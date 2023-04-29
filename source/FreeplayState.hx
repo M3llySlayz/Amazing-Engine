@@ -354,9 +354,29 @@ class FreeplayState extends MusicBeatState
 
 		else if (accepted)
 		{
+			
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
 			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
+			if (Assets.exists(Paths.inst(PlayState.SONG.song, poop))) {
+
+				PlayState.loadChartEvents = true;
+				destroyFreeplayVocals();
+				LoadingState.loadAndSwitchState(new PlayState());
+			} else {
+				if (Assets.exists(songLowercase, poop))
+					CoolUtil.coolError(PlayState.SONG.song.toLowerCase()
+						+ " (JSON) != "
+						+ songLowercase + " (FREEPLAY)\nTry making them the same.",
+						"Amazing Engine's Alert System");
+				else
+					CoolUtil.coolError("Your song seems to not have an Inst.ogg, check the folder name in 'songs'!",
+					"Leather Engine's No Crash, We Help Fix Stuff Tool");
+				}
+		} else {
+		CoolUtil.coolError(songLowercase + " doesn't match with any song audio files!\nTry fixing it's name in freeplaySonglist.txt",
+			"Amazing Engine's Alert System");
+		}
 			/*#if MODS_ALLOWED
 			if(!sys.FileSystem.exists(Paths.modsJson(songLowercase + '/' + poop)) && !sys.FileSystem.exists(Paths.json(songLowercase + '/' + poop))) {
 			#else
