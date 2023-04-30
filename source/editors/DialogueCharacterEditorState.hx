@@ -419,7 +419,7 @@ class DialogueCharacterEditorState extends MusicBeatState
 		updateTextBox();
 	}
 
-	private static var DEFAULT_TEXT:String = 'Psych Engine v' + MainMenuState.psychEngineVersion + ': Extra Keys';
+	private static var DEFAULT_TEXT:String = 'Amazing Engine v' + MainMenuState.amazingEngineVersion;
 	function reloadText() {
 		if(daText != null) {
 			daText.kill();

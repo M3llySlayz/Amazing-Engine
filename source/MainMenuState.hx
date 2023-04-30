@@ -26,10 +26,10 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '0.6.3'; //This is also used for Discord RPC
-	public static var extraKeysVersion:String = '0.3';
+	public static var amazingEngineVersion:String = '0.2'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 	public static var launchChance:Dynamic = null;
+	public static var wasPaused:Bool = false;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -41,7 +41,7 @@ class MainMenuState extends MusicBeatState
 		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-		#if !switch 'donate', #end
+		//#if !switch 'donate', #end
 		'options'
 	];
 
@@ -139,10 +139,7 @@ class MainMenuState extends MusicBeatState
 
 		var texts:Array<String> = [
 			"Friday Night Funkin' v" + Application.current.meta.get('version'),
-			"Psych Engine v" + psychEngineVersion,
-			"Psych Engine Extra Keys v" + extraKeysVersion,
-			"Happy Aniversary Extra Keys!",
-			"EK ANIVERSARY BUILD",
+			"Amazing Engine v" + amazingEngineVersion
 		];
 
 		for (i in 0...texts.length) {

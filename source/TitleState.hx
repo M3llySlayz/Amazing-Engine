@@ -81,14 +81,11 @@ class TitleState extends MusicBeatState
 	#end
 
 	var mustUpdate:Bool = false;
-	var mustUpdateEK:Bool = false;
 	public static var newVersion:String = '';
-	public static var newEKVersion:String = '';
 
 	var titleJSON:TitleData;
 
 	public static var updateVersion:String = '';
-	public static var extraKeyUpdateVersion:String = '';
 
 	override public function create():Void
 	{
@@ -146,33 +143,11 @@ class TitleState extends MusicBeatState
 			{
 				newVersion = data;
 				updateVersion = data.split('\n')[0].trim();
-				var curVersion:String = MainMenuState.psychEngineVersion.trim();
+				var curVersion:String = MainMenuState.amazingEngineVersion.trim();
 				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
 				if(updateVersion != curVersion) {
 					trace('versions arent matching!');
 					mustUpdate = true;
-				}
-			}
-
-			http.onError = function (error) {
-				trace('error: $error');
-			}
-
-			http.request();
-
-			//  extra keys updates
-			trace('checking for ek update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/tposejank/FNF-PsychEngine/extra-keys/gitEKVersion.txt");
-
-			http.onData = function (data:String)
-			{
-				newEKVersion = data;
-				extraKeyUpdateVersion = data.split('\n')[0].trim();
-				var curVersion:String = MainMenuState.extraKeysVersion.trim();
-				trace('ek version online: ' + extraKeyUpdateVersion + ', your ek version: ' + curVersion);
-				if(extraKeyUpdateVersion != curVersion) {
-					trace('versions arent matching!');
-					mustUpdateEK = true;
 				}
 			}
 
@@ -532,8 +507,8 @@ class TitleState extends MusicBeatState
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					if (mustUpdate || mustUpdateEK) {
-						MusicBeatState.switchState(new OutdatedState(newVersion, mustUpdateEK, newEKVersion));
+					if (mustUpdate) {
+						MusicBeatState.switchState(new OutdatedState(newVersion));
 					} else {
 						MusicBeatState.switchState(new MainMenuState());
 					}
@@ -667,17 +642,17 @@ class TitleState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 15);
+					#if AMAZING_WATERMARKS
+					createCoolText(['Amazing Engine by'], 15);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				// credTextShit.visible = true;
 				case 4:
 					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 15);
-					addMoreText('RiverOaken', 15);
-					addMoreText('shubs', 15);
+					addMoreText('M3llySlayz', 15);
+					addMoreText('Irshaad Ali', 15);
+					//addMoreText('shubs', 15);
 					#else
 					addMoreText('present');
 					#end
@@ -690,13 +665,13 @@ class TitleState extends MusicBeatState
 				// credTextShit.screenCenter();
 				case 6:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Extra Keys by'], -40);
+					createCoolText(['Not associated with'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
 				case 8:
 					#if PSYCH_WATERMARKS
-					addMoreText('tposejank');
+					addMoreText('Newgrounds');
 					#else
 					addMoreText('newgrounds', -40);
 					#end
@@ -729,14 +704,14 @@ class TitleState extends MusicBeatState
 				// credTextShit.visible = true;
 				case 15:
 					#if PSYCH_WATERMARKS
-					addMoreText('Psych Engine');
+					addMoreText('Amazing');
 					#else
 					addMoreText('Night');
 					#end
 				// credTextShit.text += '\nNight';
 				case 16:
 					#if PSYCH_WATERMARKS
-					addMoreText('Extra Keys');
+					addMoreText('Engine');
 					#else
 					addMoreText('Funkin');
 					#end

@@ -358,13 +358,12 @@ class FreeplayState extends MusicBeatState
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
 			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
-			if (Assets.exists(Paths.inst(PlayState.SONG.song, poop))) {
+			//if (Assets.exists(Paths.inst(PlayState.SONG.song, poop))) {
 
-				PlayState.loadChartEvents = true;
 				destroyFreeplayVocals();
 				LoadingState.loadAndSwitchState(new PlayState());
-			} else {
-				if (Assets.exists(songLowercase, poop))
+			//} else {
+				/*if (Assets.exists(songLowercase, poop))
 					CoolUtil.coolError(PlayState.SONG.song.toLowerCase()
 						+ " (JSON) != "
 						+ songLowercase + " (FREEPLAY)\nTry making them the same.",

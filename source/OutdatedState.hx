@@ -27,34 +27,22 @@ class OutdatedState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Hey! The Psych Engine version you're using
+			"Hey! The Amazing Engine version you're using
 			is currently out of date. \nTo update to the
-			latest one, wait until \nPsych Engine with
+			latest one, wait until \nAmazing Engine with
 			Extra Keys is updated. To check and
 			download\n the latest version press your ACCEPT key,
 			if you wish to ignore, press your BACK key.\n\n
-			Current version: " + MainMenuState.psychEngineVersion + " - Newest version: " + newVersion + "\n
-			\nPlease be patient until Psych Engine with
-			Extra Keys is updated.",
+			Current version: " + MainMenuState.amazingEngineVersion + " - Newest version: " + newVersion,
 			32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
-
-		if (updateEK) {
-			warnText.text = "Hey! The Psych Engine EK version you're using 
-			is currently out of date. \nTo update to the latest EK version,
-			press your ACCEPT key!\nIf you wish to ignore, press BACK.\n
-			\nCurrent version: " + MainMenuState.extraKeysVersion + " - Newest version: " + updateEKVer + "\n";
-			warnText.screenCenter(Y);
-		}
 	}
 
-	public function new(newVer:String, mustUpdateEK:Bool = false, updateEKVer:String = '')
+	public function new(newVer:String)
 	{
 		newVersion = newVer;
-		updateEK = mustUpdateEK;
-		this.updateEKVer = updateEKVer;
 		super();
 	}
 
@@ -63,7 +51,7 @@ class OutdatedState extends MusicBeatState
 		if(!leftState) {
 			if (controls.ACCEPT) {
 				leftState = true;
-				CoolUtil.browserLoad("https://gamebanana.com/mods/333373");
+				CoolUtil.browserLoad("https://github.com/M3llySlayz/Amazing-Engine");
 			}
 			else if(controls.BACK) {
 				leftState = true;

@@ -90,9 +90,9 @@ class FPS extends TextField
 			text += "\nMemory: " + memoryMegas + " MB";
 			#end
 
-			text += "\nExtra Keys v" + MainMenuState.extraKeysVersion;
+			text += "\nAmazing Engine v" + MainMenuState.amazingEngineVersion;
 			#if CHECK_FOR_UPDATES
-			if (MainMenuState.extraKeysVersion != TitleState.extraKeyUpdateVersion) {
+			if (MainMenuState.amazingEngineVersion != TitleState.newVersion) {
 				text += "\nUpdate available!";
 			}
 			#end

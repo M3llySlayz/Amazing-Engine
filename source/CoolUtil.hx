@@ -48,7 +48,7 @@ class CoolUtil
 		}
 		return Paths.formatToSongPath(fileSuffix);
 	}
-	//leather code
+	/*leather code
 	public static function coolError(message:Null<String> = null, title:Null<String> = null):Void {
 		#if !linux
 		Application.current.window.alert(message, title);
@@ -73,7 +73,7 @@ class CoolUtil
 		});
 		#end
 	}
-
+*/
 	public static function difficultyString():String
 	{
 		return difficulties[PlayState.storyDifficulty].toUpperCase();
