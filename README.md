@@ -1,3 +1,5 @@
+![Amazing Engine Logo](https://user-images.githubusercontent.com/78555659/235371908-8510fa1f-aa10-4668-b62a-4d1632ded756.gif)
+
 # Friday Night Funkin' - Amazing Engine
 Engine originally used on [VS Astoria](https://gamebanana.com/mods/435389), intended to make Psych Engine easier to modify without source code.
 
