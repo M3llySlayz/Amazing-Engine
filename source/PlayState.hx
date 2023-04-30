@@ -2870,6 +2870,7 @@ class PlayState extends MusicBeatState
 	{
 		//funny dissapear transitions
 		//while new strums appear
+		if (newValue <= 0) newValue = 1;
 		var daOldMania = mania;
 				
 		mania = newValue;

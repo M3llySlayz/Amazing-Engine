@@ -26,7 +26,7 @@ class OutdatedState extends MusicBeatState
 
 		warnText = new FlxText(0, 0, FlxG.width,
 			"Hey! The Amazing Engine version you're using\nis currently out of date.
-			To check and download the latest version\npress your ACCEPT key.
+			To check and download the latest version,\npress your ACCEPT key.
 			If you wish to ignore, press your BACK key.\n\n
 			Current version: " + MainMenuState.amazingEngineVersion + " - Newest version: " + newVersion,
 			32);

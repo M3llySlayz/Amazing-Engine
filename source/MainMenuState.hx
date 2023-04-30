@@ -26,7 +26,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var amazingEngineVersion:String = '0.2'; //This is also used for Discord RPC
+	public static var amazingEngineVersion:String = '0.2.2'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 	public static var launchChance:Dynamic = null;
 	public static var wasPaused:Bool = false;

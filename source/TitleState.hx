@@ -137,7 +137,7 @@ class TitleState extends MusicBeatState
 		#if CHECK_FOR_UPDATES
 		if(ClientPrefs.checkForUpdates && !closedState) {
 			trace('checking for update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt");
+			var http = new haxe.Http("https://raw.githubusercontent.com/M3llySlayz/Amazing-Engine/main/gitVersion.txt");
 
 			http.onData = function (data:String)
 			{
@@ -664,17 +664,13 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 6:
-					#if PSYCH_WATERMARKS
+					#if AMAZING_WATERMARKS
 					createCoolText(['Not associated with'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
 				case 8:
-					#if PSYCH_WATERMARKS
 					addMoreText('Newgrounds');
-					#else
-					addMoreText('newgrounds', -40);
-					#end
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 9:
