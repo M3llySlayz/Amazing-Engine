@@ -401,7 +401,7 @@ class TitleState extends MusicBeatState
 
 		credTextShit.visible = false;
 
-		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('extra-keys/extra-keys-logo')); // no more newground
+		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('aebanner')); // no more newground
 		add(ngSpr);
 		ngSpr.visible = false;
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.5));
@@ -649,7 +649,7 @@ class TitleState extends MusicBeatState
 					#end
 				// credTextShit.visible = true;
 				case 4:
-					#if PSYCH_WATERMARKS
+					#if AMAZING_WATERMARKS
 					addMoreText('M3llySlayz', 15);
 					addMoreText('Irshaad Ali', 15);
 					//addMoreText('shubs', 15);
