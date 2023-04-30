@@ -47,11 +47,11 @@ class FlashingState extends MusicBeatState
 
 		FlxG.mouse.visible = true;
 		#if lime
-	 	saveDataPath = System.applicationStorageDirectory + 'tposejank\\';
+	 	saveDataPath = System.applicationStorageDirectory + 'm3llyslayz\\';
 		displaySaveDataPath = StringTools.replace(saveDataPath, "\\", "/");
 
 		textAdvanced = 	
-		"Before use:\n\nEK uses a different save data folder than normal\nPsych Engine, so you are going to have to set your\noptions to what you're using.\n" + 
+		"Before use:\n\nAE uses a different save data folder than normal\nPsych Engine, so you are going to have to set your\noptions to what you're using.\n" + 
 		#if lime
 		"Save data creation path:\n\n" + displaySaveDataPath + "\n" +
 		#if windows

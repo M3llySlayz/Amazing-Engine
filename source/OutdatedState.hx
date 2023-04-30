@@ -15,8 +15,6 @@ class OutdatedState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 	var newVersion:String = '';
-	var updateEK:Bool = false;
-	var updateEKVer:String = '';
 
 	var warnText:FlxText;
 	override function create()
@@ -27,12 +25,9 @@ class OutdatedState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Hey! The Amazing Engine version you're using
-			is currently out of date. \nTo update to the
-			latest one, wait until \nAmazing Engine with
-			Extra Keys is updated. To check and
-			download\n the latest version press your ACCEPT key,
-			if you wish to ignore, press your BACK key.\n\n
+			"Hey! The Amazing Engine version you're using\nis currently out of date.
+			To check and download the latest version\npress your ACCEPT key.
+			If you wish to ignore, press your BACK key.\n\n
 			Current version: " + MainMenuState.amazingEngineVersion + " - Newest version: " + newVersion,
 			32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
