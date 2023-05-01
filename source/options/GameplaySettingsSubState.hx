@@ -49,6 +49,20 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
+		var option:Option = new Option('Splitscroll',
+			'If checked, your notes go up AND down. Freaky.\nOnly works properly on 4K.',
+			'splitScroll',
+			'bool',
+			false);
+		addOption(option);
+
+		var option:Option = new Option('Alt Splitscroll',
+			'If checked, your notes go up AND down, but different. Freakier.\nOnly works properly on 4K.',
+			'altSplitScroll',
+			'bool',
+			false);
+		addOption(option);
+
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
 			'opponentStrums',

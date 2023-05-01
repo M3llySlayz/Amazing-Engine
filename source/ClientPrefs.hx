@@ -42,6 +42,9 @@ class ClientPrefs {
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
 	public static var antimash:Bool = true;
+	public static var splitScroll:Bool = false;
+	public static var altSplitScroll:Bool = false;
+	public static var bigCache:Bool = false;
 	public static var convertEK:Bool = true;
 	public static var showKeybindsOnStart:Bool = true;
 	public static var comboStacking = true;
@@ -330,6 +333,9 @@ class ClientPrefs {
 		FlxG.save.data.pauseMusic = pauseMusic;
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.antimash = antimash;
+		FlxG.save.data.splitScroll = splitScroll;
+		FlxG.save.data.altSplitScroll = altSplitScroll;
+		FlxG.save.data.bigCache = bigCache;
 		FlxG.save.data.convertEK = convertEK;
 		FlxG.save.data.comboStacking = comboStacking;
 		FlxG.save.data.showKeybindsOnStart = showKeybindsOnStart;
@@ -470,6 +476,18 @@ class ClientPrefs {
 		if (FlxG.save.data.antimash != null)
 		{
 			antimash = FlxG.save.data.antimash;
+		}
+		if (FlxG.save.data.splitScroll != null)
+		{
+			splitScroll = FlxG.save.data.splitScroll;
+		}
+		if (FlxG.save.data.altSplitScroll != null)
+		{
+			altSplitScroll = FlxG.save.data.altSplitScroll;
+		}
+		if (FlxG.save.data.bigCache != null)
+		{
+			bigCache = FlxG.save.data.bigCache;
 		}
 		if (FlxG.save.data.convertEK != null)
 		{

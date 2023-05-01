@@ -692,21 +692,21 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = "Friday";
 				// credTextShit.screenCenter();
 				case 14:
-					#if PSYCH_WATERMARKS
+					#if AMAZING_WATERMARKS
 					addMoreText('Friday Night Funkin');
 					#else
 					addMoreText('Friday');
 					#end
 				// credTextShit.visible = true;
 				case 15:
-					#if PSYCH_WATERMARKS
+					#if AMAZING_WATERMARKS
 					addMoreText('Amazing');
 					#else
 					addMoreText('Night');
 					#end
 				// credTextShit.text += '\nNight';
 				case 16:
-					#if PSYCH_WATERMARKS
+					#if AMAZING_WATERMARKS
 					addMoreText('Engine');
 					#else
 					addMoreText('Funkin');

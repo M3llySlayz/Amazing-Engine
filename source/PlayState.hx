@@ -331,7 +331,9 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
-		Paths.clearStoredMemory();
+		if (!ClientPrefs.bigCache){
+			Paths.clearStoredMemory();
+		}
 		MainMenuState.wasPaused = false;
 		// for lua
 		instance = this;
@@ -2870,10 +2872,11 @@ class PlayState extends MusicBeatState
 	{
 		//funny dissapear transitions
 		//while new strums appear
-		if (newValue <= 0) newValue = 1;
+		if (newValue < 0 || newValue > 17) newValue = 0;
 		var daOldMania = mania;
 				
 		mania = newValue;
+		
 		if (!skipStrumFadeOut) {
 			for (i in 0...strumLineNotes.members.length) {
 				var oldStrum:FlxSprite = strumLineNotes.members[i].clone();
@@ -3897,7 +3900,7 @@ class PlayState extends MusicBeatState
 				var skipTween:Bool = value2 == "true" ? true : false;
 
 				newMania = Std.parseInt(value1);
-				if(Math.isNaN(newMania) && newMania < 0 && newMania > 9)
+				if(Math.isNaN(newMania) && newMania < 0 && newMania > 17)
 					newMania = 0;
 				changeMania(newMania, skipTween);
 
