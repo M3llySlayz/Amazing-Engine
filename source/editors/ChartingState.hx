@@ -240,7 +240,7 @@ class ChartingState extends MusicBeatState
 		// Updating Discord Rich Presence
 		var s_termination = "s";
 		if (_song.mania == 0) s_termination = "";
-		DiscordClient.changePresence("EK Chart Editor", StringTools.replace(_song.song, '-', ' ') + " (" + (_song.mania + 1) + " key" + s_termination + ")");
+		DiscordClient.changePresence("EK Chart Editor", StringTools.replace(_song.song, '-', ' ') + " (" + (_song.mania + 1) + " key" + s_termination + ")", 'melly', false, null, 'chart');
 		#end
 
 		vortex = FlxG.save.data.chart_vortex;
