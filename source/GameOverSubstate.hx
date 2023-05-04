@@ -22,16 +22,16 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	public static var characterName:String = 'bf-dead';
 	public static var deathSoundName:String = 'fnf_loss_sfx';
-	public static var loopSoundName:String = 'gameOver';
-	public static var endSoundName:String = 'gameOverEnd';
+	public static var loopSoundName:String = ClientPrefs.gameOverSong;
+	public static var endSoundName:String = ClientPrefs.gameOverSong + '-End';
 
 	public static var instance:GameOverSubstate;
 
 	public static function resetVariables() {
 		characterName = 'bf-dead';
 		deathSoundName = 'fnf_loss_sfx';
-		loopSoundName = 'gameOver';
-		endSoundName = 'gameOverEnd';
+		loopSoundName = ClientPrefs.gameOverSong;
+		endSoundName = ClientPrefs.gameOverSong + '-End';
 	}
 
 	override function create()
@@ -100,7 +100,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			else
 				MusicBeatState.switchState(new FreeplayState());
 
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 			PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
 		}
 

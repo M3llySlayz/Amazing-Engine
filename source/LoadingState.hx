@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.display.FlxBackdrop;
 import lime.app.Promise;
 import lime.app.Future;
 import flixel.FlxG;
@@ -40,6 +41,7 @@ class LoadingState extends MusicBeatState
 		this.directory = directory;
 	}
 	var loadingScreen:String = 'images/LoadingScreen.png';
+	var checkerboard:FlxBackdrop;
 	var funkay:FlxSprite;
 	var loadBar:FlxSprite;
 	override function create()
@@ -58,6 +60,17 @@ class LoadingState extends MusicBeatState
 		loadBar.screenCenter(X);
 		loadBar.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadBar);
+
+		var swagShader:ColorSwap = null;
+		swagShader = new ColorSwap();
+		checkerboard = new FlxBackdrop(Paths.image('checkerboard'), XY);
+		checkerboard.scrollFactor.set(0.2, 0);
+		checkerboard.velocity.set(200, 110);
+		checkerboard.updateHitbox();
+		checkerboard.alpha = 0.2;
+		checkerboard.screenCenter(X);
+		add(checkerboard);
+		checkerboard.shader = swagShader.shader;
 		
 		initSongsManifest().onComplete
 		(

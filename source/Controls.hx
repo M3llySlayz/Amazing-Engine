@@ -26,6 +26,9 @@ enum abstract Action(String) to String from String
 	var UI_LEFT_R = "ui_left-release";
 	var UI_RIGHT_R = "ui_right-release";
 	var UI_DOWN_R = "ui_down-release";
+	var DEV_BIND = "dev_bind";
+	var DEV_BIND_R = "dev_bind-release";
+	var DEV_BIND_P = "dev_bind-press";
 	var NOTE_UP = "note_up";
 	var NOTE_LEFT = "note_left";
 	var NOTE_RIGHT = "note_right";
@@ -59,6 +62,9 @@ abstract Action(String) to String from String
 	var UI_LEFT_R = "ui_left-release";
 	var UI_RIGHT_R = "ui_right-release";
 	var UI_DOWN_R = "ui_down-release";
+	var DEV_BIND = "dev_bind";
+	var DEV_BIND_R = "dev_bind-release";
+	var DEV_BIND_P = "dev_bind-press";
 	var NOTE_UP = "note_up";
 	var NOTE_LEFT = "note_left";
 	var NOTE_RIGHT = "note_right";
@@ -95,6 +101,7 @@ enum Control
 	UI_LEFT;
 	UI_RIGHT;
 	UI_DOWN;
+	DEV_BIND;
 	NOTE_UP;
 	NOTE_LEFT;
 	NOTE_RIGHT;
@@ -123,14 +130,17 @@ class Controls extends FlxActionSet
 	var _ui_left = new FlxActionDigital(Action.UI_LEFT);
 	var _ui_right = new FlxActionDigital(Action.UI_RIGHT);
 	var _ui_down = new FlxActionDigital(Action.UI_DOWN);
+	var _dev_bind = new FlxActionDigital(Action.DEV_BIND);
 	var _ui_upP = new FlxActionDigital(Action.UI_UP_P);
 	var _ui_leftP = new FlxActionDigital(Action.UI_LEFT_P);
 	var _ui_rightP = new FlxActionDigital(Action.UI_RIGHT_P);
 	var _ui_downP = new FlxActionDigital(Action.UI_DOWN_P);
+	var _dev_bindP = new FlxActionDigital(Action.DEV_BIND_P);
 	var _ui_upR = new FlxActionDigital(Action.UI_UP_R);
 	var _ui_leftR = new FlxActionDigital(Action.UI_LEFT_R);
 	var _ui_rightR = new FlxActionDigital(Action.UI_RIGHT_R);
 	var _ui_downR = new FlxActionDigital(Action.UI_DOWN_R);
+	var _dev_bindR = new FlxActionDigital(Action.DEV_BIND_R);
 	var _note_up = new FlxActionDigital(Action.NOTE_UP);
 	var _note_left = new FlxActionDigital(Action.NOTE_LEFT);
 	var _note_right = new FlxActionDigital(Action.NOTE_RIGHT);
@@ -177,6 +187,11 @@ class Controls extends FlxActionSet
 	inline function get_UI_DOWN()
 		return _ui_down.check();
 
+	public var DEV_BIND(get, never):Bool;
+
+	inline function get_DEV_BIND()
+		return _dev_bind.check();
+
 	public var UI_UP_P(get, never):Bool;
 
 	inline function get_UI_UP_P()
@@ -196,6 +211,11 @@ class Controls extends FlxActionSet
 
 	inline function get_UI_DOWN_P()
 		return _ui_downP.check();
+
+	public var DEV_BIND_P(get, never):Bool;
+
+	inline function get_DEV_BIND_P()
+		return _dev_bindP.check();
 
 	public var UI_UP_R(get, never):Bool;
 
@@ -217,6 +237,9 @@ class Controls extends FlxActionSet
 	inline function get_UI_DOWN_R()
 		return _ui_downR.check();
 
+	inline function get_DEV_BIND_R()
+		return _dev_bindR.check();
+
 	public var NOTE_UP(get, never):Bool;
 
 	inline function get_NOTE_UP()
@@ -236,6 +259,7 @@ class Controls extends FlxActionSet
 
 	inline function get_NOTE_DOWN()
 		return _note_down.check();
+	
 
 	public var NOTE_UP_P(get, never):Bool;
 
@@ -306,14 +330,17 @@ class Controls extends FlxActionSet
 		add(_ui_left);
 		add(_ui_right);
 		add(_ui_down);
+		add(_dev_bind);
 		add(_ui_upP);
 		add(_ui_leftP);
 		add(_ui_rightP);
 		add(_ui_downP);
+		add(_dev_bindP);
 		add(_ui_upR);
 		add(_ui_leftR);
 		add(_ui_rightR);
 		add(_ui_downR);
+		add(_dev_bindR);
 		add(_note_up);
 		add(_note_left);
 		add(_note_right);
@@ -345,14 +372,17 @@ class Controls extends FlxActionSet
 		add(_ui_left);
 		add(_ui_right);
 		add(_ui_down);
+		add(_dev_bind);
 		add(_ui_upP);
 		add(_ui_leftP);
 		add(_ui_rightP);
 		add(_ui_downP);
+		add(_dev_bindP);
 		add(_ui_upR);
 		add(_ui_leftR);
 		add(_ui_rightR);
 		add(_ui_downR);
+		add(_dev_bindR);
 		add(_note_up);
 		add(_note_left);
 		add(_note_right);
@@ -418,6 +448,7 @@ class Controls extends FlxActionSet
 			case UI_DOWN: _ui_down;
 			case UI_LEFT: _ui_left;
 			case UI_RIGHT: _ui_right;
+			case DEV_BIND: _dev_bind;
 			case NOTE_UP: _note_up;
 			case NOTE_DOWN: _note_down;
 			case NOTE_LEFT: _note_left;
@@ -461,6 +492,10 @@ class Controls extends FlxActionSet
 				func(_ui_down, PRESSED);
 				func(_ui_downP, JUST_PRESSED);
 				func(_ui_downR, JUST_RELEASED);
+			case DEV_BIND:
+				func(_dev_bind, PRESSED);
+				func(_dev_bindP, JUST_PRESSED);
+				func(_dev_bindR, JUST_RELEASED);
 			case NOTE_UP:
 				func(_note_up, PRESSED);
 				func(_note_upP, JUST_PRESSED);
@@ -644,6 +679,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.UI_DOWN, keysMap.get('ui_down'));
 				inline bindKeys(Control.UI_LEFT, keysMap.get('ui_left'));
 				inline bindKeys(Control.UI_RIGHT, keysMap.get('ui_right'));
+				inline bindKeys(Control.DEV_BIND, keysMap.get('dev_bind')); 
 				inline bindKeys(Control.NOTE_UP, keysMap.get('note_up'));
 				inline bindKeys(Control.NOTE_DOWN, keysMap.get('note_down'));
 				inline bindKeys(Control.NOTE_LEFT, keysMap.get('note_left'));
@@ -658,6 +694,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.UI_DOWN, [S]);
 				inline bindKeys(Control.UI_LEFT, [A]);
 				inline bindKeys(Control.UI_RIGHT, [D]);
+				inline bindKeys(Control.DEV_BIND, [NUMPADFIVE]);
 				inline bindKeys(Control.NOTE_UP, [W]);
 				inline bindKeys(Control.NOTE_DOWN, [S]);
 				inline bindKeys(Control.NOTE_LEFT, [A]);
@@ -671,6 +708,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
 				inline bindKeys(Control.UI_LEFT, [FlxKey.LEFT]);
 				inline bindKeys(Control.UI_RIGHT, [FlxKey.RIGHT]);
+				inline bindKeys(Control.DEV_BIND, [FlxKey.F12]);
 				inline bindKeys(Control.NOTE_UP, [FlxKey.UP]);
 				inline bindKeys(Control.NOTE_DOWN, [FlxKey.DOWN]);
 				inline bindKeys(Control.NOTE_LEFT, [FlxKey.LEFT]);
@@ -690,6 +728,7 @@ class Controls extends FlxActionSet
 				bindKeys(Control.UI_DOWN, [S, FlxKey.DOWN]);
 				bindKeys(Control.UI_LEFT, [A, FlxKey.LEFT]);
 				bindKeys(Control.UI_RIGHT, [D, FlxKey.RIGHT]);
+				bindKeys(Control.DEV_BIND, keysMap.get('dev_bind'));
 				bindKeys(Control.NOTE_UP, [W, FlxKey.UP]);
 				bindKeys(Control.NOTE_DOWN, [S, FlxKey.DOWN]);
 				bindKeys(Control.NOTE_LEFT, [A, FlxKey.LEFT]);
@@ -703,6 +742,7 @@ class Controls extends FlxActionSet
 				bindKeys(Control.UI_DOWN, [S]);
 				bindKeys(Control.UI_LEFT, [A]);
 				bindKeys(Control.UI_RIGHT, [D]);
+				bindKeys(Control.DEV_BIND, [NUMPADFIVE]);
 				bindKeys(Control.NOTE_UP, [W]);
 				bindKeys(Control.NOTE_DOWN, [S]);
 				bindKeys(Control.NOTE_LEFT, [A]);
@@ -716,6 +756,7 @@ class Controls extends FlxActionSet
 				bindKeys(Control.UI_DOWN, [FlxKey.DOWN]);
 				bindKeys(Control.UI_LEFT, [FlxKey.LEFT]);
 				bindKeys(Control.UI_RIGHT, [FlxKey.RIGHT]);
+				bindKeys(Control.DEV_BIND, [FlxKey.F12]);
 				bindKeys(Control.NOTE_UP, [FlxKey.UP]);
 				bindKeys(Control.NOTE_DOWN, [FlxKey.DOWN]);
 				bindKeys(Control.NOTE_LEFT, [FlxKey.LEFT]);

@@ -122,7 +122,10 @@ class FreeplayState extends MusicBeatState
 				songText.scaleX = maxWidth / songText.width;
 			}
 			songText.snapToPosition();
-
+			if (ClientPrefs.freeplayCenter){
+				songText.screenCenter(X);
+				songText.changeX = false;
+			}
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
@@ -137,7 +140,11 @@ class FreeplayState extends MusicBeatState
 		}
 		WeekData.setDirectoryFromWeek();
 
-		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
+		if (!ClientPrefs.freeplayCenter){
+			scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
+		} else {
+			scoreText = new FlxText(5, 5, 0, "", 32);
+		}
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 
 		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0xFF000000);

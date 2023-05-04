@@ -29,7 +29,7 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Gameplay', 'Controls', 'Graphics', 'Visuals and UI', 'Adjust Delay and Combo', 'Note Colors'];
+	var options:Array<String> = ['Gameplay', 'Controls', 'Graphics', 'Visuals and UI', 'Adjust Delay and Combo', 'Note Colors', 'Music'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -48,6 +48,10 @@ class OptionsState extends MusicBeatState
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+			case 'Dev Stuff':
+				openSubState(new options.DevSettingsSubState());
+			case 'Music':
+				openSubState(new options.MusicSettingsSubState());
 		}
 	}
 
@@ -67,6 +71,7 @@ class OptionsState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
+		if (ClientPrefs.devMode) options.insert(0, 'Dev Stuff');
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
@@ -102,6 +107,16 @@ class OptionsState extends MusicBeatState
 		}
 		if (controls.UI_DOWN_P) {
 			changeSelection(1);
+		}
+
+		if (controls.DEV_BIND_P) {
+			if (ClientPrefs.devMode){
+				options.remove('Dev Stuff');
+				ClientPrefs.devMode = false;
+			} else {
+				ClientPrefs.devMode = true;
+			}
+			LoadingState.loadAndSwitchState(new options.OptionsState());
 		}
 
 		if (controls.BACK) {

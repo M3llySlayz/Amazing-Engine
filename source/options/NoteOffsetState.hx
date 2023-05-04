@@ -196,7 +196,7 @@ class NoteOffsetState extends MusicBeatState
 		updateMode();
 
 		Conductor.changeBPM(128.0);
-		FlxG.sound.playMusic(Paths.music('offsetSong'), 1, true);
+		FlxG.sound.playMusic(Paths.music('Psync'), 1, true);
 
 		super.create();
 	}

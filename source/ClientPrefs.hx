@@ -45,6 +45,10 @@ class ClientPrefs {
 	public static var splitScroll:Bool = false;
 	public static var altSplitScroll:Bool = false;
 	public static var bigCache:Bool = false;
+	public static var devMode:Bool = false;
+	public static var freeplayCenter:Bool = false;
+	public static var gameOverSong:String = 'Default';
+	public static var mainSong:String = 'Freaky';
 	public static var convertEK:Bool = true;
 	public static var showKeybindsOnStart:Bool = true;
 	public static var comboStacking = true;
@@ -286,7 +290,9 @@ class ClientPrefs {
 		'volume_down'	=> [NUMPADMINUS, MINUS],
 		
 		'debug_1'		=> [SEVEN, NONE],
-		'debug_2'		=> [EIGHT, NONE]
+		'debug_2'		=> [EIGHT, NONE],
+
+		'dev_bind'		=> [NUMPADFIVE, NONE]
 	];
 	public static var defaultKeys:Map<String, Array<FlxKey>> = keyBinds;
 
@@ -336,6 +342,10 @@ class ClientPrefs {
 		FlxG.save.data.splitScroll = splitScroll;
 		FlxG.save.data.altSplitScroll = altSplitScroll;
 		FlxG.save.data.bigCache = bigCache;
+		FlxG.save.data.devMode = devMode;
+		FlxG.save.data.freeplayCenter = freeplayCenter;
+		FlxG.save.data.gameOverSong = gameOverSong;
+		FlxG.save.data.mainSong = mainSong;
 		FlxG.save.data.convertEK = convertEK;
 		FlxG.save.data.comboStacking = comboStacking;
 		FlxG.save.data.showKeybindsOnStart = showKeybindsOnStart;
@@ -343,7 +353,7 @@ class ClientPrefs {
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
-		save.bind('controls_v2', 'tposejank'); //Placing this in a separate save so that it can be manually deleted without removing your Score and stuff
+		save.bind('controls_v2', 'm3llyslayz'); //Placing this in a separate save so that it can be manually deleted without removing your Score and stuff
 		save.data.customControls = keyBinds;
 		save.flush();
 		FlxG.log.add("Settings saved!");
@@ -489,6 +499,22 @@ class ClientPrefs {
 		{
 			bigCache = FlxG.save.data.bigCache;
 		}
+		if (FlxG.save.data.devMode != null)
+		{
+			devMode = FlxG.save.data.devMode;
+		}
+		if (FlxG.save.data.freeplayCenter != null)
+		{
+			freeplayCenter = FlxG.save.data.freeplayCenter;
+		}
+		if (FlxG.save.data.gameOverSong != null)
+		{
+			gameOverSong = FlxG.save.data.gameOverSong;
+		}
+		if (FlxG.save.data.mainSong != null)
+		{
+			mainSong = FlxG.save.data.mainSong;
+		}
 		if (FlxG.save.data.convertEK != null)
 		{
 			convertEK = FlxG.save.data.convertEK;
@@ -499,7 +525,7 @@ class ClientPrefs {
 			showKeybindsOnStart = FlxG.save.data.showKeybindsOnStart;
 
 		var save:FlxSave = new FlxSave();
-		save.bind('controls_v2', 'tposejank');
+		save.bind('controls_v2', 'm3llyslayz');
 		if(save != null && save.data.customControls != null) {
 			var loadedControls:Map<String, Array<FlxKey>> = save.data.customControls;
 			for (control => keys in loadedControls) {

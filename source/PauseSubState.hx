@@ -25,6 +25,7 @@ class PauseSubState extends MusicBeatSubstate
 	var curSelected:Int = 0;
 
 	var pauseMusic:FlxSound;
+	var authorText:FlxText = new FlxText(20, 640+32, 0, "", 32);
 	var practiceText:FlxText;
 	var skipTimeText:FlxText;
 	var skipTimeTracker:Alphabet;
@@ -114,6 +115,28 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.updateHitbox();
 		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
+
+		var composer:String = '';
+
+		switch(ClientPrefs.pauseMusic){
+			case 'Bossfight' | 'Construct' | 'Confront' | 'Waiting (Impatient)':
+				composer = 'Melly and BoyBot69';
+				//composerColor = [0xFFFF0000, 0xFF026902];
+			case 'Adventure' | 'Bounce':
+				composer = 'Melly';
+				//composerColor = [0xFFFF0000, 0xFFBD0000];
+			case 'Waiting':
+				composer = 'BoyBot69';
+				//composerColor = [0xFF3DD700, 0xFF026902];
+		}
+
+		
+		authorText.text += 'By ' + composer;
+		authorText.scrollFactor.set();
+		authorText.setFormat(Paths.font("vcr.ttf"), 32);
+		authorText.drawFrame();
+		authorText.updateHitbox();
+		add(authorText);
 
 		blueballedTxt.alpha = 0;
 		levelDifficulty.alpha = 0;
@@ -259,19 +282,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
 				case "Quit":
-					PlayState.deathCounter = 0;
-					PlayState.seenCutscene = false;
-
-					WeekData.loadTheFirstEnabledMod();
-					if(PlayState.isStoryMode) {
-						MusicBeatState.switchState(new StoryMenuState());
-					} else {
-						MusicBeatState.switchState(new FreeplayState());
-					}
-					PlayState.cancelMusicFadeTween();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
-					PlayState.changedDifficulty = false;
-					PlayState.chartingMode = false;
+					quitSong();
 			}
 		}
 	}
@@ -305,6 +316,23 @@ class PauseSubState extends MusicBeatSubstate
 		}
 	}
 
+	function quitSong()
+	{
+		PlayState.deathCounter = 0;
+		PlayState.seenCutscene = false;
+
+		WeekData.loadTheFirstEnabledMod();
+		if(PlayState.isStoryMode) {
+			MusicBeatState.switchState(new StoryMenuState());
+		} else {
+			MusicBeatState.switchState(new FreeplayState());
+		}
+		PlayState.cancelMusicFadeTween();
+		FlxG.sound.playMusic(Paths.music(ClientPrefs.pauseMusic));
+		PlayState.changedDifficulty = false;
+		PlayState.chartingMode = false;
+	}
+	
 	override function destroy()
 	{
 		pauseMusic.destroy();
