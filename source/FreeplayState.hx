@@ -293,7 +293,7 @@ class FreeplayState extends MusicBeatState
 			if(FlxG.mouse.wheel != 0)
 			{
 				changeDiff();
-				FlxG.sound.play(Paths.sound('scrollMenu'), 0.2);
+				SoundEffects.playSFX('confirm', false);
 				changeSelection(-shiftMult * FlxG.mouse.wheel, false);
 			}
 		}
@@ -310,7 +310,7 @@ class FreeplayState extends MusicBeatState
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', false);
 			MusicBeatState.switchState(new FreeplayCategoryState());
 		}
 
