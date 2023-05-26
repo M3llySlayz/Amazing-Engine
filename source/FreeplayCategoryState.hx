@@ -13,7 +13,7 @@ import flixel.util.FlxTimer;
 using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
-    public var categoriesList:Array<String> = ['base game', 'custom']; // Change this line here. Don't forget about the hardcoding aswell.
+    public var categoriesList:Array<String> = ['base game', 'custom']; // Change this line here. Don't forget about the hardcoding in FreeplayState aswell.
     public var categoryNamesList:Array<String> = ['vanilla', 'custom category'];
     public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFFFF];
   
