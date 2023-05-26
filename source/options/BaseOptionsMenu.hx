@@ -72,7 +72,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		add(checkboxGroup);
 
 		descBox = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
-		descBox.alpha = 0.6;
+		descBox.screenCenter(X); // Center the descbox, lol
+		descBox.alpha = 0.5;
 		add(descBox);
 
 		var titleText:Alphabet = new Alphabet(75, 40, title, true);
@@ -82,7 +83,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		add(titleText);
 
 		descText = new FlxText(50, 600, 1180, "", 32);
-		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.setFormat(Paths.font("sylfaen.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.screenCenter(X);
 		descText.scrollFactor.set();
 		descText.borderSize = 2.4;
 		add(descText);
@@ -146,8 +148,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		if (controls.BACK) {
 			close();
-			//FlxG.sound.play(Paths.sound('cancelMenu'));
-			SoundEffects.playSFX('cancel', true);
+			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
 
 		if(nextAccept <= 0)
@@ -162,8 +163,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				if(controls.ACCEPT)
 				{
-					//FlxG.sound.play(Paths.sound('scrollMenu'));
-					SoundEffects.playSFX('confirm', true);
+					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
 					curOption.change();
 					reloadCheckboxes();
@@ -269,6 +269,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			nextAccept -= 1;
 		}
 		super.update(elapsed);
+		descBox.screenCenter(X); // Center the descbox, lol
 	}
 
 	function updateTextFrom(option:Option) {
@@ -319,6 +320,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		descBox.setPosition(descText.x - 10, descText.y - 10);
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
+		descBox.screenCenter(X);
 		descBox.updateHitbox();
 
 		if(boyfriend != null)
