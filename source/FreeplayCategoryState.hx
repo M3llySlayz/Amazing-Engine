@@ -13,15 +13,10 @@ import flixel.util.FlxTimer;
 using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
-    public var categoriesList:Array<String> = ['base game', 'festivalv', 'coming soon...'];
-    public var categoryNamesList:Array<String> = ['vanilla', 'festivalv (season 1)', 'coming soon...'];
-    public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFF00, 0xFF222222];
-
-    /* Version 2 Stuff
-    public var categoriesList:Array<String> = ['base game', 'festivalv', 'festivalv2', 'extras'];
-    public var categoryNamesList:Array<String> = ['vanilla', 'festivalv (season 1)', 'festivalv (season 2)', 'extras'];
-    public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFF00, 0xFF060666, 0xFF999099]; */
-
+    public var categoriesList:Array<String> = ['base game', 'custom']; // Change this line here. Don't forget about the hardcoding aswell.
+    public var categoryNamesList:Array<String> = ['vanilla', 'custom category'];
+    public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFFFF];
+  
     public static var curSelected:Int = 0;
 
     public var bg:FlxSprite;
@@ -89,7 +84,7 @@ class FreeplayCategoryState extends MusicBeatState {
             }
 
             if (controls.ACCEPT)
-                if (curSelected != 2)
+                if (curSelected != 1)
                     selectCategory();
                 else
                     FlxG.sound.play(Paths.sound('cancelMenu'));
