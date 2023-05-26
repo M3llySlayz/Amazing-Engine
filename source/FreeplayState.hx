@@ -293,7 +293,7 @@ class FreeplayState extends MusicBeatState
 			if(FlxG.mouse.wheel != 0)
 			{
 				changeDiff();
-				SoundEffects.playSFX('confirm', false);
+				SoundEffects.playSFX('scroll', false);
 				changeSelection(-shiftMult * FlxG.mouse.wheel, false);
 			}
 		}
