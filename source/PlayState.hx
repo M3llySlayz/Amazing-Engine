@@ -3224,6 +3224,13 @@ class PlayState extends MusicBeatState
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
+			if (practiceMode && cpuControlled){
+				botplayTxt.text = 'BOTPLAY\nPRACTICE MODE';
+			} else if (practiceMode){
+				botplayTxt.text = 'PRACTICE MODE';
+			} else if (cpuControlled){
+				botplayTxt.text = 'BOTPLAY';
+			}
 		}
 
 		if (controls.PAUSE && startedCountdown && canPause)
@@ -3255,18 +3262,23 @@ class PlayState extends MusicBeatState
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 
-		if (health > 2)
-			health = 2;
+		if (health > 2) health = 2;
 
-		if (healthBar.percent < 20)
+		if (healthBar.percent < 20){
 			iconP1.animation.curAnim.curFrame = 1;
-		else
+			iconP2.animation.curAnim.curFrame = 2;
+		} else {
 			iconP1.animation.curAnim.curFrame = 0;
+			iconP2.animation.curAnim.curFrame = 2;
+		}
 
-		if (healthBar.percent > 80)
+		if (healthBar.percent > 80){
 			iconP2.animation.curAnim.curFrame = 1;
-		else
+			iconP1.animation.curAnim.curFrame = 2;
+		} else {
 			iconP2.animation.curAnim.curFrame = 0;
+			iconP1.animation.curAnim.curFrame = 2;
+		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;

@@ -121,7 +121,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			if (ClientPrefs.mainMenuPos == 'Center') menuItem.screenCenter(X);	
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -229,20 +229,24 @@ class MainMenuState extends MusicBeatState
 		{
 			if (controls.UI_UP_P)
 			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				//FlxG.sound.play(Paths.sound('scrollMenu'));
+				//I made a new file just for this :)
+				SoundEffects.playSFX('scroll', false);
 				changeItem(-1);
 			}
 
 			if (controls.UI_DOWN_P)
 			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				//FlxG.sound.play(Paths.sound('scrollMenu'));
+				SoundEffects.playSFX('scroll', false);
 				changeItem(1);
 			}
 
 			if (controls.BACK)
 			{
 				selectedSomethin = true;
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('cancel', false);
 				MusicBeatState.switchState(new TitleState());
 			}
 
@@ -255,7 +259,8 @@ class MainMenuState extends MusicBeatState
 				else
 				{
 					selectedSomethin = true;
-					FlxG.sound.play(Paths.sound('confirmMenu'));
+					//FlxG.sound.play(Paths.sound('confirmMenu'));
+					SoundEffects.playSFX('confirm', false);
 					FlxG.mouse.visible = false;
 
 					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);

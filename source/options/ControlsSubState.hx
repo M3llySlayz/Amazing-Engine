@@ -177,7 +177,8 @@ class ControlsSubState extends MusicBeatSubstate {
 			if (controls.BACK) {
 				ClientPrefs.reloadControls();
 				close();
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('cancel', true);
 			}
 
 			if(controls.ACCEPT && nextAccept <= 0) {
@@ -186,7 +187,8 @@ class ControlsSubState extends MusicBeatSubstate {
 					reloadKeys();
 					reloadTexts();
 					changeSelection();
-					FlxG.sound.play(Paths.sound('confirmMenu'));
+					//FlxG.sound.play(Paths.sound('confirmMenu'));
+					SoundEffects.playSFX('confirm', true);
 				} else if(!unselectableCheck(curSelected)) {
 					bindingTime = 0;
 					rebindingKey = true;
@@ -195,7 +197,8 @@ class ControlsSubState extends MusicBeatSubstate {
 					} else {
 						grpInputs[getInputTextNum()].alpha = 0;
 					}
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					//FlxG.sound.play(Paths.sound('scrollMenu'));
+					SoundEffects.playSFX('scroll', false);
 				}
 			}
 		} else {
@@ -211,7 +214,8 @@ class ControlsSubState extends MusicBeatSubstate {
 				ClientPrefs.keyBinds.set(optionShit[curSelected][1], keysArray);
 
 				reloadKeys();
-				FlxG.sound.play(Paths.sound('confirmMenu'));
+				//FlxG.sound.play(Paths.sound('confirmMenu'));
+				SoundEffects.playSFX('confirm', true);
 				rebindingKey = false;
 			}
 
@@ -225,7 +229,8 @@ class ControlsSubState extends MusicBeatSubstate {
 						grpInputs[curSelected].alpha = 1;
 				}
 				reloadTexts();
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				//FlxG.sound.play(Paths.sound('scrollMenu'));
+				SoundEffects.playSFX('scroll', false);
 				rebindingKey = false;
 				bindingTime = 0;
 			}
@@ -313,7 +318,8 @@ class ControlsSubState extends MusicBeatSubstate {
 				}
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		//FlxG.sound.play(Paths.sound('scrollMenu'));
+		SoundEffects.playSFX('scroll', false);
 	}
 
 	function changeAlt() {
@@ -336,7 +342,8 @@ class ControlsSubState extends MusicBeatSubstate {
 				break;
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		//FlxG.sound.play(Paths.sound('scrollMenu'));
+		SoundEffects.playSFX('scroll', false);
 	}
 
 	private function unselectableCheck(num:Int, ?checkDefaultKey:Bool = false):Bool {

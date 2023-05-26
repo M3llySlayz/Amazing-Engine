@@ -146,7 +146,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		if (controls.BACK) {
 			close();
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', true);
 		}
 
 		if(nextAccept <= 0)
@@ -161,7 +162,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				if(controls.ACCEPT)
 				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					//FlxG.sound.play(Paths.sound('scrollMenu'));
+					SoundEffects.playSFX('confirm', true);
 					curOption.setValue((curOption.getValue() == true) ? false : true);
 					curOption.change();
 					reloadCheckboxes();

@@ -47,7 +47,10 @@ class ClientPrefs {
 	public static var bigCache:Bool = false;
 	public static var devMode:Bool = false;
 	public static var freeplayCenter:Bool = false;
+	public static var mainMenuPos:String = 'Center';
 	public static var gameOverSong:String = 'Default';
+	public static var sfxPreset:String = 'Default';
+	public static var advancedSfx:Bool = false;
 	public static var mainSong:String = 'Freaky';
 	public static var convertEK:Bool = true;
 	public static var showKeybindsOnStart:Bool = true;
@@ -344,6 +347,9 @@ class ClientPrefs {
 		FlxG.save.data.bigCache = bigCache;
 		FlxG.save.data.devMode = devMode;
 		FlxG.save.data.freeplayCenter = freeplayCenter;
+		FlxG.save.data.mainMenuPos = mainMenuPos;
+		FlxG.save.data.sfxPreset = sfxPreset;
+		FlxG.save.data.advancedSfx = advancedSfx;
 		FlxG.save.data.gameOverSong = gameOverSong;
 		FlxG.save.data.mainSong = mainSong;
 		FlxG.save.data.convertEK = convertEK;
@@ -506,6 +512,18 @@ class ClientPrefs {
 		if (FlxG.save.data.freeplayCenter != null)
 		{
 			freeplayCenter = FlxG.save.data.freeplayCenter;
+		}
+		if (FlxG.save.data.mainMenuPos != null)
+		{
+			mainMenuPos = FlxG.save.data.mainMenuPos;
+		}
+		if (FlxG.save.data.sfxPreset != null)
+		{
+			sfxPreset = FlxG.save.data.sfxPreset;
+		}
+		if (FlxG.save.data.advancedSfx != null)
+		{
+			advancedSfx = FlxG.save.data.advancedSfx;
 		}
 		if (FlxG.save.data.gameOverSong != null)
 		{

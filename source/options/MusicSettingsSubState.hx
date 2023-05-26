@@ -59,7 +59,7 @@ class MusicSettingsSubState extends BaseOptionsMenu
 		'mainSong',
 		'string',
 		'Freaky',
-		['Freaky', 'Iconic']);
+		['Freaky', 'Iconic', 'Ambience']);
 		addOption(option);
 		
 		option.onChange = onChangeMenuMusic;
@@ -80,7 +80,7 @@ class MusicSettingsSubState extends BaseOptionsMenu
 	function onChangeMenuMusic()
 	{
 		FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.mainSong)));
-		changedMusic = true;
+		changedMusic = false;
 	}
 
 	function onChangeGameOverMusic() {
@@ -91,12 +91,8 @@ class MusicSettingsSubState extends BaseOptionsMenu
 	override function destroy()
 	{
 		if(changedMusic){
-			if (ClientPrefs.mainSong == 'Freaky'){
-				FlxG.sound.playMusic(Paths.music('freaky'));
-			}else{
-				FlxG.sound.playMusic(Paths.music('iconic'));
-			}
-		}
+			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 		super.destroy();
+	}
 	}
 }

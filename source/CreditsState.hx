@@ -220,7 +220,8 @@ class CreditsState extends MusicBeatState
 				if(colorTween != null) {
 					colorTween.cancel();
 				}
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('cancel', false);
 				MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
 			}
@@ -249,7 +250,8 @@ class CreditsState extends MusicBeatState
 	var moveTween:FlxTween = null;
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 		do {
 			curSelected += change;
 			if (curSelected < 0)

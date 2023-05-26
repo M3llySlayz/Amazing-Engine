@@ -213,18 +213,22 @@ class StoryMenuState extends MusicBeatState
 			if (upP)
 			{
 				changeWeek(-1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				//FlxG.sound.play(Paths.sound('scrollMenu'));
+				SoundEffects.playSFX('scroll', false);
 			}
 
 			if (downP)
 			{
 				changeWeek(1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				//FlxG.sound.play(Paths.sound('scrollMenu'));
+				SoundEffects.playSFX('scroll', false);
 			}
 
 			if(FlxG.mouse.wheel != 0)
 			{
-				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+				
+				//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+				SoundEffects.playSFX('scroll', false);
 				changeWeek(-FlxG.mouse.wheel);
 				changeDifficulty();
 			}
@@ -265,7 +269,8 @@ class StoryMenuState extends MusicBeatState
 
 		if (controls.BACK && !movedBack && !selectedWeek)
 		{
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', false);
 			movedBack = true;
 			MusicBeatState.switchState(new MainMenuState());
 		}
@@ -289,7 +294,8 @@ class StoryMenuState extends MusicBeatState
 		{
 			if (stopspamming == false)
 			{
-				FlxG.sound.play(Paths.sound('confirmMenu'));
+				//FlxG.sound.play(Paths.sound('confirmMenu'));
+				SoundEffects.playSFX('confirm', false);
 
 				grpWeekText.members[curWeek].startFlashing();
 
@@ -329,7 +335,8 @@ class StoryMenuState extends MusicBeatState
 				FreeplayState.destroyFreeplayVocals();
 			});
 		} else {
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', true);
 		}
 	}
 

@@ -60,6 +60,7 @@ class ModsMenuState extends MusicBeatState
 	var removeButton:FlxButton;
 
 	var modsList:Array<Dynamic> = [];
+	public var enabledMods:Array<Dynamic> = []; 
 
 	var visibleWhenNoMods:Array<FlxBasic> = [];
 	var visibleWhenHasMods:Array<FlxBasic> = [];
@@ -105,6 +106,19 @@ class ModsMenuState extends MusicBeatState
 				}
 			}
 		}
+
+		if(FileSystem.exists(path))
+	{
+		var leMods:Array<String> = CoolUtil.coolTextFile(path); //sets the leMod var as a string and sets
+		//it to the list of mods in the text file.
+		for (i in 0...leMods.length) //for 0 to the length of the mods list.
+    	{
+        	var modSplit:Array<String> = leMods[i].split('|'); //splits up the mods into two variables. name and enabled[t/f]
+        	if (modSplit[1] == '1') { //if mod is enabled.
+            	addToEnabledList(modSplit[0]); //enabledlist.txt is the name of the mods only that are enabled.
+        	}
+    	}
+	}
 
 		// FIND MOD FOLDERS
 		var boolshit = true;
@@ -400,6 +414,19 @@ class ModsMenuState extends MusicBeatState
 		modsList.push(values);
 	}
 
+	function addToEnabledModsList(values:Array<Dynamic>)
+		{
+			for (i in 0...enabledMods.length)
+			{
+				if(enabledMods[i][0] == values[0])
+				{
+					//trace(modsList[i][0], values[0]);
+					return;
+				}
+			}
+			enabledMods.push(values);
+		}
+
 	function updateButtonToggle()
 	{
 		if (modsList[curSelected][1])
@@ -462,6 +489,22 @@ class ModsMenuState extends MusicBeatState
 		Paths.pushGlobalMods();
 	}
 
+	function saveEnabledTxt()
+		{
+			var fileStr:String = '';
+			for (values in enabledMods)
+			{
+				if (values[1] == 1)
+				{
+					if(fileStr.length > 0) fileStr += '\n';
+					fileStr += values[0];
+				}
+			}
+		var path:String = 'enabledList.txt';
+		File.saveContent(path, fileStr);
+		Paths.pushGlobalMods();
+		}
+
 	var noModsSine:Float = 0;
 	var canExit:Bool = true;
 	override function update(elapsed:Float)
@@ -480,6 +523,7 @@ class ModsMenuState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			FlxG.mouse.visible = false;
 			saveTxt();
+			saveEnabledTxt();
 			if(needaReset)
 			{
 				//MusicBeatState.switchState(new TitleState());

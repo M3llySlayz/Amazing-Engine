@@ -120,7 +120,8 @@ class OptionsState extends MusicBeatState
 		}
 
 		if (controls.BACK) {
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', false);
 			if (!MainMenuState.wasPaused){
 			MusicBeatState.switchState(new MainMenuState());
 			} else {
@@ -156,6 +157,6 @@ class OptionsState extends MusicBeatState
 				selectorRight.y = item.y;
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		SoundEffects.playSFX('scroll', false);
 	}
 }

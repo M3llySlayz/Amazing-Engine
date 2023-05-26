@@ -265,11 +265,20 @@ class TitleState extends MusicBeatState
 			// music.play();
 
 			if(FlxG.sound.music == null) {
-				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+				if (ClientPrefs.sfxPreset == 'Spooky' || ClientPrefs.sfxPreset == 'spooky'){
+					FlxG.sound.playMusic(Paths.music('ambience'), 0, true);
+				}else{
+					FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong), 0);
+				}
 			}
 		}
 
-		Conductor.changeBPM(titleJSON.bpm);
+		//i got a little lazy
+		if (ClientPrefs.mainSong != 'Iconic'){
+			Conductor.changeBPM(titleJSON.bpm);
+		}else{
+			Conductor.changeBPM(117);
+		}
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite();
@@ -500,7 +509,7 @@ class TitleState extends MusicBeatState
 				if(titleText != null) titleText.animation.play('press');
 
 				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
-				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+				SoundEffects.playSFX('confirm', false);
 
 				transitioning = true;
 				// FlxG.sound.music.stop();

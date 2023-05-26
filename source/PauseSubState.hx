@@ -20,7 +20,7 @@ class PauseSubState extends MusicBeatSubstate
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
 	var menuItems:Array<String> = [];
-	var menuItemsOG:Array<String> = ['Continue', 'Retry', 'Options', 'Change Difficulty', 'Quit'];
+	var menuItemsOG:Array<String> = ['Continue', 'Retry', 'Options', 'Modifiers', 'Change Difficulty', 'Quit'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 
@@ -188,13 +188,15 @@ class PauseSubState extends MusicBeatSubstate
 			case 'Skip Time':
 				if (controls.UI_LEFT_P)
 				{
-					FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+					//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+					SoundEffects.playSFX('scroll', false);
 					curTime -= 1000;
 					holdTime = 0;
 				}
 				if (controls.UI_RIGHT_P)
 				{
-					FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+					//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+					SoundEffects.playSFX('scroll', false);
 					curTime += 1000;
 					holdTime = 0;
 				}
@@ -236,6 +238,7 @@ class PauseSubState extends MusicBeatSubstate
 			switch (daSelected)
 			{
 				case "Continue":
+					SoundEffects.playSFX('confirm', true);
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
@@ -246,8 +249,10 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.changedDifficulty = true;
 					practiceText.visible = PlayState.instance.practiceMode;
 				case "Retry":
+					SoundEffects.playSFX('confirm', false);
 					restartSong();
 				case "Options":
+					SoundEffects.playSFX('confirm', false);
 					PlayState.seenCutscene = false;
 					WeekData.loadTheFirstEnabledMod();
 					PlayState.changedDifficulty = false;
@@ -270,6 +275,7 @@ class PauseSubState extends MusicBeatSubstate
 							PlayState.instance.clearNotesBefore(curTime);
 							PlayState.instance.setSongTime(curTime);
 						}
+						SoundEffects.playSFX('confirm', true);
 						close();
 					}
 				case "End Song":
@@ -281,6 +287,8 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
+				case 'Modifiers':
+					openSubState(new GameplayChangersSubstate());
 				case "Quit":
 					quitSong();
 			}
@@ -344,7 +352,8 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		curSelected += change;
 
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+//		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;

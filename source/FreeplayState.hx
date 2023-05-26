@@ -306,7 +306,8 @@ class FreeplayState extends MusicBeatState
 
 			if(FlxG.mouse.wheel != 0)
 			{
-				FlxG.sound.play(Paths.sound('scrollMenu'), 0.2);
+				//FlxG.sound.play(Paths.sound('scrollMenu'), 0.2);
+				SoundEffects.playSFX('scroll', false);
 				changeSelection(-shiftMult * FlxG.mouse.wheel, false);
 				changeDiff();
 			}
@@ -324,7 +325,8 @@ class FreeplayState extends MusicBeatState
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', false);
 			MusicBeatState.switchState(new MainMenuState());
 		}
 
@@ -369,6 +371,7 @@ class FreeplayState extends MusicBeatState
 
 				destroyFreeplayVocals();
 				LoadingState.loadAndSwitchState(new PlayState());
+				SoundEffects.playSFX('confirm', false);
 			//} else {
 				/*if (Assets.exists(songLowercase, poop))
 					CoolUtil.coolError(PlayState.SONG.song.toLowerCase()
@@ -417,7 +420,8 @@ class FreeplayState extends MusicBeatState
 		{
 			persistentUpdate = false;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			//FlxG.sound.play(Paths.sound('scrollMenu'));
+			SoundEffects.playSFX('scroll', false);
 		}
 		super.update(elapsed);
 	}
@@ -453,7 +457,7 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
-		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		if(playSound) SoundEffects.playSFX('scroll', false);
 
 		curSelected += change;
 

@@ -41,6 +41,29 @@ class DevSettingsSubState extends BaseOptionsMenu
 			false); //Default value
 		addOption(option);
 
+		var option:Option = new Option('Main Menu Position:', //Name
+			'Where do you want the buttons to be?', //Description
+			'mainMenuPos', //Save data variable name
+			'string', //Variable type
+			'Center', //Default value
+			['Left', 'Center']); //options
+		addOption(option);
+
+		var option:Option = new Option ('Sound Effects:',
+		'What do you want your sound effects to be like?',
+		'sfxPreset',
+		'string',
+		'Default',
+		['Default', 'Spooky']);
+		addOption(option);
+
+		var option:Option = new Option('Advanced SFX', //Name
+			'If checked, the SFX used will be a bit different depending on what you do.', //Description
+			'advancedSfx', //Save data variable name
+			'bool', //Variable type
+			false); //Default value
+		addOption(option);
+
 		super();
 	}
 }
