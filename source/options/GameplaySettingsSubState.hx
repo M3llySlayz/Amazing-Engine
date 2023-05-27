@@ -50,14 +50,14 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Splitscroll',
-			'If checked, your notes go up AND down. Freaky.\nOnly works properly on 4K.',
+			'If checked, your notes go up AND down. Freaky.\nNow works with all keys -Irshaad.',
 			'splitScroll',
 			'bool',
 			false);
 		addOption(option);
 
 		var option:Option = new Option('Alt Splitscroll',
-			'If checked, your notes go up AND down, but different. Freakier.\nOnly works properly on 4K.',
+			'If checked, your notes go up AND down, but different. Freakier.\nNow works with all keys -Irshaad.',
 			'altSplitScroll',
 			'bool',
 			false);
