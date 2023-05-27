@@ -115,7 +115,7 @@ class ModsMenuState extends MusicBeatState
     	{
         	var modSplit:Array<String> = leMods[i].split('|'); //splits up the mods into two variables. name and enabled[t/f]
         	if (modSplit[1] == '1') { //if mod is enabled.
-            	addToEnabledList(modSplit[0]); //enabledlist.txt is the name of the mods only that are enabled.
+            	addToEnabledList([modSplit[0]]); //enabledlist.txt is the name of the mods only that are enabled.
         	}
     	}
 	}
@@ -414,7 +414,7 @@ class ModsMenuState extends MusicBeatState
 		modsList.push(values);
 	}
 
-	function addToEnabledList(values:Array<Dynamic>)
+	function addToEnabledList(values:Array<String>)
 		{
 			for (i in 0...enabledMods.length)
 			{
