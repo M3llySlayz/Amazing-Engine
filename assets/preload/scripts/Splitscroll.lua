@@ -8,7 +8,10 @@ function math.round(val)
 end
 --This is needed for rounding variables clearly.
 --Also now all keys should be supported
---it's 10:51 as i'm writing this. -Irshaad
+--it's 10:51 PM as i'm writing this. -Irshaad
+
+--Changelog 27/05/2023
+--so i just added if value is null to the list here, don't mind me -Irshaad
 
 local on
 local alt
@@ -152,6 +155,12 @@ function onCreatePost()
                     setPropertyFromGroup('playerStrums',i,'downScroll',true)
                 end
             end
+            if mania == nil then
+                for i = 0,1 do
+                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
+                    setPropertyFromGroup('playerStrums',i,'downScroll',true) 
+                end
+            end
             BarConfig = {706, 620}
         else -- if downscroll == true then
             if mania == 0 then
@@ -283,21 +292,44 @@ function onCreatePost()
                     setPropertyFromGroup('playerStrums',i,'downScroll',false)
                 end
             end
+            if mania == nil then
+                for i = 0,1 do
+                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
+                    setPropertyFromGroup('playerStrums',i,'downScroll',false) 
+                end
+            end
         end
     else if alt == true then
         if not downscroll then
-            for i = 0,mania do
-                if (math.round(i / 2)) == (i / 2) do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
+            if mania == nil then
+                for i = 0,3 do
+                    if (math.round(i / 2)) == (i / 2) do
+                        setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
+                        setPropertyFromGroup('playerStrums',i,'downScroll',true)
+                    end
                 end
-            end
+            else -- if mania has an int in it
+                for i = 0,mania do
+                    if (math.round(i / 2)) == (i / 2) do
+                        setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
+                        setPropertyFromGroup('playerStrums',i,'downScroll',true)
+                    end
+                end
             BarConfig = {706, 620}
         else -- if downscroll == true then
-            for i = 0,mania do
-                if (math.round(i / 2)) == (i / 2) do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
+            if mania == nil then
+                for i = 0,3 do
+                    if (math.round(i / 2)) == (i / 2) do
+                        setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
+                        setPropertyFromGroup('playerStrums',i,'downScroll',false)
+                    end
+                end
+            else
+                for i = 0,mania do
+                    if (math.round(i / 2)) == (i / 2) do
+                        setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
+                        setPropertyFromGroup('playerStrums',i,'downScroll',false)
+                    end
                 end
             end
         end
