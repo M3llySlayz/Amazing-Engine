@@ -414,7 +414,7 @@ class ModsMenuState extends MusicBeatState
 		modsList.push(values);
 	}
 
-	function addToEnabledModsList(values:Array<Dynamic>)
+	function addToEnabledList(values:Array<Dynamic>)
 		{
 			for (i in 0...enabledMods.length)
 			{
