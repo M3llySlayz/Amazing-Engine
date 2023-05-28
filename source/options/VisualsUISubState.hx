@@ -122,6 +122,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('AE Watermarks',
+			"If checked, AE's custom stuff will be everywhere :troll:",
+			'aeWatermarks',
+			'bool',
+			true);
+		addOption(option);
+
 		super();
 	}
 

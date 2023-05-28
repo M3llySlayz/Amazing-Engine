@@ -268,12 +268,9 @@ class TitleState extends MusicBeatState
 			// FlxG.sound.list.add(music);
 			// music.play();
 
-			if(FlxG.sound.music == null) {
-				if (ClientPrefs.sfxPreset == 'Spooky' || ClientPrefs.sfxPreset == 'spooky'){
-					FlxG.sound.playMusic(Paths.music('ambience'), 0, true);
-				}else{
-					FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong), 0);
-				}
+			if(FlxG.sound.music == null) 
+			{
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong), 0);
 			}
 		}
 
@@ -299,7 +296,11 @@ class TitleState extends MusicBeatState
 		add(bg);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
-		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		if (ClientPrefs.aeWatermarks){
+			logoBl.frames = Paths.getSparrowAtlas('ae logo bumpin');
+		} else {
+			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		}
 
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);

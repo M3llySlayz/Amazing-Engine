@@ -54,6 +54,7 @@ class ClientPrefs {
 	public static var mainSong:String = 'Freaky';
 	public static var convertEK:Bool = true;
 	public static var showKeybindsOnStart:Bool = true;
+	public static var aeWatermarks:Bool = true;
 	public static var comboStacking = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -355,6 +356,7 @@ class ClientPrefs {
 		FlxG.save.data.convertEK = convertEK;
 		FlxG.save.data.comboStacking = comboStacking;
 		FlxG.save.data.showKeybindsOnStart = showKeybindsOnStart;
+		FlxG.save.data.aeWatermarks = aeWatermarks;
 	
 		FlxG.save.flush();
 
@@ -532,6 +534,10 @@ class ClientPrefs {
 		if (FlxG.save.data.mainSong != null)
 		{
 			mainSong = FlxG.save.data.mainSong;
+		}
+		if (FlxG.save.data.aeWatermarks != null)
+		{
+			aeWatermarks = FlxG.save.data.aeWatermarks;
 		}
 		if (FlxG.save.data.convertEK != null)
 		{

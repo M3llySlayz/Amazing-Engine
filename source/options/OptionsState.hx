@@ -33,6 +33,8 @@ class OptionsState extends MusicBeatState
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
+	var manual:FlxSprite;
+	var changeLogSheet:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
@@ -63,6 +65,8 @@ class OptionsState extends MusicBeatState
 		DiscordClient.changePresence("Options Menu", null);
 		#end
 
+		FlxG.mouse.visible = true;
+
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
 		bg.updateHitbox();
@@ -90,6 +94,24 @@ class OptionsState extends MusicBeatState
 
 		changeSelection();
 		ClientPrefs.saveSettings();
+
+		manual = new FlxSprite(0, 0);
+		manual.frames = Paths.getSparrowAtlas('extra-keys/manual_book');
+		manual.animation.addByPrefix('normal', 'manual icon', 30, true);
+		manual.animation.addByPrefix('hover', 'manual icon hover', 30, true);
+		add(manual);
+		manual.x = FlxG.width - manual.width;
+		manual.y = FlxG.height - manual.height;
+		manual.animation.play('normal', true);
+		manual.updateHitbox();
+
+		changeLogSheet = new FlxSprite(0, 0);
+		changeLogSheet.loadGraphic(Paths.image('changelogsheet'));
+		changeLogSheet.setGraphicSize(2, 2);
+		add(changeLogSheet);
+		changeLogSheet.x = FlxG.width + manual.width;
+		changeLogSheet.y = FlxG.height - changeLogSheet.height;
+		changeLogSheet.updateHitbox();
 
 		super.create();
 	}
@@ -132,6 +154,20 @@ class OptionsState extends MusicBeatState
 
 		if (controls.ACCEPT) {
 			openSelectedSubstate(options[curSelected]);
+		}
+
+		if (FlxG.mouse.overlaps(manual) || FlxG.mouse.overlaps(changeLogSheet)) {
+			if (manual.animation.curAnim.name != 'hover') {
+				manual.animation.play('hover', true);
+			}
+			FlxTween.tween(manual, {x: manual.x - changeLogSheet.width}, 1, {ease: FlxEase.quartInOut});
+			FlxTween.tween(changeLogSheet, {x: FlxG.width - changeLogSheet.width}, 1, {ease: FlxEase.quartInOut});
+		} else {
+			if (manual.animation.curAnim != null && manual.animation.curAnim.name != 'normal') {
+				manual.animation.play('normal', true);
+			}
+			FlxTween.tween(manual, {x: FlxG.width - manual.width}, 1, {ease: FlxEase.quartInOut});
+			FlxTween.tween(changeLogSheet, {x: FlxG.width + manual.width}, 1, {ease: FlxEase.quartInOut});
 		}
 	}
 	

@@ -35,15 +35,15 @@ class EKData {
                 "pixelAnimIndex" => [0, 1, 4, 2, 3]
             ],
 		5 => [
-                "letters" => ["A", "B", "D", "F", "C", "I"], 
-                "anims" => ["LEFT", "DOWN", "RIGHT", "LEFT", "UP", "RIGHT"],
-			    "strumAnims" => ["LEFT", "DOWN", "RIGHT", "LEFT", "UP", "RIGHT"], 
+                "letters" => ["A", "C", "D", "F", "B", "I"], 
+                "anims" => ["LEFT", "UP", "RIGHT", "LEFT", "DOWN", "RIGHT"],
+			    "strumAnims" => ["LEFT", "UP", "RIGHT", "LEFT", "DOWN", "RIGHT"], 
                 "pixelAnimIndex" => [0, 2, 3, 5, 1, 8]
             ],
 		6 => [
-                "letters" => ["A", "B", "D", "E", "F", "C", "I"], 
-                "anims" => ["LEFT", "DOWN", "RIGHT", "UP", "LEFT", "UP", "RIGHT"],
-			    "strumAnims" => ["LEFT", "DOWN", "RIGHT", "SPACE", "LEFT", "UP", "RIGHT"], 
+                "letters" => ["A", "C", "D", "E", "F", "B", "I"], 
+                "anims" => ["LEFT", "UP", "RIGHT", "UP", "LEFT", "DOWN", "RIGHT"],
+			    "strumAnims" => ["LEFT", "UP", "RIGHT", "SPACE", "LEFT", "DOWN", "RIGHT"], 
                 "pixelAnimIndex" => [0, 2, 3, 4, 5, 1, 8]
             ],
 		7 => [
@@ -112,7 +112,7 @@ class EKData {
                 "anims" => ["LEFT", "DOWN", "UP", "RIGHT", "UP", "LEFT", "DOWN", "UP", "RIGHT",
                 "LEFT", "DOWN", "UP", "RIGHT", "UP", "LEFT", "DOWN", "UP", "RIGHT"],
                 "strumAnims" => ["LEFT", "DOWN", "UP", "RIGHT", "SPACE", "LEFT", "DOWN", "UP", "RIGHT", 
-                "CIRCLE", "CIRCLE", "CIRCLE", "CIRCLE", "CIRCLE", "CIRCLE", "CIRCLE", "CIRCLE", "CIRCLE"], 
+                "LEFT", "DOWN", "UP", "RIGHT", "CIRCLE", "LEFT", "DOWN", "UP", "RIGHT"], 
                 "pixelAnimIndex" => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
         ],
 	];
@@ -134,13 +134,13 @@ class EKData {
 		0.31, //13k
 		0.31, //14k
 		0.3, //15k
-        0.29, //16k
-        0.27, //17k
-        0.25 //18k
+        0.26, //16k
+        0.26, //17k
+        0.22 //18k
     ]; 
 	public static var lessX:Array<Int> = [
-		0, //1k
-		0, //2k
+		0, // 1k
+		0, // 2k
 		0, //3k
 		0, //4k
 		0, //5k
@@ -155,7 +155,7 @@ class EKData {
 		7, //14k
 		6, //15k
         7, //16k
-        6, //17k
+        6, // 17k
         6 //18k
     ];
 
@@ -164,40 +164,40 @@ class EKData {
         0, //2k
         1, //3k
         1, //4k
-        1, //5k
-        1, //6k
-        1, //7k
-        2, //8k
-        2, //9k
-        2, //10k
-        3, //11k
-        3, //12k
-        3, //13k
-        4, //14k
-        4, //15k
-        4, //16k
-        4 //18k
+        2, //5k
+        2, //6k
+        2, //7k
+        3, //8k
+        3, //9k
+        4, //10k
+        4, //11k
+        5, //12k
+        6, //13k
+        6, //14k
+        7, //15k
+        6, //16k
+        5//18k
     ];
 
     public static var offsetX:Array<Float> = [
-        245, //1k
-        127, //2k
-        115, //3k
-        80, //4k
-        52, //5k
-        47, //6k
-        30, //7k
-        25, //8k
-        27, //9k
-        38, //10k
-        36, //11k
-        46, //12k
-        48, //13k
-        27, //14k
-        9, //15k
-        12, //16k
-        9, //17k
-        14 //18k
+        150, //1k
+        89,//2k
+        0, //3k
+        0, //4k
+        0, //5k
+        0, //6k
+        0, //7k
+        0, //8k
+        0, //9k
+        0, //10k
+        0, //11k
+        0, //12k
+        0, //13k
+        0, //14k
+        0, //15k
+        0, //16k
+        0, //17k
+        0 //18k
     ];
 
     // i wont comment fuck you
@@ -227,83 +227,83 @@ class EKData {
         0, //2k
         0, //3k
         0, //4k
-        2, //5k
-        2, //6k
-        4, //7k
-        4, //8k
-        6, //9k
-        6, //10k
-        8, //11k
-        8, //12k
-        6, //13k
-        6, //14k
-        4, //15k
-        4, //16k
-        2, //17k
-        2 //18k
+        25, //5k
+        32,//6k
+        46, //7k
+        52, //8k
+        60, //9k
+        40, //10k
+        45, //11k
+        30, //12k
+        30, //13k
+        29,// 14k
+        72, //15k
+        37, // 16k
+        61, //17k
+        16 //18k
     ];
 
     public static var gridSizes:Array<Int> = [
-        60, //1k
-        50, //2k
-        45, //3k
+        40, //1k
+        40, //2k
+        40, //3k
         40, //4k
         40, //5k
         40, //6k
         40, //7k
-        38, //8k
-        36, //9k
-        34, //10k
-        32, //11k
-        30, //12k
-        29, //13k
-        28, //14k
-        27, //15k
-        26, //16k
-        25, //17k
-        24 //18k
+        40, //8k
+        40, //9k
+        35, //10k
+        30, //11k
+        25, //12k
+        25, //13k
+        20, //14k
+        20, //15k
+        20, //16k
+        20, //17k
+        15 //18k
     ];
 
     public static var splashScales:Array<Float> = [
-        1.30, //1k
-        1.20, //2k
-        1.10, //3k
-        1.00, //4k
-        1.00, //5k
-        0.90, //6k
-        0.80, //7k
-        0.70, //8k
-        0.60, //9k
-        0.50, //10k
-        0.40, //11k
-        0.30, //12k
-        0.30, //13k
-        0.30, //14k
-        0.20, //15k
+        1.3, //1k
+        1.2, //2k
+        1.1, //3k
+        1, //4k
+        1, //5k
+        0.9, //6k
+        0.8,//7k
+        0.7, //8k
+        0.6, //9k
+        0.5, //10k
+        0.4, //11k
+        0.3, //12k
+        0.3, //13k
+        0.3, //14k
+        0.2, //15k
         0.18, //16k
         0.18, //17k
-        0.15  //18k
+        0.15 //18k
     ];
 
     public static var pixelScales:Array<Float> = [
-        1.20, //1k
+        1.2, //1k
         1.15, //2k
-        1.10, //3k
-        1.00, //4k
-        0.90, //5k
+        1.1, //3k
+        1, //4k
+        0.9, //5k
         0.83, //6k
-        0.80, //7k
+        0.8, //7k
         0.74, //8k
-        0.70, //9k
-        0.60, //10k
-        0.55, //11k
-        0.50, //12k
+        0.7, //9k
+        0.6, //10k
+        0.55,//11k
+        0.5, //12k
         0.48, //13k
         0.48, //14k
         0.42, //15k
         0.38, //16k
         0.38, //17k
-        0.32  //18k
+        0.32 //18k
     ];
 }
 
