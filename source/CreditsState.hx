@@ -83,7 +83,9 @@ class CreditsState extends MusicBeatState
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Amazing Engine'],
 			['M3llySlayz',			'melly',			'Lead Programmer, Musician, and Artist',						'https://youtube.com/@M3llySlayz',		'BE0101'],
-			['Irshaad Ali',			'irshaad',			'Programmer, Made Alt Splitscroll',								'',										'0079C7'],
+			['Irshaad Ali',			'irshaad',			'Programmer, Made Splitscroll and Alt Splitscroll',				'https://www.youtube.com/channel/UCwJQYZunvqdDTVbgi9mA7fg',			'0079C7'],
+			['SomeGuyWhoUhhhh', 	'sgwu',				'Programmer, Spearheaded Freeplay Changes',						'https://gamejolt.com/@SomeGuyWhoLikesFNF',							'9900FF'],
+			['JB444m',				'jb',				'Artist, Convinced Melly to add Extra Keys (it was painful)', 	'https://youtube.com/@JB444m',			'FFAA00'],
 			[''],
 			['Extra Keys'],
 			['tposejank', 			'tposejank',		'Actitud Positiva',			 									'https://www.youtube.com/channel/UCNdhmFe3BXu-Ff2DZ4loYvQ', 		'B9AF27'],	//mensajes subliminales

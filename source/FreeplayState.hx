@@ -95,7 +95,7 @@ class FreeplayState extends MusicBeatState
 			{
 				var colors:Array<Int> = song[2];
 				if(colors == null || colors.length < 3) colors = [146, 113, 253];
-				if (curCategory == 'custom') {
+				if (curCategory == 'amongus') {
 					// Put your songs here. (Wants: addSong('Song Name', i, 'Song Character', FlxColor.fromRGB(r, g, b)) )
 				} else {
 					addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
@@ -144,11 +144,6 @@ class FreeplayState extends MusicBeatState
 			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
 			add(icon);
-
-			if (curCategory == 'festivalv')
-				songText.x += FlxG.width / 6;
-			else
-				songText.x -= FlxG.width / 6;
 		}
 		WeekData.setDirectoryFromWeek();
 

@@ -55,7 +55,7 @@ class MusicSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeGameOverMusic;
 
 		var option:Option = new Option('Main Menu Song:',
-		"What song do you prefer for the Main Menu?\nThis option option doesn't really work yet.",
+		"What song do you prefer for the Main Menu?",
 		'mainSong',
 		'string',
 		'Freaky',

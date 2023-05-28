@@ -51,7 +51,7 @@ class ClientPrefs {
 	public static var gameOverSong:String = 'Default';
 	public static var sfxPreset:String = 'Default';
 	public static var advancedSfx:Bool = false;
-	public static var mainSong:String = 'Freaky';
+	public static var mainSong:String = '';
 	public static var convertEK:Bool = true;
 	public static var showKeybindsOnStart:Bool = true;
 	public static var aeWatermarks:Bool = true;

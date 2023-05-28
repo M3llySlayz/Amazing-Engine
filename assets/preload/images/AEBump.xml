@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="AEBump.png">
+	<!-- Created with Adobe Animate version 23.0.1.70 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Bump Export Real0000" x="0" y="0" width="801" height="735" frameX="-208" frameY="-110" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0001" x="801" y="0" width="807" height="735" frameX="-204" frameY="-110" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0002" x="1608" y="0" width="847" height="733" frameX="-164" frameY="-112" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0003" x="2455" y="0" width="964" height="783" frameX="-45" frameY="-62" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0004" x="3419" y="0" width="1004" height="805" frameX="-5" frameY="-40" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0005" x="4423" y="0" width="1006" height="819" frameX="-3" frameY="-26" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0006" x="5429" y="0" width="1006" height="807" frameX="-3" frameY="-38" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0007" x="6435" y="0" width="1009" height="807" frameX="0" frameY="-38" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0008" x="6435" y="0" width="1009" height="807" frameX="0" frameY="-38" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0009" x="6435" y="0" width="1009" height="807" frameX="-3" frameY="-38" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0010" x="0" y="819" width="1006" height="808" frameX="-3" frameY="-37" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0011" x="0" y="819" width="1006" height="808" frameX="-3" frameY="-37" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0012" x="0" y="819" width="1006" height="808" frameX="-3" frameY="-36" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0013" x="1006" y="819" width="1006" height="814" frameX="-3" frameY="-31" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0014" x="1006" y="819" width="1006" height="814" frameX="-3" frameY="-31" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0015" x="2012" y="819" width="930" height="719" frameX="-3" frameY="-31" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0016" x="2942" y="819" width="936" height="719" frameX="-3" frameY="-31" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0017" x="3878" y="819" width="989" height="718" frameX="-3" frameY="-31" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0018" x="4867" y="819" width="1151" height="716" frameX="-3" frameY="-30" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0019" x="6018" y="819" width="1204" height="736" frameX="-3" frameY="-9" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0020" x="0" y="1633" width="1207" height="738" frameX="-3" frameY="-7" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0021" x="1207" y="1633" width="1207" height="739" frameX="-3" frameY="-6" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0022" x="2414" y="1633" width="1210" height="745" frameX="0" frameY="0" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0023" x="2414" y="1633" width="1210" height="745" frameX="0" frameY="0" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0024" x="2414" y="1633" width="1210" height="745" frameX="-3" frameY="0" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0025" x="3624" y="1633" width="1207" height="744" frameX="-3" frameY="-1" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0026" x="3624" y="1633" width="1207" height="744" frameX="-3" frameY="-1" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0027" x="3624" y="1633" width="1207" height="744" frameX="-3" frameY="-1" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0028" x="4831" y="1633" width="1207" height="744" frameX="-3" frameY="-1" frameWidth="1210" frameHeight="845"/>
+	<SubTexture name="Bump Export Real0029" x="4831" y="1633" width="1207" height="744" frameX="-3" frameY="-1" frameWidth="1210" frameHeight="845"/>
+</TextureAtlas>

@@ -7,6 +7,7 @@ import flixel.FlxSubState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
+import flixel.effects.FlxFlicker;
 #if (flixel < "5.3.0")
 import flixel.system.FlxSound;
 #else
@@ -18,6 +19,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
+import flixel.util.FlxTimer;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -34,6 +36,11 @@ class PauseSubState extends MusicBeatSubstate
 	var skipTimeText:FlxText;
 	var skipTimeTracker:Alphabet;
 	var curTime:Float = Math.max(0, Conductor.songPosition);
+	var bg:FlxSprite;
+	var levelInfo:FlxText;
+	var levelDifficulty:FlxText;
+	var blueballedTxt:FlxText;
+	public var chartingText:FlxText;
 	//var botplayText:FlxText;
 
 	public static var songName:String = '';
@@ -77,26 +84,26 @@ class PauseSubState extends MusicBeatSubstate
 
 		FlxG.sound.list.add(pauseMusic);
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = 0;
 		bg.scrollFactor.set();
 		add(bg);
 
-		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
+		levelInfo = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
 		levelInfo.scrollFactor.set();
 		levelInfo.setFormat(Paths.font("vcr.ttf"), 32);
 		levelInfo.updateHitbox();
 		add(levelInfo);
 
-		var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
+		levelDifficulty = new FlxText(20, 15 + 32, 0, "", 32);
 		levelDifficulty.text += CoolUtil.difficultyString();
 		levelDifficulty.scrollFactor.set();
 		levelDifficulty.setFormat(Paths.font('vcr.ttf'), 32);
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
-		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
+		blueballedTxt = new FlxText(20, 15 + 64, 0, "", 32);
 		blueballedTxt.text = "Blueballed: " + PlayState.deathCounter;
 		blueballedTxt.scrollFactor.set();
 		blueballedTxt.setFormat(Paths.font('vcr.ttf'), 32);
@@ -111,7 +118,7 @@ class PauseSubState extends MusicBeatSubstate
 		practiceText.visible = PlayState.instance.practiceMode;
 		add(practiceText);
 
-		var chartingText:FlxText = new FlxText(20, 15 + 101, 0, "CHARTING MODE", 32);
+		chartingText = new FlxText(20, 15 + 101, 0, "CHARTING MODE", 32);
 		chartingText.scrollFactor.set();
 		chartingText.setFormat(Paths.font('vcr.ttf'), 32);
 		chartingText.x = FlxG.width - (chartingText.width + 20);
@@ -242,8 +249,17 @@ class PauseSubState extends MusicBeatSubstate
 			switch (daSelected)
 			{
 				case "Continue":
-					SoundEffects.playSFX('confirm', true);
-					close();
+					/*FlxFlicker.flicker(grpMenuShit, 1.5, 0.05, false);
+					FlxTween.tween(grpMenuShit, {alpha: 0}, 1, {ease: FlxEase.linear});
+					FlxTween.tween(bg, {alpha: 0}, 0.4, {ease: FlxEase.linear});
+					FlxTween.tween(levelInfo, {alpha: 0}, 0.4, {ease: FlxEase.linear});
+					FlxTween.tween(levelDifficulty, {alpha: 0}, 0.4, {ease: FlxEase.linear});
+					FlxTween.tween(blueballedTxt, {alpha: 0}, 0.4, {ease: FlxEase.linear});
+					
+					new FlxTimer().start(1.5, function(tmr:FlxTimer) {*/
+						SoundEffects.playSFX('confirm', true);
+						close();
+				//	});
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
 					deleteSkipTimeText();

@@ -14,7 +14,7 @@ using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
     public var categoriesList:Array<String> = ['base game', 'custom']; // Change this line here. Don't forget about the hardcoding in FreeplayState aswell.
-    public var categoryNamesList:Array<String> = ['vanilla', 'custom category'];
+    public var categoryNamesList:Array<String> = ['vanilla', 'mod support soon!\nevery song is still in\nvanilla tho dw'];
     public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFFFF];
   
     public static var curSelected:Int = 0;
