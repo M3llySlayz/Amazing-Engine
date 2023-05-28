@@ -137,6 +137,8 @@ class FreeplayState extends MusicBeatState
 			}
 			songText.snapToPosition();
 
+			if (ClientPrefs.freeplayCenter) songText.screenCenter(X);
+			
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
