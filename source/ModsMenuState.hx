@@ -167,7 +167,7 @@ class ModsMenuState extends MusicBeatState
 		buttonUp = new FlxButton(startX, 0, "/\\", function()
 		{
 			moveMod(-1);
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			//FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 		});
 		buttonUp.setGraphicSize(50, 50);
 		buttonUp.updateHitbox();
@@ -180,7 +180,7 @@ class ModsMenuState extends MusicBeatState
 
 		buttonDown = new FlxButton(startX, 0, "\\/", function() {
 			moveMod(1);
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			//FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 		});
 		buttonDown.setGraphicSize(50, 50);
 		buttonDown.updateHitbox();
@@ -387,7 +387,7 @@ class ModsMenuState extends MusicBeatState
 		intendedColor = bg.color;
 		changeSelection();
 		updatePosition();
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		//FlxG.sound.play(Paths.sound('scrollMenu'));
 
 		FlxG.mouse.visible = true;
 
@@ -546,13 +546,18 @@ class ModsMenuState extends MusicBeatState
 		if(controls.UI_UP_P)
 		{
 			changeSelection(-1);
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			//FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
 		if(controls.UI_DOWN_P)
 		{
 			changeSelection(1);
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			//FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
+
+		if (FlxG.mouse.wheel != 0){
+			changeSelection(-FlxG.mouse.wheel);
+		}
+
 		updatePosition(elapsed);
 		super.update(elapsed);
 	}
@@ -626,6 +631,7 @@ class ModsMenuState extends MusicBeatState
 			i++;
 		}
 		updateButtonToggle();
+		SoundEffects.playSFX('scroll', false);
 	}
 
 	function updatePosition(elapsed:Float = -1)
