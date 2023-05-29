@@ -145,8 +145,15 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			changeSelection(1);
 		}
-
-		if (controls.BACK) {
+		if (FlxG.mouse.wheel != 0){
+			if (FlxG.mouse.wheel > 0){
+				changeSelection(-1);
+			} else {
+				changeSelection(1);
+			}
+			SoundEffects.playSFX('scroll', false);
+		}
+		if (controls.BACK || FlxG.mouse.justPressedRight) {
 			close();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
@@ -161,9 +168,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 			if(usesCheckbox)
 			{
-				if(controls.ACCEPT)
+				if(controls.ACCEPT || FlxG.mouse.justPressed)
 				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					SoundEffects.playSFX('confirm', true);
 					curOption.setValue((curOption.getValue() == true) ? false : true);
 					curOption.change();
 					reloadCheckboxes();
@@ -256,7 +263,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					}
 					leOption.change();
 				}
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('cancel', false);
 				reloadCheckboxes();
 			}
 		}
@@ -328,7 +335,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			boyfriend.visible = optionsArray[curSelected].showBoyfriend;
 		}
 		curOption = optionsArray[curSelected]; //shorter lol
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		SoundEffects.playSFX('scroll', false);
 	}
 
 	public function reloadBoyfriend()

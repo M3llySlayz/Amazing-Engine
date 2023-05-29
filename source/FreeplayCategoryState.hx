@@ -71,6 +71,13 @@ class FreeplayCategoryState extends MusicBeatState {
         bg.scale.set(1.25, 1.25);
         bg.screenCenter(X);
         if (!selectedSomethin) {
+
+            if (FlxG.mouse.wheel != 0)
+            {
+                SoundEffects.playSFX('scroll', false);
+                changeSelection(-FlxG.mouse.wheel);
+            }
+
             if (controls.UI_LEFT_P) 
             {
                 SoundEffects.playSFX('scroll', false);
@@ -83,13 +90,13 @@ class FreeplayCategoryState extends MusicBeatState {
                 changeSelection(1);
             }
 
-            if (controls.ACCEPT)
+            if (controls.ACCEPT || FlxG.mouse.justPressed)
                 if (curSelected != 1)
                     selectCategory();
                 else
                     SoundEffects.playSFX('cancel', false);
 
-            if (controls.BACK)
+            if (controls.BACK || FlxG.mouse.justPressedRight)
             {
                 selectedSomethin = true;
                 SoundEffects.playSFX('cancel', false);

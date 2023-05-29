@@ -4,7 +4,8 @@ import flixel.FlxG;
 
 class MusicEffects {
     /**
-        *The main function for playing music in Amazing Engine.
+        * A retired function for playing music in Amazing Engine.
+        * I don't think this class is even necessary anymore, but use it as a template if you wanna simplify things.
         *
         * @param    music   What type of song you're playing. You may choose from `menu`, `pause`, or `game over`.
         * @param    volume  The volume of the song, obviously.

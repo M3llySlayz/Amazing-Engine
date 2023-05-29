@@ -130,7 +130,13 @@ class OptionsState extends MusicBeatState
 		if (controls.UI_DOWN_P) {
 			changeSelection(1);
 		}
-
+		if (FlxG.mouse.wheel != 0){
+			if (FlxG.mouse.wheel > 0){
+				changeSelection(-1);
+			} else {
+				changeSelection(1);
+			}
+		}
 		if (controls.DEV_BIND_P) {
 			if (ClientPrefs.devMode){
 				options.remove('Dev Stuff');
@@ -141,7 +147,7 @@ class OptionsState extends MusicBeatState
 			LoadingState.loadAndSwitchState(new options.OptionsState());
 		}
 
-		if (controls.BACK) {
+		if (controls.BACK || FlxG.mouse.justPressedRight) {
 			//FlxG.sound.play(Paths.sound('cancelMenu'));
 			SoundEffects.playSFX('cancel', false);
 			if (!MainMenuState.wasPaused){
@@ -152,7 +158,7 @@ class OptionsState extends MusicBeatState
 			}
 		}
 
-		if (controls.ACCEPT) {
+		if (controls.ACCEPT || FlxG.mouse.justPressed) {
 			openSelectedSubstate(options[curSelected]);
 		}
 

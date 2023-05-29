@@ -62,6 +62,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			false);
 		addOption(option);
+		
+		var option:Option = new Option('Note Glow',
+			"If checked, when it's almost time to press a note, it'll glow.\nWorks like FPS Plus, but more efficient.",
+			'noteGlow',
+			'bool',
+			false);
+		addOption(option);
 
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',

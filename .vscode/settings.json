@@ -1,6 +1,8 @@
 {
     "Lua.diagnostics.disable": [
         "undefined-global",
-        "lowercase-global"
+        "lowercase-global",
+        "redundant-return",
+        "missing-return-value"
     ]
 }

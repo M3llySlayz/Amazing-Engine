@@ -48,6 +48,7 @@ class StoryMenuState extends MusicBeatState
 	var rightArrow:FlxSprite;
 
 	var loadedWeeks:Array<WeekData> = [];
+	var mouseToggle:Bool = false;
 
 	override function create()
 	{
@@ -224,13 +225,22 @@ class StoryMenuState extends MusicBeatState
 				SoundEffects.playSFX('scroll', false);
 			}
 
+			if (FlxG.mouse.justPressedMiddle){
+				if (mouseToggle){
+					mouseToggle = false;
+				} else {
+					mouseToggle = true;
+				}
+			}
+
 			if(FlxG.mouse.wheel != 0)
 			{
-				
-				//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+				if (mouseToggle){
+					changeDifficulty(-FlxG.mouse.wheel);
+				} else {
+					changeWeek(-FlxG.mouse.wheel);
+				}
 				SoundEffects.playSFX('scroll', false);
-				changeWeek(-FlxG.mouse.wheel);
-				changeDifficulty();
 			}
 
 			if (controls.UI_RIGHT)
@@ -261,13 +271,13 @@ class StoryMenuState extends MusicBeatState
 				openSubState(new ResetScoreSubState('', curDifficulty, '', curWeek));
 				//FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
-			else if (controls.ACCEPT)
+			else if (controls.ACCEPT || FlxG.mouse.justPressed)
 			{
 				selectWeek();
 			}
 		}
 
-		if (controls.BACK && !movedBack && !selectedWeek)
+		if (controls.BACK || FlxG.mouse.justPressedRight && !movedBack && !selectedWeek)
 		{
 			//FlxG.sound.play(Paths.sound('cancelMenu'));
 			SoundEffects.playSFX('cancel', false);

@@ -67,6 +67,8 @@ class MainMenuState extends MusicBeatState
 		camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
 
+		FlxG.mouse.visible = true;
+
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camAchievement, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
@@ -113,7 +115,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(100, (i * 140)  + offset);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -241,8 +243,16 @@ class MainMenuState extends MusicBeatState
 				SoundEffects.playSFX('scroll', false);
 				changeItem(1);
 			}
+			if (FlxG.mouse.wheel != 0){
+				if (FlxG.mouse.wheel > 0){
+					changeItem(-1);
+				} else {
+					changeItem(1);
+				}
+				SoundEffects.playSFX('scroll', false);
+			}
 
-			if (controls.BACK)
+			if (controls.BACK || FlxG.mouse.justPressedRight)
 			{
 				selectedSomethin = true;
 				//FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -250,7 +260,7 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new TitleState());
 			}
 
-			if (controls.ACCEPT)
+			if (controls.ACCEPT || FlxG.mouse.justPressed)
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
@@ -267,6 +277,24 @@ class MainMenuState extends MusicBeatState
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
+						if (FlxG.mouse.overlaps(spr)){
+							curSelected = spr.ID;
+							if (spr.ID != curSelected){
+								spr.animation.play('idle');
+								spr.updateHitbox();
+							}
+							spr.updateHitbox();
+							if (spr.ID == curSelected)
+							{
+								spr.animation.play('selected');
+								var add:Float = 0;
+								if(menuItems.length > 4) {
+									add = menuItems.length * 8;
+								}
+								camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
+								//spr.centerOffsets();
+						}
+					}
 						if (curSelected != spr.ID)
 						{
 							FlxTween.tween(spr, {alpha: 0}, 0.4, {
@@ -318,7 +346,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.screenCenter(X);
+			if (ClientPrefs.mainMenuPos == 'Center') spr.screenCenter(X);
 		});
 	}
 
@@ -335,7 +363,6 @@ class MainMenuState extends MusicBeatState
 		{
 			spr.animation.play('idle');
 			spr.updateHitbox();
-
 			if (spr.ID == curSelected)
 			{
 				spr.animation.play('selected');

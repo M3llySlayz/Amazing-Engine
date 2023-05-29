@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="ae book.png">
+	<!-- Created with Adobe Animate version 23.0.1.70 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="book0000" x="0" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book0001" x="0" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book0002" x="157" y="0" width="159" height="141"/>
+	<SubTexture name="book0003" x="157" y="0" width="159" height="141"/>
+	<SubTexture name="book0004" x="316" y="0" width="159" height="141"/>
+	<SubTexture name="book0005" x="316" y="0" width="159" height="141"/>
+	<SubTexture name="book0006" x="316" y="0" width="159" height="141"/>
+	<SubTexture name="book0007" x="316" y="0" width="159" height="141"/>
+	<SubTexture name="book0008" x="475" y="0" width="159" height="141"/>
+	<SubTexture name="book0009" x="475" y="0" width="159" height="141"/>
+	<SubTexture name="book0010" x="634" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book0011" x="634" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book0012" x="634" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book0013" x="634" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book0014" x="157" y="0" width="159" height="141"/>
+	<SubTexture name="book0015" x="157" y="0" width="159" height="141"/>
+	<SubTexture name="book0016" x="316" y="0" width="159" height="141"/>
+	<SubTexture name="book0017" x="316" y="0" width="159" height="141"/>
+	<SubTexture name="book0018" x="316" y="0" width="159" height="141"/>
+	<SubTexture name="book0019" x="316" y="0" width="159" height="141"/>
+	<SubTexture name="book0020" x="475" y="0" width="159" height="141"/>
+	<SubTexture name="book0021" x="475" y="0" width="159" height="141"/>
+	<SubTexture name="book0022" x="634" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book0023" x="634" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book0024" x="634" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book0025" x="634" y="0" width="157" height="139" frameX="-1" frameY="-1" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book select0000" x="0" y="0" width="157" height="139" frameX="-4" frameY="-19" frameWidth="159" frameHeight="141"/>
+	<SubTexture name="book select0001" x="791" y="0" width="158" height="140" frameX="-3" frameY="-18" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0002" x="0" y="141" width="161" height="142" frameX="-1" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0003" x="161" y="141" width="161" height="143" frameX="-1" frameY="-16" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0004" x="161" y="141" width="161" height="143" frameX="-1" frameY="-16" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0005" x="161" y="141" width="161" height="143" frameX="-1" frameY="-16" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0006" x="161" y="141" width="161" height="143" frameX="-1" frameY="-16" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0007" x="161" y="141" width="161" height="143" frameX="-1" frameY="-16" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0008" x="322" y="141" width="163" height="144" frameX="0" frameY="-15" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0009" x="485" y="141" width="160" height="143" frameX="-2" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0010" x="645" y="141" width="162" height="153" frameX="-1" frameY="-6" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0011" x="807" y="141" width="161" height="153" frameX="-1" frameY="-6" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0012" x="0" y="294" width="163" height="154" frameX="0" frameY="-5" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0013" x="163" y="294" width="160" height="160" frameX="-2" frameY="0" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0014" x="323" y="294" width="162" height="152" frameX="-1" frameY="-7" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0015" x="485" y="294" width="163" height="147" frameX="0" frameY="-12" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0016" x="648" y="294" width="160" height="148" frameX="-2" frameY="-12" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0017" x="808" y="294" width="160" height="143" frameX="-2" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0018" x="808" y="294" width="160" height="143" frameX="-2" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0019" x="808" y="294" width="160" height="143" frameX="-2" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0020" x="808" y="294" width="160" height="143" frameX="-2" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0021" x="808" y="294" width="160" height="143" frameX="-2" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0022" x="808" y="294" width="160" height="143" frameX="-2" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0023" x="808" y="294" width="160" height="143" frameX="-2" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book select0024" x="808" y="294" width="160" height="143" frameX="-2" frameY="-17" frameWidth="163" frameHeight="160"/>
+	<SubTexture name="book unread0000" x="0" y="454" width="154" height="158" frameX="-2" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0001" x="154" y="454" width="159" height="158"/>
+	<SubTexture name="book unread0002" x="313" y="454" width="154" height="158" frameX="-2" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0003" x="467" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0004" x="625" y="454" width="154" height="158" frameX="-2" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0005" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0006" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0007" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0008" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0009" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0010" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0011" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0012" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0013" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0014" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0015" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0016" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+	<SubTexture name="book unread0017" x="779" y="454" width="158" height="158" frameX="-1" frameY="0" frameWidth="159" frameHeight="158"/>
+</TextureAtlas>
