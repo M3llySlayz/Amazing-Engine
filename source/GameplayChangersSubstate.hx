@@ -176,7 +176,11 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		if (controls.BACK) {
+		if (FlxG.mouse.wheel != 0){
+			changeSelection(-FlxG.mouse.wheel);
+		}
+
+		if (controls.BACK || FlxG.mouse.justPressedRight) {
 			close();
 			ClientPrefs.saveSettings();
 			//FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -193,7 +197,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 			if(usesCheckbox)
 			{
-				if(controls.ACCEPT)
+				if(controls.ACCEPT || FlxG.mouse.justPressed)
 				{
 					//FlxG.sound.play(Paths.sound('scrollMenu'));
 					SoundEffects.playSFX('confirm', true);
@@ -293,7 +297,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET)
+			if(controls.RESET || FlxG.mouse.justPressedMiddle)
 			{
 				for (i in 0...optionsArray.length)
 				{
@@ -375,7 +379,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			}
 		}
 		curOption = optionsArray[curSelected]; //shorter lol
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		//FlxG.sound.play(Paths.sound('scrollMenu'));
+		SoundEffects.playSFX('scroll', false);
 	}
 
 	function reloadCheckboxes() {
