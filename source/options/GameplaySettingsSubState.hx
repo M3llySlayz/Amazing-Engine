@@ -70,6 +70,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
+		var option:Option = new Option('Key Strokes',
+			"If checked, shows keys being pressed in the bottom left.\nActual keys, not notes.",
+			'keyStrokes',
+			'bool',
+			false);
+		addOption(option);
+
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
 			'opponentStrums',

@@ -338,7 +338,6 @@ class PlayState extends MusicBeatState
 		if (!ClientPrefs.bigCache){
 			Paths.clearStoredMemory();
 		}
-		MainMenuState.wasPaused = false;
 		// for lua
 		instance = this;
 

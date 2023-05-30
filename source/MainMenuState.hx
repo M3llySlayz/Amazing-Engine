@@ -29,7 +29,7 @@ class MainMenuState extends MusicBeatState
 	public static var amazingEngineVersion:String = '0.3.1'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 	public static var launchChance:Dynamic = null;
-	public static var wasPaused:Bool = false;
+	//public static var wasPaused:Bool = false;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;

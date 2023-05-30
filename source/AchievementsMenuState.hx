@@ -85,9 +85,15 @@ class AchievementsMenuState extends MusicBeatState
 		}
 
 		if (controls.BACK) {
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', false);
 			MusicBeatState.switchState(new MainMenuState());
 		}
+		if (FlxG.mouse.wheel != 0)
+        {
+            SoundEffects.playSFX('scroll', false);
+            changeSelection(-FlxG.mouse.wheel);
+        }
 	}
 
 	function changeSelection(change:Int = 0) {
@@ -116,7 +122,8 @@ class AchievementsMenuState extends MusicBeatState
 			}
 		}
 		descText.text = Achievements.achievementsStuff[achievementIndex[curSelected]][1];
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 	}
 	#end
 }

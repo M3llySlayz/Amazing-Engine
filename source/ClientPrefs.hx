@@ -56,6 +56,7 @@ class ClientPrefs {
 	public static var showKeybindsOnStart:Bool = true;
 	public static var aeWatermarks:Bool = true;
 	public static var noteGlow:Bool = false;
+	public static var keyStrokes:Bool = false;
 	public static var comboStacking = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -359,6 +360,7 @@ class ClientPrefs {
 		FlxG.save.data.showKeybindsOnStart = showKeybindsOnStart;
 		FlxG.save.data.aeWatermarks = aeWatermarks;
 		FlxG.save.data.noteGlow = noteGlow;
+		FlxG.save.data.keyStrokes = keyStrokes;
 	
 		FlxG.save.flush();
 
@@ -544,6 +546,10 @@ class ClientPrefs {
 		if (FlxG.save.data.noteGlow != null)
 		{
 			noteGlow = FlxG.save.data.noteGlow;
+		}
+		if (FlxG.save.data.keyStrokes != null)
+		{
+			keyStrokes = FlxG.save.data.keyStrokes;
 		}
 		if (FlxG.save.data.convertEK != null)
 		{

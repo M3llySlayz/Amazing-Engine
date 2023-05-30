@@ -76,7 +76,7 @@ class StrumNote extends FlxSprite
 		animationArray[1] = Note.keysShit.get(PlayState.mania).get('letters')[leData];
 		animationArray[2] = Note.keysShit.get(PlayState.mania).get('letters')[leData]; // jic
 
-		var skin:String = 'NOTE_assets';
+		var skin:String = 'NOTE_assets'; // in the future this will be set to the character's skin mwahaha
 		//if(PlayState.isPixelStage) skin = 'PIXEL_' + skin;
 		if(PlayState.SONG.arrowSkin != null && PlayState.SONG.arrowSkin.length > 1) skin = PlayState.SONG.arrowSkin;
 		texture = skin; //Load texture and anims

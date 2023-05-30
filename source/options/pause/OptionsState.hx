@@ -1,4 +1,4 @@
-package options;
+package options.pause;
 
 #if desktop
 import Discord.DiscordClient;
@@ -49,7 +49,7 @@ class OptionsState extends MusicBeatState
 			case 'Gameplay':
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+				LoadingState.loadAndSwitchState(new options.pause.NoteOffsetState());
 			case 'Dev Stuff':
 				openSubState(new options.DevSettingsSubState());
 			case 'Music':
@@ -144,19 +144,14 @@ class OptionsState extends MusicBeatState
 			} else {
 				ClientPrefs.devMode = true;
 			}
-			LoadingState.loadAndSwitchState(new options.OptionsState());
+			LoadingState.loadAndSwitchState(new options.pause.OptionsState());
 		}
 
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
-			//FlxG.sound.play(Paths.sound('cancelMenu'));
-			SoundEffects.playSFX('cancel', false);
-			//if (!MainMenuState.wasPaused){
-				MusicBeatState.switchState(new MainMenuState());
-			/*} else {
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('cancel', false);
 				LoadingState.loadAndSwitchState(new PlayState());
-				MainMenuState.wasPaused = false;
-			}*/
-		}
+			}
 
 		if (controls.ACCEPT || FlxG.mouse.justPressed) {
 			openSelectedSubstate(options[curSelected]);
