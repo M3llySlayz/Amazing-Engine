@@ -32,7 +32,7 @@ function onSpawnNote(membersIndex, noteData, noteType, isSustainNote)
 	end
 end
 
--- Checks if the note can be pressed withput it hurting you.
+-- Checks if the note can be pressed without it hurting you.
 ---@param membersIndex number
 ---@return boolean
 function canHitNote(membersIndex)

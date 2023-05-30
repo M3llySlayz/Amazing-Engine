@@ -1,6 +1,10 @@
 -- by concow
 --though obviously melly edited this for ae
-enableStrokes = getPropertyFromClass('ClientPrefs', 'keyStrokes');
+local enableStrokes;
+function onCreate()
+	enableStrokes = getPropertyFromClass('ClientPrefs', 'keyStrokes');
+end
+
 function onCreatePost()
 	if enableStrokes then
 		addHaxeLibrary('InputFormatter');
