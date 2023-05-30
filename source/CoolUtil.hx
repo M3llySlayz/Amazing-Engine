@@ -1,6 +1,7 @@
 package;
 
-import flixel.FlxG;
+import flixel.util.FlxSave;
+
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
@@ -10,15 +11,12 @@ import flixel.system.FlxSound;
 #else
 import flixel.sound.FlxSound;
 #end
+import flixel.FlxG;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
-#else
-import openfl.utils.Assets;
 #end
-
 using StringTools;
-
 class CoolUtil
 {
 	public static var defaultDifficulties:Array<String> = [
@@ -29,70 +27,57 @@ class CoolUtil
 	public static var defaultDifficulty:String = 'Normal'; //The chart that has no suffix and starting difficulty on Freeplay/Story Mode
 
 	public static var difficulties:Array<String> = [];
-
 	inline public static function quantize(f:Float, snap:Float){
 		// changed so this actually works lol
 		var m:Float = Math.fround(f * snap);
 		trace(snap);
 		return (m / snap);
 	}
-
-	public static function leatherTextFile(path:String):Array<String> {
-		var daList:Array<String> = Assets.getText(path).trim().split('\n');
-
-		for (i in 0...daList.length) {
-			daList[i] = daList[i].trim();
-		}
-
-		return daList;
-	}
-
 	public static function getDifficultyFilePath(num:Null<Int> = null)
-	{
-		if(num == null) num = PlayState.storyDifficulty;
-
-		var fileSuffix:String = difficulties[num];
-		if(fileSuffix != defaultDifficulty)
 		{
-			fileSuffix = '-' + fileSuffix;
-		}
-		else
-		{
-			fileSuffix = '';
-		}
-		return Paths.formatToSongPath(fileSuffix);
-	}
-	/*leather code
-	public static function coolError(message:Null<String> = null, title:Null<String> = null):Void {
-		#if !linux
-		Application.current.window.alert(message, title);
-		#else
-		trace(title + " - " + message, ERROR);
-
-		var text:FlxText = new FlxText(8, 0, 1280, title + " - " + message, 24);
-		text.color = FlxColor.RED;
-		text.borderSize = 1.5;
-		text.borderStyle = OUTLINE;
-		text.borderColor = FlxColor.BLACK;
-		text.scrollFactor.set();
-		text.cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
-
-		FlxG.state.add(text);
-
-		FlxTween.tween(text, {alpha: 0, y: 8}, 5, {
-			onComplete: function(_) {
-				FlxG.state.remove(text);
-				text.destroy();
+			if(num == null) num = PlayState.storyDifficulty;
+	
+			var fileSuffix:String = difficulties[num];
+			if(fileSuffix != defaultDifficulty)
+			{
+				fileSuffix = '-' + fileSuffix;
 			}
-		});
-		#end
-	}
-*/
-	public static function difficultyString():String
-	{
-		return difficulties[PlayState.storyDifficulty].toUpperCase();
-	}
-
+			else
+			{
+				fileSuffix = '';
+			}
+			return Paths.formatToSongPath(fileSuffix);
+		}
+		/*leather code
+		public static function coolError(message:Null<String> = null, title:Null<String> = null):Void {
+			#if !linux
+			Application.current.window.alert(message, title);
+			#else
+			trace(title + " - " + message, ERROR);
+	
+			var text:FlxText = new FlxText(8, 0, 1280, title + " - " + message, 24);
+			text.color = FlxColor.RED;
+			text.borderSize = 1.5;
+			text.borderStyle = OUTLINE;
+			text.borderColor = FlxColor.BLACK;
+			text.scrollFactor.set();
+			text.cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+	
+			FlxG.state.add(text);
+	
+			FlxTween.tween(text, {alpha: 0, y: 8}, 5, {
+				onComplete: function(_) {
+					FlxG.state.remove(text);
+					text.destroy();
+				}
+			});
+			#end
+		}
+	*/
+		public static function difficultyString():String
+		{
+			return difficulties[PlayState.storyDifficulty].toUpperCase();
+		}
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float {
 		return Math.max(min, Math.min(max, value));
 	}
@@ -161,6 +146,26 @@ class CoolUtil
 		return dumbArray;
 	}
 
+	public static function getOptionDefVal(type:String, ?options:Array<String> = null):Dynamic
+	{
+		switch(type)
+		{
+			case 'bool':
+				return false;
+			case 'int' | 'float':
+				return 0;
+			case 'percent':
+				return 1;
+			case 'string':
+				if(options.length > 0) {
+					return options[0];
+				} else {
+					return '';
+				}
+		}
+		return null;
+	}
+
 	//uhhhh does this even work at all? i'm starting to doubt
 	public static function precacheSound(sound:String, ?library:String = null):Void {
 		Paths.sound(sound, library);
@@ -176,5 +181,17 @@ class CoolUtil
 		#else
 		FlxG.openURL(site);
 		#end
+	}
+
+	/** Quick Function to Fix Save Files for Flixel 5
+		if you are making a mod, you are gonna wanna change "ShadowMario" to something else
+		so Base Psych saves won't conflict with yours
+		@BeastlyGabi
+	**/
+	public static function getSavePath(folder:String = 'ShadowMario'):String {
+		@:privateAccess
+		return #if (flixel < "5.0.0") folder #else FlxG.stage.application.meta.get('company')
+			+ '/'
+			+ FlxSave.validate(FlxG.stage.application.meta.get('file')) #end;
 	}
 }

@@ -40,6 +40,7 @@ class ModsMenuState extends MusicBeatState
 	var bg:FlxSprite;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
+	var manual:FlxSprite;
 
 	var noModsTxt:FlxText;
 	var selector:AttachedSprite;
@@ -89,6 +90,16 @@ class ModsMenuState extends MusicBeatState
 		add(noModsTxt);
 		noModsTxt.screenCenter();
 		visibleWhenNoMods.push(noModsTxt);
+
+		manual = new FlxSprite(0, 0);
+		manual.frames = Paths.getSparrowAtlas('extra-keys/manual_book');
+		manual.animation.addByPrefix('normal', 'manual icon', 30, true);
+		manual.animation.addByPrefix('hover', 'manual icon hover', 30, true);
+		add(manual);
+		manual.x = FlxG.width - manual.width;
+		manual.y = FlxG.height - manual.height;
+		manual.animation.play('normal', true);
+		manual.updateHitbox();
 
 		var path:String = 'modsList.txt';
 		if(FileSystem.exists(path))
@@ -152,7 +163,8 @@ class ModsMenuState extends MusicBeatState
 			}
 			modsList[curSelected][1] = !modsList[curSelected][1];
 			updateButtonToggle();
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			//FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			SoundEffects.playSFX('scroll', false);
 		});
 		buttonToggle.setGraphicSize(50, 50);
 		buttonToggle.updateHitbox();
@@ -202,7 +214,7 @@ class ModsMenuState extends MusicBeatState
 			{
 				needaReset = true;
 			}
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			SoundEffects.playSFX('scroll', false);
 		});
 		buttonTop.setGraphicSize(80, 50);
 		buttonTop.updateHitbox();
@@ -228,7 +240,7 @@ class ModsMenuState extends MusicBeatState
 				}
 			}
 			updateButtonToggle();
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			SoundEffects.playSFX('cancel', true);
 		});
 		buttonDisableAll.setGraphicSize(170, 50);
 		buttonDisableAll.updateHitbox();
@@ -254,7 +266,7 @@ class ModsMenuState extends MusicBeatState
 				}
 			}
 			updateButtonToggle();
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			SoundEffects.playSFX('confirm', true);
 		});
 		buttonEnableAll.setGraphicSize(170, 50);
 		buttonEnableAll.updateHitbox();
@@ -515,12 +527,30 @@ class ModsMenuState extends MusicBeatState
 			noModsTxt.alpha = 1 - Math.sin((Math.PI * noModsSine) / 180);
 		}
 
+		if (controls.RESET || FlxG.mouse.justPressedMiddle){
+			openSubState(new options.DeleteSavesSubState());
+		}
+
+		if (FlxG.mouse.overlaps(manual)) {
+			if (manual.animation.curAnim.name != 'hover') {
+				manual.animation.play('hover', true);
+				if (FlxG.mouse.justPressed){
+					openSubState(new options.DeleteSavesSubState());
+				}
+			}
+		} else {
+			if (manual.animation.curAnim != null && manual.animation.curAnim.name != 'normal') {
+				manual.animation.play('normal', true);
+			}
+		}
+
 		if(canExit && controls.BACK)
 		{
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', false);
 			FlxG.mouse.visible = false;
 			saveTxt();
 			saveEnabledTxt();
