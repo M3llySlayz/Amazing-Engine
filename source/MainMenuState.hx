@@ -16,6 +16,7 @@ import flixel.text.FlxText;
 import flixel.math.FlxMath;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import gamejolt.GJClient;
 import flixel.util.FlxColor;
 import lime.app.Application;
 import Achievements;
@@ -163,6 +164,11 @@ class MainMenuState extends MusicBeatState
 			if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's a friday night. WEEEEEEEEEEEEEEEEEE
 				Achievements.achievementsMap.set(Achievements.achievementsStuff[achieveID][2], true);
 				giveAchievement();
+				/* I'll leave this here so you can add a trophie with the "friday_night_play" condition, only if you want ofc */
+
+			#if GAMEJOLT_ALLOWED
+			// GJClient.trophieAdd("Your Trophie ID here");
+			#end
 				ClientPrefs.saveSettings();
 			}
 		}

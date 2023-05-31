@@ -3,6 +3,7 @@
         "undefined-global",
         "lowercase-global",
         "redundant-return",
-        "missing-return-value"
+        "missing-return-value",
+        "redundant-parameter"
     ]
 }

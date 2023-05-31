@@ -15,6 +15,9 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.util.FlxGradient;
 import flixel.FlxState;
+#if GAMEJOLT_ALLOWED
+import gamejolt.GJClient;
+#end
 import flixel.FlxCamera;
 import flixel.FlxBasic;
 
@@ -22,6 +25,8 @@ class MusicBeatState extends FlxUIState
 {
 	private var curSection:Int = 0;
 	private var stepsToDo:Int = 0;
+
+	private var pinged:Bool = false;
 
 	private var curStep:Int = 0;
 	private var curBeat:Int = 0;
@@ -37,6 +42,7 @@ class MusicBeatState extends FlxUIState
 
 	override function create() {
 		camBeat = FlxG.camera;
+		CoolUtil.daCam = FlxG.camera;
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
 		super.create();
 
@@ -54,6 +60,11 @@ class MusicBeatState extends FlxUIState
 		updateCurStep();
 		updateBeat();
 
+		#if GAMEJOLT_ALLOWED
+		if (curStep % 16 == 0 && !pinged) {GJClient.pingSession(); pinged = true;}
+		else if (curStep % 16 == 7) pinged = false;
+		#end
+		
 		if (oldStep != curStep)
 		{
 			if(curStep > 0)

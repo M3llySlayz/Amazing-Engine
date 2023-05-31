@@ -179,6 +179,7 @@ class CharacterEditorState extends MusicBeatState
 		var tabs = [
 			{name: 'Character', label: 'Character'},
 			{name: 'Animations', label: 'Animations'},
+			{name: 'Properties', label: 'Properties'}
 		];
 		UI_characterbox = new FlxUITabMenu(null, tabs, true);
 		UI_characterbox.cameras = [camMenu];
@@ -196,6 +197,7 @@ class CharacterEditorState extends MusicBeatState
 
 		addCharacterUI();
 		addAnimationsUI();
+		addPropertiesUI();
 		UI_characterbox.selected_tab_id = 'Character';
 
 		FlxG.mouse.visible = true;
@@ -407,6 +409,12 @@ class CharacterEditorState extends MusicBeatState
 				0,
 				0
 			],
+			"gameover_properties": [
+				"bf-dead",
+				"fnf_loss_sfx",
+				"gameOver",
+				"gameOverEnd"
+			],
 			"sing_duration": 6.1,
 			"scale": 1
 		}';
@@ -417,7 +425,7 @@ class CharacterEditorState extends MusicBeatState
 		tab_group.name = "Settings";
 
 		var check_player = new FlxUICheckBox(10, 60, null, null, "Playable Character", 100);
-		check_player.checked = daAnim.startsWith('bf');
+		check_player.checked = daAnim.startsWith('bf') || daAnim.endsWith('-player');
 		check_player.callback = function()
 		{
 			char.isPlayer = !char.isPlayer;
@@ -430,7 +438,7 @@ class CharacterEditorState extends MusicBeatState
 		charDropDown = new FlxUIDropDownMenuCustom(10, 30, FlxUIDropDownMenuCustom.makeStrIdLabelArray([''], true), function(character:String)
 		{
 			daAnim = characterList[Std.parseInt(character)];
-			check_player.checked = daAnim.startsWith('bf');
+			check_player.checked = daAnim.startsWith('bf') || daAnim.endsWith('-player');
 			loadChar(!check_player.checked);
 			updatePresence();
 			reloadCharacterDropDown();
@@ -609,6 +617,33 @@ class CharacterEditorState extends MusicBeatState
 	var animationIndicesInputText:FlxUIInputText;
 	var animationNameFramerate:FlxUINumericStepper;
 	var animationLoopCheckBox:FlxUICheckBox;
+	var characterDeathName:FlxUIInputText;
+	var characterDeathSound:FlxUIInputText;
+	var characterDeathConfirm:FlxUIInputText;
+	var characterDeathMusic:FlxUIInputText;
+
+	function addPropertiesUI() {
+		var tab_group = new FlxUI(null, UI_box);
+		tab_group.name = "Properties";
+
+		characterDeathName = new FlxUIInputText(15, 35, 150, char.deathChar, 8);
+		characterDeathSound = new FlxUIInputText(characterDeathName.x, characterDeathName.y + 45, 150, char.deathSound, 8);
+		characterDeathConfirm = new FlxUIInputText(characterDeathName.x, characterDeathName.y + 85, 150, char.deathConfirm, 8);
+		characterDeathMusic = new FlxUIInputText(characterDeathName.x, characterDeathName.y + 125, 150, char.deathMusic, 8);
+
+		tab_group.add(new FlxText(characterDeathName.x, characterDeathName.y - 18, 0, 'Game Over Character:'));
+		tab_group.add(new FlxText(characterDeathSound.x, characterDeathSound.y - 18, 0, 'Game Over Starting Sound:'));
+		tab_group.add(new FlxText(characterDeathConfirm.x, characterDeathConfirm.y - 18, 0, 'Game Over Confirm Sound:'));
+		tab_group.add(new FlxText(characterDeathMusic.x, characterDeathMusic.y - 18, 0, 'Game Over Music:'));
+
+		tab_group.add(characterDeathName);
+		tab_group.add(characterDeathSound);
+		tab_group.add(characterDeathConfirm);
+		tab_group.add(characterDeathMusic);
+
+		UI_characterbox.addGroup(tab_group);
+	}
+
 	function addAnimationsUI() {
 		var tab_group = new FlxUI(null, UI_box);
 		tab_group.name = "Animations";
@@ -765,6 +800,18 @@ class CharacterEditorState extends MusicBeatState
 			}
 			else if(sender == imageInputText) {
 				char.imageFile = imageInputText.text;
+			}
+			else if(sender == characterDeathName) {
+				char.deathChar = characterDeathName.text;
+			}
+			else if(sender == characterDeathSound) {
+				char.deathSound = characterDeathSound.text;
+			}
+			else if(sender == characterDeathConfirm) {
+				char.deathConfirm = characterDeathConfirm.text;
+			}
+			else if(sender == characterDeathMusic) {
+				char.deathMusic = characterDeathMusic.text;
 			}
 		} else if(id == FlxUINumericStepper.CHANGE_EVENT && (sender is FlxUINumericStepper)) {
 			if (sender == scaleStepper)
@@ -992,6 +1039,10 @@ class CharacterEditorState extends MusicBeatState
 			positionYStepper.value = char.positionArray[1];
 			positionCameraXStepper.value = char.cameraPosition[0];
 			positionCameraYStepper.value = char.cameraPosition[1];
+			characterDeathName.text = char.deathChar;
+			characterDeathSound.text = char.deathSound;
+			characterDeathConfirm.text = char.deathConfirm;
+			characterDeathMusic.text = char.deathMusic;
 			reloadAnimationDropDown();
 			updatePresence();
 		}
@@ -1087,6 +1138,7 @@ class CharacterEditorState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		CoolUtil.daCam = camMenu;
 		MusicBeatState.camBeat = FlxG.camera;
 		if(char.animationsArray[curAnim] != null) {
 			textAnim.text = char.animationsArray[curAnim].anim;
@@ -1284,7 +1336,8 @@ class CharacterEditorState extends MusicBeatState
 
 			"flip_x": char.originalFlipX,
 			"no_antialiasing": char.noAntialiasing,
-			"healthbar_colors": char.healthColorArray
+			"healthbar_colors": char.healthColorArray,
+			"gameover_properties": [char.deathChar, char.deathSound, char.deathMusic, char.deathConfirm],
 		};
 
 		var data:String = Json.stringify(json, "\t");

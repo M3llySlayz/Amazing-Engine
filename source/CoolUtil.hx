@@ -12,6 +12,7 @@ import flixel.system.FlxSound;
 import flixel.sound.FlxSound;
 #end
 import flixel.FlxG;
+import flixel.FlxCamera;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -33,6 +34,7 @@ class CoolUtil
 		trace(snap);
 		return (m / snap);
 	}
+	public static var daCam:FlxCamera;
 	public static function getDifficultyFilePath(num:Null<Int> = null)
 		{
 			if(num == null) num = PlayState.storyDifficulty;

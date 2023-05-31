@@ -34,6 +34,8 @@ typedef CharacterFile = {
 	var no_antialiasing:Bool;
 	var healthbar_colors:Array<Int>;
 
+	var gameover_properties:Array<String>;
+
 	//var noteSkin:String; //MWAHAHAHAHA
 }
 
@@ -73,6 +75,12 @@ class Character extends FlxSprite
 
 	public var hasMissAnimations:Bool = false;
 
+	//Used for Game Over Properties
+	public var deathChar:String = 'bf-dead';
+	public var deathSound:String = 'fnf_loss_sfx';
+	public var deathConfirm:String = 'gameOverEnd';
+	public var deathMusic:String = 'gameOver';
+
 	//Used on Character Editor
 	public var imageFile:String = '';
 	public var jsonScale:Float = 1;
@@ -83,7 +91,7 @@ class Character extends FlxSprite
 	//public var noteSkin:String = ''; //soon
 
 	public static var DEFAULT_CHARACTER:String = 'bf'; //In case a character is missing, it will use BF on its place
-	public function new(x:Float, y:Float, ?character:String = 'bf', ?isPlayer:Bool = false)
+	public function new(x:Float, y:Float, ?character:String = 'bf', ?isPlayer:Bool = false, ?library:String)
 	{
 		super(x, y);
 
@@ -131,14 +139,14 @@ class Character extends FlxSprite
 				//texture
 				#if MODS_ALLOWED
 				var modTxtToFind:String = Paths.modsTxt(json.image);
-				var txtToFind:String = Paths.getPath('images/' + json.image + '.txt', TEXT);
+				var txtToFind:String = Paths.getPath('images/' + json.image + '.txt', TEXT, library);
 				
 				//var modTextureToFind:String = Paths.modFolders("images/"+json.image);
 				//var textureToFind:String = Paths.getPath('images/' + json.image, new AssetType();
 				
 				if (FileSystem.exists(modTxtToFind) || FileSystem.exists(txtToFind) || Assets.exists(txtToFind))
 				#else
-				if (Assets.exists(Paths.getPath('images/' + json.image + '.txt', TEXT)))
+				if (Assets.exists(Paths.getPath('images/' + json.image + '.txt', TEXT, library)))
 				#end
 				{
 					spriteType = "packer";
@@ -153,7 +161,7 @@ class Character extends FlxSprite
 				
 				if (FileSystem.exists(modAnimToFind) || FileSystem.exists(animToFind) || Assets.exists(animToFind))
 				#else
-				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json', TEXT)))
+				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json', TEXT, library)))
 				#end
 				{
 					spriteType = "texture";
@@ -162,13 +170,13 @@ class Character extends FlxSprite
 				switch (spriteType){
 					
 					case "packer":
-						frames = Paths.getPackerAtlas(json.image);
+						frames = Paths.getPackerAtlas(json.image, library);
 					
 					case "sparrow":
-						frames = Paths.getSparrowAtlas(json.image);
+						frames = Paths.getSparrowAtlas(json.image, library);
 					
 					case "texture":
-						frames = AtlasFrameMaker.construct(json.image);
+						AtlasFrameMaker.construct(json.image); //too busy to bring AtlasFrameMaker changes to patch-3.
 				}
 				imageFile = json.image;
 
@@ -187,6 +195,14 @@ class Character extends FlxSprite
 				if(json.no_antialiasing) {
 					antialiasing = false;
 					noAntialiasing = true;
+				}
+
+				if (json.gameover_properties != null)
+				{
+					deathChar = json.gameover_properties[0];
+					deathSound = json.gameover_properties[1];
+					deathMusic = json.gameover_properties[2];
+					deathConfirm = json.gameover_properties[3];
 				}
 
 				if(json.healthbar_colors != null && json.healthbar_colors.length > 2)

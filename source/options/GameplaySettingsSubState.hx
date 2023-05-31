@@ -77,6 +77,17 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
+		#if desktop
+		var option:Option = new Option('Auto Pause',
+			"If checked, the game will automatically freeze itself when not in focus.",
+			'autoPause',
+			'bool',
+			true);
+		addOption(option);
+
+		option.onChange = onToggleAutoPause;
+		#end
+
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
 			'opponentStrums',
@@ -173,9 +184,16 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
-		var option:Option = new Option('Always convert non-EK charts',
+		var option:Option = new Option('Millisecond Based Ratings',
 			'If unchecked, charts that are not EK will be converted.',
 			'convertEK',
+			'bool',
+			true);
+		addOption(option);
+
+		var option:Option = new Option('Always convert non-EK charts',
+			'If checked, shows exactly how early or late you hit a note.',
+			'precisions',
 			'bool',
 			true);
 		addOption(option);
@@ -187,4 +205,11 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 	{
 		FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
 	}
+
+	#if desktop
+	function onToggleAutoPause()
+	{
+		FlxG.autoPause = ClientPrefs.autoPause;
+	}
+	#end
 }

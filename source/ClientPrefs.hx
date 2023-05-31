@@ -57,6 +57,13 @@ class ClientPrefs {
 	public static var aeWatermarks:Bool = true;
 	public static var noteGlow:Bool = false;
 	public static var keyStrokes:Bool = false;
+	public static var precisions:Bool = false;
+	public static var splashOpacity:Float = 0.6;
+	public static var screenRes:String = '1280x720';
+	public static var fullscreen:Bool = false;
+	#if desktop
+	public static var autoPause:Bool = true;
+	#end
 	public static var comboStacking = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -363,6 +370,13 @@ class ClientPrefs {
 		FlxG.save.data.aeWatermarks = aeWatermarks;
 		FlxG.save.data.noteGlow = noteGlow;
 		FlxG.save.data.keyStrokes = keyStrokes;
+		FlxG.save.data.precisions = precisions;
+		FlxG.save.data.splashOpacity = splashOpacity;
+		FlxG.save.data.screenRes = screenRes;
+		FlxG.save.data.fullscreen = fullscreen;
+		#if desktop
+		FlxG.save.data.autoPause = autoPause;
+		#end
 	
 		FlxG.save.flush();
 
@@ -552,6 +566,29 @@ class ClientPrefs {
 		if (FlxG.save.data.keyStrokes != null)
 		{
 			keyStrokes = FlxG.save.data.keyStrokes;
+		}
+		if (FlxG.save.data.precisions != null)
+		{
+			precisions = FlxG.save.data.precisions;
+		}
+		if(FlxG.save.data.splashOpacity != null) {
+			splashOpacity = FlxG.save.data.splashOpacity;
+		}
+		if(FlxG.save.data.screenRes != null) {
+			screenRes = FlxG.save.data.screenRes;
+		}
+		if(FlxG.save.data.fullscreen != null) {
+			fullscreen = FlxG.save.data.fullscreen;
+			FlxG.fullscreen = fullscreen;
+		}
+		#if desktop
+		if(FlxG.save.data.autoPause != null) {
+			autoPause = FlxG.save.data.autoPause;
+		}
+		#end
+		else if(FlxG.save.data.noteSplashes != null) {
+			splashOpacity = FlxG.save.data.noteSplashes ? 0.6 : 0;
+			FlxG.save.data.noteSplashes = null;
 		}
 		if (FlxG.save.data.convertEK != null)
 		{

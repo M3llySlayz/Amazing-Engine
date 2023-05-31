@@ -166,6 +166,8 @@ class PlayState extends MusicBeatState
 
 	private var strumLine:FlxSprite;
 
+	public var precisions:Array<FlxText> = [];
+
 	//Handles the new epic mega sexy cam code that i've done
 	public var camFollow:FlxPoint;
 	public var camFollowPos:FlxObject;
@@ -199,6 +201,8 @@ class PlayState extends MusicBeatState
 	public var bads:Int = 0;
 	public var shits:Int = 0;
 	public static var mania:Int = 0;
+
+	public var precision:FlxText;
 	
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
@@ -985,6 +989,14 @@ class PlayState extends MusicBeatState
 		boyfriendGroup.add(boyfriend);
 		startCharacterLua(boyfriend.curCharacter);
 
+		if (boyfriend != null)
+		{
+			GameOverSubstate.characterName = boyfriend.deathChar;
+			GameOverSubstate.deathSoundName = boyfriend.deathSound;
+			GameOverSubstate.loopSoundName = boyfriend.deathMusic;
+			GameOverSubstate.endSoundName = boyfriend.deathConfirm;
+		}
+
 		var camPos:FlxPoint = new FlxPoint(girlfriendCameraOffset[0], girlfriendCameraOffset[1]);
 		if(gf != null)
 		{
@@ -992,7 +1004,7 @@ class PlayState extends MusicBeatState
 			camPos.y += gf.getGraphicMidpoint().y + gf.cameraPosition[1];
 		}
 
-		if(dad.curCharacter.startsWith('gf')) {
+		if(dad.curCharacter == gf.curCharacter) {
 			dad.setPosition(GF_X, GF_Y);
 			if(gf != null)
 				gf.visible = false;
@@ -1284,7 +1296,7 @@ class PlayState extends MusicBeatState
 					add(whiteScreen);
 					whiteScreen.scrollFactor.set();
 					whiteScreen.blend = ADD;
-					camHUD.visible = false;
+					FlxTween.tween(camHUD, {alpha: 0}, 0.8);
 					snapCamFollowToPos(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 					inCutscene = true;
 
@@ -1293,7 +1305,7 @@ class PlayState extends MusicBeatState
 						ease: FlxEase.linear,
 						onComplete: function(twn:FlxTween)
 						{
-							camHUD.visible = true;
+							FlxTween.tween(camHUD, {alpha: 1}, 0.8);
 							remove(whiteScreen);
 							startCountdown();
 						}
@@ -1306,7 +1318,7 @@ class PlayState extends MusicBeatState
 					var blackScreen:FlxSprite = new FlxSprite().makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 					add(blackScreen);
 					blackScreen.scrollFactor.set();
-					camHUD.visible = false;
+					FlxTween.tween(camHUD, {alpha: 0}, 0.8);
 					inCutscene = true;
 
 					FlxTween.tween(blackScreen, {alpha: 0}, 0.7, {
@@ -1322,7 +1334,7 @@ class PlayState extends MusicBeatState
 
 					new FlxTimer().start(0.8, function(tmr:FlxTimer)
 					{
-						camHUD.visible = true;
+						FlxTween.tween(camHUD, {alpha: 1}, 0.8);
 						remove(blackScreen);
 						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 2.5, {
 							ease: FlxEase.quadInOut,
@@ -1709,7 +1721,7 @@ class PlayState extends MusicBeatState
 			if (songName == 'thorns')
 			{
 				add(red);
-				camHUD.visible = false;
+				FlxTween.tween(camHUD, {alpha: 0}, 0.8);
 			}
 		}
 
@@ -1746,7 +1758,7 @@ class PlayState extends MusicBeatState
 									FlxG.camera.fade(FlxColor.WHITE, 0.01, true, function()
 									{
 										add(dialogueBox);
-										camHUD.visible = true;
+										FlxTween.tween(camHUD, {alpha: 1}, 0.8);
 									}, true);
 								});
 								new FlxTimer().start(3.2, function(deadTime:FlxTimer)
@@ -1775,7 +1787,7 @@ class PlayState extends MusicBeatState
 
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		dadGroup.alpha = 0.00001;
-		camHUD.visible = false;
+		FlxTween.tween(camHUD, {alpha: 0}, 0.8);
 		//inCutscene = true; //this would stop the camera movement, oops
 
 		var tankman:FlxSprite = new FlxSprite(-20, 320);
@@ -1810,7 +1822,7 @@ class PlayState extends MusicBeatState
 			startCountdown();
 
 			dadGroup.alpha = 1;
-			camHUD.visible = true;
+			FlxTween.tween(camHUD, {alpha: 1}, 0.8);
 			boyfriend.animation.finishCallback = null;
 			gf.animation.finishCallback = null;
 			gf.dance();
@@ -3416,6 +3428,10 @@ class PlayState extends MusicBeatState
 					}
 
 					var angleDir = strumDirection * Math.PI / 180;
+
+					if(daNote.isSustainNote)
+						daNote.angle = strumDirection - 90;
+					
 					if (daNote.copyAngle)
 						daNote.angle = strumDirection - 90 + strumAngle;
 
@@ -3954,11 +3970,11 @@ class PlayState extends MusicBeatState
 								addCharacterToList(value2, charType);
 							}
 
-							var wasGf:Bool = dad.curCharacter.startsWith('gf');
+							var wasGf:Bool = dad.curCharacter == gf.curCharacter;
 							var lastAlpha:Float = dad.alpha;
 							dad.alpha = 0.00001;
 							dad = dadMap.get(value2);
-							if(!dad.curCharacter.startsWith('gf')) {
+							if(dad.curCharacter != gf.curCharacter) {
 								if(wasGf && gf != null) {
 									gf.visible = true;
 								}
@@ -4202,7 +4218,7 @@ class PlayState extends MusicBeatState
 				if (storyPlaylist.length <= 0)
 				{
 					WeekData.loadTheFirstEnabledMod();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 
 					cancelMusicFadeTween();
 					if(FlxTransitionableState.skipNextTransIn) {
@@ -4272,7 +4288,7 @@ class PlayState extends MusicBeatState
 					CustomFadeTransition.nextCamera = null;
 				}
 				MusicBeatState.switchState(new FreeplayState());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 				changedDifficulty = false;
 			}
 			transitioning = true;
@@ -4438,7 +4454,30 @@ class PlayState extends MusicBeatState
 		comboSpr.y += comboSprY;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
 
+		if (ClientPrefs.precisions){
+		precision = new FlxText(0, (ClientPrefs.downScroll ? playerStrums.members[0].y + 110 : playerStrums.members[0].y - 40), '' + Math.round(Conductor.songPosition - note.strumTime) + ' ms');
+	
+		for (i in precisions) remove(i);
+
+		
+		precision.cameras = [camOther];
+
+		if (ClientPrefs.downScroll) precision.y -= 3;
+		else precision.y += 3;
+
+		precision.x = (playerStrums.members[1].x + playerStrums.members[1].width / 2) - precision.width / 2;
+
+		precision.setFormat(Paths.font("vcr.ttf"), 21, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+
+		FlxTween.tween(precision, {y: (ClientPrefs.downScroll ? precision.y + 3 : precision.y - 3)}, 0.01, {ease: FlxEase.bounceOut});
+
+
+		precisions.push(precision);
+		}
+
 		insert(members.indexOf(strumLineNotes), rating);
+
+		if (ClientPrefs.precisions) add(precision);
 		
 		if (!ClientPrefs.comboStacking)
 		{
@@ -4544,6 +4583,12 @@ class PlayState extends MusicBeatState
 				},
 				startDelay: Conductor.crochet * 0.002 / playbackRate
 			});
+
+			if (ClientPrefs.precisions){
+			FlxTween.tween(precision, {alpha: 0}, 0.2 / playbackRate, {
+				startDelay: Conductor.crochet * 0.001 / playbackRate
+			});
+			}
 
 			daLoop++;
 			if(numScore.x > xThing) xThing = numScore.x;
@@ -5017,7 +5062,7 @@ class PlayState extends MusicBeatState
 
 
 	function spawnNoteSplashOnNote(note:Note) {
-		if(ClientPrefs.noteSplashes && note != null) {
+		if(ClientPrefs.noteSplashes && note != null && ClientPrefs.splashOpacity > 0) {
 			var strum:StrumNote = playerStrums.members[note.noteData];
 			if(strum != null) {
 				spawnNoteSplash(strum.x, strum.y, note.noteData, note);
@@ -5452,6 +5497,7 @@ class PlayState extends MusicBeatState
 	public var ratingPercent:Float;
 	public var ratingFC:String;
 	public function RecalculateRating(badHit:Bool = false) {
+		updateScore(badHit); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce
 		setOnLuas('score', songScore);
 		setOnLuas('misses', songMisses);
 		setOnLuas('hits', songHits);

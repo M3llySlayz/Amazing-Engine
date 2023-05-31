@@ -43,6 +43,10 @@ import lime.app.Application;
 import openfl.Assets;
 import ClientPrefs;
 
+#if GAMEJOLT_ALLOWED
+import gamejolt.GJClient;
+#end
+
 using StringTools;
 typedef TitleData =
 {
@@ -188,13 +192,11 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
-		if(!initialized)
+		
+		if(!initialized && FlxG.save.data != null && ClientPrefs.fullscreen)
 		{
-			if(FlxG.save.data != null && FlxG.save.data.fullscreen)
-			{
-				FlxG.fullscreen = FlxG.save.data.fullscreen;
-				//trace('LOADED FULLSCREEN SETTING!!');
-			}
+			FlxG.fullscreen = ClientPrefs.fullscreen;
+			//trace('LOADED FULLSCREEN SETTING!!');
 			persistentUpdate = true;
 			persistentDraw = true;
 		}
@@ -221,6 +223,7 @@ class TitleState extends MusicBeatState
 				DiscordClient.initialize();
 				Application.current.onExit.add (function (exitCode) {
 					DiscordClient.shutdown();
+					#if GAMEJOLT_ALLOWED GJClient.logout(); #end
 				});
 			}
 			#end
