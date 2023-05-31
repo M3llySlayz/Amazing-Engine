@@ -185,8 +185,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Millisecond Based Ratings',
-			'If unchecked, charts that are not EK will be converted.',
-			'convertEK',
+			'If checked, will show precise timing when you hit a note.',
+			'precisions',
 			'bool',
 			true);
 		addOption(option);
