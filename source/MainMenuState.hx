@@ -328,7 +328,7 @@ class MainMenuState extends MusicBeatState
 									#if MULTI_MODDABLE
 										MusicBeatState.switchState(new FreeplayCategoryState());
 									#else
-										LoadingState.loadAndSwitchState(new FreeplayCategoryState());
+										LoadingState.loadAndSwitchState(new FreeplayState());
 									#end
 									#if MODS_ALLOWED
 									case 'mods':
