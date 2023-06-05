@@ -991,10 +991,18 @@ class PlayState extends MusicBeatState
 
 		if (boyfriend != null)
 		{
-			GameOverSubstate.characterName = boyfriend.deathChar;
-			GameOverSubstate.deathSoundName = boyfriend.deathSound;
-			GameOverSubstate.loopSoundName = boyfriend.deathMusic;
-			GameOverSubstate.endSoundName = boyfriend.deathConfirm;
+			if (boyfriend.deathChar != null || boyfriend.deathChar != 'bf-dead'){
+				GameOverSubstate.characterName = boyfriend.deathChar;
+			}
+			if (boyfriend.deathSound != null || boyfriend.deathSound != 'fnf_loss_sfx'){
+				GameOverSubstate.deathSoundName = boyfriend.deathSound;
+			}
+			if (boyfriend.deathMusic != null || boyfriend.deathMusic != 'gameOver'){
+				GameOverSubstate.loopSoundName = boyfriend.deathMusic;
+			}
+			if (boyfriend.deathConfirm != null || boyfriend.deathConfirm != 'gameOverEnd'){
+				GameOverSubstate.endSoundName = boyfriend.deathConfirm;
+			}
 		}
 
 		var camPos:FlxPoint = new FlxPoint(girlfriendCameraOffset[0], girlfriendCameraOffset[1]);
@@ -1002,12 +1010,6 @@ class PlayState extends MusicBeatState
 		{
 			camPos.x += gf.getGraphicMidpoint().x + gf.cameraPosition[0];
 			camPos.y += gf.getGraphicMidpoint().y + gf.cameraPosition[1];
-		}
-
-		if(dad.curCharacter == gf.curCharacter) {
-			dad.setPosition(GF_X, GF_Y);
-			if(gf != null)
-				gf.visible = false;
 		}
 
 		switch(curStage)
@@ -1101,6 +1103,12 @@ class PlayState extends MusicBeatState
 		// startCountdown();
 
 		generateSong(SONG.song);
+
+		if(dad.curCharacter == gf.curCharacter) {
+			dad.setPosition(GF_X, GF_Y);
+			if(gf != null)
+				gf.visible = false;
+		}
 
 		// After all characters being loaded, it makes then invisible 0.01s later so that the player won't freeze when you change characters
 		// add(strumLine);

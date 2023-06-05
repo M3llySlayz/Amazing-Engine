@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="JBbf.png"><SubTexture name="JBbf idle0000" x="1891" y="398" width="406" height="392" frameX="0" frameY="-20" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0001" x="1891" y="398" width="406" height="392" frameX="0" frameY="-20" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0002" x="0" y="1712" width="408" height="393" frameX="0" frameY="-19" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0003" x="0" y="1712" width="408" height="393" frameX="0" frameY="-19" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0004" x="1891" y="0" width="406" height="398" frameX="-2" frameY="-14" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0005" x="1891" y="0" width="406" height="398" frameX="-2" frameY="-14" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0006" x="1482" y="0" width="409" height="411" frameX="-1" frameY="-1" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0007" x="1482" y="0" width="409" height="411" frameX="-1" frameY="-1" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0008" x="730" y="878" width="409" height="412" frameX="-1" frameY="0" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0009" x="730" y="878" width="409" height="412" frameX="-1" frameY="0" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0010" x="730" y="878" width="409" height="412" frameX="-1" frameY="0" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0011" x="730" y="878" width="409" height="412" frameX="-1" frameY="0" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0012" x="730" y="878" width="409" height="412" frameX="-1" frameY="0" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf idle0013" x="730" y="878" width="409" height="412" frameX="-1" frameY="0" frameWidth="410" frameHeight="412" />
+<SubTexture name="JBbf sing left0000" x="1482" y="818" width="383" height="405" frameX="0" frameY="0" frameWidth="385" frameHeight="405" />
+<SubTexture name="JBbf sing left0001" x="1482" y="818" width="383" height="405" frameX="0" frameY="0" frameWidth="385" frameHeight="405" />
+<SubTexture name="JBbf sing left0002" x="1199" y="1307" width="375" height="403" frameX="-10" frameY="-2" frameWidth="385" frameHeight="405" />
+<SubTexture name="JBbf left miss0000" x="0" y="1307" width="383" height="405" frameX="0" frameY="-26" frameWidth="383" frameHeight="431" />
+<SubTexture name="JBbf left miss0001" x="1113" y="0" width="369" height="429" frameX="-14" frameY="0" frameWidth="383" frameHeight="431" />
+<SubTexture name="JBbf left miss0002" x="1113" y="0" width="369" height="429" frameX="-14" frameY="0" frameWidth="383" frameHeight="431" />
+<SubTexture name="JBbf left miss0003" x="0" y="878" width="370" height="429" frameX="-13" frameY="0" frameWidth="383" frameHeight="431" />
+<SubTexture name="JBbf sing down0000" x="1155" y="1712" width="373" height="356" frameX="-1" frameY="-5" frameWidth="374" frameHeight="361" />
+<SubTexture name="JBbf sing down0001" x="1155" y="1712" width="373" height="356" frameX="-1" frameY="-5" frameWidth="374" frameHeight="361" />
+<SubTexture name="JBbf sing down0002" x="408" y="1712" width="373" height="361" frameX="0" frameY="0" frameWidth="374" frameHeight="361" />
+<SubTexture name="JBbf down miss0000" x="781" y="1712" width="374" height="357" frameX="-1" frameY="-35" frameWidth="377" frameHeight="392" />
+<SubTexture name="JBbf down miss0001" x="1891" y="790" width="376" height="392" frameX="-1" frameY="0" frameWidth="377" frameHeight="392" />
+<SubTexture name="JBbf down miss0002" x="1891" y="790" width="376" height="392" frameX="-1" frameY="0" frameWidth="377" frameHeight="392" />
+<SubTexture name="JBbf down miss0003" x="1891" y="1182" width="377" height="389" frameX="0" frameY="-3" frameWidth="377" frameHeight="392" />
+<SubTexture name="JBbf sing up0000" x="0" y="0" width="369" height="445" frameX="-5" frameY="0" frameWidth="375" frameHeight="445" />
+<SubTexture name="JBbf sing up0001" x="0" y="0" width="369" height="445" frameX="-5" frameY="0" frameWidth="375" frameHeight="445" />
+<SubTexture name="JBbf sing up0002" x="738" y="0" width="375" height="440" frameX="0" frameY="-5" frameWidth="375" frameHeight="445" />
+<SubTexture name="JBbf up miss0000" x="369" y="0" width="369" height="445" frameX="-9" frameY="0" frameWidth="378" frameHeight="445" />
+<SubTexture name="JBbf up miss0001" x="370" y="878" width="360" height="426" frameX="0" frameY="-13" frameWidth="378" frameHeight="445" />
+<SubTexture name="JBbf up miss0002" x="370" y="878" width="360" height="426" frameX="0" frameY="-13" frameWidth="378" frameHeight="445" />
+<SubTexture name="JBbf up miss0003" x="1113" y="429" width="356" height="429" frameX="-2" frameY="-10" frameWidth="378" frameHeight="445" />
+<SubTexture name="JBbf sing right0000" x="383" y="1307" width="408" height="405" frameX="0" frameY="-2" frameWidth="408" frameHeight="407" />
+<SubTexture name="JBbf sing right0001" x="383" y="1307" width="408" height="405" frameX="0" frameY="-2" frameWidth="408" frameHeight="407" />
+<SubTexture name="JBbf sing right0002" x="1482" y="411" width="407" height="407" frameX="0" frameY="0" frameWidth="408" frameHeight="407" />
+<SubTexture name="JBbf right miss0000" x="791" y="1307" width="408" height="405" frameX="-7" frameY="-30" frameWidth="415" frameHeight="435" />
+<SubTexture name="JBbf right miss0001" x="0" y="445" width="395" height="433" frameX="0" frameY="0" frameWidth="415" frameHeight="435" />
+<SubTexture name="JBbf right miss0002" x="0" y="445" width="395" height="433" frameX="0" frameY="0" frameWidth="415" frameHeight="435" />
+<SubTexture name="JBbf right miss0003" x="395" y="445" width="400" height="433" frameX="-1" frameY="0" frameWidth="415" frameHeight="435" />
+</TextureAtlas>

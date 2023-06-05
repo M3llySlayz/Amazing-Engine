@@ -193,7 +193,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Always convert non-EK charts',
 			'If checked, shows exactly how early or late you hit a note.',
-			'precisions',
+			'convertEK',
 			'bool',
 			true);
 		addOption(option);

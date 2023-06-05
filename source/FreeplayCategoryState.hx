@@ -1,3 +1,4 @@
+#if MULTI_MODDABLE
 package;
 
 import flixel.addons.transition.FlxTransitionableState;
@@ -13,7 +14,7 @@ import flixel.util.FlxTimer;
 using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
-    public var categoriesList:Array<String> = ['base game', 'custom']; // Change this line here. Don't forget about the hardcoding in FreeplayState aswell.
+    public var categoriesList:Array<String> = ['base game', 'amongus']; // Change this line here. Don't forget about the hardcoding in FreeplayState aswell.
     public var categoryNamesList:Array<String> = ['vanilla', 'mod support soon!\nevery song is still in\nvanilla tho dw'];
     public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFFFF];
   
@@ -91,7 +92,7 @@ class FreeplayCategoryState extends MusicBeatState {
             }
 
             if (controls.ACCEPT || FlxG.mouse.justPressed)
-                if (curSelected != 1)
+                if (curSelected != 2)
                     selectCategory();
                 else
                     SoundEffects.playSFX('cancel', false);
@@ -134,7 +135,9 @@ class FreeplayCategoryState extends MusicBeatState {
         new FlxTimer().start(1.5, function(tmr:FlxTimer) {
             FreeplayState.curCategory = categoriesList[curSelected];
             if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
+            if (FreeplayState.curCategory == 'amongus') FreeplayState.curCategory = 'amongus';
             LoadingState.loadAndSwitchState(new FreeplayState());
         });
     }
 }
+#end

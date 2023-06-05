@@ -26,7 +26,7 @@ class HealthIcon extends FlxSprite
 		super.update(elapsed);
 
 		if (sprTracker != null)
-			setPosition(sprTracker.x + sprTracker.width + 12, sprTracker.y - 30);
+			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);
 	}
 
 	public function swapOldIcon() {
@@ -41,6 +41,8 @@ class HealthIcon extends FlxSprite
 			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-' + char; //Older versions of psych engine's support
 			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-face'; //Prevents crash from missing icon
 			var file:Dynamic = Paths.image(name);
+
+			loadGraphic(file); //Load stupidly first for getting the file size
 
 			loadGraphic(file, true, Math.floor(width / 3), Math.floor(height)); //Then load it fr
 			//Here's what I did for the winning icons

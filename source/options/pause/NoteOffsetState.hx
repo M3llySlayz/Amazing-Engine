@@ -31,7 +31,7 @@ class NoteOffsetState extends MusicBeatState
 	var dumbTexts:FlxTypedGroup<FlxText>;
 
 	var barPercent:Float = 0;
-	var delayMin:Int = 0;
+	var delayMin:Int = -500;
 	var delayMax:Int = 500;
 	var timeBarBG:FlxSprite;
 	var timeBar:FlxBar;
@@ -355,7 +355,7 @@ class NoteOffsetState extends MusicBeatState
 
 			persistentUpdate = false;
 			CustomFadeTransition.nextCamera = camOther;
-			MusicBeatState.switchState(new options.OptionsState());
+			MusicBeatState.switchState(new options.pause.OptionsState());
 			//FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true);
 			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong), 1, true);
 			FlxG.mouse.visible = false;

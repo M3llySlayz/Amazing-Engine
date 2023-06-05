@@ -4,6 +4,7 @@
         "lowercase-global",
         "redundant-return",
         "missing-return-value",
-        "redundant-parameter"
+        "redundant-parameter",
+        "param-type-mismatch"
     ]
 }

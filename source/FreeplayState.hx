@@ -55,6 +55,8 @@ class FreeplayState extends MusicBeatState
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 
+	var willChooseChar:Bool = true;
+
 	public static var curCategory:String = '';
 
 	//var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -97,6 +99,8 @@ class FreeplayState extends MusicBeatState
 				if(colors == null || colors.length < 3) colors = [146, 113, 253];
 				if (curCategory == 'amongus') {
 					// Put your songs here. (Wants: addSong('Song Name', i, 'Song Character', FlxColor.fromRGB(r, g, b)) )
+					addSong('Maroon', i, 'Shaggy', FlxColor.fromRGB(155, 0, 0));
+					addSong('Epiphany', i, 'Heidi', FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 				} else {
 					addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 				}
@@ -200,8 +204,8 @@ class FreeplayState extends MusicBeatState
 		add(textBG);
 
 		#if PRELOAD_ALL
-		var leText:String = "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
-		var size:Int = 16;
+		var leText:String = "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy. / Hold ALT to skip choosing your character.";
+		var size:Int = 12;
 		#else
 		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
 		var size:Int = 18;
@@ -367,8 +371,11 @@ class FreeplayState extends MusicBeatState
 			
 			if (FlxG.keys.pressed.SHIFT){
 				LoadingState.loadAndSwitchState(new ChartingState());
-			} else {
+			}else if (FlxG.keys.pressed.ALT){
 				LoadingState.loadAndSwitchState(new PlayState());
+			} else {
+				LoadingState.loadAndSwitchState(new CharMenu());
+				//FlxG.switchState(new CharMenu());
 			}
 
 			FlxG.sound.music.volume = 0;
@@ -378,7 +385,7 @@ class FreeplayState extends MusicBeatState
 		{
 			persistentUpdate = false;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			SoundEffects.playSFX('scroll', false);
 		}
 		super.update(elapsed);
 	}
@@ -405,7 +412,7 @@ class FreeplayState extends MusicBeatState
 
 		switch(curDifficulty) {
 			case 0:
-				diffText.color = 0xFF00FFFF;
+				diffText.color = 0xFF00FF3C;
 			case 1:
 				diffText.color = 0xFFFFFF00;
 			case 2:
@@ -429,7 +436,7 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
-		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		if(playSound) SoundEffects.playSFX('scroll', false);
 
 		curSelected += change;
 

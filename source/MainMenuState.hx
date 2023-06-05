@@ -281,26 +281,29 @@ class MainMenuState extends MusicBeatState
 
 					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
+					
 					menuItems.forEach(function(spr:FlxSprite)
 					{
-						if (FlxG.mouse.overlaps(spr)){
+						if (FlxG.mouse.justPressed){
+							if (FlxG.mouse.overlaps(spr)){
 							curSelected = spr.ID;
-							if (spr.ID != curSelected){
-								spr.animation.play('idle');
-								spr.updateHitbox();
-							}
-							spr.updateHitbox();
-							if (spr.ID == curSelected)
-							{
-								spr.animation.play('selected');
-								var add:Float = 0;
-								if(menuItems.length > 4) {
-									add = menuItems.length * 8;
+								if (spr.ID != curSelected){
+									spr.animation.play('idle');
+									spr.updateHitbox();
 								}
+								spr.updateHitbox();
+								if (spr.ID == curSelected)
+								{
+									spr.animation.play('selected');
+									var add:Float = 0;
+									if(menuItems.length > 4) {
+										add = menuItems.length * 8;
+									}
 								camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
-								//spr.centerOffsets();
+								spr.centerOffsets();
+								}
+							}
 						}
-					}
 						if (curSelected != spr.ID)
 						{
 							FlxTween.tween(spr, {alpha: 0}, 0.4, {
@@ -322,7 +325,11 @@ class MainMenuState extends MusicBeatState
 									case 'story_mode':
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
+									#if MULTI_MODDABLE
 										MusicBeatState.switchState(new FreeplayCategoryState());
+									#else
+										LoadingState.loadAndSwitchState(new FreeplayCategoryState());
+									#end
 									#if MODS_ALLOWED
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
