@@ -3273,6 +3273,8 @@ class PlayState extends MusicBeatState
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
+		var iconP1Width:Float = iconP1.scale.x;
+		var iconP2Width:Float = iconP2.scale.x;
 
 		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9 * playbackRate), 0, 1));
 		iconP1.scale.set(mult, mult);
@@ -3290,19 +3292,23 @@ class PlayState extends MusicBeatState
 		if (health > 2) health = 2;
 
 		if (healthBar.percent < 20){
-			iconP1.animation.curAnim.curFrame = 1;
-			iconP2.animation.curAnim.curFrame = 2;
+			if (iconP1Width != 150)
+				iconP1.animation.curAnim.curFrame = 1;
+			if (iconP2Width == 450)
+				iconP2.animation.curAnim.curFrame = 2;
 		} else {
 			iconP1.animation.curAnim.curFrame = 0;
-			iconP2.animation.curAnim.curFrame = 2;
+			iconP2.animation.curAnim.curFrame = 0;
 		}
 
 		if (healthBar.percent > 80){
-			iconP2.animation.curAnim.curFrame = 1;
-			iconP1.animation.curAnim.curFrame = 2;
+			if (iconP2Width != 150)
+				iconP2.animation.curAnim.curFrame = 1;
+			if (iconP1Width == 450)
+				iconP1.animation.curAnim.curFrame = 2;
 		} else {
 			iconP2.animation.curAnim.curFrame = 0;
-			iconP1.animation.curAnim.curFrame = 2;
+			iconP1.animation.curAnim.curFrame = 0;
 		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {

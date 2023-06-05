@@ -43,26 +43,44 @@ class HealthIcon extends FlxSprite
 			var file:Dynamic = Paths.image(name);
 
 			loadGraphic(file); //Load stupidly first for getting the file size
+			if (file.width == 450){ //three icons
 
-			loadGraphic(file, true, Math.floor(width / 3), Math.floor(height)); //Then load it fr
-			//Here's what I did for the winning icons
-			iconOffsets[0] = (width - 150) / 3;
+				loadGraphic(file, true, Math.floor(width / 3), Math.floor(height)); //Then load it fr
+				//Here's what I did for the winning icons
+				iconOffsets[0] = (width - 150) / 3;
 
-			iconOffsets[1] = (width - 150) / 3;
+				iconOffsets[1] = (width - 150) / 3;
 
-			iconOffsets[2] = (width - 150) / 3;
+				iconOffsets[2] = (width - 150) / 3;
 
-updateHitbox();
-			animation.add(char, [0, 1, 2], 0, false, isPlayer);
-			animation.play(char);
-			this.char = char;
+				updateHitbox();
+				animation.add(char, [0, 1, 2], 0, false, isPlayer);
+			} else if (file.width == 300){ //two icons
+				loadGraphic(file, true, Math.floor(width / 2), Math.floor(height)); //Then load it fr
+				//Here's what I did for the winning icons
+				iconOffsets[0] = (width - 150) / 2;
 
-			antialiasing = ClientPrefs.globalAntialiasing;
-			if(char.endsWith('-pixel')) {
-				antialiasing = false;
+				iconOffsets[1] = (width - 150) / 2;
+
+				updateHitbox();
+				animation.add(char, [0, 1], 0, false, isPlayer);
+			} else if (file.width == 150){ //one icon
+				loadGraphic(file, true, Math.floor(width), Math.floor(height)); //Then load it fr
+				//Here's what I did for the winning icons
+				iconOffsets[0] = (width - 150);
+				iconOffsets[1] = (width - 150);
+				updateHitbox();
+				animation.add(char, [0], 0, false, isPlayer);
+			}
+				animation.play(char);
+				this.char = char;
+
+				antialiasing = ClientPrefs.globalAntialiasing;
+				if(char.endsWith('-pixel')) {
+					antialiasing = false;
+				}
 			}
 		}
-	}
 
 	override function updateHitbox()
 	{
