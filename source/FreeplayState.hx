@@ -9,6 +9,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.effects.FlxFlicker;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -16,6 +17,7 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import lime.utils.Assets;
+import flixel.util.FlxTimer;
 #if (flixel < "5.3.0")
 import flixel.system.FlxSound;
 #else
@@ -35,7 +37,7 @@ class FreeplayState extends MusicBeatState
 
 	var selector:FlxText;
 	private static var curSelected:Int = 0;
-	var curDifficulty:Int = 1;
+	public static var curDifficulty:Int = 1;
 	private static var lastDifficultyName:String = '';
 
 	var scoreBG:FlxSprite;
@@ -47,6 +49,7 @@ class FreeplayState extends MusicBeatState
 	var intendedRating:Float = 0;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
+	public var songText:Alphabet;
 	private var curPlaying:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
@@ -56,6 +59,9 @@ class FreeplayState extends MusicBeatState
 	var colorTween:FlxTween;
 
 	var willChooseChar:Bool = true;
+
+	public static var songLowercase:String;
+	public static var songJson:String;
 
 	public static var curCategory:String = '';
 
@@ -129,7 +135,7 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
+			songText = new Alphabet(90, 320, songs[i].songName, true);
 			songText.isMenuItem = true;
 			songText.targetY = i - curSelected;
 			grpSongs.add(songText);
@@ -352,15 +358,40 @@ class FreeplayState extends MusicBeatState
 
 		else if (accepted || FlxG.mouse.justPressed)
 		{
-			persistentUpdate = false;
-			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
-			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
+			var shiftPressed:Bool = false;
+			var altPressed:Bool = false;
+
+			if (FlxG.keys.pressed.SHIFT){
+				shiftPressed = true;
+			} else if (FlxG.keys.pressed.ALT){
+				altPressed = true;
+			}
+				
+			for (i in 0...grpSongs.members.length)
+			{
+				if (i == curSelected)
+				{
+					FlxFlicker.flicker(grpSongs.members[i], 1, 0.06, false, false);
+					FlxFlicker.flicker(iconArray[i], 1, 0.06, false, false);
+				}
+				else
+				{
+					FlxTween.tween(grpSongs.members[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
+					FlxTween.tween(iconArray[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
+				}
+			}
 
 			SoundEffects.playSFX('confirm', false);
 			destroyFreeplayVocals();
-			LoadingState.loadAndSwitchState(new PlayState());
+			persistentUpdate = false;
+			new FlxTimer().start(1, function(tmr:FlxTimer) {
 
-			PlayState.SONG = Song.loadFromJson(poop, songLowercase);
+			songLowercase = Paths.formatToSongPath(songs[curSelected].songName);
+			songJson = Highscore.formatSong(songLowercase, curDifficulty);
+			
+			//LoadingState.loadAndSwitchState(new PlayState());
+
+			PlayState.SONG = Song.loadFromJson(songJson, songLowercase);
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
 
@@ -369,9 +400,9 @@ class FreeplayState extends MusicBeatState
 				colorTween.cancel();
 			}
 			
-			if (FlxG.keys.pressed.SHIFT){
+			if (shiftPressed){
 				LoadingState.loadAndSwitchState(new ChartingState());
-			}else if (FlxG.keys.pressed.ALT){
+			}else if (altPressed){
 				LoadingState.loadAndSwitchState(new PlayState());
 			} else {
 				LoadingState.loadAndSwitchState(new CharMenu());
@@ -380,7 +411,9 @@ class FreeplayState extends MusicBeatState
 
 			FlxG.sound.music.volume = 0;
 			destroyFreeplayVocals();
-		}
+		});
+	}
+
 		else if(controls.RESET)
 		{
 			persistentUpdate = false;

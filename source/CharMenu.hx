@@ -283,6 +283,11 @@ class CharMenu extends MusicBeatState{
                 new FlxTimer().start(0.75, function(tmr:FlxTimer)
                 {
                     FlxG.sound.music.volume = 0;
+                    persistentUpdate = false;
+			    //LoadingState.loadAndSwitchState(new PlayState());
+			    PlayState.isStoryMode = false;
+			    PlayState.storyDifficulty = FreeplayState.curDifficulty;
+
                     LoadingState.loadAndSwitchState(new PlayState()); // Usual way
                     //FlxG.switchState(new PlayState()); // Gonna try this for Psych
                 });

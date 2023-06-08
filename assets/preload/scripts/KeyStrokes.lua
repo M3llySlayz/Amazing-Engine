@@ -1,13 +1,20 @@
 -- by concow
 --though obviously melly edited this for ae
 local enableStrokes;
+local leftKey;
+local downKey;
+local upKey;
+local rightKey;
 function onCreate()
 	enableStrokes = getPropertyFromClass('ClientPrefs', 'keyStrokes');
 end
 
 function onCreatePost()
 	if enableStrokes then
-		addHaxeLibrary('InputFormatter');
+		leftKey = runHaxeCode('return ClientPrefs.keyBinds.get("note_left")[0].toString();');
+		downKey = runHaxeCode('return ClientPrefs.keyBinds.get("note_down")[0].toString();');
+		upKey = runHaxeCode('return ClientPrefs.keyBinds.get("note_up")[0].toString();');
+		rightKey = runHaxeCode('return ClientPrefs.keyBinds.get("note_right")[0].toString();');
 		
 		makeLuaSprite('keyleft', nil, 9, downscroll and 73 or 650);
 		makeGraphic('keyleft', 60, 60, 'ffffff');
@@ -33,14 +40,7 @@ function onCreatePost()
 		setObjectCamera('keyright', 'other');
 		setProperty('keyright.alpha', 0.26);
 		
-		runHaxeCode([[
-			game.setOnLuas('leftKey', InputFormatter.getKeyName(game.keysArray[0][0]));
-			game.setOnLuas('downKey', InputFormatter.getKeyName(game.keysArray[1][0]));
-			game.setOnLuas('upKey', InputFormatter.getKeyName(game.keysArray[2][0]));
-			game.setOnLuas('rightKey', InputFormatter.getKeyName(game.keysArray[3][0]));
-		]]);
-		
-		makeLuaText('left', leftKey:upper(), 60, 8, downscroll and 89 or 666);
+		makeLuaText('left', leftKey, 60, 8, downscroll and 89 or 666);
 		setTextBorder('left', 0, 'ffffff');
 		setTextSize('left', 22);
 		setTextAlignment('left', 'center');
@@ -48,7 +48,7 @@ function onCreatePost()
 		addLuaText('left');
 		setObjectCamera('left', 'other');
 		
-		makeLuaText('down', downKey:upper(), 60, 74, downscroll and 89 or 666);
+		makeLuaText('down', downKey, 60, 74, downscroll and 89 or 666);
 		setTextBorder('down', 0, 'ffffff');
 		setTextSize('down', 22);
 		setTextAlignment('down', 'center');
@@ -56,7 +56,7 @@ function onCreatePost()
 		addLuaText('down');
 		setObjectCamera('down', 'other');
 		
-		makeLuaText('up', upKey:upper(), 60, 74, downscroll and 22 or 601);
+		makeLuaText('up', upKey, 60, 74, downscroll and 22 or 601);
 		setTextBorder('up', 0, 'ffffff');
 		setTextSize('up', 22);
 		setTextAlignment('up', 'center');
@@ -64,7 +64,7 @@ function onCreatePost()
 		addLuaText('up');
 		setObjectCamera('up', 'other');
 		
-		makeLuaText('right', rightKey:upper(), 60, 140, downscroll and 89 or 666);
+		makeLuaText('right', rightKey, 60, 140, downscroll and 89 or 666);
 		setTextBorder('right', 0, 'ffffff');
 		setTextSize('right', 22);
 		setTextAlignment('right', 'center');
