@@ -105,8 +105,8 @@ class FreeplayState extends MusicBeatState
 				if(colors == null || colors.length < 3) colors = [146, 113, 253];
 				if (curCategory == 'amongus') {
 					// Put your songs here. (Wants: addSong('Song Name', i, 'Song Character', FlxColor.fromRGB(r, g, b)) )
-					addSong('Maroon', i, 'Shaggy', FlxColor.fromRGB(155, 0, 0));
-					addSong('Epiphany', i, 'Heidi', FlxColor.fromRGB(colors[0], colors[1], colors[2]));
+					//addSong('Maroon', i, 'Shaggy', FlxColor.fromRGB(155, 0, 0));
+					//addSong('Epiphany', i, 'Heidi', FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 				} else {
 					addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 				}
