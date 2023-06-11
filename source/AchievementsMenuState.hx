@@ -66,6 +66,7 @@ class AchievementsMenuState extends MusicBeatState
 
 		descText = new FlxText(150, 600, 980, "", 32);
 		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.screenCenter(X);
 		descText.scrollFactor.set();
 		descText.borderSize = 2.4;
 		add(descText);
@@ -76,6 +77,7 @@ class AchievementsMenuState extends MusicBeatState
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
+		descText.screenCenter(X);
 
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
@@ -89,11 +91,10 @@ class AchievementsMenuState extends MusicBeatState
 			SoundEffects.playSFX('cancel', false);
 			MusicBeatState.switchState(new MainMenuState());
 		}
-		if (FlxG.mouse.wheel != 0)
-        {
-            SoundEffects.playSFX('scroll', false);
-            changeSelection(-FlxG.mouse.wheel);
-        }
+		if (FlxG.mouse.wheel != 0) {
+		    SoundEffects.playSFX('scroll', false);
+		    changeSelection(-FlxG.mouse.wheel);
+        	}
 	}
 
 	function changeSelection(change:Int = 0) {
