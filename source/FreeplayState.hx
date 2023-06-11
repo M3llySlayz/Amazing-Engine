@@ -366,53 +366,52 @@ class FreeplayState extends MusicBeatState
 			} else if (FlxG.keys.pressed.ALT){
 				altPressed = true;
 			}
-				
-			for (i in 0...grpSongs.members.length)
-			{
-				if (i == curSelected)
-				{
-					FlxFlicker.flicker(grpSongs.members[i], 1, 0.06, false, false);
-					FlxFlicker.flicker(iconArray[i], 1, 0.06, false, false);
-				}
-				else
-				{
-					FlxTween.tween(grpSongs.members[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
-					FlxTween.tween(iconArray[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
-				}
-			}
-
-			SoundEffects.playSFX('confirm', false);
-			destroyFreeplayVocals();
-			persistentUpdate = false;
-			new FlxTimer().start(1, function(tmr:FlxTimer) {
-
+			
 			songLowercase = Paths.formatToSongPath(songs[curSelected].songName);
 			songJson = Highscore.formatSong(songLowercase, curDifficulty);
-			
-			//LoadingState.loadAndSwitchState(new PlayState());
 
-			PlayState.SONG = Song.loadFromJson(songJson, songLowercase);
-			PlayState.isStoryMode = false;
-			PlayState.storyDifficulty = curDifficulty;
+			try {
+				for (i in 0...grpSongs.members.length)
+				{
+					if (i == curSelected)
+					{
+						FlxFlicker.flicker(grpSongs.members[i], 1, 0.06, false, false);
+						FlxFlicker.flicker(iconArray[i], 1, 0.06, false, false);
+					}
+					else
+					{
+						FlxTween.tween(grpSongs.members[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
+						FlxTween.tween(iconArray[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
+					}
+				}
 
-			trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
-			if(colorTween != null) {
-				colorTween.cancel();
+				SoundEffects.playSFX('confirm', false);
+				destroyFreeplayVocals();
+				persistentUpdate = false;
+				new FlxTimer().start(1, function(tmr:FlxTimer) {
+					PlayState.SONG = Song.loadFromJson(songJson, songLowercase);
+					PlayState.isStoryMode = false;
+					PlayState.storyDifficulty = curDifficulty;
+
+					trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
+					if(colorTween != null) {
+						colorTween.cancel();
+					}
+					if (shiftPressed) {
+						LoadingState.loadAndSwitchState(new ChartingState());
+					}else if (altPressed) {
+						LoadingState.loadAndSwitchState(new PlayState());
+					} else {
+						LoadingState.loadAndSwitchState(new CharMenu());
+						//FlxG.switchState(new CharMenu());
+					}
+					FlxG.sound.music.volume = 0;
+					destroyFreeplayVocals();
+				});
+			} catch(e:Any) {
+				trace ('Cannot find chart file: "$songJson"');
 			}
-			
-			if (shiftPressed){
-				LoadingState.loadAndSwitchState(new ChartingState());
-			}else if (altPressed){
-				LoadingState.loadAndSwitchState(new PlayState());
-			} else {
-				LoadingState.loadAndSwitchState(new CharMenu());
-				//FlxG.switchState(new CharMenu());
-			}
-
-			FlxG.sound.music.volume = 0;
-			destroyFreeplayVocals();
-		});
-	}
+		}
 
 		else if(controls.RESET)
 		{
