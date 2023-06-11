@@ -447,7 +447,15 @@ class ChartingState extends MusicBeatState
 
 		var reloadSongJson:FlxButton = new FlxButton(reloadSong.x, saveButton.y + 30, "Reload JSON", function()
 		{
-			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function(){loadJson(_song.song.toLowerCase()); }, null,ignoreWarnings));
+			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function()
+			{
+				try {
+					loadJson(_song.song);
+				} catch (e:Any) {
+					trace ('Cannot find chart file: "${Paths.formatToSongPath(_song.song)+CoolUtil.getDifficultyFilePath()}"');
+				}
+			},
+			null, ignoreWarnings));
 		});
 
 		var loadAutosaveBtn:FlxButton = new FlxButton(reloadSongJson.x, reloadSongJson.y + 30, 'Load Autosave', function()
@@ -480,9 +488,9 @@ class ChartingState extends MusicBeatState
 		});
 
 		var clear_events:FlxButton = new FlxButton(320, 310, 'Clear events', function()
-			{
-				openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, clearEvents, null,ignoreWarnings));
-			});
+		{
+			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, clearEvents, null,ignoreWarnings));
+		});
 		clear_events.color = FlxColor.RED;
 		clear_events.label.color = FlxColor.WHITE;
 
@@ -492,9 +500,8 @@ class ChartingState extends MusicBeatState
 					_song.notes[sec].sectionNotes = [];
 				}
 				updateGrid();
-			}, null,ignoreWarnings));
-				
-			});
+			}, null, ignoreWarnings));
+		});
 		clear_notes.color = FlxColor.RED;
 		clear_notes.label.color = FlxColor.WHITE;
 
@@ -616,9 +623,9 @@ class ChartingState extends MusicBeatState
 			if (PlayState.storyDifficulty != Std.parseInt(difficulty)) {
 				PlayState.storyDifficulty = Std.parseInt(difficulty);
 				try {
-					loadJson(_song.song.toLowerCase());
+					loadJson(_song.song);
 				} catch (e:Any) {
-					trace ("File " + _song.song.toLowerCase() + CoolUtil.getDifficultyFilePath() + " is not found.");
+					trace ('Cannot find chart file: "${Paths.formatToSongPath(_song.song)+CoolUtil.getDifficultyFilePath()}"');
 				}
 			}
 		});
