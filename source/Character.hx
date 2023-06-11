@@ -47,6 +47,7 @@ typedef AnimArray = {
 	var loop:Bool;
 	var indices:Array<Int>;
 	var offsets:Array<Int>;
+	var image:String;
 }
 
 class Character extends FlxSprite
