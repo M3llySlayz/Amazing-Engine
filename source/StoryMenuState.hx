@@ -300,53 +300,56 @@ class StoryMenuState extends MusicBeatState
 
 	function selectWeek()
 	{
-		if (!weekIsLocked(loadedWeeks[curWeek].fileName))
-		{
-			if (stopspamming == false)
+		var diffic = CoolUtil.getDifficultyFilePath(curDifficulty);
+		if(diffic == null) diffic = '';
+		try {
+			if (!weekIsLocked(loadedWeeks[curWeek].fileName))
 			{
-				//FlxG.sound.play(Paths.sound('confirmMenu'));
-				SoundEffects.playSFX('confirm', false);
-
-				grpWeekText.members[curWeek].startFlashing();
-
-				for (char in grpWeekCharacters.members)
+				if (stopspamming == false)
 				{
-					if (char.character != '' && char.hasConfirmAnimation)
+					//FlxG.sound.play(Paths.sound('confirmMenu'));
+					SoundEffects.playSFX('confirm', false);
+
+					grpWeekText.members[curWeek].startFlashing();
+
+					for (char in grpWeekCharacters.members)
 					{
-						char.animation.play('confirm');
+						if (char.character != '' && char.hasConfirmAnimation)
+						{
+							char.animation.play('confirm');
+						}
 					}
+					stopspamming = true;
 				}
-				stopspamming = true;
+
+				// We can't use Dynamic Array .copy() because that crashes HTML5, here's a workaround.
+				var songArray:Array<String> = [];
+				var leWeek:Array<Dynamic> = loadedWeeks[curWeek].songs;
+				for (i in 0...leWeek.length) {
+					songArray.push(leWeek[i][0]);
+				}
+
+				// Nevermind that's stupid lmao
+				PlayState.storyPlaylist = songArray;
+				PlayState.isStoryMode = true;
+				selectedWeek = true;
+
+				PlayState.storyDifficulty = curDifficulty;
+
+				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
+				PlayState.campaignScore = 0;
+				PlayState.campaignMisses = 0;
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					LoadingState.loadAndSwitchState(new PlayState(), true);
+					FreeplayState.destroyFreeplayVocals();
+				});
+			} else {
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('cancel', true);
 			}
-
-			// We can't use Dynamic Array .copy() because that crashes HTML5, here's a workaround.
-			var songArray:Array<String> = [];
-			var leWeek:Array<Dynamic> = loadedWeeks[curWeek].songs;
-			for (i in 0...leWeek.length) {
-				songArray.push(leWeek[i][0]);
-			}
-
-			// Nevermind that's stupid lmao
-			PlayState.storyPlaylist = songArray;
-			PlayState.isStoryMode = true;
-			selectedWeek = true;
-
-			var diffic = CoolUtil.getDifficultyFilePath(curDifficulty);
-			if(diffic == null) diffic = '';
-
-			PlayState.storyDifficulty = curDifficulty;
-
-			PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
-			PlayState.campaignScore = 0;
-			PlayState.campaignMisses = 0;
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-			{
-				LoadingState.loadAndSwitchState(new PlayState(), true);
-				FreeplayState.destroyFreeplayVocals();
-			});
-		} else {
-			//FlxG.sound.play(Paths.sound('cancelMenu'));
-			SoundEffects.playSFX('cancel', true);
+		} catch (e:Any) {
+			trace ('Cannot find chart file: "${PlayState.storyPlaylist[0].toLowerCase()}$difficultyString"');
 		}
 	}
 
