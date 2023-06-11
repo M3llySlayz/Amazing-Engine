@@ -8,6 +8,8 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxSort;
+import flixel.graphics.frames.FlxFramesCollection;
+import flixel.animation.FlxAnimationController;
 import Section.SwagSection;
 #if MODS_ALLOWED
 import sys.io.File;
@@ -35,8 +37,6 @@ typedef CharacterFile = {
 	var healthbar_colors:Array<Int>;
 
 	var gameover_properties:Array<String>;
-
-	var image:String;
 
 	//var noteSkin:String; //MWAHAHAHAHA
 }
