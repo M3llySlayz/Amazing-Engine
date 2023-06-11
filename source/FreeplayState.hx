@@ -411,7 +411,7 @@ class FreeplayState extends MusicBeatState
 				FlxG.sound.music.volume = 0;
 				destroyFreeplayVocals();
 			} catch (e:Any) {
-				trace ('Cannot find chart file: "$poop"');
+				trace ('Cannot find chart file: "$songJson"');
 			}
 		});
 	}
