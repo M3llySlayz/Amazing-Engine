@@ -91,6 +91,7 @@ class AchievementsMenuState extends MusicBeatState
 			SoundEffects.playSFX('cancel', false);
 			MusicBeatState.switchState(new MainMenuState());
 		}
+
 		if (FlxG.mouse.wheel != 0) {
 		    SoundEffects.playSFX('scroll', false);
 		    changeSelection(-FlxG.mouse.wheel);
