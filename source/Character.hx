@@ -36,9 +36,10 @@ typedef CharacterFile = {
 
 	var gameover_properties:Array<String>;
 
+	var image:String;
+
 	//var noteSkin:String; //MWAHAHAHAHA
 }
-
 typedef AnimArray = {
 	var anim:String;
 	var name:String;
@@ -52,6 +53,15 @@ class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
+
+	// For swapping out huge sheets
+	public var framesList:Map<String, FlxFramesCollection>; // Image, Frames
+	public var imageNames:Map<String, String>; // Anim Name, Image
+	public var animStates:Map<String, FlxAnimationController>; // Image, Anim Controller
+	public var curFrames:String; // Current image name
+	public static var tempAnimState:FlxAnimationController; // Just so that the real one won't be cleared (It crashes if it's null)
+
+	public var spriteType:String;
 
 	public var isPlayer:Bool = false;
 	public var curCharacter:String = DEFAULT_CHARACTER;
@@ -97,9 +107,19 @@ class Character extends FlxSprite
 
 		#if (haxe >= "4.0.0")
 		animOffsets = new Map();
+		framesList = new Map();
+		imageNames = new Map();
+		animStates = new Map();
 		#else
 		animOffsets = new Map<String, Array<Dynamic>>();
+		framesList = new Map<String, FlxFramesCollection>();
+		imageNames = new Map<String, String>();
+		animStates = new Map<String, FlxAnimationController>();
 		#end
+		if (tempAnimState != null) {
+			tempAnimState.destroy();
+		}
+		tempAnimState = new FlxAnimationController(this);
 		curCharacter = character;
 		this.isPlayer = isPlayer;
 		antialiasing = ClientPrefs.globalAntialiasing;
@@ -172,11 +192,48 @@ class Character extends FlxSprite
 					case "packer":
 						frames = Paths.getPackerAtlas(json.image, library);
 					
+						curFrames = json.image;
+						framesList.set(json.image, frames);
+						animStates.set(json.image, animation);
+						for (anim in json.animations) {
+							if (anim.image != null && anim.image.length > 0 && !framesList.exists(anim.image)) {
+								framesList.set(anim.image, Paths.getPackerAtlas(anim.image));
+								animStates.set(anim.image, new FlxAnimationController(this));
+							}
+							else if (anim.image == null || anim.image.length == 0)
+								anim.image = json.image;
+							imageNames.set(anim.anim, anim.image);
+						}
 					case "sparrow":
 						frames = Paths.getSparrowAtlas(json.image, library);
 					
+						curFrames = json.image;
+						framesList.set(json.image, frames);
+						animStates.set(json.image, animation);
+						for (anim in json.animations) {
+							if (anim.image != null && anim.image.length > 0 && !framesList.exists(anim.image)) {
+								framesList.set(anim.image, Paths.getSparrowAtlas(anim.image));
+								animStates.set(anim.image, new FlxAnimationController(this));
+							}
+							else if (anim.image == null || anim.image.length == 0)
+								anim.image = json.image;
+							imageNames.set(anim.anim, anim.image);
+						}
 					case "texture":
 						AtlasFrameMaker.construct(json.image); //too busy to bring AtlasFrameMaker changes to patch-3.
+
+						curFrames = json.image;
+						framesList.set(json.image, frames);
+						animStates.set(json.image, animation);
+						for (anim in json.animations) {
+							if (anim.image != null && anim.image.length > 0 && !framesList.exists(anim.image)) {
+								framesList.set(anim.image, AtlasFrameMaker.construct(anim.image));
+								animStates.set(anim.image, new FlxAnimationController(this));
+							}
+							else if (anim.image == null || anim.image.length == 0)
+								anim.image = json.image;
+							imageNames.set(anim.anim, anim.image);
+						}
 				}
 				imageFile = json.image;
 
@@ -219,6 +276,14 @@ class Character extends FlxSprite
 						var animFps:Int = anim.fps;
 						var animLoop:Bool = !!anim.loop; //Bruh
 						var animIndices:Array<Int> = anim.indices;
+
+						if (anim.image != curFrames) {
+							animation = tempAnimState;
+							frames = framesList.get(anim.image);
+							animation = animStates.get(anim.image);
+							curFrames = anim.image;
+						}
+
 						if(animIndices != null && animIndices.length > 0) {
 							animation.addByIndices(animAnim, animName, animIndices, "", animFps, animLoop);
 						} else {
@@ -232,6 +297,10 @@ class Character extends FlxSprite
 				} else {
 					quickAnimAdd('idle', 'BF idle dance');
 				}
+				animation = tempAnimState;
+				frames = framesList.get(json.image);
+				animation = animStates.get(json.image);
+				curFrames = json.image;
 				//trace('Loaded file to character ' + curCharacter);
 		}
 		originalFlipX = flipX;
@@ -359,6 +428,14 @@ class Character extends FlxSprite
 
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{
+		var prevFrames = imageNames.get(AnimName);
+		if (prevFrames != curFrames) {
+			animation = tempAnimState;
+			frames = framesList.get(prevFrames);
+			animation = animStates.get(prevFrames);
+			curFrames = prevFrames;
+		}
+
 		specialAnim = false;
 		animation.play(AnimName, Force, Reversed, Frame);
 
