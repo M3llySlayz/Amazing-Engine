@@ -399,14 +399,17 @@ class FreeplayState extends MusicBeatState
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
-			
-			if (shiftPressed){
-				LoadingState.loadAndSwitchState(new ChartingState());
-			}else if (altPressed){
-				LoadingState.loadAndSwitchState(new PlayState());
-			} else {
-				LoadingState.loadAndSwitchState(new CharMenu());
-				//FlxG.switchState(new CharMenu());
+			try {
+				if (shiftPressed){
+					LoadingState.loadAndSwitchState(new ChartingState());
+				}else if (altPressed){
+					LoadingState.loadAndSwitchState(new PlayState());
+				} else {
+					LoadingState.loadAndSwitchState(new CharMenu());
+					//FlxG.switchState(new CharMenu());
+				}
+			} catch (e:Any) {
+				trace ('Cannot find chart file: "$poop"');
 			}
 
 			FlxG.sound.music.volume = 0;
