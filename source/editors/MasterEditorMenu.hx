@@ -112,7 +112,12 @@ class MasterEditorMenu extends MusicBeatState
 
 		if (controls.BACK || FlxG.mouse.justPressedRight)
 		{
-			MusicBeatState.switchState(new MainMenuState());
+			if (ClientPrefs.luaMenu){
+				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+				LoadingState.loadAndSwitchState(new PlayState());
+			} else {
+				MusicBeatState.switchState(new MainMenuState());
+			}
 		}
 
 		if (controls.ACCEPT || FlxG.mouse.justPressed)
@@ -159,7 +164,7 @@ class MasterEditorMenu extends MusicBeatState
 
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 
 		curSelected += change;
 
@@ -172,7 +177,7 @@ class MasterEditorMenu extends MusicBeatState
 	#if MODS_ALLOWED
 	function changeDirectory(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 
 		curDirectory += change;
 

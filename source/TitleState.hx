@@ -539,7 +539,12 @@ class TitleState extends MusicBeatState
 					if (mustUpdate) {
 						MusicBeatState.switchState(new OutdatedState(newVersion));
 					} else {
-						MusicBeatState.switchState(new MainMenuState());
+						if (ClientPrefs.luaMenu){
+							PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+							LoadingState.loadAndSwitchState(new PlayState());
+						} else {
+							MusicBeatState.switchState(new MainMenuState());
+						}
 					}
 					closedState = true;
 				});

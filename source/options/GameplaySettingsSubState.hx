@@ -70,13 +70,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option('Key Strokes',
-			"If checked, shows keys being pressed in the bottom left.\nActual keys, not notes.",
-			'keyStrokes',
-			'bool',
-			false);
-		addOption(option);
-
 		#if desktop
 		var option:Option = new Option('Auto Pause',
 			"If checked, the game will automatically freeze itself when not in focus.",

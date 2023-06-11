@@ -89,7 +89,12 @@ class AchievementsMenuState extends MusicBeatState
 		if (controls.BACK) {
 			//FlxG.sound.play(Paths.sound('cancelMenu'));
 			SoundEffects.playSFX('cancel', false);
-			MusicBeatState.switchState(new MainMenuState());
+			if (ClientPrefs.luaMenu){
+				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+				LoadingState.loadAndSwitchState(new PlayState());
+			} else {
+				MusicBeatState.switchState(new MainMenuState());
+			}
 		}
 
 		if (FlxG.mouse.wheel != 0) {

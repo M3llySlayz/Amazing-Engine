@@ -50,16 +50,23 @@ class DevSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option ('Sound Effects:',
-		'What do you want your sound effects to be like?',
-		'sfxPreset',
-		'string',
-		'Default',
-		['Default', 'Spooky']);
+			'What do you want your sound effects to be like?',
+			'sfxPreset',
+			'string',
+			'Default',
+			['Default', 'Spooky']);
 		addOption(option);
 
 		var option:Option = new Option('Advanced SFX', //Name
 			'If checked, the SFX used will be a bit different depending on what you do.', //Description
 			'advancedSfx', //Save data variable name
+			'bool', //Variable type
+			false); //Default value
+		addOption(option);
+
+		var option:Option = new Option('Lua Menu', //Name
+			'If checked, the main menu will become customizable by LUA! (check mods/data/ae-menu for more)', //Description
+			'luaMenu', //Save data variable name
 			'bool', //Variable type
 			false); //Default value
 		addOption(option);

@@ -232,7 +232,12 @@ class CreditsState extends MusicBeatState
 				}
 				//FlxG.sound.play(Paths.sound('cancelMenu'));
 				SoundEffects.playSFX('cancel', false);
-				MusicBeatState.switchState(new MainMenuState());
+				if (ClientPrefs.luaMenu){
+					PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+					LoadingState.loadAndSwitchState(new PlayState());
+				} else {
+					MusicBeatState.switchState(new MainMenuState());
+				}
 				quitting = true;
 			}
 		}

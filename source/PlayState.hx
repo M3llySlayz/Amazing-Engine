@@ -884,6 +884,7 @@ class PlayState extends MusicBeatState
 		add(luaDebugGroup);
 		#end
 
+		/*
 		function addAbilityToUnlockAchievements(funkinLua:FunkinLua)
 		{
 			var lua = funkinLua.lua;
@@ -948,7 +949,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 			#end
-
+*/
 		// "GLOBAL" SCRIPTS
 		#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];

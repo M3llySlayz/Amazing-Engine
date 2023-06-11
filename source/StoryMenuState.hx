@@ -272,7 +272,12 @@ class StoryMenuState extends MusicBeatState
 			//FlxG.sound.play(Paths.sound('cancelMenu'));
 			SoundEffects.playSFX('cancel', false);
 			movedBack = true;
-			MusicBeatState.switchState(new MainMenuState());
+			if (ClientPrefs.luaMenu){
+				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+				LoadingState.loadAndSwitchState(new PlayState());
+			} else {
+				MusicBeatState.switchState(new MainMenuState());
+			}
 		}
 
 		super.update(elapsed);

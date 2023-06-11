@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="caution.png">
+		<!-- SET 1 -->
+
+		<SubTexture name="A0000" x="0" y="0" width="154" height="154"/>
+		<SubTexture name="B0000" x="0" y="0" width="154" height="154"/>
+		<SubTexture name="C0000" x="0" y="0" width="154" height="154"/>
+		<SubTexture name="D0000" x="0" y="0" width="154" height="154"/>
+	
+		<SubTexture name="E0000" x="0" y="0" width="154" height="154"/>
+	
+		<!-- SET 2 -->
+	
+		<SubTexture name="F0000" x="0" y="0" width="154" height="154"/>
+		<SubTexture name="G0000" x="0" y="0" width="154" height="154"/>
+		<SubTexture name="H0000" x="0" y="0" width="154" height="154"/>
+		<SubTexture name="I0000" x="0" y="0" width="154" height="154"/>
+
+		<!-- REG HELD-->
+		<!-- SET 1 -->
+
+		<SubTexture name="A hold0000" x="52" y="155" width="50" height="44"/>
+		<SubTexture name="B hold0000" x="52" y="155" width="50" height="44"/>
+		<SubTexture name="C hold0000" x="52" y="155" width="50" height="44"/>
+		<SubTexture name="D hold0000" x="52" y="155" width="50" height="44"/>
+	
+		<SubTexture name="E hold0000" x="52" y="155" width="50" height="44"/>
+	
+		<!-- SET 2 -->
+	
+		<SubTexture name="F hold0000" x="52" y="155" width="50" height="44"/>
+		<SubTexture name="G hold0000" x="52" y="155" width="50" height="44"/>
+		<SubTexture name="H hold0000" x="52" y="155" width="50" height="44"/>
+		<SubTexture name="I hold0000" x="52" y="155" width="50" height="44"/>
+
+		<!-- HELD ENDS-->
+		<!-- SET 1 -->
+
+		<SubTexture name="A tail0000" x="1" y="155" width="50" height="64"/>
+		<SubTexture name="B tail0000" x="1" y="155" width="50" height="64"/>
+		<SubTexture name="C tail0000" x="1" y="155" width="50" height="64"/>
+		<SubTexture name="D tail0000" x="1" y="155" width="50" height="64"/>
+	
+		<SubTexture name="E tail0000" x="1" y="155" width="50" height="64"/>
+	
+		<!-- SET 2 -->
+	
+		<SubTexture name="F tail0000" x="1" y="155" width="50" height="64"/>
+		<SubTexture name="G tail0000" x="1" y="155" width="50" height="64"/>
+		<SubTexture name="H tail0000" x="1" y="155" width="50" height="64"/>
+		<SubTexture name="I tail0000" x="1" y="155" width="50" height="64"/>
+</TextureAtlas>

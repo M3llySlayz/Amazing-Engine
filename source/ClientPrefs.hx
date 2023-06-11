@@ -56,8 +56,8 @@ class ClientPrefs {
 	public static var showKeybindsOnStart:Bool = true;
 	public static var aeWatermarks:Bool = true;
 	public static var noteGlow:Bool = false;
-	public static var keyStrokes:Bool = false;
 	public static var precisions:Bool = false;
+	public static var luaMenu:Bool = false;
 	public static var splashOpacity:Float = 0.6;
 	public static var screenRes:String = '1280x720';
 	public static var fullscreen:Bool = false;
@@ -369,8 +369,8 @@ class ClientPrefs {
 		FlxG.save.data.showKeybindsOnStart = showKeybindsOnStart;
 		FlxG.save.data.aeWatermarks = aeWatermarks;
 		FlxG.save.data.noteGlow = noteGlow;
-		FlxG.save.data.keyStrokes = keyStrokes;
 		FlxG.save.data.precisions = precisions;
+		FlxG.save.data.luaMenu = luaMenu;
 		FlxG.save.data.splashOpacity = splashOpacity;
 		FlxG.save.data.screenRes = screenRes;
 		FlxG.save.data.fullscreen = fullscreen;
@@ -563,13 +563,13 @@ class ClientPrefs {
 		{
 			noteGlow = FlxG.save.data.noteGlow;
 		}
-		if (FlxG.save.data.keyStrokes != null)
-		{
-			keyStrokes = FlxG.save.data.keyStrokes;
-		}
 		if (FlxG.save.data.precisions != null)
 		{
 			precisions = FlxG.save.data.precisions;
+		}
+		if (FlxG.save.data.luaMenu != null)
+		{
+			luaMenu = FlxG.save.data.luaMenu;
 		}
 		if(FlxG.save.data.splashOpacity != null) {
 			splashOpacity = FlxG.save.data.splashOpacity;
