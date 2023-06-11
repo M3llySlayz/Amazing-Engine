@@ -301,7 +301,6 @@ class StoryMenuState extends MusicBeatState
 				for (i in 0...leWeek.length) {
 					songArray.push(leWeek[i][0]);
 				}
-				selectedWeek = true;
 
 				PlayState.storyPlaylist = songArray;
 				PlayState.isStoryMode = true;
@@ -325,6 +324,7 @@ class StoryMenuState extends MusicBeatState
 					}
 					stopspamming = true;
 				}
+				selectedWeek = true;
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
