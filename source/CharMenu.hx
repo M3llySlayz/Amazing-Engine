@@ -278,28 +278,24 @@ class CharMenu extends MusicBeatState{
                 
 
                 // This is used in Psych for playing music by pressing space, but the line below stops it once the PlayState is entered
-				FreeplayState.destroyFreeplayVocals();
+		FreeplayState.destroyFreeplayVocals();
 
                 new FlxTimer().start(0.75, function(tmr:FlxTimer)
                 {
-                    FlxG.sound.music.volume = 0;
-                    persistentUpdate = false;
-			    //LoadingState.loadAndSwitchState(new PlayState());
+			    FlxG.sound.music.volume = 0;
+			    persistentUpdate = false;
 			    PlayState.isStoryMode = false;
 			    PlayState.storyDifficulty = FreeplayState.curDifficulty;
 
-                    LoadingState.loadAndSwitchState(new PlayState()); // Usual way
-                    //FlxG.switchState(new PlayState()); // Gonna try this for Psych
+                 	    MusicBeatState.switchState(new PlayState()); // Usual way
                 });
             }
             if (goBack)
             {
                 if (PlayState.isStoryMode)
-                    // LoadingState.loadAndSwitchState(new StoryMenuState());
-                    FlxG.switchState(new StoryMenuState());
+                    MusicBeatState.switchState(new StoryMenuState());
                 else
-                    // LoadingState.loadAndSwitchState(new FreeplayState());
-                    FlxG.switchState(new FreeplayState());
+                    MusicBeatState.switchState(new FreeplayState());
             }
             #if debug
             if (debugMode)
