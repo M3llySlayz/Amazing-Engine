@@ -2210,8 +2210,8 @@ class ChartingState extends MusicBeatState
 		#end
 
 		var oneHalf:Float = GRID_SIZE * Note.ammo[_song.mania];
-		leftIcon.setPosition((oneHalf / 2) - (leftIcon.width / 2) + 36 - (_song.mania * 2), -100);
-		rightIcon.setPosition(((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) + 36 - (_song.mania * 2), -100);
+		leftIcon.setPosition((oneHalf / 2) - (leftIcon.width / 2) + 52 - (_song.mania * 2), -100);
+		rightIcon.setPosition(((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) + 52 - (_song.mania * 2), -100);
 
 		var leHeight:Int = Std.int(gridBG.height);
 		var foundNextSec:Bool = false;
