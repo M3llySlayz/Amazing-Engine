@@ -305,11 +305,11 @@ class PauseSubState extends MusicBeatSubstate
 				case "Options":
 					SoundEffects.playSFX('confirm', false);
 					PlayState.seenCutscene = false;
-					//WeekData.loadTheFirstEnabledMod();
+					WeekData.loadTheFirstEnabledMod();
 					PlayState.changedDifficulty = false;
 					PlayState.cancelMusicFadeTween();
-					//MainMenuState.wasPaused = true;
-					LoadingState.loadAndSwitchState(new options.pause.OptionsState());
+					MainMenuState.wasPaused = true;
+					MusicBeatState.switchState(new options.pause.OptionsState());
 				case "Leave Charting Mode":
 					restartSong();
 					PlayState.chartingMode = false;
