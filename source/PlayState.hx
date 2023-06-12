@@ -4310,7 +4310,7 @@ class PlayState extends MusicBeatState
 				if (storyPlaylist.length <= 0)
 				{
 					WeekData.loadTheFirstEnabledMod();
-					FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 					cancelMusicFadeTween();
 					if(FlxTransitionableState.skipNextTransIn) {
@@ -4318,30 +4318,22 @@ class PlayState extends MusicBeatState
 					}
 					MusicBeatState.switchState(new StoryMenuState());
 
-					// if ()
-					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
+					if(!practiceMode && !cpuControlled) {
+						Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
 						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
-
-						if (SONG.validScore)
-						{
-							Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
-						}
-
 						FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
 						FlxG.save.flush();
 					}
+					trace('WENT BACK TO STORY MODE!!');
 					changedDifficulty = false;
 				}
 				else
 				{
 					try {
-						var difficulty:String = CoolUtil.getDifficultyFilePath();
-
 						trace('LOADING NEXT SONG');
-						trace(Paths.formatToSongPath(PlayState.storyPlaylist[0]) + difficulty);
+						trace(Paths.formatToSongPath(PlayState.storyPlaylist[0]) + CoolUtil.getDifficultyFilePath());
 
-						var winterHorrorlandNext = (Paths.formatToSongPath(SONG.song) == "eggnog");
-						if (winterHorrorlandNext)
+						if (SONG.song == 'Eggnog')
 						{
 							var blackShit:FlxSprite = new FlxSprite(-FlxG.width * FlxG.camera.zoom,
 								-FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
@@ -4355,18 +4347,32 @@ class PlayState extends MusicBeatState
 						prevCamFollow = camFollow;
 						prevCamFollowPos = camFollowPos;
 
-					try {
 						PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0]+CoolUtil.getDifficultyFilePath(), PlayState.storyPlaylist[0]);
 						FlxG.sound.music.stop();
+						FlxTransitionableState.skipNextTransIn = true;
+						FlxTransitionableState.skipNextTransOut = true;
 
-					if(winterHorrorlandNext) {
-						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+						if(SONG.song == 'Eggnog') {
+							new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+								cancelMusicFadeTween();
+								LoadingState.loadAndSwitchState(new PlayState());
+							});
+						} else {
 							cancelMusicFadeTween();
 							LoadingState.loadAndSwitchState(new PlayState());
-						});
-					} else {
+						}
+					} catch (e:Any) {
+						trace('Cannot find chart file: "${PlayState.storyPlaylist[0]+CoolUtil.getDifficultyFilePath()}"');
+						WeekData.loadTheFirstEnabledMod();
+						FlxG.sound.playMusic(Paths.music('freakyMenu'));
 						cancelMusicFadeTween();
-						LoadingState.loadAndSwitchState(new PlayState());
+
+						if(FlxTransitionableState.skipNextTransIn) {
+							CustomFadeTransition.nextCamera = null;
+						}
+
+						MusicBeatState.switchState(new StoryMenuState());
+						trace('WENT BACK TO STORY MODE!!');
 					}
 				}
 			}
