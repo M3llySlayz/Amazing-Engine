@@ -248,16 +248,8 @@ class PauseSubState extends MusicBeatSubstate
 
 		if (accepted || FlxG.mouse.justPressed && cantUnpause <= 0)
 		{
-			switch(daSelected){
-			case "Continue":
-				/*FlxFlicker.flicker(grpMenuShit, 1.5, 0.05, false);
-				FlxTween.tween(grpMenuShit, {alpha: 0}, 1, {ease: FlxEase.linear});
-				FlxTween.tween(bg, {alpha: 0}, 0.4, {ease: FlxEase.linear});
-				FlxTween.tween(levelInfo, {alpha: 0}, 0.4, {ease: FlxEase.linear});
-				FlxTween.tween(levelDifficulty, {alpha: 0}, 0.4, {ease: FlxEase.linear});
-				FlxTween.tween(blueballedTxt, {alpha: 0}, 0.4, {ease: FlxEase.linear});
-			
-				new FlxTimer().start(1.5, function(tmr:FlxTimer) {*/
+			switch(daSelected) {
+				case "Continue":
 					SoundEffects.playSFX('confirm', false);
 					if (ClientPrefs.pauseExit == 'Flicker Out'){
 						closeState();
