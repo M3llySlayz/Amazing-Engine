@@ -401,7 +401,6 @@ class PauseSubState extends MusicBeatSubstate
 			} else {
 				switch (daName)
 				{
-	
 					case "Retry":
 						restartSong();
 					case "Options":
@@ -430,6 +429,8 @@ class PauseSubState extends MusicBeatSubstate
 						}
 					case "End Song":
 						PlayState.instance.finishSong(true);
+						close();
+					default:
 						close();
 					}}
 				});

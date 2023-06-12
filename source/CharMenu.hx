@@ -288,7 +288,8 @@ class CharMenu extends MusicBeatState{
 			    PlayState.isStoryMode = false;
 			    PlayState.storyDifficulty = FreeplayState.curDifficulty;
 
-                 	    MusicBeatState.switchState(new PlayState()); // Usual way
+                 	    //MusicBeatState.switchState(new PlayState()); this didnt fix anything lol
+                        LoadingState.loadAndSwitchState(new PlayState());
                 });
             }
             if (goBack)
