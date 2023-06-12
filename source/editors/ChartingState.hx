@@ -1607,7 +1607,7 @@ class ChartingState extends MusicBeatState
 		var gWidth = GRID_SIZE * (Note.ammo[_song.mania] * 2);
 		camPos.x = -80 + gWidth;
 		strumLine.width = gWidth;
-		rightIcon.x = gWidth / 2 + GRID_SIZE * 2;
+		//rightIcon.x = gWidth / 2 + GRID_SIZE * 2;
 
 		if(FlxG.sound.music.time < 0) {
 			FlxG.sound.music.pause();
@@ -2210,8 +2210,8 @@ class ChartingState extends MusicBeatState
 		#end
 
 		var oneHalf:Float = GRID_SIZE * Note.ammo[_song.mania];
-		leftIcon.setPosition((oneHalf / 2) - (leftIcon.width / 2), -100);
-		rightIcon.setPosition(((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2), -100);
+		leftIcon.setPosition((oneHalf / 2) - (leftIcon.width / 2) + 75, -100);
+		rightIcon.setPosition(((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) + 75, -100);
 
 		var leHeight:Int = Std.int(gridBG.height);
 		var foundNextSec:Bool = false;
