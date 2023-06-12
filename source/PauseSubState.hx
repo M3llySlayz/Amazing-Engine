@@ -290,7 +290,7 @@ class PauseSubState extends MusicBeatSubstate
 				case "BACK":
 					menuItems = menuItemsOG;
 					regenMenu();
-					authorText.text += 'By ' + composer;
+					authorText.text = 'By ' + composer;
 				default:
 					closeState();
 			}
