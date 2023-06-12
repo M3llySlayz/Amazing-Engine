@@ -150,16 +150,11 @@ class OptionsState extends MusicBeatState
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
 			//FlxG.sound.play(Paths.sound('cancelMenu'));
 			SoundEffects.playSFX('cancel', false);
-			if (!MainMenuState.wasPaused){
-				if (ClientPrefs.luaMenu){
-					PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
-					LoadingState.loadAndSwitchState(new PlayState());
-				} else {
-					MusicBeatState.switchState(new MainMenuState());
-				}
+			if (ClientPrefs.luaMenu){
+				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+				LoadingState.loadAndSwitchState(new PlayState());
 			} else {
-				MusicBeatState.switchState(new PlayState());
-				MainMenuState.wasPaused = false;
+				MusicBeatState.switchState(new MainMenuState());
 			}
 		}
 
