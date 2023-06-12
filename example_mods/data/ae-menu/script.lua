@@ -11,7 +11,7 @@ local lock = false
 function onCreate()
 	if songName == 'ae-menu' then
 		setProperty('skipCountdown', true)
-		precacheMusic(getPropertyFromClass('ClientPrefs', 'mainSong'))
+		precacheMusic('menu songs/'..getPropertyFromClass('ClientPrefs', 'mainSong'))
 		precacheSound('ui sfx/'..getPropertyFromClass('ClientPrefs', 'sfxPreset')..'/scrollMenu')
 		precacheSound('ui sfx/'..getPropertyFromClass('ClientPrefs', 'sfxPreset')..'/confirmMenu')
 		precacheSound('ui sfx/'..getPropertyFromClass('ClientPrefs', 'sfxPreset')..'/cancelMenu')
@@ -20,78 +20,78 @@ end
 
 function onCreatePost()
 
-if songName == 'ae-menu' then 
+	if songName == 'ae-menu' then 
 
---this is for making the default stuff invisible
-if getPropertyFromClass('ClientPrefs', 'sfxPreset') ~= null then
-	playMusic('menu songs/'..getPropertyFromClass('ClientPrefs', 'sfxPreset')..'Freaky')
-else
-	playMusic('menu songs/Freaky')
-end
-	setProperty('timeTxt.visible', false)
-	setProperty('iconP1.visible', false)
-	setProperty('iconP2.visible', false)
-	setProperty('healthBar.visible', false)
-	setProperty('healthBarBG.visible', false)
-	setProperty('scoreTxt.visible', false)
-	setProperty('boyfriend.visible', false)
-	setProperty('gf.visible', false)
-	setProperty('dad.visible', false)
-	setProperty('timeBar.visible', false)
+	--this is for making the default stuff invisible
+		if getPropertyFromClass('ClientPrefs', 'sfxPreset') ~= null then
+			playMusic('menu songs/'..getPropertyFromClass('ClientPrefs', 'sfxPreset')..getPropertyFromClass('ClientPrefs', 'mainSong'))
+		else
+			playMusic('menu songs/'..getPropertyFromClass('ClientPrefs', 'mainSong'))
+		end
+		setProperty('timeTxt.visible', false)
+		setProperty('iconP1.visible', false)
+		setProperty('iconP2.visible', false)
+		setProperty('healthBar.visible', false)
+		setProperty('healthBarBG.visible', false)
+		setProperty('scoreTxt.visible', false)
+		setProperty('boyfriend.visible', false)
+		setProperty('gf.visible', false)
+		setProperty('dad.visible', false)
+		setProperty('timeBar.visible', false)
 	
-	--menu background
-	makeLuaSprite('menuBG', 'mainmenu/menuBG', 0, 0);
-	scaleObject('menuBG', 1.5, 1.5)
-	setScrollFactor('menuBG', 0, 0);
-	setObjectCamera('menuBG', 'hud');
-	screenCenter('menuBG');
-	baseY = getProperty('menuBG.y')
-	setProperty('menuBG.y', baseY - 100)
-	addLuaSprite('menuBG', true)
-	--addGlitchEffect('menuBG', 2, 1.9)
+		--menu background
+		makeLuaSprite('menuBG', 'mainmenu/menuBG', 0, 0);
+		scaleObject('menuBG', 1.5, 1.5)
+		setScrollFactor('menuBG', 0, 0);
+		setObjectCamera('menuBG', 'hud');
+		screenCenter('menuBG');
+		baseY = getProperty('menuBG.y')
+		setProperty('menuBG.y', baseY - 100)
+		addLuaSprite('menuBG', true)
+		--addGlitchEffect('menuBG', 2, 1.9)
 
-	makeLuaSprite('anchor', '', 0, -1000);
+		makeLuaSprite('anchor', '', 0, -1000);
 
-	--storymode asset
-	makeAnimatedLuaSprite('story', 'mainmenu/menu_story_mode', StoryPos[1] + 25, StoryPos[2]);
-	scaleObject('story', 1, 1);
-	addAnimationByPrefix('story', 'basicWOW', 'story_mode basic', 24, true);
-	addAnimationByPrefix('story', 'whiteWOW', 'story_mode white', 24, true);
-	addLuaSprite('story', true);
-	setObjectCamera('story', 'hud');
-	setProperty('story.scale.x', 0.75)
-	setProperty('story.scale.y', 0.75)
-	setProperty('story.y', StoryPos[2] - 25)
-	objectPlayAnimation('story', 'whiteWOW', true);
+		--storymode asset
+		makeAnimatedLuaSprite('story', 'mainmenu/menu_story_mode', StoryPos[1] + 25, StoryPos[2]);
+		scaleObject('story', 1, 1);
+		addAnimationByPrefix('story', 'basicWOW', 'story_mode basic', 24, true);
+		addAnimationByPrefix('story', 'whiteWOW', 'story_mode white', 24, true);
+		addLuaSprite('story', true);
+		setObjectCamera('story', 'hud');
+		setProperty('story.scale.x', 0.75)
+		setProperty('story.scale.y', 0.75)
+		setProperty('story.y', StoryPos[2] - 25)
+		objectPlayAnimation('story', 'whiteWOW', true);
 
-	--freeplay asset
-	makeAnimatedLuaSprite('freeplay', 'mainmenu/menu_freeplay', FreeplayPos[1] - 50, FreeplayPos[2]);
-	scaleObject('freeplay', 1, 1);
-	addAnimationByPrefix('freeplay', 'basic', 'freeplay basic', 24, true);
-	addAnimationByPrefix('freeplay', 'white', 'freeplay white', 24, true);
-	addLuaSprite('freeplay', true);
-	setObjectCamera('freeplay', 'hud');
-	objectPlayAnimation('freeplay', 'basic', true);
+		--freeplay asset
+		makeAnimatedLuaSprite('freeplay', 'mainmenu/menu_freeplay', FreeplayPos[1] - 50, FreeplayPos[2]);
+		scaleObject('freeplay', 1, 1);
+		addAnimationByPrefix('freeplay', 'basic', 'freeplay basic', 24, true);
+		addAnimationByPrefix('freeplay', 'white', 'freeplay white', 24, true);
+		addLuaSprite('freeplay', true);
+		setObjectCamera('freeplay', 'hud');
+		objectPlayAnimation('freeplay', 'basic', true);
 
-	--credits asset
-	makeAnimatedLuaSprite('credits', 'mainmenu/menu_credits', CreditsPos[1] - 50, CreditsPos[2]);
-	scaleObject('credits', 1, 1);
-	addAnimationByPrefix('credits', 'basic', 'credits basic', 24, true);
-	addAnimationByPrefix('credits', 'white', 'credits white', 24, true);
-	addLuaSprite('credits', true);
-	setObjectCamera('credits', 'hud');
-	objectPlayAnimation('credits', 'basic', true);
+		--credits asset
+		makeAnimatedLuaSprite('credits', 'mainmenu/menu_credits', CreditsPos[1] - 50, CreditsPos[2]);
+		scaleObject('credits', 1, 1);
+		addAnimationByPrefix('credits', 'basic', 'credits basic', 24, true);
+		addAnimationByPrefix('credits', 'white', 'credits white', 24, true);
+		addLuaSprite('credits', true);
+		setObjectCamera('credits', 'hud');
+		objectPlayAnimation('credits', 'basic', true);
 
 	--you can add more if you want by the way
 
 	--this is for making all the notes disappear (im too stupid to use for loops)
-	a = 0
-	repeat
-	noteTweenAlpha('alphaTween'..a, a, 0, 0.01, cubeInOut)
-	a = a + 1
-	until (a == 8)
+		a = 0
+		repeat
+			noteTweenAlpha('alphaTween'..a, a, 0, 0.01, cubeInOut)
+			a = a + 1
+		until (a == 8)
 
-	selectChange()
+		selectChange()
 	end
 end
 

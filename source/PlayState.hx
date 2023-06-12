@@ -4364,7 +4364,7 @@ class PlayState extends MusicBeatState
 					} catch (e:Any) {
 						trace('Cannot find chart file: "${PlayState.storyPlaylist[0]+CoolUtil.getDifficultyFilePath()}"');
 						WeekData.loadTheFirstEnabledMod();
-						FlxG.sound.playMusic(Paths.music('freakyMenu'));
+						FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 						cancelMusicFadeTween();
 
 						if(FlxTransitionableState.skipNextTransIn) {

@@ -133,6 +133,7 @@ class CharMenu extends MusicBeatState{
         }
 
         FlxG.sound.playMusic(Paths.music('Waiting'), 0.8);
+        Conductor.changeBPM(240);
         // If the unlocked chars are empty, fill it with defaults
         if (unlockedCharacters == null) 
         {

@@ -686,6 +686,7 @@ class TitleState extends MusicBeatState
 					#if AMAZING_WATERMARKS
 					addMoreText('M3llySlayz', 15);
 					addMoreText('Irshaad Ali', 15);
+					addMoreText('SomeGuy', 15);
 					//addMoreText('shubs', 15);
 					#else
 					addMoreText('present');
