@@ -217,6 +217,11 @@ class CreditsEditor extends MusicBeatState
 		{
 			addCredit();
 		});
+
+		var creditSlaughter:FlxButton = new FlxButton(creditAdd.x, creditAdd.y + yDist + 10, "Remove credit", function()
+		{
+			deleteSelItem();
+		});
 		
 		blockPressWhileTypingOn.push(creditNameInput);
 		blockPressWhileTypingOn.push(iconInput);
@@ -268,6 +273,7 @@ class CreditsEditor extends MusicBeatState
 		tab_group_credits.add(new FlxText(colorInput.x - 40, colorInput.y, 0, 'Color:'));
 		tab_group_credits.add(titleAdd);
 		tab_group_credits.add(creditAdd);
+		tab_group_credits.add(creditSlaughter);
 
 		tab_group_credits.add(loadFile);
 		tab_group_credits.add(saveFile);

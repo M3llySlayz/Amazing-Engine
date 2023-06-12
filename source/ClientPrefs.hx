@@ -60,6 +60,7 @@ class ClientPrefs {
 	public static var luaMenu:Bool = false;
 	public static var splashOpacity:Float = 0.6;
 	public static var screenRes:String = '1280x720';
+	public static var pauseExit:String = 'Countdown';
 	public static var fullscreen:Bool = false;
 	#if desktop
 	public static var autoPause:Bool = true;
@@ -373,6 +374,7 @@ class ClientPrefs {
 		FlxG.save.data.luaMenu = luaMenu;
 		FlxG.save.data.splashOpacity = splashOpacity;
 		FlxG.save.data.screenRes = screenRes;
+		FlxG.save.data.pauseExit = pauseExit;
 		FlxG.save.data.fullscreen = fullscreen;
 		#if desktop
 		FlxG.save.data.autoPause = autoPause;
@@ -576,6 +578,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.screenRes != null) {
 			screenRes = FlxG.save.data.screenRes;
+		}
+		if(FlxG.save.data.pauseExit != null) {
+			pauseExit = FlxG.save.data.pauseExit;
 		}
 		if(FlxG.save.data.fullscreen != null) {
 			fullscreen = FlxG.save.data.fullscreen;

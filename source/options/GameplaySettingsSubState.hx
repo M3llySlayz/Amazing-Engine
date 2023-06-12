@@ -78,6 +78,14 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Pause Exit Method',
+			'When resuming from the pause menu, what do you want to happen?\nFlicker Out is like selecting a song in Freeplay.',
+			'pauseExit',
+			'string',
+			'Countdown',
+			['Normal', 'Flicker Out', 'Countdown']);
+		addOption(option);
+
 		option.onChange = onToggleAutoPause;
 		#end
 

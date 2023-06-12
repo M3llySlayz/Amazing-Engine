@@ -93,6 +93,7 @@ class PlayState extends MusicBeatState
 {
 	public static var STRUM_X = 42;
 	public static var STRUM_X_MIDDLESCROLL = -278;
+	public static var grabbablePlayBackRate:Float;
 
 	public static var ratingStuff:Array<Dynamic> = [
 		['You Suck!', 0.2], //From 0% to 19%
@@ -326,7 +327,7 @@ class PlayState extends MusicBeatState
 	public static var instance:PlayState;
 	public var luaArray:Array<FunkinLua> = [];
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
-	public var introSoundsSuffix:String = '';
+	public static var introSoundsSuffix:String = '';
 
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
@@ -348,6 +349,7 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
+		grabbablePlayBackRate = playbackRate;
 		if (!ClientPrefs.bigCache){
 			Paths.clearStoredMemory();
 		}
@@ -929,25 +931,25 @@ class PlayState extends MusicBeatState
 			}
 		}
 	
-			var achievementMetas = Achievements.getModAchievementMetas().copy();
-			for (i in achievementMetas) { 
-				if (i.global == null || i.global.length < 1)
+		var achievementMetas = Achievements.getModAchievementMetas().copy();
+		for (i in achievementMetas) { 
+			if (i.global == null || i.global.length < 1)
+			{
+				if(i.song != null)
 				{
-					if(i.song != null)
-					{
-						if(i.song.length > 0 && SONG.song.toLowerCase().replace(' ', '-') != i.song.toLowerCase().replace(' ', '-'))
-							continue;
-					}
-					if(i.lua_code != null) {
-						var lua = new FunkinLua(null, i.lua_code);
-						addAbilityToUnlockAchievements(lua);
-						achievementsArray.push(lua);
-					}
-					if(i.week_nomiss != null) {
-						achievementWeeks.push(i.week_nomiss + '_nomiss');
-					}
+					if(i.song.length > 0 && SONG.song.toLowerCase().replace(' ', '-') != i.song.toLowerCase().replace(' ', '-'))
+						continue;
+				}
+				if(i.lua_code != null) {
+					var lua = new FunkinLua(null, i.lua_code);
+					addAbilityToUnlockAchievements(lua);
+					achievementsArray.push(lua);
+				}
+				if(i.week_nomiss != null) {
+					achievementWeeks.push(i.week_nomiss + '_nomiss');
 				}
 			}
+		}
 			#end
 */
 		// "GLOBAL" SCRIPTS
@@ -4328,7 +4330,6 @@ class PlayState extends MusicBeatState
 						FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
 						FlxG.save.flush();
 					}
-					trace('WENT BACK TO STORY MODE!!');
 					changedDifficulty = false;
 				}
 				else
@@ -4356,30 +4357,17 @@ class PlayState extends MusicBeatState
 					prevCamFollow = camFollow;
 					prevCamFollowPos = camFollowPos;
 
-					try {
-						PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0]+CoolUtil.getDifficultyFilePath(), PlayState.storyPlaylist[0]);
-						FlxG.sound.music.stop();
+					PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0] + difficulty, PlayState.storyPlaylist[0]);
+					FlxG.sound.music.stop();
 
-						if(SONG.song == 'Eggnog') {
-							new FlxTimer().start(1.5, function(tmr:FlxTimer) {
-								cancelMusicFadeTween();
-								LoadingState.loadAndSwitchState(new PlayState());
-							});
-						} else {
+					if(winterHorrorlandNext) {
+						new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 							cancelMusicFadeTween();
 							LoadingState.loadAndSwitchState(new PlayState());
-						}
-					} catch (e:Any) {
-						trace('Cannot find chart file: "${PlayState.storyPlaylist[0]+CoolUtil.getDifficultyFilePath()}"');
-						WeekData.loadTheFirstEnabledMod();
-						FlxG.sound.playMusic(Paths.music('freakyMenu'));
+						});
+					} else {
 						cancelMusicFadeTween();
-
-						if(FlxTransitionableState.skipNextTransIn) {
-							CustomFadeTransition.nextCamera = null;
-						}
-						MusicBeatState.switchState(new StoryMenuState());
-						trace('WENT BACK TO STORY MODE!!');
+						LoadingState.loadAndSwitchState(new PlayState());
 					}
 				}
 			}
@@ -5703,26 +5691,27 @@ class PlayState extends MusicBeatState
 								unlock = true;
 							}
 						}
-					case 'toastie':
-						if(/*ClientPrefs.framerate <= 60 &&*/ !ClientPrefs.shaders && ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing) {
-							unlock = true;
-						}
-					case 'debugger':
-						if(Paths.formatToSongPath(SONG.song) == 'test' && !usedPractice) {
-							unlock = true;
-						}
+				case 'toastie':
+					if(/*ClientPrefs.framerate <= 60 &&*/ !ClientPrefs.shaders && ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing) {
+						unlock = true;
+					}
+				case 'debugger':
+					if(Paths.formatToSongPath(SONG.song) == 'test' && !usedPractice) {
+						unlock = true;
+					}
+						
 				}
 
-				if(unlock) {
-					Achievements.unlockAchievement(achievementName);
-					return achievementName;
+					if(unlock) {
+						Achievements.unlockAchievement(achievementName);
+						return achievementName;
+					}
 				}
 			}
+			return null;
 		}
-		return null;
-	}
-	#end
+		#end
 
-	var curLight:Int = -1;
-	var curLightEvent:Int = -1;
-}
+		var curLight:Int = -1;
+		var curLightEvent:Int = -1;
+	}

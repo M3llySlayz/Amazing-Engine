@@ -139,6 +139,9 @@ class PauseSubState extends MusicBeatSubstate
 
 		var composer:String = '';
 
+		if (ClientPrefs.pauseExit == 'Countdown')
+			cacheCountdown();
+
 		switch(ClientPrefs.pauseMusic){
 			case 'Bossfight' | 'Construct' | 'Confront' | 'Waiting (Impatient)':
 				composer = 'Melly and BoyBot69';
@@ -279,8 +282,14 @@ class PauseSubState extends MusicBeatSubstate
 					FlxTween.tween(blueballedTxt, {alpha: 0}, 0.4, {ease: FlxEase.linear});
 					
 					new FlxTimer().start(1.5, function(tmr:FlxTimer) {*/
-						SoundEffects.playSFX('confirm', true);
-						close();
+						SoundEffects.playSFX('confirm', false);
+						if (ClientPrefs.pauseExit == 'Flicker Out'){
+							closeState();
+						} else if (ClientPrefs.pauseExit == 'Countdown'){
+							countdown();
+						} else {
+							close();
+						}
 				//	});
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
@@ -318,10 +327,11 @@ class PauseSubState extends MusicBeatSubstate
 							PlayState.instance.setSongTime(curTime);
 						}
 						SoundEffects.playSFX('confirm', true);
-						close();
+						closeState();
 					}
 				case "End Song":
-					close();
+					SoundEffects.playSFX('confirm', false);
+					closeState();
 					PlayState.instance.finishSong(true);
 				case 'Toggle Botplay':
 					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
@@ -332,12 +342,14 @@ class PauseSubState extends MusicBeatSubstate
 				case 'Modifiers':
 					openSubState(new GameplayChangersSubstate());
 				case "Quit":
+					SoundEffects.playSFX('confirm', true);
 					menuItems = menuItemsQuitting;
 					quittingTxt.visible = true;
 					regenMenu();
 				case "Yes":
 					quitSong();
 				case "No":
+					SoundEffects.playSFX('cancel', true);
 					menuItems = menuItemsOG;
 					quittingTxt.visible = false;
 					regenMenu();
@@ -389,6 +401,43 @@ class PauseSubState extends MusicBeatSubstate
 		FlxG.sound.playMusic(Paths.music(ClientPrefs.pauseMusic));
 		PlayState.changedDifficulty = false;
 		PlayState.chartingMode = false;
+	}
+
+	function closeState(?custom:Int = null)
+		{
+			var daTime:Float = 1;
+	
+			Conductor.changeBPM(PlayState.SONG.bpm);
+	
+			var da:Int = curSelected;
+			if (custom != null)
+			{
+				da = custom;
+			}
+	
+			for (i in 0...grpMenuShit.members.length)
+			{
+				if (i == da)
+				{
+					FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.06, false, false);
+				} else {
+					FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, 0.2, {ease: FlxEase.quadIn});
+				}
+				FlxTween.tween(bg, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+				FlxTween.tween(levelInfo, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+				FlxTween.tween(levelDifficulty, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+				FlxTween.tween(blueballedTxt, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+				FlxTween.tween(authorText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+				if (practiceText.visible)
+					FlxTween.tween(practiceText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+				if (chartingText.visible)
+					FlxTween.tween(chartingText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+	
+			new FlxTimer().start(daTime, function(tmr:FlxTimer)
+			{
+				close();
+			});
+		}
 	}
 	
 	override function destroy()
@@ -477,5 +526,112 @@ class PauseSubState extends MusicBeatSubstate
 	function updateSkipTimeText()
 	{
 		skipTimeText.text = FlxStringUtil.formatTime(Math.max(0, Math.floor(curTime / 1000)), false) + ' / ' + FlxStringUtil.formatTime(Math.max(0, Math.floor(FlxG.sound.music.length / 1000)), false);
+	}
+
+	function cacheCountdown()
+	{
+		var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
+		introAssets.set('default', ['ready', 'set', 'go']);
+		introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
+	
+		var introAlts:Array<String> = introAssets.get('default');
+		if (PlayState.isPixelStage) introAlts = introAssets.get('pixel');
+			
+		for (asset in introAlts)
+			Paths.image(asset);
+			
+		Paths.sound('intro3' + PlayState.introSoundsSuffix);
+		Paths.sound('intro2' + PlayState.introSoundsSuffix);
+		Paths.sound('intro1' + PlayState.introSoundsSuffix);
+		Paths.sound('introGo' + PlayState.introSoundsSuffix);
+	}
+
+	function countdown()
+	{
+		var swagCounter:Int = 0;
+
+		var startTimer = new FlxTimer().start(Conductor.crochet / 1000 / PlayState.grabbablePlayBackRate, function(tmr:FlxTimer)
+		{
+			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
+			introAssets.set('default', ['ready', 'set', 'go']);
+			introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
+
+			var introAlts:Array<String> = introAssets.get('default');
+			var antialias:Bool = ClientPrefs.globalAntialiasing;
+			if(PlayState.isPixelStage) {
+				introAlts = introAssets.get('pixel');
+				antialias = false;
+			}
+
+			switch (swagCounter)
+			{
+				case 0:
+					FlxG.sound.play(Paths.sound('intro3' + PlayState.introSoundsSuffix), 0.6);
+				case 1:
+					var ready = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
+					ready.scrollFactor.set();
+					ready.updateHitbox();
+
+				if (PlayState.isPixelStage)
+					ready.setGraphicSize(Std.int(ready.width * PlayState.daPixelZoom));
+					add(ready);
+					ready.screenCenter();
+					ready.antialiasing = ClientPrefs.globalAntialiasing;
+					FlxTween.tween(ready, {/*y: ready.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						ease: FlxEase.cubeInOut,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(ready);
+							ready.destroy();
+						}
+					});
+					FlxG.sound.play(Paths.sound('intro2' + PlayState.introSoundsSuffix), 0.6);
+				case 2:
+					var set = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
+					set.scrollFactor.set();
+
+					if (PlayState.isPixelStage)
+						set.setGraphicSize(Std.int(set.width * PlayState.daPixelZoom));
+
+					set.screenCenter();
+					add(set);
+					set.antialiasing = ClientPrefs.globalAntialiasing;
+					FlxTween.tween(set, {/*y: set.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						ease: FlxEase.cubeInOut,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(set);
+							set.destroy();
+						}
+					});
+					FlxG.sound.play(Paths.sound('intro1' + PlayState.introSoundsSuffix), 0.6);
+				case 3:
+					var go = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
+					go.scrollFactor.set();
+
+					if (PlayState.isPixelStage)
+						go.setGraphicSize(Std.int(go.width * PlayState.daPixelZoom));
+
+					go.updateHitbox();
+
+					go.screenCenter();
+					add(go);
+					go.antialiasing = ClientPrefs.globalAntialiasing;
+					FlxTween.tween(go, {/*y: go.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						ease: FlxEase.cubeInOut,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(go);
+							go.destroy();
+						}
+					});
+					FlxG.sound.play(Paths.sound('introGo' + PlayState.introSoundsSuffix), 0.6);
+				case 4:
+					close();
+			}
+
+			swagCounter += 1;
+			// generateSong('fresh');
+		}, 5);
 	}
 }

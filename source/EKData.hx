@@ -261,7 +261,7 @@ class EKData {
         20, //15k
         20, //16k
         20, //17k
-        15 //18k
+        19 //18k
     ];
 
     public static var splashScales:Array<Float> = [
