@@ -250,14 +250,6 @@ class PauseSubState extends MusicBeatSubstate
 		{
 			switch(daSelected) {
 				case "Continue":
-					FlxFlicker.flicker(grpMenuShit, 1.5, 0.05, false);
-					FlxTween.tween(grpMenuShit, {alpha: 0}, 1, {ease: FlxEase.linear});
-					FlxTween.tween(bg, {alpha: 0}, 0.4, {ease: FlxEase.linear});
-					FlxTween.tween(levelInfo, {alpha: 0}, 0.4, {ease: FlxEase.linear});
-					FlxTween.tween(levelDifficulty, {alpha: 0}, 0.4, {ease: FlxEase.linear});
-					FlxTween.tween(blueballedTxt, {alpha: 0}, 0.4, {ease: FlxEase.linear});
-
-					new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 						SoundEffects.playSFX('confirm', false);
 						if (ClientPrefs.pauseExit == 'Flicker Out'){
 							closeState();
@@ -266,7 +258,6 @@ class PauseSubState extends MusicBeatSubstate
 						} else {
 							close();
 						}
-					}
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
 					authorText.text = 'Hold ALT to skip character selection.';
