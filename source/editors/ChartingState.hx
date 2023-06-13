@@ -723,7 +723,7 @@ class ChartingState extends MusicBeatState
 		check_altAnim.name = 'check_altAnim';
 		
 		stepperBeats = new FlxUINumericStepper(10, 100, 1, 4, 1, 24, 2);
-		stepperBeats.width = 50;
+		stepperBeats.width = 75;
 		stepperBeats.value = getSectionBeats();
 		stepperBeats.name = 'section_beats';
 		blockPressWhileTypingOnStepper.push(stepperBeats);
@@ -733,7 +733,7 @@ class ChartingState extends MusicBeatState
 		check_changeBPM.name = 'check_changeBPM';
 
 		stepperSectionBPM = new FlxUINumericStepper(10, check_changeBPM.y + 20, 1, Conductor.bpm, 0, 9999, 1);
-		stepperSectionBPM.width = 50;
+		stepperSectionBPM.width = 75;
 		if(check_changeBPM.checked) {
 			stepperSectionBPM.value = _song.notes[curSec].bpm;
 		} else {
