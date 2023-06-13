@@ -652,25 +652,32 @@ class WeekEditorFreeplayState extends MusicBeatState
 		addFreeplayUI();
 		add(UI_box);
 
-		var blackBlack:FlxSprite = new FlxSprite(0, 670).makeGraphic(FlxG.width, 50, FlxColor.BLACK);
+		var blackBlack:FlxSprite = new FlxSprite(0, 630).makeGraphic(FlxG.width, 50, FlxColor.BLACK);
 		blackBlack.alpha = 0.6;
 		add(blackBlack);
 
-		var loadWeekButton:FlxButton = new FlxButton(0, 685, "Load Week", function() {
+		var loadWeekButton:FlxButton = new FlxButton(0, 650, "Load Week", function() {
 			WeekEditorState.loadWeek();
 		});
 		loadWeekButton.screenCenter(X);
 		loadWeekButton.x -= 120;
 		add(loadWeekButton);
 		
-		var storyModeButton:FlxButton = new FlxButton(0, 685, "Story Mode", function() {
+		var storyModeButton:FlxButton = new FlxButton(0, 650, "Story Mode", function() {
 			MusicBeatState.switchState(new WeekEditorState(weekFile));
 			
 		});
 		storyModeButton.screenCenter(X);
 		add(storyModeButton);
+
+		var categoryButton:FlxButton = new FlxButton(0, 685, "Category", function() {
+			MusicBeatState.switchState(new WeekEditorCategoryState(weekFile));
+			
+		});
+		freeplayButton.screenCenter(X);
+		add(freeplayButton);
 	
-		var saveWeekButton:FlxButton = new FlxButton(0, 685, "Save Week", function() {
+		var saveWeekButton:FlxButton = new FlxButton(0, 650, "Save Week", function() {
 			WeekEditorState.saveWeek(weekFile);
 		});
 		saveWeekButton.screenCenter(X);
@@ -839,6 +846,7 @@ class WeekEditorCategoryState extends MusicBeatState
 
 	var bg:FlxSprite;
 	private var categoryImage:FlxSprite;
+	private var alphabetText:Alphabet;
 
 	override function create() {
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -850,8 +858,17 @@ class WeekEditorCategoryState extends MusicBeatState
 		categoryImage = new FlxSprite().loadGraphic(Paths.image('categories/base game'));
 		categoryImage.antialiasing = ClientPrefs.globalAntialiasing;
 		categoryImage.screenCenter();
+		categoryImage.updateHitbox();
+		add(categoryImage);
+
+		alphabetText = new Alphabet(0, FlxG.height - 200, 'base game', true);
+        alphabetText.x = categoryImage.width / 3;
+        alphabetText.alpha = 1;
+        alphabetText.x -= 60;
+        add(alphabetText);
 
 		addEditorBox();
+		super.create();
 	}
 
 	override function update(elapsed:Float) {
@@ -897,11 +914,11 @@ class WeekEditorCategoryState extends MusicBeatState
 		addCategoryUI();
 		add(UI_box);
 
-		var blackBlack:FlxSprite = new FlxSprite(0, 670).makeGraphic(FlxG.width, 50, FlxColor.BLACK);
+		var blackBlack:FlxSprite = new FlxSprite(0, 630).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		blackBlack.alpha = 0.6;
 		add(blackBlack);
 
-		var loadWeekButton:FlxButton = new FlxButton(0, 685, "Load Week", function() {
+		var loadWeekButton:FlxButton = new FlxButton(0, 650, "Load Week", function() {
 			WeekEditorState.loadWeek();
 		});
 		loadWeekButton.screenCenter(X);
@@ -922,7 +939,7 @@ class WeekEditorCategoryState extends MusicBeatState
 		freeplayButton.screenCenter(X);
 		add(freeplayButton);
 	
-		var saveWeekButton:FlxButton = new FlxButton(0, 685, "Save Week", function() {
+		var saveWeekButton:FlxButton = new FlxButton(0, 650, "Save Week", function() {
 			WeekEditorState.saveWeek(weekFile);
 		});
 		saveWeekButton.screenCenter(X);
@@ -968,7 +985,7 @@ class WeekEditorCategoryState extends MusicBeatState
 			}
 		});
 
-		imageInputText = new FlxUIInputText(10, bgColorStepperR.y + 70, 100, '', 8);
+		imageInputText = new FlxUIInputText(10, bgColorStepperR.y + 70, 100, 'base game', 8);
 		
 		tab_group.add(new FlxText(10, bgColorStepperR.y - 18, 0, 'Selected background Color R/G/B:'));
 		tab_group.add(new FlxText(10, imageInputText.y - 18, 0, 'Selected image:'));
@@ -982,6 +999,32 @@ class WeekEditorCategoryState extends MusicBeatState
 	}
 
 	function updateBG() {
+		weekFile.categoryColor[0] = Math.round(bgColorStepperR.value);
+		weekFile.categoryColor[1] = Math.round(bgColorStepperG.value);
+		weekFile.categoryColor[2] = Math.round(bgColorStepperB.value);
 		bg.color = FlxColor.fromRGB(weekFile.categoryColor[0], weekFile.categoryColor[1], weekFile.categoryColor[2]);
+	}
+
+	function updateImage() {
+		remove(categoryImage);
+		categoryImage.destroy();
+		categoryImage = new FlxSprite().loadGraphic(Paths.image('categories/' + weekFile.category));
+		categoryImage.antialiasing = ClientPrefs.globalAntialiasing;
+		categoryImage.screenCenter();
+		add(categoryImage);
+	}
+
+	override function getEvent(id:String, sender:Dynamic, data:Dynamic, ?params:Array<Dynamic>) {
+		if(id == FlxUIInputText.CHANGE_EVENT && (sender is FlxUIInputText)) {
+			weekFile.category = imageInputText.text.trim();
+			alphabetText.text = imageInputText.text.trim();
+            alphabetText.x = categoryImage.width / 3;
+			alphabetText.x -= 60;
+			updateImage();
+		} else if(id == FlxUINumericStepper.CHANGE_EVENT && (sender is FlxUINumericStepper)) {
+			if(sender == bgColorStepperR || sender == bgColorStepperG || sender == bgColorStepperB) {
+				updateBG();
+			}
+		}
 	}
 }
