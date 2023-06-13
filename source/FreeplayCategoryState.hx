@@ -15,7 +15,6 @@ using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
     public var categoriesList:Array<String> = ['base game', 'amongus']; // Change this line here. Don't forget about the hardcoding in FreeplayState aswell.
-    public var categoryNamesList:Array<String> = ['vanilla', 'mod support soon!\nevery song is still in\nvanilla tho dw'];
     public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFFFF];
   
     public static var curSelected:Int = 0;
@@ -45,7 +44,7 @@ class FreeplayCategoryState extends MusicBeatState {
         categorySpr.x += 60;
         add(categorySpr);
 
-        alphabetText = new Alphabet(0, FlxG.height - 200, categoryNamesList[curSelected], true);
+        alphabetText = new Alphabet(0, FlxG.height - 200, categoryList[curSelected], true);
         alphabetText.x = categorySpr.width / 3;
         alphabetText.alpha = 0;
         alphabetText.x -= 60;
@@ -115,7 +114,7 @@ class FreeplayCategoryState extends MusicBeatState {
 
         if (!selectedSomethin) {
             categorySpr.loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
-            alphabetText.text = categoryNamesList[curSelected];
+            alphabetText.text = categoryList[curSelected];
             alphabetText.x = categorySpr.width / 3;
             bg.color = categoryColors[curSelected];
             categorySpr.screenCenter();
