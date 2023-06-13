@@ -858,12 +858,15 @@ class ChartingState extends MusicBeatState
 		});
 
 		var stepperCopy:FlxUINumericStepper = null;
-		var copyLastButton:FlxButton = new FlxButton(10, swapSection.y + 30, "Copy last section", function()
+		var copyLastButton:FlxButton = new FlxButton(10, swapSection.y + 50, "Copy section", function()
 		{
 			var value:Int = Std.int(stepperCopy.value);
 			if(value == 0) return;
-
 			var daSec = FlxMath.maxInt(curSec, value);
+			
+			if (_song.notes[daSec] == null) { // Null check
+				for (i in 0...value-1) addSection();
+			}
 
 			for (note in _song.notes[daSec - value].sectionNotes)
 			{
@@ -893,8 +896,6 @@ class ChartingState extends MusicBeatState
 			}
 			updateGrid();
 		});
-		copyLastButton.setGraphicSize(80, 30);
-		copyLastButton.updateHitbox();
 		
 		stepperCopy = new FlxUINumericStepper(copyLastButton.x + 100, copyLastButton.y, 1, 1, -999, 999, 0);
 		blockPressWhileTypingOnStepper.push(stepperCopy);
@@ -943,8 +944,6 @@ class ChartingState extends MusicBeatState
 			
 			updateGrid();
 		});
-		copyLastButton.setGraphicSize(80, 30);
-		copyLastButton.updateHitbox();
 
 		tab_group_section.add(new FlxText(stepperBeats.x, stepperBeats.y - 15, 0, 'Beats per Section:'));
 		tab_group_section.add(stepperBeats);
