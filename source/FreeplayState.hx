@@ -402,7 +402,7 @@ class FreeplayState extends MusicBeatState
 					}else if (altPressed) {
 						LoadingState.loadAndSwitchState(new PlayState());
 					} else {
-						MusicBeatState.switchState(new CharMenu());
+						LoadingState.loadAndSwitchState(new CharMenu());
 						//FlxG.switchState(new CharMenu());
 					}
 					FlxG.sound.music.volume = 0;

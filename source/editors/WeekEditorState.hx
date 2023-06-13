@@ -149,6 +149,13 @@ class WeekEditorState extends MusicBeatState
 		});
 		freeplayButton.screenCenter(X);
 		add(freeplayButton);
+
+		var categoryButton:FlxButton = new FlxButton(0, 685, "Category", function() {
+			MusicBeatState.switchState(new WeekEditorCategoryState(weekFile));
+			
+		});
+		categoryButton.screenCenter(X);
+		add(categoryButton);
 	
 		var saveWeekButton:FlxButton = new FlxButton(0, 650, "Save Week", function() {
 			saveWeek(weekFile);
@@ -447,7 +454,7 @@ class WeekEditorState extends MusicBeatState
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 			}
 		}
 
@@ -748,7 +755,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 	}
 
 	function changeSelection(change:Int = 0) {
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 
 		curSelected += change;
 
@@ -810,12 +817,171 @@ class WeekEditorFreeplayState extends MusicBeatState
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 			}
 
 			if(controls.UI_UP_P) changeSelection(-1);
 			if(controls.UI_DOWN_P) changeSelection(1);
 		}
 		super.update(elapsed);
+	}
+}
+
+class WeekEditorCategoryState extends MusicBeatState
+{
+	var weekFile:WeekFile = null;
+	public function new(weekFile:WeekFile = null)
+	{
+		super();
+		this.weekFile = WeekData.createWeekFile();
+		if(weekFile != null) this.weekFile = weekFile;
+	}
+
+	var bg:FlxSprite;
+	private var categoryImage:FlxSprite;
+
+	override function create() {
+		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+
+		bg.color = FlxColor.WHITE;
+		add(bg);
+
+		categoryImage = new FlxSprite().loadGraphic(Paths.image('categories/base game'));
+		categoryImage.antialiasing = ClientPrefs.globalAntialiasing;
+		categoryImage.screenCenter();
+
+		addEditorBox();
+	}
+
+	override function update(elapsed:Float) {
+		if(WeekEditorState.loadedWeek != null) {
+			super.update(elapsed);
+			MusicBeatState.switchState(new WeekEditorCategoryState(WeekEditorState.loadedWeek));
+			WeekEditorState.loadedWeek = null;
+			return;
+		}
+		
+		if(imageInputText.hasFocus) {
+			FlxG.sound.muteKeys = [];
+			FlxG.sound.volumeDownKeys = [];
+			FlxG.sound.volumeUpKeys = [];
+			if(FlxG.keys.justPressed.ENTER) {
+				imageInputText.hasFocus = false;
+			}
+		} else {
+			FlxG.sound.muteKeys = TitleState.muteKeys;
+			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+			if(FlxG.keys.justPressed.ESCAPE) {
+				MusicBeatState.switchState(new editors.MasterEditorMenu());
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
+			}
+		}
+		super.update(elapsed);
+	}
+
+	var UI_box:FlxUITabMenu;
+	var blockPressWhileTypingOn:Array<FlxUIInputText> = [];
+	function addEditorBox() {
+		var tabs = [
+			{name: 'Category', label: 'Category'},
+		];
+		UI_box = new FlxUITabMenu(null, tabs, true);
+		UI_box.resize(250, 200);
+		UI_box.x = FlxG.width - UI_box.width - 100;
+		UI_box.y = FlxG.height - UI_box.height - 60;
+		UI_box.scrollFactor.set();
+		
+		UI_box.selected_tab_id = 'Week';
+		addCategoryUI();
+		add(UI_box);
+
+		var blackBlack:FlxSprite = new FlxSprite(0, 670).makeGraphic(FlxG.width, 50, FlxColor.BLACK);
+		blackBlack.alpha = 0.6;
+		add(blackBlack);
+
+		var loadWeekButton:FlxButton = new FlxButton(0, 685, "Load Week", function() {
+			WeekEditorState.loadWeek();
+		});
+		loadWeekButton.screenCenter(X);
+		loadWeekButton.x -= 120;
+		add(loadWeekButton);
+		
+		var storyModeButton:FlxButton = new FlxButton(0, 650, "Story Mode", function() {
+			MusicBeatState.switchState(new WeekEditorState(weekFile));
+			
+		});
+		storyModeButton.screenCenter(X);
+		add(storyModeButton);
+
+		var freeplayButton:FlxButton = new FlxButton(0, 685, "Freeplay", function() {
+			MusicBeatState.switchState(new WeekEditorFreeplayState(weekFile));
+			
+		});
+		freeplayButton.screenCenter(X);
+		add(freeplayButton);
+	
+		var saveWeekButton:FlxButton = new FlxButton(0, 685, "Save Week", function() {
+			WeekEditorState.saveWeek(weekFile);
+		});
+		saveWeekButton.screenCenter(X);
+		saveWeekButton.x += 120;
+		add(saveWeekButton);
+	}
+
+	var bgColorStepperR:FlxUINumericStepper;
+	var bgColorStepperG:FlxUINumericStepper;
+	var bgColorStepperB:FlxUINumericStepper;
+	var imageInputText:FlxUIInputText;
+	function addCategoryUI() {
+		var tab_group = new FlxUI(null, UI_box);
+		tab_group.name = "Category";
+
+		bgColorStepperR = new FlxUINumericStepper(10, 40, 20, 255, 0, 255, 0);
+		bgColorStepperG = new FlxUINumericStepper(80, 40, 20, 255, 0, 255, 0);
+		bgColorStepperB = new FlxUINumericStepper(150, 40, 20, 255, 0, 255, 0);
+
+		var copyColor:FlxButton = new FlxButton(10, bgColorStepperR.y + 25, "Copy Color", function() {
+			Clipboard.text = bg.color.red + ',' + bg.color.green + ',' + bg.color.blue;
+		});
+		var pasteColor:FlxButton = new FlxButton(140, copyColor.y, "Paste Color", function() {
+			if(Clipboard.text != null) {
+				var leColor:Array<Int> = [];
+				var splitted:Array<String> = Clipboard.text.trim().split(',');
+				for (i in 0...splitted.length) {
+					var toPush:Int = Std.parseInt(splitted[i]);
+					if(!Math.isNaN(toPush)) {
+						if(toPush > 255) toPush = 255;
+						else if(toPush < 0) toPush *= -1;
+						leColor.push(toPush);
+					}
+				}
+
+				if(leColor.length > 2) {
+					imageInputText.text = weekFile.category;
+					bgColorStepperR.value = leColor[0];
+					bgColorStepperG.value = leColor[1];
+					bgColorStepperB.value = leColor[2];
+					updateBG();
+				}
+			}
+		});
+
+		imageInputText = new FlxUIInputText(10, bgColorStepperR.y + 70, 100, '', 8);
+		
+		tab_group.add(new FlxText(10, bgColorStepperR.y - 18, 0, 'Selected background Color R/G/B:'));
+		tab_group.add(new FlxText(10, imageInputText.y - 18, 0, 'Selected image:'));
+		tab_group.add(bgColorStepperR);
+		tab_group.add(bgColorStepperG);
+		tab_group.add(bgColorStepperB);
+		tab_group.add(copyColor);
+		tab_group.add(pasteColor);
+		tab_group.add(imageInputText);
+		UI_box.addGroup(tab_group);
+	}
+
+	function updateBG() {
+		bg.color = FlxColor.fromRGB(weekFile.categoryColor[0], weekFile.categoryColor[1], weekFile.categoryColor[2]);
 	}
 }

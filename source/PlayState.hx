@@ -174,8 +174,6 @@ class PlayState extends MusicBeatState
 
 	private var strumLine:FlxSprite;
 
-	public var precisions:Array<FlxText> = [];
-
 	//Handles the new epic mega sexy cam code that i've done
 	public var camFollow:FlxPoint;
 	public var camFollowPos:FlxObject;
@@ -209,8 +207,6 @@ class PlayState extends MusicBeatState
 	public var bads:Int = 0;
 	public var shits:Int = 0;
 	public static var mania:Int = 0;
-
-	public var precision:FlxText;
 	
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
@@ -4551,30 +4547,51 @@ class PlayState extends MusicBeatState
 		comboSpr.y += comboSprY;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
 
+		//your code sucks super, smh
 		if (ClientPrefs.precisions){
-		precision = new FlxText(0, (ClientPrefs.downScroll ? playerStrums.members[0].y + 110 : playerStrums.members[0].y - 40), '' + Math.round(Conductor.songPosition - note.strumTime) + ' ms');
-	
-		for (i in precisions) remove(i);
+			var daNote:Note = notes.members[0];
+			var msTiming = HelperFunctions.truncateFloat(noteDiff, 3);
+			var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
+			var strumScroll:Bool = strumGroup.members[daNote.noteData].downScroll;
 
-		
-		precision.cameras = [camOther];
+			var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
+			switch(daRating.name){
+				case 'shit':
+					currentTimingShown.color = FlxColor.RED;
+				case 'bad':
+					currentTimingShown.color = FlxColor.ORANGE;
+				case 'good':
+					currentTimingShown.color = FlxColor.GREEN;
+				case 'sick':
+					currentTimingShown.color = FlxColor.CYAN;
+			}
+			currentTimingShown.borderStyle = OUTLINE;
+			currentTimingShown.borderSize = 1;
+			currentTimingShown.borderColor = FlxColor.BLACK;
+			var _dist = (Conductor.songPosition - daNote.strumTime);
+			// This if statement is shit but it should work
+			currentTimingShown.text = msTiming + "ms " + (if(_dist == 0) "=" else if(strumScroll && _dist < 0 || !strumScroll && _dist > 0) "^" else "v");
+			currentTimingShown.size = 272;
+			currentTimingShown.screenCenter();
+			currentTimingShown.updateHitbox();
+			currentTimingShown.x = (playerStrums.members[daNote.noteData].x + (playerStrums.members[daNote.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
+			currentTimingShown.y = daNote.y + (daNote.height * 0.5);
+			currentTimingShown.cameras = [camHUD]; 
+			currentTimingShown.visible = true;
+			currentTimingShown.alpha = 1;
 
-		if (ClientPrefs.downScroll) precision.y -= 3;
-		else precision.y += 3;
-
-		precision.x = (playerStrums.members[1].x + playerStrums.members[1].width / 2) - precision.width / 2;
-
-		precision.setFormat(Paths.font("vcr.ttf"), 21, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-
-		FlxTween.tween(precision, {y: (ClientPrefs.downScroll ? precision.y + 3 : precision.y - 3)}, 0.01, {ease: FlxEase.bounceOut});
-
-
-		precisions.push(precision);
+			add(currentTimingShown);
+				
+			FlxTween.tween(currentTimingShown, {alpha: 0,y:currentTimingShown.y - 60}, 0.8, {
+				onComplete: function(tween:FlxTween)
+				{
+					currentTimingShown.destroy();
+				},
+				startDelay: Conductor.crochet * 0.001,
+			});
 		}
 
 		insert(members.indexOf(strumLineNotes), rating);
-
-		if (ClientPrefs.precisions) add(precision);
 		
 		if (!ClientPrefs.comboStacking)
 		{
@@ -4680,12 +4697,6 @@ class PlayState extends MusicBeatState
 				},
 				startDelay: Conductor.crochet * 0.002 / playbackRate
 			});
-
-			if (ClientPrefs.precisions){
-			FlxTween.tween(precision, {alpha: 0}, 0.2 / playbackRate, {
-				startDelay: Conductor.crochet * 0.001 / playbackRate
-			});
-			}
 
 			daLoop++;
 			if(numScore.x > xThing) xThing = numScore.x;

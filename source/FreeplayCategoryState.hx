@@ -141,7 +141,7 @@ class FreeplayCategoryState extends MusicBeatState {
             FreeplayState.curCategory = categoriesList[curSelected];
             if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
             if (FreeplayState.curCategory == 'amongus') FreeplayState.curCategory = 'amongus';
-            LoadingState.loadAndSwitchState(new FreeplayState());
+            MusicBeatState.switchState(new FreeplayState());
         });
     }
 }
