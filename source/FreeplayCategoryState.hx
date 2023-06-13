@@ -15,9 +15,11 @@ using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
     public var categoriesList:Array<String> = ['base game', 'amongus']; // Change this line here. Don't forget about the hardcoding in FreeplayState aswell.
-    public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFFFF];
+    public var categoryColors:Array<Array<Int>> = [[171, 107, 191], [255, 255, 255]];
   
     public static var curSelected:Int = 0;
+
+    var loadedWeeks:Array<WeekData> = [];
 
     public var bg:FlxSprite;
     public var categorySpr:FlxSprite;
@@ -30,12 +32,14 @@ class FreeplayCategoryState extends MusicBeatState {
 
     var selectedSomethin:Bool = true;
     override public function create() {
+        WeekData.reloadWeekFiles(true);
+
         camOther = new FlxCamera();
         camOther.bgColor.alpha = 0;
 		FlxG.cameras.add(camOther, false);
 
         bg = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
-        bg.color = categoryColors[curSelected];
+        bg.color = FlxColor.fromRGB(categoryColors[curSelected][0], categoryColors[curSelected][1], categoryColors[curSelected][2]);
         add(bg);
 
         categorySpr = new FlxSprite().loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
@@ -57,6 +61,24 @@ class FreeplayCategoryState extends MusicBeatState {
         lightingBG.blend = ADD;
         lightingBG.alpha = 0;
         add(lightingBG);
+
+        for (i in 0...WeekData.weeksList.length)
+        {
+            var weekFile:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[i]);
+            var isLocked:Bool = StoryMenuState.weekIsLocked(WeekData.weeksList[i]);
+            if(!isLocked || !weekFile.hiddenUntilUnlocked)
+            {
+                loadedWeeks.push(weekFile);
+            }
+        }
+        
+        for (i in 0...loadedWeeks){
+            categoriesList.insert(loadedWeeks[i].category);
+            if (loadedWeeks[i].categoryColors[curSelected] != null)
+                categoryColors.insert(loadedWeeks[i].categoryColors[curSelected]);
+            else
+                categoryColors.insert([255, 255, 255]);
+        }
 
         //FlxTween.tween(blackBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
         FlxTween.tween(categorySpr, {alpha: 1, x: categorySpr.x - 60}, 0.5, {ease: FlxEase.smoothStepOut, startDelay: 0.15});
@@ -116,7 +138,7 @@ class FreeplayCategoryState extends MusicBeatState {
             categorySpr.loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
             alphabetText.text = categoriesList[curSelected];
             alphabetText.x = categorySpr.width / 3;
-            bg.color = categoryColors[curSelected];
+            bg.color = FlxColor.fromRGB(categoryColors[curSelected][0], categoryColors[curSelected][1], categoryColors[curSelected][2]);
             categorySpr.screenCenter();
         }
         else categorySpr.screenCenter(Y);
