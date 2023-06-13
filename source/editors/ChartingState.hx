@@ -240,6 +240,8 @@ class ChartingState extends MusicBeatState
 			PlayState.SONG = _song;
 		}
 
+		persistentUpdate = persistentDraw = true;
+
 		// Paths.clearMemory();
 
 		PlayState.mania = _song.mania;
@@ -448,6 +450,7 @@ class ChartingState extends MusicBeatState
 
 		var reloadSongJson:FlxButton = new FlxButton(reloadSong.x, saveButton.y + 30, "Reload JSON", function()
 		{
+			persistentUpdate = false;persistentUpdate = false;
 			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function()
 			{
 				try {
@@ -490,6 +493,7 @@ class ChartingState extends MusicBeatState
 
 		var clear_events:FlxButton = new FlxButton(320, 310, 'Clear events', function()
 		{
+			persistentUpdate = false;
 			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, clearEvents, null,ignoreWarnings));
 		});
 		clear_events.color = FlxColor.RED;
@@ -497,7 +501,9 @@ class ChartingState extends MusicBeatState
 
 		var clear_notes:FlxButton = new FlxButton(320, clear_events.y + 30, 'Clear notes', function()
 			{
+				persistentUpdate = false;
 				openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function(){for (sec in 0..._song.notes.length) {
+					persistentUpdate = true;
 					_song.notes[sec].sectionNotes = [];
 				}
 				updateGrid();
@@ -3086,6 +3092,7 @@ function updateGrid():Void
 	}
 
 	function clearEvents() {
+		persistentUpdate = true;
 		_song.events = [];
 		updateGrid();
 	}
@@ -3093,7 +3100,10 @@ function updateGrid():Void
 	private function saveLevel()
 	{
 		if(_song.events != null && _song.events.length > 1) _song.events.sort(sortByTime);
-		var json = {
+		persistentUpdate = false;
+		var state = new ChartingSubState('Saving');
+		openSubState(state);
+		/* var json = {
 			"song": _song
 		};
 
@@ -3105,8 +3115,8 @@ function updateGrid():Void
 			_file.addEventListener(Event.COMPLETE, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
-			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + (CoolUtil.getDifficultyFilePath() != null ? CoolUtil.getDifficultyFilePath() : '') + ".json");
-		}
+			_file.save(data.trim(), '${Paths.formatToSongPath(_song.song)+(CoolUtil.getDifficultyFilePath() != null ? CoolUtil.getDifficultyFilePath() : '')}.json');
+		} */
 	}
 	
 	function sortByTime(Obj1:Array<Dynamic>, Obj2:Array<Dynamic>):Int
