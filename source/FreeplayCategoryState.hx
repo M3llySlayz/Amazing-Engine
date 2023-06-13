@@ -15,7 +15,7 @@ using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
     public var categoriesList:Array<String> = ['base game', 'amongus']; // Change this line here. Don't forget about the hardcoding in FreeplayState aswell.
-    public var categoryColors:Array<Array<Int>> = [[171, 107, 191], [255, 255, 255]];
+    public var categoryColors:Array<Dynamic> = [[171, 107, 191], [255, 255, 255]];
   
     public static var curSelected:Int = 0;
 
@@ -72,12 +72,12 @@ class FreeplayCategoryState extends MusicBeatState {
             }
         }
         
-        for (i in 0...loadedWeeks){
-            categoriesList.insert(loadedWeeks[i].category);
+        for (i in 0...loadedWeeks.length) {
+            categoriesList.insert(i, loadedWeeks[i].category);
             if (loadedWeeks[i].categoryColors[curSelected] != null)
-                categoryColors.insert(loadedWeeks[i].categoryColors[curSelected]);
+                for (j in 0...2) categoryColors.insert(i, loadedWeeks[i].categoryColors[j][curSelected]);
             else
-                categoryColors.insert([255, 255, 255]);
+                categoryColors.insert(i, [255, 255, 255]);
         }
 
         //FlxTween.tween(blackBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
