@@ -75,7 +75,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'timeBarStyle',
 			'string',
 			'Gradient',
-			['Normal', 'Gradient']);
+			['Normal', 'Gradient', 'Leather']);
 		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',

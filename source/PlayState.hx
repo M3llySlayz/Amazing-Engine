@@ -1119,48 +1119,80 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
-		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
-		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		timeTxt.scrollFactor.set();
-		timeTxt.alpha = 0;
-		timeTxt.borderSize = 2;
-		timeTxt.visible = showTime;
-		if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
+		//time bars!!! yayyyyyyyy!!!!!1!1! (i hate jb so much)
+		if (ClientPrefs.timeBarStyle == 'Leather'){
 
-		if(ClientPrefs.timeBarType == 'Song Name')
-		{
-			timeTxt.text = SONG.song;
-		}
-		updateTime = showTime;
-
-		timeBarBG = new AttachedSprite('timeBar');
-		timeBarBG.x = timeTxt.x;
-		timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
-		timeBarBG.scrollFactor.set();
-		timeBarBG.alpha = 0;
-		timeBarBG.visible = showTime;
-		timeBarBG.color = FlxColor.BLACK;
-		timeBarBG.xAdd = -4;
-		timeBarBG.yAdd = -4;
-		add(timeBarBG);
-
-		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
-			'songPercent', 0, 1);
-		timeBar.scrollFactor.set();
-		if (ClientPrefs.timeBarStyle == 'Gradient'){
-			timeBar.createGradientBar([FlxColor.TRANSPARENT], [FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
-			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2])]);
-			reloadTimeBarColors();
+			var infoTxt = new FlxText(0, 0, 0, SONG.song + " - " + storyDifficultyStr + (cpuControlled ? " (BOT)" : ""), 20);
+			infoTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			infoTxt.screenCenter(X);
+	
+			infoTxt.scrollFactor.set();
+			// don't ask why this is different idfk
+			infoTxt.cameras = [camHUD];
+	
+			timeBarBG = new FlxSprite(0, healthBarPosY).loadGraphic(Paths.image('leatherTimeBar'));
+			timeBarBG.screenCenter(X);
+			timeBarBG.scrollFactor.set();
+			timeBarBG.pixelPerfectPosition = true;
+			timeBarBG.y = (ClientPrefs.downScroll) ? FlxG.height - (timeBarBG.height + 1) : 1;
+	
+			add(timeBarBG);
+	
+			timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
+				'time', 0, FlxG.sound.music.length);
+			timeBar.scrollFactor.set();
+			timeBar.createFilledBar(FlxColor.BLACK, FlxColor.WHITE);
+			timeBar.pixelPerfectPosition = true;
+			timeBar.numDivisions = 400;
+			add(timeBar);
+	
+			// inverted basically
+			infoTxt.y = timeBarBG.y;
 		} else {
-			timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
+
+			var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
+			timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+			timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			timeTxt.scrollFactor.set();
+			timeTxt.alpha = 0;
+			timeTxt.borderSize = 2;
+			timeTxt.visible = showTime;
+			if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
+
+			if(ClientPrefs.timeBarType == 'Song Name')
+			{
+				timeTxt.text = SONG.song;
+			}
+			updateTime = showTime;
+
+			timeBarBG = new AttachedSprite('timeBar');
+			timeBarBG.x = timeTxt.x;
+			timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
+			timeBarBG.scrollFactor.set();
+			timeBarBG.alpha = 0;
+			timeBarBG.visible = showTime;
+			timeBarBG.color = FlxColor.BLACK;
+			timeBarBG.xAdd = -4;
+			timeBarBG.yAdd = -4;
+			add(timeBarBG);
+
+			timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
+				'songPercent', 0, 1);
+			timeBar.scrollFactor.set();
+			if (ClientPrefs.timeBarStyle == 'Gradient'){
+				timeBar.createGradientBar([FlxColor.TRANSPARENT], [FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
+				FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2])]);
+				reloadTimeBarColors();
+			} else {
+				timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
+			}
+			timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
+			timeBar.alpha = 0;
+			timeBar.visible = showTime;
+			add(timeBar);
+			add(timeTxt);
+			timeBarBG.sprTracker = timeBar;
 		}
-		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
-		timeBar.alpha = 0;
-		timeBar.visible = showTime;
-		add(timeBar);
-		add(timeTxt);
-		timeBarBG.sprTracker = timeBar;
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
