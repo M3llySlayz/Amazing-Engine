@@ -999,10 +999,10 @@ class WeekEditorCategoryState extends MusicBeatState
 	}
 
 	function updateBG() {
-		weekFile.categoryColor[0] = Math.round(bgColorStepperR.value);
-		weekFile.categoryColor[1] = Math.round(bgColorStepperG.value);
-		weekFile.categoryColor[2] = Math.round(bgColorStepperB.value);
-		bg.color = FlxColor.fromRGB(weekFile.categoryColor[0], weekFile.categoryColor[1], weekFile.categoryColor[2]);
+		weekFile.categoryColors[0] = Math.round(bgColorStepperR.value);
+		weekFile.categoryColors[1] = Math.round(bgColorStepperG.value);
+		weekFile.categoryColors[2] = Math.round(bgColorStepperB.value);
+		bg.color = FlxColor.fromRGB(weekFile.categoryColors[0], weekFile.categoryColors[1], weekFile.categoryColors[2]);
 	}
 
 	function updateImage() {
