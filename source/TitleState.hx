@@ -101,6 +101,9 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
+		// Null check
+		if (FreeplayState.curCategory == null) FreeplayState.curCategory = 'vanilla';
+
 		#if LUA_ALLOWED
 		Paths.pushGlobalMods();
 		#end
