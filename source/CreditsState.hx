@@ -84,7 +84,7 @@ class CreditsState extends MusicBeatState
 			['Amazing Engine'],
 			['M3llySlayz',			'melly',			'Lead Programmer, Musician, and Artist',						'https://youtube.com/@M3llySlayz',		'BE0101'],
 			['Irshaad Ali',			'Irshaad',			'Programmer, Made Splitscroll and Alt Splitscroll',				'https://www.youtube.com/channel/UCwJQYZunvqdDTVbgi9mA7fg',			'0079C7'],
-			['SomeGuyWhoUhhhh', 	'sgwu',				'Programmer, Spearheaded Freeplay Changes, and Errorchecked Story Mode,\nFreeplay, Chart Editor, In-game, and its Pause Screen.',						'https://gamejolt.com/@SomeGuyWhoLikesFNF',							'9900FF'],
+			['SomeGuyWhoUhhhh', 	'sgwu',				'Programmer, Spearheaded Freeplay Changes, Errorchecked Story Mode,\nFreeplay, Chart Editor, In-game, and its Pause Screen,\nand Made the Chart Editor Substate menu.',						'https://gamejolt.com/@SomeGuyWhoLikesFNF',							'9900FF'],
 			['JB444m',				'jb',				'Artist, Convinced Melly to add Extra Keys (it was painful)', 	'https://youtube.com/@JB444m',			'FFAA00'],
 			[''],
 			['Amazing Engine Contributors'],
