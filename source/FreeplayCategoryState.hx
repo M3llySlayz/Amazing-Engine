@@ -32,7 +32,7 @@ class FreeplayCategoryState extends MusicBeatState {
 
     var selectedSomethin:Bool = true;
     override public function create() {
-        WeekData.reloadWeekFiles(true);
+        WeekData.reloadWeekFiles(false);
 
         camOther = new FlxCamera();
         camOther.bgColor.alpha = 0;
@@ -73,9 +73,10 @@ class FreeplayCategoryState extends MusicBeatState {
         }
         
         for (i in 0...loadedWeeks.length) {
-            categoriesList.push(loadedWeeks[i].category);
-            if (loadedWeeks[i].categoryColor[curSelected] != null)
-                for (j in 0...2) categoryColors.push(loadedWeeks[i].categoryColor[j][curSelected]);
+            if (loadedWeeks[i].category != loadedWeeks[i].category)
+                categoriesList.push(loadedWeeks[i].category);
+            if (loadedWeeks[i].categoryColor[curSelected] != 0)
+                for (j in 0...2) categoryColors.push(loadedWeeks[i].categoryColor);
             else
                 categoryColors.push([255, 255, 255]);
         }
