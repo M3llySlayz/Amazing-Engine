@@ -44,7 +44,7 @@ class FreeplayCategoryState extends MusicBeatState {
         categorySpr.x += 60;
         add(categorySpr);
 
-        alphabetText = new Alphabet(0, FlxG.height - 200, categoryList[curSelected], true);
+        alphabetText = new Alphabet(0, FlxG.height - 200, categoriesList[curSelected], true);
         alphabetText.x = categorySpr.width / 3;
         alphabetText.alpha = 0;
         alphabetText.x -= 60;
@@ -114,7 +114,7 @@ class FreeplayCategoryState extends MusicBeatState {
 
         if (!selectedSomethin) {
             categorySpr.loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
-            alphabetText.text = categoryList[curSelected];
+            alphabetText.text = categoriesList[curSelected];
             alphabetText.x = categorySpr.width / 3;
             bg.color = categoryColors[curSelected];
             categorySpr.screenCenter();
