@@ -4233,7 +4233,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public var transitioning = false;
+	var transitioning = false;
 	public function endSong():Void
 	{
 		//Should kill you if you tried to cheat
