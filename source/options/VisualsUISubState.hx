@@ -69,6 +69,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
+		
+		var option:Option = new Option('Time Bar Style:',
+			"What should the Time Bar look like?",
+			'timeBarStyle',
+			'string',
+			'Gradient',
+			['Normal', 'Gradient']);
+		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',
 			"Uncheck this if you're sensitive to flashing lights!",
