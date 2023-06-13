@@ -73,9 +73,10 @@ class FreeplayCategoryState extends MusicBeatState {
         }
         
         for (i in 0...loadedWeeks.length) {
-            categoriesList.insert(i, loadedWeeks[i].category);
-            if (loadedWeeks[i].categoryColors[curSelected] != null)
-                for (j in 0...2) categoryColors.insert(i, loadedWeeks[i].categoryColors[j][curSelected]);
+            if (loadedWeeks[i].category != loadedWeeks[i].category)
+                categoriesList.insert(i, loadedWeeks[i].category);
+            if (loadedWeeks[i].categoryColor[curSelected] != null)
+                for (j in 0...2) categoryColors.insert(i, loadedWeeks[i].categoryColor[j][curSelected]);
             else
                 categoryColors.insert(i, [255, 255, 255]);
         }

@@ -108,7 +108,11 @@ class FreeplayState extends MusicBeatState
 					//addSong('Maroon', i, 'Shaggy', FlxColor.fromRGB(155, 0, 0));
 					//addSong('Epiphany', i, 'Heidi', FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 				} else {
-					addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
+					if (leWeek.category == curCategory){
+						for (j in 0...leWeek.songs.length){
+							addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
+						}
+					}
 				}
 			}
 		}
