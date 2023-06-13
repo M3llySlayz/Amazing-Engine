@@ -164,7 +164,7 @@ class CreditsState extends MusicBeatState
 		descText = new FlxText(50, FlxG.height + offsetThing - 25, 1180, "", 32);
 		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER/*, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK*/);
 		descText.scrollFactor.set();
-		//descText.borderSize = 2.4;
+		descText.borderSize = 1;
 		descBox.sprTracker = descText;
 		add(descText);
 
@@ -178,6 +178,7 @@ class CreditsState extends MusicBeatState
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
+		descBox.screenCenter(X);
 		if (FlxG.sound.music.volume < 0.7)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
