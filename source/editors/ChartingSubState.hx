@@ -74,10 +74,10 @@ class ChartingSubState extends MusicBeatSubstate
 
 		exportCallback = function() {
 			try {
-                sys.io.File.saveContent(chartPathInputTxt.text, haxe.Json.stringify({"song": PlayState.SONG}, "\t"));
-            } catch (e:Any) {
-                trace('Failed to save chart: "${chartPathInputTxt.text}"\n- Not a valid directory!');
-            }
+			if(chartPathInputTxt.text.endsWith('.json')) sys.io.File.saveContent(chartPathInputTxt.text, haxe.Json.stringify({"song": PlayState.SONG}, "\t"));
+		    } catch (e:Any) {
+			trace('Failed to save chart: "${chartPathInputTxt.text}"\n- Not a valid directory!');
+		    }
 			/* CoolUtil.dumpText(
 				chartPathInputTxt.text.replace('${Paths.formatToSongPath(PlayState.SONG.song)}/${Paths.formatToSongPath(PlayState.SONG.song)+CoolUtil.getDifficultyFilePath()}', ''),
 				chartPathInputTxt.text.replace('assets/data/', ''), 'json', haxe.Json.stringify({"song": PlayState.SONG}, "\t")
