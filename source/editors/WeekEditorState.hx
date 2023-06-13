@@ -674,8 +674,8 @@ class WeekEditorFreeplayState extends MusicBeatState
 			MusicBeatState.switchState(new WeekEditorCategoryState(weekFile));
 			
 		});
-		freeplayButton.screenCenter(X);
-		add(freeplayButton);
+		categoryButton.screenCenter(X);
+		add(categoryButton);
 	
 		var saveWeekButton:FlxButton = new FlxButton(0, 650, "Save Week", function() {
 			WeekEditorState.saveWeek(weekFile);
