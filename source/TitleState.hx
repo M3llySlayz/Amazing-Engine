@@ -102,7 +102,7 @@ class TitleState extends MusicBeatState
 		Paths.clearUnusedMemory();
 
 		// Null check
-		if (FreeplayState.curCategory == null) FreeplayState.curCategory = 'vanilla';
+		if (FreeplayState.curCategory == null) FreeplayState.curCategory = 'base game';
 
 		#if LUA_ALLOWED
 		Paths.pushGlobalMods();
