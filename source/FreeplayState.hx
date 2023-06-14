@@ -108,7 +108,7 @@ class FreeplayState extends MusicBeatState
 				if(colors == null || colors.length < 3) colors = [146, 113, 253];
 				if (curCategory == '') addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 				else {
-					var category = FreeplayCategoryState.swagModCategoryFile[FreeplayCategoryState.curSelected - 3];
+					var category = FreeplayCategoryState.swagModCategoryFile[FreeplayCategoryState.curSelected - 1];
 					for (modSong in 0...category.songs.length) {
 						addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]));
 					}
