@@ -1,4 +1,3 @@
-#if MULTI_MODDABLE
 package;
 
 import flixel.addons.transition.FlxTransitionableState;
@@ -14,12 +13,64 @@ import flixel.util.FlxTimer;
 using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
-    public var categoriesList:Array<String> = ['base game', 'amongus']; // Change this line here. Don't forget about the hardcoding in FreeplayState aswell.
-    public var categoryColors:Array<Dynamic> = [[171, 107, 191], [255, 255, 255]];
-  
-    public static var curSelected:Int = 0;
+    public var categoriesList:Array<String> = ['base game', 'festivalv', 'coming soon...'];
+    public var categoryNamesList:Array<String> = ['vanilla', 'festivalv (season 1)', 'coming soon...'];
+    public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFF00, 0xFF222222];
 
-    var loadedWeeks:Array<WeekData> = [];
+    /* Version 2 Stuff
+    public var categoriesList:Array<String> = ['base game', 'festivalv', 'festivalv2', 'extras'];
+    public var categoryNamesList:Array<String> = ['vanilla', 'festivalv (season 1)', 'festivalv (season 2)', 'extras'];
+    public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFF00, 0xFF060666, 0xFF999099]; */
+
+    public static var swagModCategoryFile:Array<Dynamic> = [ // Wants: Category, Category Name, Category Songs (Song Name, Song Character), Song Colors (in RGB), Category Color
+        {
+            "category": "test 1",
+            "name": "Test Category 1",
+            "songs": [
+                ["Test 1", "bf"],
+                ["Test 2", "bf"],
+                ["Test 3", "bf"]
+            ],
+            "songColors": [
+                [0, 255, 255],
+                [127, 255, 255],
+                [255, 255, 255]
+            ],
+            "color": 0xFF00FFFF
+        },
+        {
+            "category": "test 2",
+            "name": "Test Category 2",
+            "songs": [
+                ["Test 1 2", "bf"],
+                ["Test 2 2", "bf"],
+                ["Test 3 2", "bf"]
+            ],
+            "songColors": [
+                [0, 255, 255],
+                [127, 255, 255],
+                [255, 255, 255]
+            ],
+            "color": 0xFF99FFFF
+        },
+        {
+            "category": "test 3",
+            "name": "Test Category 3",
+            "songs": [
+                ["Test 1 3", "bf"],
+                ["Test 2 3", "bf"],
+                ["Test 3 3", "bf"]
+            ],
+            "songColors": [
+                [0, 255, 255],
+                [127, 255, 255],
+                [255, 255, 255]
+            ],
+            "color": 0xFFFFFFFF
+        }
+    ];
+
+    public static var curSelected:Int = 0;
 
     public var bg:FlxSprite;
     public var categorySpr:FlxSprite;
@@ -32,14 +83,21 @@ class FreeplayCategoryState extends MusicBeatState {
 
     var selectedSomethin:Bool = true;
     override public function create() {
-        WeekData.reloadWeekFiles(false);
-
         camOther = new FlxCamera();
         camOther.bgColor.alpha = 0;
 		FlxG.cameras.add(camOther, false);
 
+        // Refresh mod category files then reload them
+        refreshModCategories();
+
+        for (category in 0...swagModCategoryFile.length) {
+            categoriesList.push(swagModCategoryFile[category].category);
+            categoryNamesList.push(swagModCategoryFile[category].name);
+            categoryColors.push(swagModCategoryFile[category].color);
+        }
+
         bg = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
-        bg.color = FlxColor.fromRGB(categoryColors[curSelected][0], categoryColors[curSelected][1], categoryColors[curSelected][2]);
+        bg.color = categoryColors[curSelected];
         add(bg);
 
         categorySpr = new FlxSprite().loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
@@ -48,7 +106,7 @@ class FreeplayCategoryState extends MusicBeatState {
         categorySpr.x += 60;
         add(categorySpr);
 
-        alphabetText = new Alphabet(0, FlxG.height - 200, categoriesList[curSelected], true);
+        alphabetText = new Alphabet(0, FlxG.height - 200, categoryNamesList[curSelected], true);
         alphabetText.x = categorySpr.width / 3;
         alphabetText.alpha = 0;
         alphabetText.x -= 60;
@@ -62,73 +120,54 @@ class FreeplayCategoryState extends MusicBeatState {
         lightingBG.alpha = 0;
         add(lightingBG);
 
-        for (i in 0...WeekData.weeksList.length)
-        {
-            var weekFile:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[i]);
-            var isLocked:Bool = StoryMenuState.weekIsLocked(WeekData.weeksList[i]);
-            if(!isLocked || !weekFile.hiddenUntilUnlocked)
-            {
-                loadedWeeks.push(weekFile);
-            }
-        }
-        
-        for (i in 0...loadedWeeks.length) {
-            if (loadedWeeks[i].category != loadedWeeks[i].category)
-                categoriesList.push(loadedWeeks[i].category);
-            if (loadedWeeks[i].categoryColor[curSelected] != 0)
-                for (j in 0...2) categoryColors.push(loadedWeeks[i].categoryColor);
-            else
-                categoryColors.push([255, 255, 255]);
-        }
-
         //FlxTween.tween(blackBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
-        FlxTween.tween(categorySpr, {alpha: 1, x: categorySpr.x - 60}, 0.5, {ease: FlxEase.smoothStepOut, startDelay: 0.15});
-        FlxTween.tween(alphabetText, {alpha: 1, x: alphabetText.x + 60}, 0.5, {ease: FlxEase.smoothStepOut, startDelay: 0.15, onComplete: function(twm:FlxTween) {
+        FlxTween.tween(categorySpr, {alpha: 1, x: categorySpr.x - 60}, 0.725, {ease: FlxEase.smootherStepOut, startDelay: 0.15});
+        FlxTween.tween(alphabetText, {alpha: 1, x: alphabetText.x + 60}, 0.725, {ease: FlxEase.smootherStepOut, startDelay: 0.25, onComplete: function(twm:FlxTween) {
             selectedSomethin = false;
         }});
         super.create();
         CustomFadeTransition.nextCamera = camOther;
     }
 
+    var swagCount = 0;
     override public function update(elapsed:Float) {
         bg.scale.set(1.25, 1.25);
         bg.screenCenter(X);
+
+        // Just testing some stuff...
+        /* if (FlxG.keys.justPressed.P && swagCount < FreeplayCategoryState.swagModCategoryFile[FreeplayCategoryState.curSelected].songs.length-1) swagCount++;
+        if (FlxG.keys.justPressed.O && swagCount > 0) swagCount--;
+        if (FlxG.keys.justPressed.A) trace(FreeplayCategoryState.swagModCategoryFile[FreeplayCategoryState.curSelected].songs[swagCount][0]);
+        if (FlxG.keys.justPressed.B) trace(FreeplayCategoryState.swagModCategoryFile[FreeplayCategoryState.curSelected].songs[swagCount][1]);
+        if (FlxG.keys.justPressed.Z) trace(FreeplayCategoryState.swagModCategoryFile[FreeplayCategoryState.curSelected].songColors[swagCount][0]);
+        if (FlxG.keys.justPressed.X) trace(FreeplayCategoryState.swagModCategoryFile[FreeplayCategoryState.curSelected].songColors[swagCount][1]);
+        if (FlxG.keys.justPressed.C) trace(FreeplayCategoryState.swagModCategoryFile[FreeplayCategoryState.curSelected].songColors[swagCount][2]);
+        if (FlxG.keys.justPressed.K) trace(curSelected - 3); */
+
         if (!selectedSomethin) {
-
-            if (FlxG.mouse.wheel != 0)
-            {
-                SoundEffects.playSFX('scroll', false);
-                changeSelection(-FlxG.mouse.wheel);
-            }
-
             if (controls.UI_LEFT_P) 
             {
-                SoundEffects.playSFX('scroll', false);
+                FlxG.sound.play(Paths.sound('scrollMenu'));
                 changeSelection(-1);
             }
 
             if (controls.UI_RIGHT_P) 
             {
-                SoundEffects.playSFX('scroll', false);
+                FlxG.sound.play(Paths.sound('scrollMenu'));
                 changeSelection(1);
             }
 
-            if (controls.ACCEPT || FlxG.mouse.justPressed)
+            if (controls.ACCEPT)
                 if (curSelected != 2)
                     selectCategory();
                 else
-                    SoundEffects.playSFX('cancel', false);
+                    FlxG.sound.play(Paths.sound('cancelMenu'));
 
-            if (controls.BACK || FlxG.mouse.justPressedRight)
+            if (controls.BACK)
             {
                 selectedSomethin = true;
-                SoundEffects.playSFX('cancel', false);
-                if (ClientPrefs.luaMenu){
-                    PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
-                    LoadingState.loadAndSwitchState(new PlayState());
-                } else {
-                    MusicBeatState.switchState(new MainMenuState());
-                }
+                FlxG.sound.play(Paths.sound('cancelMenu'));
+                MusicBeatState.switchState(new MainMenuState());
             }
         }
 
@@ -137,9 +176,9 @@ class FreeplayCategoryState extends MusicBeatState {
 
         if (!selectedSomethin) {
             categorySpr.loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
-            alphabetText.text = categoriesList[curSelected];
+            alphabetText.text = categoryNamesList[curSelected];
             alphabetText.x = categorySpr.width / 3;
-            bg.color = FlxColor.fromRGB(categoryColors[curSelected][0], categoryColors[curSelected][1], categoryColors[curSelected][2]);
+            bg.color = categoryColors[curSelected];
             categorySpr.screenCenter();
         }
         else categorySpr.screenCenter(Y);
@@ -154,7 +193,7 @@ class FreeplayCategoryState extends MusicBeatState {
     public function selectCategory() {
         lightingBG.alpha = 1;
         selectedSomethin = true;
-        SoundEffects.playSFX('confirm', false);
+        FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
         FlxFlicker.flicker(categorySpr, 1.5, 0.05, false);
         FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
         FlxTween.tween(alphabetText, {alpha: 0, x: alphabetText.x - 24}, 1, {ease: FlxEase.smoothStepOut});
@@ -162,9 +201,57 @@ class FreeplayCategoryState extends MusicBeatState {
         new FlxTimer().start(1.5, function(tmr:FlxTimer) {
             FreeplayState.curCategory = categoriesList[curSelected];
             if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
-            if (FreeplayState.curCategory == 'amongus') FreeplayState.curCategory = 'amongus';
-            MusicBeatState.switchState(new FreeplayState());
+            LoadingState.loadAndSwitchState(new FreeplayState());
         });
     }
+
+    public static function refreshModCategories() {
+        swagModCategoryFile = [
+            {
+                "category": "test 1",
+                "name": "Test Category 1",
+                "songs": [
+                    ["Test 1", "bf"],
+                    ["Test 2", "bf"],
+                    ["Test 3", "bf"]
+                ],
+                "songColors": [
+                    [0, 255, 255],
+                    [127, 255, 255],
+                    [255, 255, 255]
+                ],
+                "color": 0xFF00FFFF
+            },
+            {
+                "category": "test 2",
+                "name": "Test Category 2",
+                "songs": [
+                    ["Test 1 2", "bf"],
+                    ["Test 2 2", "bf"],
+                    ["Test 3 2", "bf"]
+                ],
+                "songColors": [
+                    [0, 255, 255],
+                    [127, 255, 255],
+                    [255, 255, 255]
+                ],
+                "color": 0xFF99FFFF
+            },
+            {
+                "category": "test 3",
+                "name": "Test Category 3",
+                "songs": [
+                    ["Test 1 3", "bf"],
+                    ["Test 2 3", "bf"],
+                    ["Test 3 3", "bf"]
+                ],
+                "songColors": [
+                    [0, 255, 255],
+                    [127, 255, 255],
+                    [255, 255, 255]
+                ],
+                "color": 0xFFFFFFFF
+            }
+        ];
+    }
 }
-#end
