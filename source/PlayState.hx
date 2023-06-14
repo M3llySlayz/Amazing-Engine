@@ -1150,6 +1150,7 @@ class PlayState extends MusicBeatState
 			// inverted basically
 			infoTxt.y = timeBarBG.y;
 			add(infoTxt);
+			timeBarBG.sprTracker = timeBar;
 		} else {
 			var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 			timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
@@ -1181,8 +1182,8 @@ class PlayState extends MusicBeatState
 				'songPercent', 0, 1);
 			timeBar.scrollFactor.set();
 			if (ClientPrefs.timeBarStyle == 'Gradient'){
-				timeBar.createGradientBar([FlxColor.TRANSPARENT], [FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
-				FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2])]);
+				timeBar.createGradientBar([FlxColor.TRANSPARENT], [FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]),
+				FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2])]);
 				reloadTimeBarColors();
 			} else {
 				timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
@@ -1653,8 +1654,8 @@ class PlayState extends MusicBeatState
 	}
 
 	public function reloadTimeBarColors() {
-		timeBar.createGradientBar([FlxColor.TRANSPARENT], [FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
-		FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2])]);
+		timeBar.createGradientBar([FlxColor.TRANSPARENT], [FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]),
+		FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2])]);
 
 		timeBar.updateBar();
 	}
@@ -4083,6 +4084,20 @@ class PlayState extends MusicBeatState
 				newMania = Std.parseInt(value1);
 				if(Math.isNaN(newMania) && newMania < 0 && newMania > 17)
 					newMania = 0;
+
+				notes.forEachAlive(function(daNote:Note)
+				{
+					//PLEASE LET THIS PATCH CHANGE MANIA
+					if (daNote.mania != newMania){
+						daNote.active = false;
+						daNote.visible = false;
+	
+						daNote.kill();
+						notes.remove(daNote, true);
+						daNote.destroy();
+					}
+				});
+
 				changeMania(newMania, skipTween);
 
 			case 'Change Character':
