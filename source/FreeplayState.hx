@@ -86,6 +86,9 @@ class FreeplayState extends MusicBeatState
 		var length:Int = WeekData.weeksList.length;
 		if (curCategory != '') length = 1;
 
+		var length:Int = WeekData.weeksList.length;
+		if (curCategory != '') length = 1;
+
 		for (i in 0...length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
 
@@ -103,15 +106,11 @@ class FreeplayState extends MusicBeatState
 			{
 				var colors:Array<Int> = song[2];
 				if(colors == null || colors.length < 3) colors = [146, 113, 253];
-				if (curCategory == 'amongus') {
-					// Put your songs here. (Wants: addSong('Song Name', i, 'Song Character', FlxColor.fromRGB(r, g, b)) )
-					//addSong('Maroon', i, 'Shaggy', FlxColor.fromRGB(155, 0, 0));
-					//addSong('Epiphany', i, 'Heidi', FlxColor.fromRGB(colors[0], colors[1], colors[2]));
-				} else {
-					if (leWeek.category == curCategory){
-						for (j in 0...leWeek.songs.length){
-							addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
-						}
+				if (curCategory == '') addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
+				else {
+					var category = FreeplayCategoryState.swagModCategoryFile[FreeplayCategoryState.curSelected - 3];
+					for (modSong in 0...category.songs.length) {
+						addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]));
 					}
 				}
 			}
