@@ -1140,7 +1140,7 @@ class PlayState extends MusicBeatState
 			add(timeBarBG);
 	
 			timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
-				'time', 0, FlxG.sound.music.length);
+				'songPercent', 0, FlxG.sound.music.length);
 			timeBar.scrollFactor.set();
 			timeBar.createFilledBar(FlxColor.BLACK, FlxColor.WHITE);
 			timeBar.pixelPerfectPosition = true;
