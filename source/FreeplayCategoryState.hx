@@ -13,14 +13,9 @@ import flixel.util.FlxTimer;
 using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
-    public var categoriesList:Array<String> = ['base game', 'festivalv', 'coming soon...'];
-    public var categoryNamesList:Array<String> = ['vanilla', 'festivalv (season 1)', 'coming soon...'];
-    public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFF00, 0xFF222222];
-
-    /* Version 2 Stuff
-    public var categoriesList:Array<String> = ['base game', 'festivalv', 'festivalv2', 'extras'];
-    public var categoryNamesList:Array<String> = ['vanilla', 'festivalv (season 1)', 'festivalv (season 2)', 'extras'];
-    public var categoryColors:Array<FlxColor> = [0xFFAB6BBF, 0xFFFFFF00, 0xFF060666, 0xFF999099]; */
+    public var categoriesList:Array<String> = ['base game'];
+    public var categoryNamesList:Array<String> = ['vanilla'];
+    public var categoryColors:Array<FlxColor> = [0xFFAB6BBF];
 
     public static var swagModCategoryFile:Array<Dynamic> = [ // Wants: Category, Category Name, Category Songs (Song Name, Song Character), Song Colors (in RGB), Category Color
         {
@@ -157,11 +152,9 @@ class FreeplayCategoryState extends MusicBeatState {
                 changeSelection(1);
             }
 
-            if (controls.ACCEPT)
-                if (curSelected != 2)
+            if (controls.ACCEPT) {
                     selectCategory();
-                else
-                    FlxG.sound.play(Paths.sound('cancelMenu'));
+	    }}
 
             if (controls.BACK)
             {
