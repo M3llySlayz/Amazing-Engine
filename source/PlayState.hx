@@ -1310,7 +1310,8 @@ class PlayState extends MusicBeatState
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
-		timeTxt.cameras = [camHUD];
+		if (timeBarStyle != 'Leather')
+			timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
