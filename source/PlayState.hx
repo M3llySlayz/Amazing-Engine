@@ -1130,7 +1130,7 @@ class PlayState extends MusicBeatState
 			// don't ask why this is different idfk
 			infoTxt.cameras = [camHUD];
 	
-			timeBarBG = new AttachedSprite(0, 0).loadGraphic(Paths.image('leatherTimeBar'));
+			timeBarBG = new AttachedSprite('leatherTimeBar');
 			timeBarBG.screenCenter(X);
 			timeBarBG.scrollFactor.set();
 			timeBarBG.pixelPerfectPosition = true;
