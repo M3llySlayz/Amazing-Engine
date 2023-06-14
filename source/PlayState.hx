@@ -1149,6 +1149,7 @@ class PlayState extends MusicBeatState
 	
 			// inverted basically
 			infoTxt.y = timeBarBG.y;
+			add(infoTxt);
 		} else {
 			var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 			timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
