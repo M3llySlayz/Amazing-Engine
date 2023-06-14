@@ -18,6 +18,23 @@ class FreeplayCategoryState extends MusicBeatState {
     public var categoryColors:Array<FlxColor> = [0xFFAB6BBF];
 
     public static var swagModCategoryFile:Array<Dynamic> = [ // Wants: Category, Category Name, Category Songs (Song Name, Song Character), Song Colors (in RGB), Category Color
+	/* Example layout:
+        {
+            "category": "test 1",
+            "name": "Test Category 1",
+            "songs": [
+                ["Test 1", "bf"],
+                ["Test 2", "bf"],
+                ["Test 3", "bf"]
+            ],
+            "songColors": [
+                [0, 255, 255],
+                [127, 255, 255],
+                [255, 255, 255]
+            ],
+            "color": 0xFF00FFFF
+        },
+        */
         {
             "category": "test 1",
             "name": "Test Category 1",
