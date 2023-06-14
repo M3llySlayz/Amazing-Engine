@@ -1,3 +1,4 @@
+#if MULTI_MODDABLE
 package;
 
 import flixel.addons.transition.FlxTransitionableState;
@@ -265,3 +266,4 @@ class FreeplayCategoryState extends MusicBeatState {
         ];
     }
 }
+#end
