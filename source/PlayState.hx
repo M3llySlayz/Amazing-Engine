@@ -1414,7 +1414,7 @@ class PlayState extends MusicBeatState
 			switch (daSong)
 			{
 				case "monster":
-					var whiteScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
+					var whiteScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), 0xFF);
 					add(whiteScreen);
 					whiteScreen.scrollFactor.set();
 					whiteScreen.blend = ADD;
@@ -1434,7 +1434,7 @@ class PlayState extends MusicBeatState
 					});
 					FlxG.sound.play(Paths.soundRandom('thunder_', 1, 2));
 					if(gf != null) gf.playAnim('scared', true);
-					if(boyfriend.animation.curAnim == 'idle') boyfriend.playAnim('scared', true);
+					if(boyfriend.animation.curAnim.name == 'idle') boyfriend.playAnim('scared', true);
 
 				case "winter-horrorland":
 					var blackScreen:FlxSprite = new FlxSprite().makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
@@ -4438,7 +4438,7 @@ class PlayState extends MusicBeatState
 					} catch (e:Any) {
 						trace('Cannot find chart file: "${PlayState.storyPlaylist[0]+CoolUtil.getDifficultyFilePath()}"');
 						WeekData.loadTheFirstEnabledMod();
-						FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
+						FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace('', '-')));
 						cancelMusicFadeTween();
 
 						if(FlxTransitionableState.skipNextTransIn) {

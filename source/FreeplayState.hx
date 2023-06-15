@@ -328,7 +328,7 @@ class FreeplayState extends MusicBeatState
 				changeDiff();
 				SoundEffects.playSFX('scroll', false);
 				changeSelection(-shiftMult * FlxG.mouse.wheel, false);
-			} else if (FlxG.mouse.wheel != 0 && mouseToggle){
+			} else if (FlxG.mouse.wheel != 0 && mouseToggle) {
 				changeDiff(-FlxG.mouse.wheel);
 				SoundEffects.playSFX('scroll', false);
 			}
@@ -374,7 +374,7 @@ class FreeplayState extends MusicBeatState
 			var shiftPressed:Bool = false;
 			var altPressed:Bool = false;
 
-			if (FlxG.keys.pressed.SHIFT){ 
+			if (FlxG.keys.pressed.SHIFT) { 
 				shiftPressed = true;
 			} else if (FlxG.keys.pressed.ALT) {
 				altPressed = true;
