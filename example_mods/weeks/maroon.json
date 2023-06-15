@@ -1,6 +1,6 @@
 {
 	"songs": [
-		["Maroon", "shaggy", [155, 0, 0],
+		["Maroon", "shaggy", [155, 0, 0]],
 		["Epiphany", "shaggy", [155, 0, 0]]
 	],
 
@@ -17,8 +17,5 @@
 	"startUnlocked": true,
 
 	"hideStoryMode": true,
-	"hideFreeplay": false,
-	
-	"category": "Maroon and shit",
-	"categoryColor": [155, 0, 0]
+	"hideFreeplay": false
 }

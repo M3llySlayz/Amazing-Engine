@@ -17,8 +17,8 @@ typedef FreeplayCategoryFile =
 	//JSON stuff :sob:
 	var category:String;
 	var name:String;
-	var songs:Array<Dynamic>;
-	var songColors:Array<Dynamic>;
+	var songs:Array<Array<String>>;
+	var songColors:Array<Array<Int>>;
 	var color:Array<Int>;
 }
 
@@ -30,8 +30,8 @@ class FreeplayCategory {
 	//JSON stuff :sob:
 	public var category:String;
 	public var name:String;
-	public var songs:Array<Dynamic>;
-	public var songColors:Array<Dynamic>;
+	public var songs:Array<Array<String>>;
+	public var songColors:Array<Array<Int>>;
 	public var color:Array<Int>;
 
 	public var fileName:String;
