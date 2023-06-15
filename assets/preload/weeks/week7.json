@@ -45,8 +45,5 @@
 	"difficulties": "Easy, Normal, Hard, Expert",
 	"hideStoryMode": false,
 	"weekBefore": "week6",
-	"startUnlocked": true,
-
-	"category": "base game",
-	"categoryColor": [171, 107, 191]
+	"startUnlocked": true
 }
