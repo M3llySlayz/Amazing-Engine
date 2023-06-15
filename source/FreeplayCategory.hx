@@ -64,6 +64,7 @@ class FreeplayCategory {
 
         this.fileName = fileName;
     }
+
     public static function reloadCategoryFiles()
     {
         categoryList = [];
@@ -199,5 +200,18 @@ class FreeplayCategory {
         }
         return null;
     }
+
+    public function loadFromJson(rawJson:FreeplayCategoryFile) { //someguy's function
+		if (rawJson != null) {
+			try {
+				if (!categoriesLoaded.exists(rawJson.category)) {
+					categoriesLoaded.set(rawJson.category, rawJson);
+				}
+			} catch (e:Any) {
+				trace('Failed to load Freeplay Category: "${rawJson.category}"\n- Exception thrown!')
+			}
+		}
+	}
+}
 
 }
