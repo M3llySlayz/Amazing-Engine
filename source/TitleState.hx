@@ -205,7 +205,6 @@ class TitleState extends MusicBeatState
 		if(!initialized && FlxG.save.data != null && ClientPrefs.fullscreen)
 		{
 			FlxG.fullscreen = ClientPrefs.fullscreen;
-			//trace('LOADED FULLSCREEN SETTING!!');
 			persistentUpdate = true;
 			persistentDraw = true;
 		}
