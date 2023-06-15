@@ -235,8 +235,6 @@ class MainMenuState extends MusicBeatState
 		{
 			if (controls.UI_UP_P)
 			{
-				//FlxG.sound.play(Paths.sound('scrollMenu'));
-				//I made a new file just for this :)
 				SoundEffects.playSFX('scroll', false);
 				changeItem(-1);
 			}
@@ -265,28 +263,10 @@ class MainMenuState extends MusicBeatState
 				else
 				{
 					selectedSomethin = true;
-					//FlxG.sound.play(Paths.sound('confirmMenu'));
-					SoundEffects.playSFX('confirm', false);
-
+					FlxG.sound.play(Paths.sound('confirmMenu'));
 					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 					menuItems.forEach(function(spr:FlxSprite)
 					{
-							curSelected = spr.ID;
-							if (spr.ID != curSelected){
-								spr.animation.play('idle');
-								spr.updateHitbox();
-							}
-							spr.updateHitbox();
-							if (spr.ID == curSelected)
-							{
-								spr.animation.play('selected');
-								var add:Float = 0;
-								if(menuItems.length > 4) {
-									add = menuItems.length * 8;
-								}
-							camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
-							spr.centerOffsets();
-						}
 						if (curSelected != spr.ID)
 						{
 							FlxTween.tween(spr, {alpha: 0}, 0.4, {
@@ -299,20 +279,20 @@ class MainMenuState extends MusicBeatState
 						}
 						else
 						{
-							FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+							if (optionShit[curSelected] == 'story_mode') {
+								FlxG.sound.music.fadeIn(1, 0.75, 0);
+								if(FreeplayState.vocals != null) FreeplayState.vocals.fadeIn(1.25, 0.75, 0);
+							}
+							FlxFlicker.flicker(spr, 1, 0.05, false, false, function(flick:FlxFlicker)
 							{
 								var daChoice:String = optionShit[curSelected];
 
 								switch (daChoice)
 								{
 									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
+										MusicBeatState.switchState(new StoryMenuStateFV());
 									case 'freeplay':
-									#if MULTI_MODDABLE
 										MusicBeatState.switchState(new FreeplayCategoryState());
-									#else
-										LoadingState.loadAndSwitchState(new FreeplayState());
-									#end
 									#if MODS_ALLOWED
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
