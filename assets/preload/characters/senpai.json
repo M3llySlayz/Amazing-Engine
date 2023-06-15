@@ -1,62 +1,73 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				1,
 				0
 			],
-			"loop": false,
-			"anim": "idle",
 			"fps": 24,
-			"name": "Senpai Idle",
-			"indices": []
+			"anim": "idle",
+			"image": "characters/senpai",
+			"indices": [],
+			"name": "Senpai Idle"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				5,
 				37
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "SENPAI UP NOTE"
+			"fps": 24,
+			"image": "characters/senpai",
+			"name": "SENPAI UP NOTE",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "SENPAI RIGHT NOTE"
+			"fps": 24,
+			"image": "characters/senpai",
+			"name": "SENPAI RIGHT NOTE",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				40,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "SENPAI LEFT NOTE"
+			"fps": 24,
+			"image": "characters/senpai",
+			"name": "SENPAI LEFT NOTE",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				14,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "SENPAI DOWN NOTE"
+			"fps": 24,
+			"image": "characters/senpai",
+			"name": "SENPAI DOWN NOTE",
+			"indices": []
 		}
 	],
 	"no_antialiasing": true,
+	"gameover_properties": [
+		"bf-dead",
+		"fnf_loss_sfx",
+		"gameOver",
+		"gameOverEnd"
+	],
 	"image": "characters/senpai",
 	"position": [
 		150,
@@ -70,8 +81,8 @@
 		111
 	],
 	"camera_position": [
-		-240,
-		-330
+		-30,
+		30
 	],
 	"sing_duration": 4,
 	"scale": 6

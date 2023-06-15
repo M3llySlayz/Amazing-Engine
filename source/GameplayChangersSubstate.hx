@@ -160,6 +160,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 		changeSelection();
 		reloadCheckboxes();
+
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	var nextAccept:Int = 5;
@@ -347,7 +349,6 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 	function clearHold()
 	{
 		if(holdTime > 0.5) {
-			//FlxG.sound.play(Paths.sound('scrollMenu'));
 			SoundEffects.playSFX('scroll', false);
 		}
 		holdTime = 0;
