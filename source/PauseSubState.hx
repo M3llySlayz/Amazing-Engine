@@ -21,6 +21,8 @@ import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 
+using StringTools;
+
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
