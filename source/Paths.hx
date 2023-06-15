@@ -129,6 +129,7 @@ class Paths
 		if (currentLevel != null)
 		{
 			var levelPath:String = '';
+			// Don't mess with those, please.
 			if(currentLevel != 'shared')
 			{
 				levelPath = getLibraryPathForce(file, currentLevel);
