@@ -110,6 +110,12 @@ class TitleState extends MusicBeatState
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		WeekData.loadTheFirstEnabledMod();
 
+		if (ClientPrefs.mainSong != 'Iconic') {
+			Conductor.changeBPM(titleJSON.bpm);
+		} else {
+			Conductor.changeBPM(117);
+		}
+
 		//trace(path, FileSystem.exists(path));
 
 		/*#if (polymod && !html5)
@@ -277,15 +283,8 @@ class TitleState extends MusicBeatState
 
 			if(FlxG.sound.music == null) 
 			{
-				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong), 0);
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')), 0);
 			}
-		}
-
-		//i got a little lazy
-		if (ClientPrefs.mainSong != 'Iconic'){
-			Conductor.changeBPM(titleJSON.bpm);
-		}else{
-			Conductor.changeBPM(117);
 		}
 		persistentUpdate = true;
 
@@ -293,7 +292,7 @@ class TitleState extends MusicBeatState
 
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
-		}else{
+		} else {
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
 
