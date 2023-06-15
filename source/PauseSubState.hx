@@ -328,7 +328,7 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		PlayState.deathCounter = 0;
 		PlayState.seenCutscene = false;
-
+		CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 		WeekData.loadTheFirstEnabledMod();
 		if(PlayState.isStoryMode) {
 			MusicBeatState.switchState(new StoryMenuState());
@@ -336,7 +336,7 @@ class PauseSubState extends MusicBeatSubstate
 			MusicBeatState.switchState(new FreeplayState());
 		}
 		PlayState.cancelMusicFadeTween();
-		FlxG.sound.playMusic(Paths.music(ClientPrefs.pauseMusic));
+		FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')));
 		PlayState.changedDifficulty = false;
 		PlayState.chartingMode = false;
 	}
@@ -429,6 +429,7 @@ class PauseSubState extends MusicBeatSubstate
 						}
 					case "End Song":
 						PlayState.instance.finishSong(true);
+						CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 						close();
 					default:
 						close();
