@@ -18,7 +18,9 @@ class FreeplayCategoryState extends MusicBeatState {
     public var categoryNamesList:Array<String> = ['vanilla'];
     public var categoryColors:Array<FlxColor> = [0xFFAB6BBF];
 
-    public static var swagModCategoryFile:Array<Dynamic> = [ // Wants: Category, Category Name, Category Songs (Song Name, Song Character), Song Colors (in RGB), Category Color
+    public var categories:Array<FreeplayCategory> = [];
+
+    public static var swagModCategoryFile:FreeplayCategory = [ // Wants: Category, Category Name, Category Songs (Song Name, Song Character), Song Colors (in RGB), Category Color
 	/* Example layout:
         {
             "category": "test 1",
@@ -103,7 +105,7 @@ class FreeplayCategoryState extends MusicBeatState {
         // Refresh mod category files then reload them
         refreshModCategories();
 
-        for (category in 0...swagModCategoryFile.length) {
+        for (i in 0...FreeplayCategory.categoryList.length) {
             categoriesList.push(swagModCategoryFile[category].category);
             categoryNamesList.push(swagModCategoryFile[category].name);
             categoryColors.push(swagModCategoryFile[category].color);
@@ -160,27 +162,24 @@ class FreeplayCategoryState extends MusicBeatState {
         if (!selectedSomethin) {
             if (controls.UI_LEFT_P) 
             {
-                FlxG.sound.play(Paths.sound('scrollMenu'));
                 changeSelection(-1);
             }
 
             if (controls.UI_RIGHT_P) 
             {
-                FlxG.sound.play(Paths.sound('scrollMenu'));
                 changeSelection(1);
             }
 
             if (controls.ACCEPT) {
-                    selectCategory();
+                selectCategory();
 	    }}
 
             if (controls.BACK)
             {
                 selectedSomethin = true;
-                FlxG.sound.play(Paths.sound('cancelMenu'));
+                SoundEffects.playSFX('cancel', false);
                 MusicBeatState.switchState(new MainMenuState());
             }
-        }
 
         if (curSelected < 0) curSelected = categoriesList.length-1;
         if (curSelected > categoriesList.length-1) curSelected = 0;
@@ -196,6 +195,7 @@ class FreeplayCategoryState extends MusicBeatState {
     }
 
     public function changeSelection(change:Int = 1) {
+        SoundEffects.playSFX('scroll', false);
         curSelected += change;
         if (curSelected < 0) curSelected = categoriesList.length-1;
         if (curSelected > categoriesList.length-1) curSelected = 0;
@@ -204,7 +204,7 @@ class FreeplayCategoryState extends MusicBeatState {
     public function selectCategory() {
         lightingBG.alpha = 1;
         selectedSomethin = true;
-        FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+        SoundEffects.playSFX('confirm', false);
         FlxFlicker.flicker(categorySpr, 1.5, 0.05, false);
         FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
         FlxTween.tween(alphabetText, {alpha: 0, x: alphabetText.x - 24}, 1, {ease: FlxEase.smoothStepOut});
