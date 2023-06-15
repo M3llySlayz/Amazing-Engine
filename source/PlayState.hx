@@ -1434,7 +1434,7 @@ class PlayState extends MusicBeatState
 					});
 					FlxG.sound.play(Paths.soundRandom('thunder_', 1, 2));
 					if(gf != null) gf.playAnim('scared', true);
-					boyfriend.playAnim('scared', true);
+					if(boyfriend.animation.curAnim == 'idle') boyfriend.playAnim('scared', true);
 
 				case "winter-horrorland":
 					var blackScreen:FlxSprite = new FlxSprite().makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
