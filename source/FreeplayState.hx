@@ -102,8 +102,7 @@ class FreeplayState extends MusicBeatState
 			}
 
 			WeekData.setDirectoryFromWeek(leWeek);
-			for (song in leWeek.songs)
-			{
+			for (song in leWeek.songs) {
 				var colors:Array<Int> = song[2];
 				if(colors == null || colors.length < 3) colors = [146, 113, 253];
 				#if MULTI_MODDABLE
