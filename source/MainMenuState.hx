@@ -68,8 +68,6 @@ class MainMenuState extends MusicBeatState
 		camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
 
-		FlxG.mouse.visible = true;
-
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camAchievement, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
@@ -249,16 +247,8 @@ class MainMenuState extends MusicBeatState
 				SoundEffects.playSFX('scroll', false);
 				changeItem(1);
 			}
-			if (FlxG.mouse.wheel != 0){
-				if (FlxG.mouse.wheel > 0){
-					changeItem(-1);
-				} else {
-					changeItem(1);
-				}
-				SoundEffects.playSFX('scroll', false);
-			}
 
-			if (controls.BACK || FlxG.mouse.justPressedRight)
+			if (controls.BACK)
 			{
 				selectedSomethin = true;
 				//FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -266,7 +256,7 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new TitleState());
 			}
 
-			if (controls.ACCEPT || FlxG.mouse.justPressed)
+			if (controls.ACCEPT)
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
@@ -277,32 +267,25 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					//FlxG.sound.play(Paths.sound('confirmMenu'));
 					SoundEffects.playSFX('confirm', false);
-					FlxG.mouse.visible = false;
 
 					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
-
-					
 					menuItems.forEach(function(spr:FlxSprite)
 					{
-						if (FlxG.mouse.justPressed){
-							if (FlxG.mouse.overlaps(spr)){
 							curSelected = spr.ID;
-								if (spr.ID != curSelected){
-									spr.animation.play('idle');
-									spr.updateHitbox();
-								}
+							if (spr.ID != curSelected){
+								spr.animation.play('idle');
 								spr.updateHitbox();
-								if (spr.ID == curSelected)
-								{
-									spr.animation.play('selected');
-									var add:Float = 0;
-									if(menuItems.length > 4) {
-										add = menuItems.length * 8;
-									}
-								camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
-								spr.centerOffsets();
-								}
 							}
+							spr.updateHitbox();
+							if (spr.ID == curSelected)
+							{
+								spr.animation.play('selected');
+								var add:Float = 0;
+								if(menuItems.length > 4) {
+									add = menuItems.length * 8;
+								}
+							camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
+							spr.centerOffsets();
 						}
 						if (curSelected != spr.ID)
 						{
