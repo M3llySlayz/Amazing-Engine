@@ -66,6 +66,7 @@ class FreeplayState extends MusicBeatState
 	public static var curCategory:String = '';
 
 	//var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+	var lightingBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xFF777777);
 
 	override function create()
 	{
@@ -76,7 +77,9 @@ class FreeplayState extends MusicBeatState
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
+
 		WeekData.reloadWeekFiles(false);
+		FreeplayCategory.reloadCategoryFiles();
 
 		#if desktop
 		// Updating Discord Rich Presence
@@ -106,9 +109,11 @@ class FreeplayState extends MusicBeatState
 				#if MULTI_MODDABLE
 				if (curCategory == '') addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 				else {
-					var category = curCategory;
-					for (modSong in 0...category.songs.length) {
-						addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]));
+					for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
+						var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
+						for (modSong in 0...category.songs.length) {
+							addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]));
+						}
 					}
 				}
 				#else
@@ -227,6 +232,11 @@ class FreeplayState extends MusicBeatState
 
 		//add(blackBG);
 		//FlxTween.tween(blackBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
+
+		lightingBG.blend = ADD;
+		lightingBG.alpha = 0;
+		add(lightingBG);
+
 		super.create();
 	}
 
@@ -365,9 +375,9 @@ class FreeplayState extends MusicBeatState
 			var shiftPressed:Bool = false;
 			var altPressed:Bool = false;
 
-			if (FlxG.keys.pressed.SHIFT){
+			if (FlxG.keys.pressed.SHIFT){ 
 				shiftPressed = true;
-			} else if (FlxG.keys.pressed.ALT){
+			} else if (FlxG.keys.pressed.ALT) {
 				altPressed = true;
 			}
 			
@@ -375,6 +385,9 @@ class FreeplayState extends MusicBeatState
 			songJson = Highscore.formatSong(songLowercase, curDifficulty);
 
 			try {
+				PlayState.SONG = Song.loadFromJson(songJson, songLowercase);
+				PlayState.isStoryMode = false;
+				PlayState.storyDifficulty = curDifficulty;
 				for (i in 0...grpSongs.members.length)
 				{
 					if (i == curSelected)
@@ -384,6 +397,8 @@ class FreeplayState extends MusicBeatState
 					}
 					else
 					{
+						lightingBG.alpha = 1;
+						FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
 						FlxTween.tween(grpSongs.members[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
 						FlxTween.tween(iconArray[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
 					}
@@ -393,17 +408,13 @@ class FreeplayState extends MusicBeatState
 				destroyFreeplayVocals();
 				persistentUpdate = false;
 				new FlxTimer().start(1, function(tmr:FlxTimer) {
-					PlayState.SONG = Song.loadFromJson(songJson, songLowercase);
-					PlayState.isStoryMode = false;
-					PlayState.storyDifficulty = curDifficulty;
-
 					trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
 					if(colorTween != null) {
 						colorTween.cancel();
 					}
 					if (shiftPressed) {
 						LoadingState.loadAndSwitchState(new ChartingState());
-					}else if (altPressed) {
+					} else if (altPressed) {
 						LoadingState.loadAndSwitchState(new PlayState());
 					} else {
 						LoadingState.loadAndSwitchState(new CharMenu());
