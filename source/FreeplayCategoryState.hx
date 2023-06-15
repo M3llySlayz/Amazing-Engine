@@ -10,6 +10,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import FreeplayCategory;
 
 using StringTools;
 
@@ -19,71 +20,6 @@ class FreeplayCategoryState extends MusicBeatState {
     public var categoryColors:Array<FlxColor> = [0xFFAB6BBF];
 
     public var categories:Array<FreeplayCategory> = [];
-
-    public static var swagModCategoryFile:FreeplayCategory = [ // Wants: Category, Category Name, Category Songs (Song Name, Song Character), Song Colors (in RGB), Category Color
-	/* Example layout:
-        {
-            "category": "test 1",
-            "name": "Test Category 1",
-            "songs": [
-                ["Test 1", "bf"],
-                ["Test 2", "bf"],
-                ["Test 3", "bf"]
-            ],
-            "songColors": [
-                [0, 255, 255],
-                [127, 255, 255],
-                [255, 255, 255]
-            ],
-            "color": 0xFF00FFFF
-        },
-        */
-        {
-            "category": "test 1",
-            "name": "Test Category 1",
-            "songs": [
-                ["Test 1", "bf"],
-                ["Test 2", "bf"],
-                ["Test 3", "bf"]
-            ],
-            "songColors": [
-                [0, 255, 255],
-                [127, 255, 255],
-                [255, 255, 255]
-            ],
-            "color": 0xFF00FFFF
-        },
-        {
-            "category": "test 2",
-            "name": "Test Category 2",
-            "songs": [
-                ["Test 1 2", "bf"],
-                ["Test 2 2", "bf"],
-                ["Test 3 2", "bf"]
-            ],
-            "songColors": [
-                [0, 255, 255],
-                [127, 255, 255],
-                [255, 255, 255]
-            ],
-            "color": 0xFF99FFFF
-        },
-        {
-            "category": "test 3",
-            "name": "Test Category 3",
-            "songs": [
-                ["Test 1 3", "bf"],
-                ["Test 2 3", "bf"],
-                ["Test 3 3", "bf"]
-            ],
-            "songColors": [
-                [0, 255, 255],
-                [127, 255, 255],
-                [255, 255, 255]
-            ],
-            "color": 0xFFFFFFFF
-        }
-    ];
 
     public static var curSelected:Int = 0;
 
@@ -103,12 +39,14 @@ class FreeplayCategoryState extends MusicBeatState {
 		FlxG.cameras.add(camOther, false);
 
         // Refresh mod category files then reload them
-        refreshModCategories();
+        //refreshModCategories(); let's see if this works
+        FreeplayCategory.reloadCategoryFiles();
+
 
         for (i in 0...FreeplayCategory.categoryList.length) {
-            categoriesList.push(swagModCategoryFile[category].category);
-            categoryNamesList.push(swagModCategoryFile[category].name);
-            categoryColors.push(swagModCategoryFile[category].color);
+            categoriesList.push(category);
+            categoryNamesList.push(name);
+            categoryColors.push(color);
         }
 
         bg = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
@@ -215,7 +153,7 @@ class FreeplayCategoryState extends MusicBeatState {
             LoadingState.loadAndSwitchState(new FreeplayState());
         });
     }
-
+/*
     public static function refreshModCategories() {
         swagModCategoryFile = [
             {
@@ -266,4 +204,5 @@ class FreeplayCategoryState extends MusicBeatState {
         ];
     }
 }
+*/
 #end
