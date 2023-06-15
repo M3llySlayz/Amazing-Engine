@@ -1,0 +1,15 @@
+{
+	"category": "test 1",
+	"name": "Test Category 1",
+	"songs": [
+		["Test 1", "bf"],
+		["Test 2", "bf"],
+		["Test 3", "bf"]
+	],
+	"songColors": [
+		[0, 255, 255],
+		[127, 255, 255],
+		[255, 255, 255]
+	],
+	"color": [0, 255, 255]
+}
