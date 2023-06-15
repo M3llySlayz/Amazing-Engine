@@ -43,7 +43,7 @@ class FreeplayCategoryState extends MusicBeatState {
         FreeplayCategory.reloadCategoryFiles();
 
 
-        for (i in 0...FreeplayCategory.categoryList.length) {
+        for (i in 0...FreeplayCategory.categoriesLoaded) {
             categoriesList.push(category);
             categoryNamesList.push(name);
             categoryColors.push(color);
@@ -206,3 +206,4 @@ class FreeplayCategoryState extends MusicBeatState {
 }
 */
 #end
+}
