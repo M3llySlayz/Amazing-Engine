@@ -450,7 +450,7 @@ class ChartingState extends MusicBeatState
 
 		var reloadSongJson:FlxButton = new FlxButton(reloadSong.x, saveButton.y + 30, "Reload JSON", function()
 		{
-			persistentUpdate = false;persistentUpdate = false;
+			persistentUpdate = false;
 			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function()
 			{
 				try {

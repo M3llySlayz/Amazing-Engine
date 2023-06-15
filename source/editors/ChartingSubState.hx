@@ -15,8 +15,10 @@ class ChartingSubState extends MusicBeatSubstate
 	var chartSaveBG:FlxSprite;
 	var chartSaveTitle:FlxText;
 	var chartSaveDescription:FlxText;
-	var chartPathInputTxt:FlxUIInputText;
-	var chartExtensionTxt:FlxText;
+	var chartPathImportInputTxt:FlxUIInputText;
+	var chartPathExportInputTxt:FlxUIInputText;
+	var chartPathFindTxt:FlxText;
+	var chartPathSaveTxt:FlxText;
 	var chartImportButton:FlxButton;
 	var chartExportButton:FlxButton;
 
@@ -64,27 +66,61 @@ class ChartingSubState extends MusicBeatSubstate
 
 		FlxG.stage.window.textInputEnabled = true;
 
-		chartPathInputTxt = new FlxUIInputText(0, chartSaveBG.y + chartSaveBG.height - 40, Std.int(chartSaveBG.width / 1.5), 'assets/data/${Paths.formatToSongPath(PlayState.SONG.song)}/${Paths.formatToSongPath(PlayState.SONG.song)+CoolUtil.getDifficultyFilePath()}.json', 16);
-		chartPathInputTxt.screenCenter(X);
-		add(chartPathInputTxt);
+		chartPathImportInputTxt = new FlxUIInputText(0, chartSaveBG.y + chartSaveBG.height - 72, Std.int(chartSaveBG.width / 1.5), 'assets/data/${Paths.formatToSongPath(PlayState.SONG.song)}/${Paths.formatToSongPath(PlayState.SONG.song)+CoolUtil.getDifficultyFilePath()}.json', 16);
+		chartPathImportInputTxt.screenCenter(X);
+		add(chartPathImportInputTxt);
+		
+		chartPathExportInputTxt = new FlxUIInputText(0, chartPathImportInputTxt.y + 32, Std.int(chartSaveBG.width / 1.5), chartPathImportInputTxt.text, 16);
+		chartPathExportInputTxt.screenCenter(X);
+		add(chartPathExportInputTxt);
+		
+		chartPathFindTxt = new FlxText(chartPathImportInputTxt.x - 112, chartPathImportInputTxt.y, 0, 'Find: ', 20);
+		chartPathFindTxt.antialiasing = false;
+		add(chartPathFindTxt);
+
+		chartPathSaveTxt = new FlxText(chartPathFindTxt.x - 32, chartPathExportInputTxt.y, 0, 'Export to: ', 20);
+		chartPathSaveTxt.antialiasing = false;
+		add(chartPathSaveTxt);
 
 		importCallback = function() {
-			trace('Work in progress');
+			try {
+				if (sys.FileSystem.exists(chartPathImportInputTxt.text)) {
+					//I need help
+				} else {
+					trace('Failed to import chart: "${chartPathImportInputTxt.text}"\n- Cannot find chart file: "${chartPathImportInputTxt.text.replace('assets/data/', '')}"');
+				}
+			} catch (e:Any) {
+				trace('Failed to import chart: "${chartPathImportInputTxt.text}"\n- Exception thrown!');
+			}
+			/* try {
+				if (sys.FileSystem.exists(chartPathImportInputTxt.text)) {
+					if(chartPathImportInputTxt.text.endsWith('.json')) {
+						PlayState.SONG = Song.parseJSONshit(haxe.Json.stringify({"song": chartPathImportInputTxt.text}, "\t"));
+						close();
+						MusicBeatState.resetState();
+					}
+				} else {
+					trace(PlayState.SONG);
+					trace('Failed to import chart: "${chartPathImportInputTxt.text}"\n- Not a valid directory!');
+				}
+			} catch (e:Any) {
+				trace('Failed to import chart: "${chartPathImportInputTxt.text}"\n- Exception thrown!');
+			} */
 		};
 
 		exportCallback = function() {
 			try {
-			if(chartPathInputTxt.text.endsWith('.json')) sys.io.File.saveContent(chartPathInputTxt.text, haxe.Json.stringify({"song": PlayState.SONG}, "\t"));
-		    } catch (e:Any) {
-			trace('Failed to save chart: "${chartPathInputTxt.text}"\n- Not a valid directory!');
-		    }
+				if(chartPathExportInputTxt.text.endsWith('.json')) sys.io.File.saveContent(chartPathExportInputTxt.text, haxe.Json.stringify({"song": PlayState.SONG}, "\t"));
+			} catch (e:Any) {
+				trace('Failed to export chart: "${chartPathExportInputTxt.text}"\n- Exception thrown!');
+			}
 			/* CoolUtil.dumpText(
-				chartPathInputTxt.text.replace('${Paths.formatToSongPath(PlayState.SONG.song)}/${Paths.formatToSongPath(PlayState.SONG.song)+CoolUtil.getDifficultyFilePath()}', ''),
-				chartPathInputTxt.text.replace('assets/data/', ''), 'json', haxe.Json.stringify({"song": PlayState.SONG}, "\t")
+				chartPathExportInputTxt.text.replace('${Paths.formatToSongPath(PlayState.SONG.song)}/${Paths.formatToSongPath(PlayState.SONG.song)+CoolUtil.getDifficultyFilePath()}', ''),
+				chartPathExportInputTxt.text.replace('assets/data/', ''), 'json', haxe.Json.stringify({"song": PlayState.SONG}, "\t")
 			); */
 		};
 
-		chartImportButton = new FlxButton(chartSaveBG.x + 360, chartSaveBG.y + chartSaveBG.height - 68, 'Import', importCallback);
+		chartImportButton = new FlxButton(chartSaveBG.x + 360, chartSaveBG.y + chartSaveBG.height - 100, 'Import', importCallback);
 		chartImportButton.screenCenter(X);
 		chartImportButton.x -= Std.int(chartImportButton.width / 1.5);
 		add(chartImportButton);
@@ -98,23 +134,27 @@ class ChartingSubState extends MusicBeatSubstate
 		chartSaveBG.scrollFactor.set();
 		chartSaveTitle.scrollFactor.set();
 		chartSaveDescription.scrollFactor.set();
-		chartPathInputTxt.scrollFactor.set();
+		chartPathImportInputTxt.scrollFactor.set();
+		chartPathExportInputTxt.scrollFactor.set();
+		chartPathFindTxt.scrollFactor.set();
+		chartPathSaveTxt.scrollFactor.set();
 	}
 
 	override public function update(elapsed:Float) {
-		if(chartPathInputTxt.hasFocus) {
+		if(chartPathImportInputTxt.hasFocus || chartPathExportInputTxt.hasFocus) {
 			FlxG.sound.muteKeys = [];
 			FlxG.sound.volumeDownKeys = [];
 			FlxG.sound.volumeUpKeys = [];
 			if(FlxG.keys.justPressed.ENTER) {
-				chartPathInputTxt.hasFocus = false;
+				chartPathImportInputTxt.hasFocus = false;
+				chartPathExportInputTxt.hasFocus = false;
 			}
 		} else {
 			FlxG.sound.muteKeys = TitleState.muteKeys;
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(controls.BACK) close();
-			//if(controls.UI_LEFT_P) trace(chartPathInputTxt.name);	
+			//if(controls.UI_LEFT_P) trace(chartPathExportInputTxt.name);	
 		}
 		super.update(elapsed);
 	}

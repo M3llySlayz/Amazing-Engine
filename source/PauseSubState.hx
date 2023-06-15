@@ -130,7 +130,7 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
 
-		quittingTxt = new FlxText(0, 100, 0, "You sure?", 32);
+		quittingTxt = new FlxText(0, 100, 0, "Are you sure?", 32);
 		quittingTxt.scrollFactor.set();
 		quittingTxt.setFormat(Paths.font('vcr.ttf'), 32);
 		quittingTxt.updateHitbox();
@@ -141,23 +141,17 @@ class PauseSubState extends MusicBeatSubstate
 		switch(ClientPrefs.pauseMusic) {
 			case 'Bossfight' | 'Construct' | 'Confront' | 'Waiting (Impatient)':
 				composer = 'Melly and BoyBot69';
-				//composerColor = [0xFFFF0000, 0xFF026902];
 			case 'Adventure' | 'Bounce':
 				composer = 'Melly';
-				//composerColor = [0xFFFF0000, 0xFFBD0000];
 			case 'Waiting':
 				composer = 'BoyBot69';
-				//composerColor = [0xFF3DD700, 0xFF026902];
-			default:
+			case 'Tea Time':
+				composer = 'iFlicky';
+			case 'Breakfast':
 				composer = 'Kawai Sprite';
+			default:
+				composer = '???';
 		}
-
-		authorText.text += 'By ' + composer;
-		authorText.scrollFactor.set();
-		authorText.setFormat(Paths.font("vcr.ttf"), 32);
-		authorText.drawFrame();
-		authorText.updateHitbox();
-		add(authorText);
 
 		blueballedTxt.alpha = 0;
 		levelDifficulty.alpha = 0;
@@ -174,6 +168,13 @@ class PauseSubState extends MusicBeatSubstate
 
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
+
+		authorText.text += 'By ' + composer;
+		authorText.scrollFactor.set();
+		authorText.setFormat(Paths.font("vcr.ttf"), 32);
+		authorText.drawFrame();
+		authorText.updateHitbox();
+		add(authorText);
 
 		regenMenu();
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];

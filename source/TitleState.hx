@@ -110,12 +110,6 @@ class TitleState extends MusicBeatState
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		WeekData.loadTheFirstEnabledMod();
 
-		if (ClientPrefs.mainSong != 'Iconic') {
-			Conductor.changeBPM(titleJSON.bpm);
-		} else {
-			Conductor.changeBPM(117);
-		}
-
 		//trace(path, FileSystem.exists(path));
 
 		/*#if (polymod && !html5)
@@ -254,31 +248,12 @@ class TitleState extends MusicBeatState
 	{
 		if (!initialized)
 		{
-			/*var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileDiamond);
-			diamond.persist = true;
-			diamond.destroyOnNoUse = false;
-
-			FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 1, new FlxPoint(0, -1), {asset: diamond, width: 32, height: 32},
-				new FlxRect(-300, -300, FlxG.width * 1.8, FlxG.height * 1.8));
-			FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.7, new FlxPoint(0, 1),
-				{asset: diamond, width: 32, height: 32}, new FlxRect(-300, -300, FlxG.width * 1.8, FlxG.height * 1.8));
-
-			transIn = FlxTransitionableState.defaultTransIn;
-			transOut = FlxTransitionableState.defaultTransOut;*/
-
-			// HAD TO MODIFY SOME BACKEND SHIT
-			// IF THIS PR IS HERE IF ITS ACCEPTED UR GOOD TO GO
-			// https://github.com/HaxeFlixel/flixel-addons/pull/348
-
-			// var music:FlxSound = new FlxSound();
-			// music.loadStream(Paths.music('freakyMenu'));
-			// FlxG.sound.list.add(music);
-			// music.play();
-
-			if(FlxG.sound.music == null) 
-			{
-				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')), 0);
+			if (ClientPrefs.mainSong != 'Iconic') {
+				Conductor.changeBPM(titleJSON.bpm);
+			} else {
+				Conductor.changeBPM(118);
 			}
+			if(FlxG.sound.music == null) FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')), 0);
 		}
 		persistentUpdate = true;
 
@@ -289,14 +264,10 @@ class TitleState extends MusicBeatState
 		} else {
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
-
-		// bg.antialiasing = ClientPrefs.globalAntialiasing;
-		// bg.setGraphicSize(Std.int(bg.width * 0.6));
-		// bg.updateHitbox();
 		add(bg);
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
-		if (ClientPrefs.aeWatermarks){
+		if (ClientPrefs.aeWatermarks) {
 			logoBl.frames = Paths.getSparrowAtlas('ae logo bumpin');
 			logoBl.x = 0;
 			logoBl.y = 0;
@@ -390,8 +361,7 @@ class TitleState extends MusicBeatState
 			
 			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
 			titleText.animation.addByPrefix('press', ClientPrefs.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
-		}
-		else {
+		} else {
 			newTitle = false;
 			
 			titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
