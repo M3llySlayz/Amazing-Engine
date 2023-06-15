@@ -330,7 +330,6 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		PlayState.deathCounter = 0;
 		PlayState.seenCutscene = false;
-		CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 		WeekData.loadTheFirstEnabledMod();
 		if(PlayState.isStoryMode) {
 			MusicBeatState.switchState(new StoryMenuState());
@@ -346,11 +345,10 @@ class PauseSubState extends MusicBeatSubstate
 	function closeState(?custom:Int = null)
 	{
 		var daTime:Float = 1;
-	
 		Conductor.changeBPM(PlayState.SONG.bpm);
-	
 		SoundEffects.playSFX('confirm', false);
 
+		CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 		var da:Int = curSelected;
 		if (custom != null)
 		{
@@ -431,7 +429,6 @@ class PauseSubState extends MusicBeatSubstate
 						}
 					case "End Song":
 						PlayState.instance.finishSong(true);
-						CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 						close();
 					default:
 						close();
@@ -444,7 +441,6 @@ class PauseSubState extends MusicBeatSubstate
 	override function destroy()
 	{
 		pauseMusic.destroy();
-
 		super.destroy();
 	}
 
