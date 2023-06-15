@@ -18,8 +18,5 @@
 	"startUnlocked": true,
 
 	"hideStoryMode": false,
-	"hideFreeplay": false,
-	
-	"category": "base game",
-	"categoryColor": [171, 107, 191]
+	"hideFreeplay": false
 }
