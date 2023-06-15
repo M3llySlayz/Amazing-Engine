@@ -23,7 +23,7 @@ typedef FreeplayCategoryFile =
 }
 
 class FreeplayCategory {
-    public static var categoriesLoaded:Map<String, FreeplayCategory> = new Map<String, FreeplayCategory>();
+	public static var categoriesLoaded:Map<String, FreeplayCategory> = new Map<String, FreeplayCategory>();
 	public static var categoryList:Array<String> = [];
 	public var folder:String = '';
 
@@ -55,12 +55,12 @@ class FreeplayCategory {
 		return categoryFile;
 	}
 
-    public function new(categoryFile:FreeplayCategoryFile, fileName:String) {
-        category = categoryFile.category;
-        name = categoryFile.name;
-        songs = categoryFile.songs;
-        songColors = categoryFile.songColors;
-        color = categoryFile.color;
+	public function new(categoryFile:FreeplayCategoryFile, fileName:String) {
+		category = categoryFile.category;
+		name = categoryFile.name;
+		songs = categoryFile.songs;
+		songColors = categoryFile.songColors;
+		color = categoryFile.color;
 
 		this.fileName = fileName;
 	}
