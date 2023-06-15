@@ -24,14 +24,15 @@ class ClientPrefs {
 	public static var hideHud:Bool = false;
 	public static var noteOffset:Int = 0;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], 
-													[0, 0, 0], [0, 0, 0], 
-													[0, 0, 0], [0, 0, 0], 
-													[0, 0, 0], [0, 0, 0], 
-													[0, 0, 0], [0, 0, 0],
-													[0, 0, 0], [0, 0, 0], 
-													[0, 0, 0], [0, 0, 0], 
-													[0, 0, 0], [0, 0, 0], 
-													[0, 0, 0], [0, 0, 0]]; // Fuck
+		[0, 0, 0], [0, 0, 0], 
+		[0, 0, 0], [0, 0, 0], 
+		[0, 0, 0], [0, 0, 0], 
+		[0, 0, 0], [0, 0, 0],
+		[0, 0, 0], [0, 0, 0], 
+		[0, 0, 0], [0, 0, 0], 
+		[0, 0, 0], [0, 0, 0], 
+		[0, 0, 0], [0, 0, 0]
+	];
 	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
 	public static var timeBarType:String = 'Time Left';
@@ -61,7 +62,7 @@ class ClientPrefs {
 	public static var luaMenu:Bool = false;
 	public static var splashOpacity:Float = 0.6;
 	public static var screenRes:String = '1280x720';
-	public static var pauseExit:String = 'Countdown';
+	public static var pauseExit:String = 'Flicker Out';
 	public static var fullscreen:Bool = false;
 	#if desktop
 	public static var autoPause:Bool = true;

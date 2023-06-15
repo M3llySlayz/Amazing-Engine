@@ -83,7 +83,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'pauseExit',
 			'string',
 			'Countdown',
-			['Normal', 'Flicker Out', 'Countdown']);
+			['Normal', 'Flicker Out']);
 		addOption(option);
 
 		option.onChange = onToggleAutoPause;

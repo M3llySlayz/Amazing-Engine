@@ -138,10 +138,7 @@ class PauseSubState extends MusicBeatSubstate
 		quittingTxt.screenCenter();
 		add(quittingTxt);
 
-		if (ClientPrefs.pauseExit == 'Countdown')
-			cacheCountdown();
-
-		switch(ClientPrefs.pauseMusic){
+		switch(ClientPrefs.pauseMusic) {
 			case 'Bossfight' | 'Construct' | 'Confront' | 'Waiting (Impatient)':
 				composer = 'Melly and BoyBot69';
 				//composerColor = [0xFFFF0000, 0xFF026902];
@@ -151,9 +148,10 @@ class PauseSubState extends MusicBeatSubstate
 			case 'Waiting':
 				composer = 'BoyBot69';
 				//composerColor = [0xFF3DD700, 0xFF026902];
+			default:
+				composer = 'Kawai Sprite';
 		}
 
-		
 		authorText.text += 'By ' + composer;
 		authorText.scrollFactor.set();
 		authorText.setFormat(Paths.font("vcr.ttf"), 32);
@@ -250,12 +248,10 @@ class PauseSubState extends MusicBeatSubstate
 		{
 			switch(daSelected) {
 				case "Continue":
-						SoundEffects.playSFX('confirm', false);
-						if (ClientPrefs.pauseExit == 'Flicker Out'){
+						if (ClientPrefs.pauseExit == 'Flicker Out') {
 							closeState();
-						} else if (ClientPrefs.pauseExit == 'Countdown'){
-							countdown();
 						} else {
+							SoundEffects.playSFX('scroll', false);
 							close();
 						}
 				case 'Change Difficulty':
@@ -276,7 +272,7 @@ class PauseSubState extends MusicBeatSubstate
 				case 'Modifiers':
 					openSubState(new GameplayChangersSubstate());
 				case "Quit":
-					SoundEffects.playSFX('confirm', true);
+					SoundEffects.playSFX('scroll', true);
 					menuItems = menuItemsQuitting;
 					quittingTxt.visible = true;
 					regenMenu();
@@ -323,6 +319,7 @@ class PauseSubState extends MusicBeatSubstate
 		else
 		{
 			MusicBeatState.resetState();
+			CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 		}
 	}
 
@@ -401,6 +398,8 @@ class PauseSubState extends MusicBeatSubstate
 			} else {
 				switch (daName)
 				{
+					case "Continue":
+						close();
 					case "Retry":
 						restartSong();
 					case "Options":
@@ -524,112 +523,5 @@ class PauseSubState extends MusicBeatSubstate
 	function updateSkipTimeText()
 	{
 		skipTimeText.text = FlxStringUtil.formatTime(Math.max(0, Math.floor(curTime / 1000)), false) + ' / ' + FlxStringUtil.formatTime(Math.max(0, Math.floor(FlxG.sound.music.length / 1000)), false);
-	}
-
-	function cacheCountdown()
-	{
-		var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
-		introAssets.set('default', ['ready', 'set', 'go']);
-		introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
-	
-		var introAlts:Array<String> = introAssets.get('default');
-		if (PlayState.isPixelStage) introAlts = introAssets.get('pixel');
-			
-		for (asset in introAlts)
-			Paths.image(asset);
-			
-		Paths.sound('intro3' + PlayState.introSoundsSuffix);
-		Paths.sound('intro2' + PlayState.introSoundsSuffix);
-		Paths.sound('intro1' + PlayState.introSoundsSuffix);
-		Paths.sound('introGo' + PlayState.introSoundsSuffix);
-	}
-
-	function countdown()
-	{
-		var swagCounter:Int = 0;
-
-		var startTimer = new FlxTimer().start(Conductor.crochet / 1000 / PlayState.grabbablePlayBackRate, function(tmr:FlxTimer)
-		{
-			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
-			introAssets.set('default', ['ready', 'set', 'go']);
-			introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
-
-			var introAlts:Array<String> = introAssets.get('default');
-			var antialias:Bool = ClientPrefs.globalAntialiasing;
-			if(PlayState.isPixelStage) {
-				introAlts = introAssets.get('pixel');
-				antialias = false;
-			}
-
-			switch (swagCounter)
-			{
-				case 0:
-					FlxG.sound.play(Paths.sound('intro3' + PlayState.introSoundsSuffix), 0.6);
-				case 1:
-					var ready = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
-					ready.scrollFactor.set();
-					ready.updateHitbox();
-
-				if (PlayState.isPixelStage)
-					ready.setGraphicSize(Std.int(ready.width * PlayState.daPixelZoom));
-					add(ready);
-					ready.screenCenter();
-					ready.antialiasing = ClientPrefs.globalAntialiasing;
-					FlxTween.tween(ready, {/*y: ready.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
-						ease: FlxEase.cubeInOut,
-						onComplete: function(twn:FlxTween)
-						{
-							remove(ready);
-							ready.destroy();
-						}
-					});
-					FlxG.sound.play(Paths.sound('intro2' + PlayState.introSoundsSuffix), 0.6);
-				case 2:
-					var set = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
-					set.scrollFactor.set();
-
-					if (PlayState.isPixelStage)
-						set.setGraphicSize(Std.int(set.width * PlayState.daPixelZoom));
-
-					set.screenCenter();
-					add(set);
-					set.antialiasing = ClientPrefs.globalAntialiasing;
-					FlxTween.tween(set, {/*y: set.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
-						ease: FlxEase.cubeInOut,
-						onComplete: function(twn:FlxTween)
-						{
-							remove(set);
-							set.destroy();
-						}
-					});
-					FlxG.sound.play(Paths.sound('intro1' + PlayState.introSoundsSuffix), 0.6);
-				case 3:
-					var go = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
-					go.scrollFactor.set();
-
-					if (PlayState.isPixelStage)
-						go.setGraphicSize(Std.int(go.width * PlayState.daPixelZoom));
-
-					go.updateHitbox();
-
-					go.screenCenter();
-					add(go);
-					go.antialiasing = ClientPrefs.globalAntialiasing;
-					FlxTween.tween(go, {/*y: go.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
-						ease: FlxEase.cubeInOut,
-						onComplete: function(twn:FlxTween)
-						{
-							remove(go);
-							go.destroy();
-						}
-					});
-					FlxG.sound.play(Paths.sound('introGo' + PlayState.introSoundsSuffix), 0.6);
-				case 4:
-
-			}
-
-			swagCounter += 1;
-			// generateSong('fresh');
-		}, 5);
 	}
 }
