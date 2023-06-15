@@ -70,9 +70,10 @@ class FreeplayCategory {
 			try {
 				if (!categoriesLoaded.exists(rawJson.category)) {
 					categoriesLoaded.set(rawJson.category, rawJson);
+					categoryList.push(rawJson.category);
 				}
 			} catch (e:Any) {
-				trace('Failed to load Freeplay Category: "${rawJson.category}"\n- Exception thrown!')
+				trace('Failed to load Freeplay Category: "${rawJson.category}"\n- Exception thrown!');
 			}
 		}
 	}
