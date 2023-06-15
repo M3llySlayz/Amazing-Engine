@@ -19,7 +19,7 @@ typedef FreeplayCategoryFile =
 	var name:String;
 	var songs:Array<Dynamic>;
 	var songColors:Array<Dynamic>;
-	var color:FlxColor;
+	var color:Array<Int>;
 }
 
 class FreeplayCategory {
@@ -32,7 +32,7 @@ class FreeplayCategory {
 	public var name:String;
 	public var songs:Array<Dynamic>;
 	public var songColors:Array<Dynamic>;
-	public var color:FlxColor;
+	public var color:Array<Int>;
 
 	public var fileName:String;
 
@@ -50,7 +50,7 @@ class FreeplayCategory {
 				[127, 255, 255],
 				[255, 255, 255]
 			],
-			color: 0xFF00FFFF
+			color: [0, 255, 255]
 		};
 		return categoryFile;
 	}
@@ -213,6 +213,5 @@ class FreeplayCategory {
 				trace('Failed to load Freeplay Category: "${rawJson.category}"\n- Exception thrown!');
 			}
 		}
-	}
-	*/
+	} */
 }
