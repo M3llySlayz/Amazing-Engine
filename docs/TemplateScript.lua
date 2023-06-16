@@ -101,14 +101,6 @@ function opponentNoteHit(id, direction, noteType, isSustainNote)
 	-- Works the same as goodNoteHit, but for Opponent's notes being hit
 end
 
-function litPlayerHit(id, direction, noteType, isSustainNote)
-	-- Works the same as goodNoteHit and opponentNoteHit, but for general player hits
-end
-
-function litOppoHit(id, direction, noteType, isSustainNote)
-	-- Works the same as litPlayerHit, but for general opponent hits
-end
-
 function noteMissPress(direction)
 	-- Called after the note press miss calculations
 	-- Player pressed a button, but there was no note to hit (ghost miss)
@@ -117,10 +109,6 @@ end
 function noteMiss(id, direction, noteType, isSustainNote)
 	-- Called after the note miss calculations
 	-- Player missed a note by letting it go offscreen
-end
-
-function opponentNoteMiss(id, direction, noteType, isSustainNote)
-	-- Works the same as noteMiss, but for when opponent play is enabled
 end
 
 

@@ -260,7 +260,11 @@ class TitleState extends MusicBeatState
 	{
 		if (!initialized)
 		{
+<<<<<<< HEAD
 			if (ClientPrefs.mainSong != 'Iconic' && ClientPrefs.mainSong != 'Iconic (Extended)') {
+=======
+			if (ClientPrefs.mainSong != 'Iconic' || 'Iconic (Extended)') {
+>>>>>>> parent of 060d2bd (OPPONENT PLAY)
 				Conductor.changeBPM(titleJSON.bpm);
 			} else {
 				Conductor.changeBPM(118);
