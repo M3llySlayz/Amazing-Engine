@@ -112,10 +112,10 @@ class FreeplayCategory {
 		var originalLength:Int = directories.length;
 		#end
 
-		var sexList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('data/modCategoriesList.txt'));
+		var sexList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('categories/categoryList.json'));
 		for (i in 0...sexList.length) {
 			for (j in 0...directories.length) {
-				var fileToCheck:String = directories[j] + 'data/modCategoriesList.json';
+				var fileToCheck:String = directories[j] + 'categories/categoryList.json';
 				if(!categoriesLoaded.exists(sexList[i])) {
 					var category:FreeplayCategoryFile = getCategoryFile(fileToCheck);
 					if(category != null) {
@@ -165,7 +165,7 @@ class FreeplayCategory {
 
 	private static function addCategory(categoryToCheck:String, path:String, directory:String, i:Int, originalLength:Int)
 	{
-		if(!categoriesLoaded.exists(categoryToCheck))
+		if(!categoriesLoaded.exists(categoryToCheck) && !categoryList.contains(categoryToCheck))
 		{
 			var category:FreeplayCategoryFile = getCategoryFile(path);
 			if(category != null)
@@ -187,12 +187,16 @@ class FreeplayCategory {
 		var rawJson:String = null;
 
 		#if MODS_ALLOWED
-		if(FileSystem.exists(path)) {
-			try {rawJson = File.getContent(path);} catch(e:Any) { trace('Think this means the JSON is bad');};
+		try {
+			rawJson = File.getContent(path);
+		} catch(e:Any) {
+			trace('Cannot find Category file: "$path"');
 		}
 		#else
-		if(OpenFlAssets.exists(path)) {
+		try {
 			rawJson = Assets.getText(path);
+		} catch(e:Any) {
+			trace('Cannot find Category file: "$path"');
 		}
 		#end
 

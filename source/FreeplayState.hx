@@ -303,12 +303,10 @@ class FreeplayState extends MusicBeatState
 				holdTime = 0;
 			}
 
-			if (FlxG.mouse.justPressedMiddle){
-				if (mouseToggle){
-					mouseToggle = false;
-				} else {
-					mouseToggle = true;
-				}
+			if (FlxG.mouse.justPressedMiddle)
+			{
+				if (mouseToggle) mouseToggle = false;
+				else mouseToggle = true;
 			}
 
 			if(controls.UI_DOWN || controls.UI_UP)
@@ -399,9 +397,6 @@ class FreeplayState extends MusicBeatState
 					}
 					else
 					{
-						//killing these just rq
-						//lightingBG.alpha = 1;
-						//FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.quadIn});
 						FlxTween.tween(grpSongs.members[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
 						FlxTween.tween(iconArray[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
 					}
@@ -544,10 +539,10 @@ class FreeplayState extends MusicBeatState
 
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
 		var diffStr:String = '';
-		if (curCategory != '' && curCategory != 'base game'){ //if this isn't vanilla
-		for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
-			var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
-				for (modSong in 0...category.songs.length){
+		if (curCategory != '' && curCategory != 'base game') { //if this isn't vanilla
+			for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
+				var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
+				for (modSong in 0...category.songs.length) {
 					if (modSong == curSelected) diffStr = category.songs[modSong][2];
 				}
 			}
