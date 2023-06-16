@@ -331,6 +331,7 @@ class PlayState extends MusicBeatState
 	public var luaArray:Array<FunkinLua> = [];
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	public static var introSoundsSuffix:String = '';
+	public var skipArrowStartTween:Bool = false;
 
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
@@ -2777,6 +2778,7 @@ class PlayState extends MusicBeatState
 		checkEventNote();
 		generatedMusic = true;
 	}
+}
 
 	function eventPushed(event:EventNote) {
 		switch(event.event) {
@@ -2868,8 +2870,8 @@ class PlayState extends MusicBeatState
 				return 280; //Plays 280ms before the actual position
 		return 0;
 
-		case 'Trigger Opponent Play': // Better timing when placing on a note
-			return -83.3333333333333; // Triggers a note (or grid square) before, oh and fuck you it's a long ass number, round my ass >:)
+			case 'Trigger Opponent Play': // Better timing when placing on a note
+				return -83.3333333333333; // Triggers a note (or grid square) before, oh and fuck you it's a long ass number, round my ass >:)
 		}
 			
 	}
@@ -2884,7 +2886,6 @@ class PlayState extends MusicBeatState
 		return FlxSort.byValues(FlxSort.ASCENDING, Obj1.strumTime, Obj2.strumTime);
 	}
 
-	public var skipArrowStartTween:Bool = false; //for lua
 	private function generateStaticArrows(player:Int):Void
 	{
 		for (i in 0...Note.ammo[mania])
@@ -2968,6 +2969,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 	}
+}
 
 	function updateNote(note:Note)
 	{
@@ -3107,6 +3109,7 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(1);
 		updateLuaDefaultPos();
 	}
+	
 
 	override function openSubState(SubState:FlxSubState)
 	{
@@ -3193,6 +3196,7 @@ class PlayState extends MusicBeatState
 
 		super.closeSubState();
 	}
+}
 
 	override public function onFocus():Void
 	{
