@@ -93,7 +93,7 @@ class FPS extends TextField
 			text += "\nAmazing Engine v" + MainMenuState.amazingEngineVersion;
 			#if CHECK_FOR_UPDATES
 			if (MainMenuState.amazingEngineVersion != TitleState.newVersion) {
-				text += "\nUpdate available!";
+				text += "\nVersions don't match.";
 			}
 			#end
 
