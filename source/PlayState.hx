@@ -321,8 +321,8 @@ class PlayState extends MusicBeatState
 
 	//Achievement shit
 	var keysPressed:Array<Bool> = [];
-	var boyfriendIdleTime:Float = 0.0;
-	var boyfriendIdled:Bool = false;
+	var playerIdleTime:Float = 0.0;
+	var playerIdled:Bool = false;
 	var achievementsArray:Array<FunkinLua> = [];
 	var achievementWeeks:Array<String> = [];
 
@@ -2870,9 +2870,6 @@ class PlayState extends MusicBeatState
 				return -83.3333333333333; // Triggers a note (or grid square) before, oh and fuck you it's a long ass number, round my ass >:)
 		}
 		return 0;
-
-		case 'Trigger Opponent Play': // Better timing when placing on a note
-			return -83.3333333333333; // Triggers a note (or grid square) before, oh and fuck you it's a long ass number, round my ass >:)
 	}
 
 	function sortByShit(Obj1:Note, Obj2:Note):Int

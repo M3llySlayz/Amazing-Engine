@@ -189,6 +189,7 @@ class CharMenu extends MusicBeatState{
 
 			characterImage.screenCenter(XY);
 			imageArray.push(characterImage);
+			characterImage.flipX = true;
 			add(characterImage);
 		}
 
