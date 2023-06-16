@@ -140,7 +140,7 @@ class FreeplayCategory {
 		for (i in 0...directories.length) {
 			var directory:String = directories[i] + 'categories/';
 			if(FileSystem.exists(directory)) {
-				var listOfCategories:Array<String> = CoolUtil.coolTextFile(directory + 'categoryList.json');
+				var listOfCategories:Array<String> = CoolUtil.coolTextFile(directory + 'categoryList.txt');
 				for (daCategory in listOfCategories)
 				{
 					var path:String = directory + daCategory + '.json';
