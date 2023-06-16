@@ -14,7 +14,6 @@ import flixel.effects.FlxFlicker;
 import flixel.util.FlxTimer;
 import lime.utils.Assets;
 import haxe.Json;
-import Boyfriend.Boyfriend;
 import Character.Character;
 import HealthIcon.HealthIcon;
 import flixel.ui.FlxBar;
@@ -195,7 +194,7 @@ class CharMenu extends MusicBeatState{
 		}
 
 		// Character select text at the top of the screen
-		var selectionHeader:Alphabet = new Alphabet(0, 50, 'Select your character', true);
+		var selectionHeader:Alphabet = new Alphabet(0, 50, 'Character Select', true);
 		selectionHeader.screenCenter(X);
 		add(selectionHeader);
 		
@@ -481,7 +480,7 @@ class CharMenu extends MusicBeatState{
 	function resetCharacterSelectionVars() 
 	{
 		// Ensures the save data has at least 1 value
-		if (FlxG.save.data.daUnlockedChars == null) FlxG.save.data.daUnlockedChars = [false];
+		if (FlxG.save.data.daUnlockedChars == null) {FlxG.save.data.daUnlockedChars = [false];}
 
 		// Allows the code to determind if this has already been reset
 		alreadyReset = true;
