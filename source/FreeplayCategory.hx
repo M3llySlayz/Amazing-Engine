@@ -135,6 +135,32 @@ class FreeplayCategory {
 				}
 			}
 		}
+	
+		#if MODS_ALLOWED
+		for (i in 0...directories.length) {
+			var directory:String = directories[i] + 'categories/';
+			if(FileSystem.exists(directory)) {
+				var listOfCategories:Array<String> = CoolUtil.coolTextFile(directory + 'categoryList.json');
+				for (daCategory in listOfCategories)
+				{
+					var path:String = directory + daCategory + '.json';
+					if(sys.FileSystem.exists(path))
+					{
+						addCategory(daCategory, path, directories[i], i, originalLength);
+					}
+				}
+
+				for (file in FileSystem.readDirectory(directory))
+				{
+					var path = haxe.io.Path.join([directory, file]);
+					if (!sys.FileSystem.isDirectory(path) && file.endsWith('.json'))
+					{
+						addCategory(file.substr(0, file.length - 5), path, directories[i], i, originalLength);
+					}
+				}
+			}
+		}
+		#end
 	}
 
 	private static function addCategory(categoryToCheck:String, path:String, directory:String, i:Int, originalLength:Int)
