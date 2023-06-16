@@ -15,9 +15,9 @@ import FreeplayCategory;
 using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
-	public var categoriesList:Array<String> = ['base game'];
-	public var categoryNamesList:Array<String> = ['vanilla'];
-	public var categoryColors:Array<FlxColor> = [0xFFAB6BBF];
+	public static var categoriesList:Array<String> = ['base game'];
+	public static var categoryNamesList:Array<String> = ['vanilla'];
+	public static var categoryColors:Array<FlxColor> = [0xFFAB6BBF];
 
 	//public var categories:Array<FreeplayCategory> = [];
 
@@ -39,11 +39,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		FlxG.cameras.add(camOther, false);
 
 		FreeplayCategory.reloadCategoryFiles();
-		for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
-			categoriesList.push(categoriesLoaded.category);
-			categoryNamesList.push(categoriesLoaded.name);
-			categoryColors.push(FlxColor.fromRGB(categoriesLoaded.color[0], categoriesLoaded.color[1], categoriesLoaded.color[2]));
-		}
+		refreshCategories();
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = categoryColors[curSelected];
@@ -144,6 +140,17 @@ class FreeplayCategoryState extends MusicBeatState {
 			if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
 			MusicBeatState.switchState(new FreeplayState());
 		});
+	}
+
+	public function refreshCategories() {
+		categoriesList = ['base game'];
+		categoryNamesList = ['vanilla'];
+		categoryColors = [0xFFAB6BBF];
+		for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
+			categoriesList.push(categoriesLoaded.category);
+			categoryNamesList.push(categoriesLoaded.name);
+			categoryColors.push(FlxColor.fromRGB(categoriesLoaded.color[0], categoriesLoaded.color[1], categoriesLoaded.color[2]));
+		}
 	}
 }
 #end

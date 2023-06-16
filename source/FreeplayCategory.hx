@@ -37,13 +37,13 @@ class FreeplayCategory {
 	public var fileName:String;
 
 	public static function createCategoryFile():FreeplayCategoryFile {
-		var categoryFile:FreeplayCategoryFile = {
+		return {
 			category: "Test3",
 			name: "Test Category 3",
 			songs: [
-				["Test 1", "bf", 'Easy, Normal, Hard'],
-				["Test 2", "bf", 'Normal, Hard'],
-				["Test 3", "bf", 'Hard']
+				["Test 1", "bf", "Easy, Normal, Hard"],
+				["Test 2", "bf", "Normal, Hard"],
+				["Test 3", "bf", "Hard"]
 			],
 			songColors: [
 				[0, 255, 255],
@@ -52,7 +52,6 @@ class FreeplayCategory {
 			],
 			color: [0, 255, 255]
 		};
-		return categoryFile;
 	}
 
 	public function new(categoryFile:FreeplayCategoryFile, fileName:String) {
@@ -135,7 +134,7 @@ class FreeplayCategory {
 				}
 			}
 		}
-	
+
 		#if MODS_ALLOWED
 		for (i in 0...directories.length) {
 			var directory:String = directories[i] + 'categories/';
@@ -174,7 +173,7 @@ class FreeplayCategory {
 				if(i >= originalLength)
 				{
 					#if MODS_ALLOWED
-						categoryFile.folder = directory.substring(Paths.mods().length, directory.length-1);
+					categoryFile.folder = directory.substring(Paths.mods().length, directory.length-1);
 					#end
 				}
 				categoriesLoaded.set(categoryToCheck, categoryFile);
@@ -182,7 +181,7 @@ class FreeplayCategory {
 			}
 		}
 	}
-	
+
 	private static function getCategoryFile(path:String):FreeplayCategoryFile {
 		var rawJson:String = null;
 
