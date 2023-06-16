@@ -359,13 +359,16 @@ class FreeplayState extends MusicBeatState
 		{
 			if(instPlaying != curSelected)
 			{
-				destroyFreeplayVocals();
-				FlxG.sound.music.volume = 0;
-				Paths.currentModDirectory = songs[curSelected].folder;
 				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
-				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
-				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
-				instPlaying = curSelected;
+				try {
+					PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
+					FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
+					Paths.currentModDirectory = songs[curSelected].folder;
+					instPlaying = curSelected;
+					destroyFreeplayVocals();
+				} catch (e:Any) {
+					trace ('Cannot find chart file: "$poop"');
+				}
 			}
 		}
 

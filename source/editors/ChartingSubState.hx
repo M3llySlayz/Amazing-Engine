@@ -85,7 +85,11 @@ class ChartingSubState extends MusicBeatSubstate
 		importCallback = function() {
 			try {
 				if (sys.FileSystem.exists(chartPathImportInputTxt.text)) {
-					//I need help
+					if(chartPathImportInputTxt.text.endsWith('.json')) {
+						PlayState.SONG = cast haxe.Json.parse(sys.io.File.getContent(chartPathImportInputTxt.text));
+						//trace(cast haxe.Json.parse(sys.io.File.getContent(chartPathImportInputTxt.text)));
+						MusicBeatState.resetState();
+					}
 				} else {
 					trace('Failed to import chart: "${chartPathImportInputTxt.text}"\n- Cannot find chart file: "${chartPathImportInputTxt.text.replace('assets/data/', '')}"');
 				}

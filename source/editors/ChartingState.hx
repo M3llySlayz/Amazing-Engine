@@ -263,7 +263,7 @@ class ChartingState extends MusicBeatState
 		gridLayer = new FlxTypedGroup<FlxSprite>();
 		add(gridLayer);
 
-		waveformSprite = new FlxSprite(GRID_SIZE, 0).makeGraphic(FlxG.width, FlxG.height, 0x60FFFFFF);
+		waveformSprite = new FlxSprite().makeGraphic(1, 1, FlxColor.TRANSPARENT);
 		add(waveformSprite);
 
 		var eventIcon:FlxSprite = new FlxSprite(-GRID_SIZE - 5, -90).loadGraphic(Paths.image('eventArrow'));
@@ -281,8 +281,9 @@ class ChartingState extends MusicBeatState
 		add(leftIcon);
 		add(rightIcon);
 
-		leftIcon.setPosition(GRID_SIZE + 10, -100);
-		rightIcon.setPosition(GRID_SIZE * 5.2, -100);
+		var oneHalf:Float = GRID_SIZE * Note.ammo[_song.mania];
+		leftIcon.setPosition((oneHalf / 2) - (leftIcon.width / 2) - (_song.mania * 2) + 48, -100);
+		rightIcon.setPosition(((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) - (_song.mania * 2) + 48, -100);
 
 		curRenderedSustains = new FlxTypedGroup<FlxSprite>();
 		curRenderedNotes = new FlxTypedGroup<Note>();
@@ -1614,7 +1615,6 @@ class ChartingState extends MusicBeatState
 		var gWidth = GRID_SIZE * (Note.ammo[_song.mania] * 2);
 		camPos.x = -80 + gWidth;
 		strumLine.width = gWidth;
-		//rightIcon.x = gWidth / 2 + GRID_SIZE * 2;
 
 		if(FlxG.sound.music.time < 0) {
 			FlxG.sound.music.pause();
@@ -1650,7 +1650,6 @@ class ChartingState extends MusicBeatState
 		}
 		FlxG.watch.addQuick('daBeat', curBeat);
 		FlxG.watch.addQuick('daStep', curStep);
-
 
 		if (FlxG.mouse.x > gridBG.x
 			&& FlxG.mouse.x < gridBG.x + gridBG.width
@@ -1791,8 +1790,6 @@ class ChartingState extends MusicBeatState
 			if(FlxG.keys.justPressed.Z && FlxG.keys.pressed.CONTROL) {
 				undo();
 			}
-
-
 
 			if(FlxG.keys.justPressed.Z && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
 				--curZoom;
@@ -2218,8 +2215,8 @@ class ChartingState extends MusicBeatState
 		#end
 
 		var oneHalf:Float = GRID_SIZE * Note.ammo[_song.mania];
-		leftIcon.setPosition((oneHalf / 2) - (leftIcon.width / 2) + 52 - (_song.mania * 2), -100);
-		rightIcon.setPosition(((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) + 52 - (_song.mania * 2), -100);
+		leftIcon.setPosition((oneHalf / 2) - (leftIcon.width / 2) - (_song.mania * 2) + 48, -100);
+		rightIcon.setPosition(((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) - (_song.mania * 2) + 48, -100);
 
 		var leHeight:Int = Std.int(gridBG.height);
 		var foundNextSec:Bool = false;
@@ -2244,14 +2241,6 @@ class ChartingState extends MusicBeatState
 
 		var gridBlackLine:FlxSprite = new FlxSprite(gridBG.x + gridBG.width - (GRID_SIZE * Note.ammo[_song.mania])).makeGraphic(2, leHeight, FlxColor.BLACK);
 		gridLayer.add(gridBlackLine);
-
-		for (i in 1...4) {
-			var beatsep1:FlxSprite = new FlxSprite(gridBG.x, (GRID_SIZE * (4 * curZoom)) * i).makeGraphic(Std.int(gridBG.width), 1, 0x44FF0000);
-			if(vortex)
-			{
-				gridLayer.add(beatsep1);
-			}
-		}
 
 		var gridBlackLine:FlxSprite = new FlxSprite(gridBG.x + GRID_SIZE).makeGraphic(2, leHeight, FlxColor.BLACK);
 		gridLayer.add(gridBlackLine);
@@ -2290,8 +2279,8 @@ class ChartingState extends MusicBeatState
 	function updateWaveform() {
 		#if desktop
 		if(waveformPrinted) {
-			waveformSprite.makeGraphic(Std.int(GRID_SIZE * (Note.ammo[_song.mania] * 2)), Std.int(gridBG.height), 0x6DFFFFFF);
-			waveformSprite.pixels.fillRect(new Rectangle(0, 0, gridBG.width, gridBG.height), 0x5CFFFFFF);
+			waveformSprite.makeGraphic(Std.int(GRID_SIZE * (Note.ammo[_song.mania] * 2)), Std.int(gridBG.height), 0x00FFFFFF);
+			waveformSprite.pixels.fillRect(new Rectangle(0, 0, gridBG.width, gridBG.height), 0x00FFFFFF);
 		}
 		waveformPrinted = false;
 
@@ -2492,7 +2481,7 @@ class ChartingState extends MusicBeatState
 		#else
 		return [[[0], [0]], [[0], [0]]];
 		#end
-	}
+	} 
 
 	function changeNoteSustain(value:Float):Void
 	{
