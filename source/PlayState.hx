@@ -321,8 +321,8 @@ class PlayState extends MusicBeatState
 
 	//Achievement shit
 	var keysPressed:Array<Bool> = [];
-	var playerIdleTime:Float = 0.0;
-	var playerIdled:Bool = false;
+	var boyfriendIdleTime:Float = 0.0;
+	var boyfriendIdled:Bool = false;
 	var achievementsArray:Array<FunkinLua> = [];
 	var achievementWeeks:Array<String> = [];
 
@@ -2645,11 +2645,10 @@ class PlayState extends MusicBeatState
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		var file:String = Paths.json(songName + '/events');
 		#if MODS_ALLOWED
-		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file))
+		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file)) {
 		#else
-		if (OpenFlAssets.exists(file))
+		if (OpenFlAssets.exists(file)) {
 		#end
-		{
 			var eventsData:Array<Dynamic> = Song.loadFromJson('events', songName).events;
 			for (event in eventsData) //Event Notes
 			{
@@ -2871,6 +2870,9 @@ class PlayState extends MusicBeatState
 				return -83.3333333333333; // Triggers a note (or grid square) before, oh and fuck you it's a long ass number, round my ass >:)
 		}
 		return 0;
+
+		case 'Trigger Opponent Play': // Better timing when placing on a note
+			return -83.3333333333333; // Triggers a note (or grid square) before, oh and fuck you it's a long ass number, round my ass >:)
 	}
 
 	function sortByShit(Obj1:Note, Obj2:Note):Int
@@ -2902,7 +2904,7 @@ class PlayState extends MusicBeatState
 					if (!ClientPrefs.opponentStrums) targetAlpha = 0;
 					else if (ClientPrefs.middleScroll) targetAlpha = 0.35;
 				}
-			} // add 
+			}
 
 			var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
 			babyArrow.downScroll = ClientPrefs.downScroll;
