@@ -480,7 +480,7 @@ class CharMenu extends MusicBeatState{
 	function resetCharacterSelectionVars() 
 	{
 		// Ensures the save data has at least 1 value
-		if (FlxG.save.data.daUnlockedChars == null) {FlxG.save.data.daUnlockedChars = [false];}
+		if (FlxG.save.data.daUnlockedChars == null) FlxG.save.data.daUnlockedChars = [false];
 
 		// Allows the code to determind if this has already been reset
 		alreadyReset = true;
