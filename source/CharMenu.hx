@@ -31,7 +31,7 @@ import FreeplayState;
 class CharMenu extends MusicBeatState{
 	// Selectable Character Variables
 	var selectableCharacters:Array<String> = ['bf', 'bf-christmas', 'MellyBF', 'JBBF']; // Currently Selectable characters
-	var selectableCharactersNames:Array<String> = ['Default Character', 'Boyfriend in Week 5', 'Melly Boyfriend', 'JB Boyfriend']; // Characters names
+	var selectableCharactersNames:Array<String> = ['Default Character', 'Week 5 Boyfriend', 'Boyfriend but Black (Melly)', 'Boyfriend but one eighth Mexican (JB)']; // Characters names (i demand them to be actually funny and anyone who says otherwise probably isn't black/mexican - melly)
 	var selectableCharactersColors:Array<FlxColor> = [0xFF00ABC5, 0xFF00ABC5, 0xFFAD0101, 0xFFDE5900]; // The colors used for the background
 	var selectableCharactersOffsets:Array<Array<Int>> = [[10, 10], [35, 10], [10, 10], [10, 10]]; // [x, y]
 	
