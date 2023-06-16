@@ -233,6 +233,9 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+			if (FlxG.mouse.wheel != 0)
+				changeSelection(-FlxG.mouse.wheel);
+			
 			if (controls.UI_UP_P)
 			{
 				SoundEffects.playSFX('scroll', false);
@@ -246,7 +249,7 @@ class MainMenuState extends MusicBeatState
 				changeItem(1);
 			}
 
-			if (controls.BACK)
+			if (controls.BACK || FlxG.mouse.justPressedRight)
 			{
 				selectedSomethin = true;
 				//FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -254,7 +257,7 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new TitleState());
 			}
 
-			if (controls.ACCEPT)
+			if (controls.ACCEPT || FlxG.mouse.justPressed)
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
@@ -302,7 +305,7 @@ class MainMenuState extends MusicBeatState
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
-										LoadingState.loadAndSwitchState(new options.OptionsState());
+										MusicBeatState.switchState(new options.OptionsState());
 								}
 							});
 						}

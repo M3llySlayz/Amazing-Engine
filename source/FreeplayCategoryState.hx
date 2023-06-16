@@ -84,6 +84,9 @@ class FreeplayCategoryState extends MusicBeatState {
 		bg.screenCenter(X);
 
 		if (!selectedSomethin) {
+			if (FlxG.mouse.wheel != 0)
+				changeSelection(-FlxG.mouse.wheel);
+
 			if (controls.UI_LEFT_P) 
 			{
 				changeSelection(-1);
@@ -94,12 +97,12 @@ class FreeplayCategoryState extends MusicBeatState {
 				changeSelection(1);
 			}
 
-			if (controls.ACCEPT) {
+			if (controls.ACCEPT || FlxG.mouse.justPressed) {
 				selectCategory();
 			}
 		}
 
-		if (controls.BACK)
+		if (controls.BACK || FlxG.mouse.justPressedRight)
 		{
 			selectedSomethin = true;
 			SoundEffects.playSFX('cancel', false);
@@ -139,7 +142,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 			FreeplayState.curCategory = categoriesList[curSelected];
 			if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
-			LoadingState.loadAndSwitchState(new FreeplayState());
+			MusicBeatState.switchState(new FreeplayState());
 		});
 	}
 }

@@ -149,6 +149,7 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
 				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				FlxG.mouse.visible = false;
 				SoundEffects.playSFX('cancel', false);
 				LoadingState.loadAndSwitchState(new PlayState());
 			}

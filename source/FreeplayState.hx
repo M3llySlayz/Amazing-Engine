@@ -399,8 +399,9 @@ class FreeplayState extends MusicBeatState
 					}
 					else
 					{
-						lightingBG.alpha = 1;
-						FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.quadIn});
+						//killing these just rq
+						//lightingBG.alpha = 1;
+						//FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.quadIn});
 						FlxTween.tween(grpSongs.members[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
 						FlxTween.tween(iconArray[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
 					}
@@ -419,7 +420,7 @@ class FreeplayState extends MusicBeatState
 					} else if (altPressed) {
 						LoadingState.loadAndSwitchState(new PlayState());
 					} else {
-						LoadingState.loadAndSwitchState(new CharMenu());
+						MusicBeatState.switchState(new CharMenu());
 						//FlxG.switchState(new CharMenu());
 					}
 					FlxG.sound.music.volume = 0;
@@ -547,7 +548,8 @@ class FreeplayState extends MusicBeatState
 		for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
 			var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
 				for (modSong in 0...category.songs.length){
-					diffStr = category.songs[modSong][2];
+					if (modSong == curSelected)
+						diffStr = category.songs[modSong][2];
 				}
 			}
 		} else {
