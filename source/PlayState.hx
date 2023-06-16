@@ -325,6 +325,7 @@ class PlayState extends MusicBeatState
 	public var luaArray:Array<FunkinLua> = [];
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	public static var introSoundsSuffix:String = '';
+	public var skipArrowStartTween:Bool = false;
 
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
@@ -2742,6 +2743,7 @@ class PlayState extends MusicBeatState
 		checkEventNote();
 		generatedMusic = true;
 	}
+}
 
 	function eventPushed(event:EventNote) {
 		switch(event.event) {
@@ -2848,7 +2850,6 @@ class PlayState extends MusicBeatState
 		return FlxSort.byValues(FlxSort.ASCENDING, Obj1.strumTime, Obj2.strumTime);
 	}
 
-	public var skipArrowStartTween:Bool = false; //for lua
 	private function generateStaticArrows(player:Int):Void
 	{
 		for (i in 0...Note.ammo[mania])
@@ -2940,6 +2941,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 	}
+}
 
 	function updateNote(note:Note)
 	{
@@ -3079,6 +3081,7 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(1);
 		updateLuaDefaultPos();
 	}
+	
 
 	override function openSubState(SubState:FlxSubState)
 	{
@@ -3169,6 +3172,7 @@ class PlayState extends MusicBeatState
 
 		super.closeSubState();
 	}
+}
 
 	override public function onFocus():Void
 	{
