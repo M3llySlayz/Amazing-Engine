@@ -14,6 +14,7 @@ import flixel.effects.FlxFlicker;
 import flixel.util.FlxTimer;
 import lime.utils.Assets;
 import haxe.Json;
+import Boyfriend.Boyfriend;
 import Character.Character;
 import HealthIcon.HealthIcon;
 import flixel.ui.FlxBar;
