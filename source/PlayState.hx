@@ -2743,7 +2743,6 @@ class PlayState extends MusicBeatState
 		checkEventNote();
 		generatedMusic = true;
 	}
-}
 
 	function eventPushed(event:EventNote) {
 		switch(event.event) {
@@ -2858,7 +2857,6 @@ class PlayState extends MusicBeatState
 			var twnStart:Float = 0.5 + ((0.8 / mania) * i);
 			// FlxG.log.add(i);
 			var targetAlpha:Float = 1;
-<<<<<<< HEAD
 			if (player == 0) {
 				if (!opponentPlay) {
 					if (!ClientPrefs.opponentStrums) targetAlpha = 0;
@@ -2869,13 +2867,7 @@ class PlayState extends MusicBeatState
 					if (!ClientPrefs.opponentStrums) targetAlpha = 0;
 					else if (ClientPrefs.middleScroll) targetAlpha = 0.35;
 				}
-=======
-			if (player < 1)
-			{
-				if(!ClientPrefs.opponentStrums) targetAlpha = 0;
-				else if(ClientPrefs.middleScroll) targetAlpha = 0.35;
->>>>>>> parent of 060d2bd (OPPONENT PLAY)
-			}
+			} // Added closing curly brace here
 
 			var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
 			babyArrow.downScroll = ClientPrefs.downScroll;
@@ -2883,7 +2875,7 @@ class PlayState extends MusicBeatState
 			{
 				//babyArrow.y -= 10;
 				babyArrow.alpha = 0;
-				FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, twnDuration, {ease: FlxEase.circOut, startDelay: twnStart});
+				FlxTween.tween(babyArrow, {alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
 			}
 			else
 			{
@@ -2941,7 +2933,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 	}
-}
 
 	function updateNote(note:Note)
 	{
@@ -3081,7 +3072,6 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(1);
 		updateLuaDefaultPos();
 	}
-	
 
 	override function openSubState(SubState:FlxSubState)
 	{
@@ -3159,20 +3149,12 @@ class PlayState extends MusicBeatState
 			{
 				DiscordClient.changePresence(detailsText, SONG.song + storyDifficultyText, 'melly', true, songLength - Conductor.songPosition - ClientPrefs.noteOffset, 'play');
 			}
-<<<<<<< HEAD
-			else DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", setIcon.getCharacter());
-=======
-			else
-			{
-				DiscordClient.changePresence(detailsText, SONG.song + storyDifficultyText, 'melly');
-			}
->>>>>>> parent of 060d2bd (OPPONENT PLAY)
+			else DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 			#end
 		}
 
 		super.closeSubState();
 	}
-}
 
 	override public function onFocus():Void
 	{
@@ -3373,12 +3355,12 @@ class PlayState extends MusicBeatState
 			var lerpVal:Float = CoolUtil.boundTo(elapsed * 2.4 * cameraSpeed * playbackRate, 0, 1);
 			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 			if(!startingSong && !endingSong && boyfriend.animation.curAnim.name.startsWith('idle')) {
-				boyfriendIdleTime += elapsed;
-				if(boyfriendIdleTime >= 0.15) { // Kind of a mercy thing for making the achievement easier to get as it's apparently frustrating to some playerss
-					boyfriendIdled = true;
+				playerIdleTime += elapsed;
+				if(playerIdleTime >= 0.15) { // Kind of a mercy thing for making the achievement easier to get as it's apparently frustrating to some playerss
+				playerIdled = true;
 				}
 			} else {
-				boyfriendIdleTime = 0;
+				playerIdleTime = 0;
 			}
 		}
 
@@ -4831,16 +4813,9 @@ class PlayState extends MusicBeatState
 		var key:Int = getKeyFromEvent(eventKey);
 		//trace('Pressed: ' + eventKey);
 
-<<<<<<< HEAD
 		if (!cpuControlled && startedCountdown && !paused && key > -1 && FlxG.keys.checkStatus(eventKey, JUST_PRESSED)) {
 			var char:Character = opponentPlay ? dad : boyfriend;
 			if (!char.stunned && generatedMusic && !endingSong) {
-=======
-		if (!cpuControlled && startedCountdown && !paused && key > -1 && FlxG.keys.checkStatus(eventKey, JUST_PRESSED))
-		{
-			if(!boyfriend.stunned && generatedMusic && !endingSong)
-			{
->>>>>>> parent of 060d2bd (OPPONENT PLAY)
 				//more accurate hit time for the ratings?
 				var lastTime:Float = Conductor.songPosition;
 				Conductor.songPosition = FlxG.sound.music.time;
@@ -4991,14 +4966,9 @@ class PlayState extends MusicBeatState
 			notes.forEachAlive(function(daNote:Note)
 			{
 				// hold note functions
-<<<<<<< HEAD
-				if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && dataKeyIsPressed(daNote.noteData) && daNote.canBeHit && daNote.mustPress == !opponentPlay && !daNote.tooLate && (opponentPlay ? !daNote.hitByOpponent : !daNote.wasGoodHit) && !daNote.blockHit) {
-					opponentPlay ? opponentNoteHit(daNote) : goodNoteHit(daNote);
-=======
 				if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && dataKeyIsPressed(daNote.noteData % Note.ammo[mania]) && daNote.canBeHit
 				&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
 					goodNoteHit(daNote);
->>>>>>> parent of 060d2bd (OPPONENT PLAY)
 				}
 			});
 
@@ -5798,7 +5768,7 @@ class PlayState extends MusicBeatState
 							unlock = true;
 						}
 					case 'hype':
-						if(!boyfriendIdled && !usedPractice) {
+						if(!playerIdled && !usedPractice) {
 							unlock = true;
 						}
 					case 'two_keys':
