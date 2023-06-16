@@ -260,10 +260,10 @@ class TitleState extends MusicBeatState
 	{
 		if (!initialized)
 		{
-			if (ClientPrefs.mainSong != 'Iconic') {
+			if (ClientPrefs.mainSong != 'Iconic' || 'Iconic (Extended)') {
 				Conductor.changeBPM(titleJSON.bpm);
 			} else {
-				Conductor.changeBPM(117);
+				Conductor.changeBPM(118);
 			}
 			if(FlxG.sound.music == null) FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')), 0);
 		}
