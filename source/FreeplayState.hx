@@ -387,7 +387,7 @@ class FreeplayState extends MusicBeatState
 			} else if (FlxG.keys.pressed.ALT) {
 				altPressed = true;
 			}
-			
+			persistentUpdate = false;
 			songLowercase = Paths.formatToSongPath(songs[curSelected].songName);
 			songJson = Highscore.formatSong(songLowercase, curDifficulty);
 
