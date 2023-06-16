@@ -108,11 +108,9 @@ class FreeplayState extends MusicBeatState
 				#if MULTI_MODDABLE
 				if (curCategory == '') addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]), 'Easy, Normal, Hard');
 				else {
-					for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
-						var category = FreeplayCategory.categoriesLoaded.get(categoriesLoaded[FreeplayCategoryState.curSelected - 1]);
-						for (modSong in 0...category.songs.length) {
-							addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]), category.songs[modSong][2]);
-						}
+					var category = FreeplayCategory.categoriesLoaded.get(curCategory);
+					for (modSong in 0...category.songs.length) {
+						addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]), category.songs[modSong][2]);
 					}
 				}
 				#else
@@ -141,7 +139,7 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		var categoryText:Alphabet = new Alphabet(0, FlxG.height - 10, curCategory, true);
+		var categoryText:Alphabet = new Alphabet(0, FlxG.height - 60, curCategory, true);
 		categoryText.scaleX = 0.6;
 		categoryText.scaleY = 0.6;
 		categoryText.alpha = 0.4;
@@ -547,11 +545,9 @@ class FreeplayState extends MusicBeatState
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
 		var diffStr:String = '';
 		if (curCategory != '' && curCategory != 'base game') { //if this isn't vanilla
-			for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
-				var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
-				for (modSong in 0...category.songs.length) {
-					if (modSong == curSelected) diffStr = category.songs[modSong][2];
-				}
+			var category = FreeplayCategory.categoriesLoaded.get(curCategory);
+			for (modSong in 0...category.songs.length) {
+				if (modSong == curSelected) diffStr = category.songs[modSong][2];
 			}
 		} else {
 			diffStr = WeekData.getCurrentWeek().difficulties;
