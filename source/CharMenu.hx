@@ -14,7 +14,6 @@ import flixel.effects.FlxFlicker;
 import flixel.util.FlxTimer;
 import lime.utils.Assets;
 import haxe.Json;
-import Boyfriend.Boyfriend;
 import Character.Character;
 import HealthIcon.HealthIcon;
 import flixel.ui.FlxBar;
@@ -32,7 +31,8 @@ import FreeplayState;
 class CharMenu extends MusicBeatState{
 	// Selectable Character Variables
 	var selectableCharacters:Array<String> = ['bf', 'bf-christmas', 'MellyBF', 'JBBF']; // Currently Selectable characters
-	var selectableCharactersNames:Array<String> = ['Default Character', 'Boyfriend in Week 5', 'Melly Boyfriend', 'JB Boyfriend']; // Characters names
+	var selectableCharactersNames:Array<String> = ['Default Character', 'Week 5 Boyfriend', 'Bofriend but Black (Melly)', 'Boyfriend But one 8th Mexican (JB)']; // Characters names
+	//we're funny here, so character names are also funny. anyone who thinks it's racist is probably not even the race being referred to lol
 	var selectableCharactersColors:Array<FlxColor> = [0xFF00ABC5, 0xFF00ABC5, 0xFFAD0101, 0xFFDE5900]; // The colors used for the background
 	var selectableCharactersOffsets:Array<Array<Int>> = [[10, 10], [35, 10], [10, 10], [10, 10]]; // [x, y]
 	
@@ -190,12 +190,11 @@ class CharMenu extends MusicBeatState{
 
 			characterImage.screenCenter(XY);
 			imageArray.push(characterImage);
-			characterImage.flipX = true;
 			add(characterImage);
 		}
 
 		// Character select text at the top of the screen
-		var selectionHeader:Alphabet = new Alphabet(0, 50, 'Select your character', true);
+		var selectionHeader:Alphabet = new Alphabet(0, 50, 'Character Select', true);
 		selectionHeader.screenCenter(X);
 		add(selectionHeader);
 		
@@ -481,7 +480,7 @@ class CharMenu extends MusicBeatState{
 	function resetCharacterSelectionVars() 
 	{
 		// Ensures the save data has at least 1 value
-		if (FlxG.save.data.daUnlockedChars == null) FlxG.save.data.daUnlockedChars = [false];
+		if (FlxG.save.data.daUnlockedChars == null) {FlxG.save.data.daUnlockedChars = [false];}
 
 		// Allows the code to determind if this has already been reset
 		alreadyReset = true;
