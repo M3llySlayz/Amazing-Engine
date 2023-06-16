@@ -458,7 +458,7 @@ class Note extends FlxSprite
 		}
 		*/
 
-		if (mustPress)
+		if (mustPress == !PlayState.instance.opponentPlay)
 		{
 			// ok river
 			if (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult)
@@ -467,7 +467,7 @@ class Note extends FlxSprite
 			else
 				canBeHit = false;
 
-			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
+			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && (PlayState.instance.opponentPlay ? !hitByOpponent : !wasGoodHit))
 				tooLate = true;
 		}
 		else
@@ -476,8 +476,8 @@ class Note extends FlxSprite
 
 			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
 			{
-				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
-					wasGoodHit = true;
+				if((isSustainNote && (PlayState.instance.opponentPlay ? prevNote.wasGoodHit : prevNote.hitByOpponent)) || strumTime <= Conductor.songPosition)
+					PlayState.instance.opponentPlay ? hitByOpponent = true : wasGoodHit = true;
 			}
 		}
 

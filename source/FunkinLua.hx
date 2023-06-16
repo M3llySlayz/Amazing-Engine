@@ -183,6 +183,7 @@ class FunkinLua {
 		set('healthGainMult', PlayState.instance.healthGain);
 		set('healthLossMult', PlayState.instance.healthLoss);
 		set('playbackRate', PlayState.instance.playbackRate);
+		set('opponentPlay', PlayState.instance.opponentPlay);
 		set('instakillOnMiss', PlayState.instance.instakillOnMiss);
 		set('botPlay', PlayState.instance.cpuControlled);
 		set('practice', PlayState.instance.practiceMode);
@@ -1086,6 +1087,10 @@ class FunkinLua {
 			}
 			setVarInArray(Type.resolveClass(classVar), variable, value);
 			return true;
+		});
+
+		Lua_helper.add_callback(lua, "saveStrumPos", function(isPlayer:Bool) {
+			PlayState.instance.saveStrumPos(isPlayer);
 		});
 
 		//shitass stuff for epic coders like me B)  *image of obama giving himself a medal*
