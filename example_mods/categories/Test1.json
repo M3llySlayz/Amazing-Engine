@@ -1,10 +1,10 @@
 {
-	"category": "test 1",
+	"category": "Test1",
 	"name": "Test Category 1",
 	"songs": [
-		["Test 1", "bf"],
-		["Test 2", "bf"],
-		["Test 3", "bf"]
+		["Test 1", "bf", "Easy, Normal, Hard"],
+		["Test 2", "bf", "Normal, Hard"],
+		["Test 3", "bf", "Hard"]
 	],
 	"songColors": [
 		[0, 255, 255],

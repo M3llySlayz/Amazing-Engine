@@ -106,12 +106,12 @@ class FreeplayState extends MusicBeatState
 				var colors:Array<Int> = song[2];
 				if(colors == null || colors.length < 3) colors = [146, 113, 253];
 				#if MULTI_MODDABLE
-				if (curCategory == '') addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
+				if (curCategory == '') addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]), 'Easy, Normal, Hard');
 				else {
 					for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
 						var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
 						for (modSong in 0...category.songs.length) {
-							addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]));
+							addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]), category.songs[modSong][2]);
 						}
 					}
 				}
@@ -245,9 +245,9 @@ class FreeplayState extends MusicBeatState
 		super.closeSubState();
 	}
 
-	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
+	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int, difficulties:String)
 	{
-		songs.push(new SongMetadata(songName, weekNum, songCharacter, color));
+		songs.push(new SongMetadata(songName, weekNum, songCharacter, color, difficulties));
 	}
 
 	function weekIsLocked(name:String):Bool {
@@ -400,7 +400,7 @@ class FreeplayState extends MusicBeatState
 					else
 					{
 						lightingBG.alpha = 1;
-						FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
+						FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.quadIn});
 						FlxTween.tween(grpSongs.members[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
 						FlxTween.tween(iconArray[i], {alpha: 0.0}, 0.4, {ease: FlxEase.quadIn});
 					}
@@ -542,7 +542,18 @@ class FreeplayState extends MusicBeatState
 		PlayState.storyWeek = songs[curSelected].week;
 
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
-		var diffStr:String = WeekData.getCurrentWeek().difficulties;
+		var diffStr:String = '';
+		if (curCategory != '' && curCategory != 'base game'){ //if this isn't vanilla
+		for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
+			var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
+				for (modSong in 0...category.songs.length){
+					diffStr = category.songs[modSong][2];
+				}
+			}
+		} else {
+			diffStr = WeekData.getCurrentWeek().difficulties;
+		}
+
 		if(diffStr != null) diffStr = diffStr.trim(); //Fuck you HTML5
 
 		if(diffStr != null && diffStr.length > 0)
@@ -598,13 +609,15 @@ class SongMetadata
 	public var songCharacter:String = "";
 	public var color:Int = -7179779;
 	public var folder:String = "";
+	public var difficulties:String;
 
-	public function new(song:String, week:Int, songCharacter:String, color:Int)
+	public function new(song:String, week:Int, songCharacter:String, color:Int, difficulties:String)
 	{
 		this.songName = song;
 		this.week = week;
 		this.songCharacter = songCharacter;
 		this.color = color;
+		this.difficulties = difficulties;
 		this.folder = Paths.currentModDirectory;
 		if(this.folder == null) this.folder = '';
 	}

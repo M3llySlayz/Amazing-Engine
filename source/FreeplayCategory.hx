@@ -38,12 +38,12 @@ class FreeplayCategory {
 
 	public static function createCategoryFile():FreeplayCategoryFile {
 		var categoryFile:FreeplayCategoryFile = {
-			category: "test 1",
-			name: "Test Category 1",
+			category: "Test3",
+			name: "Test Category 3",
 			songs: [
-				["Test 1", "bf"],
-				["Test 2", "bf"],
-				["Test 3", "bf"]
+				["Test 1", "bf", 'Easy, Normal, Hard'],
+				["Test 2", "bf", 'Normal, Hard'],
+				["Test 3", "bf", 'Hard']
 			],
 			songColors: [
 				[0, 255, 255],
@@ -138,12 +138,12 @@ class FreeplayCategory {
 	
 		#if MODS_ALLOWED
 		for (i in 0...directories.length) {
-			var directory:String = directories[i] + 'data/';
+			var directory:String = directories[i] + 'categories/';
 			if(FileSystem.exists(directory)) {
 				var listOfCategories:Array<String> = CoolUtil.coolTextFile(directory + 'categoryList.txt');
 				for (daCategory in listOfCategories)
 				{
-					var path:String = directory + 'modsCategoriesList.json';
+					var path:String = directory + daCategory + '.json';
 					if(sys.FileSystem.exists(path))
 					{
 						addCategory(daCategory, path, directories[i], i, originalLength);
@@ -188,7 +188,7 @@ class FreeplayCategory {
 
 		#if MODS_ALLOWED
 		if(FileSystem.exists(path)) {
-			rawJson = File.getContent(path);
+			try {rawJson = File.getContent(path);} catch(e:Any) { trace('Think this means the JSON is bad');};
 		}
 		#else
 		if(OpenFlAssets.exists(path)) {
