@@ -14,7 +14,6 @@ import flixel.effects.FlxFlicker;
 import flixel.util.FlxTimer;
 import lime.utils.Assets;
 import haxe.Json;
-import Boyfriend.Boyfriend;
 import Character.Character;
 import HealthIcon.HealthIcon;
 import flixel.ui.FlxBar;
@@ -32,7 +31,7 @@ import FreeplayState;
 class CharMenu extends MusicBeatState{
 	// Selectable Character Variables
 	var selectableCharacters:Array<String> = ['bf', 'bf-christmas', 'MellyBF', 'JBBF']; // Currently Selectable characters
-	var selectableCharactersNames:Array<String> = ['Default Character', 'Boyfriend but Christmas', 'Boyfriend But Black', 'Boyfriend but Hispanic']; // Characters names
+	var selectableCharactersNames:Array<String> = ['Default Character', 'Boyfriend in Week 5', 'Melly Boyfriend', 'JB Boyfriend']; // Characters names
 	var selectableCharactersColors:Array<FlxColor> = [0xFF00ABC5, 0xFF00ABC5, 0xFFAD0101, 0xFFDE5900]; // The colors used for the background
 	var selectableCharactersOffsets:Array<Array<Int>> = [[10, 10], [35, 10], [10, 10], [10, 10]]; // [x, y]
 	
@@ -71,7 +70,7 @@ class CharMenu extends MusicBeatState{
 	var menuBG:FlxSprite; // The background
 	var bgOverlay:FlxSprite;
 	var colorTween:FlxTween = null;
-	private var imageArray:Array<Boyfriend> = []; // Array of all the selectable characters
+	private var imageArray:Array<Character> = []; // Array of all the selectable characters
 	var selectedCharName:FlxText; // Name of selected character
 	var alphaTweens:Array<FlxTween> = [null]; // Copying destinationTweens idea for this
 
@@ -182,7 +181,7 @@ class CharMenu extends MusicBeatState{
 		// Adds the chars to the selection
 		for (i in 0...unlockedCharacters.length)
 		{
-			var characterImage:Boyfriend = new Boyfriend(0, 0, unlockedCharacters[i]);
+			var characterImage:Character = new Character(0, 0, unlockedCharacters[i]);
 			if (StringTools.endsWith(unlockedCharacters[i], '-pixel'))
 				characterImage.scale.set(5.5, 5.5);
 			else
