@@ -91,6 +91,7 @@ class ModsMenuState extends MusicBeatState
 		noModsTxt.screenCenter();
 		visibleWhenNoMods.push(noModsTxt);
 
+		/*
 		manual = new FlxSprite(0, 0);
 		manual.frames = Paths.getSparrowAtlas('extra-keys/manual_book');
 		manual.animation.addByPrefix('normal', 'manual icon', 30, true);
@@ -100,6 +101,7 @@ class ModsMenuState extends MusicBeatState
 		manual.y = FlxG.height - manual.height;
 		manual.animation.play('normal', true);
 		manual.updateHitbox();
+		*/
 
 		var path:String = 'modsList.txt';
 		if(FileSystem.exists(path))
@@ -531,7 +533,7 @@ class ModsMenuState extends MusicBeatState
 			openSubState(new options.DeleteSavesSubState());
 		}
 
-		if (FlxG.mouse.overlaps(manual)) {
+	/*	if (FlxG.mouse.overlaps(manual)) {
 			if (manual.animation.curAnim.name != 'hover') {
 				manual.animation.play('hover', true);
 				if (FlxG.mouse.justPressed){
@@ -542,7 +544,7 @@ class ModsMenuState extends MusicBeatState
 			if (manual.animation.curAnim != null && manual.animation.curAnim.name != 'normal') {
 				manual.animation.play('normal', true);
 			}
-		}
+		}*/
 
 		if(canExit && controls.BACK)
 		{

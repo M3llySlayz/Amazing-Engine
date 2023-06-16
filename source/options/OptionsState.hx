@@ -96,6 +96,7 @@ class OptionsState extends MusicBeatState
 		changeSelection();
 		ClientPrefs.saveSettings();
 
+		/*
 		theCircle = new FlxSprite().loadGraphic(Paths.image('book bg'));
 		add(theCircle);
 		theCircle.x = FlxG.width - (theCircle.width / 2);
@@ -122,6 +123,7 @@ class OptionsState extends MusicBeatState
 		changeLogSheet.x = FlxG.width + manual.width;
 		changeLogSheet.y = FlxG.height - changeLogSheet.height;
 		changeLogSheet.updateHitbox();
+		*/
 
 		super.create();
 	}
@@ -173,6 +175,7 @@ class OptionsState extends MusicBeatState
 			openSelectedSubstate(options[curSelected]);
 		}
 
+		/*
 		if (FlxG.mouse.overlaps(manual) || FlxG.mouse.overlaps(changeLogSheet)) {
 			if (manual.animation.curAnim.name != 'hover') {
 				manual.animation.play('hover', true);
@@ -193,6 +196,7 @@ class OptionsState extends MusicBeatState
 			//FlxTween.tween(manual, {x: FlxG.width - manual.width}, 1, {ease: FlxEase.quartInOut});
 			//FlxTween.tween(changeLogSheet, {x: FlxG.width + manual.width}, 1, {ease: FlxEase.quartInOut});
 		}
+		*/
 	}
 	
 	function changeSelection(change:Int = 0) {
