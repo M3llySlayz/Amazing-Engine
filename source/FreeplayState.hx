@@ -548,8 +548,7 @@ class FreeplayState extends MusicBeatState
 		for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
 			var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
 				for (modSong in 0...category.songs.length){
-					if (modSong == curSelected)
-						diffStr = category.songs[modSong][2];
+					if (modSong == curSelected) diffStr = category.songs[modSong][2];
 				}
 			}
 		} else {
