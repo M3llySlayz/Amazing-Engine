@@ -39,7 +39,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		FlxG.cameras.add(camOther, false);
 
 		FreeplayCategory.reloadCategoryFiles();
-		for (categoriesLoaded in 0...FreeplayCategory.categoryList.length-1) {
+		for (categoriesLoaded in 0...FreeplayCategory.categoryList.length) {
 			var categories = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[categoriesLoaded]);
 			categoriesList.push(categories.category);
 			categoryNamesList.push(categories.name);
