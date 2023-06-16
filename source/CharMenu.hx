@@ -195,7 +195,7 @@ class CharMenu extends MusicBeatState{
 		}
 
 		// Character select text at the top of the screen
-		var selectionHeader:Alphabet = new Alphabet(0, 50, 'Character Select', true);
+		var selectionHeader:Alphabet = new Alphabet(0, 50, 'Select your character', true);
 		selectionHeader.screenCenter(X);
 		add(selectionHeader);
 		
