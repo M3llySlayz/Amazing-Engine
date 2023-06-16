@@ -2866,11 +2866,12 @@ class PlayState extends MusicBeatState
 		switch(event.event) {
 			case 'Kill Henchmen': //Better timing so that the kill sound matches the beat intended
 				return 280; //Plays 280ms before the actual position
-		}
 		return 0;
 
 		case 'Trigger Opponent Play': // Better timing when placing on a note
 			return -83.3333333333333; // Triggers a note (or grid square) before, oh and fuck you it's a long ass number, round my ass >:)
+		}
+			
 	}
 
 	function sortByShit(Obj1:Note, Obj2:Note):Int
