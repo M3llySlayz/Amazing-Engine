@@ -234,8 +234,8 @@ class MainMenuState extends MusicBeatState
 		if (!selectedSomethin)
 		{
 			if (FlxG.mouse.wheel != 0)
-				changeSelection(-FlxG.mouse.wheel);
-			
+				changeItem(-FlxG.mouse.wheel);
+
 			if (controls.UI_UP_P)
 			{
 				SoundEffects.playSFX('scroll', false);
