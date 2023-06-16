@@ -45,21 +45,21 @@ class MusicSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangePauseMusic;
 
 		var option:Option = new Option('Game Over Song:',
-		"What song do you prefer for the Game Over?",
-		'gameOverSong',
-		'string',
-		'Default',
-		['Default', 'A Taken L', 'Far', 'Regret']);
+			"What song do you prefer for the Game Over?",
+			'gameOverSong',
+			'string',
+			'Default',
+			['Default', 'A Taken L', 'Far', 'Regret']);
 		addOption(option);
 
 		option.onChange = onChangeGameOverMusic;
 
 		var option:Option = new Option('Main Menu Song:',
-		"What song do you prefer for the Main Menu?",
-		'mainSong',
-		'string',
-		'Freaky',
-		['Freaky', 'Iconic', 'Ambience']);
+			"What song do you prefer for the Main Menu?",
+			'mainSong',
+			'string',
+			'Freaky',
+			['Freaky', 'Iconic', 'Iconic (Extended)', 'Ambience']);
 		addOption(option);
 		
 		option.onChange = onChangeMenuMusic;

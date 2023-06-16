@@ -141,6 +141,13 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
+		var categoryText:Alphabet = new Alphabet(0, FlxG.height - 60, curCategory, true);
+		categoryText.scaleX = 0.6;
+		categoryText.scaleY = 0.6;
+		categoryText.alpha = 0.4;
+		categoryText.x = FlxG.width - categoryText.width - 30;
+		add(categoryText);
+
 		for (i in 0...songs.length)
 		{
 			songText = new Alphabet(90, 320, songs[i].songName, true);
@@ -198,7 +205,7 @@ class FreeplayState extends MusicBeatState
 
 		// JUST DOIN THIS SHIT FOR TESTING!!!
 		/* 
-			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
+			var md:String = 64453kdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
 
 			var texFel:TextField = new TextField();
 			texFel.width = FlxG.width;
@@ -420,7 +427,7 @@ class FreeplayState extends MusicBeatState
 					} else if (altPressed) {
 						LoadingState.loadAndSwitchState(new PlayState());
 					} else {
-						MusicBeatState.switchState(new CharMenu());
+						LoadingState.loadAndSwitchState(new CharMenu());
 						//FlxG.switchState(new CharMenu());
 					}
 					FlxG.sound.music.volume = 0;

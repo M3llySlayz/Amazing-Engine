@@ -34,6 +34,7 @@ class OptionsState extends MusicBeatState
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 	var manual:FlxSprite;
+	var theCircle:FlxSprite;
 	var changeLogSheet:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
@@ -95,15 +96,24 @@ class OptionsState extends MusicBeatState
 		changeSelection();
 		ClientPrefs.saveSettings();
 
+		theCircle = new FlxSprite().loadGraphic(Paths.image('book bg'));
+		add(theCircle);
+		theCircle.x = FlxG.width - (theCircle.width / 2);
+		theCircle.y = FlxG.height - (theCircle.height / 2);
+		theCircle.updateHitbox();
+		
 		manual = new FlxSprite(0, 0);
-		manual.frames = Paths.getSparrowAtlas('extra-keys/manual_book');
-		manual.animation.addByPrefix('normal', 'manual icon', 30, true);
-		manual.animation.addByPrefix('hover', 'manual icon hover', 30, true);
+		manual.frames = Paths.getSparrowAtlas('ae book');
+		manual.animation.addByPrefix('normal', 'book0', 30, true);
+		manual.animation.addByPrefix('alert', 'book unread', 30, true);
+		manual.animation.addByPrefix('hover', 'book select', 30, true);
 		add(manual);
 		manual.x = FlxG.width - manual.width;
 		manual.y = FlxG.height - manual.height;
 		manual.animation.play('normal', true);
 		manual.updateHitbox();
+
+		
 
 		changeLogSheet = new FlxSprite(0, 0);
 		changeLogSheet.loadGraphic(Paths.image('changelogsheet'));
@@ -149,6 +159,7 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
 			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			FlxG.mouse.visible = false;
 			SoundEffects.playSFX('cancel', false);
 			if (ClientPrefs.luaMenu){
 				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
@@ -166,14 +177,21 @@ class OptionsState extends MusicBeatState
 			if (manual.animation.curAnim.name != 'hover') {
 				manual.animation.play('hover', true);
 			}
-			FlxTween.tween(manual, {x: manual.x - changeLogSheet.width}, 1, {ease: FlxEase.quartInOut});
-			FlxTween.tween(changeLogSheet, {x: FlxG.width - changeLogSheet.width}, 1, {ease: FlxEase.quartInOut});
+			//FlxTween.tween(manual, {x: manual.x - changeLogSheet.width}, 1, {ease: FlxEase.quartInOut});
+			//FlxTween.tween(changeLogSheet, {x: FlxG.width - changeLogSheet.width}, 1, {ease: FlxEase.quartInOut});
 		} else {
-			if (manual.animation.curAnim != null && manual.animation.curAnim.name != 'normal') {
-				manual.animation.play('normal', true);
+			if (!ClientPrefs.justUpdated){
+				if (manual.animation.curAnim != null && manual.animation.curAnim.name != 'normal') {
+					manual.animation.play('normal', true);
+				}
+			} else {
+				if (manual.animation.curAnim != null && manual.animation.curAnim.name != 'alert') {
+					manual.animation.play('alert', true);
+					ClientPrefs.justUpdated = false;
+				}
 			}
-			FlxTween.tween(manual, {x: FlxG.width - manual.width}, 1, {ease: FlxEase.quartInOut});
-			FlxTween.tween(changeLogSheet, {x: FlxG.width + manual.width}, 1, {ease: FlxEase.quartInOut});
+			//FlxTween.tween(manual, {x: FlxG.width - manual.width}, 1, {ease: FlxEase.quartInOut});
+			//FlxTween.tween(changeLogSheet, {x: FlxG.width + manual.width}, 1, {ease: FlxEase.quartInOut});
 		}
 	}
 	

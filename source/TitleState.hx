@@ -150,7 +150,8 @@ class TitleState extends MusicBeatState
 		if(ClientPrefs.checkForUpdates && !closedState) {
 			trace('checking for update');
 			var http = new haxe.Http("https://raw.githubusercontent.com/M3llySlayz/Amazing-Engine/main/gitVersion.txt");
-
+			var neededUpdate:Bool = ClientPrefs.neededUpdate;
+			var justUpdated:Bool = ClientPrefs.justUpdated;
 			http.onData = function (data:String)
 			{
 				newVersion = data;
@@ -160,6 +161,15 @@ class TitleState extends MusicBeatState
 				if(curVersion < updateVersion) { //yeah i'm getting tired of having to constantly gettin that warning lmao
 					trace('versions arent matching!');
 					mustUpdate = true;
+					neededUpdate = true;
+				}
+				else{
+					if (neededUpdate && !mustUpdate){
+						neededUpdate = false;
+						justUpdated = true;
+					} else if (!neededUpdate && !justUpdated){
+						//do nothing lol
+					}
 				}
 			}
 
@@ -168,6 +178,8 @@ class TitleState extends MusicBeatState
 			}
 
 			http.request();
+			ClientPrefs.neededUpdate = neededUpdate;
+			ClientPrefs.justUpdated = justUpdated;
 		}
 		#end
 
@@ -251,7 +263,7 @@ class TitleState extends MusicBeatState
 			if (ClientPrefs.mainSong != 'Iconic') {
 				Conductor.changeBPM(titleJSON.bpm);
 			} else {
-				Conductor.changeBPM(118);
+				Conductor.changeBPM(117);
 			}
 			if(FlxG.sound.music == null) FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')), 0);
 		}

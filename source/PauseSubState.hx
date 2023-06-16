@@ -409,7 +409,7 @@ class PauseSubState extends MusicBeatSubstate
 						PlayState.changedDifficulty = false;
 						PlayState.cancelMusicFadeTween();
 						//MainMenuState.wasPaused = true;
-						MusicBeatState.switchState(new options.pause.OptionsState());
+						LoadingState.loadAndSwitchState(new options.pause.OptionsState());
 					case "Leave Charting Mode":
 						restartSong();
 						PlayState.chartingMode = false;
