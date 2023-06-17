@@ -3372,11 +3372,11 @@ class PlayState extends MusicBeatState
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
-			if (practiceMode && cpuControlled){
+			if (practiceMode && cpuControlled) {
 				botplayTxt.text = 'BOTPLAY\nPRACTICE MODE';
-			} else if (practiceMode){
+			} else if (practiceMode) {
 				botplayTxt.text = 'PRACTICE MODE';
-			} else if (cpuControlled){
+			} else if (cpuControlled) {
 				botplayTxt.text = 'BOTPLAY';
 			}
 		}
