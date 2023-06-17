@@ -41,9 +41,9 @@ class FreeplayCategory {
 			category: "Test3",
 			name: "Test Category 3",
 			songs: [
-				["Test 1", "bf", 'Easy, Normal, Hard'],
-				["Test 2", "bf", 'Normal, Hard'],
-				["Test 3", "bf", 'Hard']
+				["Test 1", "bf", "Easy, Normal, Hard"],
+				["Test 2", "bf", "Normal, Hard"],
+				["Test 3", "bf", "Hard"]
 			],
 			songColors: [
 				[0, 255, 255],
@@ -61,7 +61,6 @@ class FreeplayCategory {
 		songs = categoryFile.songs;
 		songColors = categoryFile.songColors;
 		color = categoryFile.color;
-
 		this.fileName = fileName;
 	}
 
