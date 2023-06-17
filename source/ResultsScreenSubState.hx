@@ -137,7 +137,7 @@ class ResultsScreenSubState extends MusicBeatSubstate {
 				MusicBeatState.switchState(new StoryMenuState());
 			else
 				MusicBeatState.switchState(new FreeplayState());
-			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
+			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')));
 		}
 	}
 }
