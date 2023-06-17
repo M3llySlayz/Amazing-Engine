@@ -68,6 +68,7 @@ class FreeplayState extends MusicBeatState
 	//var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 	var lightingBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xFF777777);
 
+	var selectedSomethin = false;
 	override function create()
 	{
 		if (!ClientPrefs.bigCache) {
@@ -300,24 +301,24 @@ class FreeplayState extends MusicBeatState
 
 		if(songs.length > 1)
 		{
-			if (upP)
+			if (upP && !selectedSomethin)
 			{
 				changeSelection(-shiftMult);
 				holdTime = 0;
 			}
-			if (downP)
+			if (downP && !selectedSomethin)
 			{
 				changeSelection(shiftMult);
 				holdTime = 0;
 			}
 
-			if (FlxG.mouse.justPressedMiddle)
+			if (FlxG.mouse.justPressedMiddle && !selectedSomethin)
 			{
 				if (mouseToggle) mouseToggle = false;
 				else mouseToggle = true;
 			}
 
-			if(controls.UI_DOWN || controls.UI_UP)
+			if((controls.UI_DOWN || controls.UI_UP) && !selectedSomethin)
 			{
 				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
 				holdTime += elapsed;
@@ -329,7 +330,7 @@ class FreeplayState extends MusicBeatState
 				}
 			}
 
-			if(FlxG.mouse.wheel != 0 && !mouseToggle)
+			if(FlxG.mouse.wheel != 0 && !mouseToggle && !selectedSomethin)
 			{
 				changeDiff();
 				SoundEffects.playSFX('scroll', false);
@@ -340,13 +341,13 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 
-		if (controls.UI_LEFT_P)
+		if (controls.UI_LEFT_P && !selectedSomethin)
 			changeDiff(-1);
-		else if (controls.UI_RIGHT_P)
+		else if (controls.UI_RIGHT_P && !selectedSomethin)
 			changeDiff(1);
-		else if (upP || downP) changeDiff();
+		else if ((upP || downP) && !selectedSomethin) changeDiff();
 
-		if (controls.BACK || FlxG.mouse.justPressedRight)
+		if ((controls.BACK || FlxG.mouse.justPressedRight) && !selectedSomethin)
 		{
 			persistentUpdate = false;
 			if(colorTween != null) {
@@ -356,12 +357,12 @@ class FreeplayState extends MusicBeatState
 			MusicBeatState.switchState(new FreeplayCategoryState());
 		}
 
-		if(ctrl)
+		if(ctrl && !selectedSomethin)
 		{
 			persistentUpdate = false;
 			openSubState(new GameplayChangersSubstate());
 		}
-		else if(space)
+		else if(space && !selectedSomethin)
 		{
 			if(instPlaying != curSelected)
 			{
@@ -378,7 +379,7 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 
-		else if (accepted || FlxG.mouse.justPressed)
+		else if ((accepted || FlxG.mouse.justPressed) && !selectedSomethin)
 		{
 			var shiftPressed:Bool = false;
 			var altPressed:Bool = false;
@@ -396,6 +397,7 @@ class FreeplayState extends MusicBeatState
 				PlayState.SONG = Song.loadFromJson(songJson, songLowercase);
 				PlayState.isStoryMode = false;
 				PlayState.storyDifficulty = curDifficulty;
+				selectedSomethin = true;
 				for (i in 0...grpSongs.members.length)
 				{
 					if (i == curSelected)
@@ -433,9 +435,9 @@ class FreeplayState extends MusicBeatState
 				var errorText:FlxText = new FlxText(-70, FlxG.height - 50, 0, "Oops! We can't seem to find your chart file. You sure it's named '"+ songJson +"'?");
 				errorText.alpha = 0;
 				add(errorText);
-				FlxTween.tween(errorText, {x: 0, alpha: 1}, 0.4, {ease: FlxEase.quadIn});
+				FlxTween.tween(errorText, {x: 50, alpha: 1}, 0.4, {ease: FlxEase.quadOut});
 				new FlxTimer().start(3, function (tmr:FlxTimer) {
-					FlxTween.tween(errorText, {x: -50, alpha: 0}, 2, {ease: FlxEase.quadIn});
+					FlxTween.tween(errorText, {x: -50, alpha: 0}, 2, {ease: FlxEase.quadOut});
 				});
 			}
 		}
