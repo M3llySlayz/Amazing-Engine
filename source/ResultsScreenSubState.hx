@@ -80,7 +80,7 @@ class ResultsScreenSubState extends MusicBeatSubstate {
 		#else
 		pressEnterTxt = new FlxText(400, 650, FlxG.width - 800, "[Press ENTER to continue]", 32);
 		#end
-		pressEnterTxt.setFormat("vcr.ttf", 30, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		pressEnterTxt.setFormat("VCR OSD Mono", 30, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		pressEnterTxt.scrollFactor.set();
 		pressEnterTxt.visible = true;
 		add(pressEnterTxt);
