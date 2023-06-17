@@ -5826,7 +5826,7 @@ class PlayState extends MusicBeatState
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		healthGain = ClientPrefs.getGameplaySetting('healthgain', 1);
 		healthLoss = ClientPrefs.getGameplaySetting('healthloss', 1);
-		opponentPlay = ClientPrefs.getGameplaySetting('opponentpaly', false);
+		//opponentPlay = ClientPrefs.getGameplaySetting('opponentpaly', false);
 		songSpeed = ClientPrefs.getGameplaySetting('scrollspeed', 1);
 		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype', 'multiplicative');
 	}
