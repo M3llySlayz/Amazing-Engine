@@ -110,7 +110,6 @@ class CharMenu extends MusicBeatState{
 				FlxG.save.data.daUnlockedChars[Std.parseInt(achievementUnlocks[i][1])] = false;
 			}
 		}
-
         persistentUpdate = true;
 
 		/*hopefully adds modded characters
@@ -231,11 +230,7 @@ class CharMenu extends MusicBeatState{
 	{
 		selectedCharName.text = unlockedCharactersNames[curSelected].toUpperCase();
 		selectedCharName.x = FlxG.width - (selectedCharName.width + 10);
-		if (selectedCharName.text == '' || selectedCharName.text == null)
-		{
-			trace('No name');
-			selectedCharName.text = '';
-		}
+		if (selectedCharName.text == '' || selectedCharName.text == null) selectedCharName.text = 'Unnamed';
 
 		// Must be changed depending on how an engine uses its own controls
 		var leftPress = controls.UI_LEFT_P; // Default for Psych
@@ -277,13 +272,14 @@ class CharMenu extends MusicBeatState{
 				FlxFlicker.flicker(imageArray[curSelected], 0);
 				SoundEffects.playSFX('confirm', false);
 
-				new FlxTimer().start(0.75, function(tmr:FlxTimer)
+				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
+					PlayState.SONG = Song.loadFromJson(PlayState.SONG.song+CoolUtil.getDifficultyFilePath(), PlayState.SONG.song);
 					FlxG.sound.music.volume = 0;
 					persistentUpdate = false;
 					PlayState.isStoryMode = false;
 					PlayState.storyDifficulty = FreeplayState.curDifficulty;
-					MusicBeatState.switchState(new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState());
 				});
 			}
 			if (goBack)
@@ -315,8 +311,8 @@ class CharMenu extends MusicBeatState{
 			{
 				if (i == curSelected) {imageArray[i].dance();}
 			}
-			super.update(elapsed);
 		}
+		super.update(elapsed);
 	}
 
 	function initializeChars()
@@ -386,7 +382,7 @@ class CharMenu extends MusicBeatState{
 			}
 			// if (moveTween != null) moveTween.cancel();
 			if (destinationTweens[i] != null) destinationTweens[i].cancel();
-			destinationTweens[i] = FlxTween.tween(imageArray[i], {x : destinationX}, tweenTime, {ease: FlxEase.quadInOut});
+			destinationTweens[i] = FlxTween.tween(imageArray[i], {x : destinationX}, tweenTime, {ease: FlxEase.quadOut});
 		}
 		
 		unlockedCharsCheck();
@@ -400,8 +396,7 @@ class CharMenu extends MusicBeatState{
 
 		// menuBG.loadGraphic(Paths.image(unlockedCharactersBGs[curSelected], backgroundFolder));
 		if (colorTween != null) colorTween.cancel();
-		// colorTween = FlxTween.tween(menuBG, {color : unlockedCharactersColors[curSelected]}, tweenTime);
-		colorTween = FlxTween.color(menuBG, tweenTime, menuBG.color, unlockedCharactersColors[curSelected], {ease: FlxEase.sineOut});
+		colorTween = FlxTween.color(menuBG, tweenTime, menuBG.color, unlockedCharactersColors[curSelected], {ease: FlxEase.quadOut});
 
 		icon = new HealthIcon(unlockedCharacters[curSelected], true);
 
@@ -479,7 +474,7 @@ class CharMenu extends MusicBeatState{
 	function resetCharacterSelectionVars() 
 	{
 		// Ensures the save data has at least 1 value
-		if (FlxG.save.data.daUnlockedChars == null) {FlxG.save.data.daUnlockedChars = [false];}
+		if (FlxG.save.data.daUnlockedChars == null) FlxG.save.data.daUnlockedChars = [false];
 
 		// Allows the code to determind if this has already been reset
 		alreadyReset = true;
@@ -490,7 +485,7 @@ class CharMenu extends MusicBeatState{
 
 		// Ensures the characters are reset and that the first one is the default character
 		unlockedCharacters = selectableCharacters;
-		unlockedCharacters[0] = PlayState.SONG.player1; 
+		if (PlayState.SONG.player1 != null) unlockedCharacters[0] = PlayState.SONG.player1;
 
 		// Grabs default character names
 		unlockedCharactersNames = selectableCharactersNames;

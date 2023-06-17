@@ -417,12 +417,11 @@ class FreeplayState extends MusicBeatState
 						colorTween.cancel();
 					}
 					if (shiftPressed) {
-						LoadingState.loadAndSwitchState(new ChartingState());
+						MusicBeatState.switchState(new ChartingState());
 					} else if (altPressed) {
 						LoadingState.loadAndSwitchState(new PlayState());
 					} else {
 						LoadingState.loadAndSwitchState(new CharMenu());
-						//FlxG.switchState(new CharMenu());
 					}
 					FlxG.sound.music.volume = 0;
 					destroyFreeplayVocals();
