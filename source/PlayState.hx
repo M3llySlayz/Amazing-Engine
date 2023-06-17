@@ -3135,6 +3135,7 @@ class PlayState extends MusicBeatState
 				timer.active = true;
 			}
 			paused = false;
+			//refreshModifiers();
 			callOnLuas('onResume', []);
 
 			#if desktop
@@ -5817,4 +5818,16 @@ class PlayState extends MusicBeatState
 
 		var curLight:Int = -1;
 		var curLightEvent:Int = -1;
+
+	function refreshModifiers(){
+		playbackRate = ClientPrefs.getGameplaySetting('songspeed', 1);
+		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
+		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
+		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
+		healthGain = ClientPrefs.getGameplaySetting('healthgain', 1);
+		healthLoss = ClientPrefs.getGameplaySetting('healthloss', 1);
+		opponentPlay = ClientPrefs.getGameplaySetting('opponentpaly', false);
+		songSpeed = ClientPrefs.getGameplaySetting('scrollspeed', 1);
+		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype', 'multiplicative');
 	}
+}

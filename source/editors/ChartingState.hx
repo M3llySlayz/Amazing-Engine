@@ -38,6 +38,7 @@ import flixel.sound.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxTimer;
 import flixel.ui.FlxButton;
 import flixel.ui.FlxSpriteButton;
 import flixel.util.FlxColor;
@@ -458,6 +459,13 @@ class ChartingState extends MusicBeatState
 					loadJson(_song.song);
 				} catch (e:Any) {
 					trace ('Cannot find chart file: "${Paths.formatToSongPath(_song.song)+CoolUtil.getDifficultyFilePath()}"');
+					var errorText:FlxText = new FlxText(-70, FlxG.height - 50, 0, "Oops! We can't seem to find your chart file. You sure it's named '"+ {Paths.formatToSongPath(_song.song)+CoolUtil.getDifficultyFilePath()} +"'?");
+					errorText.alpha = 0;
+					add(errorText);
+					FlxTween.tween(errorText, {x: 0, alpha: 1}, 0.4, {ease: FlxEase.quadIn});
+					new FlxTimer().start(3, function (tmr:FlxTimer) {
+						FlxTween.tween(errorText, {x: -50, alpha: 0}, 2, {ease: FlxEase.quadIn});
+				});
 				}
 			},
 			null, ignoreWarnings));
