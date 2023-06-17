@@ -139,7 +139,7 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		var categoryText:Alphabet = new Alphabet(120, 90, FreeplayCategoryState.categoryNames[FreeplayCategoryState.curSelected], true);
+		var categoryText:Alphabet = new Alphabet(100, 60, FreeplayCategoryState.categoryNames[FreeplayCategoryState.curSelected], true);
 		categoryText.isMenuItem = true;
 		categoryText.scaleX = 0.7;
 		categoryText.scaleY = 0.7;
@@ -475,7 +475,7 @@ class FreeplayState extends MusicBeatState
 			case "EXPERT":
 				diffText.color = 0xFF9849d0;
 			case "INSANE":
-				diffText.color = 0xFFDDDDDD;
+				diffText.color = 0xFFFFFFFF;
 			default:
 				diffText.color = 0xFFFFFFFF;
 		}
