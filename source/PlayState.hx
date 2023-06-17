@@ -5056,6 +5056,7 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		});
+		songMisses++;
 		combo = 0;
 
 		if (opponentPlay) health += daNote.missHealth * healthLoss;
@@ -5097,9 +5098,8 @@ class PlayState extends MusicBeatState
 				if (SONG.needsVoices) vocals.volume = 0;
 				doDeathCheck(true);
 			}
-
 			if (combo > 5 && gf != null && gf.animOffsets.exists('sad')) gf.playAnim('sad');
-
+			
 			combo = 0;
 			if (!practiceMode) songScore -= 10;
 			if (!endingSong) songMisses++;
