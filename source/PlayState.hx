@@ -315,8 +315,8 @@ class PlayState extends MusicBeatState
 
 	//Achievement shit
 	var keysPressed:Array<Bool> = [];
-	var playerIdleTime:Float = 0.0;
-	var playerIdled:Bool = false;
+	var boyfriendIdleTime:Float = 0.0;
+	var boyfriendIdled:Bool = false;
 	var achievementsArray:Array<FunkinLua> = [];
 	var achievementWeeks:Array<String> = [];
 
@@ -2896,7 +2896,7 @@ class PlayState extends MusicBeatState
 			strumLineNotes.add(babyArrow);
 			babyArrow.postAddedToGroup();
 
-			if (ClientPrefs.showKeybindsOnStart && (opponentPlay ? player == 0 : player == 1)) {
+			if (ClientPrefs.showKeybindsOnStart && player == 1) {
 				for (j in 0...keysArray[mania][i].length) {
 					var daKeyTxt:FlxText = new FlxText(babyArrow.x, babyArrow.y - 10, 0, InputFormatter.getKeyName(keysArray[mania][i][j]), 32);
 					daKeyTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -5255,10 +5255,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 	}
-
-
-
-
 
 	function spawnNoteSplashOnNote(note:Note) {
 		if(ClientPrefs.noteSplashes && note != null && ClientPrefs.splashOpacity > 0) {
