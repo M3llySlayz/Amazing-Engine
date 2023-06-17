@@ -279,6 +279,8 @@ class PauseSubState extends MusicBeatSubstate
 					menuItems = menuItemsQuitting;
 					quittingTxt.visible = true;
 					regenMenu();
+				case "Yes":
+					quitSong();
 				case "No":
 					SoundEffects.playSFX('cancel', true);
 					menuItems = menuItemsOG;
@@ -326,18 +328,53 @@ class PauseSubState extends MusicBeatSubstate
 
 	function quitSong()
 	{
-		PlayState.deathCounter = 0;
-		PlayState.seenCutscene = false;
-		WeekData.loadTheFirstEnabledMod();
-		if(PlayState.isStoryMode) {
-			MusicBeatState.switchState(new StoryMenuState());
-		} else {
-			MusicBeatState.switchState(new FreeplayState());
+		var daTime:Float = 1;
+		SoundEffects.playSFX('confirm', false);
+
+		CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
+		var da:Int = curSelected;
+		for (i in 0...grpMenuShit.members.length)
+		{
+			if (i == da)
+			{
+				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.06, false, false);
+			} else {
+				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, 0.2, {ease: FlxEase.quadIn});
+			}
+
+			var overlay:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+			overlay.alpha = 0;
+			overlay.scrollFactor.set();
+			add(overlay);
+
+			FlxTween.tween(bg, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+			FlxTween.tween(overlay, {alpha: 1}, 0.7, {ease: FlxEase.quadIn});
+			FlxTween.tween(levelInfo, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+			FlxTween.tween(levelDifficulty, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+			FlxTween.tween(blueballedTxt, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+			FlxTween.tween(authorText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+			if (practiceText.visible)
+				FlxTween.tween(practiceText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+			if (chartingText.visible)
+				FlxTween.tween(chartingText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+	
+		new FlxTimer().start(daTime, function(tmr:FlxTimer)
+		{
+			PlayState.deathCounter = 0;
+			PlayState.seenCutscene = false;
+			WeekData.loadTheFirstEnabledMod();
+			if(PlayState.isStoryMode) {
+				MusicBeatState.switchState(new StoryMenuState());
+			} else {
+				MusicBeatState.switchState(new FreeplayState());
+			}
+			PlayState.cancelMusicFadeTween();
+			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')));
+			PlayState.changedDifficulty = false;
+			PlayState.chartingMode = false;
+		});
+			
 		}
-		PlayState.cancelMusicFadeTween();
-		FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')));
-		PlayState.changedDifficulty = false;
-		PlayState.chartingMode = false;
 	}
 
 	function closeState(?custom:Int = null)
@@ -428,8 +465,6 @@ class PauseSubState extends MusicBeatSubstate
 					case "End Song":
 						PlayState.instance.finishSong(true);
 						close();
-					case "Yes":
-						quitSong();
 					default:
 						close();
 					}}
