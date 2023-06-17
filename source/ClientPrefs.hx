@@ -64,6 +64,7 @@ class ClientPrefs {
 	public static var screenRes:String = '1280x720';
 	public static var pauseExit:String = 'Flicker Out';
 	public static var fullscreen:Bool = false;
+	public static var resultsScreen:Bool = true;
 	public static var justUpdated:Bool = false;
 	public static var neededUpdate:Bool = false;
 	#if desktop
@@ -381,6 +382,7 @@ class ClientPrefs {
 		FlxG.save.data.screenRes = screenRes;
 		FlxG.save.data.pauseExit = pauseExit;
 		FlxG.save.data.fullscreen = fullscreen;
+		FlxG.save.data.resultsScreen = resultsScreen;
 		FlxG.save.data.justUpdated = justUpdated;
 		FlxG.save.data.neededUpdate = neededUpdate;
 		#if desktop
@@ -595,6 +597,9 @@ class ClientPrefs {
 		if(FlxG.save.data.fullscreen != null) {
 			fullscreen = FlxG.save.data.fullscreen;
 			FlxG.fullscreen = fullscreen;
+		}
+		if(FlxG.save.data.resultsScreen != null) {
+			resultsScreen = FlxG.save.data.resultsScreen;
 		}
 		if(FlxG.save.data.justUpdated != null) {
 			justUpdated = FlxG.save.data.justUpdated;

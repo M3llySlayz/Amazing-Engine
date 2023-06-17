@@ -192,6 +192,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Results Screen',
+			'If checked, shows your results at the end of a song.',
+			'resultsScreen',
+			'bool',
+			true);
+		addOption(option);
+
 		var option:Option = new Option('Always convert non-EK charts',
 			'If checked, shows exactly how early or late you hit a note.',
 			'convertEK',
