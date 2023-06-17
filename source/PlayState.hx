@@ -890,7 +890,6 @@ class PlayState extends MusicBeatState
 		add(luaDebugGroup);
 		#end
 
-		
 		function addAbilityToUnlockAchievements(funkinLua:FunkinLua)
 		{
 			var lua = funkinLua.lua;
