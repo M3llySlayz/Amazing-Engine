@@ -139,11 +139,11 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		var categoryText:Alphabet = new Alphabet(0, FlxG.height - 60, curCategory, true);
-		categoryText.scaleX = 0.6;
-		categoryText.scaleY = 0.6;
-		categoryText.alpha = 0.4;
-		categoryText.x = FlxG.width - categoryText.width - 30;
+		var categoryText:Alphabet = new Alphabet(60, 20, FreeplayCategoryState.categoryNames[FreeplayCategoryState.curSelected], true);
+		categoryText.isMenuItem = true;
+		categoryText.scaleX = 0.5;
+		categoryText.scaleY = 0.5;
+		categoryText.alpha = 0.5;
 		add(categoryText);
 
 		for (i in 0...songs.length)
