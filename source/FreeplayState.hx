@@ -475,7 +475,7 @@ class FreeplayState extends MusicBeatState
 			case "EXPERT":
 				diffText.color = 0xFF9849d0;
 			case "INSANE":
-				diffText.color = 0xFFFFFFFF;
+				diffText.color = 0xFFCCCCCC;
 			default:
 				diffText.color = 0xFFFFFFFF;
 		}
