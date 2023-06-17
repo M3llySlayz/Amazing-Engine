@@ -90,6 +90,8 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Amazing Engine Contributors'],
 			['NexIsDumb',			'nothing',			'Made Custom Options Code',										'https://github.com/ShadowMario/FNF-PsychEngine/pull/12307',		'AAAAAA'],
+			['TheWorldMachinima',	'nothing',			'Made Custom Achievements Code',								'https://github.com/ShadowMario/FNF-PsychEngine/pull/11651',		'AAAAAA'],
+			['RodneyAnImaginativePerson', 	'nothing',	'Made Opponent Play Code',											'https://github.com/ShadowMario/FNF-PsychEngine/pull/11805',		'AAAAAA'],
 			[''],
 			['Extra Keys'],
 			['tposejank', 			'tposejank',		'Actitud Positiva',			 									'https://www.youtube.com/channel/UCNdhmFe3BXu-Ff2DZ4loYvQ', 		'B9AF27'],	//mensajes subliminales
