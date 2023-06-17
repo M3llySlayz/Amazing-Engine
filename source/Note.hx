@@ -458,7 +458,7 @@ class Note extends FlxSprite
 		}
 		*/
 
-		if (mustPress == !PlayState.instance.opponentPlay)
+		if (mustPress == (!PlayState.instance.opponentPlay == null ? !PlayState.instance.opponentPlay : ClientPrefs.getGameplaySetting('opponentPlay', true)))
 		{
 			// ok river
 			if (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult)
