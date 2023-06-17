@@ -139,10 +139,10 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		var categoryText:Alphabet = new Alphabet(60, 20, FreeplayCategoryState.categoryNames[FreeplayCategoryState.curSelected], true);
+		var categoryText:Alphabet = new Alphabet(120, 90, FreeplayCategoryState.categoryNames[FreeplayCategoryState.curSelected], true);
 		categoryText.isMenuItem = true;
-		categoryText.scaleX = 0.5;
-		categoryText.scaleY = 0.5;
+		categoryText.scaleX = 0.7;
+		categoryText.scaleY = 0.7;
 		categoryText.alpha = 0.5;
 		add(categoryText);
 
@@ -460,23 +460,25 @@ class FreeplayState extends MusicBeatState
 			curDifficulty = 0;
 		}
 
-		switch(curDifficulty) {
-			case 0:
-				diffText.color = 0xFF00FF3C;
-			case 1:
-				diffText.color = 0xFFFFFF00;
-			case 2:
-				diffText.color = 0xFFFF0000;
-			case 3:
-				diffText.color = 0xFF9849d0;
-			default:
-				diffText.color = 0xFFFFFFFF;
-		}
-
 		PlayState.storyDifficulty = curDifficulty;
 		diffText.text = '${CoolUtil.difficultyString()}';
 		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
 		positionHighscore();
+
+		switch(diffText.text.toUpperCase()) {
+			case "EASY":
+				diffText.color = 0xFF00FF3C;
+			case "NORMAL":
+				diffText.color = 0xFFFFFF00;
+			case "HARD":
+				diffText.color = 0xFFFF0000;
+			case "EXPERT":
+				diffText.color = 0xFF9849d0;
+			case "INSANE":
+				diffText.color = 0xFFDDDDDD;
+			default:
+				diffText.color = 0xFFFFFFFF;
+		}
 
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
