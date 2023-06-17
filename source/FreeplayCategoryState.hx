@@ -21,6 +21,7 @@ class FreeplayCategoryState extends MusicBeatState {
 
 	//public var categories:Array<FreeplayCategory> = [];
 
+	public static var categoryNames:Array<String> = []; // Freeplay Category Title in Freeplay
 	public static var curSelected:Int = 0;
 
 	public var bg:FlxSprite;
@@ -39,11 +40,14 @@ class FreeplayCategoryState extends MusicBeatState {
 		FlxG.cameras.add(camOther, false);
 
 		FreeplayCategory.reloadCategoryFiles();
-		for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
-			categoriesList.push(categoriesLoaded.category);
-			categoryNamesList.push(categoriesLoaded.name);
-			categoryColors.push(FlxColor.fromRGB(categoriesLoaded.color[0], categoriesLoaded.color[1], categoriesLoaded.color[2]));
+		for (categoriesLoaded in 0...FreeplayCategory.categoryList.length) {
+			var categories = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[categoriesLoaded]);
+			categoriesList.push(categories.category);
+			categoryNamesList.push(categories.name);
+			categoryColors.push(FlxColor.fromRGB(categories.color[0], categories.color[1], categories.color[2]));
 		}
+
+		categoryNames = categoryNamesList;
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = categoryColors[curSelected];

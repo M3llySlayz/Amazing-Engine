@@ -108,11 +108,9 @@ class FreeplayState extends MusicBeatState
 				#if MULTI_MODDABLE
 				if (curCategory == '') addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]), 'Easy, Normal, Hard');
 				else {
-					for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
-						var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
-						for (modSong in 0...category.songs.length) {
-							addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]), category.songs[modSong][2]);
-						}
+					var category = FreeplayCategory.categoriesLoaded.get(curCategory);
+					for (modSong in 0...category.songs.length) {
+						addSong(category.songs[modSong][0], i, category.songs[modSong][1], FlxColor.fromRGB(category.songColors[modSong][0], category.songColors[modSong][1], category.songColors[modSong][2]), category.songs[modSong][2]);
 					}
 				}
 				#else
@@ -141,11 +139,11 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		var categoryText:Alphabet = new Alphabet(0, FlxG.height - 10, curCategory, true);
-		categoryText.scaleX = 0.6;
-		categoryText.scaleY = 0.6;
-		categoryText.alpha = 0.4;
-		categoryText.x = FlxG.width - categoryText.width - 30;
+		var categoryText:Alphabet = new Alphabet(100, 60, FreeplayCategoryState.categoryNames[FreeplayCategoryState.curSelected], true);
+		categoryText.isMenuItem = true;
+		categoryText.scaleX = 0.7;
+		categoryText.scaleY = 0.7;
+		categoryText.alpha = 0.5;
 		add(categoryText);
 
 		for (i in 0...songs.length)
@@ -462,23 +460,25 @@ class FreeplayState extends MusicBeatState
 			curDifficulty = 0;
 		}
 
-		switch(curDifficulty) {
-			case 0:
-				diffText.color = 0xFF00FF3C;
-			case 1:
-				diffText.color = 0xFFFFFF00;
-			case 2:
-				diffText.color = 0xFFFF0000;
-			case 3:
-				diffText.color = 0xFF9849d0;
-			default:
-				diffText.color = 0xFFFFFFFF;
-		}
-
 		PlayState.storyDifficulty = curDifficulty;
 		diffText.text = '${CoolUtil.difficultyString()}';
 		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
 		positionHighscore();
+
+		switch(diffText.text.toUpperCase()) {
+			case "EASY":
+				diffText.color = 0xFF00FF3C;
+			case "NORMAL":
+				diffText.color = 0xFFFFFF00;
+			case "HARD":
+				diffText.color = 0xFFFF0000;
+			case "EXPERT":
+				diffText.color = 0xFF9849d0;
+			case "INSANE":
+				diffText.color = 0xFFCCCCCC;
+			default:
+				diffText.color = 0xFFFFFFFF;
+		}
 
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
@@ -547,11 +547,9 @@ class FreeplayState extends MusicBeatState
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
 		var diffStr:String = '';
 		if (curCategory != '' && curCategory != 'base game') { //if this isn't vanilla
-			for (categoriesLoaded in FreeplayCategory.categoriesLoaded) {
-				var category = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[FreeplayCategoryState.curSelected - 1]);
-				for (modSong in 0...category.songs.length) {
-					if (modSong == curSelected) diffStr = category.songs[modSong][2];
-				}
+			var category = FreeplayCategory.categoriesLoaded.get(curCategory);
+			for (modSong in 0...category.songs.length) {
+				if (modSong == curSelected) diffStr = category.songs[modSong][2];
 			}
 		} else {
 			diffStr = WeekData.getCurrentWeek().difficulties;
