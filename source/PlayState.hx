@@ -4443,13 +4443,17 @@ class PlayState extends MusicBeatState
 				if (storyPlaylist.length <= 0)
 				{
 					WeekData.loadTheFirstEnabledMod();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 
 					cancelMusicFadeTween();
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					MusicBeatState.switchState(new StoryMenuState());
+					if (ClientPrefs.resultsScreen)
+						openSubState(new ResultsScreenSubState([sicks, goods, bads, shits], campaignScore, songMisses,
+						Highscore.floorDecimal(ratingPercent * 100, 2), ratingName + (' [' + ratingFC + '] ')));
+					else
+						MusicBeatState.switchState(new StoryMenuState());
 
 					if(!practiceMode && !cpuControlled) {
 						Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
@@ -4504,7 +4508,12 @@ class PlayState extends MusicBeatState
 							CustomFadeTransition.nextCamera = null;
 						}
 
-						MusicBeatState.switchState(new StoryMenuState());
+						if (ClientPrefs.resultsScreen)
+							openSubState(new ResultsScreenSubState([sicks, goods, bads, shits], campaignScore, songMisses,
+							Highscore.floorDecimal(ratingPercent * 100, 2), ratingName + (' [' + ratingFC + '] ')));
+						else
+							MusicBeatState.switchState(new StoryMenuState());
+
 						trace('WENT BACK TO STORY MODE!!');
 					}
 				}
@@ -4517,7 +4526,12 @@ class PlayState extends MusicBeatState
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
 				}
-				MusicBeatState.switchState(new FreeplayState());
+				if (ClientPrefs.resultsScreen)
+					openSubState(new ResultsScreenSubState([sicks, goods, bads, shits], songScore, songMisses, Highscore.floorDecimal(ratingPercent * 100, 2),
+						ratingName + (' [' + ratingFC + '] ')));
+				else
+					MusicBeatState.switchState(new FreeplayState());
+
 				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 				changedDifficulty = false;
 			}

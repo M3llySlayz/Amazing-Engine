@@ -86,7 +86,7 @@ class CreditsState extends MusicBeatState
 			['Irshaad Ali',			'Irshaad',			'Programmer, Made Splitscroll and Alt Splitscroll',				'https://www.youtube.com/channel/UCwJQYZunvqdDTVbgi9mA7fg',			'0079C7'],
 			['SomeGuyWhoUhhhh', 	'sgwu',				'Programmer, Spearheaded Freeplay Changes, Errorchecked Story Mode,\nFreeplay, Chart Editor, In-game, and its Pause Screen,\nand Made the Chart Editor Substate menu.',						'https://gamejolt.com/@SomeGuyWhoLikesFNF',							'9900FF'],
 			['JB444m',				'jb',				'Artist, Convinced Melly to add Extra Keys (it was painful)', 	'https://youtube.com/@JB444m',			'FFAA00'],
-			['Discord',				'discord',			"",		'https://discord.gg/KjeeBQ3fh3',			'7289DA'],
+			['Discord',				'discord',			"The Discord server for AE lol",		'https://discord.gg/KjeeBQ3fh3',			'7289DA'],
 			[''],
 			['Amazing Engine Contributors'],
 			['NexIsDumb',			'nothing',			'Made Custom Options Code',										'https://github.com/ShadowMario/FNF-PsychEngine/pull/12307',		'AAAAAA'],
