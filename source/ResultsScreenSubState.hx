@@ -13,6 +13,8 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
+using StringTools;
+
 class ResultsScreenSubState extends MusicBeatSubstate {
 	var background:FlxSprite;
 	var resultsText:FlxText;
