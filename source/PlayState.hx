@@ -360,7 +360,6 @@ class PlayState extends MusicBeatState
 
 		keysArray = EKData.Keybinds.fill();
 
-
 		//Ratings
 		ratingsData.push(new Rating('sick')); //default rating
 
