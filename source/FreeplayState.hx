@@ -430,6 +430,13 @@ class FreeplayState extends MusicBeatState
 				});
 			} catch(e:Any) {
 				trace ('Cannot find chart file: "$songJson"');
+				var errorText:FlxText = new FlxText(-70, FlxG.height - 50, 0, "Oops! We can't seem to find your chart file. You sure it's named '"+ songJson +"'?");
+				errorText.alpha = 0;
+				add(errorText);
+				FlxTween.tween(errorText, {x: 0, alpha: 1}, 0.4, {ease: FlxEase.quadIn});
+				new FlxTimer().start(3, function (tmr:FlxTimer) {
+					FlxTween.tween(errorText, {x: -50, alpha: 0}, 2, {ease: FlxEase.quadIn});
+				});
 			}
 		}
 
