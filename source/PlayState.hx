@@ -2937,7 +2937,7 @@ class PlayState extends MusicBeatState
 			strumLineNotes.add(babyArrow);
 			babyArrow.postAddedToGroup();
 
-			if (ClientPrefs.showKeybindsOnStart && player == 1) {
+			if (ClientPrefs.showKeybindsOnStart && (opponentPlay ? player == 0 : player == 1)) {
 				for (j in 0...keysArray[mania][i].length) {
 					var daKeyTxt:FlxText = new FlxText(babyArrow.x, babyArrow.y - 10, 0, InputFormatter.getKeyName(keysArray[mania][i][j]), 32);
 					daKeyTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -3687,19 +3687,18 @@ class PlayState extends MusicBeatState
 
 					// Kill extremely late notes and cause misses
 					if (Conductor.songPosition > noteKillOffset + daNote.strumTime)
-					{
-						// Don't touch!
-						if (daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && daNote.tooLate) {
-							noteMiss(daNote);
+						{
+							if (daNote.mustPress == !opponentPlay && !cpuControlled && !daNote.ignoreNote && !endingSong && daNote.tooLate) {
+								noteMiss(daNote);
+							}
+							daNote.active = false;
+							daNote.visible = false;
+	
+							daNote.kill();
+							notes.remove(daNote, true);
+							daNote.destroy();
 						}
-						daNote.active = false;
-						daNote.visible = false;
-
-						daNote.kill();
-						notes.remove(daNote, true);
-						daNote.destroy();
-					}
-				});
+					});
 			}
 			else
 			{

@@ -279,8 +279,6 @@ class PauseSubState extends MusicBeatSubstate
 					menuItems = menuItemsQuitting;
 					quittingTxt.visible = true;
 					regenMenu();
-				case "Yes":
-					quitSong();
 				case "No":
 					SoundEffects.playSFX('cancel', true);
 					menuItems = menuItemsOG;
@@ -430,6 +428,8 @@ class PauseSubState extends MusicBeatSubstate
 					case "End Song":
 						PlayState.instance.finishSong(true);
 						close();
+					case "Yes":
+						quitSong();
 					default:
 						close();
 					}}
