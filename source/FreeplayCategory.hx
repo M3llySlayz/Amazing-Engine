@@ -67,7 +67,7 @@ class FreeplayCategory {
 		color = categoryFile.color;
 		this.fileName = fileName;
 
-		if (startLocked == null) startLocked = false;
+		if (startLocked == null) startLocked = false; // Null check
 	}
 
 	public static function reloadCategoryFiles()
