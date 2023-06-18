@@ -311,6 +311,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	function restartSong(?noTrans:Bool = false)
 	{
+		selectedSomethin = true;
 		PlayState.instance.paused = true; // For lua
 		FlxG.sound.music.volume = 0;
 		PlayState.instance.vocals.volume = 0;
@@ -351,6 +352,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	function quitSong()
 	{
+		selectedSomethin = true;
 		var daTime:Float = 1.5;
 		SoundEffects.playSFX('confirm', false);
 
@@ -397,6 +399,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	function closeState(?custom:Int = null)
 	{
+		selectedSomethin = true;
 		var daTime:Float = 1.5;
 		Conductor.changeBPM(PlayState.SONG.bpm);
 		SoundEffects.playSFX('confirm', false);
