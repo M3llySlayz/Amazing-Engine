@@ -11,35 +11,26 @@ import openfl.text.TextFormat;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 
-class LoadingScreen extends Sprite{
+class LoadingScreen extends Sprite {
 	public static var object:LoadingScreen;
 
 	public static var loadingText(default,set):String = "";
-	public static function set_loadingText(val:String):String{
+	public static function set_loadingText(val:String):String {
 		loadingText = val;
-		// Main.game.blockUpdate = Main.game.blockDraw = true;
-		// lime.app.Application.current.draw();
-		// Main.game.blockUpdate = Main.game.blockDraw = false;
 		return loadingText;
 	}
-	// var _loadingText:String = "";
+
 	var funni = false;
 	var textField:TextField;
-	// var loadingText:Alphabet;
 	var loadingIcon:Sprite;
 	var vel:Float = 0;
 
-	public override function new(?txt = "loading"){
+	public override function new(?txt = "loading") {
 		super();
 
 		width = 1280;
 		height = 720;
 
-			// scaleX = lime.app.Application.current.window.width / 1280;
-			// scaleY = lime.app.Application.current.window.height / 720;
-		// graphics.beginFill(0x110011);
-		// graphics.drawRect(0,0, 1280, 720);
-		// graphics.endFill();
 		var loadingText = new Alphabet(0,0,txt,true);
 		loadingText.isMenuItem = false;
 		loadingText.visible = true;
@@ -51,8 +42,6 @@ class LoadingScreen extends Sprite{
 		note.useFramePixels = true;
 		note.draw();
 		loadingIcon.graphics.beginBitmapFill(note.framePixels,false,true);
-		// loadingIcon.graphics.moveTo();
-		// 
 		loadingIcon.graphics.drawRect(0,0, note.framePixels.width, note.framePixels.height);
 		loadingIcon.graphics.endFill();
 		loadingIcon.scaleX = loadingIcon.scaleY= 0.5;
@@ -68,10 +57,6 @@ class LoadingScreen extends Sprite{
 			x -= Std.int(v.width - 2);
 			funniBitmap.copyPixels(v.framePixels,new flash.geom.Rectangle(0,0,v.width,v.height),new flash.geom.Point(x,y));
 			v.destroy();
-			// graphics.beginBitmapFill(v.framePixels,false,true);
-			// graphics.moveTo(x,y);
-			// graphics.drawRect(0,0, v.width, v.height);
-			// graphics.endFill();
 			i--;
 		}
 
@@ -80,7 +65,6 @@ class LoadingScreen extends Sprite{
 		graphics.drawRect(-5,-5, funniBitmap.width, funniBitmap.height);
 		graphics.endFill();
 		loadingText.destroy();
-
 
 		var errText:FlxText = new FlxText(0,0,0,'');
 		errText.size = 20;
@@ -95,36 +79,17 @@ class LoadingScreen extends Sprite{
 		textField.y = 720 * 0.7;
 		addChild(textField);
 
-
-		// textField.x = (1280 * 0.5);
 		var tf = new TextFormat(oldTF.defaultTextFormat.font, 32, 0xFFFFFF);
 		textField.embedFonts = oldTF.embedFonts;
 		tf.align = "center";
 
 		textField.defaultTextFormat = tf;
-		// addChild(Main.fpsCounter);
-
-		// new FlxTimer().start(0.1,function(_){
-		// 	FlxG.cameras.remove(cam);
-		// 	graphics.beginBitmapFill(cam.buffer);
-		// 	graphics.drawRect(0,0, 1280, 720);
-		// 	graphics.endFill();
-		// 	loadingText.destroy();
-		// 	cam.destroy();
-		// 	cam = null;
-		// 	loadingText = null;
-		// },1);
-		// loadingText.update(0);
-		// loadingText.draw();
-		
-		
-		// super.addChild(loadingText);
 	}
 
 	public static function initScreen(?text:String = "Loading"){
 		object = new LoadingScreen(text);
-
 	}
+
 	var elapsed = 0;
 	override function __enterFrame(e:Int){
 		try{
@@ -151,60 +116,47 @@ class LoadingScreen extends Sprite{
 			}
 			super.__enterFrame(e);
 		}
-		catch(e){
+		catch (e) {
 			trace(e);
-
 		}	
-	} 
+	}
+
 	function updateText(){
 		textField.htmlText = loadingText;
 		if(loadingIcon != null) vel += 0.15;
-		// textField.x = (1280 * 0.5) - textField.width;
 	}
+
 	public static var tween:FlxTween;
-	public static function show(){
+	public static function show() {
 		if(object == null){
 			initScreen();
 		}
-		// object.alpha = 1;
-		if(tween != null){tween.cancel();}
+		if(tween != null) tween.cancel();
 		object.funni = true;
 		object.elapsed = 0;
 		object.scaleX = lime.app.Application.current.window.width / 1280;
 		object.scaleY = lime.app.Application.current.window.height / 720;
-		//add(object);
 		loadingText = "";
 		object.updateText();
-		if(!FlxG.save.data.doCoolLoading)object.alpha = 1;
-
-		// object.visible = true;
+		if(!FlxG.save.data.doCoolLoading) object.alpha = 1;
 	}
-	public static function forceHide(){
-		if(object == null){
+
+	public static function forceHide() {
+		if(object == null) {
 			return;
 		}
-		if(tween != null){tween.cancel();}
+		if(tween != null) tween.cancel();
 		object.funni = false;
 		object.alpha = 0;
-		try{
-			//remove(object);}catch(e){}
-	    
-        }
     }
-	public static function hide(){
-		if(object == null){
+
+	public static function hide() {
+		if(object == null) {
 			return;
 		}
-		if(!object.funni){return;}
-		if(tween != null){tween.cancel();}
+		if(!object.funni) return;
+		if(tween != null) tween.cancel();
 		object.funni = false;
 		object.alpha = 1;
-		try{
-			//tween = FlxTween.tween(object,{alpha:0},0.4,{onComplete:function(_){Main.funniSprite.removeChild(object);}});
-		}catch(e){
-			object.alpha = 0;
-		}
-		
 	}
-
 }
