@@ -78,7 +78,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		lightingBG.alpha = 0;
 		add(lightingBG);
 		
-		lockedTxt = new FlxText(0, FlxG.height - (categorySpr.width / 3), 0, '[Locked]', 72);
+		lockedTxt = new FlxText(0, Std.int(FlxG.height - (categorySpr.width / 2.75)), 0, 'Locked Category!', 64);
 		lockedTxt.visible = false;
 		add(lockedTxt);
 
