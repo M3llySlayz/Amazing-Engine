@@ -142,8 +142,8 @@ class ResultsScreenSubState extends FlxSubState {
 
 	override function update(elapsed:Float) {
 		if (pressEnterTxt.visible && !selectedSomethin) {
-			pressEnterTxtSine += 150 * elapsed;
-			pressEnterTxt.alpha = 1 - Math.sin((Math.PI * pressEnterTxtSine) / 150);
+			pressEnterTxtSine += 100 * elapsed;
+			pressEnterTxt.alpha = 1 - Math.sin((Math.PI * pressEnterTxtSine) / 120);
 		}
 
 		if (PlayerSettings.player1.controls.ACCEPT && !selectedSomethin) {
