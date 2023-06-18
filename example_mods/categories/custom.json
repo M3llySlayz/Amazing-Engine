@@ -1,0 +1,12 @@
+{
+	"category": "custom",
+	"name": "Custom",
+	"songs": [
+		["Song name", "character", "Easy, Normal, Hard"]
+	],
+	"songColors": [
+		[0, 255, 255],
+		[255, 255, 255]
+	],
+	"color": [0, 255, 255]
+}

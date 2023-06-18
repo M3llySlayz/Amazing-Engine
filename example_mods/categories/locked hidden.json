@@ -1,0 +1,13 @@
+{
+	"category": "locked hidden",
+	"name": "Locked Hidden",
+	"songs": [
+		["Locked song", "lock", "Insane"]
+	],
+	"songColors": [
+		[24, 24, 24]
+	],
+	"color": [24, 24, 24],
+	"startLocked": true,
+	"hiddenWhenLocked": true
+}

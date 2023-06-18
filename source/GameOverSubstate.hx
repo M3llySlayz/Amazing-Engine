@@ -48,7 +48,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super();
 
-		PlayState.instance.setOnLuas('inGameOver', true);
+		PlayState.instance.setOnLuas('inGameOver', PlayState.instance.playingAsOpponent);
 
 		Conductor.songPosition = 0;
 

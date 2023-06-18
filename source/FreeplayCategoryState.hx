@@ -6,6 +6,7 @@ import flixel.effects.FlxFlicker;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -27,6 +28,7 @@ class FreeplayCategoryState extends MusicBeatState {
 	public var bg:FlxSprite;
 	public var categorySpr:FlxSprite;
 	public var alphabetText:Alphabet;
+	public var lockedTxt:FlxText;
 
 	public var camOther:FlxCamera;
 
@@ -42,7 +44,8 @@ class FreeplayCategoryState extends MusicBeatState {
 		FreeplayCategory.reloadCategoryFiles();
 		for (categoriesLoaded in 0...FreeplayCategory.categoryList.length) {
 			var categories = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[categoriesLoaded]);
-			if (!categories.startLocked && !categories.hiddenWhenLocked) {
+			//trace(FreeplayCategory.categoryList[categoriesLoaded] + ': ' + categories.hiddenWhenLocked); // For testing purposes...
+			if (!categories.hiddenWhenLocked) { // Categories that are locked and hidden are not added onto the list
 				categoriesList.push(categories.category);
 				categoryNamesList.push(categories.name);
 				categoryColors.push(FlxColor.fromRGB(categories.color[0], categories.color[1], categories.color[2]));
@@ -74,25 +77,24 @@ class FreeplayCategoryState extends MusicBeatState {
 		lightingBG.blend = ADD;
 		lightingBG.alpha = 0;
 		add(lightingBG);
+		
+		lockedTxt = new FlxText(0, FlxG.height - (categorySpr.width / 3), 0, '[Locked]', 72);
+		lockedTxt.visible = false;
+		add(lockedTxt);
 
 		//FlxTween.tween(blackBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
 		FlxTween.tween(categorySpr, {alpha: 1, x: categorySpr.x - 60}, 0.75, {ease: FlxEase.quintOut, startDelay: 0.15});
 		FlxTween.tween(alphabetText, {alpha: 1, x: alphabetText.x + 60}, 0.75, {ease: FlxEase.quintOut, startDelay: 0.25, onComplete: function(twm:FlxTween) {
 			selectedSomethin = false;
 		}});
+		lockedTxt.screenCenter(X);
+
 		super.create();
 		CustomFadeTransition.nextCamera = camOther;
 	}
 
 	var swagCount = 0;
 	override public function update(elapsed:Float) {
-		if (curSelected != 0) {
-			if (FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]).startLocked) {
-				bg.color = 0xFF999999;
-			} else {
-				bg.color = 0xFFFFFFFF;
-			}
-		}
 		bg.scale.set(1.25, 1.25);
 		bg.screenCenter(X);
 
@@ -128,11 +130,33 @@ class FreeplayCategoryState extends MusicBeatState {
 		if (!selectedSomethin) {
 			categorySpr.loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
 			alphabetText.text = categoryNamesList[curSelected];
-			alphabetText.x = categorySpr.width / 3;
+			alphabetText.x = FlxG.width / 6;
 			bg.color = categoryColors[curSelected];
 			categorySpr.screenCenter();
 		}
 		else categorySpr.screenCenter(Y);
+	}
+
+	public function lockedCategoryCheck() {
+		var categories = FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]);
+		if (curSelected != 0) { // Null check
+			if (categories.startLocked) {
+				categorySpr.color = 0x00000000;
+				alphabetText.visible = false;
+				lockedTxt.visible = true;
+				categorySpr.alpha = 0.5;
+			} else {
+				categorySpr.color = 0xFFFFFFFF;
+				alphabetText.visible = true;
+				lockedTxt.visible = false;
+				categorySpr.alpha = 1;
+			}
+		} else {
+			categorySpr.color = 0xFFFFFFFF;
+			alphabetText.visible = true;
+			lockedTxt.visible = false;
+			categorySpr.alpha = 1;
+		}
 	}
 
 	public function changeSelection(change:Int = 1) {
@@ -140,10 +164,27 @@ class FreeplayCategoryState extends MusicBeatState {
 		SoundEffects.playSFX('scroll', false);
 		if (curSelected < 0) curSelected = categoriesList.length-1;
 		if (curSelected > categoriesList.length-1) curSelected = 0;
+		lockedCategoryCheck();
 	}
 
 	public function selectCategory() {
-		if (!FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]).startLocked) {
+		var categories = FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]);
+		if (curSelected != 0) { // Null check
+			if (!categories.startLocked) {
+				lightingBG.alpha = 1;
+				selectedSomethin = true;
+				SoundEffects.playSFX('confirm', false);
+				FlxFlicker.flicker(categorySpr, 1.5, 0.05, false);
+				FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
+				FlxTween.tween(alphabetText, {alpha: 0, x: alphabetText.x - 24}, 1, {ease: FlxEase.smoothStepOut});
+				FlxTween.tween(categorySpr, {alpha: 0}, 0.75, {ease: FlxEase.smoothStepOut, startDelay: 0.75});
+				new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+					FreeplayState.curCategory = categoriesList[curSelected];
+					if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
+					LoadingState.loadAndSwitchState(new FreeplayState());
+				});
+			} else SoundEffects.playSFX('cancel', false);
+		} else {
 			lightingBG.alpha = 1;
 			selectedSomethin = true;
 			SoundEffects.playSFX('confirm', false);
@@ -156,7 +197,7 @@ class FreeplayCategoryState extends MusicBeatState {
 				if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
 				LoadingState.loadAndSwitchState(new FreeplayState());
 			});
-		} else SoundEffects.playSFX('cancel', false);
+		}
 	}
 }
 #end
