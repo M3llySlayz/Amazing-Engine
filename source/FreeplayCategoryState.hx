@@ -29,6 +29,7 @@ class FreeplayCategoryState extends MusicBeatState {
 	public var categorySpr:FlxSprite;
 	public var alphabetText:Alphabet;
 	public var lockedTxt:FlxText;
+	public var lockIcon:FlxSprite;
 
 	public var camOther:FlxCamera;
 
@@ -64,8 +65,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		categorySpr.x += 60;
 		add(categorySpr);
 
-		alphabetText = new Alphabet(0, FlxG.height - 200, categoryNamesList[curSelected], true);
-		alphabetText.x = categorySpr.width / 3;
+		alphabetText = new Alphabet(categorySpr.width / 3, FlxG.height - 200, categoryNamesList[curSelected], true);
 		alphabetText.alpha = 0;
 		alphabetText.x -= 60;
 		add(alphabetText);
@@ -81,6 +81,12 @@ class FreeplayCategoryState extends MusicBeatState {
 		lockedTxt = new FlxText(0, Std.int(FlxG.height - (categorySpr.width / 2.75)), 0, 'Locked Category!', 64);
 		lockedTxt.visible = false;
 		add(lockedTxt);
+
+		lockIcon = new FlxSprite(0, 0).loadGraphic(Paths.image('Freeplay_Category_LockIcon'));
+		lockIcon.antialiasing = true;
+		lockIcon.visible = false;
+		lockIcon.screenCenter();
+		add(lockIcon);
 
 		//FlxTween.tween(blackBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
 		FlxTween.tween(categorySpr, {alpha: 1, x: categorySpr.x - 60}, 0.75, {ease: FlxEase.quintOut, startDelay: 0.15});
@@ -133,8 +139,13 @@ class FreeplayCategoryState extends MusicBeatState {
 			alphabetText.x = FlxG.width / 6;
 			bg.color = categoryColors[curSelected];
 			categorySpr.screenCenter();
+			lockedTxt.y = FlxG.height - (categorySpr.width / 2.75);
 		}
-		else categorySpr.screenCenter(Y);
+		else {
+			lockedTxt.y = FlxG.height - (categorySpr.width / 2.75);
+			categorySpr.screenCenter(Y);
+		}
+		super.update(elasped);
 	}
 
 	public function lockedCategoryCheck() {
@@ -144,17 +155,20 @@ class FreeplayCategoryState extends MusicBeatState {
 				categorySpr.color = 0x00000000;
 				alphabetText.visible = false;
 				lockedTxt.visible = true;
+				lockIcon.visible = true;
 				categorySpr.alpha = 0.5;
 			} else {
 				categorySpr.color = 0xFFFFFFFF;
 				alphabetText.visible = true;
 				lockedTxt.visible = false;
+				lockIcon.visible = false;
 				categorySpr.alpha = 1;
 			}
 		} else {
 			categorySpr.color = 0xFFFFFFFF;
 			alphabetText.visible = true;
 			lockedTxt.visible = false;
+			lockIcon.visible = false;
 			categorySpr.alpha = 1;
 		}
 	}
