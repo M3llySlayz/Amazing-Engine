@@ -50,6 +50,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	public static var songName:String = '';
 
+	public var selectedSomethin:Bool = false;
 	public function new(x:Float, y:Float)
 	{
 		super();
@@ -193,9 +194,9 @@ class PauseSubState extends MusicBeatSubstate
 		super.update(elapsed);
 		updateSkipTextStuff();
 
-		var upP = controls.UI_UP_P;
-		var downP = controls.UI_DOWN_P;
-		var accepted = controls.ACCEPT;
+		var upP = controls.UI_UP_P && !selectedSomethin;
+		var downP = controls.UI_DOWN_P && !selectedSomethin;
+		var accepted = controls.ACCEPT && !selectedSomethin;
 
 		if (upP)
 		{
@@ -206,8 +207,8 @@ class PauseSubState extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		if (FlxG.mouse.wheel != 0){
-			if (FlxG.mouse.wheel > 0){
+		if (FlxG.mouse.wheel != 0 && !selectedSomethin) {
+			if (FlxG.mouse.wheel > 0) {
 				changeSelection(-1);
 			} else {
 				changeSelection(1);
@@ -218,14 +219,14 @@ class PauseSubState extends MusicBeatSubstate
 		switch (daSelected)
 		{
 			case 'Skip Time':
-				if (controls.UI_LEFT_P)
+				if (controls.UI_LEFT_P && !selectedSomethin)
 				{
 					//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 					SoundEffects.playSFX('scroll', false);
 					curTime -= 1000;
 					holdTime = 0;
 				}
-				if (controls.UI_RIGHT_P)
+				if (controls.UI_RIGHT_P && !selectedSomethin)
 				{
 					//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 					SoundEffects.playSFX('scroll', false);
@@ -233,7 +234,7 @@ class PauseSubState extends MusicBeatSubstate
 					holdTime = 0;
 				}
 
-				if(controls.UI_LEFT || controls.UI_RIGHT)
+				if ((controls.UI_LEFT || controls.UI_RIGHT) && !selectedSomethin)
 				{
 					holdTime += elapsed;
 					if(holdTime > 0.5)
