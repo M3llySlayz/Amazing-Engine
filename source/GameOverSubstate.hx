@@ -22,18 +22,18 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	var stageSuffix:String = "";
 
-	public static var characterName:String = 'bf-dead';
-	public static var deathSoundName:String = 'fnf_loss_sfx';
-	public static var loopSoundName:String = ClientPrefs.gameOverSong.replace(' ', '-');
-	public static var endSoundName:String = ClientPrefs.gameOverSong.replace(' ', '-') + '-End';
+	public static var characterName = 'bf-dead';
+	public static var deathSoundName = 'fnf_loss_sfx';
+	public static var loopSoundName = Paths.formatToSongPath(ClientPrefs.gameOverSong);
+	public static var endSoundName = Paths.formatToSongPath(ClientPrefs.gameOverSong) + '-End';
 
 	public static var instance:GameOverSubstate;
 
 	public static function resetVariables() {
 		characterName = 'bf-dead';
 		deathSoundName = 'fnf_loss_sfx';
-		loopSoundName = ClientPrefs.gameOverSong.replace(' ', '-');
-		endSoundName = ClientPrefs.gameOverSong.replace(' ', '-') + '-End';
+		loopSoundName = Paths.formatToSongPath(ClientPrefs.gameOverSong);
+		endSoundName = Paths.formatToSongPath(ClientPrefs.gameOverSong) + '-End';
 	}
 
 	override function create()
@@ -119,14 +119,14 @@ class GameOverSubstate extends MusicBeatSubstate
 				if (PlayState.SONG.stage == 'tank')
 				{
 					playingDeathSound = true;
-					coolStartDeath(0.2);
+					FlxG.sound.playMusic(Paths.music(loopSoundName), 0.2);
 					FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + FlxG.random.int(1, 25)), 1, false, null, true, function() {
 						if(!isEnding) FlxG.sound.music.fadeIn(0.2, 1, 4);
 					});
 				}
 				else
 				{
-					coolStartDeath();
+					FlxG.sound.playMusic(Paths.music(loopSoundName), 1);
 				}
 				boyfriend.startedDeath = true;
 			}
@@ -142,11 +142,6 @@ class GameOverSubstate extends MusicBeatSubstate
 	}
 
 	var isEnding:Bool = false;
-
-	function coolStartDeath(?volume:Float = 1):Void
-	{
-		FlxG.sound.playMusic(Paths.music(loopSoundName), volume);
-	}
 
 	function endBullshit():Void
 	{

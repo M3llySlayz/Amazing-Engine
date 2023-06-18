@@ -31,8 +31,15 @@ class ResultsScreenSubState extends MusicBeatSubstate {
 	public function new(daResults:Array<Int>, campaignScore:Int, songMisses:Int, ratingPercent:Float, ratingName:String) {
 		super();
 
+		persistentDraw = true;
+		persistentUpdate = true;
+
 		background = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
-		background.color = 0xFF353535;
+		background.color = FlxColor.fromRGB(
+			PlayState.instance.dad.healthColorArray[0],
+			PlayState.instance.dad.healthColorArray[1],
+			PlayState.instance.dad.healthColorArray[2]
+		);
 		background.scrollFactor.set();
 		background.updateHitbox();
 		background.screenCenter();
@@ -42,21 +49,21 @@ class ResultsScreenSubState extends MusicBeatSubstate {
 
 		resultsText = new FlxText(5, 0, 0, 'RESULTS', 72);
 		resultsText.scrollFactor.set();
-		resultsText.setFormat("vcr.ttf", 48, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resultsText.setFormat("VCR OSD Mono", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resultsText.updateHitbox();
 		add(resultsText);
 
 		results = new FlxText(5, resultsText.height, FlxG.width, '', 48);
 		results.text = 'Sicks: ' + daResults[0] + '\nGoods: ' + daResults[1] + '\nBads: ' + daResults[2] + '\nShits: ' + daResults[3];
 		results.scrollFactor.set();
-		results.setFormat("vcr.ttf", 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		results.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		results.updateHitbox();
 		add(results);
 
 		songNameText = new FlxText(0, 155, 0, '', 124);
 		songNameText.text = "Song: " + PlayState.SONG.song;
 		songNameText.scrollFactor.set();
-		songNameText.setFormat("vcr.ttf", 72, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songNameText.setFormat("VCR OSD Mono", 72, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songNameText.updateHitbox();
 		songNameText.screenCenter(X);
 		add(songNameText);
@@ -64,7 +71,7 @@ class ResultsScreenSubState extends MusicBeatSubstate {
 		difficultyNameTxt = new FlxText(0, 155 + songNameText.height, 0, '', 100);
 		difficultyNameTxt.text = "Difficulty: " + CoolUtil.difficultyString();
 		difficultyNameTxt.scrollFactor.set();
-		difficultyNameTxt.setFormat("vcr.ttf", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		difficultyNameTxt.setFormat("VCR OSD Mono", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		difficultyNameTxt.updateHitbox();
 		difficultyNameTxt.screenCenter(X);
 		add(difficultyNameTxt);
@@ -72,7 +79,7 @@ class ResultsScreenSubState extends MusicBeatSubstate {
 		judgementCounterTxt = new FlxText(0, difficultyNameTxt.y + difficultyNameTxt.height + 45, FlxG.width, '', 86);
 		judgementCounterTxt.text = 'Score: ' + campaignScore + '\nMisses: ' + songMisses + '\nAccuracy: ' + ratingPercent + '%\nRating: ' + ratingName;
 		judgementCounterTxt.scrollFactor.set();
-		judgementCounterTxt.setFormat("vcr.ttf", 36, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		judgementCounterTxt.setFormat("VCR OSD Mono", 36, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		judgementCounterTxt.updateHitbox();
 		judgementCounterTxt.screenCenter(X);
 		add(judgementCounterTxt);
@@ -139,7 +146,6 @@ class ResultsScreenSubState extends MusicBeatSubstate {
 				MusicBeatState.switchState(new StoryMenuState());
 			else
 				MusicBeatState.switchState(new FreeplayState());
-			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')));
 		}
 	}
 }

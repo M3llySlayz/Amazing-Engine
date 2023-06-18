@@ -17,6 +17,7 @@ typedef FreeplayCategoryFile =
 	//JSON stuff :sob:
 	var category:String;
 	var name:String;
+	var startLocked:Null<Bool>;
 	var songs:Array<Array<String>>;
 	var songColors:Array<Array<Int>>;
 	var color:Array<Int>;
@@ -30,6 +31,7 @@ class FreeplayCategory {
 	//JSON stuff :sob:
 	public var category:String;
 	public var name:String;
+	public var startLocked:Null<Bool>;
 	public var songs:Array<Array<String>>;
 	public var songColors:Array<Array<Int>>;
 	public var color:Array<Int>;
@@ -40,6 +42,7 @@ class FreeplayCategory {
 		var categoryFile:FreeplayCategoryFile = {
 			category: "Test3",
 			name: "Test Category 3",
+			startLocked: false,
 			songs: [
 				["Test 1", "bf", "Easy, Normal, Hard"],
 				["Test 2", "bf", "Normal, Hard"],
@@ -58,10 +61,13 @@ class FreeplayCategory {
 	public function new(categoryFile:FreeplayCategoryFile, fileName:String) {
 		category = categoryFile.category;
 		name = categoryFile.name;
+		startLocked = categoryFile.startLocked;
 		songs = categoryFile.songs;
 		songColors = categoryFile.songColors;
 		color = categoryFile.color;
 		this.fileName = fileName;
+
+		if (startLocked == null) startLocked = false;
 	}
 
 	public static function reloadCategoryFiles()
