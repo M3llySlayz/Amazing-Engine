@@ -6,11 +6,11 @@
 		["Test 5", "bf", "Normal, Hard, Insane"],
 		["Test 6", "bf", "Hard, Among Us"]
 	],
-	"startLocked": true,
 	"songColors": [
 		[0, 255, 255],
 		[127, 255, 255],
 		[255, 255, 255]
 	],
-	"color": [0, 255, 0]
+	"color": [0, 255, 0],
+	"startLocked": true
 }

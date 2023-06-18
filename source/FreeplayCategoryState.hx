@@ -42,9 +42,11 @@ class FreeplayCategoryState extends MusicBeatState {
 		FreeplayCategory.reloadCategoryFiles();
 		for (categoriesLoaded in 0...FreeplayCategory.categoryList.length) {
 			var categories = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[categoriesLoaded]);
-			categoriesList.push(categories.category);
-			categoryNamesList.push(categories.name);
-			categoryColors.push(FlxColor.fromRGB(categories.color[0], categories.color[1], categories.color[2]));
+			if (!categories.startLocked && !categories.hiddenWhenLocked) {
+				categoriesList.push(categories.category);
+				categoryNamesList.push(categories.name);
+				categoryColors.push(FlxColor.fromRGB(categories.color[0], categories.color[1], categories.color[2]));
+			}
 		}
 
 		categoryNames = categoryNamesList;
@@ -84,6 +86,11 @@ class FreeplayCategoryState extends MusicBeatState {
 
 	var swagCount = 0;
 	override public function update(elapsed:Float) {
+		if (FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]).startLocked) {
+			bg.color = 0xFF999999;
+		} else {
+			bg.color = 0xFFFFFFFF;
+		}
 		bg.scale.set(1.25, 1.25);
 		bg.screenCenter(X);
 
@@ -134,23 +141,7 @@ class FreeplayCategoryState extends MusicBeatState {
 	}
 
 	public function selectCategory() {
-		var categories = FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]);
-		if (curSelected != 0) { // Null check
-			if (!categories.startLocked) {
-				lightingBG.alpha = 1;
-				selectedSomethin = true;
-				SoundEffects.playSFX('confirm', false);
-				FlxFlicker.flicker(categorySpr, 1.5, 0.05, false);
-				FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
-				FlxTween.tween(alphabetText, {alpha: 0, x: alphabetText.x - 24}, 1, {ease: FlxEase.smoothStepOut});
-				FlxTween.tween(categorySpr, {alpha: 0}, 0.75, {ease: FlxEase.smoothStepOut, startDelay: 0.75});
-				new FlxTimer().start(1.5, function(tmr:FlxTimer) {
-					FreeplayState.curCategory = categoriesList[curSelected];
-					if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
-					LoadingState.loadAndSwitchState(new FreeplayState());
-				});
-			} else SoundEffects.playSFX('cancel', false);
-		} else {
+		if (!FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]).startLocked) {
 			lightingBG.alpha = 1;
 			selectedSomethin = true;
 			SoundEffects.playSFX('confirm', false);
@@ -163,7 +154,7 @@ class FreeplayCategoryState extends MusicBeatState {
 				if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
 				LoadingState.loadAndSwitchState(new FreeplayState());
 			});
-		}
+		} else SoundEffects.playSFX('cancel', false);
 	}
 }
 #end

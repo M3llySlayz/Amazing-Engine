@@ -17,10 +17,11 @@ typedef FreeplayCategoryFile =
 	//JSON stuff :sob:
 	var category:String;
 	var name:String;
-	var startLocked:Null<Bool>;
 	var songs:Array<Array<String>>;
 	var songColors:Array<Array<Int>>;
 	var color:Array<Int>;
+	var startLocked:Null<Bool>;
+	var hiddenWhenLocked:Null<Bool>;
 }
 
 class FreeplayCategory {
@@ -31,10 +32,11 @@ class FreeplayCategory {
 	//JSON stuff :sob:
 	public var category:String;
 	public var name:String;
-	public var startLocked:Null<Bool>;
 	public var songs:Array<Array<String>>;
 	public var songColors:Array<Array<Int>>;
 	public var color:Array<Int>;
+	public var startLocked:Null<Bool>;
+	public var hiddenWhenLocked:Null<Bool>;
 
 	public var fileName:String;
 
@@ -42,7 +44,6 @@ class FreeplayCategory {
 		var categoryFile:FreeplayCategoryFile = {
 			category: "Test3",
 			name: "Test Category 3",
-			startLocked: false,
 			songs: [
 				["Test 1", "bf", "Easy, Normal, Hard"],
 				["Test 2", "bf", "Normal, Hard"],
@@ -53,7 +54,9 @@ class FreeplayCategory {
 				[127, 255, 255],
 				[255, 255, 255]
 			],
-			color: [0, 255, 255]
+			color: [0, 255, 255],
+			startLocked: false,
+			hiddenWhenLocked: false
 		};
 		return categoryFile;
 	}
@@ -61,13 +64,16 @@ class FreeplayCategory {
 	public function new(categoryFile:FreeplayCategoryFile, fileName:String) {
 		category = categoryFile.category;
 		name = categoryFile.name;
-		startLocked = categoryFile.startLocked;
 		songs = categoryFile.songs;
 		songColors = categoryFile.songColors;
 		color = categoryFile.color;
+		startLocked = categoryFile.startLocked;
+		hiddenWhenLocked = categoryFile.hiddenWhenLocked;
 		this.fileName = fileName;
 
-		if (startLocked == null) startLocked = false; // Null check
+		// Null checks
+		if (startLocked == null) startLocked = false;
+		if (hiddenWhenLocked == null) hiddenWhenLocked = false;
 	}
 
 	public static function reloadCategoryFiles()
