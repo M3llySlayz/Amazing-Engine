@@ -308,8 +308,30 @@ class PauseSubState extends MusicBeatSubstate
 		skipTimeTracker = null;
 	}
 
-	public static function restartSong(noTrans:Bool = false)
+	function restartSong(?noTrans:Bool = false)
 	{
+		PlayState.instance.paused = true; // For lua
+		FlxG.sound.music.volume = 0;
+		PlayState.instance.vocals.volume = 0;
+
+		FlxTween.cancelTweensOf(bg, []);
+		FlxTween.cancelTweensOf(levelInfo, []);
+		FlxTween.cancelTweensOf(levelDifficulty, []);
+		FlxTween.cancelTweensOf(blueballedTxt, []);
+
+		if(noTrans)
+		{
+			FlxTransitionableState.skipNextTransOut = true;
+			FlxG.resetState();
+		}
+		else
+		{
+			MusicBeatState.resetState();
+			CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
+		}
+	}
+
+	public static function restartSongFromInstance(?noTrans:Bool = false) {
 		PlayState.instance.paused = true; // For lua
 		FlxG.sound.music.volume = 0;
 		PlayState.instance.vocals.volume = 0;
@@ -328,97 +350,89 @@ class PauseSubState extends MusicBeatSubstate
 
 	function quitSong()
 	{
-		var daTime:Float = 1;
+		var daTime:Float = 1.5;
 		SoundEffects.playSFX('confirm', false);
 
-		CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
+		FlxTween.cancelTweensOf(bg, []);
+		FlxTween.cancelTweensOf(levelInfo, []);
+		FlxTween.cancelTweensOf(levelDifficulty, []);
+		FlxTween.cancelTweensOf(blueballedTxt, []);
+
 		var da:Int = curSelected;
-		for (i in 0...grpMenuShit.members.length)
-		{
-			if (i == da)
-			{
-				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.06, false, false);
+		for (i in 0...grpMenuShit.members.length) {
+			if (i == da) {
+				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.05, false, false);
+				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			} else {
-				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, 0.2, {ease: FlxEase.quadIn});
+				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			}
 
-			var overlay:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-			overlay.alpha = 0;
-			overlay.scrollFactor.set();
-			add(overlay);
-
-			FlxTween.tween(bg, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(overlay, {alpha: 1}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(levelInfo, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(levelDifficulty, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(blueballedTxt, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(authorText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			if (practiceText.visible)
-				FlxTween.tween(practiceText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			if (chartingText.visible)
-				FlxTween.tween(chartingText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+			FlxTween.tween(bg, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(levelInfo, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(levelDifficulty, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(blueballedTxt, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(quittingTxt, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(authorText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			if (practiceText.visible) FlxTween.tween(practiceText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			if (chartingText.visible) FlxTween.tween(chartingText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 	
-		new FlxTimer().start(daTime, function(tmr:FlxTimer)
-		{
-			PlayState.deathCounter = 0;
-			PlayState.seenCutscene = false;
-			WeekData.loadTheFirstEnabledMod();
-			if(PlayState.isStoryMode) {
-				MusicBeatState.switchState(new StoryMenuState());
-			} else {
-				MusicBeatState.switchState(new FreeplayState());
-			}
-			PlayState.cancelMusicFadeTween();
-			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')));
-			PlayState.changedDifficulty = false;
-			PlayState.chartingMode = false;
-		});
-			
+			new FlxTimer().start(daTime, function(tmr:FlxTimer) {
+				PlayState.deathCounter = 0;
+				PlayState.seenCutscene = false;
+				WeekData.loadTheFirstEnabledMod();
+				CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
+				if(PlayState.isStoryMode) {
+					LoadingState.loadAndSwitchState(new StoryMenuState());
+				} else {
+					LoadingState.loadAndSwitchState(new FreeplayState());
+				}
+				PlayState.cancelMusicFadeTween();
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')));
+				PlayState.changedDifficulty = false;
+				PlayState.chartingMode = false;
+			});
 		}
 	}
 
 	function closeState(?custom:Int = null)
 	{
-		var daTime:Float = 1;
+		var daTime:Float = 1.5;
 		Conductor.changeBPM(PlayState.SONG.bpm);
 		SoundEffects.playSFX('confirm', false);
 
+		FlxTween.cancelTweensOf(bg, []);
+		FlxTween.cancelTweensOf(levelInfo, []);
+		FlxTween.cancelTweensOf(levelDifficulty, []);
+		FlxTween.cancelTweensOf(blueballedTxt, []);
+
 		CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 		var da:Int = curSelected;
-		if (custom != null)
-		{
-			da = custom;
-		}
+		if (custom != null) da = custom;
 		var daName = menuItems[curSelected];
-		for (i in 0...grpMenuShit.members.length)
-		{
-			if (i == da)
-			{
-				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.06, false, false);
+		for (i in 0...grpMenuShit.members.length) {
+			if (i == da) {
+				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.05, false, false);
+				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			} else {
-				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, 0.2, {ease: FlxEase.quadIn});
+				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			}
-			FlxTween.tween(bg, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(levelInfo, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(levelDifficulty, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(blueballedTxt, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(authorText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			if (practiceText.visible)
-				FlxTween.tween(practiceText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			if (chartingText.visible)
-				FlxTween.tween(chartingText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-	
-		new FlxTimer().start(daTime, function(tmr:FlxTimer)
-		{
-			if (menuItems == difficultyChoices)
-			{
+			FlxTween.tween(bg, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(levelInfo, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(levelDifficulty, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(blueballedTxt, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(authorText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			if (practiceText.visible) FlxTween.tween(practiceText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			if (chartingText.visible) FlxTween.tween(chartingText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+
+		new FlxTimer().start(daTime, function(tmr:FlxTimer) {
+			if (menuItems == difficultyChoices) {
 				if(menuItems.length - 1 != da && difficultyChoices.contains(daName)) {
 					var name:String = PlayState.SONG.song;
 					var poop = Highscore.formatSong(name, da);
 					try {
 						PlayState.SONG = Song.loadFromJson(poop, name);
 						PlayState.storyDifficulty = da;
-						if (FlxG.keys.pressed.ALT){
+						if (FlxG.keys.pressed.ALT) {
 							MusicBeatState.resetState();
 						} else {
 							LoadingState.loadAndSwitchState(new CharMenu());
@@ -467,11 +481,11 @@ class PauseSubState extends MusicBeatSubstate
 						close();
 					default:
 						close();
-					}}
-				});
-			}
+					}
+				}
+			});
 		}
-		
+	}
 	
 	override function destroy()
 	{
@@ -497,12 +511,10 @@ class PauseSubState extends MusicBeatSubstate
 			bullShit++;
 
 			item.alpha = 0.6;
-			// item.setGraphicSize(Std.int(item.width * 0.8));
 
 			if (item.targetY == 0)
 			{
 				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
 
 				if(item == skipTimeTracker)
 				{

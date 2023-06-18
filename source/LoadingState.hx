@@ -49,11 +49,8 @@ class LoadingState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);
 		add(bg);
 		funkay = new FlxSprite(600, 600).loadGraphic(Paths.getPath(loadingScreen, IMAGE));
-		//funkay.setGraphicSize(FlxG.width, FlxG.height);
-		//funkay.updateHitbox();
 		funkay.antialiasing = ClientPrefs.globalAntialiasing;
 		add(funkay);
-		//funkay.scrollFactor.set();
 		funkay.screenCenter();
 
 		loadBar = new FlxSprite(0, FlxG.height - 20).makeGraphic(FlxG.width, 10, 0xd8008409);
@@ -93,6 +90,8 @@ class LoadingState extends MusicBeatState
 				new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete());
 			}
 		);
+
+		persistentUpdate = true;
 	}
 	
 	function checkLoadSong(path:String)
@@ -101,10 +100,6 @@ class LoadingState extends MusicBeatState
 		{
 			var library = Assets.getLibrary("songs");
 			final symbolPath = path.split(":").pop();
-			// @:privateAccess
-			// library.types.set(symbolPath, SOUND);
-			// @:privateAccess
-			// library.pathGroups.set(symbolPath, [library.__cacheBreak(symbolPath)]);
 			var callback = callbacks.add("song:" + path);
 			Assets.loadSound(path).onComplete(function (_) { callback(); });
 		}
@@ -126,14 +121,6 @@ class LoadingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		//funkay.setGraphicSize(Std.int(0.88 * FlxG.width + 0.9 * (funkay.width - 0.88 * FlxG.width)));
-		//funkay.updateHitbox();
-		if(controls.ACCEPT)
-		{
-			//funkay.setGraphicSize(Std.int(funkay.width + 60));
-			//funkay.updateHitbox();
-		}
-
 		if(callbacks != null) {
 			targetShit = FlxMath.remapToRange(callbacks.numRemaining / callbacks.length, 1, 0, 0, 1);
 			loadBar.scale.x += 0.5 * (targetShit - loadBar.scale.x);
@@ -186,24 +173,23 @@ class LoadingState extends MusicBeatState
 
 		return target;
 	}
-	
+
 	static function isSoundLoaded(path:String):Bool
 	{
 		return Assets.cache.hasSound(path);
 	}
-	
+
 	static function isLibraryLoaded(library:String):Bool
 	{
 		return Assets.getLibrary(library) != null;
 	}
-	
+
 	override function destroy()
 	{
 		super.destroy();
-		
 		callbacks = null;
 	}
-	
+
 	static function initSongsManifest()
 	{
 		var id = "songs";
@@ -281,7 +267,7 @@ class MultiCallback
 	var unfired = new Map<String, Void->Void>();
 	var fired = new Array<String>();
 	
-	public function new (callback:Void->Void, logId:String = null)
+	public function new(callback:Void->Void, logId:String = null)
 	{
 		this.callback = callback;
 		this.logId = logId;
