@@ -3511,8 +3511,7 @@ class PlayState extends MusicBeatState
 			// Conductor.lastSongPos = FlxG.sound.music.time;
 		}
 
-		if (camZooming)
-		{
+		if (camZooming) {
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
 			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
 		}
@@ -4039,8 +4038,7 @@ class PlayState extends MusicBeatState
 						}
 				}
 
-				if (char != null)
-				{
+				if (char != null && !playingAsOpponent) {
 					char.playAnim(value1, true);
 					char.specialAnim = true;
 				}
@@ -5124,10 +5122,8 @@ class PlayState extends MusicBeatState
 
 	function opponentNoteHit(note:Note):Void
 	{
-		if (!playingAsOpponent) {
-			if (Paths.formatToSongPath(SONG.song) != 'tutorial') {
-				camZooming = true;
-			}
+		if (Paths.formatToSongPath(SONG.song) != 'tutorial') {
+			camZooming = true;
 		}
 
 		var char:Character = dad;
@@ -5141,7 +5137,7 @@ class PlayState extends MusicBeatState
 
 			if (SONG.notes[curSection] != null)
 			{
-				if (SONG.notes[curSection].altAnim && !playingAsOpponent && !SONG.notes[curSection].gfSection) {
+				if (SONG.notes[curSection].altAnim && !SONG.notes[curSection].gfSection) {
 					altAnim = '-alt';
 				}
 			}

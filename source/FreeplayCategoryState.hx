@@ -145,7 +145,7 @@ class FreeplayCategoryState extends MusicBeatState {
 			lockedTxt.y = FlxG.height - (categorySpr.width / 2.75);
 			categorySpr.screenCenter(Y);
 		}
-		super.update(elasped);
+		super.update(elapsed);
 	}
 
 	public function lockedCategoryCheck() {
