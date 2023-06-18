@@ -86,10 +86,12 @@ class FreeplayCategoryState extends MusicBeatState {
 
 	var swagCount = 0;
 	override public function update(elapsed:Float) {
-		if (FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]).startLocked) {
-			bg.color = 0xFF999999;
-		} else {
-			bg.color = 0xFFFFFFFF;
+		if (curSelected != 0) {
+			if (FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]).startLocked) {
+				bg.color = 0xFF999999;
+			} else {
+				bg.color = 0xFFFFFFFF;
+			}
 		}
 		bg.scale.set(1.25, 1.25);
 		bg.screenCenter(X);
