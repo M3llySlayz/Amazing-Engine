@@ -4038,7 +4038,7 @@ class PlayState extends MusicBeatState
 						}
 				}
 
-				if (char != null && !playingAsOpponent) {
+				if (char != null) {
 					char.playAnim(value1, true);
 					char.specialAnim = true;
 				}
