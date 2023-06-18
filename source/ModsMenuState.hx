@@ -111,27 +111,23 @@ class ModsMenuState extends MusicBeatState
 			{
 				if(leMods.length > 1 && leMods[0].length > 0) {
 					var modSplit:Array<String> = leMods[i].split('|');
-					if(!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase()))
-					{
-						addToModsList([modSplit[0], (modSplit[1] == '1')]);
-						//trace(modSplit[1]);
-					}
+					if(!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase())) addToModsList([modSplit[0], (modSplit[1] == '1')]);
 				}
 			}
 		}
 
 		if(FileSystem.exists(path))
-	{
-		var leMods:Array<String> = CoolUtil.coolTextFile(path); //sets the leMod var as a string and sets
-		//it to the list of mods in the text file.
-		for (i in 0...leMods.length) //for 0 to the length of the mods list.
-    	{
-        	var modSplit:Array<String> = leMods[i].split('|'); //splits up the mods into two variables. name and enabled[t/f]
-        	if (modSplit[1] == '1') { //if mod is enabled.
-            	addToEnabledList([modSplit[0]]); //enabledlist.txt is the name of the mods only that are enabled.
-        	}
-    	}
-	}
+		{
+			var leMods:Array<String> = CoolUtil.coolTextFile(path); //sets the leMod var as a string and sets
+			//it to the list of mods in the text file.
+			for (i in 0...leMods.length) //for 0 to the length of the mods list.
+			{
+				var modSplit:Array<String> = leMods[i].split('|'); //splits up the mods into two variables. name and enabled[t/f]
+				if (modSplit[1] == '1') { //if mod is enabled.
+					addToEnabledList([modSplit[0]]); //enabledlist.txt is the name of the mods only that are enabled.
+				}
+			}
+		}
 
 		// FIND MOD FOLDERS
 		var boolshit = true;
@@ -355,7 +351,7 @@ class ModsMenuState extends MusicBeatState
 			}
 
 			var newMod:ModMetadata = new ModMetadata(values[0]);
-			if (mods[i].name != 'categories' || mods[i].name != 'options') mods.push(newMod);
+			if (values[0] != 'categories' || values[0] != 'options') mods.push(newMod);
 
 			newMod.alphabet = new Alphabet(0, 0, mods[i].name, true);
 			var scale:Float = Math.min(840 / newMod.alphabet.width, 1);
@@ -401,27 +397,18 @@ class ModsMenuState extends MusicBeatState
 		intendedColor = bg.color;
 		changeSelection();
 		updatePosition();
-		//FlxG.sound.play(Paths.sound('scrollMenu'));
 
 		FlxG.mouse.visible = true;
 
 		super.create();
 	}
 
-	/*function getIntArray(max:Int):Array<Int>{
-		var arr:Array<Int> = [];
-		for (i in 0...max) {
-			arr.push(i);
-		}
-		return arr;
-	}*/
 	function addToModsList(values:Array<Dynamic>)
 	{
 		for (i in 0...modsList.length)
 		{
 			if(modsList[i][0] == values[0])
 			{
-				//trace(modsList[i][0], values[0]);
 				return;
 			}
 		}
@@ -429,17 +416,17 @@ class ModsMenuState extends MusicBeatState
 	}
 
 	function addToEnabledList(values:Array<String>)
+	{
+		for (i in 0...enabledMods.length)
 		{
-			for (i in 0...enabledMods.length)
+			if(enabledMods[i][0] == values[0])
 			{
-				if(enabledMods[i][0] == values[0])
-				{
-					//trace(modsList[i][0], values[0]);
-					return;
-				}
+				//trace(modsList[i][0], values[0]);
+				return;
 			}
-			enabledMods.push(values);
 		}
+		enabledMods.push(values);
+	}
 
 	function updateButtonToggle()
 	{
@@ -643,7 +630,7 @@ class ModsMenuState extends MusicBeatState
 				mod.alphabet.alpha = 1;
 				selector.sprTracker = mod.alphabet;
 				descriptionTxt.text = mod.description;
-				if (mod.restart){//finna make it to where if nothing changed then it won't reset
+				if (mod.restart) { //finna make it to where if nothing changed then it won't reset
 					descriptionTxt.text += " (This Mod will restart the game!)";
 				}
 
