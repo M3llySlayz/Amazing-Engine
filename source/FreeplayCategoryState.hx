@@ -84,7 +84,7 @@ class FreeplayCategoryState extends MusicBeatState {
 
 		//FlxTween.tween(blackBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
 		FlxTween.tween(categorySpr, {alpha: 1, x: categorySpr.x - 60}, 0.75, {ease: FlxEase.quintOut, startDelay: 0.15});
-		FlxTween.tween(alphabetText, {alpha: 1, x: alphabetText.x + 60}, 0.75, {ease: FlxEase.quintOut, startDelay: 0.25, onComplete: function(twm:FlxTween) {
+		FlxTween.tween(alphabetText, {alpha: 1, x: FlxG.width / 6}, 0.75, {ease: FlxEase.quintOut, startDelay: 0.25, onComplete: function(twm:FlxTween) {
 			selectedSomethin = false;
 		}});
 		lockedTxt.screenCenter(X);

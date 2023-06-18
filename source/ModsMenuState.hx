@@ -355,7 +355,7 @@ class ModsMenuState extends MusicBeatState
 			}
 
 			var newMod:ModMetadata = new ModMetadata(values[0]);
-			mods.push(newMod);
+			if (mods[i].name != 'categories' || mods[i].name != 'options') mods.push(newMod);
 
 			newMod.alphabet = new Alphabet(0, 0, mods[i].name, true);
 			var scale:Float = Math.min(840 / newMod.alphabet.width, 1);
