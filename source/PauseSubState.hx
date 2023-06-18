@@ -328,10 +328,9 @@ class PauseSubState extends MusicBeatSubstate
 
 	function quitSong()
 	{
-		var daTime:Float = 1;
+		var daTime:Float = 1.5;
 		SoundEffects.playSFX('confirm', false);
 
-		CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 		var da:Int = curSelected;
 		for (i in 0...grpMenuShit.members.length)
 		{
@@ -339,47 +338,39 @@ class PauseSubState extends MusicBeatSubstate
 			{
 				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.06, false, false);
 			} else {
-				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, 0.2, {ease: FlxEase.quadIn});
+				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, 0.2, {ease: FlxEase.sineOut});
 			}
 
-			var overlay:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-			overlay.alpha = 0;
-			overlay.scrollFactor.set();
-			add(overlay);
-
-			FlxTween.tween(bg, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(overlay, {alpha: 1}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(levelInfo, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(levelDifficulty, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(blueballedTxt, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(authorText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			if (practiceText.visible)
-				FlxTween.tween(practiceText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			if (chartingText.visible)
-				FlxTween.tween(chartingText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
+			FlxTween.tween(bg, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(levelInfo, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(levelDifficulty, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(blueballedTxt, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(authorText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			if (practiceText.visible) FlxTween.tween(practiceText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			if (chartingText.visible) FlxTween.tween(chartingText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 	
-		new FlxTimer().start(daTime, function(tmr:FlxTimer)
-		{
-			PlayState.deathCounter = 0;
-			PlayState.seenCutscene = false;
-			WeekData.loadTheFirstEnabledMod();
-			if(PlayState.isStoryMode) {
-				MusicBeatState.switchState(new StoryMenuState());
-			} else {
-				MusicBeatState.switchState(new FreeplayState());
-			}
-			PlayState.cancelMusicFadeTween();
-			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')));
-			PlayState.changedDifficulty = false;
-			PlayState.chartingMode = false;
-		});
-			
+			new FlxTimer().start(daTime, function(tmr:FlxTimer)
+			{
+				PlayState.deathCounter = 0;
+				PlayState.seenCutscene = false;
+				WeekData.loadTheFirstEnabledMod();
+				CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
+				if(PlayState.isStoryMode) {
+					LoadingState.loadAndSwitchState(new StoryMenuState());
+				} else {
+					LoadingState.loadAndSwitchState(new FreeplayState());
+				}
+				PlayState.cancelMusicFadeTween();
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')));
+				PlayState.changedDifficulty = false;
+				PlayState.chartingMode = false;
+			});
 		}
 	}
 
 	function closeState(?custom:Int = null)
 	{
-		var daTime:Float = 1;
+		var daTime:Float = 1.5;
 		Conductor.changeBPM(PlayState.SONG.bpm);
 		SoundEffects.playSFX('confirm', false);
 
@@ -396,18 +387,16 @@ class PauseSubState extends MusicBeatSubstate
 			{
 				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.06, false, false);
 			} else {
-				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, 0.2, {ease: FlxEase.quadIn});
+				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, 0.2, {ease: FlxEase.sineOut});
 			}
-			FlxTween.tween(bg, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(levelInfo, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(levelDifficulty, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(blueballedTxt, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			FlxTween.tween(authorText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			if (practiceText.visible)
-				FlxTween.tween(practiceText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-			if (chartingText.visible)
-				FlxTween.tween(chartingText, {alpha: 0}, 0.7, {ease: FlxEase.quadIn});
-	
+			FlxTween.tween(bg, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(levelInfo, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(levelDifficulty, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(blueballedTxt, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(authorText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			if (practiceText.visible) FlxTween.tween(practiceText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			if (chartingText.visible) FlxTween.tween(chartingText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+
 		new FlxTimer().start(daTime, function(tmr:FlxTimer)
 		{
 			if (menuItems == difficultyChoices)
