@@ -35,7 +35,7 @@ class PauseSubState extends MusicBeatSubstate
 	var composer:String = '';
 
 	var pauseMusic:FlxSound;
-	var authorText:FlxText = new FlxText(20, 640+32, 0, "", 32);
+	var authorText:FlxText = new FlxText(20, 640 + 32, 0, "", 32);
 	var practiceText:FlxText;
 	var skipTimeText:FlxText;
 	var skipTimeTracker:Alphabet;
@@ -77,7 +77,6 @@ class PauseSubState extends MusicBeatSubstate
 			difficultyChoices.push(diff);
 		}
 		difficultyChoices.push('BACK');
-
 
 		pauseMusic = new FlxSound();
 		if(songName != null) {
@@ -252,12 +251,12 @@ class PauseSubState extends MusicBeatSubstate
 		{
 			switch(daSelected) {
 				case "Continue":
-						if (ClientPrefs.pauseExit == 'Flicker Out') {
-							closeState();
-						} else {
-							SoundEffects.playSFX('scroll', false);
-							close();
-						}
+					if (ClientPrefs.pauseExit == 'Flicker Out') {
+						closeState();
+					} else {
+						SoundEffects.playSFX('scroll', false);
+						close();
+					}
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
 					authorText.text = 'Hold ALT to skip character selection.';
@@ -460,6 +459,7 @@ class PauseSubState extends MusicBeatSubstate
 						PlayState.seenCutscene = false;
 						PlayState.changedDifficulty = false;
 						PlayState.cancelMusicFadeTween();
+						CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 						MusicBeatState.switchState(new options.pause.OptionsState());
 					case "Leave Charting Mode":
 						restartSong();
