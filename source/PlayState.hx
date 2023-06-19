@@ -3424,20 +3424,20 @@ class PlayState extends MusicBeatState
 				iconP1.animation.curAnim.curFrame = 0;
 			}
 		} else {
-			if (healthBar.percent < 20) {
+			if (healthBar.percent > 80) {
 				if (iconP2Width != 150)
-					iconP2.animation.curAnim.curFrame = 2;
+					iconP2.animation.curAnim.curFrame = 1;
 				if (iconP1Width == 450)
-					iconP1.animation.curAnim.curFrame = 1;
+					iconP1.animation.curAnim.curFrame = 2;
 			} else {
 				iconP2.animation.curAnim.curFrame = 0;
 				iconP1.animation.curAnim.curFrame = 0;
 			}
-			if (healthBar.percent > 80) {
+			if (healthBar.percent < 20) {
 				if (iconP1Width != 150)
-					iconP1.animation.curAnim.curFrame = 2;
+					iconP1.animation.curAnim.curFrame = 1;
 				if (iconP2Width == 450)
-					iconP2.animation.curAnim.curFrame = 1;
+					iconP2.animation.curAnim.curFrame = 2;
 			} else {
 				iconP1.animation.curAnim.curFrame = 0;
 				iconP2.animation.curAnim.curFrame = 0;
