@@ -206,10 +206,10 @@ class StoryMenuState extends MusicBeatState
 			var upP = controls.UI_UP_P;
 			var downP = controls.UI_DOWN_P;
 
-			if (upP) changeWeek(-1);
-			if (downP) changeWeek(1);
+			if (upP && !stopspamming) changeWeek(-1);
+			if (downP && !stopspamming) changeWeek(1);
 
-			if (FlxG.mouse.justPressedMiddle) {
+			if (FlxG.mouse.justPressedMiddle && !stopspamming) {
 				if (mouseToggle) {
 					mouseToggle = false;
 				} else {
@@ -217,7 +217,7 @@ class StoryMenuState extends MusicBeatState
 				}
 			}
 
-			if(FlxG.mouse.wheel != 0) {
+			if(FlxG.mouse.wheel != 0 && !stopspamming) {
 				if (mouseToggle) {
 					changeDifficulty(-FlxG.mouse.wheel);
 				} else {
@@ -225,34 +225,34 @@ class StoryMenuState extends MusicBeatState
 				}
 			}
 
-			if (controls.UI_RIGHT)
+			if (controls.UI_RIGHT && !stopspamming)
 				rightArrow.animation.play('press')
 			else
 				rightArrow.animation.play('idle');
 
-			if (controls.UI_LEFT)
+			if (controls.UI_LEFT && !stopspamming)
 				leftArrow.animation.play('press');
 			else
 				leftArrow.animation.play('idle');
 
-			if (controls.UI_RIGHT_P)
+			if (controls.UI_RIGHT_P && !stopspamming)
 				changeDifficulty(1);
-			else if (controls.UI_LEFT_P)
+			else if (controls.UI_LEFT_P && !stopspamming)
 				changeDifficulty(-1);
-			else if (upP || downP)
+			else if (upP || downP && !stopspamming)
 				changeDifficulty();
 
-			if(FlxG.keys.justPressed.CONTROL)
+			if(FlxG.keys.justPressed.CONTROL && !stopspamming)
 			{
 				persistentUpdate = false;
 				openSubState(new GameplayChangersSubstate());
 			}
-			else if(controls.RESET)
+			else if(controls.RESET && !stopspamming)
 			{
 				persistentUpdate = false;
 				openSubState(new ResetScoreSubState('', curDifficulty, '', curWeek));
 			}
-			else if (controls.ACCEPT || FlxG.mouse.justPressed)
+			else if ((controls.ACCEPT || FlxG.mouse.justPressed) && !stopspamming)
 			{
 				selectWeek();
 			}

@@ -384,7 +384,7 @@ class PauseSubState extends MusicBeatSubstate
 				WeekData.loadTheFirstEnabledMod();
 				CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 				if(PlayState.isStoryMode) {
-					LoadingState.loadAndSwitchState(new StoryMenuState());
+					LoadingState.loadAndSwitchState(new AmazingStoryMenuState());
 				} else {
 					LoadingState.loadAndSwitchState(new FreeplayState());
 				}
