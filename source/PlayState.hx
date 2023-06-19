@@ -383,18 +383,9 @@ class PlayState extends MusicBeatState
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
-		if (FlxG.sound.music != null)
-			FlxG.sound.music.stop();
+		if (FlxG.sound.music != null) FlxG.sound.music.stop();
 
-		// Gameplay settings
-		healthGain = ClientPrefs.getGameplaySetting('healthgain', 1);
-		healthLoss = ClientPrefs.getGameplaySetting('healthloss', 1);
-		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
-		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
-		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
-		playingAsOpponent = ClientPrefs.getGameplaySetting('playAsOpponent', false);
-
-		// var gameCam:FlxCamera = FlxG.camera;
+		refreshModifiers();
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
@@ -404,20 +395,18 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
-		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
+		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camOther;
 
 		persistentUpdate = true;
 		persistentDraw = true;
 
-		if (SONG == null)
-			SONG = Song.loadFromJson('tutorial');
+		if (SONG == null) SONG = Song.loadFromJson('tutorial');
 
 		mania = SONG.mania;
-		if (mania < Note.minMania || mania > Note.maxMania)
-			mania = Note.defaultMania;
+		if (mania < Note.minMania || mania > Note.maxMania) mania = Note.defaultMania;
 
 		trace("song keys: " + (mania + 1) + " / mania value: " + mania);
 
@@ -888,8 +877,9 @@ class PlayState extends MusicBeatState
 		function addAbilityToUnlockAchievements(funkinLua:FunkinLua)
 		{
 			var lua = funkinLua.lua;
-			if (lua != null){
-				Lua_helper.add_callback(lua, "giveAchievement", function(name:String){
+			if (lua != null)
+			{
+				Lua_helper.add_callback(lua, "giveAchievement", function(name:String) {
 					if (luaArray.contains(funkinLua))
 						throw 'Illegal attempt to unlock ' + name;
 					@:privateAccess
@@ -905,7 +895,6 @@ class PlayState extends MusicBeatState
 					}
 					else return "Instance is null.";
 				});
-	
 			}
 		}
 	
@@ -919,9 +908,7 @@ class PlayState extends MusicBeatState
 				var meta:Achievements.AchievementMeta = try Json.parse(File.getContent(luaFile.substring(0, luaFile.length - 4) + '.json')) catch(e) throw e;
 				if (meta != null)
 				{
-					if ((meta.global == null || meta.global.length < 1) && meta.song != null && meta.song.length > 0 && SONG.song.toLowerCase().replace(' ', '-') != meta.song.toLowerCase().replace(' ', '-'))
-						continue;
-	
+					if ((meta.global == null || meta.global.length < 1) && meta.song != null && meta.song.length > 0 && Paths.formatToSongPath(SONG.song) != Paths.formatToSongPath(meta.song)) continue;
 					var lua = new FunkinLua(luaFile);
 					addAbilityToUnlockAchievements(lua);
 					achievementsArray.push(lua);
@@ -930,7 +917,8 @@ class PlayState extends MusicBeatState
 		}
 	
 		var achievementMetas = Achievements.getModAchievementMetas().copy();
-		for (i in achievementMetas) { 
+		for (i in achievementMetas)
+		{ 
 			if (i.global == null || i.global.length < 1)
 			{
 				if(i.song != null)
@@ -3145,7 +3133,7 @@ class PlayState extends MusicBeatState
 				timer.active = true;
 			}
 			paused = false;
-			//refreshModifiers();
+			refreshModifiers();
 			callOnLuas('onResume', []);
 
 			#if desktop
@@ -5147,7 +5135,7 @@ class PlayState extends MusicBeatState
 
 			if(playingAsOpponent && boyfriend != null)
 			{
-				health -= note.hitHealth * healthGain;
+				if (health > 2) health -= note.hitHealth * healthGain;
 				boyfriend.playAnim(animToPlay, true);
 				boyfriend.holdTimer = 0;
 			}
@@ -5858,14 +5846,14 @@ class PlayState extends MusicBeatState
 		var curLight:Int = -1;
 		var curLightEvent:Int = -1;
 
-	function refreshModifiers(){
+	function refreshModifiers() {
 		playbackRate = ClientPrefs.getGameplaySetting('songspeed', 1);
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		healthGain = ClientPrefs.getGameplaySetting('healthgain', 1);
 		healthLoss = ClientPrefs.getGameplaySetting('healthloss', 1);
-		//opponentPlay = ClientPrefs.getGameplaySetting('opponentpaly', false);
+		playingAsOpponent = ClientPrefs.getGameplaySetting('playAsOpponent', false);
 		songSpeed = ClientPrefs.getGameplaySetting('scrollspeed', 1);
 		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype', 'multiplicative');
 	}
