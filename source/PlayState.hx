@@ -5135,7 +5135,7 @@ class PlayState extends MusicBeatState
 
 			if(playingAsOpponent && boyfriend != null)
 			{
-				if (health > 2) health -= note.hitHealth * healthGain;
+				if (health > 1.95) health -= note.hitHealth * healthGain;
 				boyfriend.playAnim(animToPlay, true);
 				boyfriend.holdTimer = 0;
 			}
