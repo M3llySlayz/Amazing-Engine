@@ -188,8 +188,7 @@ class Character extends FlxSprite
 					spriteType = "texture";
 				}
 
-				switch (spriteType){
-					
+				switch (spriteType) {
 					case "packer":
 						frames = Paths.getPackerAtlas(json.image, library);
 					

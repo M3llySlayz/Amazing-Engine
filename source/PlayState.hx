@@ -4021,24 +4021,23 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Play Animation':
-				//trace('Anim to play: ' + value1);
-				var char:Character = dad;
-				switch(value2.toLowerCase().trim()) {
-					case 'bf' | 'boyfriend':
-						char = boyfriend;
-					case 'gf' | 'girlfriend':
-						char = gf;
-					default:
-						var val2:Int = Std.parseInt(value2);
-						if(Math.isNaN(val2)) val2 = 0;
-		
-						switch(val2) {
-							case 1: char = boyfriend;
-							case 2: char = gf;
-						}
-				}
+					var char:Character = dad;
+					switch(value2.toLowerCase().trim()) {
+						case 'bf' | 'boyfriend':
+							char = boyfriend;
+						case 'gf' | 'girlfriend':
+							char = gf;
+						default:
+							var val2:Int = Std.parseInt(value2);
+							if(Math.isNaN(val2)) val2 = 0;
+			
+							switch(val2) {
+								case 1: char = boyfriend;
+								case 2: char = gf;
+							}
+					}
 
-				if (char != null) {
+				if (char != null && !playingAsOpponent) {
 					char.playAnim(value1, true);
 					char.specialAnim = true;
 				}
@@ -5022,7 +5021,7 @@ class PlayState extends MusicBeatState
 				boyfriend.dance();
 			}
 
-			if (keysArePressed() && !endingSong && playingAsOpponent) {
+			if (keysArePressed() && !endingSong && playingAsOpponent && dad.hasMissAnimations) {
 				holdTime += elapsed;
 			} else if (dad.holdTimer > Conductor.stepCrochet * 0.001 * (dad.singDuration + holdTime) && dad.animation.curAnim.name.startsWith('sing') && !dad.animation.curAnim.name.endsWith('miss')) {
 				holdTime = 0;
@@ -5134,11 +5133,9 @@ class PlayState extends MusicBeatState
 			dad.heyTimer = 0.6;
 		} else if(!note.noAnimation) {
 			var altAnim:String = note.animSuffix;
-
-			if (SONG.notes[curSection] != null)
-			{
+			if (SONG.notes[curSection] != null) {
 				if (SONG.notes[curSection].altAnim && !SONG.notes[curSection].gfSection) {
-					altAnim = '-alt';
+					if (!playingAsOpponent) altAnim = '-alt';
 				}
 			}
 

@@ -203,10 +203,14 @@ class Note extends FlxSprite
 					colorSwap.brightness = 0;
 					missHealth = 1;
 				case 'Alt Animation':
-					animSuffix = '-alt';
+					if (!PlayState.instance.playingAsOpponent) { // Make sure it doesn't affect playing as opponent, which can crash the game
+						animSuffix = '-alt';
+					}
 				case 'No Animation':
-					noAnimation = true;
-					noMissAnimation = true;
+					if (!PlayState.instance.playingAsOpponent) { 
+						noAnimation = true;
+						noMissAnimation = true;
+					}
 				case 'GF Sing':
 					gfNote = true;
 			}
