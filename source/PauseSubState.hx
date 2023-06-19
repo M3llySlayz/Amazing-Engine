@@ -247,7 +247,7 @@ class PauseSubState extends MusicBeatSubstate
 				}
 		}
 
-		if (accepted || FlxG.mouse.justPressed && cantUnpause <= 0)
+		if (accepted || (FlxG.mouse.justPressed && !selectedSomethin) && cantUnpause <= 0)
 		{
 			switch(daSelected) {
 				case "Continue":

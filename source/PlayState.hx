@@ -4415,12 +4415,12 @@ class PlayState extends MusicBeatState
 						openSubState(new ResultsScreenSubState([sicks, goods, bads, shits], campaignScore, songMisses,
 						Highscore.floorDecimal(ratingPercent * 100, 2), ratingName + (' [' + ratingFC + '] ')));
 					else
-						MusicBeatState.switchState(new StoryMenuState());
+						MusicBeatState.switchState(new AmazingStoryMenuState());
 
 					if(!practiceMode && !cpuControlled) {
 						Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
-						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
-						FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
+						AmazingStoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
+						FlxG.save.data.weekCompleted = AmazingStoryMenuState.weekCompleted;
 						FlxG.save.flush();
 					}
 					trace('WENT BACK TO STORY MODE!!');
