@@ -3133,7 +3133,6 @@ class PlayState extends MusicBeatState
 				timer.active = true;
 			}
 			paused = false;
-			refreshModifiers();
 			callOnLuas('onResume', []);
 
 			#if desktop
@@ -5135,7 +5134,7 @@ class PlayState extends MusicBeatState
 
 			if(playingAsOpponent && boyfriend != null)
 			{
-				if (health > 1.95) health -= note.hitHealth * healthGain;
+				if (health < 1.95) health -= note.hitHealth * healthGain;
 				boyfriend.playAnim(animToPlay, true);
 				boyfriend.holdTimer = 0;
 			}
@@ -5144,6 +5143,7 @@ class PlayState extends MusicBeatState
 				char.playAnim(animToPlay, true);
 				char.holdTimer = 0;
 			}
+
 		}
 
 		if (SONG.needsVoices)
