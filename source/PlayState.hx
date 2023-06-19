@@ -3589,7 +3589,7 @@ class PlayState extends MusicBeatState
 					}
 
 					//PLEASE LET THIS PATCH CHANGE MANIA
-					if (daNote.mania != mania){
+					if (daNote.mania != mania && daNote.animation.curAnim.name != null) {
 						daNote.active = false;
 						daNote.visible = false;
 
@@ -5152,6 +5152,7 @@ class PlayState extends MusicBeatState
 			}
 			else if(char != null)
 			{
+				health -= note.hitHealth * healthGain;
 				char.playAnim(animToPlay, true);
 				char.holdTimer = 0;
 			}
