@@ -83,7 +83,7 @@ class OptionsState extends MusicBeatState
 		{
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.y += 75 * (i - (options.length / 2)) + 25;
 			grpOptions.add(optionText);
 		}
 
@@ -150,10 +150,9 @@ class OptionsState extends MusicBeatState
 		}
 
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
-				//FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxG.mouse.visible = false;
 				SoundEffects.playSFX('cancel', false);
-				LoadingState.loadAndSwitchState(new PlayState());
+				MusicBeatState.switchState(new PlayState());
 			}
 
 		if (controls.ACCEPT || FlxG.mouse.justPressed) {
