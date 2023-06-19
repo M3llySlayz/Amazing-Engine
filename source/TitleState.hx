@@ -20,7 +20,6 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 import options.GraphicsSettingsSubState;
-//import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
@@ -98,8 +97,10 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		Paths.clearStoredMemory();
-		Paths.clearUnusedMemory();
+		if (!ClientPrefs.bigCache) {
+			Paths.clearStoredMemory();
+			Paths.clearUnusedMemory();
+		}
 
 		// Null check
 		if (FreeplayState.curCategory == null) FreeplayState.curCategory = 'base game';
@@ -652,7 +653,6 @@ class TitleState extends MusicBeatState
 			switch (sickBeats)
 			{
 				case 1:
-					//FlxG.sound.music.stop();
 					FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
@@ -661,23 +661,16 @@ class TitleState extends MusicBeatState
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
-				// credTextShit.visible = true;
 				case 4:
 					#if AMAZING_WATERMARKS
 					addMoreText('M3llySlayz', 15);
 					addMoreText('Irshaad Ali', 15);
-					addMoreText('SomeGuy', 15);
-					//addMoreText('shubs', 15);
+					addMoreText('SomeGuyWhoLikesFNF', 15);
 					#else
 					addMoreText('present');
 					#end
-				// credTextShit.text += '\npresent...';
-				// credTextShit.addText();
 				case 5:
 					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = 'In association \nwith';
-				// credTextShit.screenCenter();
 				case 6:
 					#if AMAZING_WATERMARKS
 					createCoolText(['Not associated with'], -40);
@@ -687,39 +680,27 @@ class TitleState extends MusicBeatState
 				case 8:
 					addMoreText('Newgrounds');
 					ngSpr.visible = true;
-				// credTextShit.text += '\nNewgrounds';
 				case 9:
 					deleteCoolText();
 					ngSpr.visible = false;
-				// credTextShit.visible = false;
-
-				// credTextShit.text = 'Shoutouts Tom Fulp';
-				// credTextShit.screenCenter();
 				case 10:
 					createCoolText([curWacky[0]]);
-				// credTextShit.visible = true;
 				case 12:
 					addMoreText(curWacky[1]);
-				// credTextShit.text += '\nlmao';
 				case 13:
 					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = "Friday";
-				// credTextShit.screenCenter();
 				case 14:
 					#if AMAZING_WATERMARKS
 					addMoreText('Friday Night Funkin');
 					#else
 					addMoreText('Friday');
 					#end
-				// credTextShit.visible = true;
 				case 15:
 					#if AMAZING_WATERMARKS
 					addMoreText('Amazing');
 					#else
 					addMoreText('Night');
 					#end
-				// credTextShit.text += '\nNight';
 				case 16:
 					#if AMAZING_WATERMARKS
 					addMoreText('Engine');

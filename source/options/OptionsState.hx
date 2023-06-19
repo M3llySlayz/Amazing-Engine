@@ -84,7 +84,7 @@ class OptionsState extends MusicBeatState
 		{
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
+			optionText.y += 75 * (i - (options.length / 2)) + 32;
 			grpOptions.add(optionText);
 		}
 
@@ -95,35 +95,6 @@ class OptionsState extends MusicBeatState
 
 		changeSelection();
 		ClientPrefs.saveSettings();
-
-		/*
-		theCircle = new FlxSprite().loadGraphic(Paths.image('book bg'));
-		add(theCircle);
-		theCircle.x = FlxG.width - (theCircle.width / 2);
-		theCircle.y = FlxG.height - (theCircle.height / 2);
-		theCircle.updateHitbox();
-		
-		manual = new FlxSprite(0, 0);
-		manual.frames = Paths.getSparrowAtlas('ae book');
-		manual.animation.addByPrefix('normal', 'book0', 30, true);
-		manual.animation.addByPrefix('alert', 'book unread', 30, true);
-		manual.animation.addByPrefix('hover', 'book select', 30, true);
-		add(manual);
-		manual.x = FlxG.width - manual.width;
-		manual.y = FlxG.height - manual.height;
-		manual.animation.play('normal', true);
-		manual.updateHitbox();
-
-		
-
-		changeLogSheet = new FlxSprite(0, 0);
-		changeLogSheet.loadGraphic(Paths.image('changelogsheet'));
-		changeLogSheet.setGraphicSize(2, 2);
-		add(changeLogSheet);
-		changeLogSheet.x = FlxG.width + manual.width;
-		changeLogSheet.y = FlxG.height - changeLogSheet.height;
-		changeLogSheet.updateHitbox();
-		*/
 
 		super.create();
 	}
@@ -139,18 +110,21 @@ class OptionsState extends MusicBeatState
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
 		}
+
 		if (controls.UI_DOWN_P) {
 			changeSelection(1);
 		}
-		if (FlxG.mouse.wheel != 0){
-			if (FlxG.mouse.wheel > 0){
+
+		if (FlxG.mouse.wheel != 0) {
+			if (FlxG.mouse.wheel > 0) {
 				changeSelection(-1);
 			} else {
 				changeSelection(1);
 			}
 		}
+
 		if (controls.DEV_BIND_P) {
-			if (ClientPrefs.devMode){
+			if (ClientPrefs.devMode) {
 				options.remove('Dev Stuff');
 				ClientPrefs.devMode = false;
 			} else {
@@ -160,10 +134,9 @@ class OptionsState extends MusicBeatState
 		}
 
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
-			//FlxG.sound.play(Paths.sound('cancelMenu'));
 			FlxG.mouse.visible = false;
 			SoundEffects.playSFX('cancel', false);
-			if (ClientPrefs.luaMenu){
+			if (ClientPrefs.luaMenu) {
 				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
 				LoadingState.loadAndSwitchState(new PlayState());
 			} else {
@@ -174,29 +147,6 @@ class OptionsState extends MusicBeatState
 		if (controls.ACCEPT || FlxG.mouse.justPressed) {
 			openSelectedSubstate(options[curSelected]);
 		}
-
-		/*
-		if (FlxG.mouse.overlaps(manual) || FlxG.mouse.overlaps(changeLogSheet)) {
-			if (manual.animation.curAnim.name != 'hover') {
-				manual.animation.play('hover', true);
-			}
-			//FlxTween.tween(manual, {x: manual.x - changeLogSheet.width}, 1, {ease: FlxEase.quartInOut});
-			//FlxTween.tween(changeLogSheet, {x: FlxG.width - changeLogSheet.width}, 1, {ease: FlxEase.quartInOut});
-		} else {
-			if (!ClientPrefs.justUpdated){
-				if (manual.animation.curAnim != null && manual.animation.curAnim.name != 'normal') {
-					manual.animation.play('normal', true);
-				}
-			} else {
-				if (manual.animation.curAnim != null && manual.animation.curAnim.name != 'alert') {
-					manual.animation.play('alert', true);
-					ClientPrefs.justUpdated = false;
-				}
-			}
-			//FlxTween.tween(manual, {x: FlxG.width - manual.width}, 1, {ease: FlxEase.quartInOut});
-			//FlxTween.tween(changeLogSheet, {x: FlxG.width + manual.width}, 1, {ease: FlxEase.quartInOut});
-		}
-		*/
 	}
 	
 	function changeSelection(change:Int = 0) {

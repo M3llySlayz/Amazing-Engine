@@ -293,7 +293,7 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
+										MusicBeatState.switchState(new AmazingStoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayCategoryState());
 									#if MODS_ALLOWED
@@ -332,6 +332,7 @@ class MainMenuState extends MusicBeatState
 	function changeItem(huh:Int = 0)
 	{
 		curSelected += huh;
+		if (huh != 0) SoundEffects.playSFX('scroll', false);
 
 		if (curSelected >= menuItems.length)
 			curSelected = 0;

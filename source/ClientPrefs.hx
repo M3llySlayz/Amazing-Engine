@@ -313,7 +313,7 @@ class ClientPrefs {
 		'debug_1'		=> [SEVEN, NONE],
 		'debug_2'		=> [EIGHT, NONE],
 
-		'dev_bind'		=> [NUMPADFIVE, NONE]
+		'dev_bind'		=> [FIVE, NONE]
 	];
 	public static var defaultKeys:Map<String, Array<FlxKey>> = keyBinds;
 

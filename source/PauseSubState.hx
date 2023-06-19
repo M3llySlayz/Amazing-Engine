@@ -35,7 +35,7 @@ class PauseSubState extends MusicBeatSubstate
 	var composer:String = '';
 
 	var pauseMusic:FlxSound;
-	var authorText:FlxText = new FlxText(20, 640+32, 0, "", 32);
+	var authorText:FlxText = new FlxText(20, 640 + 32, 0, "", 32);
 	var practiceText:FlxText;
 	var skipTimeText:FlxText;
 	var skipTimeTracker:Alphabet;
@@ -50,6 +50,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	public static var songName:String = '';
 
+	public var selectedSomethin:Bool = false;
 	public function new(x:Float, y:Float)
 	{
 		super();
@@ -76,7 +77,6 @@ class PauseSubState extends MusicBeatSubstate
 			difficultyChoices.push(diff);
 		}
 		difficultyChoices.push('BACK');
-
 
 		pauseMusic = new FlxSound();
 		if(songName != null) {
@@ -193,9 +193,9 @@ class PauseSubState extends MusicBeatSubstate
 		super.update(elapsed);
 		updateSkipTextStuff();
 
-		var upP = controls.UI_UP_P;
-		var downP = controls.UI_DOWN_P;
-		var accepted = controls.ACCEPT;
+		var upP = controls.UI_UP_P && !selectedSomethin;
+		var downP = controls.UI_DOWN_P && !selectedSomethin;
+		var accepted = controls.ACCEPT && !selectedSomethin;
 
 		if (upP)
 		{
@@ -206,8 +206,8 @@ class PauseSubState extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		if (FlxG.mouse.wheel != 0){
-			if (FlxG.mouse.wheel > 0){
+		if (FlxG.mouse.wheel != 0 && !selectedSomethin) {
+			if (FlxG.mouse.wheel > 0) {
 				changeSelection(-1);
 			} else {
 				changeSelection(1);
@@ -218,14 +218,14 @@ class PauseSubState extends MusicBeatSubstate
 		switch (daSelected)
 		{
 			case 'Skip Time':
-				if (controls.UI_LEFT_P)
+				if (controls.UI_LEFT_P && !selectedSomethin)
 				{
 					//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 					SoundEffects.playSFX('scroll', false);
 					curTime -= 1000;
 					holdTime = 0;
 				}
-				if (controls.UI_RIGHT_P)
+				if (controls.UI_RIGHT_P && !selectedSomethin)
 				{
 					//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 					SoundEffects.playSFX('scroll', false);
@@ -233,7 +233,7 @@ class PauseSubState extends MusicBeatSubstate
 					holdTime = 0;
 				}
 
-				if(controls.UI_LEFT || controls.UI_RIGHT)
+				if ((controls.UI_LEFT || controls.UI_RIGHT) && !selectedSomethin)
 				{
 					holdTime += elapsed;
 					if(holdTime > 0.5)
@@ -247,16 +247,16 @@ class PauseSubState extends MusicBeatSubstate
 				}
 		}
 
-		if (accepted || FlxG.mouse.justPressed && cantUnpause <= 0)
+		if (accepted || (FlxG.mouse.justPressed && !selectedSomethin) && cantUnpause <= 0)
 		{
 			switch(daSelected) {
 				case "Continue":
-						if (ClientPrefs.pauseExit == 'Flicker Out') {
-							closeState();
-						} else {
-							SoundEffects.playSFX('scroll', false);
-							close();
-						}
+					if (ClientPrefs.pauseExit == 'Flicker Out') {
+						closeState();
+					} else {
+						SoundEffects.playSFX('scroll', false);
+						close();
+					}
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
 					authorText.text = 'Hold ALT to skip character selection.';
@@ -310,6 +310,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	function restartSong(?noTrans:Bool = false)
 	{
+		selectedSomethin = true;
 		PlayState.instance.paused = true; // For lua
 		FlxG.sound.music.volume = 0;
 		PlayState.instance.vocals.volume = 0;
@@ -350,6 +351,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	function quitSong()
 	{
+		selectedSomethin = true;
 		var daTime:Float = 1.5;
 		SoundEffects.playSFX('confirm', false);
 
@@ -396,6 +398,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	function closeState(?custom:Int = null)
 	{
+		selectedSomethin = true;
 		var daTime:Float = 1.5;
 		Conductor.changeBPM(PlayState.SONG.bpm);
 		SoundEffects.playSFX('confirm', false);
@@ -454,11 +457,10 @@ class PauseSubState extends MusicBeatSubstate
 						restartSong();
 					case "Options":
 						PlayState.seenCutscene = false;
-						//WeekData.loadTheFirstEnabledMod();
 						PlayState.changedDifficulty = false;
 						PlayState.cancelMusicFadeTween();
-						//MainMenuState.wasPaused = true;
-						LoadingState.loadAndSwitchState(new options.pause.OptionsState());
+						CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
+						MusicBeatState.switchState(new options.pause.OptionsState());
 					case "Leave Charting Mode":
 						restartSong();
 						PlayState.chartingMode = false;
