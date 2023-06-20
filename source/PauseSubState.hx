@@ -415,7 +415,7 @@ class PauseSubState extends MusicBeatSubstate
 		for (i in 0...grpMenuShit.members.length) {
 			if (i == da) {
 				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.05, false, false);
-				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, daTime + 0.5, {ease: FlxEase.sineOut});
 			} else {
 				FlxTween.tween(grpMenuShit.members[i], {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			}

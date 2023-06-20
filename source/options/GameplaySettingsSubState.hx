@@ -130,7 +130,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Rating Offset',
+		var option:Option = new Option('Rating Offset:',
 			'Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.',
 			'ratingOffset',
 			'int',
@@ -141,7 +141,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 30;
 		addOption(option);
 
-		var option:Option = new Option('Sick! Hit Window',
+		var option:Option = new Option('Sick! Hit Window:',
 			'Changes the amount of time you have\nfor hitting a "Sick!" in milliseconds.',
 			'sickWindow',
 			'int',
@@ -152,7 +152,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 45;
 		addOption(option);
 
-		var option:Option = new Option('Good Hit Window',
+		var option:Option = new Option('Good Hit Window:',
 			'Changes the amount of time you have\nfor hitting a "Good" in milliseconds.',
 			'goodWindow',
 			'int',
@@ -163,7 +163,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 90;
 		addOption(option);
 
-		var option:Option = new Option('Bad Hit Window',
+		var option:Option = new Option('Bad Hit Window:',
 			'Changes the amount of time you have\nfor hitting a "Bad" in milliseconds.',
 			'badWindow',
 			'int',
@@ -174,7 +174,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 135;
 		addOption(option);
 
-		var option:Option = new Option('Safe Frames',
+		var option:Option = new Option('Safe Frames:',
 			'Changes how many frames you have for\nhitting a note earlier or late.',
 			'safeFrames',
 			'float',
@@ -185,12 +185,23 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
-		var option:Option = new Option('Millisecond Based Ratings',
-			'If checked, will show precise timing when you hit a note.',
+		var option:Option = new Option('Precise Ratings',
+			'If checked, will show timing in milliseconds when you hit a note.',
 			'precisions',
 			'bool',
 			true);
 		addOption(option);
+
+		var option:Option = new Option('Max Precision Decimals:',
+			"Sets how many decimal places your milliseconds will go.",
+			'precisionDecimals',
+			'int',
+			3);
+		addOption(option);
+
+		option.minValue = 0;
+		option.maxValue = 5;
+		option.changeValue = 1;
 
 		var option:Option = new Option('Results Screen',
 			'If checked, shows your results at the end of a song.',

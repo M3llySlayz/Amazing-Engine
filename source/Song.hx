@@ -25,12 +25,17 @@ typedef SwagSong =
 	var player2:String;
 	var gfVersion:String;
 	var stage:String;
+	var healthdrainKill:Bool;
 
 	var mania:Null<Int>;
 
 	var arrowSkin:String;
 	var splashSkin:String;
 	var validScore:Bool;
+	var characterTrails:Bool;
+	var bfTrails:Bool;
+	var healthdrain:Float;
+	var songInstVolume:Float;
 }
 
 class Song
@@ -43,10 +48,16 @@ class Song
 	public var arrowSkin:String;
 	public var splashSkin:String;
 	public var speed:Float = 1;
+	public var healthdrain:Float = 0;
 	public var stage:String;
+	public var healthdrainKill:Bool = false;
+	public var characterTrails:Bool = false;
+	public var bfTrails:Bool = false;
+
 	public var player1:String = 'bf';
 	public var player2:String = 'dad';
 	public var gfVersion:String = 'gf';
+	public var songInstVolume:Float = 1;
 
 	private static function onLoadJson(songJson:Dynamic) // Convert old charts to newest format
 	{

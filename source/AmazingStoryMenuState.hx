@@ -64,8 +64,8 @@ class AmazingStoryMenuState extends MusicBeatState
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
-		var sideBar:FlxSprite = new FlxSprite().makeGraphic(350, FlxG.height, 0xFF520712);
-		add(sideBar);
+		//var sideBar:FlxSprite = new FlxSprite().makeGraphic(350, FlxG.height, 0xFF520712);
+		//add(sideBar);
 
 		bgSprite = new FlxSprite(FlxG.width - 360, 64);
 		bgSprite.antialiasing = ClientPrefs.globalAntialiasing;

@@ -10,7 +10,12 @@ typedef SwagSection =
 	var gfSection:Bool;
 	var bpm:Float;
 	var changeBPM:Bool;
+	var changeHealthdrain:Bool;
+	var healthdrain:Float;
+	var healthdrainKill:Bool;
 	var altAnim:Bool;
+	var characterTrails:Bool;
+	var bfTrails:Bool;
 }
 
 class Section

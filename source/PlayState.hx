@@ -95,6 +95,9 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 	public static var grabbablePlayBackRate:Float;
 
+	public static var cameramovingoffset = 20;
+	public static var cameramovingoffsetbf = 20; // idk why i made literally same variable
+
 	public static var ratingStuff:Array<Dynamic> = [
 		['You Suck!', 0.2], //From 0% to 19%
 		['Shit', 0.4], //From 20% to 39%
@@ -222,6 +225,20 @@ class PlayState extends MusicBeatState
 	public var cpuControlled:Bool = false;
 	public var playingAsOpponent:Bool = false;
 	public var practiceMode:Bool = false;
+
+	//new chart settings
+	public var healthdrain:Float = 0;
+	public var healthdrainKill:Bool = false;
+	public var characterTrails:Bool = false;
+	public var bfTrails:Bool = false;
+
+	//trails
+	public var trailunderdad:FlxTrail;
+	public var trailunderbf:FlxTrail;
+
+	//underlays
+	public var laneunderlay:FlxSprite;
+    public var laneunderlayOp:FlxSprite;
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
@@ -1109,6 +1126,23 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
+		laneunderlayOp = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		laneunderlayOp.color = FlxColor.BLACK;
+		laneunderlayOp.scrollFactor.set();
+        laneunderlayOp.alpha = ClientPrefs.oppUnderlay;
+        laneunderlayOp.visible = true;
+
+		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		laneunderlay.color = FlxColor.BLACK;
+		laneunderlay.scrollFactor.set();
+        laneunderlay.alpha = ClientPrefs.underlay;
+        laneunderlay.visible = true;
+		if (!ClientPrefs.middleScroll) 
+		{
+			add(laneunderlayOp);
+		  }
+	  	add(laneunderlay);
+
 		//time bars!!! yayyyyyyyy!!!!!1!1! (i hate jb so much)
 		if (ClientPrefs.timeBarStyle == 'Leather'){
 
@@ -1211,6 +1245,14 @@ class PlayState extends MusicBeatState
 			if(gf != null)
 				gf.visible = false;
 		}
+
+		if (characterTrails) {
+			reloadDadTrails();
+			//var trailundergf = new FlxTrail(gf, null, 4, 24, 0.3, 0.069); //nice
+			//insert(members.indexOf(gfGroup) - 1, trailundergf);			will fix it somedays :D
+		}
+		if (bfTrails)
+			reloadBFTrails();
 
 		// After all characters being loaded, it makes then invisible 0.01s later so that the player won't freeze when you change characters
 		// add(strumLine);
@@ -2513,7 +2555,7 @@ class PlayState extends MusicBeatState
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
 
-		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
+		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), PlayState.SONG.songInstVolume, false);
 		FlxG.sound.music.pitch = playbackRate;
 		FlxG.sound.music.onComplete = finishSong.bind();
 		vocals.play();
@@ -3360,6 +3402,8 @@ class PlayState extends MusicBeatState
 
 		setOnLuas('curDecStep', curDecStep);
 		setOnLuas('curDecBeat', curDecBeat);
+		setOnLuas('camNoteOffsetP1', cameramovingoffsetbf);
+		setOnLuas('camNoteOffsetP2', cameramovingoffset);
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -4140,6 +4184,15 @@ class PlayState extends MusicBeatState
 				reloadHealthBarColors();
 				if (ClientPrefs.timeBarStyle == 'Gradient')
 					reloadTimeBarColors();
+
+				if (characterTrails) {
+					remove(trailunderdad);
+					reloadDadTrails();
+				}
+				if (bfTrails) {
+					remove(trailunderbf);
+					reloadBFTrails();
+				}
 			
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
@@ -4613,10 +4666,10 @@ class PlayState extends MusicBeatState
 		comboSpr.y += comboSprY;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
 
-		//your code sucks super, smh
+		//TY SUPER <3
 		if (ClientPrefs.precisions) {
 			var daNote:Note = notes.members[0];
-			var msTiming = HelperFunctions.truncateFloat(noteDiff, 3);
+			var msTiming = HelperFunctions.truncateFloat(noteDiff, ClientPrefs.precisionDecimals);
 			var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
 			var strumScroll:Bool = strumGroup.members[daNote.noteData].downScroll;
 
@@ -4637,7 +4690,7 @@ class PlayState extends MusicBeatState
 			var _dist = (Conductor.songPosition - daNote.strumTime);
 			// This if statement is shit but it should work
 			currentTimingShown.text = msTiming + "ms " + (if(_dist == 0) "=" else if(strumScroll && _dist < 0 || !strumScroll && _dist > 0) "^" else "v");
-			currentTimingShown.size = 27;
+			currentTimingShown.size = 15;
 			currentTimingShown.screenCenter();
 			currentTimingShown.updateHitbox();
 			currentTimingShown.x = (playerStrums.members[daNote.noteData].x + (playerStrums.members[daNote.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
@@ -5081,10 +5134,10 @@ class PlayState extends MusicBeatState
 
 		var char:Character = dad;
 		if(playingAsOpponent) char = boyfriend;
-		if(note.noteType == 'Hey!' && dad.animOffsets.exists('hey')) {
-			dad.playAnim('hey', true);
-			dad.specialAnim = true;
-			dad.heyTimer = 0.6;
+		if(note.noteType == 'Hey!' && char.animOffsets.exists('hey')) {
+			char.playAnim('hey', true);
+			char.specialAnim = true;
+			char.heyTimer = 0.6;
 		} else if(!note.noAnimation) {
 			var altAnim:String = note.animSuffix;
 			if (SONG.notes[curSection] != null) {
@@ -5097,6 +5150,37 @@ class PlayState extends MusicBeatState
 			var animToPlay:String = 'sing' + Note.keysShit.get(mania).get('anims')[note.noteData] + altAnim;
 			if(note.gfNote) {
 				char = gf;
+			}
+
+			if (ClientPrefs.cameraMoveOnNotes) {
+				if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == false && !note.isSustainNote)
+				{
+					if (!char.stunned)
+					{
+						switch (char.animation.curAnim.name) {
+							case 'singLEFT' | 'singLEFT-alt':
+								if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfLEFT');
+							case 'singDOWN' | 'singDOWN-alt':
+								if (!playingAsOpponent) cameraMove('dadDOWN'); else cameraMove('bfDOWN');
+							case 'singUP' | 'singUP-alt':
+								if (!playingAsOpponent) cameraMove('dadUP'); else cameraMove('bfUP');
+							case 'singRIGHT' | 'singRIGHT-alt':
+								if (!playingAsOpponent) cameraMove('dadRIGHT'); else cameraMove('bfRIGHT');
+						}                 
+					}
+				} 
+			}
+
+			if(healthdrain > 0) {
+				var ppppperc = healthdrain/100;
+				if (healthdrainKill == true) {
+					health = health - ppppperc;
+				} else if (!healthdrainKill && (health - ppppperc < 0)) {
+					//trace("shut up");
+					health = 0.01;
+				} else if (!healthdrainKill && (health - ppppperc > 0)) {
+					health = health - ppppperc;
+				}
 			}
 
 			if(playingAsOpponent && boyfriend != null)
@@ -5199,11 +5283,28 @@ class PlayState extends MusicBeatState
 					char.holdTimer = 0;
 				}
 
+				if(ClientPrefs.cameraMoveOnNotes){
+					if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == true && !note.isSustainNote){
+						if (!char.stunned){
+							switch (char.animation.curAnim.name){
+								case 'singLEFT' | 'singLEFT-alt':
+									if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadLEFT');
+								case 'singDOWN' | 'singDOWN-alt':
+									if (!playingAsOpponent) cameraMove('bfDOWN'); else cameraMove('dadDOWN');
+								case 'singUP' | 'singUP-alt':
+									if (!playingAsOpponent) cameraMove('bfUP'); else cameraMove('dadUP');
+								case 'singRIGHT' | 'singRIGHT-alt':
+									if (!playingAsOpponent) cameraMove('bfRIGHT'); else cameraMove('dadRIGHT');
+							}
+						}                    
+					}
+				}
+
 				if(note.noteType == 'Hey!') {
 					if(boyfriend.animOffsets.exists('hey')) {
-						boyfriend.playAnim('hey', true);
-						boyfriend.specialAnim = true;
-						boyfriend.heyTimer = 0.6;
+						char.playAnim('hey', true);
+						char.specialAnim = true;
+						char.heyTimer = 0.6;
 					}
 
 					if(gf != null && gf.animOffsets.exists('cheer')) {
@@ -5243,6 +5344,36 @@ class PlayState extends MusicBeatState
 				notes.remove(note, true);
 				note.destroy();
 			}
+		}
+	}
+
+	//wouldn't need this if not for fucking ek :sob:
+	function cameraMove(what:String) {
+		switch(what){
+			case 'bfLEFT':
+				camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
+				camFollow.x += boyfriend.cameraPosition[0] - cameramovingoffsetbf; camFollow.y += boyfriend.cameraPosition[1];
+			case 'bfDOWN':
+				camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
+				camFollow.x += boyfriend.cameraPosition[0]; camFollow.y += boyfriend.cameraPosition[1] + cameramovingoffsetbf;
+			case 'bfUP':
+				camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
+				camFollow.x += boyfriend.cameraPosition[0]; camFollow.y += boyfriend.cameraPosition[1] - cameramovingoffsetbf;
+			case 'bfRIGHT':
+				camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
+				camFollow.x += boyfriend.cameraPosition[0] + cameramovingoffsetbf; camFollow.y += boyfriend.cameraPosition[1];
+			case 'dadLEFT':
+				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+				camFollow.x += dad.cameraPosition[0] - cameramovingoffset; camFollow.y += dad.cameraPosition[1];
+			case 'dadDOWN':
+				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+				camFollow.x += dad.cameraPosition[0]; camFollow.y += dad.cameraPosition[1] + cameramovingoffset;
+			case 'dadUP':
+				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+				camFollow.x += dad.cameraPosition[0]; camFollow.y += dad.cameraPosition[1] - cameramovingoffset;
+			case 'dadRIGHT':
+				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+				camFollow.x += dad.cameraPosition[0] + cameramovingoffset; camFollow.y += dad.cameraPosition[1];
 		}
 	}
 
@@ -5624,13 +5755,42 @@ class PlayState extends MusicBeatState
 				setOnLuas('crochet', Conductor.crochet);
 				setOnLuas('stepCrochet', Conductor.stepCrochet);
 			}
+
+			if (SONG.notes[curSection].changeHealthdrain){
+				healthdrain = SONG.notes[curSection].healthdrain;
+				healthdrainKill = SONG.notes[curSection].healthdrainKill;
+				setOnLuas('healthdrain', healthdrain);
+				setOnLuas('healthdrainKill', healthdrainKill);
+			}
+
+			if (SONG.notes[curSection].characterTrails && !characterTrails)
+				reloadDadTrails();
+
+			if (SONG.notes[curSection].bfTrails && !bfTrails)
+				reloadBFTrails();
+
+			characterTrails = SONG.notes[curSection].characterTrails;
+			bfTrails = SONG.notes[curSection].bfTrails;
+
 			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
 			setOnLuas('gfSection', SONG.notes[curSection].gfSection);
+			setOnLuas('oppTrails', SONG.notes[curSection].characterTrails);
+			setOnLuas('bfTrails', SONG.notes[curSection].bfTrails);
 		}
 		
 		setOnLuas('curSection', curSection);
 		callOnLuas('onSectionHit', []);
+	}
+
+	function reloadDadTrails() {
+		trailunderdad = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
+		insert(members.indexOf(dadGroup) - 1, trailunderdad);
+	}
+
+	function reloadBFTrails() {
+		trailunderbf = new FlxTrail(boyfriend, null, 4, 24, 0.3, 0.069); //nice
+		insert(members.indexOf(boyfriendGroup) - 1, trailunderbf);
 	}
 
 	public function callOnLuas(event:String, args:Array<Dynamic>, ignoreStops = true, exclusions:Array<String> = null):Dynamic {

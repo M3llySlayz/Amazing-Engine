@@ -226,7 +226,12 @@ class ChartingState extends MusicBeatState
 				notes: [],
 				events: [],
 				bpm: 150.0,
+				characterTrails: false,
+				bfTrails: false,
 				needsVoices: true,
+				healthdrain: 0,
+				healthdrainKill: false,
+				songInstVolume: 1.0,
 				arrowSkin: '',
 				splashSkin: 'noteSplashes',//idk it would crash if i didn't
 				player1: 'bf',
@@ -654,6 +659,11 @@ class ChartingState extends MusicBeatState
 		noteSkinInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		blockPressWhileTypingOn.push(noteSkinInputText);
 
+		var songinstVolumeOBJ:FlxUINumericStepper = new FlxUINumericStepper(player1DropDown.x + 140, player1DropDown.y, 0.1, 1.0, 0.1, 1, 1);
+		if (_song.songInstVolume > 0 ) songinstVolumeOBJ.value = _song.songInstVolume; else songinstVolumeOBJ.value = 1;
+		songinstVolumeOBJ.name = 'instplay_Volume';
+		blockPressWhileTypingOnStepper.push(songinstVolumeOBJ);
+
 		var stepperMania:FlxUINumericStepper = new FlxUINumericStepper(100, stepperSpeed.y, 1, 3, Note.minMania, Note.maxMania, 1);
 		stepperMania.value = _song.mania;
 		stepperMania.name = 'mania';
@@ -736,6 +746,19 @@ class ChartingState extends MusicBeatState
 		check_altAnim = new FlxUICheckBox(check_gfSection.x + 120, check_gfSection.y, null, null, "Alt Animation", 100);
 		check_altAnim.checked = _song.notes[curSec].altAnim;
 		check_altAnim.name = 'check_altAnim';
+
+		var check_Trails = new FlxUICheckBox(check_altAnim.x, check_altAnim.y+30, null, null, "Opponent Trail", 100);
+		check_Trails.checked = _song.notes[curSec].characterTrails;
+		check_Trails.callback = function()
+		{
+			_song.notes[curSec].characterTrails = check_Trails.checked;
+		};
+		var check_bfTrails = new FlxUICheckBox(check_Trails.x, check_Trails.y+30, null, null, "Boyfriend Trail", 100);
+		check_bfTrails.checked = _song.notes[curSec].bfTrails;
+		check_bfTrails.callback = function()
+		{
+			_song.notes[curSec].bfTrails = check_bfTrails.checked;
+		};
 		
 		stepperBeats = new FlxUINumericStepper(10, 100, 1, 4, 1, 24, 2);
 		stepperBeats.width = 75;
@@ -756,6 +779,22 @@ class ChartingState extends MusicBeatState
 		}
 		stepperSectionBPM.name = 'section_bpm';
 		blockPressWhileTypingOnStepper.push(stepperSectionBPM);
+
+		var healthdrainOBJ:FlxUINumericStepper = new FlxUINumericStepper(stepperSectionBPM.x + 140, stepperSectionBPM.y, 1, 0, 0, 99, 0);
+		healthdrainOBJ.value = _song.notes[curSec].healthdrain;
+		healthdrainOBJ.name = 'health_drain';
+		blockPressWhileTypingOnStepper.push(healthdrainOBJ);
+
+		var check_healthdrain = new FlxUICheckBox(healthdrainOBJ.x, healthdrainOBJ.y + 30, null, null, 'Change BPM', 100);
+		check_healthdrain.checked = _song.notes[curSec].changeHealthdrain;
+		check_healthdrain.name = 'check_healthdrain';
+		
+		var healthdrainKill_check = new FlxUICheckBox(healthdrainOBJ.x + 140, healthdrainOBJ.y, null, null, "Healthdrain can kill player", 100);
+		healthdrainKill_check.checked = _song.notes[curSec].healthdrainKill;
+		healthdrainKill_check.callback = function()
+		{
+			_song.notes[curSec].healthdrainKill = healthdrainKill_check.checked;
+		};
 
 		var check_eventsSec:FlxUICheckBox = null;
 		var check_notesSec:FlxUICheckBox = null;
@@ -963,6 +1002,7 @@ class ChartingState extends MusicBeatState
 		});
 
 		tab_group_section.add(new FlxText(stepperBeats.x, stepperBeats.y - 15, 0, 'Beats per Section:'));
+		tab_group_section.add(new FlxText(healthdrainOBJ.x, healthdrainOBJ.y - 25, 0, 'Health Drain on \nOpponent Notehit'));
 		tab_group_section.add(stepperBeats);
 		tab_group_section.add(stepperSectionBPM);
 		tab_group_section.add(check_mustHitSection);
@@ -971,6 +1011,8 @@ class ChartingState extends MusicBeatState
 		tab_group_section.add(check_changeBPM);
 		tab_group_section.add(copyButton);
 		tab_group_section.add(pasteButton);
+		tab_group_section.add(healthdrainOBJ);
+		tab_group_section.add(healthdrainKill_check);
 		tab_group_section.add(clearSectionButton);
 		tab_group_section.add(check_notesSec);
 		tab_group_section.add(check_eventsSec);
@@ -2865,7 +2907,7 @@ function updateGrid():Void
 		return spr;
 	}
 
-	private function addSection(sectionBeats:Float = 4, lengthInSteps:Int = 16):Void
+	private function addSection(sectionBeats:Float = 4, lengthInSteps:Int = 16, healthdrain:Float = 0, healthdrainKill:Bool = false, changeHealthdrain:Bool = false, characterTrails:Bool = false, bfTrails:Bool = false):Void
 	{
 		var sec:SwagSection = {
 			sectionBeats: sectionBeats,
@@ -2876,7 +2918,12 @@ function updateGrid():Void
 			gfSection: false,
 			sectionNotes: [],
 			typeOfSection: 0,
-			altAnim: false
+			altAnim: false,
+			healthdrain: healthdrain,
+			healthdrainKill: healthdrainKill,
+			changeHealthdrain: changeHealthdrain,
+			characterTrails: characterTrails,
+			bfTrails: bfTrails
 		};
 
 		_song.notes.push(sec);

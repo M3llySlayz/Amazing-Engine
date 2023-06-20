@@ -61,12 +61,17 @@ class ClientPrefs {
 	public static var precisions:Bool = false;
 	public static var luaMenu:Bool = false;
 	public static var splashOpacity:Float = 0.6;
+	public static var underlay:Float = 0;
+	public static var oppUnderlay:Float = 0;
 	public static var screenRes:String = '1280x720';
 	public static var pauseExit:String = 'Flicker Out';
 	public static var fullscreen:Bool = false;
 	public static var resultsScreen:Bool = true;
 	public static var justUpdated:Bool = false;
 	public static var neededUpdate:Bool = false;
+	public static var precisionDecimals:Int = 3;
+	public static var cameraMoveOnNotes:Bool = true;
+	public static var colorblindMode:String = 'None';
 	#if desktop
 	public static var autoPause:Bool = true;
 	#end
@@ -379,12 +384,17 @@ class ClientPrefs {
 		FlxG.save.data.precisions = precisions;
 		FlxG.save.data.luaMenu = luaMenu;
 		FlxG.save.data.splashOpacity = splashOpacity;
+		FlxG.save.data.underlay = underlay;
+		FlxG.save.data.oppUnderlay = oppUnderlay;
 		FlxG.save.data.screenRes = screenRes;
 		FlxG.save.data.pauseExit = pauseExit;
 		FlxG.save.data.fullscreen = fullscreen;
 		FlxG.save.data.resultsScreen = resultsScreen;
 		FlxG.save.data.justUpdated = justUpdated;
 		FlxG.save.data.neededUpdate = neededUpdate;
+		FlxG.save.data.colorBlindMode = colorblindMode;
+		FlxG.save.data.precisionDecimals = precisionDecimals;
+		FlxG.save.data.cameraMoveOnNotes = cameraMoveOnNotes;
 		#if desktop
 		FlxG.save.data.autoPause = autoPause;
 		#end
@@ -588,6 +598,12 @@ class ClientPrefs {
 		if(FlxG.save.data.splashOpacity != null) {
 			splashOpacity = FlxG.save.data.splashOpacity;
 		}
+		if(FlxG.save.data.underlay != null) {
+			underlay = FlxG.save.data.underlay;
+		}
+		if(FlxG.save.data.oppUnderlay != null) {
+			oppUnderlay = FlxG.save.data.oppUnderlay;
+		}
 		if(FlxG.save.data.screenRes != null) {
 			screenRes = FlxG.save.data.screenRes;
 		}
@@ -606,6 +622,15 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.neededUpdate != null) {
 			neededUpdate = FlxG.save.data.neededUpdate;
+		}
+		if(FlxG.save.data.colorblindMode != null) {
+			colorblindMode = FlxG.save.data.colorblindMode;
+		}
+		if(FlxG.save.data.precisionDecimals != null) {
+			precisionDecimals = FlxG.save.data.precisionDecimals;
+		}
+		if(FlxG.save.data.cameraMoveOnNotes != null) {
+			cameraMoveOnNotes = FlxG.save.data.cameraMoveOnNotes;
 		}
 		#if desktop
 		if(FlxG.save.data.autoPause != null) {

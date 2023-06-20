@@ -261,9 +261,7 @@ class TitleState extends MusicBeatState
 	{
 		if (!initialized)
 		{
-			if (ClientPrefs.mainSong == 'Iconic') {
-				Conductor.changeBPM(118);
-			} else if (ClientPrefs.mainSong == 'Iconic (Extended)') {
+			if (ClientPrefs.mainSong == 'Iconic'|| ClientPrefs.mainSong == 'Iconic (Extended)') {
 				Conductor.changeBPM(118);
 			} else {
 				Conductor.changeBPM(titleJSON.bpm);
@@ -271,6 +269,8 @@ class TitleState extends MusicBeatState
 			if(FlxG.sound.music == null) FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')), 0);
 		}
 		persistentUpdate = true;
+
+		ColorblindFilters.applyFiltersOnGame();
 
 		var bg:FlxSprite = new FlxSprite();
 

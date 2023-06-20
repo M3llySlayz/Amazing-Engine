@@ -85,9 +85,49 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Colorblind Filter:',
+			'You can set colorblind filter (makes the game more playable for colorblind people)',
+			'colorblindMode',
+			'string',
+			'None', 
+			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia']);
+		option.onChange = ColorblindFilters.applyFiltersOnGame;
+		addOption(option);
+
+		var option:Option = new Option('Lane Underlay:',
+			'Sets opacity of the background for your notes to help you see!.',
+			'underlay',
+			'percent',
+			0);
+		addOption(option);	
+		option.scrollSpeed = 1;
+		option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		option.decimals = 1;
+
+		var option:Option = new Option('Opponent Lane Underlay:',
+			'Sets opacity of opponent\'s lane underlay.',
+			'oppUnderlay',
+			'percent',
+			0);
+		addOption(option);	
+		option.scrollSpeed = 1;
+		option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		option.decimals = 1;
+
 		var option:Option = new Option('Camera Zooms',
 			"If unchecked, the camera won't zoom in on a beat hit.",
 			'camZooms',
+			'bool',
+			true);
+		addOption(option);
+
+		var option:Option = new Option('Camera Note Movement:',
+			"If checked, the camera will move based on the note being hit.",
+			'cameraMoveOnNotes',
 			'bool',
 			true);
 		addOption(option);
@@ -99,7 +139,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Health Bar Transparency',
+		var option:Option = new Option('Health Bar Transparency:',
 			'How much transparent should the health bar and icons be.',
 			'healthBarAlpha',
 			'percent',
@@ -152,23 +192,6 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		super();
-	}
-
-	var changedMusic:Bool = false;
-	function onChangePauseMusic()
-	{
-		if(ClientPrefs.pauseMusic == 'None')
-			FlxG.sound.music.volume = 0;
-		else
-			FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)));
-
-		changedMusic = true;
-	}
-
-	override function destroy()
-	{
-		if(changedMusic) FlxG.sound.playMusic(Paths.music('freakyMenu'));
-		super.destroy();
 	}
 
 	#if !mobile
