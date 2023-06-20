@@ -78,6 +78,15 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Normal', 'Gradient', 'Leather']);
 		addOption(option);
 
+		
+		var option:Option = new Option('Pause Exit Method:',
+			'When resuming from the pause menu, what do you want to happen?\nFlicker Out is like selecting a song in Freeplay.',
+			'pauseExit',
+			'string',
+			'Countdown',
+			['Normal', 'Flicker Out', 'Countdown']);
+		addOption(option);
+
 		var option:Option = new Option('Flashing Lights',
 			"Uncheck this if you're sensitive to flashing lights!",
 			'flashing',
