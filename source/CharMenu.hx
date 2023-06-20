@@ -266,19 +266,15 @@ class CharMenu extends MusicBeatState{
 			{
 				alreadySelected = true;
 				var daSelected:String = unlockedCharacters[curSelected];
-				if (unlockedCharacters[curSelected] != PlayState.SONG.player1)
-					PlayState.SONG.player1 = daSelected;
-
 				FlxFlicker.flicker(imageArray[curSelected], 0);
 				SoundEffects.playSFX('confirm', false);
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					PlayState.SONG = Song.loadFromJson(PlayState.SONG.song+CoolUtil.getDifficultyFilePath(), PlayState.SONG.song);
-					FlxG.sound.music.volume = 0;
-					persistentUpdate = false;
-					PlayState.isStoryMode = false;
+					if (unlockedCharacters[curSelected] != PlayState.SONG.player1) PlayState.SONG.player1 = daSelected;
 					PlayState.storyDifficulty = FreeplayState.curDifficulty;
+					PlayState.isStoryMode = false;
 					LoadingState.loadAndSwitchState(new PlayState());
 				});
 			}
@@ -485,7 +481,7 @@ class CharMenu extends MusicBeatState{
 
 		// Ensures the characters are reset and that the first one is the default character
 		unlockedCharacters = selectableCharacters;
-		if (PlayState.SONG.player1 != null) unlockedCharacters[0] = PlayState.SONG.player1;
+		unlockedCharacters[0] = PlayState.SONG.player1;
 
 		// Grabs default character names
 		unlockedCharactersNames = selectableCharactersNames;

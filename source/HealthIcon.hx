@@ -55,7 +55,7 @@ class HealthIcon extends FlxSprite
 
 				updateHitbox();
 				animation.add(char, [0, 1, 2], 0, false, isPlayer);
-			} else if (file.width == 300){ //two icons
+			} else if (file.width == 300) { //two icons
 				loadGraphic(file, true, Math.floor(width / 2), Math.floor(height)); //Then load it fr
 				//Here's what I did for the winning icons
 				iconOffsets[0] = (width - 150) / 2;
@@ -64,7 +64,7 @@ class HealthIcon extends FlxSprite
 
 				updateHitbox();
 				animation.add(char, [0, 1], 0, false, isPlayer);
-			} else if (file.width == 150){ //one icon
+			} else if (file.width == 150) { //one icon
 				loadGraphic(file, true, Math.floor(width), Math.floor(height)); //Then load it fr
 				//Here's what I did for the winning icons
 				iconOffsets[0] = (width - 150);

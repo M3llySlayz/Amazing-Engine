@@ -3405,19 +3405,15 @@ class PlayState extends MusicBeatState
 		if (health > 2) health = 2;
 
 		if (healthBar.percent < 20) {
-			if (iconP1Width != 150)
-				iconP1.animation.curAnim.curFrame = 1;
-			if (iconP2Width == 450)
-				iconP2.animation.curAnim.curFrame = 2;
+			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = 1;
+			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = 2;
 		} else {
 			iconP1.animation.curAnim.curFrame = 0;
 			iconP2.animation.curAnim.curFrame = 0;
 		}
 		if (healthBar.percent > 80) {
-			if (iconP2Width != 150)
-				iconP2.animation.curAnim.curFrame = 1;
-			if (iconP1Width == 450)
-				iconP1.animation.curAnim.curFrame = 2;
+			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = 1;
+			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = 2;
 		} else {
 			iconP2.animation.curAnim.curFrame = 0;
 			iconP1.animation.curAnim.curFrame = 0;
@@ -5127,9 +5123,9 @@ class PlayState extends MusicBeatState
 		if (SONG.needsVoices)
 			vocals.volume = 1;
 
-		var time:Float = 0.15;
+		var time:Float = 0.15 / playbackRate;
 		if(note.isSustainNote && !note.animation.curAnim.name.endsWith('tail')) {
-			time += 0.15;
+			time += 0.15 / playbackRate;
 		}
 		StrumPlayAnim(true, Std.int(Math.abs(note.noteData)) % Note.ammo[mania], time);
 		note.hitByOpponent = true;
@@ -5142,7 +5138,6 @@ class PlayState extends MusicBeatState
 			notes.remove(note, true);
 			note.destroy();
 		}
-		
 	}
 
 	function goodNoteHit(note:Note):Void
@@ -5228,9 +5223,9 @@ class PlayState extends MusicBeatState
 			}
 
 			if(cpuControlled) {
-				var time:Float = 0.15;
+				var time:Float = 0.15 / playbackRate;
 				if(note.isSustainNote && !note.animation.curAnim.name.endsWith('tail')) {
-					time += 0.15;
+					time += 0.15 / playbackRate;
 				}
 				StrumPlayAnim(false, Std.int(Math.abs(note.noteData)) % Note.ammo[mania], time);
 			} else {
