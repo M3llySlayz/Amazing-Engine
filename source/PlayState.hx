@@ -3383,8 +3383,6 @@ class PlayState extends MusicBeatState
 			openChartEditor();
 		}																																
 
-		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
-		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 		var iconP1Width:Float = iconP1.scale.x;
 		var iconP2Width:Float = iconP2.scale.x;
 
@@ -3402,20 +3400,22 @@ class PlayState extends MusicBeatState
 
 		if (health > 2) health = 2;
 
-		if (healthBar.percent < 20) {
-			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = playingAsOpponent ? 2 : 1;
-			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = playingAsOpponent ? 1 : 2;
-		} else {
-			iconP1.animation.curAnim.curFrame = 0;
-			iconP2.animation.curAnim.curFrame = 0;
-		}
-		if (healthBar.percent > 80) {
-			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = playingAsOpponent ? 1 : 2;
-			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = playingAsOpponent ? 2 : 1;
-		} else {
-			iconP2.animation.curAnim.curFrame = 0;
-			iconP1.animation.curAnim.curFrame = 0;
-		}
+		if (healthBar.percent < 20)
+			iconP1.animation.curAnim.curFrame = 1; // PLAYER LOSING ICON
+		else if (healthBar.percent > 80)
+			iconP1.animation.curAnim.curFrame = 2; // PLAYER WINNING ICON
+		else
+			iconP1.animation.curAnim.curFrame = 0; // PLAYER NEUTRAL ICON
+
+		if (healthBar.percent > 80)
+			iconP2.animation.curAnim.curFrame = 1; // OPPONENT LOSING ICON
+		else if (healthBar.percent < 20)
+			iconP2.animation.curAnim.curFrame = 2; // OPPONENT WINNING ICON
+		else
+			iconP2.animation.curAnim.curFrame = 0; // OPPONENT NEUTRAL ICON
+
+		if (FlxG.keys.justPressed.Z) trace(iconP1.width);
+		if (FlxG.keys.justPressed.X) trace(iconP2.width);
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;
@@ -3471,6 +3471,9 @@ class PlayState extends MusicBeatState
 		FlxG.watch.addQuick("secShit", curSection);
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
+		FlxG.watch.addQuick("stepShit", curStep);
+		FlxG.watch.addQuick("Frame1", iconP1.animation.curAnim.curFrame);
+		FlxG.watch.addQuick("Frame2", iconP2.animation.curAnim.curFrame);
 
 		// RESET = Quick Game Over Screen
 		if (!ClientPrefs.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong)
@@ -3502,7 +3505,7 @@ class PlayState extends MusicBeatState
 		{
 			if(!cpuControlled) {
 				keyShit(elapsed);
-			} else if(boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss')) {
+			} else if(boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 * boyfriend.singDuration) && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss')) {
 				boyfriend.dance();
 			}
 			if(cpuControlled && playingAsOpponent && dad.holdTimer > Conductor.stepCrochet * 0.001 * dad.singDuration && dad.animation.curAnim.name.startsWith('sing') && !dad.animation.curAnim.name.endsWith('miss')) {
