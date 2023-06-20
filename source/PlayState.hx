@@ -3468,8 +3468,6 @@ class PlayState extends MusicBeatState
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
 		FlxG.watch.addQuick("stepShit", curStep);
-		FlxG.watch.addQuick("Frame1", iconP1.animation.curAnim.curFrame);
-		FlxG.watch.addQuick("Frame2", iconP2.animation.curAnim.curFrame);
 
 		// RESET = Quick Game Over Screen
 		if (!ClientPrefs.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong)
