@@ -64,15 +64,15 @@ class HealthIcon extends FlxSprite
 				updateHitbox();
 				animation.add(char, [0], 0, false, isPlayer);
 			}
-				animation.play(char);
-				this.char = char;
+			animation.play(char);
+			this.char = char;
 
-				antialiasing = ClientPrefs.globalAntialiasing;
-				if(char.endsWith('-pixel')) {
-					antialiasing = false;
-				}
+			antialiasing = ClientPrefs.globalAntialiasing;
+			if(char.endsWith('-pixel')) {
+				antialiasing = false;
 			}
 		}
+	}
 
 	override function updateHitbox()
 	{

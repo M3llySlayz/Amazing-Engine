@@ -3372,16 +3372,14 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (controls.PAUSE && startedCountdown && canPause)
-		{
+		if (controls.PAUSE && startedCountdown && canPause) {
 			var ret:Dynamic = callOnLuas('onPause', [], false);
 			if(ret != FunkinLua.Function_Stop) {
 				openPauseMenu();
 			}
 		}
 
-		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
-		{
+		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene) {
 			openChartEditor();
 		}																																
 
@@ -3405,15 +3403,15 @@ class PlayState extends MusicBeatState
 		if (health > 2) health = 2;
 
 		if (healthBar.percent < 20) {
-			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = 1;
-			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = 2;
+			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = playingAsOpponent ? 2 : 1;
+			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = playingAsOpponent ? 1 : 2;
 		} else {
 			iconP1.animation.curAnim.curFrame = 0;
 			iconP2.animation.curAnim.curFrame = 0;
 		}
 		if (healthBar.percent > 80) {
-			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = 1;
-			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = 2;
+			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = playingAsOpponent ? 1 : 2;
+			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = playingAsOpponent ? 2 : 1;
 		} else {
 			iconP2.animation.curAnim.curFrame = 0;
 			iconP1.animation.curAnim.curFrame = 0;
@@ -3426,32 +3424,24 @@ class PlayState extends MusicBeatState
 			MusicBeatState.switchState(new CharacterEditorState(SONG.player2));
 		}
 		
-		if (startedCountdown)
-		{
+		if (startedCountdown) {
 			Conductor.songPosition += FlxG.elapsed * 1000 * playbackRate;
 		}
 
-		if (startingSong)
-		{
+		if (startingSong) {
 			if (startedCountdown && Conductor.songPosition >= 0)
 				startSong();
 			else if(!startedCountdown)
 				Conductor.songPosition = -Conductor.crochet * 5;
-		}
-		else
-		{
-			if (!paused)
-			{
+		} else {
+			if (!paused) {
 				songTime += FlxG.game.ticks - previousFrameTime;
 				previousFrameTime = FlxG.game.ticks;
 
 				// Interpolation type beat
-				if (Conductor.lastSongPos != Conductor.songPosition)
-				{
+				if (Conductor.lastSongPos != Conductor.songPosition) {
 					songTime = (songTime + Conductor.songPosition) / 2;
 					Conductor.lastSongPos = Conductor.songPosition;
-					// Conductor.songPosition += FlxG.elapsed * 1000;
-					// trace('MISSED FRAME');
 				}
 
 				if(updateTime) {
@@ -4372,11 +4362,15 @@ class PlayState extends MusicBeatState
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					if (ClientPrefs.resultsScreen)
+
+					if (ClientPrefs.resultsScreen) {
+						persistentUpdate = true;
 						openSubState(new ResultsScreenSubState([sicks, goods, bads, shits], campaignScore, songMisses,
 						Highscore.floorDecimal(ratingPercent * 100, 2), ratingName + (' [' + ratingFC + '] ')));
-					else
+					} else {
+						persistentUpdate = true;
 						MusicBeatState.switchState(new AmazingStoryMenuState());
+					}
 
 					if(!practiceMode && !cpuControlled) {
 						Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
