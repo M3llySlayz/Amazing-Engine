@@ -67,12 +67,12 @@ class AmazingStoryMenuState extends MusicBeatState
 		var sideBar:FlxSprite = new FlxSprite().makeGraphic(350, FlxG.height, 0xFF520712);
 		add(sideBar);
 
-		bgSprite = new FlxSprite(FlxG.width - 350);
+		bgSprite = new FlxSprite(FlxG.width - 360, 64);
 		bgSprite.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bgSprite);
 
-		tracksSprite = new FlxSprite(16, FlxG.height - 400).loadGraphic(Paths.image('Menu_Tracks'));
-		tracksSprite.x = 216 - (tracksSprite.width / 1.35);
+		tracksSprite = new FlxSprite(18, FlxG.height - 400).loadGraphic(Paths.image('Menu_Tracks'));
+		tracksSprite.x = 218 - (tracksSprite.width / 1.35);
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
 
 		tracksBG = new FlxSprite(12, tracksSprite.y - 4).makeGraphic(324, Std.int(tracksSprite.height * 1.25), FlxColor.BLACK);
@@ -86,16 +86,16 @@ class AmazingStoryMenuState extends MusicBeatState
 		txtTracklist.color = 0xFFe55777;
 		add(txtTracklist);
 
-		scoreText = new FlxText(0, FlxG.height - 34, 0, "SCORE: 49324858", 32);
-		scoreText.setFormat("VCR OSD Mono", 32);
-		scoreText.screenCenter(X);
-		add(scoreText);
-
 		grpLocks = new FlxTypedGroup<FlxSprite>();
 		add(grpLocks);
 
 		grpWeekText = new FlxTypedGroup<AmazingMenuItem>();
 		add(grpWeekText);
+
+		scoreText = new FlxText(0, FlxG.height - 34, 0, "SCORE: 49324858", 32);
+		scoreText.setFormat("VCR OSD Mono", 32);
+		scoreText.screenCenter(X);
+		add(scoreText);
 
 		var sideBarWeekTitle:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 64, 0xFF520712);
 		add(sideBarWeekTitle);
@@ -144,7 +144,7 @@ class AmazingStoryMenuState extends MusicBeatState
 		WeekData.setDirectoryFromWeek(loadedWeeks[0]);
 		difficultySelectors = new FlxGroup();
 
-		leftArrow = new FlxSprite(155, 50);
+		leftArrow = new FlxSprite(150, 59);
 		leftArrow.frames = ui_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
@@ -203,11 +203,12 @@ class AmazingStoryMenuState extends MusicBeatState
 		{
 			var leftP = controls.UI_LEFT_P;
 			var rightP = controls.UI_RIGHT_P;
+			var accepted = controls.ACCEPT;
 
 			if (leftP) changeWeek(-1);
 			if (rightP) changeWeek(1);
 
-			if (FlxG.mouse.justPressedMiddle) {
+			if (FlxG.mouse.justPressedMiddle && !stopspamming) {
 				if (mouseToggle) {
 					mouseToggle = false;
 				} else {
@@ -215,7 +216,7 @@ class AmazingStoryMenuState extends MusicBeatState
 				}
 			}
 
-			if(FlxG.mouse.wheel != 0) {
+			if(FlxG.mouse.wheel != 0 && !stopspamming) {
 				if (mouseToggle) {
 					changeDifficulty(FlxG.mouse.wheel);
 				} else {
@@ -223,21 +224,21 @@ class AmazingStoryMenuState extends MusicBeatState
 				}
 			}
 
-			if (controls.UI_UP)
+			if (controls.UI_UP && !stopspamming)
 				leftArrow.animation.play('press')
 			else
 				leftArrow.animation.play('idle');
 
-			if (controls.UI_DOWN)
+			if (controls.UI_DOWN && !stopspamming)
 				rightArrow.animation.play('press');
 			else
 				rightArrow.animation.play('idle');
 
-			if (controls.UI_UP_P)
+			if (controls.UI_UP_P && !stopspamming)
 				changeDifficulty(1);
-			else if (controls.UI_DOWN_P)
+			else if (controls.UI_DOWN_P && !stopspamming)
 				changeDifficulty(-1);
-			else if (leftP || rightP)
+			else if (leftP || rightP && !stopspamming)
 				changeDifficulty();
 
 			if(FlxG.keys.justPressed.CONTROL)
@@ -250,13 +251,13 @@ class AmazingStoryMenuState extends MusicBeatState
 				persistentUpdate = false;
 				openSubState(new ResetScoreSubState('', curDifficulty, '', curWeek));
 			}
-			else if (controls.ACCEPT || FlxG.mouse.justPressed)
+			else if ((accepted || FlxG.mouse.justPressed) && !stopspamming)
 			{
 				selectWeek();
 			}
 		}
 
-		if (controls.BACK || FlxG.mouse.justPressedRight && !movedBack && !selectedWeek)
+		if ((controls.BACK || FlxG.mouse.justPressedRight) && (!movedBack && !selectedWeek) && !stopspamming)
 		{
 			SoundEffects.playSFX('cancel', false);
 			movedBack = true;
@@ -302,7 +303,7 @@ class AmazingStoryMenuState extends MusicBeatState
 				PlayState.campaignScore = 0;
 				PlayState.campaignMisses = 0;
 
-				if (stopspamming == false)
+				if (!stopspamming)
 				{
 					SoundEffects.playSFX('confirm', false);
 					grpWeekText.members[curWeek].startFlashing();
@@ -351,7 +352,7 @@ class AmazingStoryMenuState extends MusicBeatState
 		if(sprDifficulty.graphic != newImage)
 		{
 			sprDifficulty.loadGraphic(newImage);
-			sprDifficulty.x = leftArrow.x - 135;
+			sprDifficulty.x = leftArrow.x - 130;
 			sprDifficulty.x += (308 - sprDifficulty.width) / 2;
 			sprDifficulty.alpha = 0;
 			sprDifficulty.y = leftArrow.y + 85;
