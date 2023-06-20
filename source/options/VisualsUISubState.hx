@@ -104,7 +104,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Lane Underlay:',
-			'Sets opacity of the background for your notes to help you see!.',
+			'Sets opacity of the background for your notes to help you see!',
 			'underlay',
 			'percent',
 			0);
