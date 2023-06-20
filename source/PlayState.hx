@@ -3403,15 +3403,15 @@ class PlayState extends MusicBeatState
 		if (health > 2) health = 2;
 
 		if (healthBar.percent < 20) {
-			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = playingAsOpponent ? 1 : 2;
-			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = playingAsOpponent ? 2 : 1;
+			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = playingAsOpponent ? 2 : 1;
+			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = playingAsOpponent ? 1 : 2;
 		} else {
 			iconP1.animation.curAnim.curFrame = 0;
 			iconP2.animation.curAnim.curFrame = 0;
 		}
 		if (healthBar.percent > 80) {
-			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = playingAsOpponent ? 2 : 1;
-			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = playingAsOpponent ? 1 : 2;
+			if (iconP2Width != 150) iconP2.animation.curAnim.curFrame = playingAsOpponent ? 1 : 2;
+			if (iconP1Width != 300) iconP1.animation.curAnim.curFrame = playingAsOpponent ? 2 : 1;
 		} else {
 			iconP2.animation.curAnim.curFrame = 0;
 			iconP1.animation.curAnim.curFrame = 0;
