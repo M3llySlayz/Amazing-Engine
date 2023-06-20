@@ -1482,9 +1482,10 @@ class PlayState extends MusicBeatState
 		if (PauseSubState.songName != null) {
 			precacheList.set(PauseSubState.songName, 'music');
 		} else if(ClientPrefs.pauseMusic != 'None') {
-			precacheList.set(Paths.formatToSongPath(ClientPrefs.pauseMusic.replace(' ', '-')), 'music');
+			precacheList.set(Paths.formatToSongPath(ClientPrefs.pauseMusic), 'music');
 		}
 
+		precacheList.set(Paths.formatToSongPath(ClientPrefs.mainSong), 'music');
 		precacheList.set('alphabet', 'image');
 
 		#if desktop
