@@ -4699,10 +4699,10 @@ class PlayState extends MusicBeatState
 			currentTimingShown.screenCenter();
 			currentTimingShown.updateHitbox();
 			currentTimingShown.x = (playerStrums.members[note.noteData].x + (playerStrums.members[note.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
-			currentTimingShown.y = FlxG.height - 150;
+			currentTimingShown.y = daNote.height * 0.5;
 			currentTimingShown.cameras = [camHUD]; 
 			currentTimingShown.visible = true;
-			currentTimingShown.alpha = 1;
+			currentTimingShown.alpha = 0.6;
 
 			add(currentTimingShown);
 
