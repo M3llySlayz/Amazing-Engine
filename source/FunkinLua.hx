@@ -1415,7 +1415,7 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "getHealth", function() {
 			return PlayState.instance.health;
 		});
-		
+
 		Lua_helper.add_callback(lua, "unlockCategory", function(name:String) {
 			if (FreeplayCategory.categoriesLoaded.exists(name)) {
 				if (!FreeplayCategoryState.catUnlocks.get(name)) {

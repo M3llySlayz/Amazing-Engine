@@ -176,23 +176,7 @@ class FreeplayCategoryState extends MusicBeatState {
 	}
 
 	public function selectCategory() {
-		var categories = FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]);
-		if (curSelected != 0) { // Null check
-			if (!categories.startLocked) {
-				lightingBG.alpha = 1;
-				selectedSomethin = true;
-				SoundEffects.playSFX('confirm', false);
-				FlxFlicker.flicker(categorySpr, 1.5, 0.05, false);
-				FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
-				FlxTween.tween(alphabetText, {alpha: 0, x: alphabetText.x - 24}, 1, {ease: FlxEase.smoothStepOut});
-				FlxTween.tween(categorySpr, {alpha: 0}, 0.75, {ease: FlxEase.smoothStepOut, startDelay: 0.75});
-				new FlxTimer().start(1.5, function(tmr:FlxTimer) {
-					FreeplayState.curCategory = categoriesList[curSelected];
-					if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
-					LoadingState.loadAndSwitchState(new FreeplayState());
-				});
-			} else SoundEffects.playSFX('cancel', false);
-		} else {
+		if (!categoryIsLocked(categoriesList[curSelected])) {
 			lightingBG.alpha = 1;
 			selectedSomethin = true;
 			SoundEffects.playSFX('confirm', false);
@@ -205,7 +189,7 @@ class FreeplayCategoryState extends MusicBeatState {
 				if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
 				LoadingState.loadAndSwitchState(new FreeplayState());
 			});
-		}
+		} else SoundEffects.playSFX('cancel', false);
 	}
 
 	public static function categoryIsLocked(name:String):Bool {
