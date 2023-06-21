@@ -4681,8 +4681,8 @@ class PlayState extends MusicBeatState
 			var msTiming = HelperFunctions.truncateFloat(noteDiff, ClientPrefs.precisionDecimals);
 			var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
 			var strumScroll:Bool = strumGroup.members[note.noteData].downScroll;
-
 			var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
+
 			var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
 			switch(daRating.name) {
 				case 'shit': currentTimingShown.color = 0xFFFF0000;
@@ -4699,7 +4699,7 @@ class PlayState extends MusicBeatState
 			currentTimingShown.screenCenter();
 			currentTimingShown.updateHitbox();
 			currentTimingShown.x = (playerStrums.members[note.noteData].x + (playerStrums.members[note.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
-			currentTimingShown.y = daNote.height * 0.5;
+			currentTimingShown.y = strumScroll ? FlxG.height - 160 : 160;
 			currentTimingShown.cameras = [camHUD]; 
 			currentTimingShown.visible = true;
 			currentTimingShown.alpha = 0.6;
