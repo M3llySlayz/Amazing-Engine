@@ -659,15 +659,16 @@ class ChartingState extends MusicBeatState
 		noteSkinInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		blockPressWhileTypingOn.push(noteSkinInputText);
 
-		var songinstVolumeOBJ:FlxUINumericStepper = new FlxUINumericStepper(player1DropDown.x + 140, player1DropDown.y, 0.1, 1.0, 0.1, 1, 1);
-		if (_song.songInstVolume > 0 ) songinstVolumeOBJ.value = _song.songInstVolume; else songinstVolumeOBJ.value = 1;
-		songinstVolumeOBJ.name = 'instplay_Volume';
-		blockPressWhileTypingOnStepper.push(songinstVolumeOBJ);
-
 		var stepperMania:FlxUINumericStepper = new FlxUINumericStepper(100, stepperSpeed.y, 1, 3, Note.minMania, Note.maxMania, 1);
 		stepperMania.value = _song.mania;
 		stepperMania.name = 'mania';
 		blockPressWhileTypingOnStepper.push(stepperMania);
+
+		
+		var songinstVolumeOBJ:FlxUINumericStepper = new FlxUINumericStepper(stepperMania.x, stepperBPM.y, 0.1, 1.0, 0.1, 1, 1);
+		if (_song.songInstVolume > 0 ) songinstVolumeOBJ.value = _song.songInstVolume; else songinstVolumeOBJ.value = 1;
+		songinstVolumeOBJ.name = 'instplay_Volume';
+		blockPressWhileTypingOnStepper.push(songinstVolumeOBJ);
 	
 		noteSplashesInputText = new FlxUIInputText(noteSkinInputText.x, noteSkinInputText.y + 35, 150, _song.splashSkin, 8);
 		noteSplashesInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
@@ -744,11 +745,11 @@ class ChartingState extends MusicBeatState
 		check_gfSection.checked = _song.notes[curSec].gfSection;
 		// _song.needsVoices = check_mustHit.checked;
 
-		check_altAnim = new FlxUICheckBox(check_gfSection.x + 120, check_gfSection.y, null, null, "Alt Animation", 100);
+		check_altAnim = new FlxUICheckBox(check_gfSection.x + 120, check_mustHitSection.y, null, null, "Alt Animation", 100);
 		check_altAnim.checked = _song.notes[curSec].altAnim;
 		check_altAnim.name = 'check_altAnim';
 
-		var check_Trails = new FlxUICheckBox(check_altAnim.x, check_altAnim.y+30, null, null, "Opponent Trail", 100);
+		var check_Trails = new FlxUICheckBox(check_altAnim.x, check_gfSection.y, null, null, "Opponent Trail", 100);
 		check_Trails.checked = _song.notes[curSec].characterTrails;
 		check_Trails.callback = function()
 		{
@@ -781,7 +782,7 @@ class ChartingState extends MusicBeatState
 		stepperSectionBPM.name = 'section_bpm';
 		blockPressWhileTypingOnStepper.push(stepperSectionBPM);
 
-		var healthdrainOBJ:FlxUINumericStepper = new FlxUINumericStepper(stepperSectionBPM.x + 140, stepperSectionBPM.y, 0.05, 0, 0, 99, 0);
+		var healthdrainOBJ:FlxUINumericStepper = new FlxUINumericStepper(stepperSectionBPM.x + 140, stepperSectionBPM.y, 0.05, 0, 0, 4, 2);
 		healthdrainOBJ.value = _song.notes[curSec].healthdrain;
 		healthdrainOBJ.name = 'health_drain';
 		blockPressWhileTypingOnStepper.push(healthdrainOBJ);
@@ -790,7 +791,7 @@ class ChartingState extends MusicBeatState
 		check_healthdrain.checked = _song.notes[curSec].changeHealthdrain;
 		check_healthdrain.name = 'check_healthdrain';
 		
-		var healthdrainKill_check = new FlxUICheckBox(healthdrainOBJ.x, healthdrainOBJ.y + 60, null, null, "Healthdrain can kill player", 100);
+		var healthdrainKill_check = new FlxUICheckBox(check_bfTrails.x, check_bfTrails.y + 30, null, null, "Healthdrain can kill player", 100);
 		healthdrainKill_check.checked = _song.notes[curSec].healthdrainKill;
 		healthdrainKill_check.callback = function()
 		{
