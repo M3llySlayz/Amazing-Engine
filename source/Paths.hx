@@ -458,11 +458,10 @@ class Paths
 			}
 		}
 
-		for(mod in getGlobalMods()){
+		for(mod in getGlobalMods()) {
 			var fileToCheck:String = mods(mod + '/' + key);
 			if(FileSystem.exists(fileToCheck))
 				return fileToCheck;
-
 		}
 		return 'mods/$key';
 	}
