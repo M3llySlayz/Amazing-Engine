@@ -801,7 +801,7 @@ class FunkinLua {
 			return false;
 		});
 
-
+		
 		Lua_helper.add_callback(lua, "addLuaScript", function(luaFile:String, ?ignoreAlreadyRunning:Bool = false) { //would be dope asf.
 			var cervix = luaFile + ".lua";
 			if(luaFile.endsWith(".lua"))cervix=luaFile;
@@ -1414,6 +1414,12 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "getHealth", function() {
 			return PlayState.instance.health;
+		});
+		
+		Lua_helper.add_callback(lua, "unlockCategory", function(name:String) {
+			FreeplayCategoryState.catUnlocks.set(name, true);
+			FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
+			FlxG.save.flush();
 		});
 
 		Lua_helper.add_callback(lua, "getColorFromHex", function(color:String) {

@@ -16,6 +16,8 @@ import FreeplayCategory;
 using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
+	public static var catUnlocks:Map<String, Bool> = new Map<String, Bool>();
+
 	public var categoriesList:Array<String> = ['base game'];
 	public var categoryNamesList:Array<String> = ['vanilla'];
 	public var categoryColors:Array<FlxColor> = [0xFFAB6BBF];
@@ -149,9 +151,9 @@ class FreeplayCategoryState extends MusicBeatState {
 	}
 
 	public function lockedCategoryCheck() {
-		var categories = FreeplayCategory.categoriesLoaded.get(categoriesList[curSelected]);
+		var locked = categoryIsLocked(categoriesList[curSelected]);
 		if (curSelected != 0) { // Null check
-			if (categories.startLocked) {
+			if (locked) {
 				categorySpr.color = 0x00000000;
 				alphabetText.visible = false;
 				lockedTxt.visible = true;
@@ -212,6 +214,11 @@ class FreeplayCategoryState extends MusicBeatState {
 				LoadingState.loadAndSwitchState(new FreeplayState());
 			});
 		}
+	}
+
+	public static function categoryIsLocked(name:String):Bool {
+		var leCategory:FreeplayCategory = FreeplayCategory.categoriesLoaded.get(name);
+		return (leCategory.startLocked && !catUnlocks.get(leCategory.name));
 	}
 }
 #end
