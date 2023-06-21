@@ -4700,7 +4700,7 @@ class PlayState extends MusicBeatState
 			currentTimingShown.updateHitbox();
 			currentTimingShown.x = (playerStrums.members[note.noteData].x + (playerStrums.members[note.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
 			currentTimingShown.y = strumScroll ? FlxG.height - 160 : 160;
-			currentTimingShown.cameras = [camHUD]; 
+			currentTimingShown.cameras = [camHUD];
 			currentTimingShown.visible = true;
 			currentTimingShown.alpha = 0.6;
 
