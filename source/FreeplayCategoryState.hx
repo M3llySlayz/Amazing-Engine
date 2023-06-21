@@ -45,7 +45,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		FlxG.cameras.add(camOther, false);
 
 		FreeplayCategory.reloadCategoryFiles();
-		FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks; // Reload Unlocked Freeplay categories
+		FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks; // Reload Unlocked Freeplay Categories
 		for (categoriesLoaded in 0...FreeplayCategory.categoryList.length) {
 			var categories = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[categoriesLoaded]);
 			//trace(FreeplayCategory.categoryList[categoriesLoaded] + ': ' + categories.hiddenWhenLocked); // For testing purposes...
@@ -213,7 +213,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		try {
 			return (leCategory.startLocked && (!catUnlocks.exists(leCategory.category) || !catUnlocks.get(leCategory.category)));
 		} catch (e:Any) {
-			trace('Cannot check if "$name" is unlocked - Invalid value in "startLocked"');
+			if (name != "base game") trace('Cannot check if "$name" is unlocked - Null value in "startLocked"');
 			return false;
 		}
 	}
