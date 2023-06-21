@@ -4710,15 +4710,15 @@ class PlayState extends MusicBeatState
 			currentTimingShown.alpha = 0.7;
 			add(currentTimingShown);
 
-			currentTimingShown.scale.set(1.2, 1.2);
-			FlxTween.tween(currentTimingShown, {"scale.x": 1, "scale.y": 1}, Conductor.crochet * 0.001, {ease: FlxEase.expoOut});
+			currentTimingShown.scale.set(1.5, 1.25);
+			FlxTween.tween(currentTimingShown, {"scale.x": 1, "scale.y": 1}, Conductor.crochet * 0.0007, {ease: FlxEase.expoOut});
 			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 10}, 0.8, {
 				ease: FlxEase.quintIn,
 				onComplete: function(tween:FlxTween)
 				{
 					currentTimingShown.destroy();
 				},
-				startDelay: Conductor.crochet * 0.0011,
+				startDelay: Conductor.crochet * 0.001,
 			});
 		}
 

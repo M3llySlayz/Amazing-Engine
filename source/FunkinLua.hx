@@ -1430,6 +1430,20 @@ class FunkinLua {
 			}
 		});
 
+		Lua_helper.add_callback(lua, "lockCategory", function(name:String) { // If you want to lock a specific category
+			if (FreeplayCategory.categoriesLoaded.exists(name)) {
+				if (FreeplayCategoryState.catUnlocks.get(name)) {
+					FreeplayCategoryState.catUnlocks.set(name, false);
+					FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
+					FlxG.save.flush();
+				} else {
+					trace('Category "$name" is already locked!');
+				}
+			} else {
+				trace('Category "$name" doesn\'t exist!');
+			}
+		});
+
 		Lua_helper.add_callback(lua, "getColorFromHex", function(color:String) {
 			if(!color.startsWith('0x')) color = '0xff' + color;
 			return Std.parseInt(color);
