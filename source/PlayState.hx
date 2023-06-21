@@ -4683,9 +4683,9 @@ class PlayState extends MusicBeatState
 			var strumScroll:Bool = strumGroup.members[note.noteData].downScroll;
 			var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
 			var timingType:Array<Float> = [
-				daNote.height / 2,
+				note.height / 2,
 				strumScroll ? FlxG.height - 160 : 160,
-				daNote.y + (daNote.height / 2)
+				note.y + (note.height / 2)
 			];
 
 			var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
