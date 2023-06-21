@@ -3465,8 +3465,8 @@ class PlayState extends MusicBeatState
 		else
 			iconP2.animation.curAnim.curFrame = 0; // OPPONENT NEUTRAL ICON
 
-		if (FlxG.keys.justPressed.Z) trace(iconP1.width);
-		if (FlxG.keys.justPressed.X) trace(iconP2.width);
+		//if (FlxG.keys.justPressed.Z) trace(iconP1.width);
+		//if (FlxG.keys.justPressed.X) trace(iconP2.width);
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;
@@ -4699,7 +4699,7 @@ class PlayState extends MusicBeatState
 			currentTimingShown.screenCenter();
 			currentTimingShown.updateHitbox();
 			currentTimingShown.x = (playerStrums.members[note.noteData].x + (playerStrums.members[note.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
-			currentTimingShown.y = note.height * 0.5;
+			currentTimingShown.y = FlxG.height - 150;
 			currentTimingShown.cameras = [camHUD]; 
 			currentTimingShown.visible = true;
 			currentTimingShown.alpha = 1;
