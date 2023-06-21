@@ -1417,7 +1417,7 @@ class FunkinLua {
 		});
 		
 		Lua_helper.add_callback(lua, "unlockCategory", function(name:String) {
-			if (FreeplayCategory.categoriesLoaded.exists(name)) { // Checks if
+			if (FreeplayCategory.categoriesLoaded.exists(name)) {
 				if (!FreeplayCategoryState.catUnlocks.get(name)) {
 					FreeplayCategoryState.catUnlocks.set(name, true);
 					FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
