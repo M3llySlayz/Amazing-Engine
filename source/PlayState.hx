@@ -4712,6 +4712,7 @@ class PlayState extends MusicBeatState
 			add(currentTimingShown);
 
 			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 60}, 0.8, {
+				ease: FlxEase.quadIn,
 				onComplete: function(tween:FlxTween)
 				{
 					currentTimingShown.destroy();
