@@ -95,7 +95,7 @@ class ChartingSubState extends MusicBeatSubstate
 					}
 				} else {
 					trace('Failed to import chart: "${chartPathImportInputTxt.text}"\n- Cannot find chart file: "${chartPathImportInputTxt.text.replace('assets/data/', '')}"');
-					var errorText:FlxText = new FlxText(-70, FlxG.height - 10, 0, "Oops! We can't seem to find your chart file. You sure it's '"+ chartPathImportInputTxt.text +"'?");
+					var errorText:FlxText = new FlxText(-70, FlxG.height - 70, 0, "Oops! We can't seem to find your chart file. You sure it's '"+ chartPathImportInputTxt.text +"'?");
 					errorText.alpha = 0;
 					add(errorText);
 					FlxTween.tween(errorText, {x: 50, alpha: 1}, 0.4, {ease: FlxEase.quadOut});
@@ -125,7 +125,7 @@ class ChartingSubState extends MusicBeatSubstate
 		exportCallback = function() {
 			try {
 				if(chartPathExportInputTxt.text.endsWith('.json')) sys.io.File.saveContent(chartPathExportInputTxt.text, haxe.Json.stringify({"song": PlayState.SONG}, "\t"));
-				var errorText:FlxText = new FlxText(-70, FlxG.height - 10, 0, "Done and done! You're free to play it.");
+				var errorText:FlxText = new FlxText(-70, FlxG.height - 70, 0, "Done and done! You're free to play it.");
 				errorText.alpha = 0;
 				add(errorText);
 				FlxTween.tween(errorText, {x: 50, alpha: 1}, 0.4, {ease: FlxEase.quadOut});
@@ -134,7 +134,7 @@ class ChartingSubState extends MusicBeatSubstate
 				});
 			} catch (e:Any) {
 				trace('Failed to export chart: "${chartPathExportInputTxt.text}"\n- Exception thrown!');
-				var errorText:FlxText = new FlxText(-70, FlxG.height - 50, 0, "Oops! We can't seem to save your chart file. You sure '"+ chartPathExportInputTxt.text +"' exists?");
+				var errorText:FlxText = new FlxText(-70, FlxG.height - 70, 0, "Oops! We can't seem to save your chart file. You sure '"+ chartPathExportInputTxt.text +"' exists?");
 				errorText.alpha = 0;
 				add(errorText);
 				FlxTween.tween(errorText, {x: 50, alpha: 1}, 0.4, {ease: FlxEase.quadOut});
