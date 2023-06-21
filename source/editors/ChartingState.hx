@@ -431,7 +431,7 @@ class ChartingState extends MusicBeatState
 	function addSongUI():Void
 	{
 		UI_songTitle = new FlxUIInputText(10, 10, 70, _song.song, 8);
-                UI_songTitle.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
+            UI_songTitle.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		blockPressWhileTypingOn.push(UI_songTitle);
 		
 		var check_voices = new FlxUICheckBox(10, 25, null, null, "Has voice track", 100);
@@ -697,8 +697,9 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(reloadNotesButton);
 		tab_group_song.add(noteSkinInputText);
 		tab_group_song.add(noteSplashesInputText);
+		tab_group_song.add(songinstVolumeOBJ);
 		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
-		tab_group_song.add(new FlxText(stepperBPM.x + 100, stepperBPM.y - 15, 0, 'Song Offset:'));
+		//tab_group_song.add(new FlxText(stepperBPM.x + 100, stepperBPM.y - 15, 0, 'Song Offset:'));
 		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Song Speed:'));
 		tab_group_song.add(new FlxText(stepperMania.x, stepperMania.y - 15, 0, 'Mania:'));
 		tab_group_song.add(new FlxText(player2DropDown.x, player2DropDown.y - 15, 0, 'P2 (Opponent):'));
@@ -789,7 +790,7 @@ class ChartingState extends MusicBeatState
 		check_healthdrain.checked = _song.notes[curSec].changeHealthdrain;
 		check_healthdrain.name = 'check_healthdrain';
 		
-		var healthdrainKill_check = new FlxUICheckBox(healthdrainOBJ.x + 140, healthdrainOBJ.y, null, null, "Healthdrain can kill player", 100);
+		var healthdrainKill_check = new FlxUICheckBox(healthdrainOBJ.x, healthdrainOBJ.y + 60, null, null, "Healthdrain can kill player", 100);
 		healthdrainKill_check.checked = _song.notes[curSec].healthdrainKill;
 		healthdrainKill_check.callback = function()
 		{
@@ -1013,6 +1014,8 @@ class ChartingState extends MusicBeatState
 		tab_group_section.add(pasteButton);
 		tab_group_section.add(healthdrainOBJ);
 		tab_group_section.add(healthdrainKill_check);
+		tab_group_section.add(check_Trails);
+		tab_group_section.add(check_bfTrails);
 		tab_group_section.add(clearSectionButton);
 		tab_group_section.add(check_notesSec);
 		tab_group_section.add(check_eventsSec);

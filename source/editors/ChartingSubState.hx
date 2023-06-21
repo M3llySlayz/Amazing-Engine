@@ -6,6 +6,9 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxTimer;
 
 using StringTools;
 
@@ -92,6 +95,13 @@ class ChartingSubState extends MusicBeatSubstate
 					}
 				} else {
 					trace('Failed to import chart: "${chartPathImportInputTxt.text}"\n- Cannot find chart file: "${chartPathImportInputTxt.text.replace('assets/data/', '')}"');
+					var errorText:FlxText = new FlxText(-70, FlxG.height - 10, 0, "Oops! We can't seem to find your chart file. You sure it's '"+ chartPathImportInputTxt.text +"'?");
+					errorText.alpha = 0;
+					add(errorText);
+					FlxTween.tween(errorText, {x: 50, alpha: 1}, 0.4, {ease: FlxEase.quadOut});
+					new FlxTimer().start(3, function (tmr:FlxTimer) {
+						FlxTween.tween(errorText, {x: -50, alpha: 0}, 2, {ease: FlxEase.quadOut});
+					});
 				}
 			} catch (e:Any) {
 				trace('Failed to import chart: "${chartPathImportInputTxt.text}"\n- Exception thrown!');
@@ -115,8 +125,22 @@ class ChartingSubState extends MusicBeatSubstate
 		exportCallback = function() {
 			try {
 				if(chartPathExportInputTxt.text.endsWith('.json')) sys.io.File.saveContent(chartPathExportInputTxt.text, haxe.Json.stringify({"song": PlayState.SONG}, "\t"));
+				var errorText:FlxText = new FlxText(-70, FlxG.height - 10, 0, "Done and done! You're free to play it.");
+				errorText.alpha = 0;
+				add(errorText);
+				FlxTween.tween(errorText, {x: 50, alpha: 1}, 0.4, {ease: FlxEase.quadOut});
+				new FlxTimer().start(3, function (tmr:FlxTimer) {
+					FlxTween.tween(errorText, {x: -50, alpha: 0}, 2, {ease: FlxEase.quadOut});
+				});
 			} catch (e:Any) {
 				trace('Failed to export chart: "${chartPathExportInputTxt.text}"\n- Exception thrown!');
+				var errorText:FlxText = new FlxText(-70, FlxG.height - 50, 0, "Oops! We can't seem to save your chart file. You sure '"+ chartPathExportInputTxt.text +"' exists?");
+				errorText.alpha = 0;
+				add(errorText);
+				FlxTween.tween(errorText, {x: 50, alpha: 1}, 0.4, {ease: FlxEase.quadOut});
+				new FlxTimer().start(3, function (tmr:FlxTimer) {
+					FlxTween.tween(errorText, {x: -50, alpha: 0}, 2, {ease: FlxEase.quadOut});
+				});
 			}
 			/* CoolUtil.dumpText(
 				chartPathExportInputTxt.text.replace('${Paths.formatToSongPath(PlayState.SONG.song)}/${Paths.formatToSongPath(PlayState.SONG.song)+CoolUtil.getDifficultyFilePath()}', ''),
