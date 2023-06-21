@@ -1240,12 +1240,6 @@ class PlayState extends MusicBeatState
 
 		generateSong(SONG.song);
 
-		if(dad.curCharacter == gf.curCharacter) {
-			dad.setPosition(GF_X, GF_Y);
-			if(gf != null)
-				gf.visible = false;
-		}
-
 		if (characterTrails) {
 			reloadDadTrails();
 			//var trailundergf = new FlxTrail(gf, null, 4, 24, 0.3, 0.069); //nice
@@ -1536,7 +1530,6 @@ class PlayState extends MusicBeatState
 		// Updating Discord Rich Presence.
 		DiscordClient.changePresence(detailsText, SONG.song + storyDifficultyText, iconP2.getCharacter());
 		#end
-
 
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
@@ -2272,6 +2265,16 @@ class PlayState extends MusicBeatState
 		Paths.sound('intro2' + introSoundsSuffix);
 		Paths.sound('intro1' + introSoundsSuffix);
 		Paths.sound('introGo' + introSoundsSuffix);
+
+		if (dad != null && gf != null){
+			if (dad.curCharacter != null && gf.curCharacter != null){
+				if(dad.curCharacter == gf.curCharacter) {
+					dad.setPosition(GF_X, GF_Y);
+					if(gf != null)
+						gf.visible = false;
+				}
+			}
+		}
 	}
 	
 	public function updateLuaDefaultPos() {
@@ -4676,45 +4679,48 @@ class PlayState extends MusicBeatState
 
 		//TY SUPER <3
 		if (ClientPrefs.precisions) {
-			var daNote:Note = notes.members[-1];
-			var msTiming = HelperFunctions.truncateFloat(noteDiff, ClientPrefs.precisionDecimals);
-			var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
-			var strumScroll:Bool = strumGroup.members[daNote.noteData].downScroll;
+			notes.forEachAlive(function(daNote:Note){
+				//var daNote:Note = notes.members[0];
+				var msTiming = HelperFunctions.truncateFloat(noteDiff, ClientPrefs.precisionDecimals);
+				var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
+				var strumScroll:Bool = strumGroup.members[daNote.noteData].downScroll;
 
-			var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
-			switch(daRating.name){
-				case 'shit':
-					currentTimingShown.color = FlxColor.RED;
-				case 'bad':
-					currentTimingShown.color = FlxColor.ORANGE;
+				var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
+				var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
+				switch(daRating.name){
+					case 'shit':
+						currentTimingShown.color = FlxColor.RED;
+					case 'bad':
+						currentTimingShown.color = FlxColor.ORANGE;
 				case 'good':
 					currentTimingShown.color = FlxColor.GREEN;
 				case 'sick':
 					currentTimingShown.color = FlxColor.CYAN;
-			}
-			currentTimingShown.borderStyle = OUTLINE;
-			currentTimingShown.borderSize = 1;
-			currentTimingShown.borderColor = FlxColor.BLACK;
-			var _dist = (Conductor.songPosition - daNote.strumTime);
-			// This if statement is shit but it should work
-			currentTimingShown.text = msTiming + "ms " + (if(_dist == 0) "=" else if(strumScroll && _dist < 0 || !strumScroll && _dist > 0) "^" else "v");
-			currentTimingShown.size = 15;
-			currentTimingShown.screenCenter();
-			currentTimingShown.updateHitbox();
-			currentTimingShown.x = (playerStrums.members[daNote.noteData].x + (playerStrums.members[daNote.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
-			currentTimingShown.y = daNote.height * 0.5;
-			currentTimingShown.cameras = [camHUD]; 
-			currentTimingShown.visible = true;
-			currentTimingShown.alpha = 1;
+				}
+				currentTimingShown.borderStyle = OUTLINE;
+				currentTimingShown.borderSize = 1;
+				currentTimingShown.borderColor = FlxColor.BLACK;
+				var _dist = (Conductor.songPosition - daNote.strumTime);
+				// This if statement is shit but it should work
+				currentTimingShown.text = msTiming + "ms " + (if(_dist == 0) "=" else if(strumScroll && _dist < 0 || !strumScroll && _dist > 0) "^" else "v");
+				currentTimingShown.size = 15;
+				currentTimingShown.screenCenter();
+				currentTimingShown.updateHitbox();
+				currentTimingShown.x = (playerStrums.members[daNote.noteData].x + (playerStrums.members[daNote.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
+				currentTimingShown.y = daNote.height * 0.5;
+				currentTimingShown.cameras = [camHUD]; 
+				currentTimingShown.visible = true;
+				currentTimingShown.alpha = 1;
 
-			add(currentTimingShown);
-				
-			FlxTween.tween(currentTimingShown, {alpha: 0,y:currentTimingShown.y - 60}, 0.8, {
-				onComplete: function(tween:FlxTween)
-				{
-					currentTimingShown.destroy();
-				},
-				startDelay: Conductor.crochet * 0.001,
+				add(currentTimingShown);
+
+				FlxTween.tween(currentTimingShown, {alpha: 0,y:currentTimingShown.y - 60}, 0.8, {
+					onComplete: function(tween:FlxTween)
+					{
+						currentTimingShown.destroy();
+					},
+					startDelay: Conductor.crochet * 0.001,
+				});
 			});
 		}
 
