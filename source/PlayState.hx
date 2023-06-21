@@ -4684,7 +4684,7 @@ class PlayState extends MusicBeatState
 			var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
 			var timingType:Array<Float> = [
 				note.height / 2,
-				strumScroll ? FlxG.height - 160 : 160,
+				ClientPrefs.downScroll ? FlxG.height - 160 : 160,
 				note.y + (note.height / 2)
 			];
 
@@ -4707,7 +4707,7 @@ class PlayState extends MusicBeatState
 			currentTimingShown.y = timingType[ClientPrefs.hitTimingPositionType];
 			currentTimingShown.cameras = [camHUD];
 			currentTimingShown.visible = true;
-			currentTimingShown.alpha = 0.6;
+			currentTimingShown.alpha = 0.7;
 
 			add(currentTimingShown);
 
