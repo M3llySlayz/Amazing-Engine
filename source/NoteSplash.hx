@@ -61,6 +61,8 @@ class NoteSplash extends FlxSprite
 	}
 
 	function loadAnims(skin:String) {
+		Paths.image(skin);
+		
 		frames = Paths.getSparrowAtlas(skin);
 		for (i in 1...3) {
 			for (j in 0...Note.gfxLetter.length) {

@@ -146,7 +146,7 @@ class ChartingSubState extends MusicBeatSubstate
 		chartImportButton.x -= Std.int(chartImportButton.width / 1.5);
 		//add(chartImportButton);
 
-		chartExportButton = new FlxButton(chartSaveBG.x + 120, chartSaveBG.y, 'Export', exportCallback);
+		chartExportButton = new FlxButton(chartSaveBG.x + 120, chartSaveBG.y + chartSaveBG.height - 100, 'Export', exportCallback);
 		chartExportButton.screenCenter(X);
 		//chartExportButton.x += Std.int(chartExportButton.width / 1.5);
 		add(chartExportButton);

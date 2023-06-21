@@ -8,5 +8,6 @@
 		[41, 19, 66]
 	],
 	"color": [41, 19, 66],
-	"startLocked": true
+	"startLocked": true,
+	"hiddenWhenLocked": false
 }
