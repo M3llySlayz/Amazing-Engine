@@ -4684,7 +4684,7 @@ class PlayState extends MusicBeatState
 			var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
 			var timingType:Array<Float> = [
 				note.height / 2,
-				ClientPrefs.downScroll ? FlxG.height - 160 : 160,
+				strumScroll ? FlxG.height - 160 : 160,
 				note.y + (note.height / 2)
 			];
 
