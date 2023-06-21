@@ -218,7 +218,11 @@ class FreeplayCategoryState extends MusicBeatState {
 
 	public static function categoryIsLocked(name:String):Bool {
 		var leCategory:FreeplayCategory = FreeplayCategory.categoriesLoaded.get(name);
+		try {
 			return (leCategory.startLocked && (!catUnlocks.exists(leCategory.category) || !catUnlocks.get(leCategory.category)));
+		} catch (e:Any) {
+			return false;
+		}
 	}
 }
 #end
