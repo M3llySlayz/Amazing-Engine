@@ -19,7 +19,7 @@ class FreeplayCategoryState extends MusicBeatState {
 	public static var catUnlocks:Map<String, Bool> = new Map<String, Bool>();
 
 	public var categoriesList:Array<String> = ['base game'];
-	public var categoryNamesList:Array<String> = ['vanilla'];
+	public var categoryNamesList:Array<String> = ['all weeks'];
 	public var categoryColors:Array<FlxColor> = [0xFFAB6BBF];
 
 	//public var categories:Array<FreeplayCategory> = [];

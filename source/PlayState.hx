@@ -1129,13 +1129,13 @@ class PlayState extends MusicBeatState
 		laneunderlayOp = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
 		laneunderlayOp.color = FlxColor.BLACK;
 		laneunderlayOp.scrollFactor.set();
-        laneunderlayOp.alpha = !playingAsOpponent ? ClientPrefs.oppUnderlay : ClientPrefs.underlay;
+        laneunderlayOp.alpha = ClientPrefs.oppUnderlay;
         laneunderlayOp.visible = true;
 
 		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 2);
 		laneunderlay.color = FlxColor.BLACK;
 		laneunderlay.scrollFactor.set();
-        laneunderlay.alpha = !playingAsOpponent ? ClientPrefs.underlay : ClientPrefs.oppUnderlay;
+        laneunderlay.alpha = ClientPrefs.underlay;
         laneunderlay.visible = true;
 		if (!ClientPrefs.middleScroll) 
 		{
@@ -2302,10 +2302,10 @@ class PlayState extends MusicBeatState
 			generateStaticArrows(1);
 			updateLuaDefaultPos();
 
-			/*laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
+			laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
 			laneunderlay.screenCenter(Y);
 		    laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
-		    laneunderlayOp.screenCenter(Y);*/
+		    laneunderlayOp.screenCenter(Y);
 
 			startedCountdown = true;
 			Conductor.songPosition = -Conductor.crochet * 5;
@@ -4676,7 +4676,7 @@ class PlayState extends MusicBeatState
 
 		//TY SUPER <3
 		if (ClientPrefs.precisions) {
-			var daNote:Note = notes.members[0];
+			var daNote:Note = notes.members[-1];
 			var msTiming = HelperFunctions.truncateFloat(noteDiff, ClientPrefs.precisionDecimals);
 			var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
 			var strumScroll:Bool = strumGroup.members[daNote.noteData].downScroll;

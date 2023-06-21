@@ -7,5 +7,7 @@
 	"songColors": [
 		[0, 255, 255]
 	],
-	"color": [0, 255, 255]
+	"color": [0, 255, 255],
+	"startLocked": false,
+	"hiddenWhenLocked": false
 }
