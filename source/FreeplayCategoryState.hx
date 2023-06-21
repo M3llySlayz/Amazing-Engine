@@ -81,7 +81,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		lightingBG.alpha = 0;
 		add(lightingBG);
 		
-		lockedTxt = new FlxText(0, Std.int(FlxG.height - 350), 0, 'Locked Category!', 64);
+		lockedTxt = new FlxText(0, Std.int(FlxG.height - 200), 0, 'Locked Category!', 64);
 		lockedTxt.visible = false;
 		add(lockedTxt);
 
@@ -142,9 +142,9 @@ class FreeplayCategoryState extends MusicBeatState {
 			alphabetText.x = FlxG.width / 6;
 			bg.color = categoryColors[curSelected];
 			categorySpr.screenCenter();
-			lockedTxt.y = FlxG.height - 350;
+			lockedTxt.y = FlxG.height - 200;
 		} else {
-			lockedTxt.y = FlxG.height - 350;
+			lockedTxt.y = FlxG.height - 200;
 			categorySpr.screenCenter(Y);
 		}
 		super.update(elapsed);
