@@ -151,21 +151,12 @@ class FreeplayCategoryState extends MusicBeatState {
 	}
 
 	public function lockedCategoryCheck() {
-		var locked = categoryIsLocked(categoriesList[curSelected]);
-		if (curSelected != 0) { // Null check
-			if (locked) {
-				categorySpr.color = 0x00000000;
-				alphabetText.visible = false;
-				lockedTxt.visible = true;
-				lockIcon.visible = true;
-				categorySpr.alpha = 0.5;
-			} else {
-				categorySpr.color = 0xFFFFFFFF;
-				alphabetText.visible = true;
-				lockedTxt.visible = false;
-				lockIcon.visible = false;
-				categorySpr.alpha = 1;
-			}
+		if (categoryIsLocked(categoriesList[curSelected])) {
+			categorySpr.color = 0x00000000;
+			alphabetText.visible = false;
+			lockedTxt.visible = true;
+			lockIcon.visible = true;
+			categorySpr.alpha = 0.5;
 		} else {
 			categorySpr.color = 0xFFFFFFFF;
 			alphabetText.visible = true;
@@ -221,6 +212,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		try {
 			return (leCategory.startLocked && (!catUnlocks.exists(leCategory.category) || !catUnlocks.get(leCategory.category)));
 		} catch (e:Any) {
+			trace('Can\'t check if "$name" is unlocked - It\'s null!');
 			return false;
 		}
 	}
