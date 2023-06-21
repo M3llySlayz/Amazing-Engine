@@ -483,6 +483,7 @@ class PauseSubState extends MusicBeatSubstate
 						close();
 					default:
 						close();
+						//FlxG.sound.music.volume = PlayState.SONG.songInstVolume;
 					}
 				}
 			});
@@ -560,11 +561,14 @@ class PauseSubState extends MusicBeatSubstate
 	
 	function updateSkipTextStuff()
 	{
-		if(skipTimeText == null || skipTimeTracker == null) return;
-
-		skipTimeText.x = skipTimeTracker.x + skipTimeTracker.width + 60;
-		skipTimeText.y = skipTimeTracker.y;
-		skipTimeText.visible = (skipTimeTracker.alpha >= 1);
+		if(skipTimeText == null || skipTimeTracker == null)
+		{
+			return;
+		} else if (skipTimeText != null && skipTimeTracker != null){
+			skipTimeText.x = skipTimeTracker.x + skipTimeTracker.width + 60;
+			skipTimeText.y = skipTimeTracker.y;
+			skipTimeText.visible = (skipTimeTracker.alpha >= 1);
+		}
 	}
 
 	function updateSkipTimeText()

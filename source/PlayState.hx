@@ -1132,7 +1132,7 @@ class PlayState extends MusicBeatState
         laneunderlayOp.alpha = ClientPrefs.oppUnderlay;
         laneunderlayOp.visible = true;
 
-		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 2);
 		laneunderlay.color = FlxColor.BLACK;
 		laneunderlay.scrollFactor.set();
         laneunderlay.alpha = ClientPrefs.underlay;
@@ -2302,9 +2302,9 @@ class PlayState extends MusicBeatState
 			generateStaticArrows(1);
 			updateLuaDefaultPos();
 
-			laneunderlayOp.x = playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
+			laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
 			laneunderlay.screenCenter(Y);
-		    laneunderlay.x = playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
+		    laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
 		    laneunderlayOp.screenCenter(Y);
 
 			startedCountdown = true;
@@ -2503,7 +2503,8 @@ class PlayState extends MusicBeatState
 		scoreTxt.text = 'Score: ' + songScore
 		+ ' | Misses: ' + songMisses
 		+ ' | Rating: ' + ratingName
-		+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
+		+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '')
+		+ ' | Combo: ' + combo;
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
