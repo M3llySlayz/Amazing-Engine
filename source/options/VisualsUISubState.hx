@@ -161,7 +161,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Hit timing position type',
-			'Sets what type the position is.',
+			'Sets the hit timing position type.',
 			'hitTimingPositionType',
 			'int',
 			0);
