@@ -2302,9 +2302,9 @@ class PlayState extends MusicBeatState
 			generateStaticArrows(1);
 			updateLuaDefaultPos();
 
-			laneunderlay.x = playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
+			laneunderlayOp.x = playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
 			laneunderlay.screenCenter(Y);
-		    laneunderlayOp.x = playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
+		    laneunderlay.x = playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
 		    laneunderlayOp.screenCenter(Y);
 
 			startedCountdown = true;
