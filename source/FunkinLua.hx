@@ -1406,10 +1406,10 @@ class FunkinLua {
 			return PlayState.instance.songHits;
 		});
 
-		Lua_helper.add_callback(lua, "setHealth", function(value:Float = 0) {
+		Lua_helper.add_callback(lua, "setHealth", function(?value = 0) {
 			PlayState.instance.health = value;
 		});
-		Lua_helper.add_callback(lua, "addHealth", function(value:Float = 0) {
+		Lua_helper.add_callback(lua, "addHealth", function(?value = 0) {
 			PlayState.instance.health += value;
 		});
 		Lua_helper.add_callback(lua, "getHealth", function() {
