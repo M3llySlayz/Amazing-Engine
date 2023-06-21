@@ -4682,6 +4682,11 @@ class PlayState extends MusicBeatState
 			var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
 			var strumScroll:Bool = strumGroup.members[note.noteData].downScroll;
 			var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
+			var timingType:Array<Float> = [
+				daNote.height / 2,
+				strumScroll ? FlxG.height - 160 : 160,
+				daNote.y + (daNote.height / 2)
+			];
 
 			var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
 			switch(daRating.name) {
@@ -4699,7 +4704,7 @@ class PlayState extends MusicBeatState
 			currentTimingShown.screenCenter();
 			currentTimingShown.updateHitbox();
 			currentTimingShown.x = (playerStrums.members[note.noteData].x + (playerStrums.members[note.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
-			currentTimingShown.y = strumScroll ? FlxG.height - 160 : 160;
+			currentTimingShown.y = timingType[ClientPrefs.hitTimingPositionType];
 			currentTimingShown.cameras = [camHUD];
 			currentTimingShown.visible = true;
 			currentTimingShown.alpha = 0.6;

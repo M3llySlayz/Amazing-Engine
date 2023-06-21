@@ -159,6 +159,17 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		option.decimals = 1;
 		addOption(option);
+
+		var option:Option = new Option('Hit timing position type',
+			'Sets what type the position is.',
+			'hitTimingPositionType',
+			'int',
+			0);
+		addOption(option);	
+		option.scrollSpeed = 0;
+		option.minValue = 0;
+		option.maxValue = 3;
+		option.changeValue = 1;
 		
 		#if !mobile
 		var option:Option = new Option('FPS Counter',
