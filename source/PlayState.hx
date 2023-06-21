@@ -1346,6 +1346,8 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.timeBarStyle != 'Leather')
 			timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		laneunderlay.cameras = [camHUD];
+		laneunderlayOp.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -2299,6 +2301,11 @@ class PlayState extends MusicBeatState
 			generateStaticArrows(0);
 			generateStaticArrows(1);
 			updateLuaDefaultPos();
+
+			laneunderlay.x = playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
+			laneunderlay.screenCenter(Y);
+		    laneunderlayOp.x = playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
+		    laneunderlayOp.screenCenter(Y);
 
 			startedCountdown = true;
 			Conductor.songPosition = -Conductor.crochet * 5;
