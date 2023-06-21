@@ -5,8 +5,7 @@
 		["Song name", "character", "Easy, Normal, Hard"]
 	],
 	"songColors": [
-		[0, 255, 255],
-		[255, 255, 255]
+		[0, 255, 255]
 	],
 	"color": [0, 255, 255]
 }
