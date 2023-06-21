@@ -3456,14 +3456,14 @@ class PlayState extends MusicBeatState
 		if (health > 2) health = 2;
 
 		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1; // PLAYER LOSING ICON
+			iconP1.animation.curAnim.curFrame = playingAsOpponent ? 0 : 1; // PLAYER LOSING ICON
 		else
-			iconP1.animation.curAnim.curFrame = 0; // PLAYER NEUTRAL ICON
+			iconP1.animation.curAnim.curFrame = playingAsOpponent ? 1 : 0; // PLAYER NEUTRAL ICON
 
 		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1; // OPPONENT LOSING ICON
+			iconP2.animation.curAnim.curFrame = playingAsOpponent ? 0 : 1; // OPPONENT LOSING ICON
 		else
-			iconP2.animation.curAnim.curFrame = 0; // OPPONENT NEUTRAL ICON
+			iconP2.animation.curAnim.curFrame = playingAsOpponent ? 1 : 0; // OPPONENT NEUTRAL ICON
 
 		//if (FlxG.keys.justPressed.Z) trace(iconP1.width);
 		//if (FlxG.keys.justPressed.X) trace(iconP2.width);
@@ -4711,14 +4711,14 @@ class PlayState extends MusicBeatState
 			add(currentTimingShown);
 
 			currentTimingShown.scale.set(1.5, 1.25);
-			FlxTween.tween(currentTimingShown, {"scale.x": 1, "scale.y": 1}, Conductor.crochet * 0.0007, {ease: FlxEase.expoOut});
-			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 10}, 0.8, {
+			FlxTween.tween(currentTimingShown, {"scale.x": 1, "scale.y": 1}, Conductor.crochet * 0.0005, {ease: FlxEase.expoOut});
+			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 10}, Conductor.crochet * 0.0005, {
 				ease: FlxEase.quintIn,
 				onComplete: function(tween:FlxTween)
 				{
 					currentTimingShown.destroy();
 				},
-				startDelay: Conductor.crochet * 0.001,
+				startDelay: Conductor.crochet * 0.0075,
 			});
 		}
 
@@ -5040,7 +5040,7 @@ class PlayState extends MusicBeatState
 				boyfriend.dance();
 			}
 
-			if (keysArePressed() && !endingSong && playingAsOpponent && dad.hasMissAnimations) {
+			if (keysArePressed() && !endingSong && playingAsOpponent) {
 				holdTime += elapsed;
 			} else if (dad.holdTimer > Conductor.stepCrochet * 0.001 * (dad.singDuration + holdTime) && dad.animation.curAnim.name.startsWith('sing') && !dad.animation.curAnim.name.endsWith('miss')) {
 				holdTime = 0;
