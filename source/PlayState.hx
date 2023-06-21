@@ -4708,16 +4708,17 @@ class PlayState extends MusicBeatState
 			currentTimingShown.cameras = [camHUD];
 			currentTimingShown.visible = true;
 			currentTimingShown.alpha = 0.7;
-
 			add(currentTimingShown);
 
-			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 60}, 0.8, {
-				ease: FlxEase.quadIn,
+			currentTimingShown.scale.set(1.2, 1.2);
+			FlxTween.tween(currentTimingShown, {"scale.x": 1, "scale.y": 1}, Conductor.crochet * 0.001, {ease: FlxEase.expoOut});
+			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 10}, 0.8, {
+				ease: FlxEase.quintIn,
 				onComplete: function(tween:FlxTween)
 				{
 					currentTimingShown.destroy();
 				},
-				startDelay: Conductor.crochet * 0.001,
+				startDelay: Conductor.crochet * 0.0011,
 			});
 		}
 
