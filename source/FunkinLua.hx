@@ -1417,9 +1417,17 @@ class FunkinLua {
 		});
 		
 		Lua_helper.add_callback(lua, "unlockCategory", function(name:String) {
-			FreeplayCategoryState.catUnlocks.set(name, true);
-			FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
-			FlxG.save.flush();
+			if (FreeplayCategory.categoriesLoaded.exists(name)) {
+				if (!FreeplayCategoryState.catUnlocks.get(name)) {
+					FreeplayCategoryState.catUnlocks.set(name, true);
+					FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
+					FlxG.save.flush();
+				} else {
+					trace('Category "$name" is already unlocked!');
+				}
+			} else {
+				trace('Category "$name" doesn\'t exist!');
+			}
 		});
 
 		Lua_helper.add_callback(lua, "getColorFromHex", function(color:String) {

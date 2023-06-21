@@ -45,6 +45,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		FlxG.cameras.add(camOther, false);
 
 		FreeplayCategory.reloadCategoryFiles();
+		FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks; // Reload Unlocked Freeplay Categories
 		for (categoriesLoaded in 0...FreeplayCategory.categoryList.length) {
 			var categories = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[categoriesLoaded]);
 			//trace(FreeplayCategory.categoryList[categoriesLoaded] + ': ' + categories.hiddenWhenLocked); // For testing purposes...
@@ -151,21 +152,12 @@ class FreeplayCategoryState extends MusicBeatState {
 	}
 
 	public function lockedCategoryCheck() {
-		var locked = categoryIsLocked(categoriesList[curSelected]);
-		if (curSelected != 0) { // Null check
-			if (locked) {
-				categorySpr.color = 0x00000000;
-				alphabetText.visible = false;
-				lockedTxt.visible = true;
-				lockIcon.visible = true;
-				categorySpr.alpha = 0.5;
-			} else {
-				categorySpr.color = 0xFFFFFFFF;
-				alphabetText.visible = true;
-				lockedTxt.visible = false;
-				lockIcon.visible = false;
-				categorySpr.alpha = 1;
-			}
+		if (categoryIsLocked(categoriesList[curSelected])) {
+			categorySpr.color = 0x00000000;
+			alphabetText.visible = false;
+			lockedTxt.visible = true;
+			lockIcon.visible = true;
+			categorySpr.alpha = 0.5;
 		} else {
 			categorySpr.color = 0xFFFFFFFF;
 			alphabetText.visible = true;
@@ -218,7 +210,12 @@ class FreeplayCategoryState extends MusicBeatState {
 
 	public static function categoryIsLocked(name:String):Bool {
 		var leCategory:FreeplayCategory = FreeplayCategory.categoriesLoaded.get(name);
+		try {
 			return (leCategory.startLocked && (!catUnlocks.exists(leCategory.category) || !catUnlocks.get(leCategory.category)));
+		} catch (e:Any) {
+			if (name != "base game") trace('Cannot check if "$name" is unlocked - Null value in "startLocked"');
+			return false;
+		}
 	}
 }
 #end
