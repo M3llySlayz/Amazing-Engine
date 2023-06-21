@@ -4685,10 +4685,10 @@ class PlayState extends MusicBeatState
 			var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
 			var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
 			switch(daRating.name) {
-				case 'shit': currentTimingShown.color = FlxColor.RED;
-				case 'bad': currentTimingShown.color = FlxColor.ORANGE;
-				case 'good': currentTimingShown.color = FlxColor.GREEN;
-				case 'sick': currentTimingShown.color = FlxColor.CYAN;
+				case 'shit': currentTimingShown.color = 0xFFFF0000;
+				case 'bad': currentTimingShown.color = 0xFFFF6600;
+				case 'good': currentTimingShown.color = 0xFF00FF00;
+				case 'sick': currentTimingShown.color = 0xFF00FFFF;
 			}
 			currentTimingShown.borderStyle = OUTLINE;
 			currentTimingShown.borderSize = 1;
