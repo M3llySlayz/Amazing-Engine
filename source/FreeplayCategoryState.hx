@@ -45,7 +45,7 @@ class FreeplayCategoryState extends MusicBeatState {
 		FlxG.cameras.add(camOther, false);
 
 		FreeplayCategory.reloadCategoryFiles();
-		FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks;
+		FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks; // Reload Unlocked Freeplay categories
 		for (categoriesLoaded in 0...FreeplayCategory.categoryList.length) {
 			var categories = FreeplayCategory.categoriesLoaded.get(FreeplayCategory.categoryList[categoriesLoaded]);
 			//trace(FreeplayCategory.categoryList[categoriesLoaded] + ': ' + categories.hiddenWhenLocked); // For testing purposes...
