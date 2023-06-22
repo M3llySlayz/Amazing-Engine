@@ -3456,7 +3456,7 @@ class PlayState extends MusicBeatState
 		if (health > 2) health = 2;
 
 		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = playingAsOpponent ? 1 : 0; // PLAYER LOSING ICON
+			iconP1.animation.curAnim.curFrame = playingAsOpponent ? 0 : 1; // PLAYER LOSING ICON
 		else
 			iconP1.animation.curAnim.curFrame = 0; // PLAYER NEUTRAL ICON
 
