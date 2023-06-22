@@ -3455,15 +3455,21 @@ class PlayState extends MusicBeatState
 
 		if (health > 2) health = 2;
 
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = playingAsOpponent ? 0 : 1; // PLAYER LOSING ICON
-		else
-			iconP1.animation.curAnim.curFrame = 0; // PLAYER NEUTRAL ICON
+		if (healthBar.percent < 20) {
+			iconP1.animation.curAnim.curFrame = 1;
+			(playingAsOpponent ? iconP2 : iconP1) .animation.curAnim.curFrame = 1;
+		} else {
+			iconP1.animation.curAnim.curFrame = 0;
+			(playingAsOpponent ? iconP2 : iconP1) .animation.curAnim.curFrame = 0;
+		}
 
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = playingAsOpponent ? 1 : 0; // OPPONENT LOSING ICON
-		else
-			iconP2.animation.curAnim.curFrame = 0; // OPPONENT NEUTRAL ICON
+		if (healthBar.percent > 80) {
+			iconP2.animation.curAnim.curFrame = 1;
+			(playingAsOpponent ? iconP1 : iconP2) .animation.curAnim.curFrame = 1;
+		} else {
+			iconP2.animation.curAnim.curFrame = 0;
+			(playingAsOpponent ? iconP1 : iconP2) .animation.curAnim.curFrame = 0;
+		}
 
 		//if (FlxG.keys.justPressed.Z) trace(iconP1.width);
 		//if (FlxG.keys.justPressed.X) trace(iconP2.width);
@@ -4711,14 +4717,14 @@ class PlayState extends MusicBeatState
 			add(currentTimingShown);
 
 			currentTimingShown.scale.set(1.5, 1.25);
-			FlxTween.tween(currentTimingShown, {"scale.x": 1, "scale.y": 1}, Conductor.crochet * 0.0005, {ease: FlxEase.expoOut});
-			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 10}, Conductor.crochet * 0.0005, {
+			FlxTween.tween(currentTimingShown, {"scale.x": 1, "scale.y": 1}, Conductor.crochet * 0.0009, {ease: FlxEase.expoOut});
+			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 10}, Conductor.crochet * 0.0001, {
 				ease: FlxEase.quintIn,
 				onComplete: function(tween:FlxTween)
 				{
 					currentTimingShown.destroy();
 				},
-				startDelay: Conductor.crochet * 0.0075,
+				startDelay: Conductor.crochet * 0.001,
 			});
 		}
 
@@ -5170,13 +5176,13 @@ class PlayState extends MusicBeatState
 						if (!char.stunned) {
 							switch (char.animation.curAnim.name) {
 								case 'singLEFT' | 'singLEFT-alt':
-									if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfLEFT');
+									if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadLEFT');
 								case 'singDOWN' | 'singDOWN-alt':
-									if (!playingAsOpponent) cameraMove('dadDOWN'); else cameraMove('bfDOWN');
+									if (!playingAsOpponent) cameraMove('bfDOWN'); else cameraMove('dadLEFT');
 								case 'singUP' | 'singUP-alt':
-									if (!playingAsOpponent) cameraMove('dadUP'); else cameraMove('bfUP');
+									if (!playingAsOpponent) cameraMove('bfUP'); else cameraMove('dadLEFT');
 								case 'singRIGHT' | 'singRIGHT-alt':
-									if (!playingAsOpponent) cameraMove('dadRIGHT'); else cameraMove('bfRIGHT');
+									if (!playingAsOpponent) cameraMove('bfRIGHT'); else cameraMove('dadLEFT');
 							}
 						}
 					}
@@ -5301,13 +5307,13 @@ class PlayState extends MusicBeatState
 							if (!char.stunned) {
 								switch (char.animation.curAnim.name) {
 									case 'singLEFT' | 'singLEFT-alt':
-										if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadLEFT');
+										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfLEFT');
 									case 'singDOWN' | 'singDOWN-alt':
-										if (!playingAsOpponent) cameraMove('bfDOWN'); else cameraMove('dadDOWN');
+										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfDOWN');
 									case 'singUP' | 'singUP-alt':
-										if (!playingAsOpponent) cameraMove('bfUP'); else cameraMove('dadUP');
+										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfUP');
 									case 'singRIGHT' | 'singRIGHT-alt':
-										if (!playingAsOpponent) cameraMove('bfRIGHT'); else cameraMove('dadRIGHT');
+										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfRIGHT');
 								}
 							}
 						}
