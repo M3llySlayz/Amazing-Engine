@@ -26,10 +26,15 @@ import flash.geom.Rectangle;
 import flixel.ui.FlxButton;
 import flixel.FlxBasic;
 import sys.io.File;
-/*import haxe.zip.Reader;
+import openfl.net.FileReference;
+import openfl.events.Event;
+import openfl.events.IOErrorEvent;
+import flash.net.FileFilter;
+import haxe.io.Bytes;
+import haxe.zip.Reader;
 import haxe.zip.Entry;
 import haxe.zip.Uncompress;
-import haxe.zip.Writer;*/
+import haxe.zip.Writer;
 
 using StringTools;
 
@@ -281,8 +286,8 @@ class ModsMenuState extends MusicBeatState
 
 
 
-		/*
-		installButton = new FlxButton(startX, 620, "Install Mod", function()
+		
+		/*installButton = new FlxButton(startX, 620, "Install Mod", function()
 		{
 			installMod();
 		});
@@ -293,7 +298,7 @@ class ModsMenuState extends MusicBeatState
 		installButton.label.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER);
 		setAllLabelsOffset(installButton, 2, 24);
 		add(installButton);
-		startX -= 180;
+		startX -= 180;*/
 
 		removeButton = new FlxButton(startX, 620, "Delete Selected Mod", function()
 		{
@@ -303,7 +308,7 @@ class ModsMenuState extends MusicBeatState
 				trace('Trying to delete directory ' + path);
 				try
 				{
-					FileSystem.deleteFile(path); //FUCK YOU HAXE WHY DONT YOU WORK WAAAAAAAAAAAAH
+					FileSystem.deleteDirectory(path); //FUCK YOU HAXE WHY DONT YOU WORK WAAAAAAAAAAAAH
 
 					var icon = mods[curSelected].icon;
 					var alphabet = mods[curSelected].alphabet;
@@ -314,7 +319,7 @@ class ModsMenuState extends MusicBeatState
 					modsList.remove(modsList[curSelected]);
 					mods.remove(mods[curSelected]);
 
-					if(curSelected >= mods.length) --curSelected;
+					if(curSelected >= mods.length) curSelected--;
 					changeSelection();
 				}
 				catch(e)
@@ -330,7 +335,7 @@ class ModsMenuState extends MusicBeatState
 		removeButton.label.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER);
 		setAllLabelsOffset(removeButton, 2, 15);
 		add(removeButton);
-		visibleWhenHasMods.push(removeButton);*/
+		visibleWhenHasMods.push(removeButton);
 
 		///////
 		descriptionTxt = new FlxText(148, 0, FlxG.width - 216, "", 32);
