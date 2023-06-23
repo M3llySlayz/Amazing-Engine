@@ -139,6 +139,27 @@ class EKData {
         0.22 //18k
     ];
 
+    public static var closeX:Array<Array<Float>> = [
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3],
+        [2, 2, 2, 2.7, 2.8, 2.9, 3]
+    ];
+
 	public static var lessX:Array<Int> = [
 		0, // 1k
 		0, // 2k
@@ -158,6 +179,37 @@ class EKData {
         7, //16k
         6, // 17k
         6 //18k
+    ];
+
+    public static var lesserX:Array<Array<Int>> = [
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170],
+        [0, 0, 0, 10, 155, 160, 170]
+    ];
+
+    public static var lessScale:Array<Float> = [
+        1, // 0
+        1, // 1
+        1, // 2
+        0.85, // 3
+        0.75, // 4
+        0.6, // 5
+        0.5, // 6
     ];
 
     public static var noteSep:Array<Int> = [
@@ -181,7 +233,7 @@ class EKData {
     ];
 
     public static var offsetX:Array<Float> = [
-        150, //1k
+        10, //1k
         89,//2k
         0, //3k
         0, //4k
@@ -466,7 +518,7 @@ class Keybinds
             ['Down 1', 'note_162'],
             ['Up 1', 'note_163'],
             ['Right 1', 'note_164'],
-            ['Left 2', 'note_165'],
+            ['Left 2', 'note_160'],
             ['Down 2', 'note_166'],
             ['Up 2', 'note_167'],
             ['Right 2', 'note_168'],
@@ -698,7 +750,7 @@ class Keybinds
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_162')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_163')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_164')),
-				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_165')),
+				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_160')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_166')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_167')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_168')),

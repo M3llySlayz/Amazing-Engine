@@ -26,13 +26,16 @@ class Note extends FlxSprite
 
 	//Important stuff
 	public static var gfxLetter:Array<String> = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
-												'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
+	'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
 	public static var ammo:Array<Int> = EKData.gun;
 	public static var minMania:Int = 0;
 	public static var maxMania:Int = 17; // key value is this + 1
 
 	public static var scales:Array<Float> = EKData.scales;
+	public static var closeX:Array<Array<Float>> = EKData.closeX;
 	public static var lessX:Array<Int> = EKData.lessX;
+	public static var lesserX:Array<Array<Int>> = EKData.lesserX;
+	public static var lessScale:Array<Float> = EKData.lessScale;
 	public static var separator:Array<Int> = EKData.noteSep;
 	public static var xtra:Array<Float> = EKData.offsetX;
 	public static var posRest:Array<Float> = EKData.restPosition;
@@ -53,7 +56,6 @@ class Note extends FlxSprite
 	// pixel notes
 	public static var pixelNotesDivisionValue:Int = 18;
 	public static var pixelScales:Array<Float> = EKData.pixelScales;
-
 	public static var keysShit:Map<Int, Map<String, Dynamic>> = EKData.keysShit;
 
 	// End of extra keys stuff
@@ -139,13 +141,13 @@ class Note extends FlxSprite
 	public var changeColSwap:Bool = true;
 	
 	public function resizeByRatio(ratio:Float) //haha funny twitter shit
+	{
+		if(isSustainNote && !animation.curAnim.name.endsWith('tail'))
 		{
-			if(isSustainNote && !animation.curAnim.name.endsWith('tail'))
-			{
-				scale.y *= ratio;
-				updateHitbox();
-			}
+			scale.y *= ratio;
+			updateHitbox();
 		}
+	}
 
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
