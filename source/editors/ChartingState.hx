@@ -68,7 +68,8 @@ import sys.io.File;
 
 class ChartingState extends MusicBeatState
 {
-	public static var noteTypeList:Array<String> = [ //Used for backwards compatibility with 0.1 - 0.3.2 charts, though, you should add your hardcoded custom note types here too.
+	public static var noteTypeList:Array<String> = //Used for backwards compatibility with 0.1 - 0.3.2 charts, though, you should add your hardcoded custom note types here too.
+	[
 		'',
 		'Alt Animation',
 		'Hey!',
@@ -77,14 +78,6 @@ class ChartingState extends MusicBeatState
 		'GF Sing',
 		'No Animation'
 	];
-
-	public static var strumNoteTypeList:Array<String> = [
-		'Third Strum',
-		'Fourth Strum',
-		'Fifth Strum',
-		'Sixth Strum'
-	];
-
 	private var noteTypeIntMap:Map<Int, String> = new Map<Int, String>();
 	private var noteTypeMap:Map<String, Null<Int>> = new Map<String, Null<Int>>();
 	public var ignoreWarnings = false;
@@ -246,9 +239,8 @@ class ChartingState extends MusicBeatState
 				gfVersion: 'gf',
 				speed: 1,
 				stage: 'stage',
-				strumlines: 2,
-				mania: Note.defaultMania,
-				validScore: false
+				validScore: false,
+				mania: Note.defaultMania
 			};
 			addSection();
 			PlayState.SONG = _song;
@@ -1055,15 +1047,6 @@ class ChartingState extends MusicBeatState
 		strumTimeInputText = new FlxUIInputText(10, 65, 180, "0");
 		tab_group_note.add(strumTimeInputText);
 		blockPressWhileTypingOn.push(strumTimeInputText);
-
-		for (strum in 0..._song.strumlines-2) {
-			try {
-				if (noteTypeList.contains(strumNoteTypeList[strum])) noteTypeList.remove(strumNoteTypeList[strum]);
-				noteTypeList.push(strumNoteTypeList[strum]);
-			} catch (e:Any) {
-				trace('Strum notetype $strum is null');
-			}
-		}
 
 		var key:Int = 0;
 		var displayNameList:Array<String> = [];

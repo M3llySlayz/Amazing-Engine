@@ -181,7 +181,7 @@ class EKData {
     ];
 
     public static var offsetX:Array<Float> = [
-        10, //1k
+        150, //1k
         89,//2k
         0, //3k
         0, //4k
@@ -466,7 +466,7 @@ class Keybinds
             ['Down 1', 'note_162'],
             ['Up 1', 'note_163'],
             ['Right 1', 'note_164'],
-            ['Left 2', 'note_160'],
+            ['Left 2', 'note_165'],
             ['Down 2', 'note_166'],
             ['Up 2', 'note_167'],
             ['Right 2', 'note_168'],
@@ -698,7 +698,7 @@ class Keybinds
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_162')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_163')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_164')),
-				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_160')),
+				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_165')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_166')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_167')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_168')),

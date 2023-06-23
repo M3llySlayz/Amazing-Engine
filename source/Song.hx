@@ -17,15 +17,17 @@ typedef SwagSong =
 	var song:String;
 	var notes:Array<SwagSection>;
 	var events:Array<Dynamic>;
-	var speed:Float;
 	var bpm:Float;
 	var needsVoices:Bool;
+	var speed:Float;
 
 	var player1:String;
 	var player2:String;
 	var gfVersion:String;
-	var songInstVolume:Float;
 	var stage:String;
+	var healthdrainKill:Bool;
+
+	var mania:Null<Int>;
 
 	var arrowSkin:String;
 	var splashSkin:String;
@@ -33,10 +35,7 @@ typedef SwagSong =
 	var characterTrails:Bool;
 	var bfTrails:Bool;
 	var healthdrain:Float;
-	var healthdrainKill:Bool;
-
-	var strumlines:Null<Int>;
-	var mania:Null<Int>;
+	var songInstVolume:Float;
 }
 
 class Song
@@ -44,13 +43,13 @@ class Song
 	public var song:String;
 	public var notes:Array<SwagSection>;
 	public var events:Array<Dynamic>;
-	public var speed:Float = 1;
 	public var bpm:Float;
 	public var needsVoices:Bool = true;
-
 	public var arrowSkin:String;
 	public var splashSkin:String;
+	public var speed:Float = 1;
 	public var healthdrain:Float = 0;
+	public var stage:String;
 	public var healthdrainKill:Bool = false;
 	public var characterTrails:Bool = false;
 	public var bfTrails:Bool = false;
@@ -59,7 +58,6 @@ class Song
 	public var player2:String = 'dad';
 	public var gfVersion:String = 'gf';
 	public var songInstVolume:Float = 1;
-	public var stage:String;
 
 	private static function onLoadJson(songJson:Dynamic) // Convert old charts to newest format
 	{
@@ -93,16 +91,21 @@ class Song
 			}
 		}
 
-		if (songJson.mania == null)
+		if (songJson.mania == null && ClientPrefs.convertEK) //yall better not replace this
         {
-			songJson.mania = Note.defaultMania;
+			/*var highestMania:Int = -1;
+			for (i in 0...songJson.notes.length)
+			{
+				var notes:Array<Dynamic> = songJson.notes[i].sectionNotes;
+				if (notes[1] > -1 && notes[1] > highestMania)
+				{
+					highestMania = notes[1];
+				}
+			}*/
+
+            songJson.mania = Note.defaultMania;
 			trace("Song mania value is NULL, set to " + Note.defaultMania);
         }
-
-		if (songJson.strumlines == null) {
-			songJson.strumlines = 3;
-			trace("Song strumlines value is NULL, set to 2");
-		}
 	}
 
 	public function new(song, notes, bpm)
