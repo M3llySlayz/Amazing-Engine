@@ -33,15 +33,6 @@ class VisualsUISubState extends BaseOptionsMenu
 	{
 		title = 'Visuals and UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
-
-		/*irrelevant, we have opacity now :)
-		var option:Option = new Option('Note Splashes',
-			"If unchecked, hitting \"Sick!\" notes won't show particles.",
-			'noteSplashes',
-			'bool',
-			true);
-		addOption(option);
-		*/
 		
 		var option:Option = new Option('Note Splash Opacity:',
 			"Set the alpha for the Note Splashes, shown when hitting \"Sick!\" notes.",
@@ -159,6 +150,17 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		option.decimals = 1;
 		addOption(option);
+
+		var option:Option = new Option('Hit timing position type',
+			'Sets the hit timing position type.',
+			'hitTimingPositionType',
+			'int',
+			0);
+		addOption(option);	
+		option.scrollSpeed = 0;
+		option.minValue = 0;
+		option.maxValue = 3;
+		option.changeValue = 1;
 		
 		#if !mobile
 		var option:Option = new Option('FPS Counter',

@@ -3455,15 +3455,17 @@ class PlayState extends MusicBeatState
 
 		if (health > 2) health = 2;
 
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1; // PLAYER LOSING ICON
-		else
-			iconP1.animation.curAnim.curFrame = 0; // PLAYER NEUTRAL ICON
+		if (healthBar.percent < 20) {
+			(playingAsOpponent?iconP2:iconP1).animation.curAnim.curFrame = 1;
+		} else {
+			(playingAsOpponent?iconP2:iconP1).animation.curAnim.curFrame = 0;
+		}
 
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1; // OPPONENT LOSING ICON
-		else
-			iconP2.animation.curAnim.curFrame = 0; // OPPONENT NEUTRAL ICON
+		if (healthBar.percent > 80) {
+			(playingAsOpponent?iconP1:iconP2).animation.curAnim.curFrame = 1;
+		} else {
+			(playingAsOpponent?iconP1:iconP2).animation.curAnim.curFrame = 0;
+		}
 
 		//if (FlxG.keys.justPressed.Z) trace(iconP1.width);
 		//if (FlxG.keys.justPressed.X) trace(iconP2.width);
@@ -4681,8 +4683,13 @@ class PlayState extends MusicBeatState
 			var msTiming = HelperFunctions.truncateFloat(noteDiff, ClientPrefs.precisionDecimals);
 			var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
 			var strumScroll:Bool = strumGroup.members[note.noteData].downScroll;
-
 			var currentTimingShown:FlxText = new FlxText(0,0,0,"0ms");
+			var timingType:Array<Float> = [
+				note.height / 2,
+				strumScroll ? FlxG.height - 160 : 160,
+				note.y + (note.height / 2)
+			];
+
 			var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
 			switch(daRating.name) {
 				case 'shit': currentTimingShown.color = 0xFFFF0000;
@@ -4699,14 +4706,16 @@ class PlayState extends MusicBeatState
 			currentTimingShown.screenCenter();
 			currentTimingShown.updateHitbox();
 			currentTimingShown.x = (playerStrums.members[note.noteData].x + (playerStrums.members[note.noteData].width * 0.5)) - (currentTimingShown.width * 0.5);
-			currentTimingShown.y = daNote.height * 0.5;
-			currentTimingShown.cameras = [camHUD]; 
+			currentTimingShown.y = timingType[ClientPrefs.hitTimingPositionType];
+			currentTimingShown.cameras = [camHUD];
 			currentTimingShown.visible = true;
-			currentTimingShown.alpha = 0.6;
-
+			currentTimingShown.alpha = 0.7;
 			add(currentTimingShown);
 
-			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 60}, 0.8, {
+			currentTimingShown.scale.set(1.5, 1.25);
+			FlxTween.tween(currentTimingShown, {"scale.x": 1, "scale.y": 1}, Conductor.crochet * 0.0009, {ease: FlxEase.expoOut});
+			FlxTween.tween(currentTimingShown, {alpha: 0, y: currentTimingShown.y - 10}, Conductor.crochet * 0.0001, {
+				ease: FlxEase.quintIn,
 				onComplete: function(tween:FlxTween)
 				{
 					currentTimingShown.destroy();
@@ -5033,7 +5042,7 @@ class PlayState extends MusicBeatState
 				boyfriend.dance();
 			}
 
-			if (keysArePressed() && !endingSong && playingAsOpponent && dad.hasMissAnimations) {
+			if (keysArePressed() && !endingSong && playingAsOpponent) {
 				holdTime += elapsed;
 			} else if (dad.holdTimer > Conductor.stepCrochet * 0.001 * (dad.singDuration + holdTime) && dad.animation.curAnim.name.startsWith('sing') && !dad.animation.curAnim.name.endsWith('miss')) {
 				holdTime = 0;
@@ -5158,22 +5167,22 @@ class PlayState extends MusicBeatState
 			}
 
 			if (ClientPrefs.cameraMoveOnNotes) {
-				if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == false && !note.isSustainNote)
-				{
-					if (!char.stunned)
-					{
-						switch (char.animation.curAnim.name) {
-							case 'singLEFT' | 'singLEFT-alt':
-								if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfLEFT');
-							case 'singDOWN' | 'singDOWN-alt':
-								if (!playingAsOpponent) cameraMove('dadDOWN'); else cameraMove('bfDOWN');
-							case 'singUP' | 'singUP-alt':
-								if (!playingAsOpponent) cameraMove('dadUP'); else cameraMove('bfUP');
-							case 'singRIGHT' | 'singRIGHT-alt':
-								if (!playingAsOpponent) cameraMove('dadRIGHT'); else cameraMove('bfRIGHT');
-						}                 
+				try {
+					if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == false && !note.isSustainNote) {
+						if (!char.stunned) {
+							switch (char.animation.curAnim.name) {
+								case 'singLEFT' | 'singLEFT-alt':
+									if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadLEFT');
+								case 'singDOWN' | 'singDOWN-alt':
+									if (!playingAsOpponent) cameraMove('bfDOWN'); else cameraMove('dadLEFT');
+								case 'singUP' | 'singUP-alt':
+									if (!playingAsOpponent) cameraMove('bfUP'); else cameraMove('dadLEFT');
+								case 'singRIGHT' | 'singRIGHT-alt':
+									if (!playingAsOpponent) cameraMove('bfRIGHT'); else cameraMove('dadLEFT');
+							}
+						}
 					}
-				} 
+				} catch (e:Any) {}
 			}
 
 			if(healthdrain > 0) {
@@ -5288,21 +5297,23 @@ class PlayState extends MusicBeatState
 					char.holdTimer = 0;
 				}
 
-				if(ClientPrefs.cameraMoveOnNotes){
-					if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == true && !note.isSustainNote){
-						if (!char.stunned){
-							switch (char.animation.curAnim.name){
-								case 'singLEFT' | 'singLEFT-alt':
-									if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadLEFT');
-								case 'singDOWN' | 'singDOWN-alt':
-									if (!playingAsOpponent) cameraMove('bfDOWN'); else cameraMove('dadDOWN');
-								case 'singUP' | 'singUP-alt':
-									if (!playingAsOpponent) cameraMove('bfUP'); else cameraMove('dadUP');
-								case 'singRIGHT' | 'singRIGHT-alt':
-									if (!playingAsOpponent) cameraMove('bfRIGHT'); else cameraMove('dadRIGHT');
+				if(ClientPrefs.cameraMoveOnNotes) {
+					try {
+						if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == true && !note.isSustainNote) {
+							if (!char.stunned) {
+								switch (char.animation.curAnim.name) {
+									case 'singLEFT' | 'singLEFT-alt':
+										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfLEFT');
+									case 'singDOWN' | 'singDOWN-alt':
+										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfDOWN');
+									case 'singUP' | 'singUP-alt':
+										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfUP');
+									case 'singRIGHT' | 'singRIGHT-alt':
+										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfRIGHT');
+								}
 							}
-						}                    
-					}
+						}
+					} catch (e:Any) {}
 				}
 
 				if(note.noteType == 'Hey!') {
