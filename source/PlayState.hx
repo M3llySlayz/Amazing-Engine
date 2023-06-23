@@ -5172,13 +5172,13 @@ class PlayState extends MusicBeatState
 						if (!char.stunned) {
 							switch (char.animation.curAnim.name) {
 								case 'singLEFT' | 'singLEFT-alt':
-									if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadLEFT');
+									if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfLEFT');
 								case 'singDOWN' | 'singDOWN-alt':
-									if (!playingAsOpponent) cameraMove('bfDOWN'); else cameraMove('dadLEFT');
+									if (!playingAsOpponent) cameraMove('dadDOWN'); else cameraMove('bfLEFT');
 								case 'singUP' | 'singUP-alt':
-									if (!playingAsOpponent) cameraMove('bfUP'); else cameraMove('dadLEFT');
+									if (!playingAsOpponent) cameraMove('dadUP'); else cameraMove('bfLEFT');
 								case 'singRIGHT' | 'singRIGHT-alt':
-									if (!playingAsOpponent) cameraMove('bfRIGHT'); else cameraMove('dadLEFT');
+									if (!playingAsOpponent) cameraMove('dadRIGHT'); else cameraMove('bfLEFT');
 							}
 						}
 					}
@@ -5299,17 +5299,17 @@ class PlayState extends MusicBeatState
 
 				if(ClientPrefs.cameraMoveOnNotes) {
 					try {
-						if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == true && !note.isSustainNote) {
+						if(SONG.notes[Math.floor(curStep / 16)].mustHitSection && !note.isSustainNote) {
 							if (!char.stunned) {
 								switch (char.animation.curAnim.name) {
 									case 'singLEFT' | 'singLEFT-alt':
-										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfLEFT');
+										if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadLEFT');
 									case 'singDOWN' | 'singDOWN-alt':
-										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfDOWN');
+										if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadDOWN');
 									case 'singUP' | 'singUP-alt':
-										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfUP');
+										if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadUP');
 									case 'singRIGHT' | 'singRIGHT-alt':
-										if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfRIGHT');
+										if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadRIGHT');
 								}
 							}
 						}
