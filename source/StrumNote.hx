@@ -146,10 +146,9 @@ class StrumNote extends FlxSprite
 
 		x += Note.xtra[PlayState.mania];
 		x += 50;
-		x += Std.int(FlxG.width / Note.closeX[PlayState.SONG.mania][PlayState.SONG.strumlines]) * player;
+		x += Std.int(FlxG.width / 2) * player;
 		ID = noteData;
 		x -= Note.posRest[PlayState.mania];
-		x -= Note.lesserX[PlayState.mania][PlayState.SONG.strumlines];
 	}
 
 	override function update(elapsed:Float) {

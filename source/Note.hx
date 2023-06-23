@@ -32,10 +32,7 @@ class Note extends FlxSprite
 	public static var maxMania:Int = 17; // key value is this + 1
 
 	public static var scales:Array<Float> = EKData.scales;
-	public static var closeX:Array<Array<Float>> = EKData.closeX;
 	public static var lessX:Array<Int> = EKData.lessX;
-	public static var lesserX:Array<Array<Int>> = EKData.lesserX;
-	public static var lessScale:Array<Float> = EKData.lessScale;
 	public static var separator:Array<Int> = EKData.noteSep;
 	public static var xtra:Array<Float> = EKData.offsetX;
 	public static var posRest:Array<Float> = EKData.restPosition;
