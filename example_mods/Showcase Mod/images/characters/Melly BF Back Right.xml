@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="MellyBFBack.png">
+	<!-- Created with Adobe Animate version 23.0.1.70 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Down Miss Flip0000" x="0" y="0" width="524" height="492" frameX="0" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0001" x="0" y="0" width="524" height="492" frameX="0" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0002" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0003" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0004" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0005" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0006" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0007" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0008" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0009" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0010" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0011" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0012" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0013" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0014" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0015" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0016" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0017" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0018" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0019" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0020" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0021" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0022" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Down Miss Flip0023" x="524" y="0" width="496" height="494" frameX="-17" frameY="0" frameWidth="524" frameHeight="494"/>
+	<SubTexture name="Idle Flip0000" x="1020" y="0" width="498" height="484" frameX="0" frameY="-6" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0001" x="1020" y="0" width="498" height="484" frameX="0" frameY="-6" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0002" x="1518" y="0" width="499" height="479" frameX="-2" frameY="-13" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0003" x="1518" y="0" width="499" height="479" frameX="-2" frameY="-13" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0004" x="2017" y="0" width="498" height="490" frameX="-8" frameY="-3" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0005" x="2017" y="0" width="498" height="490" frameX="-8" frameY="-3" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0006" x="2515" y="0" width="495" height="491" frameX="-15" frameY="-2" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0007" x="2515" y="0" width="495" height="491" frameX="-15" frameY="-2" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0008" x="3010" y="0" width="492" height="493" frameX="-22" frameY="0" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0009" x="3010" y="0" width="492" height="493" frameX="-22" frameY="0" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0010" x="3010" y="0" width="492" height="493" frameX="-22" frameY="0" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0011" x="3010" y="0" width="492" height="493" frameX="-22" frameY="0" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0012" x="3010" y="0" width="492" height="493" frameX="-22" frameY="0" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Idle Flip0013" x="3010" y="0" width="492" height="493" frameX="-22" frameY="0" frameWidth="514" frameHeight="493"/>
+	<SubTexture name="Left Miss Flip0000" x="3502" y="0" width="482" height="567" frameX="0" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0001" x="3502" y="0" width="482" height="567" frameX="0" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0002" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0003" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0004" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0005" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0006" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0007" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0008" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0009" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0010" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0011" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0012" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0013" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0014" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0015" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0016" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0017" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0018" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0019" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0020" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0021" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0022" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Left Miss Flip0023" x="0" y="567" width="473" height="567" frameX="-16" frameY="0" frameWidth="489" frameHeight="567"/>
+	<SubTexture name="Right Miss Flip0000" x="473" y="567" width="515" height="592" frameX="-15" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0001" x="473" y="567" width="515" height="592" frameX="-15" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0002" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0003" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0004" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0005" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0006" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0007" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0008" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0009" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0010" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0011" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0012" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0013" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0014" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0015" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0016" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0017" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0018" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0019" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0020" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0021" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0022" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Right Miss Flip0023" x="988" y="567" width="518" height="592" frameX="0" frameY="0" frameWidth="530" frameHeight="592"/>
+	<SubTexture name="Sing Down Flip0000" x="1506" y="567" width="497" height="464" frameX="0" frameY="-12" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0001" x="1506" y="567" width="497" height="464" frameX="0" frameY="-12" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0002" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0003" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0004" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0005" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0006" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0007" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0008" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0009" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0010" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0011" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0012" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0013" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0014" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0015" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0016" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0017" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0018" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0019" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0020" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0021" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0022" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Down Flip0023" x="2003" y="567" width="497" height="479" frameX="-1" frameY="0" frameWidth="498" frameHeight="479"/>
+	<SubTexture name="Sing Left Flip0000" x="2500" y="567" width="473" height="481" frameX="0" frameY="-3" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0001" x="2500" y="567" width="473" height="481" frameX="0" frameY="-3" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0002" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0003" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0004" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0005" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0006" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0007" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0008" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0009" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0010" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0011" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0012" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0013" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0014" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0015" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0016" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0017" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0018" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0019" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0020" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0021" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0022" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Left Flip0023" x="2973" y="567" width="485" height="483" frameX="-2" frameY="0" frameWidth="487" frameHeight="484"/>
+	<SubTexture name="Sing Right Flip0000" x="3458" y="567" width="519" height="505" frameX="-4" frameY="0" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0001" x="3458" y="567" width="519" height="505" frameX="-4" frameY="0" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0002" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0003" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0004" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0005" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0006" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0007" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0008" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0009" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0010" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0011" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0012" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0013" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0014" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0015" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0016" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0017" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0018" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0019" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0020" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0021" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0022" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Right Flip0023" x="0" y="1159" width="492" height="493" frameX="0" frameY="-14" frameWidth="523" frameHeight="507"/>
+	<SubTexture name="Sing Up Flip0000" x="492" y="1159" width="455" height="552" frameX="-4" frameY="0" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0001" x="492" y="1159" width="455" height="552" frameX="-4" frameY="0" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0002" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0003" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0004" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0005" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0006" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0007" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0008" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0009" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0010" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0011" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0012" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0013" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0014" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0015" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0016" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0017" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Sing Up Flip0018" x="947" y="1159" width="461" height="538" frameX="0" frameY="-12" frameWidth="461" frameHeight="552"/>
+	<SubTexture name="Up Miss Flip0000" x="1408" y="1159" width="439" height="642" frameX="-7" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0001" x="1408" y="1159" width="439" height="642" frameX="-7" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0002" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0003" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0004" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0005" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0006" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0007" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0008" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0009" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0010" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0011" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0012" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0013" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0014" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0015" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0016" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0017" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0018" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0019" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0020" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0021" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0022" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+	<SubTexture name="Up Miss Flip0023" x="1847" y="1159" width="455" height="640" frameX="0" frameY="0" frameWidth="455" frameHeight="642"/>
+</TextureAtlas>

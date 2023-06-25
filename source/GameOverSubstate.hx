@@ -24,16 +24,16 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	public static var characterName = 'bf-dead';
 	public static var deathSoundName = 'fnf_loss_sfx';
-	public static var loopSoundName = Paths.formatToSongPath(ClientPrefs.gameOverSong);
-	public static var endSoundName = Paths.formatToSongPath(ClientPrefs.gameOverSong) + '-End';
+	public static var loopSoundName = ClientPrefs.gameOverSong.replace(' ', '-');
+	public static var endSoundName = ClientPrefs.gameOverSong.replace(' ', '-') + '-End';
 
 	public static var instance:GameOverSubstate;
 
 	public static function resetVariables() {
 		characterName = 'bf-dead';
 		deathSoundName = 'fnf_loss_sfx';
-		loopSoundName = Paths.formatToSongPath(ClientPrefs.gameOverSong);
-		endSoundName = Paths.formatToSongPath(ClientPrefs.gameOverSong) + '-End';
+		loopSoundName = ClientPrefs.gameOverSong.replace(' ', '-');
+		endSoundName = ClientPrefs.gameOverSong.replace(' ', '-') + '-End';
 	}
 
 	override function create()

@@ -529,40 +529,44 @@ class PauseSubState extends MusicBeatSubstate
 	}
 
 	function regenMenu():Void {
-		for (i in 0...grpMenuShit.members.length) {
-			var obj = grpMenuShit.members[0];
-			obj.kill();
-			grpMenuShit.remove(obj, true);
-			obj.destroy();
-		}
-
-		for (i in 0...menuItems.length) {
-			var item = new Alphabet(90, 320, menuItems[i], true);
-			item.isMenuItem = true;
-			item.targetY = i;
-			grpMenuShit.add(item);
-
-			if(menuItems[i] == 'Skip Time')
-			{
-				skipTimeText = new FlxText(0, 0, 0, '', 64);
-				skipTimeText.setFormat(Paths.font("vcr.ttf"), 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				skipTimeText.scrollFactor.set();
-				skipTimeText.borderSize = 2;
-				skipTimeTracker = item;
-				add(skipTimeText);
-
-				updateSkipTextStuff();
-				updateSkipTimeText();
+		try {
+			for (i in 0...grpMenuShit.members.length) {
+				var obj = grpMenuShit.members[0];
+				obj.kill();
+				grpMenuShit.remove(obj, true);
+				obj.destroy();
 			}
+
+			for (i in 0...menuItems.length) {
+				var item = new Alphabet(90, 320, menuItems[i], true);
+				item.isMenuItem = true;
+				item.targetY = i;
+				grpMenuShit.add(item);
+
+				if(menuItems[i] == 'Skip Time')
+				{
+					skipTimeText = new FlxText(0, 0, 0, '', 64);
+					skipTimeText.setFormat(Paths.font("vcr.ttf"), 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					skipTimeText.scrollFactor.set();
+					skipTimeText.borderSize = 2;
+					skipTimeTracker = item;
+					add(skipTimeText);
+
+					updateSkipTextStuff();
+					updateSkipTimeText();
+				}
+			}
+			curSelected = 0;
+			changeSelection();
+		} catch (e:Any) {
+			trace('Exception Thrown');
+			close();
 		}
-		curSelected = 0;
-		changeSelection();
 	}
 	
 	function updateSkipTextStuff()
 	{
-		if(skipTimeText == null || skipTimeTracker == null)
-		{
+		if(skipTimeText == null || skipTimeTracker == null) {
 			return;
 		} else if (skipTimeText != null && skipTimeTracker != null){
 			skipTimeText.x = skipTimeTracker.x + skipTimeTracker.width + 60;

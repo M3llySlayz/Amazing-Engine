@@ -151,19 +151,21 @@ class FreeplayCategoryState extends MusicBeatState {
 	}
 
 	public function lockedCategoryCheck() {
-		if (categoryIsLocked(categoriesList[curSelected])) {
-			categorySpr.color = 0x00000000;
-			alphabetText.visible = false;
-			lockedTxt.visible = true;
-			lockIcon.visible = true;
-			categorySpr.alpha = 0.5;
-		} else {
-			categorySpr.color = 0xFFFFFFFF;
-			alphabetText.visible = true;
-			lockedTxt.visible = false;
-			lockIcon.visible = false;
-			categorySpr.alpha = 1;
-		}
+		try {
+			if (categoryIsLocked(categoriesList[curSelected])) {
+				categorySpr.color = 0x00000000;
+				alphabetText.visible = false;
+				lockedTxt.visible = true;
+				lockIcon.visible = true;
+				categorySpr.alpha = 0.5;
+			} else {
+				categorySpr.color = 0xFFFFFFFF;
+				alphabetText.visible = true;
+				lockedTxt.visible = false;
+				lockIcon.visible = false;
+				categorySpr.alpha = 1;
+			}
+		} catch (e:Any) {}
 	}
 
 	public function changeSelection(change:Int = 1) {
@@ -175,28 +177,34 @@ class FreeplayCategoryState extends MusicBeatState {
 	}
 
 	public function selectCategory() {
-		if (!categoryIsLocked(categoriesList[curSelected])) {
-			lightingBG.alpha = 1;
-			selectedSomethin = true;
-			SoundEffects.playSFX('confirm', false);
-			FlxFlicker.flicker(categorySpr, 1.5, 0.05, false);
-			FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
-			FlxTween.tween(alphabetText, {alpha: 0, x: alphabetText.x - 24}, 1, {ease: FlxEase.smoothStepOut});
-			FlxTween.tween(categorySpr, {alpha: 0}, 0.75, {ease: FlxEase.smoothStepOut, startDelay: 0.75});
-			new FlxTimer().start(1.5, function(tmr:FlxTimer) {
-				FreeplayState.curCategory = categoriesList[curSelected];
-				if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
-				LoadingState.loadAndSwitchState(new FreeplayState());
-			});
-		} else SoundEffects.playSFX('cancel', false);
+		try {
+			if (!categoryIsLocked(categoriesList[curSelected])) {
+				lightingBG.alpha = 1;
+				selectedSomethin = true;
+				SoundEffects.playSFX('confirm', false);
+				FlxFlicker.flicker(categorySpr, 1.5, 0.05, false);
+				FlxTween.tween(lightingBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
+				FlxTween.tween(alphabetText, {alpha: 0, x: alphabetText.x - 24}, 1, {ease: FlxEase.smoothStepOut});
+				FlxTween.tween(categorySpr, {alpha: 0}, 0.75, {ease: FlxEase.smoothStepOut, startDelay: 0.75});
+				new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+					FreeplayState.curCategory = categoriesList[curSelected];
+					if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
+					LoadingState.loadAndSwitchState(new FreeplayState());
+				});
+			} else SoundEffects.playSFX('cancel', false);
+		} catch (e:Any) {}
 	}
 
+	// Debugging and triggering this method might freeze the game it but if you spam Step out then it finally continues (No clue how it happened but that's haxe stuff)
 	public static function categoryIsLocked(name:String):Bool {
 		var leCategory:FreeplayCategory = FreeplayCategory.categoriesLoaded.get(name);
-		try {
-			return (leCategory.startLocked && (!catUnlocks.exists(leCategory.category) || !catUnlocks.get(leCategory.category)));
-		} catch (e:Any) {
-			if (name != "base game") trace('Cannot check if "$name" is unlocked - Null value in "startLocked"');
+		if (leCategory != null) {
+			try {
+				return (leCategory.startLocked != null ? leCategory.startLocked : false) && (!catUnlocks.exists(leCategory.category) || !catUnlocks.get(leCategory.category));
+			} catch (e:Any) {
+				return false;
+			}
+		} else {
 			return false;
 		}
 	}

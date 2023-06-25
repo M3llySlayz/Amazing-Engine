@@ -92,34 +92,34 @@ class StrumNote extends FlxSprite
 		var pxDV:Int = Note.pixelNotesDivisionValue;
 
 		if(PlayState.isPixelStage)
-			{
-				loadGraphic(Paths.image('pixelUI/' + texture));
-				width = width / Note.pixelNotesDivisionValue;
-				height = height / 5;
-				antialiasing = false;
-				loadGraphic(Paths.image('pixelUI/' + texture), true, Math.floor(width), Math.floor(height));
-				var daFrames:Array<Int> = Note.keysShit.get(PlayState.mania).get('pixelAnimIndex');
+		{
+			loadGraphic(Paths.image('pixelUI/' + texture));
+			width = width / Note.pixelNotesDivisionValue;
+			height = height / 5;
+			antialiasing = false;
+			loadGraphic(Paths.image('pixelUI/' + texture), true, Math.floor(width), Math.floor(height));
+			var daFrames:Array<Int> = Note.keysShit.get(PlayState.mania).get('pixelAnimIndex');
 
-				setGraphicSize(Std.int(width * PlayState.daPixelZoom * Note.pixelScales[PlayState.mania]));
-				updateHitbox();
-				antialiasing = false;
-				animation.add('static', [daFrames[noteData]]);
-				animation.add('pressed', [daFrames[noteData] + pxDV, daFrames[noteData] + (pxDV * 2)], 12, false);
-				animation.add('confirm', [daFrames[noteData] + (pxDV * 3), daFrames[noteData] + (pxDV * 4)], 24, false);
-				//i used windows calculator
-			}
+			setGraphicSize(Std.int(width * PlayState.daPixelZoom * Note.pixelScales[PlayState.mania]));
+			updateHitbox();
+			antialiasing = false;
+			animation.add('static', [daFrames[noteData]]);
+			animation.add('pressed', [daFrames[noteData] + pxDV, daFrames[noteData] + (pxDV * 2)], 12, false);
+			animation.add('confirm', [daFrames[noteData] + (pxDV * 3), daFrames[noteData] + (pxDV * 4)], 24, false);
+			//i used windows calculator
+		}
 		else
-			{
-				frames = Paths.getSparrowAtlas(texture);
+		{
+			frames = Paths.getSparrowAtlas(texture);
 
-				antialiasing = ClientPrefs.globalAntialiasing;
+			antialiasing = ClientPrefs.globalAntialiasing;
 
-				setGraphicSize(Std.int(width * Note.scales[PlayState.mania]));
-		
-				animation.addByPrefix('static', 'arrow' + animationArray[0]);
-				animation.addByPrefix('pressed', animationArray[1] + ' press', 24, false);
-				animation.addByPrefix('confirm', animationArray[1] + ' confirm', 24, false);
-			}
+			setGraphicSize(Std.int(width * Note.scales[PlayState.mania]));
+	
+			animation.addByPrefix('static', 'arrow' + animationArray[0]);
+			animation.addByPrefix('pressed', animationArray[1] + ' press', 24, false);
+			animation.addByPrefix('confirm', animationArray[1] + ' confirm', 24, false);
+		}
 
 		updateHitbox();
 
@@ -150,9 +150,10 @@ class StrumNote extends FlxSprite
 		x += Note.xtra[PlayState.mania];
 	
 		x += 50;
-		x += (FlxG.width / 2) * player;
+		x += (FlxG.width / Note.lessSpacing[PlayState.strumlines]) * player;
 		ID = noteData;
-		x -= Note.posRest[PlayState.mania];
+		x -= Note.posRest[PlayState.mania] * Note.lessScale[PlayState.strumlines];
+		x -= Note.lesserX[PlayState.strumlines];
 	}
 
 	override function update(elapsed:Float) {

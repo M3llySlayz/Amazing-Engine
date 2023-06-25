@@ -27,8 +27,6 @@ typedef SwagSong =
 	var stage:String;
 	var healthdrainKill:Bool;
 
-	var mania:Null<Int>;
-
 	var arrowSkin:String;
 	var splashSkin:String;
 	var validScore:Bool;
@@ -36,6 +34,9 @@ typedef SwagSong =
 	var bfTrails:Bool;
 	var healthdrain:Float;
 	var songInstVolume:Float;
+
+	var strumlines:Null<Int>;
+	var mania:Null<Int>;
 }
 
 class Song
@@ -91,21 +92,17 @@ class Song
 			}
 		}
 
-		if (songJson.mania == null && ClientPrefs.convertEK) //yall better not replace this
+		if (songJson.mania == null)
         {
-			/*var highestMania:Int = -1;
-			for (i in 0...songJson.notes.length)
-			{
-				var notes:Array<Dynamic> = songJson.notes[i].sectionNotes;
-				if (notes[1] > -1 && notes[1] > highestMania)
-				{
-					highestMania = notes[1];
-				}
-			}*/
-
-            songJson.mania = Note.defaultMania;
+			songJson.mania = Note.defaultMania;
 			trace("Song mania value is NULL, set to " + Note.defaultMania);
         }
+
+		if (songJson.strumlines == null || (songJson.strumlines < 2 && songJson.strumlines > 6))
+		{
+			songJson.strumlines = 2;
+			trace("Song strumlines value is NULL, set to 2");
+		}
 	}
 
 	public function new(song, notes, bpm)

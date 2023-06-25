@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-5,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Idle Flip",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				45,
+				-16
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Sing Left Flip",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				10,
+				-17
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Sing Down Flip",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-73,
+				48
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Sing Up Flip",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-26,
+				13
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Sing Right Flip",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				47,
+				66
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "Left Miss Flip",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-76,
+				137
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "Up Miss Flip",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-34,
+				99
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "Right Miss Flip",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				25,
+				1
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "Down Miss Flip",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Melly BF Back Right",
+	"position": [
+		0,
+		350
+	],
+	"healthicon": "melly",
+	"flip_x": true,
+	"healthbar_colors": [
+		164,
+		0,
+		0
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1.6
+}

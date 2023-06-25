@@ -1,0 +1,7 @@
+{
+	"name": "Showcase Mod",
+	"description": "A default mod for Amazing Engine made to showcase everything it can do!",
+	"restart":true,
+	"runsGlobally": true,
+	"color": [170, 0, 255]
+}

@@ -68,8 +68,7 @@ import sys.io.File;
 
 class ChartingState extends MusicBeatState
 {
-	public static var noteTypeList:Array<String> = //Used for backwards compatibility with 0.1 - 0.3.2 charts, though, you should add your hardcoded custom note types here too.
-	[
+	public static var noteTypeList:Array<String> = [ //Used for backwards compatibility with 0.1 - 0.3.2 charts, though, you should add your hardcoded custom note types here too.
 		'',
 		'Alt Animation',
 		'Hey!',
@@ -78,13 +77,20 @@ class ChartingState extends MusicBeatState
 		'GF Sing',
 		'No Animation'
 	];
+
+	public static var strumNoteTypeList:Array<String> = [ //Notetypes that appear based on how many strumlines there are
+		'Third Strum',
+		'Fourth Strum',
+		'Fifth Strum',
+		'Sixth Strum'
+	];
+
 	private var noteTypeIntMap:Map<Int, String> = new Map<Int, String>();
 	private var noteTypeMap:Map<String, Null<Int>> = new Map<String, Null<Int>>();
 	public var ignoreWarnings = false;
 	var undos = [];
 	var redos = [];
-	var eventStuff:Array<Dynamic> =
-	[
+	var eventStuff:Array<Dynamic> = [
 		['', "Nothing. Yep, that's right."],
 		['Dadbattle Spotlight', "Used in Dad Battle,\nValue 1: 0/1 = ON/OFF,\n2 = Target Dad\n3 = Target BF"],
 		['Hey!', "Plays the \"Hey!\" animation from Bopeebo,\nValue 1: BF = Only Boyfriend, GF = Only Girlfriend,\nSomething else = Both.\nValue 2: Custom animation duration,\nleave it blank for 0.6s"],
@@ -101,7 +107,8 @@ class ChartingState extends MusicBeatState
 		['Change Character', "Value 1: Character to change (Dad, BF, GF)\nValue 2: New character's name"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
-		['Change Mania', "Value 1: The new mania value (min: " + Note.minMania + "; max: " + Note.maxMania + ")\nValue 2: Skip old strum fade tween\nPut 'true' to skip it, anything else or blank to not."]
+		['Change Mania', "Value 1: The new mania value (min: " + Note.minMania + "; max: " + Note.maxMania + ")\nValue 2: Skip old strum fade tween\nPut 'true' to skip it, anything else or blank to not."],
+		['Change Strumlines', "Value 1: The new amount of strumlines (min: 2; max: 6)\nValue 2: Skip old strum fade tween\nPut 'true' to skip it, anything else or blank to not."]
 	];
 
 	var _file:FileReference;
@@ -240,6 +247,7 @@ class ChartingState extends MusicBeatState
 				speed: 1,
 				stage: 'stage',
 				validScore: false,
+				strumlines: 2,
 				mania: Note.defaultMania
 			};
 			addSection();
@@ -288,8 +296,8 @@ class ChartingState extends MusicBeatState
 		add(rightIcon);
 
 		var oneHalf:Float = GRID_SIZE * Note.ammo[_song.mania];
-		leftIcon.setPosition((oneHalf / 2) - (leftIcon.width / 2) - (_song.mania * 2) + 48, -100);
-		rightIcon.setPosition(((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) - (_song.mania * 2) + 48, -100);
+		leftIcon.x = (oneHalf / 2) - (leftIcon.width / 2) - (_song.mania * 2) + 48; leftIcon.y = -100;
+		rightIcon.x = ((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) - (_song.mania * 2) + 48; rightIcon.y = -100;
 
 		curRenderedSustains = new FlxTypedGroup<FlxSprite>();
 		curRenderedNotes = new FlxTypedGroup<Note>();
@@ -1048,6 +1056,8 @@ class ChartingState extends MusicBeatState
 		tab_group_note.add(strumTimeInputText);
 		blockPressWhileTypingOn.push(strumTimeInputText);
 
+		refreshStrumNoteTypes();
+
 		var key:Int = 0;
 		var displayNameList:Array<String> = [];
 		while (key < noteTypeList.length) {
@@ -1068,7 +1078,7 @@ class ChartingState extends MusicBeatState
 		#end
 
 		for (i in 0...directories.length) {
-			var directory:String =  directories[i];
+			var directory:String = directories[i];
 			if(FileSystem.exists(directory)) {
 				for (file in FileSystem.readDirectory(directory)) {
 					var path = haxe.io.Path.join([directory, file]);
@@ -1110,6 +1120,12 @@ class ChartingState extends MusicBeatState
 		UI_box.addGroup(tab_group_note);
 	}
 	
+	function refreshStrumNoteTypes() {
+		for (strum in 0..._song.strumlines-2) {
+			if (noteTypeList.contains(strumNoteTypeList[strum])) noteTypeList.remove(strumNoteTypeList[strum]);
+			noteTypeList.push(strumNoteTypeList[strum]);
+		}
+	}
 
 	var eventDropDown:FlxUIDropDownMenuCustom;
 	var descText:FlxText;
@@ -1670,6 +1686,9 @@ class ChartingState extends MusicBeatState
 		camPos.x = -80 + gWidth;
 		strumLine.width = gWidth;
 
+		leftIcon.x = (gWidth / 4) - (leftIcon.width / 2) - (_song.mania * 2) + 48; leftIcon.y = -100;
+		rightIcon.x = (gWidth - (gWidth / 4)) - (rightIcon.width / 2) - (_song.mania * 2) + 48; rightIcon.y = -100;
+
 		if(FlxG.sound.music.time < 0) {
 			FlxG.sound.music.pause();
 			FlxG.sound.music.time = 0;
@@ -1683,27 +1702,23 @@ class ChartingState extends MusicBeatState
 		_song.song = UI_songTitle.text;
 
 		strumLineUpdateY();
-		for (i in 0...strumLineNotes.members.length){
+		for (i in 0...strumLineNotes.members.length) {
 			strumLineNotes.members[i].y = strumLine.y;
 		}
 
 		FlxG.mouse.visible = true;//cause reasons. trust me
 		camPos.y = strumLine.y;
 		if(!disableAutoScrolling.checked) {
-			if (Math.ceil(strumLine.y) >= (gridBG.height))
-				{
+			if (Math.ceil(strumLine.y) >= (gridBG.height)) {
 				if (_song.notes[curSec + 1] == null)
 				{
 					addSection();
 				}
-
 				changeSection(curSec + 1, false);
 			} else if(strumLine.y < -10) {
 				changeSection(curSec - 1, false);
 			}
 		}
-		FlxG.watch.addQuick('daBeat', curBeat);
-		FlxG.watch.addQuick('daStep', curStep);
 
 		if (FlxG.mouse.x > gridBG.x
 			&& FlxG.mouse.x < gridBG.x + gridBG.width
@@ -2269,8 +2284,8 @@ class ChartingState extends MusicBeatState
 		#end
 
 		var oneHalf:Float = GRID_SIZE * Note.ammo[_song.mania];
-		leftIcon.setPosition((oneHalf / 2) - (leftIcon.width / 2) - (_song.mania * 2) + 48, -100);
-		rightIcon.setPosition(((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) - (_song.mania * 2) + 48, -100);
+		leftIcon.x = (oneHalf / 2) - (leftIcon.width / 2) - (_song.mania * 2) + 48; leftIcon.y = -100;
+		rightIcon.x = ((oneHalf * 2) - (oneHalf / 2)) - (rightIcon.width / 2) - (_song.mania * 2) + 48; rightIcon.y = -100;
 
 		var leHeight:Int = Std.int(gridBG.height);
 		var foundNextSec:Bool = false;

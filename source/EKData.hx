@@ -48,7 +48,7 @@ class EKData {
             ],
 		7 => [
                 "letters" => ["A", "B", "C", "D", "F", "G", "H", "I"], 
-                "anims" => ["LEFT", "UP", "DOWN", "RIGHT", "LEFT", "DOWN", "UP", "RIGHT"],
+                "anims" => ["LEFT", "DOWN", "UP", "RIGHT", "LEFT", "DOWN", "UP", "RIGHT"],
 			    "strumAnims" => ["LEFT", "DOWN", "UP", "RIGHT", "LEFT", "DOWN", "UP", "RIGHT"], 
                 "pixelAnimIndex" => [0, 1, 2, 3, 5, 6, 7, 8]
             ],
@@ -159,6 +159,49 @@ class EKData {
         6, // 17k
         6 //18k
     ];
+
+    // MULTISTRUM STUFF
+    ////////////////////////////////////////////////////////////////
+    public static var lesserX:Array<Int> = [
+        0, // 0
+        0, // 1
+        0, // 2
+        154, // 3
+        370, // 4
+        586, // 5
+        795 // 6
+    ];
+
+    public static var moreY:Array<Int> = [
+        0, // 0
+        0, // 1
+        0, // 2
+        46, // 3
+        118, // 4
+        204, // 5
+        296 // 6
+    ];
+
+    public static var lessScale:Array<Float> = [
+        1, // 0
+        1, // 1
+        1, // 2
+        0.84, // 3
+        0.66, // 4
+        0.54, // 5
+        0.46 // 6
+    ];
+
+    public static var lessSpacing:Array<Float> = [
+        2, // 0
+        2, // 1
+        2, // 2
+        2.7, // 3
+        2.75, // 4
+        2.8, // 5
+        2.85 // 6
+    ];
+    ////////////////////////////////////////////////////////////////
 
     public static var noteSep:Array<Int> = [
         0, //1k

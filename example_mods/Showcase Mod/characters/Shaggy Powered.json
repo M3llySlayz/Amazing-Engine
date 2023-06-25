@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "pshaggy_idle"
+		},
+		{
+			"offsets": [
+				65,
+				24
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "pshaggy_left"
+		},
+		{
+			"offsets": [
+				170,
+				-141
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "pshaggy_down"
+		},
+		{
+			"offsets": [
+				74,
+				155
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "pshaggy_up"
+		},
+		{
+			"offsets": [
+				22,
+				-27
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "pshaggy_right"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Shaggy Powered",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "shaggyp",
+	"flip_x": false,
+	"healthbar_colors": [
+		156,
+		0,
+		0
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

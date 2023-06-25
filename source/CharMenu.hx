@@ -21,14 +21,10 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.addons.display.FlxBackdrop;
 
-// Using for achievements
-import Achievements;
+using StringTools;
 
-import Math;
-import StringTools;
-import FreeplayState;
-
-class CharMenu extends MusicBeatState{
+class CharMenu extends MusicBeatState
+{
 	// Selectable Character Variables
 	var selectableCharacters:Array<String> = ['bf', 'bf-christmas', 'MellyBF'/*, 'JBBF'*/]; // Currently Selectable characters
 	var selectableCharactersNames:Array<String> = ['Default Character', 'Week 5 Boyfriend', 'Boyfriend but Black (Melly)'/*, 'Boyfriend but Mexican (JB)'*/]; // Characters names (i demand them to be actually funny and anyone who says otherwise probably isn't black/mexican - melly)
@@ -138,7 +134,7 @@ class CharMenu extends MusicBeatState{
 		if (unlockedCharacters == null) 
 		{
 			unlockedCharacters = selectableCharacters;
-		} 
+		}
 		// If names are empty, fill it with defaults
 		if (unlockedCharactersNames == null) 
 		{
@@ -181,7 +177,7 @@ class CharMenu extends MusicBeatState{
 		for (i in 0...unlockedCharacters.length)
 		{
 			var characterImage:Boyfriend = new Boyfriend(0, 0, unlockedCharacters[i]);
-			if (StringTools.endsWith(unlockedCharacters[i], '-pixel'))
+			if (unlockedCharacters[i].endsWith('-pixel'))
 				characterImage.scale.set(5.5, 5.5);
 			else
 				characterImage.scale.set(0.8, 0.8);
@@ -251,14 +247,10 @@ class CharMenu extends MusicBeatState{
 		{
 			if (leftPress)
 			{
-				//newArrows.offset.set(33, 3);
-				//newArrows.animation.play('left', true);
 				changeSelection(-1);
 			}
 			if (rightPress)
 			{
-				//newArrows.offset.set(0, 4);
-				//newArrows.animation.play('right', true);
 				changeSelection(1);
 			}
 			if (FlxG.mouse.wheel != 0) changeSelection(-FlxG.mouse.wheel);
@@ -280,6 +272,7 @@ class CharMenu extends MusicBeatState{
 			}
 			if (goBack)
 			{
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')), 0.8);
 				if (PlayState.isStoryMode)
 					MusicBeatState.switchState(new StoryMenuState());
 				else
@@ -323,7 +316,7 @@ class CharMenu extends MusicBeatState{
 			
 			Nevermind, Go to CheckFirstSlot() function to add specific offsets to make it fit better
 			*/
-			if (StringTools.endsWith(imageArray[i].curCharacter, '-pixel'))
+			if (imageArray[i].curCharacter.endsWith('-pixel'))
 			{
 				imageArray[i].x = (FlxG.width / 2) + ((i - curSelected - 1) * charXoffset) + 475 + unlockedCharactersOffsets[i][0];
 				imageArray[i].y = (FlxG.height / 2) - 60 + unlockedCharactersOffsets[i][1];
@@ -351,6 +344,8 @@ class CharMenu extends MusicBeatState{
 		if (curSelected >= unlockedCharacters.length)
 			curSelected = 0;
 
+		if (changeAmount != 0) SoundEffects.playSFX('scroll', false);
+
 		for (i in 0...imageArray.length)
 		{
 			var desiredAlpha:Float = 0;
@@ -368,7 +363,7 @@ class CharMenu extends MusicBeatState{
 
 			Nevermind, Go to CheckFirstSlot() function to add specific offsets to make it fit better
 			*/
-			if (StringTools.endsWith(imageArray[i].curCharacter, '-pixel'))
+			if (imageArray[i].curCharacter.endsWith('-pixel'))
 			{
 				destinationX = (FlxG.width / 2) + ((i - curSelected - 1) * charXoffset) + 475 + unlockedCharactersOffsets[i][0];
 			}
@@ -376,7 +371,6 @@ class CharMenu extends MusicBeatState{
 			{
 				destinationX = (FlxG.width / 2) + ((i - curSelected - 1) * charXoffset) + 250 + unlockedCharactersOffsets[i][0];
 			}
-			// if (moveTween != null) moveTween.cancel();
 			if (destinationTweens[i] != null) destinationTweens[i].cancel();
 			destinationTweens[i] = FlxTween.tween(imageArray[i], {x : destinationX}, tweenTime, {ease: FlxEase.quadOut});
 		}
@@ -397,7 +391,8 @@ class CharMenu extends MusicBeatState{
 		icon = new HealthIcon(unlockedCharacters[curSelected], true);
 
 		// This code is for Psych but if necessary can be use on other engines too
-		switch(unlockedCharacters[curSelected]){
+		switch(unlockedCharacters[curSelected])
+		{
 			case 'bf-car' | 'bf-christmas' | 'bf-holding-gf':
 				icon.changeIcon('bf');
 			case 'pico-player':

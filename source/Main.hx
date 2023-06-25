@@ -88,9 +88,7 @@ class Main extends Sprite
 		}
 
 		//ClientPrefs.loadDefaultKeys();
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, 
-			#if (flixel < "5.0.0") zoom, #end
-			framerate, framerate, skipSplash, startFullscreen));
+		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
@@ -114,6 +112,11 @@ class Main extends Sprite
 		#if CRASH_HANDLER
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
+
+		/* FlxG.stage.addEventListener(Keyboard.KEY_DOWN, e -> {
+			if (e.keyCode == Keyboard.F11)
+			FlxG.fullscreen = !FlxG.fullscreen;
+		}); */
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!

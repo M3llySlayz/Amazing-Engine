@@ -33,6 +33,10 @@ class Note extends FlxSprite
 
 	public static var scales:Array<Float> = EKData.scales;
 	public static var lessX:Array<Int> = EKData.lessX;
+	public static var lesserX:Array<Int> = EKData.lesserX;
+	public static var moreY:Array<Int> = EKData.moreY;
+	public static var lessScale:Array<Float> = EKData.lessScale;
+	public static var lessSpacing:Array<Float> = EKData.lessSpacing;
 	public static var separator:Array<Int> = EKData.noteSep;
 	public static var xtra:Array<Float> = EKData.offsetX;
 	public static var posRest:Array<Float> = EKData.restPosition;
@@ -137,15 +141,15 @@ class Note extends FlxSprite
 	public var hitsoundDisabled:Bool = false;
 	public var changeAnim:Bool = true;
 	public var changeColSwap:Bool = true;
-	
+
 	public function resizeByRatio(ratio:Float) //haha funny twitter shit
+	{
+		if(isSustainNote && !animation.curAnim.name.endsWith('tail'))
 		{
-			if(isSustainNote && !animation.curAnim.name.endsWith('tail'))
-			{
-				scale.y *= ratio;
-				updateHitbox();
-			}
+			scale.y *= ratio;
+			updateHitbox();
 		}
+	}
 
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
@@ -289,7 +293,7 @@ class Note extends FlxSprite
 
 				if(PlayState.isPixelStage) { ///Y E  A H
 					prevNote.scale.y *= 1.19;
-					prevNote.scale.y *= (6 / height); //Auto adjust note size
+					prevNote.scale.y *= 6 / height; //Auto adjust note size
 				}
 				prevNote.updateHitbox();
 				// prevNote.setGraphicSize();
