@@ -4304,7 +4304,7 @@ class PlayState extends MusicBeatState
 				var skipFade:Bool = value2 == "true" ? true : false;
 
 				newMania = Std.parseInt(value1);
-				if(Math.isNaN(newMania) || newMania < 0 && newMania > 17) newMania = Note.defaultMania;
+				if(Math.isNaN(newMania) || (newMania < 0 || newMania > 17)) newMania = Note.defaultMania;
 				changeMania(newMania, skipFade);
 
 			case 'Change Strumlines':
@@ -4312,7 +4312,7 @@ class PlayState extends MusicBeatState
 				var skipFade:Bool = value2 == "true" ? true : false;
 
 				newStrums = Std.parseInt(value1);
-				if(Math.isNaN(newStrums) || newStrums < 2 && newStrums > 6) newStrums = 2;
+				if(Math.isNaN(newStrums) || (newStrums < 2 || newStrums > 6)) newStrums = 2;
 				changeStrumlines(newStrums, skipFade);
 
 			case 'Change Character':
