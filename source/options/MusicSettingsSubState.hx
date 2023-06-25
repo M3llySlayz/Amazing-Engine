@@ -63,6 +63,12 @@ class MusicSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 		
 		option.onChange = onChangeMenuMusic;
+
+		var option = new Option('Persistent Music',
+			'Do you want music played through the engine to be consistent?\nThis means, for exmaple, playing an Inst from Freeplay will keep it playing in menus.',
+			'persistentBeats',
+			'bool',
+			false);
 		super();
 	}
 
@@ -90,7 +96,7 @@ class MusicSettingsSubState extends BaseOptionsMenu
 
 	override function destroy() {
 		if(changedMusic) {
-			FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
+			if (!ClientPrefs.persistentBeats) FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 			super.destroy();
 		}
 	}

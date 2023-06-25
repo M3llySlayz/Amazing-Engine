@@ -272,7 +272,7 @@ class CharMenu extends MusicBeatState
 			}
 			if (goBack)
 			{
-				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')), 0.8);
+				if (!ClientPrefs.persistentBeats) FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong.replace(' ', '-')), 0.8);
 				if (PlayState.isStoryMode)
 					MusicBeatState.switchState(new StoryMenuState());
 				else
