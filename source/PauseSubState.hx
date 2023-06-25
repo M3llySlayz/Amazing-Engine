@@ -278,6 +278,7 @@ class PauseSubState extends MusicBeatSubstate
 					SoundEffects.playSFX('scroll', true);
 					menuItems = menuItemsQuitting;
 					quittingTxt.visible = true;
+					deleteSkipTimeText();
 					regenMenu();
 				case "Yes":
 					quitSong();
