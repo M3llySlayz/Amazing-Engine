@@ -5326,7 +5326,7 @@ class PlayState extends MusicBeatState
 			health -= healthdrain;
 			if (health < healthdrain) {
 				if (!healthdrainKill) {
-					health = 0.01;
+					health = 0.05;
 				}
 			}
 
