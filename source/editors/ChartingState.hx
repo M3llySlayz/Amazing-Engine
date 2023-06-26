@@ -734,7 +734,6 @@ class ChartingState extends MusicBeatState
 	var check_mustHitSection:FlxUICheckBox;
 	var check_gfSection:FlxUICheckBox;
 	var check_changeBPM:FlxUICheckBox;
-	var check_healthdrain:FlxUICheckBox;
 	var healthdrainKill_check:FlxUICheckBox;
 	var stepperSectionBPM:FlxUINumericStepper;
 	var stepperHealthDrain:FlxUINumericStepper;
@@ -798,10 +797,6 @@ class ChartingState extends MusicBeatState
 		stepperHealthDrain.value = _song.notes[curSec].healthdrain;
 		stepperHealthDrain.name = 'health_drain';
 		blockPressWhileTypingOnStepper.push(stepperHealthDrain);
-
-		check_healthdrain = new FlxUICheckBox(stepperHealthDrain.x, stepperHealthDrain.y + 30, null, null, 'Change Health Drain', 100);
-		check_healthdrain.checked = _song.notes[curSec].changeHealthdrain;
-		check_healthdrain.name = 'check_healthdrain';
 
 		healthdrainKill_check = new FlxUICheckBox(check_bfTrails.x, check_bfTrails.y + 30, null, null, "Healthdrain can kill player", 100);
 		healthdrainKill_check.checked = _song.notes[curSec].healthdrainKill;
@@ -1022,7 +1017,6 @@ class ChartingState extends MusicBeatState
 		tab_group_section.add(copyButton);
 		tab_group_section.add(pasteButton);
 		tab_group_section.add(stepperHealthDrain);
-		tab_group_section.add(check_healthdrain);
 		tab_group_section.add(healthdrainKill_check);
 		tab_group_section.add(check_Trails);
 		tab_group_section.add(check_bfTrails);
@@ -2679,7 +2673,6 @@ class ChartingState extends MusicBeatState
 		check_gfSection.checked = sec.gfSection;
 		check_altAnim.checked = sec.altAnim;
 		check_changeBPM.checked = sec.changeBPM;
-		check_healthdrain.checked = sec.changeHealthdrain;
 		stepperHealthDrain.value = sec.healthdrain;
 		healthdrainKill_check.checked = sec.healthdrainKill;
 		stepperSectionBPM.value = sec.bpm;
