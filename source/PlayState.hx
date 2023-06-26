@@ -3828,7 +3828,7 @@ class PlayState extends MusicBeatState
 							if(daNote.canBeHit) {
 								goodNoteHit(daNote);
 							}
-						} else if(daNote.strumTime <= Conductor.songPosition || daNote.isSustainNote) {
+						} else if(daNote.strumTime < Conductor.songPosition || daNote.isSustainNote) {
 							goodNoteHit(daNote);
 						}
 					}
@@ -5046,8 +5046,11 @@ class PlayState extends MusicBeatState
 					{
 						for (doubleNote in pressNotes) {
 							if (Math.abs(doubleNote.strumTime - epicNote.strumTime) < 0) {
-								goodNoteHit(epicNote);
-								pressNotes.push(epicNote);
+								if (!cpuControlled) {
+									goodNoteHit(epicNote);
+									pressNotes.push(epicNote);
+								}
+								notesStopped = false;
 							} else notesStopped = true;
 						}
 							
