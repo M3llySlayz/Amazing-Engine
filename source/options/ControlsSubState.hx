@@ -61,23 +61,23 @@ class ControlsSubState extends MusicBeatSubstate {
 
 		var currentPage:String = "";
 		var generatedPage:Dynamic = [];
-		for (i in 0...optionShit.length+1) {
-			if (optionShit[i][0] != "" && optionShit[i].length < 2 && currentPage == "") { //It's the first page title
-				generatedPage.push(optionShit[i]);
-				currentPage = optionShit[i][0];
-			} else if (optionShit[i][0] != "" && optionShit[i].length < 2 && currentPage != "") { // It's a new page title.
+		for (option in optionShit) {
+			if (option[0] != "" && option.length < 2 && currentPage == "") { //It's the first page title
+				generatedPage.push(option);
+				currentPage = option[0];
+			} else if (option[0] != "" && option.length < 2 && currentPage != "") { // It's a new page title.
 				generatedPage.push(['']);
 				generatedPage.push([defaultKey]);
 				pages.push(generatedPage);
 
 				generatedPage = [];
 
-				generatedPage.push(optionShit[i]);
-				currentPage = optionShit[i][0];
-			} else if (optionShit[i].length > 1) { // It's an input
-				generatedPage.push(optionShit[i]);
-			} else if (optionShit[i][0] == "" && optionShit[i].length < 2) { // It's blank!
-				generatedPage.push(optionShit[i]);
+				generatedPage.push(option);
+				currentPage = option[0];
+			} else if (option.length > 1) { // It's an input
+				generatedPage.push(option);
+			} else if (option[0] == "" && option.length < 2) { // It's blank!
+				generatedPage.push(option);
 			}
 		}
 
@@ -110,13 +110,13 @@ class ControlsSubState extends MusicBeatSubstate {
 
 		for (i in 0...optionShit.length) {
 			var isCentered:Bool = false;
-			var isDefaultKey:Bool = (optionShit[i][0] == defaultKey);
+			var isDefaultKey:Bool = (option[0] == defaultKey);
 			if(unselectableCheck(i, true)) {
 				isCentered = true;
 			}
 
 			var isFirst:Bool = i == 0;
-			var text:String = optionShit[i][0];
+			var text:String = option[0];
 			if (isFirst) text = '< ' + text + ' >';
 
 			var optionText:Alphabet = new Alphabet(200, 300, text, (!isCentered || isDefaultKey));
