@@ -738,6 +738,8 @@ class ChartingState extends MusicBeatState
 	var stepperSectionBPM:FlxUINumericStepper;
 	var stepperHealthDrain:FlxUINumericStepper;
 	var check_altAnim:FlxUICheckBox;
+	var check_Trails:FlxUICheckBox;
+	var check_bfTrails:FlxUICheckBox;
 
 	var sectionToCopy:Int = 0;
 	var notesCopied:Array<Dynamic>;
@@ -751,7 +753,7 @@ class ChartingState extends MusicBeatState
 		check_mustHitSection.name = 'check_mustHit';
 		check_mustHitSection.checked = _song.notes[curSec].mustHitSection;
 
-		check_gfSection = new FlxUICheckBox(10, check_mustHitSection.y + 22, null, null, "GF section", 100);
+		check_gfSection = new FlxUICheckBox(10, check_mustHitSection.y + 25, null, null, "GF section", 100);
 		check_gfSection.name = 'check_gf';
 		check_gfSection.checked = _song.notes[curSec].gfSection;
 		// _song.needsVoices = check_mustHit.checked;
@@ -760,13 +762,13 @@ class ChartingState extends MusicBeatState
 		check_altAnim.checked = _song.notes[curSec].altAnim;
 		check_altAnim.name = 'check_altAnim';
 
-		var check_Trails = new FlxUICheckBox(check_altAnim.x, check_gfSection.y, null, null, "Opponent Trail", 100);
+		check_Trails = new FlxUICheckBox(check_altAnim.x, check_gfSection.y, null, null, "Opponent Trail", 100);
 		check_Trails.checked = _song.notes[curSec].characterTrails;
 		check_Trails.callback = function()
 		{
 			_song.notes[curSec].characterTrails = check_Trails.checked;
 		};
-		var check_bfTrails = new FlxUICheckBox(check_Trails.x, check_Trails.y+30, null, null, "Boyfriend Trail", 100);
+		check_bfTrails = new FlxUICheckBox(check_Trails.x, check_Trails.y + 25, null, null, "Boyfriend Trail", 100);
 		check_bfTrails.checked = _song.notes[curSec].bfTrails;
 		check_bfTrails.callback = function()
 		{
@@ -798,7 +800,7 @@ class ChartingState extends MusicBeatState
 		stepperHealthDrain.name = 'health_drain';
 		blockPressWhileTypingOnStepper.push(stepperHealthDrain);
 
-		healthdrainKill_check = new FlxUICheckBox(check_bfTrails.x, check_bfTrails.y + 30, null, null, "Healthdrain can kill player", 100);
+		healthdrainKill_check = new FlxUICheckBox(check_bfTrails.x, check_bfTrails.y + 25, null, null, "Healthdrain can kill player", 100);
 		healthdrainKill_check.checked = _song.notes[curSec].healthdrainKill;
 
 		var check_eventsSec:FlxUICheckBox = null;
@@ -2676,6 +2678,8 @@ class ChartingState extends MusicBeatState
 		stepperHealthDrain.value = sec.healthdrain;
 		healthdrainKill_check.checked = sec.healthdrainKill;
 		stepperSectionBPM.value = sec.bpm;
+		check_Trails.checked = sec.characterTrails;
+		check_bfTrails.checked = sec.bfTrails;
 
 		updateHeads();
 	}
@@ -2920,8 +2924,11 @@ class ChartingState extends MusicBeatState
 	}
 
 	function setupSusNote(note:Note, beats:Float):FlxSprite {
-		var height:Int = Math.floor(FlxMath.remapToRange(note.sustainLength, 0, Conductor.stepCrochet * 16, 0, GRID_SIZE * 16 * zoomList[curZoom]) + (GRID_SIZE * zoomList[curZoom]) - GRID_SIZE / 2);
+		var height:Int = Math.floor(FlxMath.remapToRange(note.sustainLength, 0, Conductor.stepCrochet * 16, 0,
+		GRID_SIZE * 16 * zoomList[curZoom]) + (GRID_SIZE * zoomList[curZoom]) - GRID_SIZE / 2);
+
 		var minHeight:Int = Std.int((GRID_SIZE * zoomList[curZoom] / 2) + GRID_SIZE / 2);
+
 		if(height < minHeight) height = minHeight;
 		if(height < 1) height = 1; //Prevents error of invalid height
 
@@ -2929,7 +2936,8 @@ class ChartingState extends MusicBeatState
 		return spr;
 	}
 
-	private function addSection(sectionBeats:Float = 4, lengthInSteps:Int = 16, healthdrain:Float = 0, healthdrainKill:Bool = false, changeHealthdrain:Bool = false, characterTrails:Bool = false, bfTrails:Bool = false):Void
+	private function addSection(sectionBeats:Float = 4, lengthInSteps:Int = 16, healthdrain:Float = 0,
+	healthdrainKill:Bool = false, changeHealthdrain:Bool = false, characterTrails:Bool = false, bfTrails:Bool = false):Void
 	{
 		var sec:SwagSection = {
 			sectionBeats: sectionBeats,

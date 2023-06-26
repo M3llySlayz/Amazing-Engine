@@ -5242,10 +5242,9 @@ class PlayState extends MusicBeatState
 	function noteMissPress(direction:Int = 1):Void //You pressed a key when there was no notes to press for this key
 	{
 		if(ClientPrefs.ghostTapping) return; //fuck it
-
 		if (!boyfriend.stunned)
 		{
-			health -= 0.05 * healthLoss;
+			for (daNote in notes) health -= daNote.missHealth * healthLoss;
 			if(instakillOnMiss)
 			{
 				vocals.volume = 0;
@@ -5334,7 +5333,7 @@ class PlayState extends MusicBeatState
 				if (!SONG.notes[curSection].healthdrainKill && health > SONG.notes[curSection].healthdrain) {
 					health -= SONG.notes[curSection].healthdrain;
 				} else if (!SONG.notes[curSection].healthdrainKill && health < SONG.notes[curSection].healthdrain) {
-					health = SONG.notes[curSection].healthdrain;
+					health = 0.01;
 				}
 			}
 
