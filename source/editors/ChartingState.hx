@@ -104,6 +104,8 @@ class ChartingState extends MusicBeatState
 		['Change Character', "Value 1: Character to change (Dad, BF, GF)\nValue 2: New character's name"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
+		['Toggle Opponent Trails', "Value 1: True; Toggle the trail, False; Untoggle the trail."],
+		['Toggle Player Trails', "Value 1: True; Toggle the trail, False; Untoggle the trail."],
 		['Change Mania', "Value 1: The new mania value (min: " + Note.minMania + "; max: " + Note.maxMania + ")\nValue 2: Skip old strum fade tween\nPut 'true' to skip it, anything else or blank to not."],
 		['Change Strumlines', "Value 1: The new amount of strumlines (min: 2; max: 6)\nValue 2: Skip old strum fade tween\nPut 'true' to skip it, anything else or blank to not."]
 	];
@@ -230,8 +232,6 @@ class ChartingState extends MusicBeatState
 				notes: [],
 				events: [],
 				bpm: 150.0,
-				characterTrails: false,
-				bfTrails: false,
 				needsVoices: true,
 				healthdrain: 0,
 				healthdrainKill: false,
@@ -738,8 +738,6 @@ class ChartingState extends MusicBeatState
 	var stepperSectionBPM:FlxUINumericStepper;
 	var stepperHealthDrain:FlxUINumericStepper;
 	var check_altAnim:FlxUICheckBox;
-	var check_Trails:FlxUICheckBox;
-	var check_bfTrails:FlxUICheckBox;
 
 	var sectionToCopy:Int = 0;
 	var notesCopied:Array<Dynamic>;
@@ -761,19 +759,6 @@ class ChartingState extends MusicBeatState
 		check_altAnim = new FlxUICheckBox(check_gfSection.x + 120, check_mustHitSection.y, null, null, "Alt Animation", 100);
 		check_altAnim.checked = _song.notes[curSec].altAnim;
 		check_altAnim.name = 'check_altAnim';
-
-		check_Trails = new FlxUICheckBox(check_altAnim.x, check_gfSection.y, null, null, "Opponent Trail", 100);
-		check_Trails.checked = _song.notes[curSec].characterTrails;
-		check_Trails.callback = function()
-		{
-			_song.notes[curSec].characterTrails = check_Trails.checked;
-		};
-		check_bfTrails = new FlxUICheckBox(check_Trails.x, check_Trails.y + 25, null, null, "Boyfriend Trail", 100);
-		check_bfTrails.checked = _song.notes[curSec].bfTrails;
-		check_bfTrails.callback = function()
-		{
-			_song.notes[curSec].bfTrails = check_bfTrails.checked;
-		};
 		
 		stepperBeats = new FlxUINumericStepper(10, 100, 1, 4, 1, 24, 2);
 		stepperBeats.width = 75;
@@ -800,7 +785,7 @@ class ChartingState extends MusicBeatState
 		stepperHealthDrain.name = 'health_drain';
 		blockPressWhileTypingOnStepper.push(stepperHealthDrain);
 
-		healthdrainKill_check = new FlxUICheckBox(check_bfTrails.x, check_bfTrails.y + 25, null, null, "Healthdrain can kill player", 100);
+		healthdrainKill_check = new FlxUICheckBox(check_altAnim.x, check_gfSection.y, null, null, "Healthdrain can kill player", 100);
 		healthdrainKill_check.checked = _song.notes[curSec].healthdrainKill;
 
 		var check_eventsSec:FlxUICheckBox = null;
@@ -1020,8 +1005,6 @@ class ChartingState extends MusicBeatState
 		tab_group_section.add(pasteButton);
 		tab_group_section.add(stepperHealthDrain);
 		tab_group_section.add(healthdrainKill_check);
-		tab_group_section.add(check_Trails);
-		tab_group_section.add(check_bfTrails);
 		tab_group_section.add(clearSectionButton);
 		tab_group_section.add(check_notesSec);
 		tab_group_section.add(check_eventsSec);
@@ -2678,8 +2661,6 @@ class ChartingState extends MusicBeatState
 		stepperHealthDrain.value = sec.healthdrain;
 		healthdrainKill_check.checked = sec.healthdrainKill;
 		stepperSectionBPM.value = sec.bpm;
-		check_Trails.checked = sec.characterTrails;
-		check_bfTrails.checked = sec.bfTrails;
 
 		updateHeads();
 	}
@@ -2937,7 +2918,7 @@ class ChartingState extends MusicBeatState
 	}
 
 	private function addSection(sectionBeats:Float = 4, lengthInSteps:Int = 16, healthdrain:Float = 0,
-	healthdrainKill:Bool = false, changeHealthdrain:Bool = false, characterTrails:Bool = false, bfTrails:Bool = false):Void
+	healthdrainKill:Bool = false, changeHealthdrain:Bool = false):Void
 	{
 		var sec:SwagSection = {
 			sectionBeats: sectionBeats,
@@ -2951,9 +2932,7 @@ class ChartingState extends MusicBeatState
 			altAnim: false,
 			healthdrain: healthdrain,
 			healthdrainKill: healthdrainKill,
-			changeHealthdrain: changeHealthdrain,
-			characterTrails: characterTrails,
-			bfTrails: bfTrails
+			changeHealthdrain: changeHealthdrain
 		};
 
 		_song.notes.push(sec);

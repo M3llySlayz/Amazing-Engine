@@ -3743,17 +3743,13 @@ class PlayState extends MusicBeatState
 						try {
 							switch (daNote.noteType) {
 								case 'Third Strum':
-									if (strumlines >= 3) strumGroup = thirdStrums;
-									else strumGroup = opponentStrums;
+									strumGroup = thirdStrums;
 								case 'Fourth Strum':
-									if (strumlines >= 4) strumGroup = fourthStrums;
-									else strumGroup = opponentStrums;
+									strumGroup = fourthStrums;
 								case 'Fifth Strum':
-									if (strumlines >= 5) strumGroup = fifthStrums;
-									else strumGroup = opponentStrums;
+									strumGroup = fifthStrums;
 								case 'Sixth Strum':
-									if (strumlines >= 6) strumGroup = sixthStrums;
-									else strumGroup = opponentStrums;
+									strumGroup = sixthStrums;
 								default:
 									strumGroup = opponentStrums;
 							}
@@ -4293,6 +4289,16 @@ class PlayState extends MusicBeatState
 				if(Math.isNaN(newStrums) || (newStrums < 2 || newStrums > 6)) newStrums = 2;
 				changeStrumlines(newStrums, skipFade);
 
+			case 'Toggle Opponent Trails':
+				var toggle:Bool = value1 == "true" ? true : false;
+				if (toggle) reloadDadTrails();
+				else remove(trailunderdad);
+
+			case 'Toggle Player Trails':
+				var toggle:Bool = value1 == "true" ? true : false;
+				if (toggle) reloadBFTrails();
+				else remove(trailunderbf);
+
 			case 'Change Character':
 				var charType:Int = 0;
 				switch(value1.toLowerCase().trim()) {
@@ -4363,15 +4369,6 @@ class PlayState extends MusicBeatState
 				reloadHealthBarColors();
 				if (ClientPrefs.timeBarStyle == 'Gradient')
 					reloadTimeBarColors();
-
-				if (SONG.notes[curSection].characterTrails) {
-					remove(trailunderdad);
-					reloadDadTrails();
-				}
-				if (SONG.notes[curSection].bfTrails) {
-					remove(trailunderbf);
-					reloadBFTrails();
-				}
 			
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
@@ -5897,19 +5894,11 @@ class PlayState extends MusicBeatState
 				setOnLuas('stepCrochet', Conductor.stepCrochet);
 			}
 
-			if (SONG.notes[curSection].characterTrails) reloadDadTrails();
-			else remove(trailunderdad);
-
-			if (SONG.notes[curSection].bfTrails) reloadBFTrails();
-			else remove(trailunderbf);
-
 			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
 			setOnLuas('healthdrain', SONG.notes[curSection].healthdrain);
 			setOnLuas('healthdrainKill', SONG.notes[curSection].healthdrainKill);
 			setOnLuas('gfSection', SONG.notes[curSection].gfSection);
-			setOnLuas('oppTrails', SONG.notes[curSection].characterTrails);
-			setOnLuas('bfTrails', SONG.notes[curSection].bfTrails);
 		}
 		
 		setOnLuas('curSection', curSection);
@@ -5917,12 +5906,16 @@ class PlayState extends MusicBeatState
 	}
 
 	function reloadDadTrails() {
-		trailunderdad = new FlxTrail(dad, null, 16, 1, 0.5, 0.001); //nice
+		trailunderdad = new FlxTrail(dad, null, 18, 4, 0.15, 0.001); //nice
+		trailunderdad.blend = ADD;
+		trailunderdad.color = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
 		insert(members.indexOf(dadGroup) - 1, trailunderdad);
 	}
 
 	function reloadBFTrails() {
-		trailunderbf = new FlxTrail(boyfriend, null, 16, 1, 0.5, 0.001); //nice
+		trailunderbf = new FlxTrail(boyfriend, null, 18, 4, 0.15, 0.001); //nice
+		trailunderbf.blend = ADD;
+		trailunderbf.color = FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]);
 		insert(members.indexOf(boyfriendGroup) - 1, trailunderbf);
 	}
 
@@ -5970,17 +5963,13 @@ class PlayState extends MusicBeatState
 				case 1:
 					spr = playerStrums.members[id];
 				case 2:
-					if (strumlines >= 3) spr = thirdStrums.members[id];
-					else spr = opponentStrums.members[id];
+					spr = thirdStrums.members[id];
 				case 3:
-					if (strumlines >= 4) spr = fourthStrums.members[id];
-					else spr = opponentStrums.members[id];
+					spr = fourthStrums.members[id];
 				case 4:
-					if (strumlines >= 5) spr = fifthStrums.members[id];
-					else spr = opponentStrums.members[id];
+					spr = fifthStrums.members[id];
 				case 5:
-					if (strumlines >= 6) spr = sixthStrums.members[id];
-					else spr = opponentStrums.members[id];
+					spr = sixthStrums.members[id];
 			}
 		} catch (e:Any) {}
 

@@ -29,8 +29,6 @@ typedef SwagSong =
 	var arrowSkin:String;
 	var splashSkin:String;
 	var validScore:Bool;
-	var characterTrails:Bool;
-	var bfTrails:Bool;
 	var songInstVolume:Float;
 
 	var strumlines:Null<Int>;
