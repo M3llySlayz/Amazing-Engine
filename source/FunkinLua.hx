@@ -139,6 +139,7 @@ class FunkinLua {
 		set('songPath', Paths.formatToSongPath(PlayState.SONG.song));
 		set('startedCountdown', false);
 		set('mania', PlayState.mania);
+		set('strumlines', PlayState.strumlines);
 		set('curStage', PlayState.SONG.stage);
 
 		set('isStoryMode', PlayState.isStoryMode);

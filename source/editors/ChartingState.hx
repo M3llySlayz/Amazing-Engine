@@ -492,7 +492,6 @@ class ChartingState extends MusicBeatState
 
 		var loadEventJson:FlxButton = new FlxButton(loadAutosaveBtn.x, loadAutosaveBtn.y + 30, 'Load Events', function()
 		{
-			
 			var songName:String = Paths.formatToSongPath(_song.song);
 			var file:String = Paths.json(songName + '/events');
 			#if sys
@@ -521,10 +520,10 @@ class ChartingState extends MusicBeatState
 		clear_events.color = FlxColor.RED;
 		clear_events.label.color = FlxColor.WHITE;
 
-		var clear_notes:FlxButton = new FlxButton(320, clear_events.y + 30, 'Clear notes', function()
-			{
-				persistentUpdate = false;
-				openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function(){for (sec in 0..._song.notes.length) {
+		var clear_notes:FlxButton = new FlxButton(320, clear_events.y + 30, 'Clear notes', function() {
+			persistentUpdate = false;
+			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function() {
+				for (sec in 0..._song.notes.length) {
 					persistentUpdate = true;
 					_song.notes[sec].sectionNotes = [];
 				}
@@ -534,7 +533,7 @@ class ChartingState extends MusicBeatState
 		clear_notes.color = FlxColor.RED;
 		clear_notes.label.color = FlxColor.WHITE;
 
-		var stepperBPM:FlxUINumericStepper = new FlxUINumericStepper(10, 70, 1, 1, 1, 400, 3);
+		var stepperBPM:FlxUINumericStepper = new FlxUINumericStepper(10, 80, 1, 1, 1, 400, 3);
 		stepperBPM.value = Conductor.bpm;
 		stepperBPM.name = 'song_bpm';
 		blockPressWhileTypingOnStepper.push(stepperBPM);
@@ -671,12 +670,11 @@ class ChartingState extends MusicBeatState
 		stepperMania.value = _song.mania;
 		stepperMania.name = 'mania';
 		blockPressWhileTypingOnStepper.push(stepperMania);
-
 		
-		var songinstVolumeOBJ:FlxUINumericStepper = new FlxUINumericStepper(stepperMania.x, stepperBPM.y, 0.1, 1.0, 0.1, 1, 1);
-		if (_song.songInstVolume > 0 ) songinstVolumeOBJ.value = _song.songInstVolume; else songinstVolumeOBJ.value = 1;
-		songinstVolumeOBJ.name = 'instplay_Volume';
-		blockPressWhileTypingOnStepper.push(songinstVolumeOBJ);
+		var stepperStrumlines:FlxUINumericStepper = new FlxUINumericStepper(stepperMania.x, stepperBPM.y, 1, 2, 2, 6, 1);
+		stepperStrumlines.value = _song.strumlines;
+		stepperStrumlines.name = 'strumlines';
+		blockPressWhileTypingOnStepper.push(stepperStrumlines);
 	
 		noteSplashesInputText = new FlxUIInputText(noteSkinInputText.x, noteSkinInputText.y + 35, 150, _song.splashSkin, 8);
 		noteSplashesInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
@@ -706,11 +704,11 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(reloadNotesButton);
 		tab_group_song.add(noteSkinInputText);
 		tab_group_song.add(noteSplashesInputText);
-		tab_group_song.add(songinstVolumeOBJ);
+		tab_group_song.add(stepperStrumlines);
 		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
-		//tab_group_song.add(new FlxText(stepperBPM.x + 100, stepperBPM.y - 15, 0, 'Song Offset:'));
 		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Song Speed:'));
 		tab_group_song.add(new FlxText(stepperMania.x, stepperMania.y - 15, 0, 'Mania:'));
+		tab_group_song.add(new FlxText(stepperStrumlines.x, stepperStrumlines.y - 15, 0, 'Strumlines:'));
 		tab_group_song.add(new FlxText(player2DropDown.x, player2DropDown.y - 15, 0, 'P2 (Opponent):'));
 		tab_group_song.add(new FlxText(gfVersionDropDown.x, gfVersionDropDown.y - 15, 0, 'P3 (Girlfriend):'));
 		tab_group_song.add(new FlxText(difficultyDropDown.x, difficultyDropDown.y - 15, 0, 'Difficulty:'));
