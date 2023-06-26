@@ -161,11 +161,19 @@ class ControlsSubState extends MusicBeatSubstate {
 				}
 			}
 			if (controls.UI_UP_P || FlxG.mouse.wheel != 0) {
-				changeSelection(-shiftMult);
+				if (FlxG.mouse.wheel > 0) {
+					changeSelection(-shiftMult);
+				} else {
+					changeSelection(shiftMult);
+				}
 				holdTime = 0;
 			}
 			if (controls.UI_DOWN_P || FlxG.mouse.wheel != 0) {
-				changeSelection(shiftMult);
+				if (FlxG.mouse.wheel > 0) {
+					changeSelection(shiftMult);
+				} else {
+					changeSelection(-shiftMult);
+				}
 				holdTime = 0;
 			}
 			if (controls.UI_LEFT_P || controls.UI_RIGHT_P) {
