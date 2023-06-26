@@ -34,7 +34,7 @@ class HealthIcon extends FlxSprite
 		else changeIcon('bf');
 	}
 
-	private var iconOffsets:Array<Float> = [0, 0];
+	private var iconOffsets:Array<Float> = [0];
 	public function changeIcon(char:String) {
 		if(this.char != char) {
 			var name:String = 'icons/' + char;
@@ -43,13 +43,29 @@ class HealthIcon extends FlxSprite
 			var file:Dynamic = Paths.image(name);
 
 			loadGraphic(file); //Load stupidly first for getting the file size
-			loadGraphic(file, true, Math.floor(width / 2), Math.floor(height)); //Then load it fr
-				
-			iconOffsets[0] = (width - 150) / 2;
-			iconOffsets[1] = (width - 150) / 2;
-			updateHitbox();
-				
-			animation.add(char, [0, 1], 0, false, isPlayer);
+			
+			var iconNumber:Float = 0;
+			iconNumber = width / 150;
+			switch(iconNumber){
+				case 1:
+					loadGraphic(file, true, Math.floor(width), Math.floor(height)); //Then load it fr
+					iconOffsets[0] = (width - 150);
+					animation.add(char, [0], 0, false, isPlayer);
+				case 2:
+					loadGraphic(file, true, Math.floor(width / 2), Math.floor(height)); //Then load it fr
+					iconOffsets = [0, 0];
+					iconOffsets[0] = (width - 150) / 2;
+					iconOffsets[1] = (width - 150) / 2;
+					animation.add(char, [0, 1], 0, false, isPlayer);
+				case 3:
+					loadGraphic(file, true, Math.floor(width / 3), Math.floor(height)); //Then load it fr
+					iconOffsets = [0, 0, 0];
+					iconOffsets[0] = (width - 150) / 3;
+					iconOffsets[1] = (width - 150) / 3;
+					iconOffsets[2] = (width - 150) / 3;
+					animation.add(char, [0, 1, 2], 0, false, isPlayer);
+			}
+
 			animation.play(char);
 			this.char = char;
 
@@ -64,7 +80,7 @@ class HealthIcon extends FlxSprite
 	{
 		super.updateHitbox();
 		offset.x = iconOffsets[0];
-		offset.y = iconOffsets[1];
+		offset.y = iconOffsets[0];
 	}
 
 	public function getCharacter():String {

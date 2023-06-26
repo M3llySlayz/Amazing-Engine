@@ -59,6 +59,7 @@ typedef TitleData =
 	backgroundSprite:String,
 	bpm:Int
 }
+
 class TitleState extends MusicBeatState
 {
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];

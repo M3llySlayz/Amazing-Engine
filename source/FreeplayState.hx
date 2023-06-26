@@ -25,6 +25,7 @@ import flixel.sound.FlxSound;
 #end
 import openfl.utils.Assets as OpenFlAssets;
 import WeekData;
+import TitleState.TitleData;
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
@@ -34,6 +35,8 @@ using StringTools;
 class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
+
+	var titleJSON:TitleData;
 
 	var selector:FlxText;
 	private static var curSelected:Int = 0;
@@ -75,6 +78,8 @@ class FreeplayState extends MusicBeatState
 			Paths.clearStoredMemory();
 			Paths.clearUnusedMemory();
 		}
+
+		titleJSON = haxe.Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
@@ -355,6 +360,12 @@ class FreeplayState extends MusicBeatState
 			}
 			SoundEffects.playSFX('cancel', false);
 			MusicBeatState.switchState(new FreeplayCategoryState());
+
+			if (ClientPrefs.mainSong == 'Iconic'|| ClientPrefs.mainSong == 'Iconic (Extended)') {
+				Conductor.changeBPM(118);
+			} else {
+				Conductor.changeBPM(titleJSON.bpm);
+			}
 		}
 
 		if(ctrl && !selectedSomethin)
@@ -373,6 +384,7 @@ class FreeplayState extends MusicBeatState
 					Paths.currentModDirectory = songs[curSelected].folder;
 					instPlaying = curSelected;
 					destroyFreeplayVocals();
+					Conductor.changeBPM(PlayState.SONG.bpm);
 				} catch (e:Any) {
 					trace ('Cannot find chart file: "$poop"');
 				}
@@ -611,6 +623,14 @@ class FreeplayState extends MusicBeatState
 		scoreBG.x = FlxG.width - (scoreBG.scale.x / 2);
 		diffText.x = Std.int(scoreBG.x + (scoreBG.width / 2));
 		diffText.x -= diffText.width / 2;
+	}
+
+	override function beatHit() {
+		super.beatHit();
+		if (instPlaying != -1){
+			iconArray[curSelected].scale.set(1.2, 1.2);
+			FlxTween.tween(iconArray[curSelected], {scale: 1}, 0.2 /*i think this can be better, but idk how*/, {ease: FlxEase.quadIn});
+		}
 	}
 }
 

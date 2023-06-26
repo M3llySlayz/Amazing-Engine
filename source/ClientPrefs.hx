@@ -72,6 +72,7 @@ class ClientPrefs {
 	public static var precisionDecimals:Int = 3;
 	public static var cameraMoveOnNotes:Bool = true;
 	public static var colorblindMode:String = 'None';
+	public static var persistentBeats:Bool = false;
 	#if desktop
 	public static var autoPause:Bool = true;
 	#end
@@ -319,7 +320,7 @@ class ClientPrefs {
 		'debug_1'		=> [SEVEN, NONE],
 		'debug_2'		=> [EIGHT, NONE],
 
-		'dev_bind'		=> [FIVE, NONE]
+		'dev_bind'		=> [NUMPADFIVE, F5]
 	];
 	public static var defaultKeys:Map<String, Array<FlxKey>> = keyBinds;
 
@@ -397,6 +398,7 @@ class ClientPrefs {
 		FlxG.save.data.colorBlindMode = colorblindMode;
 		FlxG.save.data.precisionDecimals = precisionDecimals;
 		FlxG.save.data.cameraMoveOnNotes = cameraMoveOnNotes;
+		FlxG.save.data.persistentBeats = persistentBeats;
 		#if desktop
 		FlxG.save.data.autoPause = autoPause;
 		#end
@@ -636,6 +638,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.cameraMoveOnNotes != null) {
 			cameraMoveOnNotes = FlxG.save.data.cameraMoveOnNotes;
+		}
+		if(FlxG.save.data.persistentBeats != null) {
+			persistentBeats = FlxG.save.data.persistentBeats;
 		}
 		#if desktop
 		if(FlxG.save.data.autoPause != null) {
