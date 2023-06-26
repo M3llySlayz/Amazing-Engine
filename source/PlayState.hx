@@ -383,6 +383,12 @@ class PlayState extends MusicBeatState
 		// for lua
 		instance = this;
 
+		#if cpp
+		//cpp.vm.Gc.enable(true);
+		cpp.vm.Gc.run(true);
+		//trace(cpp.vm.Gc.memUsage());
+		#end
+
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
 		PauseSubState.songName = null; //Reset to default
@@ -1143,25 +1149,20 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
-		laneunderlayOp = new FlxSprite(0, -FlxG.height / 3).makeGraphic(110 * 4 + 50, FlxG.height * 4);
-		laneunderlayOp.color = FlxColor.BLACK;
-        laneunderlayOp.alpha = ClientPrefs.oppUnderlay;
-		add(laneunderlay);
+		laneunderlayOp = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 4, FlxColor.BLACK);
+		laneunderlayOp.alpha = 0;
+		add(laneunderlayOp);
 
-		laneunderlay = new FlxSprite(0, -FlxG.height / 3).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 4);
-		laneunderlay.color = FlxColor.BLACK;
-        laneunderlay.alpha = ClientPrefs.underlay;
-		if (!ClientPrefs.middleScroll) add(laneunderlayOp);
+		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 4, FlxColor.BLACK);
+		laneunderlay.alpha = 0;
+		add(laneunderlay);
 
 		//time bars!!! yayyyyyyyy!!!!!1!1! (i hate jb so much)
 		if (ClientPrefs.timeBarStyle == 'Leather') {
 			infoTxt = new FlxText(0, 0, 0, SONG.song + " - " + CoolUtil.difficultyString() + (cpuControlled ? " (BOT)" : ""), 20);
 			infoTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			infoTxt.screenCenter(X);
-	
 			infoTxt.scrollFactor.set();
-			// don't ask why this is different idfk
-			infoTxt.cameras = [camHUD];
 	
 			timeBarBG = new AttachedSprite('leatherTimeBar');
 			timeBarBG.screenCenter(X);
@@ -1336,9 +1337,9 @@ class PlayState extends MusicBeatState
 
 		strumLineNotes.cameras = [camNotes];
 		grpNoteSplashes.cameras = [camNotes];
-		notes.cameras = [camNotes];
 		laneunderlay.cameras = [camNotes];
 		laneunderlayOp.cameras = [camNotes];
+		notes.cameras = [camNotes];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
@@ -1347,8 +1348,8 @@ class PlayState extends MusicBeatState
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
-		if (ClientPrefs.timeBarStyle != 'Leather')
-			timeTxt.cameras = [camHUD];
+		if (ClientPrefs.timeBarStyle != 'Leather') timeTxt.cameras = [camHUD];
+		else infoTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
@@ -1357,7 +1358,7 @@ class PlayState extends MusicBeatState
 
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
-		
+
 		#if LUA_ALLOWED
 		for (notetype in noteTypeMap.keys())
 		{
@@ -2256,7 +2257,6 @@ class PlayState extends MusicBeatState
 	public var camlock:Bool = false;
 	public var bfturn:Bool = false;
 
-
 	function cacheCountdown()
 	{
 		var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
@@ -2330,11 +2330,6 @@ class PlayState extends MusicBeatState
 			for (strum in 0...6) {
 				generateStaticArrows(strum);
 			}
-
-			laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
-			laneunderlay.screenCenter(Y);
-		    laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
-		    laneunderlayOp.screenCenter(Y);
 
 			startedCountdown = true;
 			Conductor.songPosition = -Conductor.crochet * 5;
@@ -2487,7 +2482,7 @@ class PlayState extends MusicBeatState
 	{
 		insert(members.indexOf(boyfriendGroup), obj);
 	}
-	public function addBehindDad (obj:FlxObject)
+	public function addBehindDad(obj:FlxObject)
 	{
 		insert(members.indexOf(dadGroup), obj);
 	}
@@ -2497,15 +2492,12 @@ class PlayState extends MusicBeatState
 		var i:Int = unspawnNotes.length - 1;
 		while (i >= 0) {
 			var daNote:Note = unspawnNotes[i];
-			if(daNote.strumTime - 350 < time)
+			if(daNote.strumTime - 15 < time)
 			{
 				daNote.active = false;
 				daNote.visible = false;
 				daNote.ignoreNote = true;
-
 				daNote.kill();
-				unspawnNotes.remove(daNote);
-				daNote.destroy();
 			}
 			--i;
 		}
@@ -2513,15 +2505,12 @@ class PlayState extends MusicBeatState
 		i = notes.length - 1;
 		while (i >= 0) {
 			var daNote:Note = notes.members[i];
-			if(daNote.strumTime - 350 < time)
+			if(daNote.strumTime - 15 < time)
 			{
 				daNote.active = false;
 				daNote.visible = false;
 				daNote.ignoreNote = true;
-
 				daNote.kill();
-				notes.remove(daNote, true);
-				daNote.destroy();
 			}
 			--i;
 		}
@@ -2617,6 +2606,11 @@ class PlayState extends MusicBeatState
 		} else {
 			FlxTween.tween(infoTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		}
+
+		FlxTween.tween(laneunderlay, {alpha: ClientPrefs.underlay}, 0.5, {ease: FlxEase.circOut});
+		FlxTween.tween(laneunderlayOp, {alpha: ClientPrefs.middleScroll ? 0 : ClientPrefs.oppUnderlay}, 0.5, {ease: FlxEase.circOut});
+		//trace(playerStrums.members[0].x - 25);
+		//trace(opponentStrums.members[0].x - 25);
 
 		switch(curStage)
 		{
@@ -3440,6 +3434,11 @@ class PlayState extends MusicBeatState
 	{
 		callOnLuas('onUpdate', [elapsed]);
 
+		laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
+		laneunderlay.screenCenter(Y);
+		laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
+		laneunderlayOp.screenCenter(Y);
+
 		if(ClientPrefs.camMovement && !PlayState.isPixelStage) {
 			if(camlock) {
 				camFollow.x = camlockx;
@@ -3753,16 +3752,16 @@ class PlayState extends MusicBeatState
 						try {
 							switch (daNote.noteType) {
 								case 'Third Strum':
-									if (strumlines > 3) strumGroup = thirdStrums;
+									if (strumlines >= 3) strumGroup = thirdStrums;
 									else strumGroup = opponentStrums;
 								case 'Fourth Strum':
-									if (strumlines > 4) strumGroup = fourthStrums;
+									if (strumlines >= 4) strumGroup = fourthStrums;
 									else strumGroup = opponentStrums;
 								case 'Fifth Strum':
-									if (strumlines > 5) strumGroup = fifthStrums;
+									if (strumlines >= 5) strumGroup = fifthStrums;
 									else strumGroup = opponentStrums;
 								case 'Sixth Strum':
-									if (strumlines > 6) strumGroup = sixthStrums;
+									if (strumlines >= 6) strumGroup = sixthStrums;
 									else strumGroup = opponentStrums;
 								default:
 									strumGroup = opponentStrums;
@@ -3833,8 +3832,7 @@ class PlayState extends MusicBeatState
 						}
 					}
 
-					if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
-					{
+					if (daNote.strumTime < Conductor.songPosition && !daNote.mustPress && (!daNote.hitByOpponent && !daNote.ignoreNote)) {
 						opponentNoteHit(daNote);
 					}
 
@@ -3880,13 +3878,9 @@ class PlayState extends MusicBeatState
 						if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit)) {
 							noteMiss(daNote);
 						}
-
 						daNote.active = false;
 						daNote.visible = false;
-
 						daNote.kill();
-						notes.remove(daNote, true);
-						daNote.destroy();
 					}
 				});
 			}
@@ -4523,24 +4517,6 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong():Void
 	{
-		//Should kill you if you tried to cheat
-		if(!startingSong) {
-			notes.forEach(function(daNote:Note) {
-				if(daNote.strumTime < songLength - Conductor.safeZoneOffset) {
-					health -= 0.05 * healthLoss;
-				}
-			});
-			for (daNote in unspawnNotes) {
-				if(daNote.strumTime < songLength - Conductor.safeZoneOffset) {
-					health -= 0.05 * healthLoss;
-				}
-			}
-
-			if(doDeathCheck()) {
-				return;
-			}
-		}
-
 		timeBarBG.visible = false;
 		timeBar.visible = false;
 		if (ClientPrefs.timeBarStyle != "Leather") timeTxt.visible = false;
@@ -4720,10 +4696,7 @@ class PlayState extends MusicBeatState
 			var daNote:Note = notes.members[0];
 			daNote.active = false;
 			daNote.visible = false;
-
 			daNote.kill();
-			notes.remove(daNote, true);
-			daNote.destroy();
 		}
 		unspawnNotes = [];
 		eventNotes = [];
@@ -5084,12 +5057,10 @@ class PlayState extends MusicBeatState
 					for (epicNote in sortedNotesList)
 					{
 						for (doubleNote in pressNotes) {
-							if (Math.abs(doubleNote.strumTime - epicNote.strumTime) < 1) {
-								doubleNote.kill();
-								notes.remove(doubleNote, true);
-								doubleNote.destroy();
-							} else
-								notesStopped = true;
+							if (Math.abs(doubleNote.strumTime - epicNote.strumTime) < 0) {
+								goodNoteHit(epicNote);
+								pressNotes.push(epicNote);
+							} else notesStopped = true;
 						}
 							
 						// eee jack detection before was not super good
@@ -5097,7 +5068,6 @@ class PlayState extends MusicBeatState
 							goodNoteHit(epicNote);
 							pressNotes.push(epicNote);
 						}
-
 					}
 				}
 				else{
@@ -5234,10 +5204,8 @@ class PlayState extends MusicBeatState
 	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
 		//Dupe note remove
 		notes.forEachAlive(function(note:Note) {
-			if (daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1) {
+			if (daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 0) {
 				note.kill();
-				notes.remove(note, true);
-				note.destroy();
 			}
 		});
 		songMisses++;
@@ -5411,13 +5379,7 @@ class PlayState extends MusicBeatState
 		note.hitByOpponent = true;
 
 		callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
-
-		if (!note.isSustainNote)
-		{
-			note.kill();
-			notes.remove(note, true);
-			note.destroy();
-		}
+		if (!note.isSustainNote) note.kill();
 	}
 
 	function goodNoteHit(note:Note):Void
@@ -5449,12 +5411,7 @@ class PlayState extends MusicBeatState
 				}
 
 				note.wasGoodHit = true;
-				if (!note.isSustainNote)
-				{
-					note.kill();
-					notes.remove(note, true);
-					note.destroy();
-				}
+				if (!note.isSustainNote) note.kill();
 				return;
 			} 
 
@@ -5540,13 +5497,7 @@ class PlayState extends MusicBeatState
 			var leType:String = note.noteType;
 
 			callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
-
-			if (!note.isSustainNote)
-			{
-				note.kill();
-				notes.remove(note, true);
-				note.destroy();
-			}
+			if (!note.isSustainNote) note.kill();
 		}
 	}
 
@@ -6042,16 +5993,16 @@ class PlayState extends MusicBeatState
 				case 1:
 					spr = playerStrums.members[id];
 				case 2:
-					if (strumlines > 3) spr = thirdStrums.members[id];
+					if (strumlines >= 3) spr = thirdStrums.members[id];
 					else spr = opponentStrums.members[id];
 				case 3:
-					if (strumlines > 4) spr = fourthStrums.members[id];
+					if (strumlines >= 4) spr = fourthStrums.members[id];
 					else spr = opponentStrums.members[id];
 				case 4:
-					if (strumlines > 5) spr = fifthStrums.members[id];
+					if (strumlines >= 5) spr = fifthStrums.members[id];
 					else spr = opponentStrums.members[id];
 				case 5:
-					if (strumlines > 6) spr = sixthStrums.members[id];
+					if (strumlines >= 6) spr = sixthStrums.members[id];
 					else spr = opponentStrums.members[id];
 			}
 		} catch (e:Any) {}

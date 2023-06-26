@@ -8,12 +8,6 @@
             "name": "Launch",
             "type": "hxcpp",
             "request": "launch",
-            "program": "${workspaceFolder}/export/windows/bin/AmazingEngine.exe"
-        },
-        {
-            "name": "Debug Launch",
-            "type": "hxcpp",
-            "request": "launch",
             "program": "${workspaceFolder}/export/debug/windows/bin/AmazingEngine.exe"
         }
     ]
