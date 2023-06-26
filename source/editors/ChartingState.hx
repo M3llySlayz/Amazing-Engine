@@ -436,9 +436,9 @@ class ChartingState extends MusicBeatState
 	function addSongUI():Void
 	{
 		UI_songTitle = new FlxUIInputText(10, 10, 70, _song.song, 8);
-            UI_songTitle.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
+        UI_songTitle.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		blockPressWhileTypingOn.push(UI_songTitle);
-		
+
 		var check_voices = new FlxUICheckBox(10, 25, null, null, "Has voice track", 100);
 		check_voices.checked = _song.needsVoices;
 		// _song.needsVoices = check_voices.checked;
@@ -665,7 +665,7 @@ class ChartingState extends MusicBeatState
 
 		var stepperMania:FlxUINumericStepper = new FlxUINumericStepper(100, stepperSpeed.y, 1, 3, Note.minMania, Note.maxMania, 1);
 		stepperMania.value = _song.mania;
-		stepperMania.name = 'song_mania';
+		stepperMania.name = 'mania';
 		blockPressWhileTypingOnStepper.push(stepperMania);
 
 		var stepperStrumlines:FlxUINumericStepper = new FlxUINumericStepper(stepperMania.x, stepperBPM.y, 1, 2, 2, 6, 1);
