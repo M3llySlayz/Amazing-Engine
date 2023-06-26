@@ -236,6 +236,10 @@ class PlayState extends MusicBeatState
 	public var playingAsOpponent:Bool = false;
 	public var practiceMode:Bool = false;
 
+	//healthdrain stuff
+	public var healthdrain:Float = 0;
+	public var healthdrainKill:Bool = false;
+
 	//trails
 	public var trailunderdad:FlxTrail;
 	public var trailunderbf:FlxTrail;
@@ -2146,7 +2150,7 @@ class PlayState extends MusicBeatState
 
 				cutsceneHandler.timer(15.2, function()
 				{
-					FlxTween.tween(camFollow, {x: 650, y: 300}, 1, {ease: FlxEase.sineOut});
+					FlxTween.tween(camFollow, {x: 650, y: 300}, 1, {ease: FlxEase.cubeOut});
 					FlxTween.tween(FlxG.camera, {zoom: 0.9 * 1.2 * 1.2}, 2.25, {ease: FlxEase.quadInOut});
 
 					gfDance.visible = false;
@@ -2591,15 +2595,15 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.sineOut});
+		FlxTween.tween(timeBar, {alpha: 1}, 1, {ease: FlxEase.cubeOut});
 		if (ClientPrefs.timeBarStyle != 'Leather'){
-			FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.sineOut});
+			FlxTween.tween(timeTxt, {alpha: 1}, 1, {ease: FlxEase.cubeOut});
 		} else {
-			FlxTween.tween(infoTxt, {alpha: 1}, 0.5, {ease: FlxEase.sineOut});
+			FlxTween.tween(infoTxt, {alpha: 1}, 1, {ease: FlxEase.cubeOut});
 		}
 
-		FlxTween.tween(laneunderlay, {alpha: ClientPrefs.underlay}, 0.5, {ease: FlxEase.sineOut});
-		FlxTween.tween(laneunderlayOp, {alpha: ClientPrefs.middleScroll ? 0 : ClientPrefs.oppUnderlay}, 0.5, {ease: FlxEase.sineOut});
+		FlxTween.tween(laneunderlay, {alpha: ClientPrefs.underlay}, 1, {ease: FlxEase.cubeOut});
+		FlxTween.tween(laneunderlayOp, {alpha: ClientPrefs.middleScroll ? 0 : ClientPrefs.oppUnderlay}, 1, {ease: FlxEase.cubeOut});
 		//trace(playerStrums.members[0].x - 25);
 		//trace(opponentStrums.members[0].x - 25);
 
@@ -2927,7 +2931,7 @@ class PlayState extends MusicBeatState
 					babyArrow.y += 10;
 					babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
 					babyArrow.alpha = 0;
-					if (player < strumlines) FlxTween.tween(babyArrow, {y: babyArrow.y - 10, alpha: targetAlpha}, twnDuration, {ease: FlxEase.circOut, startDelay: twnStart});
+					if (player < strumlines) FlxTween.tween(babyArrow, {y: babyArrow.y - 10, alpha: targetAlpha}, twnDuration, {ease: FlxEase.cubeOut, startDelay: twnStart});
 				}
 				else
 				{
@@ -2997,13 +3001,13 @@ class PlayState extends MusicBeatState
 						daKeyTxt.y = textY;
 
 						if (mania > 1 && !skipArrowStartTween) {
-							FlxTween.tween(daKeyTxt, {y: textY + 32, alpha: 1}, twnDuration, {ease: FlxEase.circOut, startDelay: twnStart});
+							FlxTween.tween(daKeyTxt, {y: textY + 32, alpha: 1}, twnDuration, {ease: FlxEase.cubeOut, startDelay: twnStart});
 						} else {
 							daKeyTxt.y += 16;
 							daKeyTxt.alpha = 1;
 						}
 						new FlxTimer().start(Conductor.crochet * 0.001 * 12, function(_) {
-							FlxTween.tween(daKeyTxt, {y: daKeyTxt.y + 32, alpha: 0}, twnDuration, {ease: FlxEase.circIn, startDelay: twnStart, onComplete:
+							FlxTween.tween(daKeyTxt, {y: daKeyTxt.y + 32, alpha: 0}, twnDuration, {ease: FlxEase.cubeIn, startDelay: twnStart, onComplete:
 							function(t) {
 								remove(daKeyTxt);
 							}});
@@ -3110,7 +3114,7 @@ class PlayState extends MusicBeatState
 							daKeyTxt.alpha = 1;
 						}
 						new FlxTimer().start(Conductor.crochet * 0.001 * 6, function(_) {
-							FlxTween.tween(daKeyTxt, {y: daKeyTxt.y + 32, alpha: 0}, 4 / mania, {ease: FlxEase.circIn, onComplete:
+							FlxTween.tween(daKeyTxt, {y: daKeyTxt.y + 32, alpha: 0}, 4 / mania, {ease: FlxEase.cubeIn, onComplete:
 							function(t) {
 								remove(daKeyTxt);
 							}});
@@ -5319,10 +5323,10 @@ class PlayState extends MusicBeatState
 				} catch (e:Any) {}
 			}
 
-			if(SONG.notes[curSection].healthdrain > 0) {
-				if (!SONG.notes[curSection].healthdrainKill && health > SONG.notes[curSection].healthdrain) {
-					health -= SONG.notes[curSection].healthdrain;
-				} else if (!SONG.notes[curSection].healthdrainKill && health < SONG.notes[curSection].healthdrain) {
+			if(healthdrain > 0) {
+				if (health > healthdrain) {
+					health -= healthdrain;
+				} else if (!healthdrainKill && health < healthdrain) {
 					health = 0.01;
 				}
 			}
@@ -5896,10 +5900,17 @@ class PlayState extends MusicBeatState
 				setOnLuas('stepCrochet', Conductor.stepCrochet);
 			}
 
-			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
+			if (SONG.notes[curSection].changeHealthdrain)
+			{
+				healthdrain = SONG.notes[curSection].healthdrain;
+				healthdrainKill = SONG.notes[curSection].healthdrainKill;
+				setOnLuas('healthDrain', healthdrain);
+				setOnLuas('healthDrainCanKillPlayer', healthdrainKill);
+			}
+
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
-			setOnLuas('healthdrain', SONG.notes[curSection].healthdrain);
-			setOnLuas('healthdrainKill', SONG.notes[curSection].healthdrainKill);
+			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
+			setOnLuas('changeHealthDrain', SONG.notes[curSection].changeHealthdrain);
 			setOnLuas('gfSection', SONG.notes[curSection].gfSection);
 		}
 		
