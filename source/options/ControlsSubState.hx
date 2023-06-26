@@ -61,7 +61,7 @@ class ControlsSubState extends MusicBeatSubstate {
 
 		var currentPage:String = "";
 		var generatedPage:Dynamic = [];
-		for (i in 0...optionShit.length) {
+		for (i in 0...optionShit.length+1) {
 			if (optionShit[i][0] != "" && optionShit[i].length < 2 && currentPage == "") { //It's the first page title
 				generatedPage.push(optionShit[i]);
 				currentPage = optionShit[i][0];
