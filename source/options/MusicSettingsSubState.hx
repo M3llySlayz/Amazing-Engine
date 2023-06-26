@@ -69,6 +69,8 @@ class MusicSettingsSubState extends BaseOptionsMenu
 			'persistentBeats',
 			'bool',
 			false);
+		addOption(option);
+		
 		super();
 	}
 

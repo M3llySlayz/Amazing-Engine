@@ -73,6 +73,7 @@ class ClientPrefs {
 	public static var cameraMoveOnNotes:Bool = true;
 	public static var colorblindMode:String = 'None';
 	public static var persistentBeats:Bool = false;
+	public static var loadSpeed:Float = 0.7;
 	#if desktop
 	public static var autoPause:Bool = true;
 	#end
@@ -399,6 +400,7 @@ class ClientPrefs {
 		FlxG.save.data.precisionDecimals = precisionDecimals;
 		FlxG.save.data.cameraMoveOnNotes = cameraMoveOnNotes;
 		FlxG.save.data.persistentBeats = persistentBeats;
+		FlxG.save.data.loadSpeed = loadSpeed;
 		#if desktop
 		FlxG.save.data.autoPause = autoPause;
 		#end
@@ -641,6 +643,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.persistentBeats != null) {
 			persistentBeats = FlxG.save.data.persistentBeats;
+		}
+		if(FlxG.save.data.loadSpeed != null) {
+			loadSpeed = FlxG.save.data.loadSpeed;
 		}
 		#if desktop
 		if(FlxG.save.data.autoPause != null) {

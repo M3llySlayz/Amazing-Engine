@@ -318,6 +318,9 @@ hits = 0
 --- The current rating percentage (from 0 to 1)
 ---@type number
 rating = 0
+--- The current amount of keys, minus one.
+---@type number
+mania = 3
 --- The current rating name
 ---@type string
 ratingName = ''

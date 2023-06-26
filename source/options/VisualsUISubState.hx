@@ -151,8 +151,8 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 
-		var option:Option = new Option('Hit timing position type',
-			'Sets the hit timing position type.',
+		var option:Option = new Option('Precision Position:',
+			'Where do you want your precisions?\n0 is on top of each note, and each number up makes it lower and lower.',
 			'hitTimingPositionType',
 			'int',
 			0);
@@ -171,6 +171,18 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 		option.onChange = onChangeFPSCounter;
 		#end
+
+		var option:Option = new Option('Loading Speed:',
+			'What percent of its normal speed do you want the loading transition to be?',
+			'loadSpeed',
+			'percent',
+			0.7);
+		addOption(option);	
+		option.scrollSpeed = 0.1;
+		option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		option.decimals = 1;
 		
 		#if CHECK_FOR_UPDATES
 		var option:Option = new Option('Check for Updates',

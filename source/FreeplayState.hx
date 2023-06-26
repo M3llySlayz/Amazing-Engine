@@ -294,6 +294,12 @@ class FreeplayState extends MusicBeatState
 		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 		positionHighscore();
 
+		PlayState.grabbablePlayBackRate = ClientPrefs.getGameplaySetting('songspeed', 1);
+		FlxG.sound.music.pitch = PlayState.grabbablePlayBackRate;
+		var mult:Float = FlxMath.lerp(1, iconArray[curSelected].scale.x, CoolUtil.boundTo(1 - (elapsed * 9 * PlayState.grabbablePlayBackRate), 0, 1));
+		iconArray[curSelected].scale.set(mult, mult);
+		iconArray[curSelected].updateHitbox();
+
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
@@ -629,7 +635,6 @@ class FreeplayState extends MusicBeatState
 		super.beatHit();
 		if (instPlaying != -1){
 			iconArray[curSelected].scale.set(1.2, 1.2);
-			FlxTween.tween(iconArray[curSelected], {scale: 1}, 0.2 /*i think this can be better, but idk how*/, {ease: FlxEase.quadIn});
 		}
 	}
 }
