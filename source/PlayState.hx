@@ -5898,16 +5898,10 @@ class PlayState extends MusicBeatState
 			}
 
 			if (SONG.notes[curSection].characterTrails) reloadDadTrails();
-			else {
-				remove(trailunderdad);
-				reloadDadTrails();
-			}
+			else remove(trailunderdad);
 
 			if (SONG.notes[curSection].bfTrails) reloadBFTrails();
-			else {
-				remove(trailunderbf);
-				reloadBFTrails();
-			}
+			else remove(trailunderbf);
 
 			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
@@ -5923,12 +5917,12 @@ class PlayState extends MusicBeatState
 	}
 
 	function reloadDadTrails() {
-		trailunderdad = new FlxTrail(dad, null, 6, 24, 0.1, 0.1); //nice
+		trailunderdad = new FlxTrail(dad, null, 6, 1, 0.1, 0.1); //nice
 		insert(members.indexOf(dadGroup) - 1, trailunderdad);
 	}
 
 	function reloadBFTrails() {
-		trailunderbf = new FlxTrail(boyfriend, null, 6, 24, 0.1, 0.1); //nice
+		trailunderbf = new FlxTrail(boyfriend, null, 6, 1, 0.1, 0.1); //nice
 		insert(members.indexOf(boyfriendGroup) - 1, trailunderbf);
 	}
 
