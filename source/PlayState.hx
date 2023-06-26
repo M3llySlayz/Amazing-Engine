@@ -5906,13 +5906,6 @@ class PlayState extends MusicBeatState
 				setOnLuas('stepCrochet', Conductor.stepCrochet);
 			}
 
-			if (SONG.notes[curSection].changeHealthdrain){
-				healthdrain = SONG.notes[curSection].healthdrain;
-				healthdrainKill = SONG.notes[curSection].healthdrainKill;
-				setOnLuas('healthdrain', healthdrain);
-				setOnLuas('healthdrainKill', healthdrainKill);
-			}
-
 			if (SONG.notes[curSection].characterTrails && !characterTrails)
 				reloadDadTrails();
 
@@ -5924,6 +5917,8 @@ class PlayState extends MusicBeatState
 
 			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
+			setOnLuas('healthdrain', SONG.notes[curSection].healthdrain);
+			setOnLuas('healthdrainKill', SONG.notes[curSection].healthdrainKill);
 			setOnLuas('gfSection', SONG.notes[curSection].gfSection);
 			setOnLuas('oppTrails', SONG.notes[curSection].characterTrails);
 			setOnLuas('bfTrails', SONG.notes[curSection].bfTrails);
@@ -5934,12 +5929,12 @@ class PlayState extends MusicBeatState
 	}
 
 	function reloadDadTrails() {
-		trailunderdad = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
+		trailunderdad = new FlxTrail(dad, null, 6, 24, 0.1, 0.1); //nice
 		insert(members.indexOf(dadGroup) - 1, trailunderdad);
 	}
 
 	function reloadBFTrails() {
-		trailunderbf = new FlxTrail(boyfriend, null, 4, 24, 0.3, 0.069); //nice
+		trailunderbf = new FlxTrail(boyfriend, null, 6, 24, 0.1, 0.1); //nice
 		insert(members.indexOf(boyfriendGroup) - 1, trailunderbf);
 	}
 
