@@ -1143,17 +1143,13 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
-		laneunderlayOp = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
-		laneunderlayOp.cameras = [camNotes];
+		laneunderlayOp = new FlxSprite(0, -FlxG.height / 3).makeGraphic(110 * 4 + 50, FlxG.height * 4);
 		laneunderlayOp.color = FlxColor.BLACK;
-		laneunderlayOp.scrollFactor.set();
         laneunderlayOp.alpha = ClientPrefs.oppUnderlay;
 		add(laneunderlay);
 
-		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 2);
-		laneunderlay.cameras = [camNotes];
+		laneunderlay = new FlxSprite(0, -FlxG.height / 3).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 4);
 		laneunderlay.color = FlxColor.BLACK;
-		laneunderlay.scrollFactor.set();
         laneunderlay.alpha = ClientPrefs.underlay;
 		if (!ClientPrefs.middleScroll) add(laneunderlayOp);
 
@@ -1341,6 +1337,8 @@ class PlayState extends MusicBeatState
 		strumLineNotes.cameras = [camNotes];
 		grpNoteSplashes.cameras = [camNotes];
 		notes.cameras = [camNotes];
+		laneunderlay.cameras = [camNotes];
+		laneunderlayOp.cameras = [camNotes];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
@@ -1352,8 +1350,6 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.timeBarStyle != 'Leather')
 			timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
-		laneunderlay.cameras = [camHUD];
-		laneunderlayOp.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -6047,12 +6043,16 @@ class PlayState extends MusicBeatState
 					spr = playerStrums.members[id];
 				case 2:
 					if (strumlines > 3) spr = thirdStrums.members[id];
+					else spr = opponentStrums.members[id];
 				case 3:
 					if (strumlines > 4) spr = fourthStrums.members[id];
+					else spr = opponentStrums.members[id];
 				case 4:
 					if (strumlines > 5) spr = fifthStrums.members[id];
+					else spr = opponentStrums.members[id];
 				case 5:
 					if (strumlines > 6) spr = sixthStrums.members[id];
+					else spr = opponentStrums.members[id];
 			}
 		} catch (e:Any) {}
 
