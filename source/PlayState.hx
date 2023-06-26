@@ -2600,15 +2600,15 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.sineOut});
 		if (ClientPrefs.timeBarStyle != 'Leather'){
-			FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+			FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.sineOut});
 		} else {
-			FlxTween.tween(infoTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+			FlxTween.tween(infoTxt, {alpha: 1}, 0.5, {ease: FlxEase.sineOut});
 		}
 
-		FlxTween.tween(laneunderlay, {alpha: ClientPrefs.underlay}, 0.5, {ease: FlxEase.circOut});
-		FlxTween.tween(laneunderlayOp, {alpha: ClientPrefs.middleScroll ? 0 : ClientPrefs.oppUnderlay}, 0.5, {ease: FlxEase.circOut});
+		FlxTween.tween(laneunderlay, {alpha: ClientPrefs.underlay}, 0.5, {ease: FlxEase.sineOut});
+		FlxTween.tween(laneunderlayOp, {alpha: ClientPrefs.middleScroll ? 0 : ClientPrefs.oppUnderlay}, 0.5, {ease: FlxEase.sineOut});
 		//trace(playerStrums.members[0].x - 25);
 		//trace(opponentStrums.members[0].x - 25);
 

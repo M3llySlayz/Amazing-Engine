@@ -665,12 +665,12 @@ class ChartingState extends MusicBeatState
 
 		var stepperMania:FlxUINumericStepper = new FlxUINumericStepper(100, stepperSpeed.y, 1, 3, Note.minMania, Note.maxMania, 1);
 		stepperMania.value = _song.mania;
-		stepperMania.name = 'mania';
+		stepperMania.name = 'song_mania';
 		blockPressWhileTypingOnStepper.push(stepperMania);
 
 		var stepperStrumlines:FlxUINumericStepper = new FlxUINumericStepper(stepperMania.x, stepperBPM.y, 1, 2, 2, 6, 1);
 		stepperStrumlines.value = _song.strumlines;
-		stepperStrumlines.name = 'strumlines';
+		stepperStrumlines.name = 'song_strumlines';
 		blockPressWhileTypingOnStepper.push(stepperStrumlines);
 
 		var applyStrums:FlxButton = new FlxButton(loadEventJson.x, loadEventJson.y + 30, 'Apply Strums', () -> _song.strumlines = Std.int(stepperStrumlines.value));
