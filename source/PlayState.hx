@@ -3760,16 +3760,16 @@ class PlayState extends MusicBeatState
 						try {
 							switch (daNote.noteType) {
 								case 'Third Strum':
-									if (strumlines >= 3) strumGroup = thirdStrums;
+									if (SONG.strumlines > 3) strumGroup = thirdStrums;
 									else strumGroup = opponentStrums;
 								case 'Fourth Strum':
-									if (strumlines >= 4) strumGroup = fourthStrums;
+									if (SONG.strumlines > 4) strumGroup = fourthStrums;
 									else strumGroup = opponentStrums;
 								case 'Fifth Strum':
-									if (strumlines >= 5) strumGroup = fifthStrums;
+									if (SONG.strumlines > 5) strumGroup = fifthStrums;
 									else strumGroup = opponentStrums;
 								case 'Sixth Strum':
-									if (strumlines >= 6) strumGroup = sixthStrums;
+									if (SONG.strumlines > 6) strumGroup = sixthStrums;
 									else strumGroup = opponentStrums;
 								default:
 									strumGroup = opponentStrums;
@@ -6049,13 +6049,13 @@ class PlayState extends MusicBeatState
 				case 1:
 					spr = playerStrums.members[id];
 				case 2:
-					if (strumlines >= 3) spr = thirdStrums.members[id];
+					if (SONG.strumlines >= 3) spr = thirdStrums.members[id];
 				case 3:
-					if (strumlines >= 4) spr = fourthStrums.members[id];
+					if (SONG.strumlines >= 4) spr = fourthStrums.members[id];
 				case 4:
-					if (strumlines >= 5) spr = fifthStrums.members[id];
+					if (SONG.strumlines >= 5) spr = fifthStrums.members[id];
 				case 5:
-					if (strumlines >= 6) spr = sixthStrums.members[id];
+					if (SONG.strumlines >= 6) spr = sixthStrums.members[id];
 			}
 		} catch (e:Any) {}
 
