@@ -25,18 +25,17 @@ typedef SwagSong =
 	var player2:String;
 	var gfVersion:String;
 	var stage:String;
-	var healthdrainKill:Bool;
 
 	var arrowSkin:String;
 	var splashSkin:String;
 	var validScore:Bool;
-	var characterTrails:Bool;
-	var bfTrails:Bool;
-	var healthdrain:Float;
 	var songInstVolume:Float;
 
 	var strumlines:Null<Int>;
 	var mania:Null<Int>;
+
+	var healthdrain:Float;
+	var healthdrainKill:Bool;
 }
 
 class Song

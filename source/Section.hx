@@ -14,8 +14,6 @@ typedef SwagSection =
 	var healthdrain:Float;
 	var healthdrainKill:Bool;
 	var altAnim:Bool;
-	var characterTrails:Bool;
-	var bfTrails:Bool;
 }
 
 class Section

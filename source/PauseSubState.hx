@@ -500,7 +500,7 @@ class PauseSubState extends MusicBeatSubstate
 	function changeSelection(change:Int = 0):Void
 	{
 		curSelected += change;
-		SoundEffects.playSFX('scroll', false);
+		if (change != 0) SoundEffects.playSFX('scroll', false);
 
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;

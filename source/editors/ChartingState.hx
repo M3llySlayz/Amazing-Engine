@@ -75,10 +75,7 @@ class ChartingState extends MusicBeatState
 		'Hurt Note',
 		'Caution Note',
 		'GF Sing',
-		'No Animation'
-	];
-
-	public static var strumNoteTypeList:Array<String> = [ //Notetypes that appear based on how many strumlines there are
+		'No Animation',
 		'Third Strum',
 		'Fourth Strum',
 		'Fifth Strum',
@@ -107,6 +104,8 @@ class ChartingState extends MusicBeatState
 		['Change Character', "Value 1: Character to change (Dad, BF, GF)\nValue 2: New character's name"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
+		['Toggle Opponent Trails', "Value 1: True; Toggle the trail, False; Untoggle the trail."],
+		['Toggle Player Trails', "Value 1: True; Toggle the trail, False; Untoggle the trail."],
 		['Change Mania', "Value 1: The new mania value (min: " + Note.minMania + "; max: " + Note.maxMania + ")\nValue 2: Skip old strum fade tween\nPut 'true' to skip it, anything else or blank to not."],
 		['Change Strumlines', "Value 1: The new amount of strumlines (min: 2; max: 6)\nValue 2: Skip old strum fade tween\nPut 'true' to skip it, anything else or blank to not."]
 	];
@@ -233,8 +232,6 @@ class ChartingState extends MusicBeatState
 				notes: [],
 				events: [],
 				bpm: 150.0,
-				characterTrails: false,
-				bfTrails: false,
 				needsVoices: true,
 				healthdrain: 0,
 				healthdrainKill: false,
@@ -439,9 +436,9 @@ class ChartingState extends MusicBeatState
 	function addSongUI():Void
 	{
 		UI_songTitle = new FlxUIInputText(10, 10, 70, _song.song, 8);
-            UI_songTitle.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
+        UI_songTitle.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		blockPressWhileTypingOn.push(UI_songTitle);
-		
+
 		var check_voices = new FlxUICheckBox(10, 25, null, null, "Has voice track", 100);
 		check_voices.checked = _song.needsVoices;
 		// _song.needsVoices = check_voices.checked;
@@ -670,12 +667,17 @@ class ChartingState extends MusicBeatState
 		stepperMania.value = _song.mania;
 		stepperMania.name = 'mania';
 		blockPressWhileTypingOnStepper.push(stepperMania);
-		
+
 		var stepperStrumlines:FlxUINumericStepper = new FlxUINumericStepper(stepperMania.x, stepperBPM.y, 1, 2, 2, 6, 1);
 		stepperStrumlines.value = _song.strumlines;
 		stepperStrumlines.name = 'strumlines';
 		blockPressWhileTypingOnStepper.push(stepperStrumlines);
-	
+
+		// Don't think we need this anymore since I got the strumlines value to actually work
+		var applyStrums:FlxButton = new FlxButton(loadEventJson.x, loadEventJson.y + 30, 'Apply Strums', () -> _song.strumlines = Std.int(stepperStrumlines.value));
+		applyStrums.color = 0xFF00FF00;
+		applyStrums.label.color = FlxColor.WHITE;
+
 		noteSplashesInputText = new FlxUIInputText(noteSkinInputText.x, noteSkinInputText.y + 35, 150, _song.splashSkin, 8);
 		noteSplashesInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		blockPressWhileTypingOn.push(noteSplashesInputText);
@@ -705,14 +707,15 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(noteSkinInputText);
 		tab_group_song.add(noteSplashesInputText);
 		tab_group_song.add(stepperStrumlines);
+		//tab_group_song.add(applyStrums);
 		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
 		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Song Speed:'));
-		tab_group_song.add(new FlxText(stepperMania.x, stepperMania.y - 15, 0, 'Mania:'));
+		tab_group_song.add(new FlxText(stepperMania.x, stepperMania.y - 15, 0, 'Song Mania:'));
 		tab_group_song.add(new FlxText(stepperStrumlines.x, stepperStrumlines.y - 15, 0, 'Strumlines:'));
-		tab_group_song.add(new FlxText(player2DropDown.x, player2DropDown.y - 15, 0, 'P2 (Opponent):'));
-		tab_group_song.add(new FlxText(gfVersionDropDown.x, gfVersionDropDown.y - 15, 0, 'P3 (Girlfriend):'));
+		tab_group_song.add(new FlxText(player2DropDown.x, player2DropDown.y - 15, 0, 'Opponent:'));
+		tab_group_song.add(new FlxText(gfVersionDropDown.x, gfVersionDropDown.y - 15, 0, 'GF:'));
 		tab_group_song.add(new FlxText(difficultyDropDown.x, difficultyDropDown.y - 15, 0, 'Difficulty:'));
-		tab_group_song.add(new FlxText(player1DropDown.x, player1DropDown.y - 15, 0, 'P1 (Player):'));
+		tab_group_song.add(new FlxText(player1DropDown.x, player1DropDown.y - 15, 0, 'Player:'));
 		tab_group_song.add(new FlxText(stageDropDown.x, stageDropDown.y - 15, 0, 'Stage:'));
 		tab_group_song.add(new FlxText(noteSkinInputText.x, noteSkinInputText.y - 15, 0, 'Note Texture:'));
 		tab_group_song.add(new FlxText(noteSplashesInputText.x, noteSplashesInputText.y - 15, 0, 'Note Splashes Texture:'));
@@ -731,7 +734,9 @@ class ChartingState extends MusicBeatState
 	var check_mustHitSection:FlxUICheckBox;
 	var check_gfSection:FlxUICheckBox;
 	var check_changeBPM:FlxUICheckBox;
+	var healthdrainKill_check:FlxUICheckBox;
 	var stepperSectionBPM:FlxUINumericStepper;
+	var stepperHealthDrain:FlxUINumericStepper;
 	var check_altAnim:FlxUICheckBox;
 
 	var sectionToCopy:Int = 0;
@@ -746,7 +751,7 @@ class ChartingState extends MusicBeatState
 		check_mustHitSection.name = 'check_mustHit';
 		check_mustHitSection.checked = _song.notes[curSec].mustHitSection;
 
-		check_gfSection = new FlxUICheckBox(10, check_mustHitSection.y + 22, null, null, "GF section", 100);
+		check_gfSection = new FlxUICheckBox(10, check_mustHitSection.y + 25, null, null, "GF section", 100);
 		check_gfSection.name = 'check_gf';
 		check_gfSection.checked = _song.notes[curSec].gfSection;
 		// _song.needsVoices = check_mustHit.checked;
@@ -754,19 +759,6 @@ class ChartingState extends MusicBeatState
 		check_altAnim = new FlxUICheckBox(check_gfSection.x + 120, check_mustHitSection.y, null, null, "Alt Animation", 100);
 		check_altAnim.checked = _song.notes[curSec].altAnim;
 		check_altAnim.name = 'check_altAnim';
-
-		var check_Trails = new FlxUICheckBox(check_altAnim.x, check_gfSection.y, null, null, "Opponent Trail", 100);
-		check_Trails.checked = _song.notes[curSec].characterTrails;
-		check_Trails.callback = function()
-		{
-			_song.notes[curSec].characterTrails = check_Trails.checked;
-		};
-		var check_bfTrails = new FlxUICheckBox(check_Trails.x, check_Trails.y+30, null, null, "Boyfriend Trail", 100);
-		check_bfTrails.checked = _song.notes[curSec].bfTrails;
-		check_bfTrails.callback = function()
-		{
-			_song.notes[curSec].bfTrails = check_bfTrails.checked;
-		};
 		
 		stepperBeats = new FlxUINumericStepper(10, 100, 1, 4, 1, 24, 2);
 		stepperBeats.width = 75;
@@ -788,21 +780,13 @@ class ChartingState extends MusicBeatState
 		stepperSectionBPM.name = 'section_bpm';
 		blockPressWhileTypingOnStepper.push(stepperSectionBPM);
 
-		var healthdrainOBJ:FlxUINumericStepper = new FlxUINumericStepper(stepperSectionBPM.x + 140, stepperSectionBPM.y, 0.05, 0, 0, 4, 2);
-		healthdrainOBJ.value = _song.notes[curSec].healthdrain;
-		healthdrainOBJ.name = 'health_drain';
-		blockPressWhileTypingOnStepper.push(healthdrainOBJ);
+		stepperHealthDrain = new FlxUINumericStepper(stepperSectionBPM.x + 120, stepperSectionBPM.y, 0.05, 0, 0, 4, 2);
+		stepperHealthDrain.value = _song.notes[curSec].healthdrain;
+		stepperHealthDrain.name = 'health_drain';
+		blockPressWhileTypingOnStepper.push(stepperHealthDrain);
 
-		var check_healthdrain = new FlxUICheckBox(healthdrainOBJ.x, healthdrainOBJ.y + 30, null, null, 'Change BPM', 100);
-		check_healthdrain.checked = _song.notes[curSec].changeHealthdrain;
-		check_healthdrain.name = 'check_healthdrain';
-		
-		var healthdrainKill_check = new FlxUICheckBox(check_bfTrails.x, check_bfTrails.y + 30, null, null, "Healthdrain can kill player", 100);
+		healthdrainKill_check = new FlxUICheckBox(check_altAnim.x, check_gfSection.y, null, null, "Healthdrain can kill player", 100);
 		healthdrainKill_check.checked = _song.notes[curSec].healthdrainKill;
-		healthdrainKill_check.callback = function()
-		{
-			_song.notes[curSec].healthdrainKill = healthdrainKill_check.checked;
-		};
 
 		var check_eventsSec:FlxUICheckBox = null;
 		var check_notesSec:FlxUICheckBox = null;
@@ -1010,7 +994,7 @@ class ChartingState extends MusicBeatState
 		});
 
 		tab_group_section.add(new FlxText(stepperBeats.x, stepperBeats.y - 15, 0, 'Beats per Section:'));
-		tab_group_section.add(new FlxText(healthdrainOBJ.x, healthdrainOBJ.y - 25, 0, 'Health Drain on \nOpponent Notehit'));
+		tab_group_section.add(new FlxText(stepperHealthDrain.x, stepperHealthDrain.y - 15, 0, 'Health Drain:'));
 		tab_group_section.add(stepperBeats);
 		tab_group_section.add(stepperSectionBPM);
 		tab_group_section.add(check_mustHitSection);
@@ -1019,10 +1003,8 @@ class ChartingState extends MusicBeatState
 		tab_group_section.add(check_changeBPM);
 		tab_group_section.add(copyButton);
 		tab_group_section.add(pasteButton);
-		tab_group_section.add(healthdrainOBJ);
+		tab_group_section.add(stepperHealthDrain);
 		tab_group_section.add(healthdrainKill_check);
-		tab_group_section.add(check_Trails);
-		tab_group_section.add(check_bfTrails);
 		tab_group_section.add(clearSectionButton);
 		tab_group_section.add(check_notesSec);
 		tab_group_section.add(check_eventsSec);
@@ -1053,8 +1035,6 @@ class ChartingState extends MusicBeatState
 		strumTimeInputText = new FlxUIInputText(10, 65, 180, "0");
 		tab_group_note.add(strumTimeInputText);
 		blockPressWhileTypingOn.push(strumTimeInputText);
-
-		refreshStrumNoteTypes();
 
 		var key:Int = 0;
 		var displayNameList:Array<String> = [];
@@ -1116,13 +1096,6 @@ class ChartingState extends MusicBeatState
 		tab_group_note.add(noteTypeDropDown);
 
 		UI_box.addGroup(tab_group_note);
-	}
-	
-	function refreshStrumNoteTypes() {
-		for (strum in 0..._song.strumlines-2) {
-			if (noteTypeList.contains(strumNoteTypeList[strum])) noteTypeList.remove(strumNoteTypeList[strum]);
-			noteTypeList.push(strumNoteTypeList[strum]);
-		}
 	}
 
 	var eventDropDown:FlxUIDropDownMenuCustom;
@@ -1553,6 +1526,11 @@ class ChartingState extends MusicBeatState
 				case 'Change BPM':
 					_song.notes[curSec].changeBPM = check.checked;
 					FlxG.log.add('changed bpm shit');
+
+				case 'Healthdrain can kill player':
+					_song.notes[curSec].healthdrainKill = check.checked;
+					FlxG.log.add('changed healtdrain shit');
+
 				case "Alt Animation":
 					_song.notes[curSec].altAnim = check.checked;
 			}
@@ -1577,6 +1555,11 @@ class ChartingState extends MusicBeatState
 				_song.mania = Std.int(nums.value);
 				reloadGridLayer();
 			}
+			else if (wname == 'strumlines')
+			{
+				_song.strumlines = Std.int(nums.value);
+				reloadGridLayer();
+			}
 			else if (wname == 'song_bpm')
 			{
 				tempBpm = nums.value;
@@ -1593,6 +1576,11 @@ class ChartingState extends MusicBeatState
 			else if (wname == 'section_bpm')
 			{
 				_song.notes[curSec].bpm = nums.value;
+				updateGrid();
+			}
+			else if (wname == 'health_drain')
+			{
+				_song.notes[curSec].healthdrain = nums.value;
 				updateGrid();
 			}
 			else if (wname == 'inst_volume')
@@ -2670,6 +2658,8 @@ class ChartingState extends MusicBeatState
 		check_gfSection.checked = sec.gfSection;
 		check_altAnim.checked = sec.altAnim;
 		check_changeBPM.checked = sec.changeBPM;
+		stepperHealthDrain.value = sec.healthdrain;
+		healthdrainKill_check.checked = sec.healthdrainKill;
 		stepperSectionBPM.value = sec.bpm;
 
 		updateHeads();
@@ -2747,7 +2737,7 @@ class ChartingState extends MusicBeatState
 		}
 	}
 
-function updateGrid():Void
+	function updateGrid():Void
 	{
 		curRenderedNotes.clear();
 		curRenderedSustains.clear();
@@ -2915,8 +2905,11 @@ function updateGrid():Void
 	}
 
 	function setupSusNote(note:Note, beats:Float):FlxSprite {
-		var height:Int = Math.floor(FlxMath.remapToRange(note.sustainLength, 0, Conductor.stepCrochet * 16, 0, GRID_SIZE * 16 * zoomList[curZoom]) + (GRID_SIZE * zoomList[curZoom]) - GRID_SIZE / 2);
+		var height:Int = Math.floor(FlxMath.remapToRange(note.sustainLength, 0, Conductor.stepCrochet * 16, 0,
+		GRID_SIZE * 16 * zoomList[curZoom]) + (GRID_SIZE * zoomList[curZoom]) - GRID_SIZE / 2);
+
 		var minHeight:Int = Std.int((GRID_SIZE * zoomList[curZoom] / 2) + GRID_SIZE / 2);
+
 		if(height < minHeight) height = minHeight;
 		if(height < 1) height = 1; //Prevents error of invalid height
 
@@ -2924,7 +2917,8 @@ function updateGrid():Void
 		return spr;
 	}
 
-	private function addSection(sectionBeats:Float = 4, lengthInSteps:Int = 16, healthdrain:Float = 0, healthdrainKill:Bool = false, changeHealthdrain:Bool = false, characterTrails:Bool = false, bfTrails:Bool = false):Void
+	private function addSection(sectionBeats:Float = 4, lengthInSteps:Int = 16, healthdrain:Float = 0,
+	healthdrainKill:Bool = false, changeHealthdrain:Bool = false):Void
 	{
 		var sec:SwagSection = {
 			sectionBeats: sectionBeats,
@@ -2938,9 +2932,7 @@ function updateGrid():Void
 			altAnim: false,
 			healthdrain: healthdrain,
 			healthdrainKill: healthdrainKill,
-			changeHealthdrain: changeHealthdrain,
-			characterTrails: characterTrails,
-			bfTrails: bfTrails
+			changeHealthdrain: changeHealthdrain
 		};
 
 		_song.notes.push(sec);

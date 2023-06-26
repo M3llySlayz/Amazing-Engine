@@ -61,23 +61,23 @@ class ControlsSubState extends MusicBeatSubstate {
 
 		var currentPage:String = "";
 		var generatedPage:Dynamic = [];
-		for (i in 0...optionShit.length) {
-			if (optionShit[i][0] != "" && optionShit[i].length < 2 && currentPage == "") { //It's the first page title
-				generatedPage.push(optionShit[i]);
-				currentPage = optionShit[i][0];
-			} else if (optionShit[i][0] != "" && optionShit[i].length < 2 && currentPage != "") { // It's a new page title.
+		for (option in optionShit) {
+			if (option[0] != "" && option.length < 2 && currentPage == "") { //It's the first page title
+				generatedPage.push(option);
+				currentPage = option[0];
+			} else if (option[0] != "" && option.length < 2 && currentPage != "") { // It's a new page title.
 				generatedPage.push(['']);
 				generatedPage.push([defaultKey]);
 				pages.push(generatedPage);
 
 				generatedPage = [];
 
-				generatedPage.push(optionShit[i]);
-				currentPage = optionShit[i][0];
-			} else if (optionShit[i].length > 1) { // It's an input
-				generatedPage.push(optionShit[i]);
-			} else if (optionShit[i][0] == "" && optionShit[i].length < 2) { // It's blank!
-				generatedPage.push(optionShit[i]);
+				generatedPage.push(option);
+				currentPage = option[0];
+			} else if (option.length > 1) { // It's an input
+				generatedPage.push(option);
+			} else if (option[0] == "" && option.length < 2) { // It's blank!
+				generatedPage.push(option);
 			}
 		}
 
@@ -187,8 +187,10 @@ class ControlsSubState extends MusicBeatSubstate {
 					reloadKeys();
 					reloadTexts();
 					changeSelection();
-					//FlxG.sound.play(Paths.sound('confirmMenu'));
 					SoundEffects.playSFX('confirm', true);
+					FlxG.sound.muteKeys = TitleState.muteKeys;
+				FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+				FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 				} else if(!unselectableCheck(curSelected)) {
 					bindingTime = 0;
 					rebindingKey = true;
@@ -197,7 +199,9 @@ class ControlsSubState extends MusicBeatSubstate {
 					} else {
 						grpInputs[getInputTextNum()].alpha = 0;
 					}
-					//FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.muteKeys = TitleState.muteKeys;
+					FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+					FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 					SoundEffects.playSFX('scroll', false);
 				}
 			}
@@ -207,6 +211,10 @@ class ControlsSubState extends MusicBeatSubstate {
 				var keysArray:Array<FlxKey> = ClientPrefs.keyBinds.get(optionShit[curSelected][1]);
 				keysArray[curAlt ? 1 : 0] = keyPressed;
 
+				FlxG.sound.muteKeys = [];
+				FlxG.sound.volumeDownKeys = [];
+				FlxG.sound.volumeUpKeys = [];
+
 				var opposite:Int = (curAlt ? 0 : 1);
 				if(keysArray[opposite] == keysArray[1 - opposite]) {
 					keysArray[opposite] = NONE;
@@ -214,7 +222,6 @@ class ControlsSubState extends MusicBeatSubstate {
 				ClientPrefs.keyBinds.set(optionShit[curSelected][1], keysArray);
 
 				reloadKeys();
-				//FlxG.sound.play(Paths.sound('confirmMenu'));
 				SoundEffects.playSFX('confirm', true);
 				rebindingKey = false;
 			}

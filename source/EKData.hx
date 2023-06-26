@@ -538,7 +538,7 @@ class Keybinds
             ['Right 3', 'note_1713'],
             ['Left 4', 'note_1714'],
             ['Down 4', 'note_1715'],
-            ['Up 4', 'note_1717'],
+            ['Up 4', 'note_1716'], // Thank you JB for noticing it, tposejank was rushing while making these keybinds
             ['Right 4', 'note_1717'],
             [''],
             ['18 KEYS FINAL'],
@@ -578,8 +578,13 @@ class Keybinds
             ['Down', 'volume_down'],
             [''],
             ['DEBUG'],
+            ['Dev', 'dev_bind'],
             ['Key 1', 'debug_1'],
-            ['Key 2', 'debug_2']
+            ['Key 2', 'debug_2'],
+            // Why did I make this empty page :skull:
+            [''],
+            [' '],
+            ['', '']
         ];
     }
 
