@@ -4364,11 +4364,11 @@ class PlayState extends MusicBeatState
 				if (ClientPrefs.timeBarStyle == 'Gradient')
 					reloadTimeBarColors();
 
-				if (characterTrails) {
+				if (SONG.notes[curSection].characterTrails) {
 					remove(trailunderdad);
 					reloadDadTrails();
 				}
-				if (bfTrails) {
+				if (SONG.notes[curSection].bfTrails) {
 					remove(trailunderbf);
 					reloadBFTrails();
 				}
@@ -5897,11 +5897,17 @@ class PlayState extends MusicBeatState
 				setOnLuas('stepCrochet', Conductor.stepCrochet);
 			}
 
-			if (SONG.notes[curSection].characterTrails)
+			if (SONG.notes[curSection].characterTrails) reloadDadTrails();
+			else {
+				remove(trailunderdad);
 				reloadDadTrails();
+			}
 
-			if (SONG.notes[curSection].bfTrails)
+			if (SONG.notes[curSection].bfTrails) reloadBFTrails();
+			else {
+				remove(trailunderbf);
 				reloadBFTrails();
+			}
 
 			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
