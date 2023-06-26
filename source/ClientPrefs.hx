@@ -48,7 +48,6 @@ class ClientPrefs {
 	public static var altSplitScroll:Bool = false;
 	public static var bigCache:Bool = false;
 	public static var devMode:Bool = false;
-	public static var centeredAlphabet:Bool = false;
 	public static var mainMenuPos:String = 'Center';
 	public static var gameOverSong:String = 'Default';
 	public static var sfxPreset:String = 'Default';
@@ -369,7 +368,6 @@ class ClientPrefs {
 		FlxG.save.data.altSplitScroll = altSplitScroll;
 		FlxG.save.data.bigCache = bigCache;
 		FlxG.save.data.devMode = devMode;
-		FlxG.save.data.centeredAlphabet = centeredAlphabet;
 		FlxG.save.data.mainMenuPos = mainMenuPos;
 		FlxG.save.data.sfxPreset = sfxPreset;
 		FlxG.save.data.advancedSfx = advancedSfx;
@@ -558,10 +556,6 @@ class ClientPrefs {
 		if (FlxG.save.data.devMode != null)
 		{
 			devMode = FlxG.save.data.devMode;
-		}
-		if (FlxG.save.data.centeredAlphabet != null)
-		{
-			centeredAlphabet = FlxG.save.data.centeredAlphabet;
 		}
 		if (FlxG.save.data.mainMenuPos != null)
 		{
