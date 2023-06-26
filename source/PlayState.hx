@@ -236,12 +236,6 @@ class PlayState extends MusicBeatState
 	public var playingAsOpponent:Bool = false;
 	public var practiceMode:Bool = false;
 
-	//new chart settings
-	public var healthdrain:Float = 0;
-	public var healthdrainKill:Bool = false;
-	public var characterTrails:Bool = false;
-	public var bfTrails:Bool = false;
-
 	//trails
 	public var trailunderdad:FlxTrail;
 	public var trailunderbf:FlxTrail;
@@ -1253,9 +1247,6 @@ class PlayState extends MusicBeatState
 		// startCountdown();
 
 		generateSong(SONG.song);
-
-		if (characterTrails) reloadDadTrails();
-		if (bfTrails) reloadBFTrails();
 
 		// After all characters being loaded, it makes then invisible 0.01s later so that the player won't freeze when you change characters
 		// add(strumLine);
@@ -5906,14 +5897,11 @@ class PlayState extends MusicBeatState
 				setOnLuas('stepCrochet', Conductor.stepCrochet);
 			}
 
-			if (SONG.notes[curSection].characterTrails && !characterTrails)
+			if (SONG.notes[curSection].characterTrails)
 				reloadDadTrails();
 
-			if (SONG.notes[curSection].bfTrails && !bfTrails)
+			if (SONG.notes[curSection].bfTrails)
 				reloadBFTrails();
-
-			characterTrails = SONG.notes[curSection].characterTrails;
-			bfTrails = SONG.notes[curSection].bfTrails;
 
 			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
