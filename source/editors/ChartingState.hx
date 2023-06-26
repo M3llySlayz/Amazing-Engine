@@ -734,6 +734,7 @@ class ChartingState extends MusicBeatState
 	var check_mustHitSection:FlxUICheckBox;
 	var check_gfSection:FlxUICheckBox;
 	var check_changeBPM:FlxUICheckBox;
+	var healthdrain_check:FlxUICheckBox;
 	var healthdrainKill_check:FlxUICheckBox;
 	var stepperSectionBPM:FlxUINumericStepper;
 	var stepperHealthDrain:FlxUINumericStepper;
@@ -785,7 +786,10 @@ class ChartingState extends MusicBeatState
 		stepperHealthDrain.name = 'health_drain';
 		blockPressWhileTypingOnStepper.push(stepperHealthDrain);
 
-		healthdrainKill_check = new FlxUICheckBox(check_altAnim.x, check_gfSection.y, null, null, "Healthdrain can kill player", 100);
+		healthdrain_check = new FlxUICheckBox(check_altAnim.x, check_gfSection.y, null, null, "Change Healthdrain", 100);
+		healthdrain_check.checked = _song.notes[curSec].changeHealthdrain;
+
+		healthdrainKill_check = new FlxUICheckBox(check_altAnim.x, check_gfSection.y + 25, null, null, "Healthdrain can kill player", 100);
 		healthdrainKill_check.checked = _song.notes[curSec].healthdrainKill;
 
 		var check_eventsSec:FlxUICheckBox = null;
@@ -982,12 +986,6 @@ class ChartingState extends MusicBeatState
 				
 				note[1] = boob;
 				var copiedNote:Array<Dynamic> = [note[0], boob, note[2], note[3]];
-				//duetNotes.push(copiedNote);
-			}
-			
-			for (i in duetNotes){
-			//_song.notes[curSec].sectionNotes.push(i);
-				
 			}
 			
 			updateGrid();
@@ -1004,6 +1002,7 @@ class ChartingState extends MusicBeatState
 		tab_group_section.add(copyButton);
 		tab_group_section.add(pasteButton);
 		tab_group_section.add(stepperHealthDrain);
+		tab_group_section.add(healthdrain_check);
 		tab_group_section.add(healthdrainKill_check);
 		tab_group_section.add(clearSectionButton);
 		tab_group_section.add(check_notesSec);
@@ -1527,9 +1526,13 @@ class ChartingState extends MusicBeatState
 					_song.notes[curSec].changeBPM = check.checked;
 					FlxG.log.add('changed bpm shit');
 
+				case 'Change Healthdrain':
+					_song.notes[curSec].changeHealthdrain = check.checked;
+					FlxG.log.add('changed healtdrain shit');
+
 				case 'Healthdrain can kill player':
 					_song.notes[curSec].healthdrainKill = check.checked;
-					FlxG.log.add('changed healtdrain shit');
+					FlxG.log.add('changed healtdrain kill shit');
 
 				case "Alt Animation":
 					_song.notes[curSec].altAnim = check.checked;
@@ -2659,6 +2662,7 @@ class ChartingState extends MusicBeatState
 		check_altAnim.checked = sec.altAnim;
 		check_changeBPM.checked = sec.changeBPM;
 		stepperHealthDrain.value = sec.healthdrain;
+		healthdrain_check.checked = sec.changeHealthdrain;
 		healthdrainKill_check.checked = sec.healthdrainKill;
 		stepperSectionBPM.value = sec.bpm;
 
