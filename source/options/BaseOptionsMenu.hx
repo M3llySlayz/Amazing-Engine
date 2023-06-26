@@ -53,7 +53,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		if(rpcTitle == null) rpcTitle = 'Options Menu';
 		
 		#if desktop
-		DiscordClient.changePresence(rpcTitle, null);
+		DiscordClient.changePresence('In the ' + rpcTitle, 'Changing settings', 'icon', false, null, 'gear');
 		#end
 		
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));

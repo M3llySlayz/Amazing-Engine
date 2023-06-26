@@ -106,7 +106,7 @@ class AmazingStoryMenuState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In the Story Menu", "Picking a week", null, false, null, 'storymode');
 		#end
 
 		var num:Int = 0;

@@ -19,6 +19,10 @@ import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
 
+#if desktop
+import Discord.DiscordClient;
+#end
+
 import haxe.io.Path;
 
 class LoadingState extends MusicBeatState
@@ -51,6 +55,11 @@ class LoadingState extends MusicBeatState
 	var loadBar:FlxSprite;
 	override function create()
 	{
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Loading...", "If you're even seeing this, their pc sucks", null, false, null, 'paused');
+		#end
+
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);
 		add(bg);
 

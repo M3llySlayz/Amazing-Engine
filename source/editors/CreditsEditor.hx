@@ -68,7 +68,7 @@ class CreditsEditor extends MusicBeatState
 	{
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Credits Editor", null);
+		DiscordClient.changePresence("In the Credits Editor", "Listing names and stuff", null, false, null, 'chart');
 		#end
 
 		persistentUpdate = true;

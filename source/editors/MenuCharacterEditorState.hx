@@ -50,7 +50,7 @@ class MenuCharacterEditorState extends MusicBeatState
 		};
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Menu Character Editor", "Editting: " + characterFile.image);
+		DiscordClient.changePresence("In the Menu Character Editor", "Editting: " + characterFile.image, null, false, null, 'storyeditor');
 		#end
 
 		grpWeekCharacters = new FlxTypedGroup<MenuCharacter>();

@@ -13,6 +13,10 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import FreeplayCategory;
 
+#if desktop
+import Discord.DiscordClient;
+#end
+
 using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
@@ -43,6 +47,11 @@ class FreeplayCategoryState extends MusicBeatState {
 		camOther = new FlxCamera();
 		camOther.bgColor.alpha = 0;
 		FlxG.cameras.add(camOther, false);
+
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("In the Freeplay Menu", "Picking a category", null, false, null, 'icon');
+		#end
 
 		FreeplayCategory.reloadCategoryFiles();
 		FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks; // Reload Unlocked Freeplay Categories
