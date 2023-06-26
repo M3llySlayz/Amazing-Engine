@@ -76,6 +76,8 @@ class ClientPrefs {
 	public static var loadSpeed:Float = 0.7;
 	#if desktop
 	public static var autoPause:Bool = true;
+	#else
+	public static var autoPause:Bool = false;
 	#end
 	public static var comboStacking = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [

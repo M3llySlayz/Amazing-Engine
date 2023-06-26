@@ -673,10 +673,9 @@ class ChartingState extends MusicBeatState
 		stepperStrumlines.name = 'strumlines';
 		blockPressWhileTypingOnStepper.push(stepperStrumlines);
 
-		var applyStrums:FlxButton = new FlxButton(loadEventJson.x, loadEventJson.y + 30, 'Apply Strums', function()
-		{
-			_song.strumlines = Std.int(stepperStrumlines.value);
-		});
+		var applyStrums:FlxButton = new FlxButton(loadEventJson.x, loadEventJson.y + 30, 'Apply Strums', () -> _song.strumlines = Std.int(stepperStrumlines.value));
+		applyStrums.color = 0xFF00FF00;
+		applyStrums.label.color = FlxColor.WHITE;
 
 		noteSplashesInputText = new FlxUIInputText(noteSkinInputText.x, noteSkinInputText.y + 35, 150, _song.splashSkin, 8);
 		noteSplashesInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;

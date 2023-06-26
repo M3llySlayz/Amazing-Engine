@@ -1144,21 +1144,18 @@ class PlayState extends MusicBeatState
 		strumLine.scrollFactor.set();
 
 		laneunderlayOp = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		laneunderlayOp.cameras = [camNotes];
 		laneunderlayOp.color = FlxColor.BLACK;
 		laneunderlayOp.scrollFactor.set();
         laneunderlayOp.alpha = ClientPrefs.oppUnderlay;
-        laneunderlayOp.visible = true;
+		add(laneunderlay);
 
 		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 2);
+		laneunderlay.cameras = [camNotes];
 		laneunderlay.color = FlxColor.BLACK;
 		laneunderlay.scrollFactor.set();
         laneunderlay.alpha = ClientPrefs.underlay;
-        laneunderlay.visible = true;
-		if (!ClientPrefs.middleScroll) 
-		{
-			add(laneunderlayOp);
-		}
-	  	add(laneunderlay);
+		if (!ClientPrefs.middleScroll) add(laneunderlayOp);
 
 		//time bars!!! yayyyyyyyy!!!!!1!1! (i hate jb so much)
 		if (ClientPrefs.timeBarStyle == 'Leather') {
@@ -3760,16 +3757,16 @@ class PlayState extends MusicBeatState
 						try {
 							switch (daNote.noteType) {
 								case 'Third Strum':
-									if (SONG.strumlines > 3) strumGroup = thirdStrums;
+									if (strumlines > 3) strumGroup = thirdStrums;
 									else strumGroup = opponentStrums;
 								case 'Fourth Strum':
-									if (SONG.strumlines > 4) strumGroup = fourthStrums;
+									if (strumlines > 4) strumGroup = fourthStrums;
 									else strumGroup = opponentStrums;
 								case 'Fifth Strum':
-									if (SONG.strumlines > 5) strumGroup = fifthStrums;
+									if (strumlines > 5) strumGroup = fifthStrums;
 									else strumGroup = opponentStrums;
 								case 'Sixth Strum':
-									if (SONG.strumlines > 6) strumGroup = sixthStrums;
+									if (strumlines > 6) strumGroup = sixthStrums;
 									else strumGroup = opponentStrums;
 								default:
 									strumGroup = opponentStrums;
@@ -3871,7 +3868,7 @@ class PlayState extends MusicBeatState
 						}
 						else
 						{
-							if ((daNote.y + daNote.offset.y) * daNote.scale.y <= center)
+							if (daNote.y + daNote.offset.y * daNote.scale.y <= center)
 							{
 								var swagRect = new FlxRect(0, 0, daNote.width / daNote.scale.x, daNote.height / daNote.scale.y);
 								swagRect.y = (center - daNote.y) / daNote.scale.y;
@@ -6049,13 +6046,13 @@ class PlayState extends MusicBeatState
 				case 1:
 					spr = playerStrums.members[id];
 				case 2:
-					if (SONG.strumlines >= 3) spr = thirdStrums.members[id];
+					if (strumlines > 3) spr = thirdStrums.members[id];
 				case 3:
-					if (SONG.strumlines >= 4) spr = fourthStrums.members[id];
+					if (strumlines > 4) spr = fourthStrums.members[id];
 				case 4:
-					if (SONG.strumlines >= 5) spr = fifthStrums.members[id];
+					if (strumlines > 5) spr = fifthStrums.members[id];
 				case 5:
-					if (SONG.strumlines >= 6) spr = sixthStrums.members[id];
+					if (strumlines > 6) spr = sixthStrums.members[id];
 			}
 		} catch (e:Any) {}
 
