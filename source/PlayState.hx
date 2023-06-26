@@ -5905,12 +5905,12 @@ class PlayState extends MusicBeatState
 				healthdrain = SONG.notes[curSection].healthdrain;
 				healthdrainKill = SONG.notes[curSection].healthdrainKill;
 				setOnLuas('healthDrain', healthdrain);
-				setOnLuas('changeHealthDrain', changeHealthdrain);
 				setOnLuas('healthDrainCanKillPlayer', healthdrainKill);
 			}
 
-			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
 			setOnLuas('altAnim', SONG.notes[curSection].altAnim);
+			setOnLuas('mustHitSection', SONG.notes[curSection].mustHitSection);
+			setOnLuas('changeHealthDrain', SONG.notes[curSection].changeHealthdrain);
 			setOnLuas('gfSection', SONG.notes[curSection].gfSection);
 		}
 		
