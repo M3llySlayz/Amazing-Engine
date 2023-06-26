@@ -670,9 +670,10 @@ class ChartingState extends MusicBeatState
 
 		var stepperStrumlines:FlxUINumericStepper = new FlxUINumericStepper(stepperMania.x, stepperBPM.y, 1, 2, 2, 6, 1);
 		stepperStrumlines.value = _song.strumlines;
-		stepperStrumlines.name = 'song_strumlines';
+		stepperStrumlines.name = 'strumlines';
 		blockPressWhileTypingOnStepper.push(stepperStrumlines);
 
+		// Don't think we need this anymore since I got the strumlines value to actually work
 		var applyStrums:FlxButton = new FlxButton(loadEventJson.x, loadEventJson.y + 30, 'Apply Strums', () -> _song.strumlines = Std.int(stepperStrumlines.value));
 		applyStrums.color = 0xFF00FF00;
 		applyStrums.label.color = FlxColor.WHITE;
@@ -706,7 +707,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(noteSkinInputText);
 		tab_group_song.add(noteSplashesInputText);
 		tab_group_song.add(stepperStrumlines);
-		tab_group_song.add(applyStrums);
+		//tab_group_song.add(applyStrums);
 		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
 		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Song Speed:'));
 		tab_group_song.add(new FlxText(stepperMania.x, stepperMania.y - 15, 0, 'Song Mania:'));
@@ -1568,6 +1569,11 @@ class ChartingState extends MusicBeatState
 			else if (wname == 'mania')
 			{
 				_song.mania = Std.int(nums.value);
+				reloadGridLayer();
+			}
+			else if (wname == 'strumlines')
+			{
+				_song.strumlines = Std.int(nums.value);
 				reloadGridLayer();
 			}
 			else if (wname == 'song_bpm')
