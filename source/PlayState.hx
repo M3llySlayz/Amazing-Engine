@@ -3425,9 +3425,9 @@ class PlayState extends MusicBeatState
 	{
 		callOnLuas('onUpdate', [elapsed]);
 
-		laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - (25 * Note.lessScale[mania]) : opponentStrums.members[0].x - (25 * Note.lessScale[mania]);
+		laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
 		laneunderlay.screenCenter(Y);
-		laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - (25 * Note.lessScale[mania]) : playerStrums.members[0].x - (25 * Note.lessScale[mania]);
+		laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
 		laneunderlayOp.screenCenter(Y);
 
 		if(ClientPrefs.camMovement && !PlayState.isPixelStage) {
