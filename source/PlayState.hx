@@ -5060,8 +5060,7 @@ class PlayState extends MusicBeatState
 							pressNotes.push(epicNote);
 						}
 					}
-				}
-				else{
+				} else {
 					callOnLuas('onGhostTap', [key]);
 					if (canMiss) {
 						noteMissPress(key);
