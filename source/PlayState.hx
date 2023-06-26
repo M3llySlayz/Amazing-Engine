@@ -5323,10 +5323,9 @@ class PlayState extends MusicBeatState
 				} catch (e:Any) {}
 			}
 
-			if(healthdrain > 0) {
-				if (health > healthdrain) {
-					health -= healthdrain;
-				} else if (!healthdrainKill && health < healthdrain) {
+			health -= healthdrain;
+			if (health < healthdrain) {
+				if (!healthdrainKill) {
 					health = 0.01;
 				}
 			}
