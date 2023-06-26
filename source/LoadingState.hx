@@ -19,6 +19,10 @@ import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
 
+#if desktop
+import Discord.DiscordClient;
+#end
+
 import haxe.io.Path;
 
 class LoadingState extends MusicBeatState
