@@ -75,10 +75,7 @@ class ChartingState extends MusicBeatState
 		'Hurt Note',
 		'Caution Note',
 		'GF Sing',
-		'No Animation'
-	];
-
-	public static var strumNoteTypeList:Array<String> = [ //Notetypes that appear based on how many strumlines there are
+		'No Animation',
 		'Third Strum',
 		'Fourth Strum',
 		'Fifth Strum',
@@ -714,7 +711,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
 		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Song Speed:'));
 		tab_group_song.add(new FlxText(stepperMania.x, stepperMania.y - 15, 0, 'Song Mania:'));
-		tab_group_song.add(new FlxText(stepperStrumlines.x, stepperStrumlines.y - 15, 0, 'Song Strumlines:'));
+		tab_group_song.add(new FlxText(stepperStrumlines.x, stepperStrumlines.y - 15, 0, 'Strumlines:'));
 		tab_group_song.add(new FlxText(player2DropDown.x, player2DropDown.y - 15, 0, 'Opponent:'));
 		tab_group_song.add(new FlxText(gfVersionDropDown.x, gfVersionDropDown.y - 15, 0, 'GF:'));
 		tab_group_song.add(new FlxText(difficultyDropDown.x, difficultyDropDown.y - 15, 0, 'Difficulty:'));
