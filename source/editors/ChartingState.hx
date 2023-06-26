@@ -670,12 +670,17 @@ class ChartingState extends MusicBeatState
 		stepperMania.value = _song.mania;
 		stepperMania.name = 'mania';
 		blockPressWhileTypingOnStepper.push(stepperMania);
-		
+
 		var stepperStrumlines:FlxUINumericStepper = new FlxUINumericStepper(stepperMania.x, stepperBPM.y, 1, 2, 2, 6, 1);
 		stepperStrumlines.value = _song.strumlines;
 		stepperStrumlines.name = 'strumlines';
 		blockPressWhileTypingOnStepper.push(stepperStrumlines);
-	
+
+		var applyStrums:FlxButton = new FlxButton(loadEventJson.x, loadEventJson.y + 30, 'Apply Strums', function()
+		{
+			_song.strumlines = Std.int(stepperStrumlines.value);
+		});
+
 		noteSplashesInputText = new FlxUIInputText(noteSkinInputText.x, noteSkinInputText.y + 35, 150, _song.splashSkin, 8);
 		noteSplashesInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		blockPressWhileTypingOn.push(noteSplashesInputText);
@@ -705,6 +710,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(noteSkinInputText);
 		tab_group_song.add(noteSplashesInputText);
 		tab_group_song.add(stepperStrumlines);
+		tab_group_song.add(applyStrums);
 		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
 		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Song Speed:'));
 		tab_group_song.add(new FlxText(stepperMania.x, stepperMania.y - 15, 0, 'Mania:'));
@@ -1054,8 +1060,6 @@ class ChartingState extends MusicBeatState
 		tab_group_note.add(strumTimeInputText);
 		blockPressWhileTypingOn.push(strumTimeInputText);
 
-		refreshStrumNoteTypes();
-
 		var key:Int = 0;
 		var displayNameList:Array<String> = [];
 		while (key < noteTypeList.length) {
@@ -1116,13 +1120,6 @@ class ChartingState extends MusicBeatState
 		tab_group_note.add(noteTypeDropDown);
 
 		UI_box.addGroup(tab_group_note);
-	}
-	
-	function refreshStrumNoteTypes() {
-		for (strum in 0..._song.strumlines-2) {
-			if (noteTypeList.contains(strumNoteTypeList[strum])) noteTypeList.remove(strumNoteTypeList[strum]);
-			noteTypeList.push(strumNoteTypeList[strum]);
-		}
 	}
 
 	var eventDropDown:FlxUIDropDownMenuCustom;
