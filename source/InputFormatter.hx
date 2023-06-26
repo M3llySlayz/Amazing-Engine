@@ -7,7 +7,7 @@ class InputFormatter {
 	public static function getKeyName(key:FlxKey):String {
 		switch (key) {
 			case BACKSPACE:
-				return "BckSpc";
+				return "BkSp";
 			case CONTROL:
 				return "Ctrl";
 			case ALT:
@@ -72,20 +72,22 @@ class InputFormatter {
 				return ",";
 			case PERIOD:
 				return ".";
-			//case SLASH:
-			//	return "/";
+			case SLASH:
+				return "Sl";
 			case GRAVEACCENT:
 				return "`";
 			case LBRACKET:
 				return "[";
-			//case BACKSLASH:
-			//	return "\\";
+			case BACKSLASH:
+				return "BSl";
 			case RBRACKET:
 				return "]";
 			case QUOTE:
 				return "'";
 			case PRINTSCREEN:
-				return "PrtScrn";
+				return "PtSc";
+			case SPACE:
+				return "Sp";
 			case NONE:
 				return '---';
 			default:

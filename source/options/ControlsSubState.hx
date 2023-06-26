@@ -110,13 +110,13 @@ class ControlsSubState extends MusicBeatSubstate {
 
 		for (i in 0...optionShit.length) {
 			var isCentered:Bool = false;
-			var isDefaultKey:Bool = (option[0] == defaultKey);
+			var isDefaultKey:Bool = (optionShit[i][0] == defaultKey);
 			if(unselectableCheck(i, true)) {
 				isCentered = true;
 			}
 
 			var isFirst:Bool = i == 0;
-			var text:String = option[0];
+			var text:String = optionShit[i][0];
 			if (isFirst) text = '< ' + text + ' >';
 
 			var optionText:Alphabet = new Alphabet(200, 300, text, (!isCentered || isDefaultKey));
@@ -187,8 +187,10 @@ class ControlsSubState extends MusicBeatSubstate {
 					reloadKeys();
 					reloadTexts();
 					changeSelection();
-					//FlxG.sound.play(Paths.sound('confirmMenu'));
 					SoundEffects.playSFX('confirm', true);
+					FlxG.sound.muteKeys = TitleState.muteKeys;
+				FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+				FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 				} else if(!unselectableCheck(curSelected)) {
 					bindingTime = 0;
 					rebindingKey = true;
@@ -197,7 +199,9 @@ class ControlsSubState extends MusicBeatSubstate {
 					} else {
 						grpInputs[getInputTextNum()].alpha = 0;
 					}
-					//FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.muteKeys = TitleState.muteKeys;
+					FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+					FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 					SoundEffects.playSFX('scroll', false);
 				}
 			}
@@ -207,6 +211,10 @@ class ControlsSubState extends MusicBeatSubstate {
 				var keysArray:Array<FlxKey> = ClientPrefs.keyBinds.get(optionShit[curSelected][1]);
 				keysArray[curAlt ? 1 : 0] = keyPressed;
 
+				FlxG.sound.muteKeys = [];
+				FlxG.sound.volumeDownKeys = [];
+				FlxG.sound.volumeUpKeys = [];
+
 				var opposite:Int = (curAlt ? 0 : 1);
 				if(keysArray[opposite] == keysArray[1 - opposite]) {
 					keysArray[opposite] = NONE;
@@ -214,7 +222,6 @@ class ControlsSubState extends MusicBeatSubstate {
 				ClientPrefs.keyBinds.set(optionShit[curSelected][1], keysArray);
 
 				reloadKeys();
-				//FlxG.sound.play(Paths.sound('confirmMenu'));
 				SoundEffects.playSFX('confirm', true);
 				rebindingKey = false;
 			}

@@ -580,7 +580,8 @@ class Keybinds
             ['DEBUG'],
             ['Developer', 'dev_bind'],
             ['Key 1', 'debug_1'],
-            ['Key 2', 'debug_2']
+            ['Key 2', 'debug_2'],
+            ['']
         ];
     }
 
