@@ -8,7 +8,7 @@
             "name": "Launch",
             "type": "hxcpp",
             "request": "launch",
-            "program": "${workspaceFolder}/export/windows/bin/AmazingEngine.exe"
+            "program": "${workspaceFolder}/export/release/windows/bin/AmazingEngine.exe"
         },
         {
             "name": "Debug Launch",

@@ -68,6 +68,8 @@ class FreeplayState extends MusicBeatState
 
 	public static var curCategory:String = '';
 
+	var lastSelectedSong:Int = -1;
+
 	//var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 	var lightingBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xFF777777);
 
@@ -89,7 +91,7 @@ class FreeplayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In the Freeplay Menu", "Picking a song", null, false, null, 'play');
 		#end
 
 		var length:Int = WeekData.weeksList.length;
@@ -296,9 +298,16 @@ class FreeplayState extends MusicBeatState
 
 		PlayState.grabbablePlayBackRate = ClientPrefs.getGameplaySetting('songspeed', 1);
 		FlxG.sound.music.pitch = PlayState.grabbablePlayBackRate;
-		var mult:Float = FlxMath.lerp(1, iconArray[curSelected].scale.x, CoolUtil.boundTo(1 - (elapsed * 9 * PlayState.grabbablePlayBackRate), 0, 1));
-		iconArray[curSelected].scale.set(mult, mult);
-		iconArray[curSelected].updateHitbox();
+		for (i in 0...iconArray.length) {
+			if (i == lastSelectedSong)
+				continue;
+
+			iconArray[i].scale.set(1, 1);
+		}
+
+		if (lastSelectedSong != -1 && iconArray[lastSelectedSong] != null)
+			iconArray[lastSelectedSong].scale.set(FlxMath.lerp(iconArray[lastSelectedSong].scale.x, 1, elapsed * 9),
+				FlxMath.lerp(iconArray[lastSelectedSong].scale.y, 1, elapsed * 9));
 
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
@@ -633,9 +642,8 @@ class FreeplayState extends MusicBeatState
 
 	override function beatHit() {
 		super.beatHit();
-		if (instPlaying != -1){
-			iconArray[curSelected].scale.set(1.2, 1.2);
-		}
+		if (lastSelectedSong != -1 && iconArray[lastSelectedSong] != null)
+			iconArray[lastSelectedSong].scale.add(0.2, 0.2);
 	}
 }
 
