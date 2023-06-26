@@ -21,6 +21,10 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.addons.display.FlxBackdrop;
 
+#if desktop
+import Discord.DiscordClient;
+#end
+
 using StringTools;
 
 class CharMenu extends MusicBeatState
@@ -95,6 +99,11 @@ class CharMenu extends MusicBeatState
 	{
 		resetCharacterSelectionVars();
 		checkFirstSlot();
+
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("In the Character Select", "About to start a song", null, false, null, 'play');
+		#end
 
 		// Code to check is an achievement is completed
 		for (i in 0...achievementUnlocks.length)

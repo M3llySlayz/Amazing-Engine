@@ -62,7 +62,7 @@ class OptionsState extends MusicBeatState
 
 	override function create() {
 		#if desktop
-		DiscordClient.changePresence("Options Menu", null);
+		DiscordClient.changePresence("In the Options Menu", "Changing settings", 'icon', false, null, 'gear');
 		#end
 
 		FlxG.mouse.visible = true;
