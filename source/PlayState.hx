@@ -5917,12 +5917,12 @@ class PlayState extends MusicBeatState
 	}
 
 	function reloadDadTrails() {
-		trailunderdad = new FlxTrail(dad, null, 6, 1, 0.1, 0.1); //nice
+		trailunderdad = new FlxTrail(dad, null, 16, 1, 0.5, 0.001); //nice
 		insert(members.indexOf(dadGroup) - 1, trailunderdad);
 	}
 
 	function reloadBFTrails() {
-		trailunderbf = new FlxTrail(boyfriend, null, 6, 1, 0.1, 0.1); //nice
+		trailunderbf = new FlxTrail(boyfriend, null, 16, 1, 0.5, 0.001); //nice
 		insert(members.indexOf(boyfriendGroup) - 1, trailunderbf);
 	}
 
