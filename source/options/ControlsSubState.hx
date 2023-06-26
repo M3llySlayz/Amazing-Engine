@@ -160,11 +160,11 @@ class ControlsSubState extends MusicBeatSubstate {
 					changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
 				}
 			}
-			if (controls.UI_UP_P) {
+			if (controls.UI_UP_P || FlxG.mouse.wheel != 0) {
 				changeSelection(-shiftMult);
 				holdTime = 0;
 			}
-			if (controls.UI_DOWN_P) {
+			if (controls.UI_DOWN_P || FlxG.mouse.wheel != 0) {
 				changeSelection(shiftMult);
 				holdTime = 0;
 			}
@@ -177,11 +177,10 @@ class ControlsSubState extends MusicBeatSubstate {
 			if (controls.BACK) {
 				ClientPrefs.reloadControls();
 				close();
-				//FlxG.sound.play(Paths.sound('cancelMenu'));
 				SoundEffects.playSFX('cancel', true);
 			}
 
-			if(controls.ACCEPT && nextAccept <= 0) {
+			if((controls.ACCEPT && nextAccept <= 0) || FlxG.mouse.justPressed) {
 				if(optionShit[curSelected][0] == defaultKey) {
 					ClientPrefs.keyBinds = EKData.Keybinds.defaultKeybinds();
 					reloadTexts();
