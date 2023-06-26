@@ -1149,11 +1149,11 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
-		laneunderlayOp = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 4, FlxColor.BLACK);
+		laneunderlayOp = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + Std.int(50 * Note.lessScale[mania]), FlxG.height * 4, FlxColor.BLACK);
 		laneunderlayOp.alpha = 0;
 		add(laneunderlayOp);
 
-		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + 50, FlxG.height * 4, FlxColor.BLACK);
+		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + Std.int(50 * Note.lessScale[mania]), FlxG.height * 4, FlxColor.BLACK);
 		laneunderlay.alpha = 0;
 		add(laneunderlay);
 
@@ -3434,9 +3434,9 @@ class PlayState extends MusicBeatState
 	{
 		callOnLuas('onUpdate', [elapsed]);
 
-		laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
+		laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - (25 * Note.lessScale[mania]) : opponentStrums.members[0].x - (25 * Note.lessScale[mania]);
 		laneunderlay.screenCenter(Y);
-		laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
+		laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - (25 * Note.lessScale[mania]) : playerStrums.members[0].x - (25 * Note.lessScale[mania]);
 		laneunderlayOp.screenCenter(Y);
 
 		if(ClientPrefs.camMovement && !PlayState.isPixelStage) {
@@ -5313,7 +5313,7 @@ class PlayState extends MusicBeatState
 
 			if (ClientPrefs.cameraMoveOnNotes) {
 				try {
-					if(SONG.notes[Math.floor(curStep / 16)].mustHitSection == false && !note.isSustainNote) {
+					if(!SONG.notes[curSection].mustHitSection && !note.isSustainNote) {
 						if (!char.stunned) {
 							switch (char.animation.curAnim.name) {
 								case 'singLEFT' | 'singLEFT-alt':
@@ -5330,15 +5330,11 @@ class PlayState extends MusicBeatState
 				} catch (e:Any) {}
 			}
 
-			if(healthdrain > 0) {
-				var ppppperc = healthdrain/100;
-				if (healthdrainKill == true) {
-					health = health - ppppperc;
-				} else if (!healthdrainKill && (health - ppppperc < 0)) {
-					//trace("shut up");
-					health = 0.01;
-				} else if (!healthdrainKill && (health - ppppperc > 0)) {
-					health = health - ppppperc;
+			if(SONG.notes[curSection].healthdrain > 0) {
+				if (!SONG.notes[curSection].healthdrainKill && health > SONG.notes[curSection].healthdrain) {
+					health -= SONG.notes[curSection].healthdrain;
+				} else if (!SONG.notes[curSection].healthdrainKill && health < SONG.notes[curSection].healthdrain) {
+					health = SONG.notes[curSection].healthdrain;
 				}
 			}
 
@@ -5352,7 +5348,6 @@ class PlayState extends MusicBeatState
 				char.playAnim(animToPlay, true);
 				char.holdTimer = 0;
 			}
-
 		}
 
 		if (SONG.needsVoices)
