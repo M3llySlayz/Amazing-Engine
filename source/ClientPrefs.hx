@@ -225,7 +225,7 @@ class ClientPrefs {
 		'note_fourt5'	=> [C, NONE],
 		'note_fourt6'	=> [V, NONE],
 		'note_fourt7'	=> [T, NONE],
-		'note_fourt8'    => [Y, NONE],
+		'note_fourt8'   => [Y, NONE],
 		'note_fourt9'	=> [N, NONE],
 		'note_fourt10'	=> [M, NONE],
 		'note_fourt11'	=> [H, NONE],
@@ -240,8 +240,8 @@ class ClientPrefs {
 		'note_155'	=> [C, NONE],
 		'note_156'	=> [V, NONE],
 		'note_157'	=> [T, NONE],
-		'note_158'    => [Y, NONE],
-		'note_159'    => [U, NONE],
+		'note_158'  => [Y, NONE],
+		'note_159'  => [U, NONE],
 		'note_1510'	=> [N, NONE],
 		'note_1511'	=> [M, NONE],
 		'note_1512'	=> [H, NONE],
@@ -256,8 +256,8 @@ class ClientPrefs {
 		'note_165'	=> [Q, NONE],
 		'note_166'	=> [W, NONE],
 		'note_167'	=> [E, NONE],
-		'note_168'    => [R, NONE],
-		'note_169'    => [Y, NONE],
+		'note_168'  => [R, NONE],
+		'note_169'  => [Y, NONE],
 		'note_1610'	=> [U, NONE],
 		'note_1611'	=> [I, NONE],
 		'note_1612'	=> [O, NONE],
@@ -273,9 +273,9 @@ class ClientPrefs {
 		'note_175'	=> [Q, NONE],
 		'note_176'	=> [W, NONE],
 		'note_177'	=> [E, NONE],
-		'note_178'    => [R, NONE],
-		'note_179'		=> [SPACE, NONE],
-		'note_1710'    => [Y, NONE],
+		'note_178'  => [R, NONE],
+		'note_179'	=> [SPACE, NONE],
+		'note_1710' => [Y, NONE],
 		'note_1711'	=> [U, NONE],
 		'note_1712'	=> [I, NONE],
 		'note_1713'	=> [O, NONE],
@@ -283,7 +283,6 @@ class ClientPrefs {
 		'note_1715'	=> [J, NONE],
 		'note_1716'	=> [K, NONE],
 		'note_1717'	=> [L, NONE],
-
 
 		'note_181'	=> [A, NONE],
 		'note_182'	=> [S, NONE],
@@ -304,8 +303,7 @@ class ClientPrefs {
 		'note_1816'	=> [U, NONE],
 		'note_1817'	=> [I, NONE],
 		'note_1818'	=> [O, NONE],
-		
-		
+
 		'ui_left'		=> [A, LEFT],
 		'ui_down'		=> [S, DOWN],
 		'ui_up'			=> [W, UP],
@@ -319,18 +317,13 @@ class ClientPrefs {
 		'volume_mute'	=> [ZERO, NONE],
 		'volume_up'		=> [NUMPADPLUS, PLUS],
 		'volume_down'	=> [NUMPADMINUS, MINUS],
-		
+
 		'debug_1'		=> [SEVEN, NONE],
 		'debug_2'		=> [EIGHT, NONE],
 
 		'dev_bind'		=> [NUMPADFIVE, F5]
 	];
 	public static var defaultKeys:Map<String, Array<FlxKey>> = keyBinds;
-
-	/*public static function loadDefaultKeys() {
-		defaultKeys = keyBinds.copy();
-		//trace(defaultKeys);
-	}*/
 
 	public static function saveSettings() {
 		FlxG.save.data.downScroll = downScroll;

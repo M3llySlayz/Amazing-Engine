@@ -39,33 +39,33 @@ class InputFormatter {
 			case NINE:
 				return "9";
 			case NUMPADZERO:
-				return "#0";
+				return "NP0";
 			case NUMPADONE:
-				return "#1";
+				return "NP1";
 			case NUMPADTWO:
-				return "#2";
+				return "NP2";
 			case NUMPADTHREE:
-				return "#3";
+				return "NP3";
 			case NUMPADFOUR:
-				return "#4";
+				return "NP4";
 			case NUMPADFIVE:
-				return "#5";
+				return "NP5";
 			case NUMPADSIX:
-				return "#6";
+				return "NP6";
 			case NUMPADSEVEN:
-				return "#7";
+				return "NP7";
 			case NUMPADEIGHT:
-				return "#8";
+				return "NP8";
 			case NUMPADNINE:
-				return "#9";
+				return "NP9";
 			case NUMPADMULTIPLY:
-				return "#*";
+				return "NP*";
 			case NUMPADPLUS:
-				return "#+";
+				return "NP+";
 			case NUMPADMINUS:
-				return "#-";
+				return "NP-";
 			case NUMPADPERIOD:
-				return "#.";
+				return "NP.";
 			case SEMICOLON:
 				return ";";
 			case COMMA:
