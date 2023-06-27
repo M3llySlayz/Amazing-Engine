@@ -52,8 +52,8 @@ class FPS extends TextField
 
 	public function enterFrame(deltaTime:Float) {
 		updateFPS(deltaTime);
-		if (ClientPrefs.showMEM) updateMemory();
-		text = ClientPrefs.showFPS ?? FPSText + ClientPrefs.showMEM ?? MemoryText;
+		updateMemory();
+		text = FPSText + MemoryText;
 	}
 
 	// Frames Counter
@@ -138,7 +138,7 @@ class FPS extends TextField
 			GarbageMemory = cpp.vm.Gc.memUsage();
 
 			//checkMemory();
-			MemoryText = (ClientPrefs.showFPS ? '\n' : '') + 'Memory: ${CoolUtil.formatBytes(TotalMemory / 2)}\n- Current: ${CoolUtil.formatBytes(CurrentMemory / 2)}, Peak: ${CoolUtil.formatBytes(PeakMemory / 2)}\nGarbage Memory: ${CoolUtil.formatBytes(GarbageMemory)} Freed';
+			MemoryText = (ClientPrefs.showMEM ? '\n' : '') + 'Memory: ${CoolUtil.formatBytes(TotalMemory / 2)}\n- Current: ${CoolUtil.formatBytes(CurrentMemory / 2)}, Peak: ${CoolUtil.formatBytes(PeakMemory / 2)}\nGarbage Memory: ${CoolUtil.formatBytes(GarbageMemory)} Freed';
 		}
 	}
 
