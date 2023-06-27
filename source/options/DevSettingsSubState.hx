@@ -34,13 +34,6 @@ class DevSettingsSubState extends BaseOptionsMenu
 		title = 'Dev Settings';
 		rpcTitle = 'Dev Settings Menu'; //for Discord Rich Presence
 
-		var option:Option = new Option('Centered Freeplay', //Name
-			'If checked, the Freeplay menu songs will be centered.', //Description
-			'freeplayCenter', //Save data variable name
-			'bool', //Variable type
-			false); //Default value
-		addOption(option);
-
 		var option:Option = new Option('Main Menu Position:', //Name
 			'Where do you want the buttons to be?', //Description
 			'mainMenuPos', //Save data variable name

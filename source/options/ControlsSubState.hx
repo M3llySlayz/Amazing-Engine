@@ -160,12 +160,20 @@ class ControlsSubState extends MusicBeatSubstate {
 					changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
 				}
 			}
-			if (controls.UI_UP_P) {
-				changeSelection(-shiftMult);
+			if (controls.UI_UP_P || FlxG.mouse.wheel != 0) {
+				if (FlxG.mouse.wheel > 0) {
+					changeSelection(-shiftMult);
+				} else {
+					changeSelection(shiftMult);
+				}
 				holdTime = 0;
 			}
-			if (controls.UI_DOWN_P) {
-				changeSelection(shiftMult);
+			if (controls.UI_DOWN_P || FlxG.mouse.wheel != 0) {
+				if (FlxG.mouse.wheel > 0) {
+					changeSelection(shiftMult);
+				} else {
+					changeSelection(-shiftMult);
+				}
 				holdTime = 0;
 			}
 			if (controls.UI_LEFT_P || controls.UI_RIGHT_P) {
@@ -177,20 +185,19 @@ class ControlsSubState extends MusicBeatSubstate {
 			if (controls.BACK) {
 				ClientPrefs.reloadControls();
 				close();
-				//FlxG.sound.play(Paths.sound('cancelMenu'));
 				SoundEffects.playSFX('cancel', true);
 			}
 
-			if(controls.ACCEPT && nextAccept <= 0) {
+			if((controls.ACCEPT && nextAccept <= 0) || FlxG.mouse.justPressed) {
 				if(optionShit[curSelected][0] == defaultKey) {
-					ClientPrefs.keyBinds = ClientPrefs.defaultKeys.copy();
-					reloadKeys();
+					ClientPrefs.keyBinds = EKData.Keybinds.defaultKeybinds();
 					reloadTexts();
 					changeSelection();
+					reloadKeys();
 					SoundEffects.playSFX('confirm', true);
 					FlxG.sound.muteKeys = TitleState.muteKeys;
-				FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-				FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+					FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+					FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 				} else if(!unselectableCheck(curSelected)) {
 					bindingTime = 0;
 					rebindingKey = true;
@@ -236,7 +243,6 @@ class ControlsSubState extends MusicBeatSubstate {
 						grpInputs[curSelected].alpha = 1;
 				}
 				reloadTexts();
-				//FlxG.sound.play(Paths.sound('scrollMenu'));
 				SoundEffects.playSFX('scroll', false);
 				rebindingKey = false;
 				bindingTime = 0;
@@ -325,8 +331,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				}
 			}
 		}
-		//FlxG.sound.play(Paths.sound('scrollMenu'));
-		SoundEffects.playSFX('scroll', false);
+		if (change != 0) SoundEffects.playSFX('scroll', false);
 	}
 
 	function changeAlt() {
