@@ -40,7 +40,7 @@ class FPS extends TextField
 
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Paths.font("antonio.ttf"), 15, color);
+		defaultTextFormat = new TextFormat("Antonio Bold", 15, color);
 		defaultTextFormat.bold = true;
 		autoSize = LEFT;
 		multiline = true;
@@ -81,7 +81,13 @@ class FPS extends TextField
 			}
 		}
 		currentFps = times.length;
-		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2);
+
+		var intervalTime = 1 / currentFps;
+		var ms = Std.int(intervalTime * 1000);
+		var maxMs = 0;
+		if (ms < maxMs) maxMs = ms;
+
+		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + '\n - Time: $ms ms (Max: $maxMs ms)';
 		updateFPSTextColor();
 	}
 
