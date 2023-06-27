@@ -37,6 +37,7 @@ class FPS extends TextField
 		this.y = y;
 
 		drawFPS();
+		drawMemory();
 
 		selectable = false;
 		mouseEnabled = false;
@@ -71,10 +72,14 @@ class FPS extends TextField
 		times = [];
 	}
 
+	var intervalTime:Float;
+	var ms:Float;
+	var maxMs:Float = 16;
+
 	// I wrote this from scratch
 	function updateFPS(deltaTime:Float) {
 		currentTime += deltaTime;
-		times.unshift(Date.now());
+		times.push(Date.now());
 		for (i in 0...times.length) {
 			if (times[i] != null && times[i].getTime() + 1000 < Date.now().getTime()) {
 				times.remove(times[i]);
@@ -82,9 +87,8 @@ class FPS extends TextField
 		}
 		currentFps = times.length;
 
-		var intervalTime = 1 / currentFps;
-		var ms = Std.int(intervalTime * 1000);
-		var maxMs = 0;
+		intervalTime = 1 / currentFps;
+		ms = Std.int(intervalTime * 1000);
 		if (ms < maxMs) maxMs = ms;
 
 		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + '\n - Time: $ms ms (Max: $maxMs ms)';
@@ -96,7 +100,7 @@ class FPS extends TextField
 		// Testing...
 		//trace(Math.pow(10, 9));
 		// Math.pow(10, 9) * 4
-		if (TotalMemory >= 4000000000 || currentFps <= 0.5 / FlxG.elapsed) {
+		if (TotalMemory >= 12000000000 || currentFps <= 0.5 / FlxG.elapsed) {
 			textColor = 0xFFFF0000;
 		} else {
 			textColor = 0xFFFFFFFF;
@@ -109,6 +113,14 @@ class FPS extends TextField
 	var CurrentMemory:Float;
 	var TotalMemory:Float;
 	var GarbageMemory:Float;
+
+	function drawMemory() {
+		PeakMemory = 0;
+		CurrentMemory = 0;
+		TotalMemory = 0;
+		GarbageMemory = 0;
+	}
+
 	var MemoryText:String;
 
 	var MemoryString:String;

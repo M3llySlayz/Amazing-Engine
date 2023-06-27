@@ -89,11 +89,11 @@ class CoolUtil
 	 * [`Format`, `Divisor`]
 	 */
 	 public static var byte_formats:Array<Array<Dynamic>> = [
-		["$bytes Bytes", 1.0],
-		["$bytes KB", 1024.0],
-		["$bytes MB", 1048576.0],
-		["$bytes GB", 1073741824.0],
-		["$bytes TB", 1099511627776.0]
+		["$bytes Bytes", 0],
+		["$bytes KB", 1000],
+		["$bytes MB", 1000000],
+		["$bytes GB", 1000000000],
+		["$bytes TB", 1000000000000]
 	];
 
 	/**
