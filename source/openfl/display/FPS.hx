@@ -52,7 +52,7 @@ class FPS extends TextField
 
 	public function enterFrame(deltaTime:Float) {
 		updateFPS(deltaTime);
-		updateMemory();
+		if (ClientPrefs.showMEM) updateMemory();
 		text = FPSText + MemoryText;
 	}
 
@@ -78,21 +78,25 @@ class FPS extends TextField
 
 	// I wrote this from scratch
 	function updateFPS(deltaTime:Float) {
-		currentTime += deltaTime;
-		times.push(Date.now());
-		for (i in 0...times.length) {
-			if (times[i] != null && times[i].getTime() + 1000 < Date.now().getTime()) {
-				times.remove(times[i]);
+		if (ClientPrefs.showFPS) {
+			currentTime += deltaTime;
+			times.push(Date.now());
+			for (i in 0...times.length) {
+				if (times[i] != null && times[i].getTime() + 1000 < Date.now().getTime()) {
+					times.remove(times[i]);
+				}
 			}
+			currentFps = times.length;
+
+			intervalTime = 1 / currentFps;
+			ms = Std.int(intervalTime * 1000);
+			if (ms < maxMs) maxMs = ms;
+
+			FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + /* This text appears if your framerate is higher than the refresh rate */ (ClientPrefs.framerate > times.length + 9 ? ' [SLOWDOWN]' : '') + '\n - Time: $ms ms (Max: $maxMs ms)';
+			updateFPSTextColor();
+		} else {
+			FPSText = '';
 		}
-		currentFps = times.length;
-
-		intervalTime = 1 / currentFps;
-		ms = Std.int(intervalTime * 1000);
-		if (ms < maxMs) maxMs = ms;
-
-		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + /* This text appears if your framerate is higher than the refresh rate */ ((ClientPrefs.framerate > times.length + 9 && currentFps == times.length) ? ' (Slowdown mode)' : '') + '\n - Time: $ms ms (Max: $maxMs ms)';
-		updateFPSTextColor();
 	}
 
 	// Smooth fps color change
@@ -129,13 +133,17 @@ class FPS extends TextField
 	var GarbageMemoryString:String;
 
 	function updateMemory() {
-		CurrentMemory = Memory.getCurrentUsage();
-		PeakMemory = Memory.getPeakUsage();
-		TotalMemory = CurrentMemory + PeakMemory;
-		GarbageMemory = cpp.vm.Gc.memUsage();
+		if (ClientPrefs.showFPS) {
+			CurrentMemory = Memory.getCurrentUsage();
+			PeakMemory = Memory.getPeakUsage();
+			TotalMemory = CurrentMemory + PeakMemory;
+			GarbageMemory = cpp.vm.Gc.memUsage();
 
-		//checkMemory();
-		MemoryText = '\nMemory: ${CoolUtil.formatBytes(TotalMemory / 2)}\n- Current: ${CoolUtil.formatBytes(CurrentMemory / 2)}, Peak: ${CoolUtil.formatBytes(PeakMemory / 2)}\nGarbage Memory: ${CoolUtil.formatBytes(GarbageMemory)} Freed';
+			//checkMemory();
+			MemoryText = '\nMemory: ${CoolUtil.formatBytes(TotalMemory / 2)}\n- Current: ${CoolUtil.formatBytes(CurrentMemory / 2)}, Peak: ${CoolUtil.formatBytes(PeakMemory / 2)}\nGarbage Memory: ${CoolUtil.formatBytes(GarbageMemory)} Freed';
+		} else {
+			MemoryText = '';
+		}
 	}
 
 	/*
