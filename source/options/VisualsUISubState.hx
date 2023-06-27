@@ -163,20 +163,21 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.changeValue = 1;
 		
 		#if !mobile
+
 		var option:Option = new Option('FPS Counter',
-			'If checked, shows the FPS Counter.',
+			'If unchecked, hides the FPS Counter.',
 			'showFPS',
 			'bool',
 			true);
 		addOption(option);
-		option.onChange = onChangeFPSCounter;
+
 		var option:Option = new Option('Memory Counter',
-			'If checked, shows the Memory Counter.',
+			'If unchecked, hides the Memory Counter.',
 			'showMEM',
 			'bool',
-			false);
+			true);
 		addOption(option);
-		option.onChange = onChangeFPSCounter;
+
 		#end
 
 		var option:Option = new Option('Loading Speed:',
@@ -223,12 +224,4 @@ class VisualsUISubState extends BaseOptionsMenu
 
 		super();
 	}
-
-	#if !mobile
-	function onChangeFPSCounter()
-	{
-		if(Main.fpsVar != null)
-			Main.fpsVar.visible = ClientPrefs.showFPS;
-	}
-	#end
 }
