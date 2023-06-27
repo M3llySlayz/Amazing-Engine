@@ -5,12 +5,10 @@ import openfl.filters.BitmapFilter;
 import openfl.filters.ColorMatrixFilter;
 
 class ColorblindFilters {
-    // i honesly have no ideas how to make it, so i hope that works
     public static var filterArray:Array<BitmapFilter> = [];
 	public static var filterMap:Map<String, {filter:BitmapFilter, ?onUpdate:Void->Void}> = [
-
         /*
-            I found these values in official haxe guides :D
+            I found the first 3 values in official haxe guides :D
         */
 
         "Deuteranopia" => {
@@ -39,6 +37,16 @@ class ColorblindFilters {
 					0.02, 0.82, 0.16, 0, 0,
 					0.06, 0.88, 0.18, 0, 0,
 					   0,    0,    0, 1, 0,
+				];
+
+				{filter: new ColorMatrixFilter(matrix)}
+			},
+			"Bluecone Monochromacy" => {
+				var matrix:Array<Float> = [
+					0.567, 0.433, 0, 0, 0,
+					0.558, 0.442, 0, 0, 0,
+					0,     0.242, 0.758, 0, 0,
+					0,     0,     0,     1, 0
 				];
 
 				{filter: new ColorMatrixFilter(matrix)}

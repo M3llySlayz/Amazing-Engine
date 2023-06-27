@@ -90,7 +90,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'colorblindMode',
 			'string',
 			'None', 
-			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia']);
+			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia', 'Bluecone Monochromacy']);
 		option.onChange = ColorblindFilters.applyFiltersOnGame;
 		addOption(option);
 
