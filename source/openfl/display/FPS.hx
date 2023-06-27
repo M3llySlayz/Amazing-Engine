@@ -29,7 +29,7 @@ import flixel.FlxG;
 
 class FPS extends TextField
 {
-	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
+	public function new(x:Float = 6, y:Float = 6, color:Int = 0xFFFFFFFF)
 	{
 		super();
 
