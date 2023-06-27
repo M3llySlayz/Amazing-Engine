@@ -40,7 +40,7 @@ class FPS extends TextField
 
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Paths.font("antonio"), 15, color);
+		defaultTextFormat = new TextFormat(Paths.font("antonio.ttf"), 15, color);
 		defaultTextFormat.bold = true;
 		autoSize = LEFT;
 		multiline = true;
