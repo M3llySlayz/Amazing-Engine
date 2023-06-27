@@ -147,7 +147,7 @@ class ControlsSubState extends MusicBeatSubstate {
 	var holdTime:Float = 0;
 	override function update(elapsed:Float) {
 		if(!rebindingKey) {
-			var shiftMult:Int = FlxG.keys.pressed.SHIFT ? 3 : 1;
+			var scrollAmount:Int = FlxG.keys.pressed.SHIFT ? 3 : 1;
 
 			if(controls.UI_DOWN || controls.UI_UP)
 			{
@@ -157,23 +157,17 @@ class ControlsSubState extends MusicBeatSubstate {
 
 				if(holdTime > 0.5 && checkNewHold - checkLastHold > 0)
 				{
-					changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
+					changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -scrollAmount : scrollAmount));
 				}
 			}
 			if (controls.UI_UP_P || FlxG.mouse.wheel != 0) {
-				if (FlxG.mouse.wheel > 0) {
-					changeSelection(-shiftMult);
-				} else {
-					changeSelection(shiftMult);
-				}
+				changeSelection(-scrollAmount);
+				changeSelection(FlxG.mouse.wheel);
 				holdTime = 0;
 			}
 			if (controls.UI_DOWN_P || FlxG.mouse.wheel != 0) {
-				if (FlxG.mouse.wheel > 0) {
-					changeSelection(shiftMult);
-				} else {
-					changeSelection(-shiftMult);
-				}
+				changeSelection(scrollAmount);
+				changeSelection(FlxG.mouse.wheel);
 				holdTime = 0;
 			}
 			if (controls.UI_LEFT_P || controls.UI_RIGHT_P) {

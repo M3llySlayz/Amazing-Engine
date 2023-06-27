@@ -90,7 +90,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'colorblindMode',
 			'string',
 			'None', 
-			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia']);
+			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia', 'Bluecone Monochromacy', 'Monochromacy (Greyscale Filter)']);
 		option.onChange = ColorblindFilters.applyFiltersOnGame;
 		addOption(option);
 
@@ -163,13 +163,21 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.changeValue = 1;
 		
 		#if !mobile
+
 		var option:Option = new Option('FPS Counter',
-			'If unchecked, hides FPS Counter.',
+			'If checked, shows the FPS Counter.',
 			'showFPS',
 			'bool',
 			true);
 		addOption(option);
-		option.onChange = onChangeFPSCounter;
+
+		var option:Option = new Option('Memory Counter',
+			'If checked, shows the Memory Counter.',
+			'showMEM',
+			'bool',
+			true);
+		addOption(option);
+
 		#end
 
 		var option:Option = new Option('Loading Speed:',
@@ -216,12 +224,4 @@ class VisualsUISubState extends BaseOptionsMenu
 
 		super();
 	}
-
-	#if !mobile
-	function onChangeFPSCounter()
-	{
-		if(Main.fpsVar != null)
-			Main.fpsVar.visible = ClientPrefs.showFPS;
-	}
-	#end
 }

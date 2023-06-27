@@ -131,6 +131,8 @@ class TitleState extends MusicBeatState
 		}
 		#end*/
 
+		ColorblindFilters.applyFiltersOnGame();
+
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.sound.muteKeys = muteKeys;
 		FlxG.sound.volumeDownKeys = volumeDownKeys;
@@ -717,7 +719,7 @@ class TitleState extends MusicBeatState
 		}
 	}
 
-	var skippedIntro:Bool = false;
+	public static var skippedIntro:Bool = false;
 	var increaseVolume:Bool = false;
 	function skipIntro():Void
 	{

@@ -2,6 +2,7 @@ package;
 
 import flixel.util.FlxSave;
 
+import flixel.math.FlxMath;
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
@@ -35,52 +36,109 @@ class CoolUtil
 		trace(snap);
 		return (m / snap);
 	}
+
 	public static var daCam:FlxCamera;
 	public static function getDifficultyFilePath(num:Null<Int> = null)
+	{
+		if(num == null) num = PlayState.storyDifficulty;
+
+		var fileSuffix:String = difficulties[num];
+		if(fileSuffix != defaultDifficulty)
 		{
-			if(num == null) num = PlayState.storyDifficulty;
-	
-			var fileSuffix:String = difficulties[num];
-			if(fileSuffix != defaultDifficulty)
-			{
-				fileSuffix = '-' + fileSuffix;
-			}
-			else
-			{
-				fileSuffix = '';
-			}
-			return Paths.formatToSongPath(fileSuffix);
+			fileSuffix = '-' + fileSuffix;
 		}
-		/*leather code
-		public static function coolError(message:Null<String> = null, title:Null<String> = null):Void {
-			#if !linux
-			Application.current.window.alert(message, title);
-			#else
-			trace(title + " - " + message, ERROR);
-	
-			var text:FlxText = new FlxText(8, 0, 1280, title + " - " + message, 24);
-			text.color = FlxColor.RED;
-			text.borderSize = 1.5;
-			text.borderStyle = OUTLINE;
-			text.borderColor = FlxColor.BLACK;
-			text.scrollFactor.set();
-			text.cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
-	
-			FlxG.state.add(text);
-	
-			FlxTween.tween(text, {alpha: 0, y: 8}, 5, {
-				onComplete: function(_) {
-					FlxG.state.remove(text);
-					text.destroy();
-				}
-			});
-			#end
+		else
+		{
+			fileSuffix = '';
 		}
+		return Paths.formatToSongPath(fileSuffix);
+	}
+
+	/*leather code
+	public static function coolError(message:Null<String> = null, title:Null<String> = null):Void {
+		#if !linux
+		Application.current.window.alert(message, title);
+		#else
+		trace(title + " - " + message, ERROR);
+
+		var text:FlxText = new FlxText(8, 0, 1280, title + " - " + message, 24);
+		text.color = FlxColor.RED;
+		text.borderSize = 1.5;
+		text.borderStyle = OUTLINE;
+		text.borderColor = FlxColor.BLACK;
+		text.scrollFactor.set();
+		text.cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+
+		FlxG.state.add(text);
+
+		FlxTween.tween(text, {alpha: 0, y: 8}, 5, {
+			onComplete: function(_) {
+				FlxG.state.remove(text);
+				text.destroy();
+			}
+		});
+		#end
+	}
 	*/
-		public static function difficultyString():String
-		{
-			return difficulties[PlayState.storyDifficulty].toUpperCase();
+
+	// Leather code again
+	/**
+	 * List of formatting for different byte amounts
+	 * in an array formatted like this:
+	 * 
+	 * [`Format`, `Divisor`]
+	 */
+	 public static var byte_formats:Array<Array<Dynamic>> = [
+		["$bytes Bytes", 0],
+		["$bytes KB", 1000],
+		["$bytes MB", 1000000],
+		["$bytes GB", 1000000000],
+		["$bytes TB", 1000000000000]
+	];
+
+	/**
+	 * Formats `bytes` into a `String`.
+	 * 
+	 * Examples (Input = Output)
+	 * 
+	 * ```
+	 * 1024 = '1 kb'
+	 * 1536 = '1.5 kb'
+	 * 1048576 = '2 mb'
+	 * ```
+	 * 
+	 * @param bytes Amount of bytes to format and return.
+	 * @param onlyValue (Optional, Default = `false`) Whether or not to only format the value of bytes (ex: `'1.5 mb' -> '1.5'`).
+	 * @param precision (Optional, Default = `2`) The precision of the decimal value of bytes. (ex: `1 -> 1.5, 2 -> 1.53, etc`).
+	 * @return Formatted byte string.
+	 */
+	public static function formatBytes(bytes:Float, onlyValue:Bool = false, precision:Int = 2):String {
+		var formatted_bytes:String = '???';
+
+		for (i in 0...byte_formats.length) {
+			// If the next byte format has a divisor smaller than the current amount of bytes,
+			// and thus not the right format skip it.
+			if (byte_formats.length > i + 1 && byte_formats[i + 1][1] < bytes)
+				continue;
+
+			var format:Array<Dynamic> = byte_formats[i];
+
+			if (!onlyValue)
+				formatted_bytes = StringTools.replace(format[0], "$bytes", Std.string(FlxMath.roundDecimal(bytes / format[1], precision)));
+			else
+				formatted_bytes = Std.string(FlxMath.roundDecimal(bytes / format[1], precision));
+
+			break;
 		}
+
+		return formatted_bytes;
+	}
+		
+	public static function difficultyString():String
+	{
+		return difficulties[PlayState.storyDifficulty].toUpperCase();
+	}
+
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float {
 		return Math.max(min, Math.min(max, value));
 	}
