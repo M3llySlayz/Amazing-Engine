@@ -458,7 +458,7 @@ class PlayState extends MusicBeatState
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
 
-		#if desktop
+		#if DISCORD_ALLOWED
 		var s_termination = "s";
 		if (mania == 0) s_termination = "";
 		storyDifficultyText = " (" + CoolUtil.difficulties[storyDifficulty] + ", " + (mania + 1) + " key" + s_termination + ")";
@@ -911,7 +911,6 @@ class PlayState extends MusicBeatState
 		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
 		luaDebugGroup.cameras = [camOther];
 		add(luaDebugGroup);
-		#end
 
 		function addAbilityToUnlockAchievements(funkinLua:FunkinLua)
 		{
@@ -936,6 +935,7 @@ class PlayState extends MusicBeatState
 				});
 			}
 		}
+		#end
 	
 		//CUSTOM ACHIVEMENTS
 		#if (MODS_ALLOWED && LUA_ALLOWED && ACHIEVEMENTS_ALLOWED)
@@ -3357,7 +3357,7 @@ class PlayState extends MusicBeatState
 			paused = false;
 			callOnLuas('onResume', []);
 
-			#if desktop
+			#if DISCORD_ALLOWED
 			if (startTimer != null && startTimer.finished)
 			{
 				DiscordClient.changePresence(detailsText, SONG.song + storyDifficultyText, iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset, 'play');
@@ -3926,7 +3926,7 @@ class PlayState extends MusicBeatState
 		openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 		//}
 
-		#if desktop
+		#if DISCORD_ALLOWED
 		DiscordClient.changePresence(detailsPausedText, SONG.song + storyDifficultyText, iconP2.getCharacter(), false, null, 'paused');
 		#end
 	}

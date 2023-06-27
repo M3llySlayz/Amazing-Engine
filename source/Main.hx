@@ -17,7 +17,7 @@ import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
-#if !neko
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import sys.FileSystem;
@@ -156,7 +156,9 @@ class Main extends Sprite
 		Sys.println("Crash dump saved in " + Path.normalize(path));
 
 		Application.current.window.alert(errMsg, "Error!");
+		#if DISCORD_ALLOWED
 		DiscordClient.shutdown();
+		#end
 		Sys.exit(1);
 	}
 	#end

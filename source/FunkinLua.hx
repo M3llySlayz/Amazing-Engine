@@ -57,7 +57,7 @@ import hscript.Interp;
 import hscript.Expr;
 #end
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord;
 #end
 
