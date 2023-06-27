@@ -5,10 +5,9 @@ import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 import flixel.math.FlxMath;
-#if gl_stats
-import openfl.display._internal.stats.Context3DStats;
-import openfl.display._internal.stats.DrawCallContext;
-#end
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+
 #if flash
 import openfl.Lib;
 #end
@@ -17,25 +16,19 @@ import openfl.Lib;
 import openfl.system.System;
 #end
 
-/**
-	The FPS class provides an easy-to-use monitor to display
-	the current frame rate of an OpenFL project
-**/
+#if cpp
+import e.Memory;
+#end
+
+import flixel.FlxG;
+
 #if !openfl_debug
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
+
 class FPS extends TextField
 {
-	/**
-		The current frame rate, expressed using frames-per-second
-	**/
-	public var currentFPS(default, null):Int;
-
-	@:noCompletion private var cacheCount:Int;
-	@:noCompletion private var currentTime:Float;
-	@:noCompletion private var times:Array<Float>;
-
 	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
 	{
 		super();
@@ -43,75 +36,97 @@ class FPS extends TextField
 		this.x = x;
 		this.y = y;
 
-		currentFPS = 0;
+		drawFPS();
+
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("_sans", 14, color);
+		defaultTextFormat = new TextFormat(Paths.font("antonio"), 15, color);
+		defaultTextFormat.bold = true;
 		autoSize = LEFT;
 		multiline = true;
-		text = "FPS: ";
+		text = "FPS: 0\n - Time: 0 ms";
 
+		addEventListener(Event.ENTER_FRAME, (e:Event) -> enterFrame(Sys.time()));
+	}
+
+	public function enterFrame(deltaTime:Float) {
+		updateFPS(deltaTime);
+		updateMemory();
+		text = FPSText + MemoryText;
+	}
+
+	// Frames Counter
+
+	var FPS:Float;
+	var FPSText:String;
+	var currentFps:Float;
+
+	@:noCompletion private var cacheCount:Int;
+	@:noCompletion private var currentTime:Float;
+	@:noCompletion private var times:Array<Date>;
+
+	function drawFPS() {
 		cacheCount = 0;
 		currentTime = 0;
 		times = [];
-
-		#if flash
-		addEventListener(Event.ENTER_FRAME, function(e)
-		{
-			var time = Lib.getTimer();
-			__enterFrame(time - currentTime);
-		});
-		#end
 	}
 
-	// Event Handlers
-	@:noCompletion
-	private #if !flash override #end function __enterFrame(deltaTime:Float):Void
-	{
+	// I wrote this from scratch
+	function updateFPS(deltaTime:Float) {
 		currentTime += deltaTime;
-		times.push(currentTime);
-
-		while (times[0] < currentTime - 1000)
-		{
-			times.shift();
-		}
-
-		var currentCount = times.length;
-		currentFPS = Math.round((currentCount + cacheCount) / 2);
-		if (currentFPS > ClientPrefs.framerate) currentFPS = ClientPrefs.framerate;
-
-		if (currentCount != cacheCount /*&& visible*/)
-		{
-			text = "FPS: " + currentFPS;
-			var memoryMegas:Float = 0;
-			
-			#if openfl
-			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			text += "\nMemory: " + memoryMegas + " MB";
-			#end
-
-			text += "\nAmazing Engine v" + MainMenuState.amazingEngineVersion;
-			#if CHECK_FOR_UPDATES
-			if (MainMenuState.amazingEngineVersion != TitleState.newVersion) {
-				text += "\nVersions don't match.";
+		times.unshift(Date.now());
+		for (i in 0...times.length) {
+			if (times[i] != null && times[i].getTime() + 1000 < Date.now().getTime()) {
+				times.remove(times[i]);
 			}
-			#end
-
-			textColor = 0xFFFFFFFF;
-			if (memoryMegas > 3000 || currentFPS <= ClientPrefs.framerate / 2)
-			{
-				textColor = 0xFFFF0000;
-			}
-
-			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
-			text += "\ntotalDC: " + Context3DStats.totalDrawCalls();
-			text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
-			text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
-			#end
-
-			text += "\n";
 		}
-
-		cacheCount = currentCount;
+		currentFps = times.length;
+		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2);
+		updateFPSTextColor();
 	}
+
+	// Smooth fps color change
+	function updateFPSTextColor() {
+		// Testing...
+		//trace(Math.pow(10, 9));
+		// Math.pow(10, 9) * 4
+		if (TotalMemory >= 4000000000 || currentFps <= 0.5 / FlxG.elapsed) {
+			textColor = 0xFFFF0000;
+		} else {
+			textColor = 0xFFFFFFFF;
+		}
+	}
+
+	// Memory Counter
+
+	var PeakMemory:Float;
+	var CurrentMemory:Float;
+	var TotalMemory:Float;
+	var GarbageMemory:Float;
+	var MemoryText:String;
+
+	var MemoryString:String;
+	var CurrentMemoryString:String;
+	var PeakMemoryString:String;
+	var GarbageMemoryString:String;
+
+	function updateMemory() {
+		CurrentMemory = Memory.getCurrentUsage();
+		PeakMemory = Memory.getPeakUsage();
+		TotalMemory = CurrentMemory + PeakMemory;
+		GarbageMemory = cpp.vm.Gc.memUsage();
+
+		//checkMemory();
+		MemoryText = '\nMemory: ${CoolUtil.formatBytes(TotalMemory / 2)}\n- Current: ${CoolUtil.formatBytes(CurrentMemory / 2)}, Peak: ${CoolUtil.formatBytes(PeakMemory / 2)}\nGarbage Memory: ${CoolUtil.formatBytes(GarbageMemory)} Freed';
+	}
+
+	/*
+	function checkMemory() {
+		'${CoolUtil.formatBytes(CurrentMemory)} / ${CoolUtil.formatBytes(Memory.getPeakUsage())}';
+	}
+
+	function convertToMemoryUnits(baseFloat:Float, whatToConvert:Float, units:String):String {
+		return HelperFunctions.truncateFloat(baseFloat / whatToConvert, 2) + ' $units';
+	}
+	*/
 }

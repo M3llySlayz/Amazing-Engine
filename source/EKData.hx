@@ -351,8 +351,7 @@ class EKData {
     ];
 }
 
-class Keybinds
-{
+class Keybinds {
     // This was used in ControlsSubState (line 186) to fix keybind resetting. Feel free to customize this.
     public static function defaultKeybinds():Map<String, Array<flixel.input.keyboard.FlxKey>> {
         return [
