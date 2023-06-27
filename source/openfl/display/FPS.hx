@@ -100,7 +100,7 @@ class FPS extends TextField
 		// Testing...
 		//trace(Math.pow(10, 9));
 		// Math.pow(10, 9) * 4
-		if (TotalMemory >= 12000000000 || currentFps <= 0.5 / FlxG.elapsed) {
+		if (TotalMemory >= 12000000000 || currentFps <= times.length / 2) {
 			textColor = 0xFFFF0000;
 		} else {
 			textColor = 0xFFFFFFFF;
