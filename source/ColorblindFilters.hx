@@ -50,6 +50,16 @@ class ColorblindFilters {
 				];
 
 				{filter: new ColorMatrixFilter(matrix)}
+			},
+			"Monochromacy (Greyscale Filter)" => {
+				var matrix: Array<Float> = [
+					0.299, 0.587, 0.114, 0, 0,
+					0.299, 0.587, 0.114, 0, 0,
+					0.299, 0.587, 0.114, 0, 0,
+					0, 0, 0, 1, 0
+				];
+
+				{filter: new ColorMatrixFilter(matrix)}
 			}
     ];
 
