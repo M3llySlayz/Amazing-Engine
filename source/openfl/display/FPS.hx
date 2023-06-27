@@ -27,6 +27,10 @@ import flixel.FlxG;
 @:noDebug
 #end
 
+#if DISCORD_ALLOWED
+import Discord.DiscordClient;
+#end
+
 class FPS extends TextField
 {
 	public function new(x:Float = 6, y:Float = 6, color:Int = 0xFFFFFFFF)
@@ -91,7 +95,7 @@ class FPS extends TextField
 		ms = Std.int(intervalTime * 1000);
 		if (ms < maxMs) maxMs = ms;
 
-		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + /* This text appears if your framerate is higher than the refresh rate */ (ClientPrefs.framerate > times.length + 9 ? ' (Slowdown mode)' : '') + '\n - Time: $ms ms (Max: $maxMs ms)';
+		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + /* This text appears if your framerate is higher than the refresh rate */ ((ClientPrefs.framerate > times.length + 9 #if DISCORD_ALLOWED && DiscordClient.isInitialized #end) ? ' (Slowdown mode)' : '') + '\n - Time: $ms ms (Max: $maxMs ms)';
 		updateFPSTextColor();
 	}
 
