@@ -53,7 +53,7 @@ class FPS extends TextField
 	public function enterFrame(deltaTime:Float) {
 		updateFPS(deltaTime);
 		if (ClientPrefs.showMEM) updateMemory();
-		text = FPSText + MemoryText;
+		text = ClientPrefs.showFPS ?? FPSText + ClientPrefs.showMEM ?? MemoryText;
 	}
 
 	// Frames Counter
@@ -94,8 +94,6 @@ class FPS extends TextField
 
 			FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + /* This text appears if your framerate is higher than the refresh rate */ (ClientPrefs.framerate > times.length + 9 ? ' [SLOWDOWN]' : '') + '\n - Time: $ms ms (Max: $maxMs ms)';
 			updateFPSTextColor();
-		} else {
-			FPSText = '';
 		}
 	}
 
@@ -133,16 +131,14 @@ class FPS extends TextField
 	var GarbageMemoryString:String;
 
 	function updateMemory() {
-		if (ClientPrefs.showFPS) {
+		if (ClientPrefs.showMEM) {
 			CurrentMemory = Memory.getCurrentUsage();
 			PeakMemory = Memory.getPeakUsage();
 			TotalMemory = CurrentMemory + PeakMemory;
 			GarbageMemory = cpp.vm.Gc.memUsage();
 
 			//checkMemory();
-			MemoryText = '\nMemory: ${CoolUtil.formatBytes(TotalMemory / 2)}\n- Current: ${CoolUtil.formatBytes(CurrentMemory / 2)}, Peak: ${CoolUtil.formatBytes(PeakMemory / 2)}\nGarbage Memory: ${CoolUtil.formatBytes(GarbageMemory)} Freed';
-		} else {
-			MemoryText = '';
+			MemoryText = (ClientPrefs.showFPS ? '\n' : '') + 'Memory: ${CoolUtil.formatBytes(TotalMemory / 2)}\n- Current: ${CoolUtil.formatBytes(CurrentMemory / 2)}, Peak: ${CoolUtil.formatBytes(PeakMemory / 2)}\nGarbage Memory: ${CoolUtil.formatBytes(GarbageMemory)} Freed';
 		}
 	}
 
