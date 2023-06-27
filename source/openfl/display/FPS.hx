@@ -91,7 +91,7 @@ class FPS extends TextField
 		ms = Std.int(intervalTime * 1000);
 		if (ms < maxMs) maxMs = ms;
 
-		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + /* This text appears if your framerate is higher than the refresh rate */ (ClientPrefs.framerate > times.length + 9 ? ' [SLOWDOWN]' : '') + '\n - Time: $ms ms (Max: $maxMs ms)';
+		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + '\n - Time: $ms ms (Max: $maxMs ms)';
 		updateFPSTextColor();
 	}
 
@@ -100,7 +100,7 @@ class FPS extends TextField
 		// Testing...
 		//trace(Math.pow(10, 9));
 		// Math.pow(10, 9) * 4
-		if (TotalMemory >= 12000000000 || currentFps <= times.length / 2) {
+		if (TotalMemory >= 12000000000 || currentFps <= times.length / 2 || ClientPrefs.framerate > times.length) {
 			textColor = 0xFFFF0000;
 		} else {
 			textColor = 0xFFFFFFFF;
