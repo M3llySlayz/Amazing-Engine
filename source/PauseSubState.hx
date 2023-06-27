@@ -57,6 +57,9 @@ class PauseSubState extends MusicBeatSubstate
 		SoundEffects.playSFX('scroll', false);
 		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
+		if (ClientPrefs.pauseExit == 'Countdown')
+			cacheCountdown();
+
 		if(PlayState.chartingMode)
 		{
 			menuItemsOG.insert(2, 'Leave Charting Mode');
@@ -254,6 +257,8 @@ class PauseSubState extends MusicBeatSubstate
 				case "Continue":
 					if (ClientPrefs.pauseExit == 'Flicker Out') {
 						closeState();
+					} else if (ClientPrefs.pauseExit == 'Countdown'){
+						countdown();
 					} else {
 						SoundEffects.playSFX('scroll', false);
 						close();
@@ -490,6 +495,114 @@ class PauseSubState extends MusicBeatSubstate
 				}
 			});
 		}
+	}
+
+
+	function cacheCountdown()
+	{
+		var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
+		introAssets.set('default', ['ready', 'set', 'go']);
+		introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
+	
+		var introAlts:Array<String> = introAssets.get('default');
+		if (PlayState.isPixelStage) introAlts = introAssets.get('pixel');
+	
+		for (asset in introAlts)
+			Paths.image(asset);
+	
+		Paths.sound('intro3' + PlayState.introSoundsSuffix);
+		Paths.sound('intro2' + PlayState.introSoundsSuffix);
+		Paths.sound('intro1' + PlayState.introSoundsSuffix);
+		Paths.sound('introGo' + PlayState.introSoundsSuffix);
+	}
+	
+	function countdown()
+	{
+		var swagCounter:Int = 0;
+
+		var startTimer = new FlxTimer().start(Conductor.crochet / 1000 / PlayState.grabbablePlayBackRate, function(tmr:FlxTimer)
+		{
+			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
+			introAssets.set('default', ['ready', 'set', 'go']);
+			introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
+	
+			var introAlts:Array<String> = introAssets.get('default');
+			var antialias:Bool = ClientPrefs.globalAntialiasing;
+			if(PlayState.isPixelStage) {
+				introAlts = introAssets.get('pixel');
+				antialias = false;
+			}
+	
+			switch (swagCounter)
+			{
+				case 0:
+					FlxG.sound.play(Paths.sound('intro3' + PlayState.introSoundsSuffix), 0.6);
+				case 1:
+					var ready = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
+					ready.scrollFactor.set();
+					ready.updateHitbox();
+	
+				if (PlayState.isPixelStage)
+					ready.setGraphicSize(Std.int(ready.width * PlayState.daPixelZoom));
+					add(ready);
+					ready.screenCenter();
+					ready.antialiasing = ClientPrefs.globalAntialiasing;
+					FlxTween.tween(ready, {/*y: ready.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						ease: FlxEase.cubeInOut,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(ready);
+							ready.destroy();
+						}
+					});
+					FlxG.sound.play(Paths.sound('intro2' + PlayState.introSoundsSuffix), 0.6);
+				case 2:
+					var set = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
+					set.scrollFactor.set();
+	
+					if (PlayState.isPixelStage)
+						set.setGraphicSize(Std.int(set.width * PlayState.daPixelZoom));
+	
+					set.screenCenter();
+					add(set);
+					set.antialiasing = ClientPrefs.globalAntialiasing;
+					FlxTween.tween(set, {/*y: set.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						ease: FlxEase.cubeInOut,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(set);
+							set.destroy();
+						}
+					});
+					FlxG.sound.play(Paths.sound('intro1' + PlayState.introSoundsSuffix), 0.6);
+				case 3:
+					var go = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
+					go.scrollFactor.set();
+	
+					if (PlayState.isPixelStage)
+						go.setGraphicSize(Std.int(go.width * PlayState.daPixelZoom));
+	
+					go.updateHitbox();
+	
+					go.screenCenter();
+					add(go);
+					go.antialiasing = ClientPrefs.globalAntialiasing;
+					FlxTween.tween(go, {/*y: go.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						ease: FlxEase.cubeInOut,
+						onComplete: function(twn:FlxTween)
+						{
+							remove(go);
+							go.destroy();
+						}
+					});
+					FlxG.sound.play(Paths.sound('introGo' + PlayState.introSoundsSuffix), 0.6);
+				case 4:
+					close();
+			}
+	
+			swagCounter += 1;
+			// generateSong('fresh');
+		}, 5);
 	}
 	
 	override function destroy()

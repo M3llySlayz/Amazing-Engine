@@ -1,6 +1,6 @@
 package;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
@@ -28,8 +28,8 @@ class AchievementsMenuState extends MusicBeatState
 	private var descText:FlxText;
 
 	override function create() {
-		#if desktop
-		DiscordClient.changePresence("Achievements Menu", null);
+		#if DISCORD_ALLOWED
+		DiscordClient.changePresence("In the Achievements Menu", "Looking at their accomplishments", null, false, null, 'icon');
 		#end
 
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));

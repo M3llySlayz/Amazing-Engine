@@ -21,7 +21,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.addons.display.FlxBackdrop;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 
@@ -100,7 +100,7 @@ class CharMenu extends MusicBeatState
 		resetCharacterSelectionVars();
 		checkFirstSlot();
 
-		#if desktop
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Character Select", "About to start a song", null, false, null, 'play');
 		#end
