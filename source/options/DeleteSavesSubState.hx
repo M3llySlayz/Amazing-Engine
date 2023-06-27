@@ -10,7 +10,7 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.util.FlxColor;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 
@@ -29,8 +29,8 @@ class DeleteSavesSubState extends MusicBeatSubstate
     {
         super();
 
-        #if desktop
-		DiscordClient.changePresence("Modpacks Options Saves Menu", null);
+        #if DISCORD_ALLOWED
+		DiscordClient.changePresence("In the Modpacks Options Saves Menu", 'Changing Fate', 'gear', false, null, 'icon');
 		#end
 
         var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));

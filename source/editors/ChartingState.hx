@@ -1,6 +1,6 @@
 package editors;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flash.geom.Rectangle;
@@ -257,7 +257,7 @@ class ChartingState extends MusicBeatState
 
 		PlayState.mania = _song.mania;
 
-		#if desktop
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
 		var s_termination = "s";
 		if (_song.mania == 0) s_termination = "";
@@ -2256,7 +2256,7 @@ class ChartingState extends MusicBeatState
 			dummyArrow.updateHitbox();	
 		}
 
-		#if desktop
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
 		var s_termination = "s";
 		if (_song.mania == 0) s_termination = "";

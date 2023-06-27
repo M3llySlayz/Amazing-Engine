@@ -1,3 +1,4 @@
+#if DISCORD_ALLOWED
 package;
 
 import Sys.sleep;
@@ -102,3 +103,4 @@ class DiscordClient
 	}
 	#end
 }
+#end

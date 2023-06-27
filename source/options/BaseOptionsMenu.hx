@@ -19,7 +19,7 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.math.FlxMath;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 
@@ -52,7 +52,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		if(title == null) title = 'Options';
 		if(rpcTitle == null) rpcTitle = 'Options Menu';
 		
-		#if desktop
+		#if DISCORD_ALLOWED
 		DiscordClient.changePresence('In the ' + rpcTitle, 'Changing settings', 'icon', false, null, 'gear');
 		#end
 		
