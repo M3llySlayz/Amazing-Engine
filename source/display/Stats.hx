@@ -116,9 +116,9 @@ class Stats extends Sprite
 	private function onEnter(_):Void
 	{
         if (visible) {
-            lerpFramerate = FlxMath.lerp(lerpFramerate, FPSCounter.frameRate, 0.325);
-            drawGraph(Std.int(lerpFramerate+FlxG.elapsed));
-            fpsText.text = "FPS: " + Std.int(lerpFramerate+FlxG.elapsed) + ' (' + FPSCounter.frameTime + ' ms)';
+            lerpFramerate = FlxMath.lerp(lerpFramerate, FPSCounter.frameRate + FlxG.elapsed, 0.325);
+            drawGraph(Std.int(lerpFramerate));
+            fpsText.text = "FPS: " + Std.int(lerpFramerate) + ' (' + FPSCounter.frameTime + ' ms)';
             fpsText.textColor = FlxColor.interpolate(0xFFFFFFFF, 0xFFFF0000, FlxEase.quadOut(50));
             fpsText.autoSize = RIGHT;
         }
