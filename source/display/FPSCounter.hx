@@ -1,10 +1,10 @@
-package openfl.display;
+package display;
 
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
-import flixel.math.FlxMath;
+import openfl.utils.Assets;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 
@@ -27,9 +27,13 @@ import flixel.FlxG;
 @:noDebug
 #end
 
-class FPS extends TextField
+class FPSCounter extends TextField
 {
-	public function new(x:Float = 6, y:Float = 6, color:Int = 0xFFFFFFFF)
+	// Static variables
+	public static var frameRate:Float = 0;
+	public static var frameTime:Float = 0;
+	
+	public function new(x:Float = 6, y:Float = 6, color:Int = 0xFFFFFFFF, ?font:String = "_sans")
 	{
 		super();
 
@@ -41,7 +45,7 @@ class FPS extends TextField
 
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("Antonio Bold", 15, color);
+		defaultTextFormat = new TextFormat(font, 15, color);
 		defaultTextFormat.bold = true;
 		autoSize = LEFT;
 		multiline = true;
@@ -62,12 +66,10 @@ class FPS extends TextField
 	var FPSText:String;
 	var currentFps:Float;
 
-	@:noCompletion private var cacheCount:Int;
-	@:noCompletion private var currentTime:Float;
-	@:noCompletion private var times:Array<Date>;
+	var currentTime:Float;
+	var times:Array<Date>;
 
 	function drawFPS() {
-		cacheCount = 0;
 		currentTime = 0;
 		times = [];
 	}
@@ -86,12 +88,14 @@ class FPS extends TextField
 			}
 		}
 		currentFps = times.length;
+		frameRate = currentFps;
 
 		intervalTime = 1 / currentFps;
 		ms = Std.int(intervalTime * 1000);
 		if (ms < maxMs) maxMs = ms;
+		frameTime = ms;
 
-		FPSText = 'FPS: ' + HelperFunctions.truncateFloat(currentFps, 2) + '\n - Time: $ms ms (Max: $maxMs ms)';
+		FPSText = 'FPS: ' + currentFps + '\n - Time: $ms ms (Max: $maxMs ms)';
 		updateFPSTextColor();
 	}
 

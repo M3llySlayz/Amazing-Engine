@@ -6,10 +6,10 @@ import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Assets;
 import openfl.Lib;
-import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
+import openfl.utils.Assets;
 
 //crash handler stuff
 #if CRASH_HANDLER
@@ -25,6 +25,11 @@ import sys.io.File;
 import sys.io.Process;
 #end
 
+// Display stuff
+import display.FPSCounter;
+import display.Stats;
+//import display.Stats;
+
 using StringTools;
 
 class Main extends Sprite
@@ -36,7 +41,10 @@ class Main extends Sprite
 	var framerate:Int = 60; // How many frames per second the game should run at.
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
-	public static var fpsVar:FPS;
+	
+	// Display stuff
+	var fpsCounter:FPSCounter;
+	var stats:Stats;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -89,34 +97,38 @@ class Main extends Sprite
 
 		//ClientPrefs.loadDefaultKeys();
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
-
-		#if !mobile
-		fpsVar = new FPS();
-		addChild(fpsVar);
-		Lib.current.stage.align = "tl";
-		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		if(fpsVar != null) {
-			fpsVar.visible = ClientPrefs.showFPS;
-		}
-		#end
-		
-		#if desktop
-		FlxG.autoPause = ClientPrefs.autoPause;
-		#end
-
-		#if html5
-		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
-		#end
+		#if desktop FlxG.autoPause = ClientPrefs.autoPause; #end
+		#if html5 FlxG.autoPause = false;
+		FlxG.mouse.visible = false; #end
 		
 		#if CRASH_HANDLER
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
 
-		/* FlxG.stage.addEventListener(Keyboard.KEY_DOWN, e -> {
-			if (e.keyCode == Keyboard.F11)
-			FlxG.fullscreen = !FlxG.fullscreen;
-		}); */
+		createDisplays();
+	}
+
+	private function createDisplays():Void
+	{
+		#if !mobile
+		fpsCounter = new FPSCounter(6, 6, 0xFFFFFF, CoolUtil.getFontFromOpenflText('lunchtype21', 'ttf'));
+		addChild(fpsCounter);
+		Lib.current.stage.align = "tl";
+		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
+		if(fpsCounter != null) {
+			fpsCounter.visible = ClientPrefs.showFPS;
+		}
+		#end
+
+		#if debug
+		fpsCounter = new FPSCounter(6, 6, 0xFFFFFF, CoolUtil.getFontFromOpenflText('lunchtype21', 'ttf'));
+		addChild(fpsCounter);
+		Lib.current.stage.align = "tl";
+		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
+		if(fpsCounter != null) {
+			fpsCounter.visible = ClientPrefs.showFPS;
+		}
+		#end
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!

@@ -255,4 +255,8 @@ class CoolUtil
 			+ '/'
 			+ FlxSave.validate(FlxG.stage.application.meta.get('file')) #end;
 	}
+
+	public static function getFontFromOpenflText(font, extension) {
+		return Assets.getFont(Paths.font('$font.$extension')).fontName;
+	}
 }
