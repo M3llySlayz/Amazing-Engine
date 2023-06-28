@@ -132,10 +132,10 @@ class Stats extends Sprite
         fpsHistory.shift();
         graph.graphics.clear();
         for (i in 0...fpsHistoryLen) {
-        	graph.graphics.moveTo(i+i*graphSpeed,barHeight-2*fpsHistory[i]/ClientPrefs.framerate*3);
+        	graph.graphics.moveTo(graphSpeed,barHeight-2*fpsHistory[i]/ClientPrefs.framerate*3);
         	color = 0xFF00FFFF;
         	graph.graphics.lineStyle(4, color);
-        	graph.graphics.lineTo(i+i*graphSpeed,barHeight-2*fpsHistory[i]/ClientPrefs.framerate*3);
+        	graph.graphics.lineTo(graphSpeed,barHeight-2*fpsHistory[i]/ClientPrefs.framerate*3);
         }
 	}
 
