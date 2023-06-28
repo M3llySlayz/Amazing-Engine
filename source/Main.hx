@@ -111,13 +111,14 @@ class Main extends Sprite
 	private function createDisplays():Void
 	{
 		#if !mobile
-		fpsCounter = new FPSCounter(6, 6, 0xFFFFFF, CoolUtil.getFontFromOpenflText('lunchtype21', 'ttf'));
+		fpsCounter = new FPSCounter(6, 6, CoolUtil.getFontFromOpenflText('lunchtype21', 'ttf'));
 		addChild(fpsCounter);
 		#end
 
 		#if debug
-		stats = new Stats(6, 6, 0xFF00FFFF);
+		stats = new Stats(0, 0, CoolUtil.getFontFromOpenflText('lunchtype21', 'ttf'));
 		addChild(stats);
+		//stats.visible = false;
 		#end
 
 		Lib.current.stage.align = "tl";
