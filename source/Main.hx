@@ -113,22 +113,15 @@ class Main extends Sprite
 		#if !mobile
 		fpsCounter = new FPSCounter(6, 6, 0xFFFFFF, CoolUtil.getFontFromOpenflText('lunchtype21', 'ttf'));
 		addChild(fpsCounter);
-		Lib.current.stage.align = "tl";
-		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		if(fpsCounter != null) {
-			fpsCounter.visible = ClientPrefs.showFPS;
-		}
 		#end
 
 		#if debug
-		fpsCounter = new FPSCounter(6, 6, 0xFFFFFF, CoolUtil.getFontFromOpenflText('lunchtype21', 'ttf'));
-		addChild(fpsCounter);
+		stats = new Stats(6, 6, 0xFF00FFFF);
+		addChild(stats);
+		#end
+
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		if(fpsCounter != null) {
-			fpsCounter.visible = ClientPrefs.showFPS;
-		}
-		#end
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
