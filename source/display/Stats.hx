@@ -124,6 +124,7 @@ class Stats extends Sprite
         }
 	}
 
+    var graphSpeed:Float = 0.03;
 	private function drawGraph(fps:Int):Void 
 	{
 		var color:Int;
@@ -131,10 +132,10 @@ class Stats extends Sprite
         fpsHistory.shift();
         graph.graphics.clear();
         for (i in 0...fpsHistoryLen) {
-        	graph.graphics.moveTo(i+i,barHeight-2*fpsHistory[i]/ClientPrefs.framerate*3);
+        	graph.graphics.moveTo(graphSpeed*i+i,barHeight-2*fpsHistory[i]/ClientPrefs.framerate*3);
         	color = 0xFF00FFFF;
         	graph.graphics.lineStyle(4, color);
-        	graph.graphics.lineTo(i+i,barHeight-2*fpsHistory[i]/ClientPrefs.framerate*3);
+        	graph.graphics.lineTo(graphSpeed*i+i,barHeight-2*fpsHistory[i]/ClientPrefs.framerate*3);
         }
 	}
 
