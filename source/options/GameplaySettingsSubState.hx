@@ -49,18 +49,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option('Splitscroll',
-			'If checked, your notes go up AND down. Freaky.\nNow works with all keys -Irshaad.',
+		var option:Option = new Option('SplitScroll Type',
+			'Selects Your Type Of Scrolling Hell.', // Enjoy The Hell =] -Irshaad
 			'splitScroll',
-			'bool',
-			false);
-		addOption(option);
-
-		var option:Option = new Option('Alt Splitscroll',
-			'If checked, your notes go up AND down, but different. Freakier.\nNow works with all keys -Irshaad.',
-			'altSplitScroll',
-			'bool',
-			false);
+			'string',
+			'None',
+			['None', 'SplitScroll', 'Up n\' Down', 'Double Down','SplitScroll Pattern','Double Down Pattern']);
 		addOption(option);
 		
 		var option:Option = new Option('Note Glow',

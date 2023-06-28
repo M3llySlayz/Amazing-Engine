@@ -10,285 +10,135 @@ end
 --Also now all keys should be supported
 --it's 10:51 as i'm writing this. -Irshaad
 
-local on
-local alt
+local scrollType --28/06/2023. I'm surprised that 2 days of sleep deprivation, I am still able to do this
 local BarConfig = {0, -20}
 
 function onCreate()
-    on = getPropertyFromClass('ClientPrefs', 'splitScroll')
-    alt = getPropertyFromClass('ClientPrefs', 'altSplitScroll');
+    scrollType = getPropertyFromClass('ClientPrefs', 'splitScroll')
 end
 
 function onCreatePost()
-    if on == true and alt == false then
-    -- if downscroll == false then 
-        if not downscroll then
-            if mania == 0 then
-                --do nothing lmao
+    if not downscroll then --DownScroll Off
+        if scrollType == 'None' then
+            --do nothing lmao
+        end
+        if scrollType == 'SplitScroll' then
+            for i = 0,(math.round(mania / 2)) do
+                setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
+                setPropertyFromGroup('playerStrums',i,'downScroll',true) 
             end
-            if mania == 1 then
-                for i = 0,0 do
+        end
+        if scrollType == 'SplitScroll Pattern' then
+            counter = 0
+            for i = 0,mania do
+                if counter <= 1 then
                     setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
                     setPropertyFromGroup('playerStrums',i,'downScroll',true) 
                 end
-            end
-            if mania == 2 then
-                for i = 0,0 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true) 
-                end
-            end
-            if mania == 3 then
-                for i = 0,1 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true) 
-                end
-            end
-            if mania == 4 then
-                for i = 0,1 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true) 
-                end
-            end
-            if mania == 5 then
-                for i = 0,2 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 6 then
-                for i = 0,2 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true) 
-                end
-            end
-            if mania == 7 then
-                for i = 0,3 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true) 
-                end
-            end
-            if mania == 8 then
-                for i = 0,3 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 9 then
-                for i = 0,4 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 10 then
-                for i = 0,4 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 11 then
-                for i = 0,5 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 12 then
-                for i = 0,5 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 13 then
-                for i = 0,6 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 14 then
-                for i = 0,6 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 15 then
-                for i = 0,7 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 16 then
-                for i = 0,7 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == 17 then
-                for i = 0,8 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                end
-            end
-            if mania == nil then
-                for i = 0,1 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',true) 
-                end
-            end
-            BarConfig = {706, 620}
-        else -- if downscroll == true then
-            if mania == 0 then
-                --do nothing lmao
-            end
-            if mania == 1 then
-                for i = 0,0 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false) 
-                end
-            end
-            if mania == 2 then
-                for i = 0,0 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false) 
-                end
-            end
-            if mania == 3 then
-                for i = 0,1 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false) 
-                end
-            end
-            if mania == 4 then
-                for i = 0,1 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false) 
-                end
-            end
-            if mania == 5 then
-                for i = 0,2 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 6 then
-                for i = 0,2 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false) 
-                end
-            end
-            if mania == 7 then
-                for i = 0,3 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false) 
-                end
-            end
-            if mania == 8 then
-                for i = 0,3 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 9 then
-                for i = 0,4 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 10 then
-                for i = 0,4 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 11 then
-                for i = 0,5 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 12 then
-                for i = 0,5 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 13 then
-                for i = 0,6 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 14 then
-                for i = 0,6 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 15 then
-                for i = 0,7 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 16 then
-                for i = 0,7 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == 17 then
-                for i = 0,8 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                end
-            end
-            if mania == nil then
-                for i = 0,1 do
-                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                    setPropertyFromGroup('playerStrums',i,'downScroll',false) 
+                counter = counter + 1
+                if counter == 4 then
+                    counter = 0
                 end
             end
         end
-    else if alt == true then
-        if not downscroll then
-            if mania == nil then
-                for i = 0,3 do
-                    if (math.round(i / 2)) == (i / 2) then
-                        setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                        setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                    end
-                end
-            else -- if mania has an int in it
-                for i = 0,mania do
-                    if (math.round(i / 2)) == (i / 2) then
-                        setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
-                        setPropertyFromGroup('playerStrums',i,'downScroll',true)
-                    end
-                end
-            end
-            BarConfig = {706, 620}
-        else -- if downscroll == true then
-            if mania == nil then
-                for i = 0,3 do
-                    if (math.round(i / 2)) == (i / 2) then
-                        setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                        setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                    end
-                end
-            else
-                for i = 0,mania do
-                    if (math.round(i / 2)) == (i / 2) then
-                        setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
-                        setPropertyFromGroup('playerStrums',i,'downScroll',false)
-                    end
+        if scrollType == 'Up n\' Down' then
+            for i = 0,mania do
+                if (math.round(i / 2)) == (i / 2) then
+                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
+                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
                 end
             end
         end
-        -- Icon Shit
-        setProperty('iconP1.y', BarConfig[2]) --sets both of the icons too there value
-        setProperty('iconP2.y', BarConfig[2])
-        setProperty('scoreTxt.y', BarConfig[1]) -- scoreTxt out of the way :D
-        setProperty('healthBar.y', BarConfig[1]) -- as you can tell this is setProperty abuse
-        setProperty('healthBarOverlay.y', BarConfig[1])
+        if scrollType == 'Double Down' then
+            for i = 0,mania do
+                if i > (mania / 4) and i < ((mania / 4) * 3) then
+                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
+                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
+                end
+            end
+        end
+        if scrollType == 'Double Down Pattern' then
+            counter = 0
+            for i = 0,mania do
+                if counter > 0 and counter < 3 then
+                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
+                    setPropertyFromGroup('playerStrums',i,'downScroll',true)
+                end
+                counter = counter + 1
+                if counter == 4 then
+                    counter = 0
+                end
+            end
+        end
+        --[[ THIS WAS DISCONTINUED. MAY CONTINUE AT SOME POINT -Irshaad
+            
+        if scrollType == 'Split SplitScroll' then
+            for i = 0,(math.round(mania / 2)) do
+                setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
+                setPropertyFromGroup('playerStrums', i, 'x', getPropertyFromGroup('strumLineNotes', i, 'x'))
+                setPropertyFromGroup('playerStrums',i,'downScroll',true) 
+            end
+        end
+        if scrollType == 'Up n\' Down Split SplitScroll' then--]]
+
+        BarConfig = {706, 620}
+    else --DownScroll On
+        if scrollType == 'None' then
+            --do nothing lmao
+        end
+        if scrollType == 'SplitScroll' then
+            for i = 0,(math.round(mania / 2)) do
+                setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
+                setPropertyFromGroup('playerStrums',i,'downScroll',false) 
+            end
+        end
+        if scrollType == 'SplitScroll Pattern' then
+            counter = 0
+            for i = 0,mania do
+                if counter <= 1 then
+                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
+                    setPropertyFromGroup('playerStrums',i,'downScroll',false) 
+                end
+                counter = counter + 1
+                if counter == 4 then
+                    counter = 0
+                end
+            end
+        end
+        if scrollType == 'Up n\' Down' then
+            for i = 0,mania do
+                if (math.round(i / 2)) == (i / 2) then
+                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
+                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
+                end
+            end
+        end
+        if scrollType == 'Double Down' then
+            for i = 0,mania do
+                if i > (mania / 4) and i < ((mania / 4) * 3) then
+                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
+                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
+                end
+            end
+        end
+        if scrollType == 'Double Down Pattern' then
+            counter = 0
+            for i = 0,mania do
+                if counter > 0 and counter < 3 then
+                    setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
+                    setPropertyFromGroup('playerStrums',i,'downScroll',false)
+                end
+                counter = counter + 1
+                if counter == 4 then
+                    counter = 0
+                end
+            end
         end
     end
+    -- Icon Shit
+    setProperty('iconP1.y', BarConfig[2]) --sets both of the icons too there value
+    setProperty('iconP2.y', BarConfig[2])
+    setProperty('scoreTxt.y', BarConfig[1]) -- scoreTxt out of the way :D
+    setProperty('healthBar.y', BarConfig[1]) -- as you can tell this is setProperty abuse
+    setProperty('healthBarOverlay.y', BarConfig[1])
 end

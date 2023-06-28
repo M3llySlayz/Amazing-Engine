@@ -45,8 +45,7 @@ class ClientPrefs {
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
 	public static var antimash:Bool = true;
-	public static var splitScroll:Bool = false;
-	public static var altSplitScroll:Bool = false;
+	public static var splitScroll:String = 'None';
 	public static var bigCache:Bool = false;
 	public static var devMode:Bool = false;
 	public static var mainMenuPos:String = 'Center';
@@ -158,7 +157,6 @@ class ClientPrefs {
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.antimash = antimash;
 		FlxG.save.data.splitScroll = splitScroll;
-		FlxG.save.data.altSplitScroll = altSplitScroll;
 		FlxG.save.data.bigCache = bigCache;
 		FlxG.save.data.devMode = devMode;
 		FlxG.save.data.mainMenuPos = mainMenuPos;
@@ -336,10 +334,6 @@ class ClientPrefs {
 		if (FlxG.save.data.splitScroll != null)
 		{
 			splitScroll = FlxG.save.data.splitScroll;
-		}
-		if (FlxG.save.data.altSplitScroll != null)
-		{
-			altSplitScroll = FlxG.save.data.altSplitScroll;
 		}
 		if (FlxG.save.data.bigCache != null)
 		{
