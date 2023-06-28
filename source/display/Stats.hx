@@ -26,7 +26,7 @@ class Stats extends Sprite
         lerpFramerate = FlxMath.lerp(lerpFramerate, FPSCounter.frameRate, 0.15);
         framesSprite = new Sprite();
         framesSprite.graphics.beginFill(0xFF00FF00); // Set fill color to red
-        framesSprite.graphics.drawRect((FlxG.width - 400) + (FlxG.game.ticks / 6), (FlxG.height - 300) - lerpFramerate, 2, 2); // Draw a rectangle
+        framesSprite.graphics.drawRect((FlxG.width - 400) + (FlxG.game.ticks / 12), (FlxG.height - 300) - lerpFramerate, 4, 4); // Draw a rectangle
         framesSprite.graphics.endFill();
 
         if (framesSprite.x < FlxG.width - 100) {
