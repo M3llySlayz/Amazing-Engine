@@ -32,7 +32,8 @@ class FPSCounter extends TextField
 	// Static variables
 	public static var frameRate:Float = 0;
 	public static var frameTime:Float = 0;
-	
+	public static var memory:Float = 0;
+
 	public function new(x:Float = 6, y:Float = 6, color:Int = 0xFFFFFFFF, ?font:String = "_sans")
 	{
 		super();
@@ -137,6 +138,7 @@ class FPSCounter extends TextField
 		PeakMemory = Memory.getPeakUsage();
 		TotalMemory = CurrentMemory + PeakMemory;
 		GarbageMemory = cpp.vm.Gc.memUsage();
+		memory = TotalMemory;
 
 		//checkMemory();
 		MemoryText = (ClientPrefs.showFPS ? '\n' : '') + 'Memory: ${CoolUtil.formatBytes(TotalMemory / 2)}\n- Current: ${CoolUtil.formatBytes(CurrentMemory / 2)}, Peak: ${CoolUtil.formatBytes(PeakMemory / 2)}\nGarbage Memory: ${CoolUtil.formatBytes(GarbageMemory)} Freed';

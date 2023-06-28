@@ -10,29 +10,37 @@ import flixel.math.FlxMath;
 
 class Stats extends Sprite
 {
+    // Graph stuff
     var framesSprite:Sprite;
     var memSprite:Sprite;
+    var graphColor:Int;
 
-    public function new(x:Float = 6, y:Float = 6, color:Int = 0xFFFFFFFF, ?font:String = "_sans")
+    // Info stuff
+    var fps:Float = 0;
+    var mem:Float = 0;
+
+    public function new(x:Float = 6, y:Float = 6, color:Int = 0xFFFFFFFF)
     {
         super();
         this.x = x;
         this.y = y;
+        graphColor = color;
         addEventListener(Event.ENTER_FRAME, (e:Event) -> enterFrame(Sys.time()));
     }
-    
-    var lerpFramerate:Float;
-    function enterFrame(deltaTime:Float) {
-        lerpFramerate = FlxMath.lerp(lerpFramerate, FPSCounter.frameRate, 0.25);
-        framesSprite = new Sprite();
-        framesSprite.graphics.beginFill(0xFF00FF00); // Set fill color to red
-        framesSprite.graphics.drawRect((FlxG.width - 400) + (FlxG.game.ticks / 24), (FlxG.height - 300) - lerpFramerate, 4, 4); // Draw a rectangle
-        framesSprite.graphics.endFill();
 
-        if (framesSprite.x < FlxG.width - 100) {
-            addChild(framesSprite);
-        } else {
-            removeChild(framesSprite);
-        }
+    function enterFrame(deltaTime:Float) {
+        updateFPS(deltaTime);
+        updateMemory(deltaTime);
+    }
+
+    ////////////
+    function updateFPS(deltaTime:Float) {
+        fps = FPSCounter.frameRate;
+        //trace(fps);
+    }
+
+    function updateMemory(deltaTime:Float) {
+        mem = FPSCounter.memory;
+        //trace(mem);
     }
 }

@@ -407,7 +407,7 @@ class TitleState extends MusicBeatState
 		textGroup = new FlxGroup();
 
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		credGroup.add(blackScreen);
+		if (!initialized) credGroup.add(blackScreen);
 
 		credTextShit = new Alphabet(0, 0, "", true);
 		credTextShit.screenCenter();
@@ -428,8 +428,9 @@ class TitleState extends MusicBeatState
 
 		if (initialized)
 			skipIntro();
-		else
+		else {
 			initialized = true;
+		}
 
 		// credGroup.add(credTextShit);
 	}
@@ -454,6 +455,7 @@ class TitleState extends MusicBeatState
 	
 	var newTitle:Bool = false;
 	var titleTimer:Float = 0;
+	public static var pressedEnter:Bool;
 
 	override function update(elapsed:Float)
 	{
@@ -461,7 +463,7 @@ class TitleState extends MusicBeatState
 			Conductor.songPosition = FlxG.sound.music.time;
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
-		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT || FlxG.mouse.justPressed;
+		pressedEnter = FlxG.keys.justPressed.ENTER || controls.ACCEPT || FlxG.mouse.justPressed;
 
 		#if mobile
 		for (touch in FlxG.touches.list)
@@ -525,7 +527,7 @@ class TitleState extends MusicBeatState
 					if (mustUpdate) {
 						MusicBeatState.switchState(new OutdatedState(newVersion));
 					} else {
-						if (ClientPrefs.luaMenu){
+						if (ClientPrefs.luaMenu) {
 							PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
 							LoadingState.loadAndSwitchState(new PlayState());
 						} else {
