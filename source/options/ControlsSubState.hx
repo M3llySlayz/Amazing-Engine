@@ -160,9 +160,10 @@ class ControlsSubState extends MusicBeatSubstate {
 					changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -scrollAmount : scrollAmount));
 				}
 			}
-			if (FlxG.keys.pressed.ALT) {
+			if (!FlxG.keys.pressed.ALT) {
 				changeSelection(-FlxG.mouse.wheel);
 			} else {
+				curSelected = 0;
 				changePage(-FlxG.mouse.wheel);
 			}
 			if (controls.UI_UP_P) {
@@ -274,6 +275,7 @@ class ControlsSubState extends MusicBeatSubstate {
 
 		reloadTexts();
 		changeSelection();
+		if (change != 0) SoundEffects.playSFX('scroll', false);
 	}
 	
 	function changeSelection(change:Int = 0) {
@@ -351,7 +353,6 @@ class ControlsSubState extends MusicBeatSubstate {
 				break;
 			}
 		}
-		//FlxG.sound.play(Paths.sound('scrollMenu'));
 		SoundEffects.playSFX('scroll', false);
 	}
 
