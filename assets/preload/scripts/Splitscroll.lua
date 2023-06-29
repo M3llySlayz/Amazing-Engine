@@ -14,11 +14,11 @@ local scrollType --28/06/2023. I'm surprised that 2 days of sleep deprivation, I
 local BarConfig = {0, -20}
 
 function onCreate()
+    if getPropertyFromClass('ClientPrefs', 'splitScroll') ~= 'None' then setProperty('skipArrowStartTween', true) end
     scrollType = getPropertyFromClass('ClientPrefs', 'splitScroll')
 end
 
 function onCreatePost()
-    if scrollType ~= 'None' then setProperty('skipArrowStartTween', true) end
     if not downscroll then --DownScroll Off
         if scrollType == 'None' then
             --do nothing lmao
