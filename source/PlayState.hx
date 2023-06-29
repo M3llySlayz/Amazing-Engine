@@ -3756,8 +3756,8 @@ class PlayState extends MusicBeatState
 
 		var iconOffset:Int = 26;
 		var percent:Float = 1 - ((playingAsOpponent ? -health : health) / 2);
-		iconP1.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-		iconP2.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+		iconP1.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * Math.min(1, Math.max(0, percent))) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+		iconP2.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * Math.min(1, Math.max(0, percent))) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 
 		if (health > 2) health = 2;
 
