@@ -31,7 +31,7 @@ function onCreatePost()
         end
         if scrollType == 'Alt' then
             counter = 0
-            for i = 0,mania do
+            for i = 0,mania-1 do
                 if counter <= 1 then
                     setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
                     setPropertyFromGroup('playerStrums',i,'downScroll',true) 
@@ -43,7 +43,7 @@ function onCreatePost()
             end
         end
         if scrollType == 'Up n\' Down' then
-            for i = 0,mania do
+            for i = 0,mania-1 do
                 if (math.round(i / 2)) == (i / 2) then
                     setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
                     setPropertyFromGroup('playerStrums',i,'downScroll',true)
@@ -51,7 +51,7 @@ function onCreatePost()
             end
         end
         if scrollType == 'Double Down' then
-            for i = 0,mania do
+            for i = 0,mania-1 do
                 if i > (mania / 4) and i < ((mania / 4) * 3) then
                     setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
                     setPropertyFromGroup('playerStrums',i,'downScroll',true)
@@ -60,7 +60,7 @@ function onCreatePost()
         end
         if scrollType == 'Double Down Alt' then
             counter = 0
-            for i = 0,mania do
+            for i = 0,mania-1 do
                 if counter > 0 and counter < 3 then
                     setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
                     setPropertyFromGroup('playerStrums',i,'downScroll',true)
@@ -74,7 +74,7 @@ function onCreatePost()
         --[[ THIS WAS DISCONTINUED. MAY CONTINUE AT SOME POINT -Irshaad
             
         if scrollType == 'Split SplitScroll' then
-            for i = 0,(math.round(mania / 2)) do
+            for i = 0,(math.round(mania / 2))-1 do
                 setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
                 setPropertyFromGroup('playerStrums', i, 'x', getPropertyFromGroup('strumLineNotes', i, 'x'))
                 setPropertyFromGroup('playerStrums',i,'downScroll',true) 
@@ -88,14 +88,14 @@ function onCreatePost()
             --do nothing lmao
         end
         if scrollType == 'Normal' then
-            for i = 0,(math.round(mania / 2)) do
+            for i = 0,(math.round(mania / 2))-1 do
                 setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
                 setPropertyFromGroup('playerStrums',i,'downScroll',false) 
             end
         end
         if scrollType == 'Alt' then
             counter = 0
-            for i = 0,mania do
+            for i = 0,mania-1 do
                 if counter <= 1 then
                     setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
                     setPropertyFromGroup('playerStrums',i,'downScroll',false) 
@@ -107,7 +107,7 @@ function onCreatePost()
             end
         end
         if scrollType == 'Up n\' Down' then
-            for i = 0,mania do
+            for i = 0,mania-1 do
                 if (math.round(i / 2)) == (i / 2) then
                     setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
                     setPropertyFromGroup('playerStrums',i,'downScroll',false)
@@ -115,7 +115,7 @@ function onCreatePost()
             end
         end
         if scrollType == 'Double Down' then
-            for i = 0,mania do
+            for i = 0,mania-1 do
                 if i > (mania / 4) and i < ((mania / 4) * 3) then
                     setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
                     setPropertyFromGroup('playerStrums',i,'downScroll',false)
@@ -124,7 +124,7 @@ function onCreatePost()
         end
         if scrollType == 'Double Down Alt' then
             counter = 0
-            for i = 0,mania do
+            for i = 0,mania-1 do
                 if counter > 0 and counter < 3 then
                     setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
                     setPropertyFromGroup('playerStrums',i,'downScroll',false)
