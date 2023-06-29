@@ -68,10 +68,12 @@ class FreeplayCategoryState extends MusicBeatState {
 		categoryNames = categoryNamesList;
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		bg.color = categoryColors[curSelected];
 		add(bg);
 
 		categorySpr = new FlxSprite().loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
+		categorySpr.antialiasing = ClientPrefs.globalAntialiasing;
 		categorySpr.screenCenter();
 		categorySpr.alpha = 0;
 		categorySpr.x += 60;
