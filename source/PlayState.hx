@@ -373,7 +373,6 @@ class PlayState extends MusicBeatState
 	var idleTime:Float = 0;
 	override public function create()
 	{
-		//trace('Playback Rate: ' + playbackRate);
 		grabbablePlayBackRate = playbackRate;
 		if (!ClientPrefs.bigCache){
 			Paths.clearStoredMemory();
@@ -382,9 +381,7 @@ class PlayState extends MusicBeatState
 		instance = this;
 
 		#if cpp
-		//cpp.vm.Gc.enable(true);
-		cpp.vm.Gc.run(true);
-		//trace(cpp.vm.Gc.memUsage());
+		cpp.vm.Gc.enable(false);
 		#end
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
