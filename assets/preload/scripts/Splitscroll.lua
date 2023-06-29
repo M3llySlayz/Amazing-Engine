@@ -18,6 +18,7 @@ function onCreate()
 end
 
 function onCreatePost()
+    if scrollType ~= 'None' then setProperty('skipArrowStartTween', true)
     if not downscroll then --DownScroll Off
         if scrollType == 'None' then
             --do nothing lmao
