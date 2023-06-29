@@ -5316,7 +5316,7 @@ class PlayState extends MusicBeatState
 		if (SONG.needsVoices)
 			vocals.volume = 1;
 
-		var time:Float = 0.01 / playbackRate;
+		var time:Float = (Conductor.stepCrochet / 1000) / playbackRate;
 		if(note.isSustainNote && !note.animation.curAnim.name.endsWith('tail')) {
 			time += 0.15 / playbackRate;
 		}
@@ -5435,7 +5435,7 @@ class PlayState extends MusicBeatState
 			}
 
 			if(cpuControlled) {
-				var time:Float = 0.01 / playbackRate;
+				var time:Float = (Conductor.stepCrochet / 1000) / playbackRate;
 				if(note.isSustainNote && !note.animation.curAnim.name.endsWith('tail')) {
 					time += 0.15 / playbackRate;
 				}
