@@ -3059,14 +3059,17 @@ class PlayState extends MusicBeatState
 				}
 
 				var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
-				babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
 				babyArrow.downScroll = ClientPrefs.downScroll;
 				if (!skipArrowStartTween && mania > 1) {
 					babyArrow.y += 10;
+					babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
 					babyArrow.alpha = 0;
 					if (player < strumlines) FlxTween.tween(babyArrow, {y: babyArrow.y - 10, alpha: targetAlpha}, 0.3, {ease: FlxEase.quadOut});
 				}
-				else if (player < strumlines) babyArrow.alpha = targetAlpha;
+				else {
+					babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
+					if (player < strumlines) babyArrow.alpha = targetAlpha;
+				}
 
 				var targetStrum = playingAsOpponent ? 0 : strumlines - 1;
 				// This took forever. Like seriously, this is NOT a joke.
