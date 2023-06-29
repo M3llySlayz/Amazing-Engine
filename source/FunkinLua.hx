@@ -1419,9 +1419,10 @@ class FunkinLua {
 
 		Lua_helper.add_callback(lua, "unlockCategory", function(name:String) {
 			if (FreeplayCategory.categoriesLoaded.exists(name)) {
-				if (!FreeplayCategoryState.catUnlocks.get(name)) {
+				if (FreeplayCategoryState.catUnlocks.get(name) == false) {
 					FreeplayCategoryState.catUnlocks.set(name, true);
 					FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
+					FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks;
 					FlxG.save.flush();
 				} else {
 					trace('Category "$name" is already unlocked!');
@@ -1433,9 +1434,10 @@ class FunkinLua {
 
 		Lua_helper.add_callback(lua, "lockCategory", function(name:String) { // If you want to lock a specific category
 			if (FreeplayCategory.categoriesLoaded.exists(name)) {
-				if (FreeplayCategoryState.catUnlocks.get(name)) {
+				if (FreeplayCategoryState.catUnlocks.get(name) == true) {
 					FreeplayCategoryState.catUnlocks.set(name, false);
 					FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
+					FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks;
 					FlxG.save.flush();
 				} else {
 					trace('Category "$name" is already locked!');
