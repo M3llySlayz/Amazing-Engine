@@ -20,6 +20,8 @@ class FuckState extends FlxUIState
 
 	// public static var needVer:String = "Unknown";
 	// public static var currChanges:String = "Check for Updates needs to be enabled in Options > Misc!";
+	//This WHOLE CLASS was made by superpowers09, i simply edited it to for AE's needs.
+	//there's actually a lot of code from super in this engine so be sure to thank her! - melly 
 	public var err:String = "";
 	public var info:String = "";
 	public static var currentStateName:String = "";
