@@ -2958,11 +2958,7 @@ class PlayState extends MusicBeatState
 					babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
 					babyArrow.alpha = 0;
 					if (player < strumlines) FlxTween.tween(babyArrow, {y: babyArrow.y - 10, alpha: targetAlpha}, twnDuration, {ease: FlxEase.cubeOut, startDelay: twnStart});
-				}
-				else
-				{
-					if (player < strumlines) babyArrow.alpha = targetAlpha;
-				}
+				} else if (player < strumlines) babyArrow.alpha = targetAlpha;
 
 				var targetStrum = playingAsOpponent ? 0 : strumlines - 1;
 				// This took forever. Like seriously, this is NOT a joke.
@@ -3065,8 +3061,7 @@ class PlayState extends MusicBeatState
 					babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
 					babyArrow.alpha = 0;
 					if (player < strumlines) FlxTween.tween(babyArrow, {y: babyArrow.y - 10, alpha: targetAlpha}, 0.3, {ease: FlxEase.quadOut});
-				}
-				else {
+				} else {
 					babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
 					if (player < strumlines) babyArrow.alpha = targetAlpha;
 				}
