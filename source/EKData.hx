@@ -797,7 +797,7 @@ class Keybinds {
             ['Down 4', 'note_1816'],
             ['Up 4', 'note_1817'],
             ['Right 4', 'note_1818'],
-            ['']
+            [' '] // Don't remove it
         ];
     }
 
