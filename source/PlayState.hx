@@ -3167,6 +3167,7 @@ class PlayState extends MusicBeatState
 				var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
 				babyArrow.downScroll = ClientPrefs.downScroll;
 				if (player < strumlines) babyArrow.alpha = targetAlpha;
+				else babyArrow.alpha = 0;
 
 				var targetStrum = playingAsOpponent ? 0 : strumlines - 1;
 				// This took forever. Like seriously, this is NOT a joke.
