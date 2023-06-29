@@ -1299,6 +1299,7 @@ class PlayState extends MusicBeatState
 		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
+		healthBar.numDivisions = Std.int(healthBar.width);
 		add(healthBar);
 		healthBarBG.sprTracker = healthBar;
 
@@ -3754,8 +3755,9 @@ class PlayState extends MusicBeatState
 		iconP2.updateHitbox();
 
 		var iconOffset:Int = 26;
-		iconP1.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, (playingAsOpponent ? -100 : 100), 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-		iconP2.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, (playingAsOpponent ? -100 : 100), 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+		var percent:Float = 1 - ((playingAsOpponent ? -health : health) / 2);
+		iconP1.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+		iconP2.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 
 		if (health > 2) health = 2;
 
@@ -5295,7 +5297,7 @@ class PlayState extends MusicBeatState
 			health -= healthdrain;
 			if (health < healthdrain) {
 				if (!healthdrainKill) {
-					health = 0.05;
+					health = 0.01;
 				}
 			}
 

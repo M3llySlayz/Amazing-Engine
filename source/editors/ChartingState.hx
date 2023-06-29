@@ -781,7 +781,7 @@ class ChartingState extends MusicBeatState
 		stepperSectionBPM.name = 'section_bpm';
 		blockPressWhileTypingOnStepper.push(stepperSectionBPM);
 
-		stepperHealthDrain = new FlxUINumericStepper(stepperSectionBPM.x + 120, stepperSectionBPM.y, 0.05, 0, 0, 4, 2);
+		stepperHealthDrain = new FlxUINumericStepper(stepperSectionBPM.x + 120, stepperSectionBPM.y, 0.01, 0, 0, 4, 2);
 		stepperHealthDrain.value = _song.notes[curSec].healthdrain;
 		stepperHealthDrain.name = 'health_drain';
 		blockPressWhileTypingOnStepper.push(stepperHealthDrain);
