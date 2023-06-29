@@ -1423,7 +1423,7 @@ class FunkinLua {
 					FreeplayCategoryState.catUnlocks.set(name, true);
 					FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
 					FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks;
-					FlxG.save.flush();
+					trace('Category "$name" successfully unlocked!');
 				} else {
 					trace('Category "$name" is already unlocked!');
 				}
@@ -1438,7 +1438,7 @@ class FunkinLua {
 					FreeplayCategoryState.catUnlocks.set(name, false);
 					FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
 					FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks;
-					FlxG.save.flush();
+					trace('Category "$name" successfully locked!');
 				} else {
 					trace('Category "$name" is already locked!');
 				}
