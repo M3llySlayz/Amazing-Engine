@@ -28,6 +28,7 @@ using StringTools;
 class MainMenuState extends MusicBeatState
 {
 	public static var amazingEngineVersion:String = '0.4'; //This is also used for Discord RPC
+	public static var compileType:String = '';
 	public static var curSelected:Int = 0;
 	public static var launchChance:Dynamic = null;
 	//public static var wasPaused:Bool = false;
@@ -57,6 +58,18 @@ class MainMenuState extends MusicBeatState
 		Paths.pushGlobalMods();
 		#end
 		WeekData.loadTheFirstEnabledMod();
+
+		#if windows
+		compileType = 'Windows';
+		#end
+
+		#if mac
+		compileType = 'Mac';
+		#end
+
+		#if linux
+		compileType = 'Linux';
+		#end
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
