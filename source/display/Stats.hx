@@ -61,6 +61,7 @@ class Stats extends Sprite
 
     private var fullHeight:Int = 50;
 
+	var toggled:Bool = false;
 	public function new(x, y, font:String) 
 	{
 		super();
@@ -115,13 +116,23 @@ class Stats extends Sprite
     var lerpFramerate:Float;
 	private function onEnter(_):Void
 	{
-        if (visible) {
+        if (toggled) {
             lerpFramerate = FlxMath.lerp(lerpFramerate, FPSCounter.frameRate + FlxG.elapsed, 0.325);
             drawGraph(Std.int(lerpFramerate));
             fpsText.text = "FPS: " + Std.int(lerpFramerate) + ' (' + FPSCounter.frameTime + ' ms)';
             fpsText.textColor = FlxColor.interpolate(0xFFFFFFFF, 0xFFFF0000, FlxEase.quadOut(50));
             fpsText.autoSize = RIGHT;
-        }
+			fpsText.visible = true;
+			graph.visible = true;
+			bound.visible = true;
+        } else {
+			graph.visible = false;
+			fpsText.visible = false;
+            fpsText.textColor = 0xFFFFFFFF;
+            fpsText.autoSize = RIGHT;
+			bound.visible = false;
+		}
+		if (FlxG.keys.anyJustPressed(ClientPrefs.copyKey(ClientPrefs.keyBinds.get('stats_bind')))) toggled = !toggled;
 	}
 
     var graphSpeed:Float = 0.03;

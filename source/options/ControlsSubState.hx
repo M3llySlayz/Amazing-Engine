@@ -160,14 +160,17 @@ class ControlsSubState extends MusicBeatSubstate {
 					changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -scrollAmount : scrollAmount));
 				}
 			}
-			if (controls.UI_UP_P || FlxG.mouse.wheel != 0) {
+			if (FlxG.keys.pressed.ALT) {
+				changeSelection(-FlxG.mouse.wheel);
+			} else {
+				changePage(-FlxG.mouse.wheel);
+			}
+			if (controls.UI_UP_P) {
 				changeSelection(-scrollAmount);
-				changeSelection(FlxG.mouse.wheel);
 				holdTime = 0;
 			}
-			if (controls.UI_DOWN_P || FlxG.mouse.wheel != 0) {
+			if (controls.UI_DOWN_P) {
 				changeSelection(scrollAmount);
-				changeSelection(FlxG.mouse.wheel);
 				holdTime = 0;
 			}
 			if (controls.UI_LEFT_P || controls.UI_RIGHT_P) {

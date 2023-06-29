@@ -563,7 +563,8 @@ class Keybinds {
             'debug_1'		=> [SEVEN, NONE],
             'debug_2'		=> [EIGHT, NONE],
 
-            'dev_bind'		=> [NUMPADFIVE, F5]
+            'dev_bind'		=> [NUMPADFIVE, F5],
+            'stats_bind'    => [NUMPADNINE, F9]
         ];
     }
 
@@ -793,6 +794,7 @@ class Keybinds {
             [''],
             ['DEBUG'],
             ['Dev', 'dev_bind'],
+            ['Stats', 'stats_bind'],
             ['Key 1', 'debug_1'],
             ['Key 2', 'debug_2'],
             // Why did I make this empty page :skull:
