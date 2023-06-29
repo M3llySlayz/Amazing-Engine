@@ -22,13 +22,13 @@ function onCreatePost()
         if scrollType == 'None' then
             --do nothing lmao
         end
-        if scrollType == 'SplitScroll' then
+        if scrollType == 'Normal' then
             for i = 0,(math.round(mania / 2)) do
                 setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') + 500))
                 setPropertyFromGroup('playerStrums',i,'downScroll',true) 
             end
         end
-        if scrollType == 'SplitScroll Pattern' then
+        if scrollType == 'Alt' then
             counter = 0
             for i = 0,mania do
                 if counter <= 1 then
@@ -57,7 +57,7 @@ function onCreatePost()
                 end
             end
         end
-        if scrollType == 'Double Down Pattern' then
+        if scrollType == 'Double Down Alt' then
             counter = 0
             for i = 0,mania do
                 if counter > 0 and counter < 3 then
@@ -86,13 +86,13 @@ function onCreatePost()
         if scrollType == 'None' then
             --do nothing lmao
         end
-        if scrollType == 'SplitScroll' then
+        if scrollType == 'Normal' then
             for i = 0,(math.round(mania / 2)) do
                 setPropertyFromGroup('playerStrums', i, 'y', (getPropertyFromGroup('strumLineNotes', i, 'y') - 500))
                 setPropertyFromGroup('playerStrums',i,'downScroll',false) 
             end
         end
-        if scrollType == 'SplitScroll Pattern' then
+        if scrollType == 'Alt' then
             counter = 0
             for i = 0,mania do
                 if counter <= 1 then
@@ -121,7 +121,7 @@ function onCreatePost()
                 end
             end
         end
-        if scrollType == 'Double Down Pattern' then
+        if scrollType == 'Double Down Alt' then
             counter = 0
             for i = 0,mania do
                 if counter > 0 and counter < 3 then
@@ -136,9 +136,11 @@ function onCreatePost()
         end
     end
     -- Icon Shit
-    setProperty('iconP1.y', BarConfig[2]) --sets both of the icons too there value
-    setProperty('iconP2.y', BarConfig[2])
-    setProperty('scoreTxt.y', BarConfig[1]) -- scoreTxt out of the way :D
-    setProperty('healthBar.y', BarConfig[1]) -- as you can tell this is setProperty abuse
-    setProperty('healthBarOverlay.y', BarConfig[1])
+    if scrollType ~= 'None' then
+        setProperty('iconP1.y', BarConfig[2]) --sets both of the icons too there value
+        setProperty('iconP2.y', BarConfig[2])
+        setProperty('scoreTxt.y', BarConfig[1]) -- scoreTxt out of the way :D
+        setProperty('healthBar.y', BarConfig[1]) -- as you can tell this is setProperty abuse
+        setProperty('healthBarOverlay.y', BarConfig[1])
+    end
 end

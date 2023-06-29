@@ -258,6 +258,8 @@ class PauseSubState extends MusicBeatSubstate
 					if (ClientPrefs.pauseExit == 'Flicker Out') {
 						closeState();
 					} else if (ClientPrefs.pauseExit == 'Countdown'){
+						SoundEffects.playSFX('confirm', true);
+						FlxFlicker.flicker(grpMenuShit.members[curSelected], 4, 0.05, false, false);
 						countdown();
 					} else {
 						SoundEffects.playSFX('scroll', false);

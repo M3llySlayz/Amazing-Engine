@@ -180,7 +180,7 @@ class ClientPrefs {
 		FlxG.save.data.resultsScreen = resultsScreen;
 		FlxG.save.data.justUpdated = justUpdated;
 		FlxG.save.data.neededUpdate = neededUpdate;
-		FlxG.save.data.colorBlindMode = colorblindMode;
+		FlxG.save.data.colorblindMode = colorblindMode;
 		FlxG.save.data.precisionDecimals = precisionDecimals;
 		FlxG.save.data.cameraMoveOnNotes = cameraMoveOnNotes;
 		FlxG.save.data.persistentBeats = persistentBeats;

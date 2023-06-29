@@ -49,12 +49,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option('SplitScroll Type',
-			'Selects Your Type Of Scrolling Hell.', // Enjoy The Hell =] -Irshaad
+		var option:Option = new Option('Splitscroll:',
+			'Selects your own personal hell.\nSplits your notes into something fearful.\nEach type is different, and Downscroll affects them as well.', // Enjoy The Hell =] -Irshaad
 			'splitScroll',
 			'string',
 			'None',
-			['None', 'SplitScroll', 'Up n\' Down', 'Double Down','SplitScroll Pattern','Double Down Pattern']);
+			['None', 'Normal', 'Up n\' Down', 'Double Down', 'Alt', 'Double Down Alt']);
 		addOption(option);
 		
 		var option:Option = new Option('Note Glow',
