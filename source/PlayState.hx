@@ -3756,8 +3756,8 @@ class PlayState extends MusicBeatState
 
 		var iconOffset:Int = 26;
 		var percent:Float = 1 - ((playingAsOpponent ? -health : health) / 2);
-		iconP1.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * Math.min(1, Math.max(0, percent))) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-		iconP2.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * Math.min(1, Math.max(0, percent))) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+		iconP1.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+		iconP2.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 
 		if (health > 2) health = 2;
 
@@ -5176,7 +5176,7 @@ class PlayState extends MusicBeatState
 		songMisses++;
 		combo = 0;
 
-		health -= daNote.missHealth * healthLoss;
+		if (health > 0) health -= daNote.missHealth * healthLoss;
 		if(instakillOnMiss)
 		{
 			vocals.volume = 0;
@@ -5316,7 +5316,7 @@ class PlayState extends MusicBeatState
 		if (SONG.needsVoices)
 			vocals.volume = 1;
 
-		var time:Float = 0.15 / playbackRate;
+		var time:Float = 0.01 / playbackRate;
 		if(note.isSustainNote && !note.animation.curAnim.name.endsWith('tail')) {
 			time += 0.15 / playbackRate;
 		}
@@ -5379,7 +5379,7 @@ class PlayState extends MusicBeatState
 				if(combo > 9999) combo = 9999;
 				popUpScore(note);
 			}
-			health += note.hitHealth * healthGain;
+			if (health < 2) health += note.hitHealth * healthGain;
 
 			if(!note.noAnimation) {
 				var animToPlay:String = 'sing' + Note.keysShit.get(mania).get('anims')[note.noteData];
@@ -5435,7 +5435,7 @@ class PlayState extends MusicBeatState
 			}
 
 			if(cpuControlled) {
-				var time:Float = 0.15 / playbackRate;
+				var time:Float = 0.01 / playbackRate;
 				if(note.isSustainNote && !note.animation.curAnim.name.endsWith('tail')) {
 					time += 0.15 / playbackRate;
 				}
