@@ -105,7 +105,7 @@ class FPSCounter extends TextField
 		// Testing...
 		//trace(Math.pow(10, 9));
 		// Math.pow(10, 9) * 4
-		if (TotalMemory >= 12000000000 || currentFps <= times.length / 2) {
+		if (currentFps <= times.length / 2) {
 			textColor = 0xFFFF0000;
 		} else {
 			textColor = 0xFFFFFFFF;
@@ -128,11 +128,12 @@ class FPSCounter extends TextField
 
 	var MemoryText:String;
 
-	var MemoryString:String;
+	/* var MemoryString:String;
 	var CurrentMemoryString:String;
 	var PeakMemoryString:String;
-	var GarbageMemoryString:String;
+	var GarbageMemoryString:String; */
 
+	var overloaded = false;
 	function updateMemory() {
 		CurrentMemory = Memory.getCurrentUsage();
 		PeakMemory = Memory.getPeakUsage();
@@ -140,7 +141,6 @@ class FPSCounter extends TextField
 		GarbageMemory = cpp.vm.Gc.memUsage();
 		memory = TotalMemory;
 
-		//checkMemory();
 		MemoryText = (ClientPrefs.showFPS ? '\n' : '') + 'Memory: ${CoolUtil.formatBytes(TotalMemory / 2)}\n- Current: ${CoolUtil.formatBytes(CurrentMemory / 2)}, Peak: ${CoolUtil.formatBytes(PeakMemory / 2)}\nGarbage Memory: ${CoolUtil.formatBytes(GarbageMemory)} Freed';
 	}
 
