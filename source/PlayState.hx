@@ -3558,11 +3558,11 @@ class PlayState extends MusicBeatState
 	{
 		callOnLuas('onUpdate', [elapsed]);
 
-		laneunderlay.makeGraphic(160 * Std.int((mania + 1) * (!isPixelStage ? Note.scales[mania] : Note.pixelScales[mania]) * Note.lessScale[strumlines]), FlxG.height * 4, FlxColor.BLACK);
+		laneunderlay.makeGraphic(160 * Std.int((mania + 1) * (!isPixelStage ? Note.scales[mania] + 0.3 : Note.pixelScales[mania]) * Note.lessScale[strumlines]), FlxG.height * 4, FlxColor.BLACK);
 		laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - (25 * Note.lessScale[strumlines]) : opponentStrums.members[0].x - (25 * Note.lessScale[strumlines]);
 		laneunderlay.screenCenter(Y);
-		laneunderlayOp.makeGraphic(160 * Std.int((mania + 1) * (!isPixelStage ? Note.scales[mania] : Note.pixelScales[mania]) * Note.lessScale[strumlines]), FlxG.height * 4, FlxColor.BLACK);
-		laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - (25 * Note.lessScale[strumlines]) : playerStrums.members[0].x - (25 * Note.lessScale[strumlines]);
+		laneunderlayOp.makeGraphic(160 * Std.int((mania + 1) * (!isPixelStage ? Note.scales[mania] + 0.3 : Note.pixelScales[mania]) * Note.lessScale[strumlines]), FlxG.height * 4, FlxColor.BLACK);
+		laneunderlayOp.x = !pladddddyingAsOpponent ? opponentStrums.members[0].x - (25 * Note.lessScale[strumlines]) : playerStrums.members[0].x - (25 * Note.lessScale[strumlines]);
 		laneunderlayOp.screenCenter(Y);
 
 		if(ClientPrefs.camMovement && !PlayState.isPixelStage) {
