@@ -1149,11 +1149,11 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
-		laneunderlayOp = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + Std.int(50 * Note.lessScale[mania]), FlxG.height * 4, FlxColor.BLACK);
+		laneunderlayOp = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + Std.int((50 * Note.lessScale[mania]) * Note.lesserScale[mania][strumlines]), FlxG.height * 4, FlxColor.BLACK);
 		laneunderlayOp.alpha = 0;
 		add(laneunderlayOp);
 
-		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + Std.int(50 * Note.lessScale[mania]), FlxG.height * 4, FlxColor.BLACK);
+		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * (mania + 1) + Std.int((50 * Note.lessScale[mania]) * Note.lesserScale[mania][strumlines]), FlxG.height * 4, FlxColor.BLACK);
 		laneunderlay.alpha = 0;
 		add(laneunderlay);
 
@@ -3558,8 +3558,10 @@ class PlayState extends MusicBeatState
 	{
 		callOnLuas('onUpdate', [elapsed]);
 
+		laneunderlay.makeGraphic(110 * (mania + 1) + Std.int((50 * Note.lessScale[mania]) * Note.lesserScale[mania][strumlines]), FlxG.height * 4, FlxColor.BLACK);
 		laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
 		laneunderlay.screenCenter(Y);
+		laneunderlayOp.makeGraphic(110 * (mania + 1) + Std.int((50 * Note.lessScale[mania]) * Note.lesserScale[mania][strumlines]), FlxG.height * 4, FlxColor.BLACK);
 		laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
 		laneunderlayOp.screenCenter(Y);
 

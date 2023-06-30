@@ -100,7 +100,7 @@ class StrumNote extends FlxSprite
 			loadGraphic(Paths.image('pixelUI/' + texture), true, Math.floor(width), Math.floor(height));
 			var daFrames:Array<Int> = Note.keysShit.get(PlayState.mania).get('pixelAnimIndex');
 
-			setGraphicSize(Std.int(width * PlayState.daPixelZoom * Note.pixelScales[PlayState.mania]));
+			setGraphicSize(Std.int(width * PlayState.daPixelZoom * (Note.pixelScales[PlayState.mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])));
 			updateHitbox();
 			antialiasing = false;
 			animation.add('static', [daFrames[noteData]]);
@@ -114,7 +114,7 @@ class StrumNote extends FlxSprite
 
 			antialiasing = ClientPrefs.globalAntialiasing;
 
-			setGraphicSize(Std.int(width * Note.scales[PlayState.mania]));
+			setGraphicSize(Std.int(width * (Note.scales[PlayState.mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])));
 	
 			animation.addByPrefix('static', 'arrow' + animationArray[0]);
 			animation.addByPrefix('pressed', animationArray[1] + ' press', 24, false);
@@ -144,7 +144,7 @@ class StrumNote extends FlxSprite
 		{
 			case 0 | 1 | 2: x += width * noteData;
 			case 3: x += Note.swagWidth * noteData;
-			default: x += (width - Note.lessX[PlayState.mania]) * noteData;
+			default: x += (width - (Note.lessX[PlayState.mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])) * noteData;
 		}
 
 		x += Note.xtra[PlayState.mania];

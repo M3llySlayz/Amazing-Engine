@@ -36,6 +36,7 @@ class Note extends FlxSprite
 	public static var lesserX:Array<Int> = EKData.lesserX;
 	public static var moreY:Array<Int> = EKData.moreY;
 	public static var lessScale:Array<Float> = EKData.lessScale;
+	public static var lesserScale:Array<Array<Float>> = EKData.lesserScale;
 	public static var lessSpacing:Array<Float> = EKData.lessSpacing;
 	public static var separator:Array<Int> = EKData.noteSep;
 	public static var xtra:Array<Float> = EKData.offsetX;
@@ -353,7 +354,7 @@ class Note extends FlxSprite
 				loadGraphic(Paths.image('pixelUI/' + blahblah), true, Math.floor(width), Math.floor(height));
 			}
 			defaultWidth = width;
-			setGraphicSize(Std.int(width * PlayState.daPixelZoom * Note.pixelScales[mania]));
+			setGraphicSize(Std.int(width * PlayState.daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])));
 			loadPixelNoteAnims();
 			antialiasing = false;
 
@@ -403,9 +404,9 @@ class Note extends FlxSprite
 			ogW = width;
 			ogH = height;
 			if (!isSustainNote)
-				setGraphicSize(Std.int(defaultWidth * scales[mania]));
+				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])));
 			else
-				setGraphicSize(Std.int(defaultWidth * scales[mania]), Std.int(defaultHeight * scales[0]));
+				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])), Std.int(defaultHeight * scales[0]));
 			updateHitbox();
 	}
 
