@@ -345,72 +345,74 @@ class Character extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		if(!debugMode && animation.curAnim != null)
-		{
-			if(heyTimer > 0)
+		try {
+			if(!debugMode && animation.curAnim != null)
 			{
-				heyTimer -= elapsed;
-				if(heyTimer <= 0)
+				if(heyTimer > 0)
 				{
-					if(specialAnim && animation.curAnim.name == 'hey' || animation.curAnim.name == 'cheer')
+					heyTimer -= elapsed;
+					if(heyTimer <= 0)
 					{
-						specialAnim = false;
-						dance();
+						if(specialAnim && animation.curAnim.name == 'hey' || animation.curAnim.name == 'cheer')
+						{
+							specialAnim = false;
+							dance();
+						}
+						heyTimer = 0;
 					}
-					heyTimer = 0;
+				} else if(specialAnim && animation.curAnim.finished)
+				{
+					specialAnim = false;
+					dance();
 				}
-			} else if(specialAnim && animation.curAnim.finished)
-			{
-				specialAnim = false;
-				dance();
-			}
-			
-			switch(curCharacter)
-			{
-				case 'pico-speaker':
-					if(animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
-					{
-						var noteData:Int = 1;
-						if(animationNotes[0][1] > 2) noteData = 3;
+				
+				switch(curCharacter)
+				{
+					case 'pico-speaker':
+						if(animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
+						{
+							var noteData:Int = 1;
+							if(animationNotes[0][1] > 2) noteData = 3;
 
-						noteData += FlxG.random.int(0, 1);
-						playAnim('shoot' + noteData, true);
-						animationNotes.shift();
-					}
-					if(animation.curAnim.finished) playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
-			}
+							noteData += FlxG.random.int(0, 1);
+							playAnim('shoot' + noteData, true);
+							animationNotes.shift();
+						}
+						if(animation.curAnim.finished) playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
+				}
 
-			if (!isPlayer)
-			{
-				if (!PlayState.instance.playingAsOpponent || curCharacter.startsWith('gf')) {
-					if (animation.curAnim.name.startsWith('sing'))
-					{
-						holdTimer += elapsed * PlayState.instance.playbackRate;
-					}
+				if (!isPlayer)
+				{
+					if (!PlayState.instance.playingAsOpponent || curCharacter.startsWith('gf')) {
+						if (animation.curAnim.name.startsWith('sing'))
+						{
+							holdTimer += elapsed * PlayState.instance.playbackRate;
+						}
 
-					if (holdTimer >= Conductor.stepCrochet * (0.001 / PlayState.instance.playbackRate) * singDuration)
-					{
-						dance();
-						holdTimer = 0;
-					}
-				} else {
-					if (animation.curAnim.name.startsWith('sing'))
-					{
-						holdTimer += elapsed * PlayState.instance.playbackRate;
-					}
-					else
-						holdTimer = 0;
+						if (holdTimer >= Conductor.stepCrochet * (0.001 / PlayState.instance.playbackRate) * singDuration)
+						{
+							dance();
+							holdTimer = 0;
+						}
+					} else {
+						if (animation.curAnim.name.startsWith('sing'))
+						{
+							holdTimer += elapsed * PlayState.instance.playbackRate;
+						}
+						else
+							holdTimer = 0;
 
-					if (animation.curAnim.name.endsWith('miss') && animation.curAnim.finished && !debugMode)
-						dance();
+						if (animation.curAnim.name.endsWith('miss') && animation.curAnim.finished && !debugMode)
+							dance();
+					}
+				}
+
+				if(animation.curAnim.finished && animation.getByName(animation.curAnim.name + '-loop') != null)
+				{
+					playAnim(animation.curAnim.name + '-loop');
 				}
 			}
-
-			if(animation.curAnim.finished && animation.getByName(animation.curAnim.name + '-loop') != null)
-			{
-				playAnim(animation.curAnim.name + '-loop');
-			}
-		}
+		} catch (e:Any) {}
 		super.update(elapsed);
 	}
 
@@ -421,7 +423,7 @@ class Character extends FlxSprite
 	 */
 	public function dance()
 	{
-		if (!debugMode && !skipDance && !specialAnim)
+		if (!debugMode && !skipDance)
 		{
 			if(danceIdle)
 			{
@@ -433,7 +435,7 @@ class Character extends FlxSprite
 					playAnim('danceLeft' + idleSuffix);
 			}
 			else if(animation.getByName('idle' + idleSuffix) != null) {
-					playAnim('idle' + idleSuffix);
+				playAnim('idle' + idleSuffix);
 			}
 		}
 	}
