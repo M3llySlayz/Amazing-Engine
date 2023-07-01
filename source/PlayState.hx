@@ -2428,7 +2428,7 @@ class PlayState extends MusicBeatState
 						countdownReady.screenCenter();
 						countdownReady.antialiasing = antialias;
 						insert(members.indexOf(notes), countdownReady);
-						FlxTween.tween(countdownReady, {/*y: countdownReady.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						FlxTween.tween(countdownReady, {/*y: countdownReady.y + 100,*/ alpha: 0}, Conductor.crochet / (1000 / playbackRate), {
 							ease: FlxEase.cubeInOut,
 							onComplete: function(twn:FlxTween)
 							{
@@ -2448,7 +2448,7 @@ class PlayState extends MusicBeatState
 						countdownSet.screenCenter();
 						countdownSet.antialiasing = antialias;
 						insert(members.indexOf(notes), countdownSet);
-						FlxTween.tween(countdownSet, {/*y: countdownSet.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						FlxTween.tween(countdownSet, {/*y: countdownSet.y + 100,*/ alpha: 0}, Conductor.crochet / (1000 / playbackRate), {
 							ease: FlxEase.cubeInOut,
 							onComplete: function(twn:FlxTween)
 							{
@@ -2470,7 +2470,7 @@ class PlayState extends MusicBeatState
 						countdownGo.screenCenter();
 						countdownGo.antialiasing = antialias;
 						insert(members.indexOf(notes), countdownGo);
-						FlxTween.tween(countdownGo, {/*y: countdownGo.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+						FlxTween.tween(countdownGo, {/*y: countdownGo.y + 100,*/ alpha: 0}, Conductor.crochet / (1000 / playbackRate), {
 							ease: FlxEase.cubeInOut,
 							onComplete: function(twn:FlxTween)
 							{
@@ -3429,6 +3429,9 @@ class PlayState extends MusicBeatState
 				vocals.pause();
 			}
 
+			if (iconP1ScaleTween != null) iconP1ScaleTween.active = false;
+			if (iconP2ScaleTween != null) iconP2ScaleTween.active = false;
+
 			if (startTimer != null && !startTimer.finished)
 				startTimer.active = false;
 			if (finishTimer != null && !finishTimer.finished)
@@ -3464,6 +3467,9 @@ class PlayState extends MusicBeatState
 			{
 				resyncVocals();
 			}
+
+			if (iconP1ScaleTween != null) iconP1ScaleTween.active = true;
+			if (iconP2ScaleTween != null) iconP2ScaleTween.active = true;
 
 			if (startTimer != null && !startTimer.finished)
 				startTimer.active = true;
@@ -3762,19 +3768,25 @@ class PlayState extends MusicBeatState
 		var percent:Float = 1 - ((playingAsOpponent ? -health : health) / 2);
 		iconP1.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+		iconP1.y = healthBar.y - (75 / iconP1.scale.y);
+		iconP2.y = healthBar.y - (75 / iconP2.scale.y);
 
 		if (health > 2) health = 2;
 
 		if (healthBar.percent < 20) {
 			(playingAsOpponent?iconP2:iconP1).animation.curAnim.curFrame = 1;
+			if (iconP2Width == 450) iconP2.animation.curAnim.curFrame = 2;
 		} else {
 			(playingAsOpponent?iconP2:iconP1).animation.curAnim.curFrame = 0;
+			if (iconP2Width == 450) iconP2.animation.curAnim.curFrame = 0;
 		}
 
 		if (healthBar.percent > 80) {
 			(playingAsOpponent?iconP1:iconP2).animation.curAnim.curFrame = 1;
+			if (iconP1Width == 450) iconP1.animation.curAnim.curFrame = 2;
 		} else {
 			(playingAsOpponent?iconP1:iconP2).animation.curAnim.curFrame = 0;
+			if (iconP1Width == 450) iconP1.animation.curAnim.curFrame = 0;
 		}
 
 		//if (FlxG.keys.justPressed.Z) trace(iconP1.width);
@@ -5839,6 +5851,8 @@ class PlayState extends MusicBeatState
 
 	var lastBeatHit:Int = -1;
 
+	var iconP1ScaleTween:FlxTween;
+	var iconP2ScaleTween:FlxTween;
 	override function beatHit()
 	{
 		super.beatHit();
@@ -5853,11 +5867,16 @@ class PlayState extends MusicBeatState
 			notes.sort(FlxSort.byY, ClientPrefs.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
 		}
 
-		iconP1.scale.set(1.2, 1.2);
-		iconP2.scale.set(1.2, 1.2);
+		var speed:Float = (Conductor.crochet / 1050) / playbackRate;
 
-		iconP1.updateHitbox();
-		iconP2.updateHitbox();
+		FlxTween.cancelTweensOf(iconP1, ['scale.x', 'scale.y']);
+		FlxTween.cancelTweensOf(iconP2, ['scale.x', 'scale.y']);
+		iconP1.scale.set(1.25, 1.25);
+		iconP2.scale.set(1.25, 1.25);
+		if (iconP1ScaleTween != null) iconP1ScaleTween.cancel();
+		if (iconP2ScaleTween != null) iconP2ScaleTween.cancel();
+		iconP1ScaleTween = FlxTween.tween(iconP1, {'scale.x': 1, 'scale.y': 1}, speed, {ease: FlxEase.circOut});
+		iconP2ScaleTween = FlxTween.tween(iconP2, {'scale.x': 1, 'scale.y': 1}, speed, {ease: FlxEase.circOut});
 
 		if (gf != null && curBeat % Math.round(gfSpeed * gf.danceEveryNumBeats) == 0 && gf.animation.curAnim != null && !gf.animation.curAnim.name.startsWith("sing") && !gf.stunned)
 		{
