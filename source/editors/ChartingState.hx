@@ -253,10 +253,6 @@ class ChartingState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		// Paths.clearMemory();
-
-		PlayState.mania = _song.mania;
-
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
 		var s_termination = "s";
@@ -1669,8 +1665,6 @@ class ChartingState extends MusicBeatState
 	{
 		curStep = recalculateSteps();
 
-		PlayState.mania = _song.mania;
-
 		var gWidth = GRID_SIZE * (Note.ammo[_song.mania] * 2);
 		camPos.x = -80 + gWidth;
 		strumLine.width = gWidth;
@@ -1955,7 +1949,7 @@ class ChartingState extends MusicBeatState
 			}
 
 			if(!vortex){
-				if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.DOWN  )
+				if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.DOWN)
 				{
 					FlxG.sound.music.pause();
 					updateCurStep();
@@ -1965,10 +1959,10 @@ class ChartingState extends MusicBeatState
 					var increase:Float = 1 / snap;
 					if (FlxG.keys.pressed.UP)
 					{
-						var fuck:Float = CoolUtil.quantize(beat, snap) - increase; //(Math.floor((beat+snap) / snap) * snap);
+						var fuck:Float = CoolUtil.quantize(beat, snap) - increase;
 						FlxG.sound.music.time = Conductor.beatToSeconds(fuck);
 					}else{
-						var fuck:Float = CoolUtil.quantize(beat, snap) + increase; //(Math.floor((beat+snap) / snap) * snap);
+						var fuck:Float = CoolUtil.quantize(beat, snap) + increase;
 						FlxG.sound.music.time = Conductor.beatToSeconds(fuck);
 					}
 				}
@@ -1980,7 +1974,7 @@ class ChartingState extends MusicBeatState
 				style = 3;
 			}
 
-			var conductorTime = Conductor.songPosition; //+ sectionStartTime();Conductor.songPosition / Conductor.stepCrochet;
+			var conductorTime = Conductor.songPosition;
 
 			//AWW YOU MADE IT SEXY <3333 THX SHADMAR
 
@@ -2248,8 +2242,6 @@ class ChartingState extends MusicBeatState
 	var lastSecBeatsNext:Float = 0;
 	function reloadGridLayer() {
 		GRID_SIZE = Note.gridSizes[_song.mania];
-
-		PlayState.mania = _song.mania;
 
 		if (dummyArrow != null){
 			dummyArrow.setGraphicSize(GRID_SIZE, GRID_SIZE);
