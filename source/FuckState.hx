@@ -27,7 +27,7 @@ class FuckState extends FlxUIState
 	public static var currentStateName:String = "";
 	public static var FATAL:Bool = false;
 	public static var jokes:Array<String> = [
-		"Hey look, mom! I'm on a crash report!",
+		"Hey look, Mom! I'm on a crash report!",
 		"This wasn't supposed to go down like this...",
 		"Don't look at me that way.. I tried",
 		"Ow, that really hurt :(",
@@ -43,7 +43,7 @@ class FuckState extends FlxUIState
 		"Where do we go from here?",
 		"Coded in Haxe.",
 		"Oh what the hell?",
-		"I just wanted to have fun.. :(",
+		"I just wanted to have fun... :(",
 		"Oh no, not this again",
 		"null object reference is real and haunts us",
 		'What is a error exactly?',
@@ -144,6 +144,7 @@ class FuckState extends FlxUIState
 		this.saved = saved;
 		super();
 	}
+	
 	override function create()
 	{
 		super.create();
