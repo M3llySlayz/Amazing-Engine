@@ -245,7 +245,8 @@ class ChartingState extends MusicBeatState
 				stage: 'stage',
 				validScore: false,
 				strumlines: 2,
-				mania: Note.defaultMania
+				mania: Note.defaultMania,
+				charSelectSkip: false
 			};
 			addSection();
 			PlayState.SONG = _song;
@@ -687,6 +688,15 @@ class ChartingState extends MusicBeatState
 			updateGrid();
 		});
 
+		var char_selectSkip = new FlxUICheckBox(loadAutosaveBtn.x, noteSplashesInputText.y, null, null, "Locks Character Select", 100);
+		char_selectSkip.checked = _song.needsVoices;
+		// _song.needsVoices = check_voices.checked;
+		char_selectSkip.callback = function()
+		{
+			_song.charSelectSkip = char_selectSkip.checked;
+			//trace('CHECKED!');
+		};
+
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
 		tab_group_song.add(UI_songTitle);
@@ -707,6 +717,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(noteSkinInputText);
 		tab_group_song.add(noteSplashesInputText);
 		tab_group_song.add(stepperStrumlines);
+		tab_group_song.add(char_selectSkip);
 		//tab_group_song.add(applyStrums);
 		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
 		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Song Speed:'));

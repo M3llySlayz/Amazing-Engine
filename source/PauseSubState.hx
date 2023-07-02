@@ -267,7 +267,9 @@ class PauseSubState extends MusicBeatSubstate
 					}
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
-					authorText.text = 'Hold ALT to skip character selection.';
+					if (!PlayState.SONG.charSelectSkip)
+						authorText.text = 'Hold ALT to skip character selection.';
+
 					deleteSkipTimeText();
 					regenMenu();
 				case 'Toggle Practice Mode':
@@ -447,7 +449,10 @@ class PauseSubState extends MusicBeatSubstate
 						if (FlxG.keys.pressed.ALT) {
 							MusicBeatState.resetState();
 						} else {
-							LoadingState.loadAndSwitchState(new CharMenu());
+							if (!PlayState.SONG.charSelectSkip)
+								LoadingState.loadAndSwitchState(new CharMenu());
+							else
+								MusicBeatState.resetState();
 						}
 						FlxG.sound.music.volume = 0;
 						PlayState.changedDifficulty = true;

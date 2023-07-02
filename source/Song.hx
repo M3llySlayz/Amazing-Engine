@@ -36,6 +36,8 @@ typedef SwagSong =
 
 	var healthdrain:Float;
 	var healthdrainKill:Bool;
+
+	var charSelectSkip:Bool;
 }
 
 class Song
@@ -58,6 +60,8 @@ class Song
 	public var player2:String = 'dad';
 	public var gfVersion:String = 'gf';
 	public var songInstVolume:Float = 1;
+
+	public var charSelectSkip:Bool = false;
 
 	private static function onLoadJson(songJson:Dynamic) // Convert old charts to newest format
 	{
