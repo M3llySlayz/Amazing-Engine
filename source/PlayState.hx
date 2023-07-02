@@ -5419,7 +5419,7 @@ class PlayState extends MusicBeatState
 
 		var time:Float = (Conductor.stepCrochet / 1800) / playbackRate;
 		if(note.isSustainNote && !note.animation.curAnim.name.endsWith('tail')) {
-			time += 0.15 / playbackRate;
+			time += 0.15;
 		}
 
 		var strumType:Int = 0;
@@ -5538,7 +5538,7 @@ class PlayState extends MusicBeatState
 			if(cpuControlled) {
 				var time:Float = (Conductor.stepCrochet / 1800) / playbackRate;
 				if(note.isSustainNote && !note.animation.curAnim.name.endsWith('tail')) {
-					time += 0.15 / playbackRate;
+					time += 0.15;
 				}
 				StrumPlayAnim(1, Std.int(Math.abs(note.noteData)) % Note.ammo[mania], time);
 			} else {
