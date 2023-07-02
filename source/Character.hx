@@ -406,7 +406,7 @@ class Character extends FlxSprite
 							if (animation.curAnim.name.endsWith('miss') && animation.curAnim.finished && !debugMode)
 								dance();
 						}
-					} else if (animation.curAnim.finished) {
+					} else if (animation.curAnim.finished) { // For special anim
 						dance();
 					}
 				}
