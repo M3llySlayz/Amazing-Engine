@@ -149,7 +149,7 @@ class FlxAnimationController implements IFlxDestroyable
 		_sprite = null;
 	}
 
-	#if (flixel <= "5.3.0")
+	#if (flixel > "5.3.0")
 	@:allow(flixel.animation.FlxAnimation)
 	function getFrameDuration(index:Int)
 	{
