@@ -3984,7 +3984,7 @@ class PlayState extends MusicBeatState
 					}
 
 					var center:Float = strumY + Note.swagWidth / 2;
-					if(daNote.isSustainNote && !daNote.ignoreNote)
+					if(daNote.isSustainNote && !daNote.ignoreNote && daNote.wasGoodHit)
 					{
 						if (strumScroll)
 						{
