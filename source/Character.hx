@@ -386,7 +386,7 @@ class Character extends FlxSprite
 					if (!PlayState.instance.playingAsOpponent || curCharacter.startsWith('gf')) {
 						if (animation.curAnim.name.startsWith('sing'))
 						{
-							holdTimer += elapsed * PlayState.instance.playbackRate;
+							holdTimer += elapsed;
 						}
 
 						if (holdTimer >= Conductor.stepCrochet * (0.001 / PlayState.instance.playbackRate) * singDuration)
@@ -397,7 +397,7 @@ class Character extends FlxSprite
 					} else {
 						if (animation.curAnim.name.startsWith('sing'))
 						{
-							holdTimer += elapsed * PlayState.instance.playbackRate;
+							holdTimer += elapsed;
 						}
 						else
 							holdTimer = 0;
