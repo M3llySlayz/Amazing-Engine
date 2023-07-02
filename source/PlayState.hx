@@ -3263,11 +3263,11 @@ class PlayState extends MusicBeatState
 		var lastScaleY:Float = note.scale.y;
 		if (isPixelStage) {
 			if (note.isSustainNote) note.originalHeightForCalcs = note.height;
-			note.setGraphicSize(Std.int(note.width * daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])));
+			note.setGraphicSize(Std.int(note.width * daPixelZoom * Note.pixelScales[mania]));
 		} else {
 			// Like loadNoteAnims()
-			if (!note.isSustainNote) note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])));
-			else note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])), Std.int(note.height * Note.scales[0]));
+			if (!note.isSustainNote) note.setGraphicSize(Std.int(note.width * Note.scales[mania]));
+			else note.setGraphicSize(Std.int(note.width * Note.scales[mania]), Std.int(note.height * Note.scales[0]));
 			note.updateHitbox();
 		}
 
@@ -3279,7 +3279,7 @@ class PlayState extends MusicBeatState
 			note.animation.play(Note.keysShit.get(mania).get('letters')[noteData] + ' tail');
 			note.updateHitbox();
 
-			note.offsetX = PlayState.isPixelStage ? (note.width / (2 * (Note.pixelScales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines]))) + 30 : (note.width / (2 * (Note.scales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])));
+			note.offsetX = PlayState.isPixelStage ? (note.width / (2 * Note.pixelScales[mania])) + 30 : (note.width / (2 * Note.scales[mania]));
 			if (note != null && prevNote != null && prevNote.isSustainNote && prevNote.animation != null) { // haxe flixel
 				prevNote.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' hold');
 				prevNote.scale.y *= Conductor.stepCrochet / 100 / (Note.scales[mania] * 1.05);
@@ -3315,7 +3315,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public function changeMania(newValue:Int, skipStrumFade:Bool = false)
+	public function changeMania(newValue:Int, skipStrumFadeOut:Bool = false)
 	{
 		//funny dissapear transitions
 		//while new strums appear
@@ -3323,7 +3323,7 @@ class PlayState extends MusicBeatState
 		mania = newValue;
 
 		try {
-			if (!skipStrumFade) {
+			if (!skipStrumFadeOut) {
 				for (i in 0...strumLineNotes.members.length) {
 					var oldStrum:FlxSprite = strumLineNotes.members[i].clone();
 					oldStrum.x = strumLineNotes.members[i].x;
@@ -3360,7 +3360,7 @@ class PlayState extends MusicBeatState
 			callOnLuas('onChangeMania', [mania, daOldMania]);
 
 			for (strum in 0...6) {
-				if (!skipStrumFade) {
+				if (!skipStrumFadeOut) {
 					regenerateStaticArrows(strum);
 				} else {
 					regenerateStaticArrowsQuick(strum);
@@ -3369,7 +3369,7 @@ class PlayState extends MusicBeatState
 		} catch (e:Any) {}
 	}
 
-	public function changeStrumlines(newValue:Int, skipStrumFade:Bool = false)
+	public function changeStrumlines(newValue:Int, skipStrumFadeOut:Bool = false)
 	{
 		//funny dissapear transitions
 		//while new strums appear
@@ -3377,7 +3377,7 @@ class PlayState extends MusicBeatState
 		strumlines = newValue;
 
 		try {
-			if (!skipStrumFade) {
+			if (!skipStrumFadeOut) {
 				for (i in 0...strumLineNotes.members.length) {
 					var oldStrum:FlxSprite = strumLineNotes.members[i].clone();
 					oldStrum.x = strumLineNotes.members[i].x;
@@ -3410,7 +3410,7 @@ class PlayState extends MusicBeatState
 			callOnLuas('onChangeStrumlines', [strumlines, daOldStrums]);
 
 			for (strum in 0...6) {
-				if (!skipStrumFade) {
+				if (!skipStrumFadeOut) {
 					regenerateStaticArrows(strum);
 				} else {
 					regenerateStaticArrowsQuick(strum);
