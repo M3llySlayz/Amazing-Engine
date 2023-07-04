@@ -54,14 +54,16 @@ class MusicBeatState extends FlxUIState
 
 	override function update(elapsed:Float)
 	{
-		//everyStep();
 		var oldStep:Int = curStep;
 
 		updateCurStep();
 		updateBeat();
 
 		#if GAMEJOLT_ALLOWED
-		if (curStep % 16 == 0 && !pinged) {GJClient.pingSession(); pinged = true;}
+		if (curStep % 16 == 0 && !pinged) {
+			GJClient.pingSession();
+			pinged = true;
+		}
 		else if (curStep % 16 == 7) pinged = false;
 		#end
 		
