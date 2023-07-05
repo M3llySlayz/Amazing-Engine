@@ -577,7 +577,7 @@ class Keybinds {
             'accept'		=> [SPACE, ENTER],
             'back'			=> [BACKSPACE, ESCAPE],
             'pause'			=> [ENTER, ESCAPE],
-            'reset'			=> [R, NONE],
+            'reset'			=> [DELETE, NONE],
             
             'volume_mute'	=> [ZERO, NONE],
             'volume_up'		=> [NUMPADPLUS, PLUS],
