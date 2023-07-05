@@ -5157,6 +5157,7 @@ class PlayState extends MusicBeatState
 			if(strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm')
 			{
 				spr.playAnim('pressed');
+				spr.centerOrigin();
 				spr.resetAnim = 0;
 			}
 			callOnLuas('onKeyPress', [key]);
@@ -5184,6 +5185,7 @@ class PlayState extends MusicBeatState
 			if(spr != null)
 			{
 				spr.playAnim('static');
+				spr.centerOrigin();
 				spr.resetAnim = 0;
 			}
 
@@ -5541,6 +5543,7 @@ class PlayState extends MusicBeatState
 				if(spr != null)	
 				{
 					spr.playAnim('confirm', true);
+					spr.centerOrigin();
 				}
 			}
 			note.wasGoodHit = true;
@@ -6061,6 +6064,7 @@ class PlayState extends MusicBeatState
 
 		if(spr != null) {
 			spr.playAnim('confirm', true);
+			spr.centerOrigin();
 			spr.resetAnim = time;
 		}
 	}
