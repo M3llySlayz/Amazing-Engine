@@ -1150,11 +1150,11 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
-		laneunderlayOp = new FlxSprite().makeGraphic(Std.int((160 * Note.lessScale[strumlines]) * Note.lesserScale[strumlines][mania]) * (mania + 1), FlxG.height * 4, FlxColor.BLACK);
+		laneunderlayOp = new FlxSprite().makeGraphic(Std.int((160 * Note.lessScale[strumlines]) * Note.lesserScale[mania][strumlines]) * (mania + 1), FlxG.height * 4, FlxColor.BLACK);
 		laneunderlayOp.alpha = 0;
 		add(laneunderlayOp);
 
-		laneunderlay = new FlxSprite().makeGraphic(Std.int((160 * Note.lessScale[strumlines]) * Note.lesserScale[strumlines][mania]) * (mania + 1), FlxG.height * 4, FlxColor.BLACK);
+		laneunderlay = new FlxSprite().makeGraphic(Std.int((160 * Note.lessScale[strumlines]) * Note.lesserScale[mania][strumlines]) * (mania + 1), FlxG.height * 4, FlxColor.BLACK);
 		laneunderlay.alpha = 0;
 		add(laneunderlay);
 
@@ -3276,7 +3276,7 @@ class PlayState extends MusicBeatState
 		// Like new()
 		var prevNote:Note = note.prevNote;
 		if (note.isSustainNote && prevNote != null) {
-			note.offsetX = PlayState.isPixelStage ? (note.width / (1.5 * (Note.pixelScales[mania] * Note.lesserScale[mania][strumlines]))) + 30 : (note.width / (1.5 * (Note.scales[mania] * Note.lesserScale[mania][strumlines])));
+			note.offsetX = PlayState.isPixelStage ? (note.width / ((Note.pixelScales[mania] * Note.lesserScale[mania][strumlines]) * 2)) + 30 : (note.width / ((Note.scales[mania] * Note.lesserScale[mania][strumlines]) * 2));
 			if (note.animation.curAnim.name.endsWith('tail')) note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' tail');
 			else note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' hold');
 			note.updateHitbox();
@@ -5157,7 +5157,6 @@ class PlayState extends MusicBeatState
 			if(strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm')
 			{
 				spr.playAnim('pressed');
-				spr.centerOrigin();
 				spr.resetAnim = 0;
 			}
 			callOnLuas('onKeyPress', [key]);
@@ -5185,7 +5184,6 @@ class PlayState extends MusicBeatState
 			if(spr != null)
 			{
 				spr.playAnim('static');
-				spr.centerOrigin();
 				spr.resetAnim = 0;
 			}
 
@@ -5543,7 +5541,6 @@ class PlayState extends MusicBeatState
 				if(spr != null)	
 				{
 					spr.playAnim('confirm', true);
-					spr.centerOrigin();
 				}
 			}
 			note.wasGoodHit = true;
@@ -6064,7 +6061,6 @@ class PlayState extends MusicBeatState
 
 		if(spr != null) {
 			spr.playAnim('confirm', true);
-			spr.centerOrigin();
 			spr.resetAnim = time;
 		}
 	}
