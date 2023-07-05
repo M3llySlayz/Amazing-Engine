@@ -3276,13 +3276,13 @@ class PlayState extends MusicBeatState
 		// Like new()
 		var prevNote:Note = note.prevNote;
 		if (note.isSustainNote && prevNote != null) {
-			note.animation.play(Note.keysShit.get(mania).get('letters')[noteData] + ' tail');
+			note.offsetX = PlayState.isPixelStage ? (note.width / (1.5 * (Note.pixelScales[mania] * Note.lesserScale[mania][strumlines]))) + 30 : (note.width / (1.5 * (Note.scales[mania] * Note.lesserScale[mania][strumlines])));
+			if (note.animation.curAnim.name.endsWith('tail')) note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' tail');
+			else note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' hold');
 			note.updateHitbox();
 
-			note.offsetX = PlayState.isPixelStage ? (note.width / (2 * Note.pixelScales[mania])) + 30 : (note.width / (2 * Note.scales[mania]));
 			if (note != null && prevNote != null && prevNote.isSustainNote && prevNote.animation != null) { // haxe flixel
-				prevNote.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' hold');
-				prevNote.scale.y *= Conductor.stepCrochet / 100 / (Note.scales[mania] * 1.05);
+				prevNote.scale.y *= Conductor.stepCrochet / 100 / ((Note.scales[mania] * Note.lesserScale[mania][strumlines]) * 1.05);
 				prevNote.scale.y *= songSpeed;
 
 				if(isPixelStage) {
@@ -3297,21 +3297,15 @@ class PlayState extends MusicBeatState
 				prevNote.updateHitbox();
 			}
 		} else if (!note.isSustainNote && noteData > - 1 && noteData < tMania) {
-			if (note.changeAnim) {
-				var animToPlay:String = '';
-				animToPlay = Note.keysShit.get(mania).get('letters')[noteData % tMania];
-				note.animation.play(animToPlay);
-			}
+			note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania]);
 		}
 
 		// Like set_noteType()
 		if (note.changeColSwap) {
 			var hsvNumThing = Std.int(Note.keysShit.get(mania).get('pixelAnimIndex')[noteData % tMania]);
-			var colSwap = note.colorSwap;
-
-			colSwap.hue = ClientPrefs.arrowHSV[hsvNumThing][0] / 360;
-			colSwap.saturation = ClientPrefs.arrowHSV[hsvNumThing][1] / 100;
-			colSwap.brightness = ClientPrefs.arrowHSV[hsvNumThing][2] / 100;
+			note.colorSwap.hue = ClientPrefs.arrowHSV[hsvNumThing][0] / 360;
+			note.colorSwap.saturation = ClientPrefs.arrowHSV[hsvNumThing][1] / 100;
+			note.colorSwap.brightness = ClientPrefs.arrowHSV[hsvNumThing][2] / 100;
 		}
 	}
 
@@ -3353,6 +3347,10 @@ class PlayState extends MusicBeatState
 			strumLineNotes.clear();
 			setOnLuas('mania', mania);
 
+			for (note in unspawnNotes) {
+				updateNote(note);
+			}
+			
 			notes.forEachAlive(function(note:Note) {
 				updateNote(note);
 			});

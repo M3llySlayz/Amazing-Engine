@@ -257,8 +257,6 @@ class Note extends FlxSprite
 			}
 		}
 
-		// trace(prevNote);
-
 		if (isSustainNote && prevNote != null)
 		{
 			alpha = 0.6;
@@ -350,7 +348,7 @@ class Note extends FlxSprite
 				loadGraphic(Paths.image('pixelUI/' + blahblah), true, Math.floor(width), Math.floor(height));
 			}
 			defaultWidth = width;
-			setGraphicSize(Std.int(width * PlayState.daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])));
+			setGraphicSize(Std.int(width * PlayState.daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[mania][PlayState.strumlines])));
 			loadPixelNoteAnims();
 			antialiasing = false;
 
@@ -358,13 +356,6 @@ class Note extends FlxSprite
 				offsetX += lastNoteOffsetXForPixelAutoAdjusting;
 				lastNoteOffsetXForPixelAutoAdjusting = (width - 7) * (PlayState.daPixelZoom / 2);
 				offsetX -= lastNoteOffsetXForPixelAutoAdjusting;
-				
-				/*if(animName != null && !animName.endsWith('tail'))
-				{
-					lastScaleY /= lastNoteScaleToo;
-					lastNoteScaleToo = (6 / height);
-					lastScaleY *= lastNoteScaleToo; 
-				}*/
 			}
 		} else {
 			frames = Paths.getSparrowAtlas(blahblah);
@@ -400,9 +391,9 @@ class Note extends FlxSprite
 			ogW = width;
 			ogH = height;
 			if (!isSustainNote)
-				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])));
+				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[mania][PlayState.strumlines])));
 			else
-				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[PlayState.mania][PlayState.strumlines])), Std.int(defaultHeight * scales[0]));
+				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[mania][PlayState.strumlines])), Std.int(defaultHeight * scales[0]));
 			updateHitbox();
 	}
 
@@ -419,50 +410,11 @@ class Note extends FlxSprite
 		}
 	}
 
-	/*public function applyManiaChange()
-	{
-		if (isSustainNote) 
-			scale.y = 1;
-		reloadNote(texture);
-		if (isSustainNote)
-			offsetX = width / 2;
-		if (!isSustainNote)
-		{
-			var animToPlay:String = '';
-			animToPlay = Note.keysShit.get(mania).get('letters')[noteData % Note.ammo[mania]];
-			animation.play(animToPlay);
-		}
-
-		/*if (isSustainNote && prevNote != null) someone please tell me why this wont work
-		{
-			animation.play(Note.keysShit.get(mania).get('letters')[noteData % Note.ammo[mania]] + ' tail');
-			if (prevNote != null && prevNote.isSustainNote)
-			{
-				prevNote.animation.play(Note.keysShit.get(mania).get('letters')[prevNote.noteData % Note.ammo[mania]] + ' hold');
-				prevNote.updateHitbox();
-			}
-		}
-
-		updateHitbox();
-	}*/
-
-
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
 		mania = PlayState.mania;
-
-		/* im so stupid for that
-		if (noteData == 9)
-		{
-			if (animation.curAnim != null)
-				trace(animation.curAnim.name);
-			else trace("te anim is null waaaaaa");
-
-			trace(Note.keysShit.get(mania).get('letters')[noteData]);
-		}
-		*/
 
 		if (mustPress)
 		{
