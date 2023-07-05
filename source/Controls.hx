@@ -486,7 +486,7 @@ class Controls extends FlxActionSet
 				#else
 				for (gamepad in controls.gamepadsAdded)
 					if (gamepadsAdded.indexOf(gamepad) == -1)
-					  gamepadsAdded.push(gamepad);
+						gamepadsAdded.push(gamepad);
 				#end
 
 				mergeKeyboardScheme(controls.keyboardScheme);
@@ -496,11 +496,6 @@ class Controls extends FlxActionSet
 			case Keys:
 				mergeKeyboardScheme(controls.keyboardScheme);
 		}
-	}
-
-	inline public function copyTo(controls:Controls, ?device:Device)
-	{
-		controls.copyFrom(this, device);
 	}
 
 	function mergeKeyboardScheme(scheme:KeyboardScheme):Void
