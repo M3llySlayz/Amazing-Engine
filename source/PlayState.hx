@@ -3282,7 +3282,7 @@ class PlayState extends MusicBeatState
 			note.updateHitbox();
 
 			if (note != null && prevNote != null && prevNote.isSustainNote && prevNote.animation != null) { // haxe flixel
-				prevNote.scale.y *= Conductor.stepCrochet / 100 / ((Note.scales[mania] * Note.lesserScale[mania][strumlines]) * 1.05);
+				prevNote.scale.y *= Conductor.stepCrochet / 100 / 1.05;
 				prevNote.scale.y *= songSpeed;
 
 				if(isPixelStage) {
