@@ -5219,7 +5219,6 @@ class PlayState extends MusicBeatState
 				if (FlxG.keys.checkStatus(keysArray[mania][i][j], PRESSED)) return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -5228,7 +5227,6 @@ class PlayState extends MusicBeatState
 		for (i in 0...keysArray[mania][data].length) {
 			if (FlxG.keys.checkStatus(keysArray[mania][data][i], PRESSED)) return true;
 		}
-
 		return false;
 	}
 
@@ -5246,8 +5244,6 @@ class PlayState extends MusicBeatState
 				}
 			});
 
-			var char:Character = boyfriend;
-			if (playingAsOpponent) char = dad;
 			if (keysArePressed() && !endingSong && !playingAsOpponent) {
 				#if ACHIEVEMENTS_ALLOWED
 				var achieve:String = checkForAchievement(['oversinging']);
