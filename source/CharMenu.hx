@@ -510,11 +510,16 @@ class CharMenu extends MusicBeatState
 	}
 
 	function cacheTheGuy(newCharacter:String) {
-		if(!boyfriendMap.exists(newCharacter)) {
-			var newBoyfriend:Boyfriend = new Boyfriend(0, 0, newCharacter);
-			boyfriendMap.set(newCharacter, newBoyfriend);
-			boyfriendGroup.add(newBoyfriend);
-			newBoyfriend.alpha = 0.00001;
-		}
+		if (boyfriendMap != null)
+			if(!boyfriendMap.exists(newCharacter)) {
+				try{
+				var newBoyfriend:Boyfriend = new Boyfriend(0, 0, newCharacter);
+				boyfriendMap.set(newCharacter, newBoyfriend);
+				boyfriendGroup.add(newBoyfriend);
+				newBoyfriend.alpha = 0.00001;
+				} catch(e){
+					trace('Probably another fucking null object reference');
+				}
+			}
 	}
 }
