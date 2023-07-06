@@ -3236,6 +3236,7 @@ class PlayState extends MusicBeatState
 		updateLuaDefaultPos();
 	}
 
+	// This is about to be done for
 	function updateNote(note:Note)
 	{
 		var tMania:Int = mania + 1;
@@ -3255,7 +3256,7 @@ class PlayState extends MusicBeatState
 			else note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[mania][strumlines])), Std.int(note.height * 1.05));
 			note.updateHitbox();
 		}
-		note.offsetX += note.width / 2;
+		note.offsetX += note.width / (Note.scales[mania] * 2);
 
 		// Like new()
 		var prevNote:Note = note.prevNote;
@@ -3279,7 +3280,7 @@ class PlayState extends MusicBeatState
 		} else if (!note.isSustainNote && noteData > -1 && noteData < tMania) {
 			note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania]);
 		}
-		note.offsetX -= note.width / 2;
+		note.offsetX -= note.width / (Note.scales[mania] * 2);
 
 		// Like set_noteType()
 		if (note.changeColSwap) {
