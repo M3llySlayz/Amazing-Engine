@@ -507,7 +507,7 @@ class CharMenu extends MusicBeatState
 	}
 
 	function cacheTheGuy(newCharacter:String) {
-		if (boyfriendMap != null)
+		if (boyfriendMap != null) {
 			if(!boyfriendMap.exists(newCharacter)) {
 				try{
 				var newBoyfriend:Boyfriend = new Boyfriend(0, 0, newCharacter);
@@ -518,5 +518,6 @@ class CharMenu extends MusicBeatState
 					trace('Probably another fucking null object reference');
 				}
 			}
+		}
 	}
 }
