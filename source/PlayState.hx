@@ -1150,14 +1150,6 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
-		laneunderlayOp = new FlxSprite().makeGraphic(Std.int((160 * Note.lessScale[strumlines]) * Note.lesserScale[mania][strumlines]) * (mania + 1), FlxG.height * 4, FlxColor.BLACK);
-		laneunderlayOp.alpha = 0;
-		add(laneunderlayOp);
-
-		laneunderlay = new FlxSprite().makeGraphic(Std.int((160 * Note.lessScale[strumlines]) * Note.lesserScale[mania][strumlines]) * (mania + 1), FlxG.height * 4, FlxColor.BLACK);
-		laneunderlay.alpha = 0;
-		add(laneunderlay);
-
 		//time bars!!! yayyyyyyyy!!!!!1!1! (i hate jb so much)
 		if (ClientPrefs.timeBarStyle == 'Leather') {
 			infoTxt = new FlxText(0, 0, 0, SONG.song + " - " + CoolUtil.difficultyString() + (cpuControlled ? " (BOT)" : ""), 20);
@@ -1360,8 +1352,6 @@ class PlayState extends MusicBeatState
 
 		strumLineNotes.cameras = [camNotes];
 		grpNoteSplashes.cameras = [camNotes];
-		laneunderlay.cameras = [camNotes];
-		laneunderlayOp.cameras = [camNotes];
 		notes.cameras = [camNotes];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
@@ -2633,11 +2623,6 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(infoTxt, {alpha: 1}, 1, {ease: FlxEase.cubeOut});
 		}
 
-		FlxTween.tween(laneunderlay, {alpha: ClientPrefs.underlay}, 1, {ease: FlxEase.cubeOut});
-		FlxTween.tween(laneunderlayOp, {alpha: ClientPrefs.middleScroll ? 0 : ClientPrefs.oppUnderlay}, 1, {ease: FlxEase.cubeOut});
-		//trace(playerStrums.members[0].x - 25);
-		//trace(opponentStrums.members[0].x - 25);
-
 		switch(curStage)
 		{
 			case 'tank':
@@ -3263,25 +3248,24 @@ class PlayState extends MusicBeatState
 		var lastScaleY:Float = note.scale.y;
 		if (isPixelStage) {
 			if (note.isSustainNote) note.originalHeightForCalcs = note.height;
-			note.setGraphicSize(Std.int(note.width * daPixelZoom * Note.pixelScales[mania]));
+			note.setGraphicSize(Std.int(note.width * daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[mania][strumlines])));
 		} else {
 			// Like loadNoteAnims()
-			if (!note.isSustainNote) note.setGraphicSize(Std.int(note.width * Note.scales[mania]));
-			else note.setGraphicSize(Std.int(note.width * Note.scales[mania]), Std.int(note.height * Note.scales[0]));
+			if (!note.isSustainNote) note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[mania][strumlines])));
+			else note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[mania][strumlines])), Std.int(note.height * 1.05));
 			note.updateHitbox();
 		}
-
-		note.updateHitbox();
 
 		// Like new()
 		var prevNote:Note = note.prevNote;
 		if (note.isSustainNote && prevNote != null) {
-			note.offsetX = PlayState.isPixelStage ? (note.width / ((Note.pixelScales[mania] * Note.lesserScale[mania][strumlines]) * 2)) + 30 : (note.width / ((Note.scales[mania] * Note.lesserScale[mania][strumlines]) * 2));
+			note.offsetX += note.width / 2;
 			if (note.animation.curAnim.name.endsWith('tail')) note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' tail');
 			else note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' hold');
-			note.updateHitbox();
+			note.offsetX -= note.width / 2;
 
 			if (note != null && prevNote != null && prevNote.isSustainNote && prevNote.animation != null) { // haxe flixel
+
 				prevNote.scale.y *= Conductor.stepCrochet / 100 / 1.05;
 				prevNote.scale.y *= songSpeed;
 
@@ -3289,14 +3273,12 @@ class PlayState extends MusicBeatState
 					prevNote.scale.y *= 1.19;
 					prevNote.scale.y *= 6 / note.height;
 				}
-				prevNote.updateHitbox();
 			}
 
 			if (isPixelStage) {
 				prevNote.scale.y *= daPixelZoom * (Note.pixelScales[mania]); //Fuck urself
-				prevNote.updateHitbox();
 			}
-		} else if (!note.isSustainNote && noteData > - 1 && noteData < tMania) {
+		} else if (!note.isSustainNote && noteData > -1 && noteData < tMania) {
 			note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania]);
 		}
 
@@ -3565,14 +3547,6 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		callOnLuas('onUpdate', [elapsed]);
-
-		laneunderlay.x = !playingAsOpponent ? playerStrums.members[0].x - 25 : opponentStrums.members[0].x - 25;
-		laneunderlay.makeGraphic(Std.int((160 * Note.lessScale[strumlines]) * Note.lesserScale[mania][strumlines]) * (mania + 1), FlxG.height * 4, FlxColor.BLACK);
-		laneunderlay.screenCenter(Y);
-
-		laneunderlayOp.x = !playingAsOpponent ? opponentStrums.members[0].x - 25 : playerStrums.members[0].x - 25;
-		laneunderlayOp.makeGraphic(Std.int((160 * Note.lessScale[strumlines]) * Note.lesserScale[mania][strumlines]) * (mania + 1), FlxG.height * 4, FlxColor.BLACK);
-		laneunderlayOp.screenCenter(Y);
 
 		if(ClientPrefs.camMovement && !PlayState.isPixelStage) {
 			if(camlock) {
@@ -3984,7 +3958,7 @@ class PlayState extends MusicBeatState
 						}
 					}
 
-					var center:Float = strumY + Note.swagWidth / 2;
+					var center:Float = strumY + (Note.swagWidth / 2);
 					if(strumGroup.members[daNote.noteData].sustainReduce && daNote.isSustainNote && (daNote.mustPress || !daNote.ignoreNote) && (!daNote.mustPress || (daNote.wasGoodHit || (daNote.prevNote.wasGoodHit && !daNote.canBeHit))))
 					{
 						if (strumScroll)
