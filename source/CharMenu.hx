@@ -20,6 +20,7 @@ import flixel.ui.FlxBar;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.addons.display.FlxBackdrop;
+import flixel.group.FlxSpriteGroup;
 
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
@@ -29,6 +30,13 @@ using StringTools;
 
 class CharMenu extends MusicBeatState
 {
+	#if (haxe >= "4.0.0")
+	var boyfriendMap:Map<String, Boyfriend> = new Map();
+	#else
+	var boyfriendMap:Map<String, Boyfriend> = new Map<String, Boyfriend>();
+	#end
+	public var boyfriendGroup:FlxSpriteGroup;
+
 	// Selectable Character Variables
 	var selectableCharacters:Array<String> = ['bf', 'bf-christmas', 'MellyBF'/*, 'JBBF'*/]; // Currently Selectable characters
 	var selectableCharactersNames:Array<String> = ['Default Character', 'Week 5 Boyfriend', 'Boyfriend but Black (Melly)'/*, 'Boyfriend but Mexican (JB)'*/]; // Characters names (i demand them to be actually funny and anyone who says otherwise probably isn't black/mexican - melly)
@@ -161,6 +169,10 @@ class CharMenu extends MusicBeatState
 		}
 
 		unlockedCharsCheck();
+
+		for (char in selectableCharacters) {
+			cacheTheGuy(char);
+		}
 
 		// Making sure the background is added first to be in the back and then adding the character names and character images afterwords
 		menuBG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -495,5 +507,14 @@ class CharMenu extends MusicBeatState
 
 		// Grabs default offsets
 		unlockedCharactersOffsets = selectableCharactersOffsets;
+	}
+
+	function cacheTheGuy(newCharacter:String) {
+		if(!boyfriendMap.exists(newCharacter)) {
+			var newBoyfriend:Boyfriend = new Boyfriend(0, 0, newCharacter);
+			boyfriendMap.set(newCharacter, newBoyfriend);
+			boyfriendGroup.add(newBoyfriend);
+			newBoyfriend.alpha = 0.00001;
+		}
 	}
 }

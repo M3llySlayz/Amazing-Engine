@@ -73,6 +73,7 @@ class ClientPrefs {
 	public static var colorblindMode:String = 'None';
 	public static var persistentBeats:Bool = false;
 	public static var loadSpeed:Float = 0.7;
+	public static var fixedLongNotes:Bool = true;
 	#if desktop
 	public static var autoPause:Bool = true;
 	#else
@@ -185,6 +186,7 @@ class ClientPrefs {
 		FlxG.save.data.cameraMoveOnNotes = cameraMoveOnNotes;
 		FlxG.save.data.persistentBeats = persistentBeats;
 		FlxG.save.data.loadSpeed = loadSpeed;
+		FlxG.save.data.fixedLongNotes = fixedLongNotes;
 		#if desktop
 		FlxG.save.data.autoPause = autoPause;
 		#end
@@ -421,6 +423,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.loadSpeed != null) {
 			loadSpeed = FlxG.save.data.loadSpeed;
+		}
+		if(FlxG.save.data.fixedLongNotes != null) {
+			fixedLongNotes = FlxG.save.data.fixedLongNotes;
 		}
 		#if desktop
 		if(FlxG.save.data.autoPause != null) {

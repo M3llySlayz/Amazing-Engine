@@ -567,7 +567,7 @@ curStage = ''
 ---@param left string | common_colors Stick to "0xFFFFFFFF" or "FFFFFF" format
 ---@param right? string | common_colors Stick to "0xFFFFFFFF" or "FFFFFF" format
 function setHealthBarColors(left, right) end
----Sets the colors for the health bar
+---Sets the colors for the time bar
 ---@param left string | common_colors Stick to "0xFFFFFFFF" or "FFFFFF" format
 ---@param right? string | common_colors Stick to "0xFFFFFFFF" or "FFFFFF" format
 function setTimeBarColors(left, right) end
@@ -663,6 +663,28 @@ function getRandomFloat(min, max, exclude) end
 ---@param chance number if `number >= 100`, it returns true always
 ---@return boolean
 function getRandomBool(chance) end
+---Unlocks a category.
+---@param category string The category you want to unlock
+function unlockCategory(category) end
+---Unlocks an achievement.
+---@param achievement string The save tag of the achievement you're unlocking
+function giveAchievement(achievement) end
+---Returns an option save.
+---@param option string
+---@param modded boolean Whether or not you're grabbing a modded option
+---@param path? string Optional choice of which mod folder you're grabbing from. If left empty, grabs from the current folder
+function getOptionSave(option, modded, path) end
+---Sets an option save.
+---@param option string
+---@param modded boolean Whether or not you're setting a modded option
+---@param path? string Optional choice of which mod folder you're setting in. If left empty, sets in the current folder
+function setOptionSave(option, modded, path) end
+---Saves all the modded options.
+function saveSettings() end
+---Loads all the modded options.
+---@param global? boolean Whether to load the global mods folder options, defaults to false if empty
+---@param mods? string[] The mods you wanna load, formatted as {'one mod', 'another mod', 'another one too'}
+function loadJsonOptions(global, mods) end
 ---Starts a dialogue cutscene.
 ---@param dialogueFile string The cutscenes `JSON` file directory. Root starts in the song's `data/<song>/` folder
 ---@param music string Directory of the music file to use. Root starts from `music/`

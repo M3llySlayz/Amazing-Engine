@@ -6,6 +6,7 @@
         "missing-return-value",
         "redundant-parameter",
         "param-type-mismatch",
-        "deprecated"
+        "deprecated",
+        "missing-parameter"
     ]
 }
