@@ -224,14 +224,12 @@ class PauseSubState extends MusicBeatSubstate
 			case 'Skip Time':
 				if (controls.UI_LEFT_P && !selectedSomethin)
 				{
-					//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 					SoundEffects.playSFX('scroll', false);
 					curTime -= 1000;
 					holdTime = 0;
 				}
 				if (controls.UI_RIGHT_P && !selectedSomethin)
 				{
-					//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 					SoundEffects.playSFX('scroll', false);
 					curTime += 1000;
 					holdTime = 0;
@@ -490,6 +488,7 @@ class PauseSubState extends MusicBeatSubstate
 							{
 								PlayState.instance.clearNotesBefore(curTime);
 								PlayState.instance.setSongTime(curTime);
+								close();
 							}
 						}
 					case "End Song":
@@ -497,7 +496,6 @@ class PauseSubState extends MusicBeatSubstate
 						close();
 					default:
 						close();
-						//FlxG.sound.music.volume = PlayState.SONG.songInstVolume;
 					}
 				}
 			});
