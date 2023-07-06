@@ -284,10 +284,7 @@ class CharMenu extends MusicBeatState
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					PlayState.SONG = Song.loadFromJson(PlayState.SONG.song+CoolUtil.getDifficultyFilePath(), PlayState.SONG.song);
 					if (unlockedCharacters[curSelected] != PlayState.SONG.player1) PlayState.SONG.player1 = daSelected;
-					PlayState.storyDifficulty = FreeplayState.curDifficulty;
-					PlayState.isStoryMode = false;
 					LoadingState.loadAndSwitchState(new PlayState());
 				});
 			}
