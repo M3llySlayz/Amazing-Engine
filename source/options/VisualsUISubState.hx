@@ -191,6 +191,13 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.maxValue = 1;
 		option.changeValue = 0.1;
 		option.decimals = 1;
+
+		var option:Option = new Option('Fixed Long Notes',
+			'If checked, long notes will freeze a character in animation instead of playing it over and over.',
+			'fixedLongNotes',
+			'bool',
+			true);
+		addOption(option);
 		
 		#if CHECK_FOR_UPDATES
 		var option:Option = new Option('Check for Updates',
