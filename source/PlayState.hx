@@ -163,6 +163,8 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 
+	public static var timeToStart:Float = 0;
+
 	public var spawnTime:Float = 2000;
 
 	public var vocals:FlxSound;
@@ -1579,6 +1581,11 @@ class PlayState extends MusicBeatState
 			}
 		}
 		Paths.clearUnusedMemory();
+
+		if(timeToStart > 0){						
+			clearNotesBefore(timeToStart);
+		}
+
 		CustomFadeTransition.nextCamera = camOther;
 	}
 
@@ -2573,6 +2580,12 @@ class PlayState extends MusicBeatState
 			vocals.pitch = playbackRate;
 		}
 		vocals.play();
+
+		if(timeToStart > 0){
+			setSongTime(timeToStart);
+			timeToStart = 0;
+		}
+
 		Conductor.songPosition = time;
 		songTime = time;
 	}
