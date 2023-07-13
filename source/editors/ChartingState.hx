@@ -380,7 +380,7 @@ class ChartingState extends MusicBeatState
 		\nALT + Left Bracket / Right Bracket - Reset Song Playback Rate
 		\nHold Shift to move 4x faster
 		\nHold Control and click on an arrow to select it
-		\nHold Control + Left/Right - Move selected arrow
+		\nHold Shift + Left/Right - Move selected arrow
 		\nZ/X - Zoom in/out
 		\n
 		\nEsc - Test your chart inside Chart Editor
@@ -677,10 +677,10 @@ class ChartingState extends MusicBeatState
 		if(availableDifficulties == null || availableDifficulties.length <= 0){
 			trace('Where are the difficulties...?');
 			availableDifficulties.push(PlayState.storyDifficulty);
-			availableDifficultiesTexts.push(CoolUtil.difficulties[0]);
+			availableDifficultiesTexts.push(CoolUtil.difficulties[2]);
 		}
 
-		difficultyDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, stageDropDown.y + 40, FlxUIDropDownMenuCustom.makeStrIdLabelArray(availableDifficultiesTexts, true), function(pressed:String)
+		var difficultyDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, stageDropDown.y + 40, FlxUIDropDownMenuCustom.makeStrIdLabelArray(availableDifficultiesTexts, true), function(pressed:String)
 		{	
 			var curSelected:Int = Std.parseInt(pressed);
 			openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function(){
@@ -2000,11 +2000,11 @@ class ChartingState extends MusicBeatState
 			}
 
 			// Move note to other side
-			if(FlxG.keys.justPressed.RIGHT && FlxG.keys.pressed.CONTROL && curSelectedNote != null) {				
+			if(FlxG.keys.justPressed.RIGHT && FlxG.keys.pressed.SHIFT && curSelectedNote != null) {				
 				if(curSelectedNote[1] < 7) curSelectedNote[1] += 1;
 				updateGrid();
 			}
-			if(FlxG.keys.justPressed.LEFT && FlxG.keys.pressed.CONTROL && curSelectedNote != null) {
+			if(FlxG.keys.justPressed.LEFT && FlxG.keys.pressed.SHIFT && curSelectedNote != null) {
 				if(curSelectedNote[1] > 0) curSelectedNote[1] -= 1;
 				updateGrid();
 			}
@@ -2313,8 +2313,6 @@ class ChartingState extends MusicBeatState
 		currentSongName + ' [' + currentDifficulty + ']' +
 		"\n"+ showTime +
 		"\n"+
-		"\n"+Std.string(daSongPosition) + " / " + Std.string(FlxMath.roundDecimal(FlxG.sound.music.length / 1000, 2))+
-		Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2)) + " / " + Std.string(FlxMath.roundDecimal(FlxG.sound.music.length / 1000, 2)) +
 		"\nSection: " + curSec +
 		"\n\nBeat: " + Std.string(curDecBeat).substring(0,4) +
 		"\n\nStep: " + curStep +

@@ -8,6 +8,7 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import haxe.Json;
 import haxe.format.JsonParser;
+import flixel.FlxG;
 
 using StringTools;
 
@@ -259,6 +260,7 @@ class WeekData {
 				{
 					foundTheTop = true;
 					Paths.currentModDirectory = dat[0];
+					if (Paths.fileExists('mouse.png', IMAGE)) FlxG.mouse.load(Paths.image('mouse.png'));
 				}
 			}
 		}
