@@ -238,6 +238,10 @@ class PlayState extends MusicBeatState
 	public var playingAsOpponent:Bool = false;
 	public var practiceMode:Bool = false;
 
+	//scoring
+	public static var validScore:Bool = true;
+	var shouldvedied:Bool = false;
+
 	//healthdrain stuff
 	public var healthdrain:Float = 0;
 	public var healthdrainKill:Bool = false;
@@ -1147,6 +1151,8 @@ class PlayState extends MusicBeatState
 		doof.skipDialogueThing = skipDialogue;
 
 		Conductor.songPosition = -5000 / Conductor.songPosition;
+
+		validScore = SONG.validScore;
 
 		strumLine = new FlxSprite(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, 50).makeGraphic(FlxG.width, 10);
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
@@ -4035,6 +4041,7 @@ class PlayState extends MusicBeatState
 		setOnLuas('cameraX', camFollowPos.x);
 		setOnLuas('cameraY', camFollowPos.y);
 		setOnLuas('botPlay', cpuControlled);
+		setOnLuas('validScore', validScore);
 		callOnLuas('onUpdatePost', [elapsed]);
 	}
 
@@ -4110,6 +4117,8 @@ class PlayState extends MusicBeatState
 			}
 		}
 		return false;
+
+		if (practiceMode) songScore = 0;
 	}
 
 	public function checkEventNote() {
@@ -4673,12 +4682,13 @@ class PlayState extends MusicBeatState
 
 		var ret:Dynamic = callOnLuas('onEndSong', [], false);
 		if(ret != FunkinLua.Function_Stop && !transitioning) {
-			if (SONG.validScore)
+			if (validScore)
 			{
 				#if !switch
 				var percent:Float = ratingPercent;
 				if(Math.isNaN(percent)) percent = 0;
-				Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
+					if (!cpuControlled && !practiceMode && !chartingMode && songSpeedType != 'constant')
+						Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
 				#end
 			}
 			playbackRate = 1;
@@ -4868,7 +4878,7 @@ class PlayState extends MusicBeatState
 		coolText.x = FlxG.width * 0.35;
 
 		var rating:FlxSprite = new FlxSprite();
-		var score:Int = 350;
+		var score:Float = 350;
 
 		//tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
@@ -4877,14 +4887,16 @@ class PlayState extends MusicBeatState
 		note.ratingMod = daRating.ratingMod;
 		if(!note.ratingDisabled) daRating.increase();
 		note.rating = daRating.name;
-		score = daRating.score;
+		var instakillMultiplier:Int = 1;
+		if (instakillOnMiss) instakillMultiplier = 2;
+		score = daRating.score * playbackRate * songSpeed * instakillMultiplier;
 
 		if(daRating.noteSplash && !note.noteSplashDisabled) {
 			spawnNoteSplashOnNote(note);
 		}
 
-		if(!practiceMode && !cpuControlled) {
-			songScore += score;
+		if(!cpuControlled) {
+			songScore += Std.int(score);
 			if(!note.ratingDisabled)
 			{
 				songHits++;
