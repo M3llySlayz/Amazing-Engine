@@ -4878,7 +4878,7 @@ class PlayState extends MusicBeatState
 		coolText.x = FlxG.width * 0.35;
 
 		var rating:FlxSprite = new FlxSprite();
-		var score:Float = 350;
+		var score:Int = 350;
 
 		//tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
