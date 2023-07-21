@@ -60,7 +60,8 @@ class OptionsSubState extends MusicBeatSubstate
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
-	override function create() {
+	public function new() {
+		super();
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("In the Options Menu", "Changing settings", 'icon', false, null, 'gear');
 		#end
@@ -114,8 +115,7 @@ class OptionsSubState extends MusicBeatSubstate
 		changeLogSheet.y = FlxG.height - changeLogSheet.height;
 		changeLogSheet.updateHitbox();
 		*/
-
-		super.create();
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	override function closeSubState() {

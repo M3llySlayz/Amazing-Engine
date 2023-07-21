@@ -288,6 +288,7 @@ class PauseSubState extends MusicBeatSubstate
 				case 'Options':
 					menuItems = menuItemsRetry;
 					regenMenu();
+					persistentUpdate = false;
 					openSubState(new options.pause.OptionsSubState());
 				case "Quit":
 					SoundEffects.playSFX('scroll', true);
