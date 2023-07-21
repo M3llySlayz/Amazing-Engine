@@ -220,11 +220,11 @@ class ChartingState extends MusicBeatState
 
 	var text:String = "";
 
-	var lilStage:FlxSprite;
-	var lilBf:FlxSprite;
-	var lilOpp:FlxSprite;
+	//var lilStage:FlxSprite;
+	//var lilBf:FlxSprite;
+	//var lilOpp:FlxSprite;
 
-	var buddies:Bool = false;
+	//var buddies:Bool = false;
 
 	public static var vortex:Bool = false;
 	public var mouseQuant:Bool = false;
@@ -346,7 +346,7 @@ class ChartingState extends MusicBeatState
 		add(quant);
 
 		
-		lilStage = new FlxSprite(32, 432).loadGraphic(Paths.image("chartEditor/lilStage"));
+		/*lilStage = new FlxSprite(32, 432).loadGraphic(Paths.image("chartEditor/lilStage"));
 		lilStage.scrollFactor.set();
 		add(lilStage);
 
@@ -375,7 +375,7 @@ class ChartingState extends MusicBeatState
 			lilOpp.animation.play(name, true, false, lilOpp.animation.getByName(name).numFrames - 2);
 		}
 		lilOpp.scrollFactor.set();
-		add(lilOpp);
+		add(lilOpp);*/
 
 		
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
@@ -1627,7 +1627,7 @@ class ChartingState extends MusicBeatState
 		if (FlxG.save.data.chart_noAutoScroll == null) FlxG.save.data.chart_noAutoScroll = false;
 		disableAutoScrolling.checked = FlxG.save.data.chart_noAutoScroll;
 
-		var lilBuddiesBox = new FlxUICheckBox(check_vortex.x, check_vortex.y + 30, null, null, "Lil' Buddies", 100);
+		/*var lilBuddiesBox = new FlxUICheckBox(check_vortex.x, check_vortex.y + 30, null, null, "Lil' Buddies", 100);
 		lilBuddiesBox.checked = true;
 		lilBuddiesBox.callback = function()
 		{
@@ -1635,7 +1635,7 @@ class ChartingState extends MusicBeatState
 			lilOpp.visible = lilBuddiesBox.checked;
 			lilStage.visible = lilBuddiesBox.checked;
 			buddies = lilBuddiesBox.checked;
-		};
+		};*/
 
 		instVolume = new FlxUINumericStepper(metronomeStepper.x, 270, 0.1, 1, 0, 1, 1);
 		instVolume.value = FlxG.sound.music.volume;
@@ -1665,7 +1665,7 @@ class ChartingState extends MusicBeatState
 		tab_group_chart.add(waveformUseInstrumental);
 		tab_group_chart.add(waveformUseVoices);
 		#end
-		tab_group_chart.add(lilBuddiesBox);
+		//tab_group_chart.add(lilBuddiesBox);
 		tab_group_chart.add(instVolume);
 		tab_group_chart.add(voicesVolume);
 		tab_group_chart.add(check_mute_inst);
@@ -2108,8 +2108,8 @@ class ChartingState extends MusicBeatState
 					FlxG.sound.music.pause();
 					if(vocals != null) vocals.pause();
 
-					lilBf.animation.play("idle");
-					lilOpp.animation.play("idle");
+					//lilBf.animation.play("idle");
+					//lilOpp.animation.play("idle");
 				}
 				else
 				{
@@ -2119,8 +2119,8 @@ class ChartingState extends MusicBeatState
 						vocals.time = FlxG.sound.music.time;
 						vocals.play();
 
-						lilBf.animation.play("idle");
-						lilOpp.animation.play("idle");
+						//lilBf.animation.play("idle");
+						//lilOpp.animation.play("idle");
 					}
 					FlxG.sound.music.play();
 				}
@@ -2137,8 +2137,8 @@ class ChartingState extends MusicBeatState
 			if (FlxG.mouse.wheel != 0)
 			{
 				FlxG.sound.music.pause();
-				lilBf.animation.play("idle");
-				lilOpp.animation.play("idle");
+				//lilBf.animation.play("idle");
+				//lilOpp.animation.play("idle");
 
 				if (!mouseQuant)
 					FlxG.sound.music.time -= (FlxG.mouse.wheel * Conductor.stepCrochet*0.8);
@@ -2170,8 +2170,8 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.pressed.W || FlxG.keys.pressed.S)
 			{
 				FlxG.sound.music.pause();
-				lilBf.animation.play("idle");
-				lilOpp.animation.play("idle");
+				//lilBf.animation.play("idle");
+				//lilOpp.animation.play("idle");
 
 				var holdingShift:Float = 1;
 				if (FlxG.keys.pressed.CONTROL) holdingShift = 0.25;
@@ -2791,8 +2791,8 @@ class ChartingState extends MusicBeatState
 	{
 		updateGrid();
 
-		lilBf.animation.play("idle");
-		lilOpp.animation.play("idle");
+		//lilBf.animation.play("idle");
+		//lilOpp.animation.play("idle");
 
 		FlxG.sound.music.pause();
 		// Basically old shit from changeSection???
@@ -2819,8 +2819,8 @@ class ChartingState extends MusicBeatState
 	{
 		//trace('changing section' + sec);
 
-		lilBf.animation.play("idle");
-				lilOpp.animation.play("idle");
+		//lilBf.animation.play("idle");
+		//lilOpp.animation.play("idle");
 
 		if (_song.notes[sec] != null)
 		{
