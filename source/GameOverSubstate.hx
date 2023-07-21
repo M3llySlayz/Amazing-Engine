@@ -97,7 +97,10 @@ class GameOverSubstate extends MusicBeatSubstate
 
 			WeekData.loadTheFirstEnabledMod();
 			if (PlayState.isStoryMode)
-				MusicBeatState.switchState(new StoryMenuState());
+				if (ClientPrefs.newStoryMenu)
+					MusicBeatState.switchState(new AmazingStoryMenuState());
+				else
+					MusicBeatState.switchState(new StoryMenuState());
 			else
 				MusicBeatState.switchState(new FreeplayState());
 

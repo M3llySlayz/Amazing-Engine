@@ -74,6 +74,7 @@ class ClientPrefs {
 	public static var persistentBeats:Bool = false;
 	public static var loadSpeed:Float = 0.7;
 	public static var fixedLongNotes:Bool = true;
+	public static var newStoryMenu:Bool = false;
 	#if desktop
 	public static var autoPause:Bool = true;
 	#else
@@ -187,6 +188,7 @@ class ClientPrefs {
 		FlxG.save.data.persistentBeats = persistentBeats;
 		FlxG.save.data.loadSpeed = loadSpeed;
 		FlxG.save.data.fixedLongNotes = fixedLongNotes;
+		FlxG.save.data.newStoryMenu = newStoryMenu;
 		#if desktop
 		FlxG.save.data.autoPause = autoPause;
 		#end
@@ -423,6 +425,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.loadSpeed != null) {
 			loadSpeed = FlxG.save.data.loadSpeed;
+		}
+		if(FlxG.save.data.newStoryMenu != null) {
+			newStoryMenu = FlxG.save.data.newStoryMenu;
 		}
 		if(FlxG.save.data.fixedLongNotes != null) {
 			fixedLongNotes = FlxG.save.data.fixedLongNotes;

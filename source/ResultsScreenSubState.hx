@@ -158,7 +158,10 @@ class ResultsScreenSubState extends FlxSubState {
 			FlxTween.tween(pressEnterTxt, {alpha: 0}, 0.75, {ease: FlxEase.quadOut});
 			new FlxTimer().start(0.75, function(_) {
 				if (PlayState.isStoryMode) {
-					LoadingState.loadAndSwitchState(new AmazingStoryMenuState());
+					if (ClientPrefs.newStoryMenu)
+						MusicBeatState.switchState(new AmazingStoryMenuState());
+					else
+						MusicBeatState.switchState(new StoryMenuState());
 				} else {
 					LoadingState.loadAndSwitchState(new FreeplayState());
 				}

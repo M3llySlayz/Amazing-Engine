@@ -222,6 +222,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('New Story Menu',
+			'If checked, activate a new, unfinished version of our own Story Mode menu.',
+			'newStoryMenu',
+			'bool',
+			false);
+		addOption(option);
+
 		var option:Option = new Option('AE Watermarks',
 			"If checked, AE's custom stuff will be everywhere :troll:",
 			'aeWatermarks',

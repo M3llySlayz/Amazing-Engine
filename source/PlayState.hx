@@ -4722,7 +4722,10 @@ class PlayState extends MusicBeatState
 						Highscore.floorDecimal(ratingPercent * 100, 2), ratingName + (' [' + ratingFC + '] ')));
 					} else {
 						persistentUpdate = true;
-						MusicBeatState.switchState(new AmazingStoryMenuState());
+						if (ClientPrefs.newStoryMenu)
+							MusicBeatState.switchState(new AmazingStoryMenuState());
+						else
+							MusicBeatState.switchState(new StoryMenuState());
 					}
 
 					if(!practiceMode && !cpuControlled) {
@@ -4782,7 +4785,10 @@ class PlayState extends MusicBeatState
 							openSubState(new ResultsScreenSubState([sicks, goods, bads, shits], campaignScore, songMisses,
 							Highscore.floorDecimal(ratingPercent * 100, 2), ratingName + (' [' + ratingFC + '] ')));
 						else
-							MusicBeatState.switchState(new StoryMenuState());
+							if (ClientPrefs.newStoryMenu)
+								MusicBeatState.switchState(new AmazingStoryMenuState());
+							else
+								MusicBeatState.switchState(new StoryMenuState());
 
 						trace('WENT BACK TO STORY MODE!!');
 					}
