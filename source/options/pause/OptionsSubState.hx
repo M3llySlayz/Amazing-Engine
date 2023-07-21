@@ -27,7 +27,7 @@ import Controls;
 
 using StringTools;
 
-class OptionsState extends MusicBeatState
+class OptionsSubState extends MusicBeatSubState
 {
 	var options:Array<String> = ['Gameplay', 'Controls', 'Graphics', 'Visuals and UI', 'Adjust Delay and Combo', 'Note Colors', 'Music'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -146,13 +146,14 @@ class OptionsState extends MusicBeatState
 			} else {
 				ClientPrefs.devMode = true;
 			}
-			LoadingState.loadAndSwitchState(new options.pause.OptionsState());
+			openSubState(new options.pause.OptionsSubState());
+			close();
 		}
 
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
 				FlxG.mouse.visible = false;
 				SoundEffects.playSFX('cancel', false);
-				MusicBeatState.switchState(new PlayState());
+				close();
 			}
 
 		if (controls.ACCEPT || FlxG.mouse.justPressed) {

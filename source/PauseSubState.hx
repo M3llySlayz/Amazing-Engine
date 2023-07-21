@@ -30,6 +30,7 @@ class PauseSubState extends MusicBeatSubstate
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Continue', 'Retry', 'Options', 'Modifiers', 'Change Difficulty', 'Quit'];
 	var menuItemsQuitting:Array<String> = ['Yes', 'No'];
+	var menuItemsRetry:Array<String> = ['Retry', 'Options', 'Modifiers', 'Change Difficulty', 'Quit']
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 	var composer:String = '';
@@ -282,6 +283,12 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplaySine = 0;
 				case 'Modifiers':
 					openSubState(new GameplayChangersSubstate());
+					menuItems = menuItemsRetry;
+					regenMenu();
+				case 'Options':
+					menuItems = menuItemsRetry;
+					regenMenu();
+					openSubState(new options.pause.OptionsSubState());
 				case "Quit":
 					SoundEffects.playSFX('scroll', true);
 					menuItems = menuItemsQuitting;
@@ -467,12 +474,6 @@ class PauseSubState extends MusicBeatSubstate
 						close();
 					case "Retry":
 						restartSong();
-					case "Options":
-						PlayState.seenCutscene = false;
-						PlayState.changedDifficulty = false;
-						PlayState.cancelMusicFadeTween();
-						CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
-						MusicBeatState.switchState(new options.pause.OptionsState());
 					case "Leave Charting Mode":
 						restartSong();
 						PlayState.chartingMode = false;
