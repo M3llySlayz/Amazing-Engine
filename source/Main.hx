@@ -46,6 +46,9 @@ class Main extends Sprite
 	var fpsCounter:FPSCounter;
 	var stats:Stats;
 
+	public static var audioDisconnected:Bool = false;
+	public static var changeID:Int = 0;
+
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function main():Void
@@ -104,6 +107,7 @@ class Main extends Sprite
 		#if CRASH_HANDLER
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
+		backend.AudioSwitchFix.init();
 
 		createDisplays();
 	}
