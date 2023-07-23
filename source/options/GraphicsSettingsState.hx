@@ -27,9 +27,9 @@ import Controls;
 
 using StringTools;
 
-class OptionsState extends MusicBeatState
+class GraphicsSettingsState extends MusicBeatState
 {
-	var options:Array<String> = ['Gameplay', 'Graphics', 'Music']; //Removing Controls[Goes to Gameplay], (Visuals and UI, Adjust Delay and Combo, Note Colors)[Goes to Graphics].
+	var options:Array<String> = ['Graphics', 'Visuals and UI', 'Note Colors']; //Removing Controls[Goes to Gameplay], (Visuals and UI, Adjust Delay and Combo, Note Colors)[Goes to Graphics].
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -39,22 +39,12 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
-			//case 'Note Colors':
-				//openSubState(new options.NotesSubState());
-			//case 'Controls':
-				//openSubState(new options.ControlsSubState());
 			case 'Graphics':
-				FlxG.switchState(new options.GraphicsSettingsState());
-			//case 'Visuals and UI':
-				//openSubState(new options.VisualsUISubState());
-			case 'Gameplay':
-				FlxG.switchState(new options.GameplaySettingsState());
-			//case 'Adjust Delay and Combo':
-				//LoadingState.loadAndSwitchState(new options.NoteOffsetState());
-			case 'Dev Stuff':
-				openSubState(new options.DevSettingsSubState());
-			case 'Music':
-				openSubState(new options.MusicSettingsSubState());
+				openSubState(new options.GraphicsSettingsSubState());
+			case 'Visuals and UI':
+				openSubState(new options.VisualsUISubState());
+			case 'Note Colors':
+				openSubState(new options.NotesSubState());
 		}
 	}
 
@@ -76,7 +66,6 @@ class OptionsState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		if (ClientPrefs.devMode) options.insert(0, 'Dev Stuff');
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
@@ -136,12 +125,7 @@ class OptionsState extends MusicBeatState
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
 			FlxG.mouse.visible = false;
 			SoundEffects.playSFX('cancel', false);
-			if (ClientPrefs.luaMenu) {
-				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
-				LoadingState.loadAndSwitchState(new PlayState());
-			} else {
-				MusicBeatState.switchState(new MainMenuState());
-			}
+			FlxG.switchState(new OptionsState());
 		}
 
 		if (controls.ACCEPT || FlxG.mouse.justPressed) {
