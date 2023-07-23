@@ -18,6 +18,7 @@ using StringTools;
 
 class NoteOffsetState extends MusicBeatState
 {
+	// This comment is here cuz I screwed something up upon commit -Irshaad
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;

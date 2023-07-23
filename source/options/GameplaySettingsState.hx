@@ -29,6 +29,7 @@ using StringTools;
 
 class GameplaySettingsState extends MusicBeatState
 {
+	// This comment is here cuz I screwed something up upon commit -Irshaad
 	var options:Array<String> = ['Gameplay', 'Controls', 'Adjust Delay and Combo']; //Removing Controls[Goes to Gameplay], (Visuals and UI, Adjust Delay and Combo, Note Colors)[Goes to Graphics].
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
