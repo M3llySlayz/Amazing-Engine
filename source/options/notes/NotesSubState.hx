@@ -1,4 +1,4 @@
-package options;
+package options.notes;
 
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;

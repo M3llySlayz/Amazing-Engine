@@ -29,7 +29,11 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Gameplay', 'Controls', 'Graphics', 'Visuals and UI', 'Adjust Delay and Combo', 'Note Colors', 'Music'];
+	var options:Array<String> = [];
+	var initialOptions:Array<String> = ['Gameplay', 'Visuals', 'Notes', 'Music', 'Other'];
+	var visualOptions:Array<String> = ['Graphics', 'UI', 'Visuals'];
+	var gameplayOptions:Array<String> = ['Settings', 'Controls', 'Delay and Combo'];
+	var notesOptions:Array<String> = ['Colors', 'Options'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -39,22 +43,39 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
-			case 'Note Colors':
-				openSubState(new options.NotesSubState());
+			case 'Colors':
+				openSubState(new options.notes.NotesSubState());
+			case 'Notes':
+				options = notesOptions;
+				reloadOptions();
 			case 'Controls':
-				openSubState(new options.ControlsSubState());
+				openSubState(new options.gameplay.ControlsSubState());
 			case 'Graphics':
-				openSubState(new options.GraphicsSettingsSubState());
-			case 'Visuals and UI':
-				openSubState(new options.VisualsUISubState());
+				openSubState(new options.visuals.GraphicsSettingsSubState());
+			case 'Visuals':
+				if (options == visualOptions){
+					openSubState(new options.visuals.VisualsSubState());
+				} else {
+					options == visualOptions;
+					reloadOptions();
+				}
+			case 'UI':
+				openSubState(new options.visuals.UISubState());
 			case 'Gameplay':
-				openSubState(new options.GameplaySettingsSubState());
-			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+				options = gameplayOptions;
+				reloadOptions();
+			case 'Settings':
+				openSubState(new options.gameplay.GameplaySettingsSubState());
+			case 'Delay and Combo':
+				LoadingState.loadAndSwitchState(new options.gameplay.NoteOffsetState());
 			case 'Dev Stuff':
-				openSubState(new options.DevSettingsSubState());
+				openSubState(new options.dev.DevSettingsSubState());
 			case 'Music':
-				openSubState(new options.MusicSettingsSubState());
+				openSubState(new options.music.MusicSettingsSubState());
+			case 'Options': //note options
+				openSubState(new options.notes.NoteOptionsSubState());
+			case 'Other':
+				openSubState(new options.other.OtherSettingsSubState());
 		}
 	}
 
@@ -76,17 +97,14 @@ class OptionsState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		if (ClientPrefs.devMode) options.insert(0, 'Dev Stuff');
+		if (ClientPrefs.devMode) initialOptions.insert(0, 'Dev Stuff');
+
+		options = initialOptions;
+
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
-		for (i in 0...options.length)
-		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
-			optionText.screenCenter();
-			optionText.y += 75 * (i - (options.length / 2)) + 32;
-			grpOptions.add(optionText);
-		}
+		reloadOptions();
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
 		add(selectorLeft);
@@ -134,13 +152,18 @@ class OptionsState extends MusicBeatState
 		}
 
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
-			FlxG.mouse.visible = false;
-			SoundEffects.playSFX('cancel', false);
-			if (ClientPrefs.luaMenu) {
-				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
-				LoadingState.loadAndSwitchState(new PlayState());
+			if (options == initialOptions){
+				FlxG.mouse.visible = false;
+				SoundEffects.playSFX('cancel', false);
+				if (ClientPrefs.luaMenu) {
+					PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+					LoadingState.loadAndSwitchState(new PlayState());
+				} else {
+					MusicBeatState.switchState(new MainMenuState());
+				}
 			} else {
-				MusicBeatState.switchState(new MainMenuState());
+				options = initialOptions;
+				reloadOptions();
 			}
 		}
 
@@ -172,5 +195,16 @@ class OptionsState extends MusicBeatState
 			}
 		}
 		SoundEffects.playSFX('scroll', false);
+	}
+
+	function reloadOptions() {
+		grpOptions = null;
+		for (i in 0...options.length)
+		{
+			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
+			optionText.screenCenter();
+			optionText.y += 75 * (i - (options.length / 2)) + 32;
+			grpOptions.add(optionText);
+		}
 	}
 }

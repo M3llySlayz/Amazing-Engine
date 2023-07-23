@@ -1,4 +1,4 @@
-package options;
+package options.gameplay;
 
 import flixel.util.FlxStringUtil;
 import flixel.tweens.FlxEase;

@@ -1,4 +1,4 @@
-package options;
+package options.gameplay;
 
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
@@ -33,54 +33,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 	{
 		title = 'Gameplay Settings';
 		rpcTitle = 'Gameplay Settings Menu'; //for Discord Rich Presence
-
-		//I'd suggest using "Downscroll" as an example for making your own option since it is the simplest here
-		var option:Option = new Option('Downscroll', //Name
-			'If checked, notes go Down instead of Up, simple enough.', //Description
-			'downScroll', //Save data variable name
-			'bool', //Variable type
-			false); //Default value
-		addOption(option);
-
-		var option:Option = new Option('Middlescroll',
-			'If checked, your notes get centered.',
-			'middleScroll',
-			'bool',
-			false);
-		addOption(option);
-
-		var option:Option = new Option('Splitscroll:',
-			'Selects your own personal hell.\nSplits your notes into something fearful.\nEach type is different, and Downscroll affects them as well.', // Enjoy The Hell =] -Irshaad
-			'splitScroll',
-			'string',
-			'None',
-			['None', 'Normal', 'Up n\' Down', 'Double Down', 'Alt', 'Double Down Alt']);
-		addOption(option);
-		
-		var option:Option = new Option('Note Glow',
-			"If checked, when it's almost time to press a note, it'll glow.\nWorks like FPS Plus, but more efficient.",
-			'noteGlow',
-			'bool',
-			false);
-		addOption(option);
-
-		#if desktop
-		var option:Option = new Option('Auto Pause',
-			"If checked, the game will automatically freeze itself when not in focus.",
-			'autoPause',
-			'bool',
-			true);
-		addOption(option);
-
-		option.onChange = onToggleAutoPause;
-		#end
-
-		var option:Option = new Option('Opponent Notes',
-			'If unchecked, opponent notes get hidden.',
-			'opponentStrums',
-			'bool',
-			true);
-		addOption(option);
 
 		var option:Option = new Option('Ghost Tapping',
 			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
@@ -196,13 +148,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Always convert non-EK charts',
-			'If checked, shows exactly how early or late you hit a note.',
-			'convertEK',
-			'bool',
-			true);
-		addOption(option);
-
 		super();
 	}
 
@@ -210,11 +155,4 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 	{
 		FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
 	}
-
-	#if desktop
-	function onToggleAutoPause()
-	{
-		FlxG.autoPause = ClientPrefs.autoPause;
-	}
-	#end
 }
