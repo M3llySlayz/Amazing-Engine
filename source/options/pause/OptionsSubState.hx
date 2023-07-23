@@ -30,7 +30,7 @@ using StringTools;
 class OptionsSubState extends MusicBeatSubstate
 {
 	// This comment is here cuz I screwed something up upon commit -Irshaad
-	var options:Array<String> = ['Gameplay', 'Controls', 'Graphics', 'Visuals and UI', 'Adjust Delay and Combo', 'Note Colors', 'Music'];
+	var options:Array<String> = ['Gameplay', 'Graphics', 'Music'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
