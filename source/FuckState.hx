@@ -136,7 +136,25 @@ class FuckState extends FlxUIState
 			}
 		}
 		//try{LoadingScreen.hide();}catch(e){}
-		Main.forceStateSwitch(new FuckState(exception,info,saved));
+		try {FlxG.switchState(new FuckState(exception, info, saved));
+		} catch(e) {
+			try {Main.forceStateSwitch(new FuckState(exception,info,saved));
+			} catch {
+				var errMsg:String = "";
+				var path:String;
+				var callStack:Array<StackItem> = CallStack.exceptionStack(true);
+				var dateNow:String = Date.now().toString();
+
+				dateNow = dateNow.replace(" ", "_");
+				dateNow = dateNow.replace(":", "'");
+
+				errMsg += err + "\nPlease report this error to the GitHub page: https://github.com/M3llySlayz/Amazing-Engine\n\n> Crash Handler written by: sqirra-rng" + "\n\nYou're seeing this message because something went wrong with the in-game crash handler.\nMention this when you report the issue.";
+
+				Application.current.window.alert(errMsg, "Error!");
+				DiscordClient.shutdown();
+				Sys.exit(1);
+			}
+		}
 	}
 	var saved:Bool = false;
 	override function new(e:String,info:String,saved:Bool = false){
