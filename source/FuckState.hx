@@ -12,6 +12,7 @@ import lime.app.Application;
 import flixel.addons.ui.FlxUIState;
 import lime.app.Application as LimeApp;
 import sys.FileSystem;
+import Discord.DiscordClient;
 
 import openfl.Lib;
 
@@ -136,7 +137,19 @@ class FuckState extends FlxUIState
 			}
 		}
 		//try{LoadingScreen.hide();}catch(e){}
-		Main.forceStateSwitch(new FuckState(exception,info,saved));
+		try {FlxG.switchState(new FuckState(exception, info, saved));
+		} catch(e) {
+			try {Main.forceStateSwitch(new FuckState(exception,info,saved));
+			} catch(e) {
+				var errMsg:String = "";
+
+				errMsg += err + "\nPlease report this error to the GitHub page: https://github.com/M3llySlayz/Amazing-Engine\n\n> Crash Handler written by: sqirra-rng" + "\n\nYou're seeing this message because something went wrong with the in-game crash handler.\nMention this when you report the issue.";
+
+				Application.current.window.alert(errMsg, "Error!");
+				DiscordClient.shutdown();
+				Sys.exit(1);
+			}
+		}
 	}
 	var saved:Bool = false;
 	override function new(e:String,info:String,saved:Bool = false){
