@@ -53,7 +53,7 @@ class OptionsState extends MusicBeatState
 			case 'Graphics':
 				openSubState(new options.visuals.GraphicsSettingsSubState());
 			case 'Visuals':
-				options == visualOptions;
+				options = visualOptions;
 				reloadOptions();
 			case 'Visual Settings':
 				openSubState(new options.visuals.VisualsSubState());

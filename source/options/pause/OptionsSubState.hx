@@ -53,7 +53,7 @@ class OptionsSubState extends MusicBeatSubstate
 			case 'Graphics':
 				openSubState(new options.visuals.GraphicsSettingsSubState());
 			case 'Visuals':
-				options == visualOptions;
+				options = visualOptions;
 				reloadOptions();
 			case 'Visual Settings':
 				openSubState(new options.visuals.VisualsSubState());
@@ -106,7 +106,7 @@ class OptionsSubState extends MusicBeatSubstate
 		add(selectorRight);
 
 		reloadOptions();
-		
+
 		ClientPrefs.saveSettings();
 
 		/*
@@ -167,12 +167,8 @@ class OptionsSubState extends MusicBeatSubstate
 			if (options == initialOptions){
 				FlxG.mouse.visible = false;
 				SoundEffects.playSFX('cancel', false);
-				if (ClientPrefs.luaMenu) {
-					PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
-					LoadingState.loadAndSwitchState(new PlayState());
-				} else {
-					MusicBeatState.switchState(new MainMenuState());
-				}
+				openSubState(new PauseSubState(PlayState.instance.boyfriend.getScreenPosition().x, PlayState.instance.boyfriend.getScreenPosition().y));
+				close();
 			} else {
 				options = initialOptions;
 				reloadOptions();
