@@ -56,7 +56,7 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		super();
 		SoundEffects.playSFX('scroll', false);
-		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
+		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); menuItemsRetry.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
 		if (ClientPrefs.pauseExit == 'Countdown')
 			cacheCountdown();
