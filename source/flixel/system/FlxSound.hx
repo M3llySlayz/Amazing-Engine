@@ -1,4 +1,3 @@
-#if (flixel < "5.3.0")
 package flixel.system;
 
 import flash.events.Event;
@@ -27,6 +26,7 @@ import openfl.utils.AssetType;
  */
 class FlxSound extends FlxBasic
 {
+	#if (flixel < "5.3.0")
 	/**
 	 * The x position of this sound in world coordinates.
 	 * Only really matters if you are doing proximity/panning stuff.
@@ -797,5 +797,5 @@ class FlxSound extends FlxBasic
 			LabelValuePair.weak("pitch", pitch)
 		]);
 	}
+	#end
 }
-#end
