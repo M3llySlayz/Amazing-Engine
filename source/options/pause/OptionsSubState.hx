@@ -100,14 +100,13 @@ class OptionsSubState extends MusicBeatSubstate
 
 		options = initialOptions;
 
-		reloadOptions();
-
 		selectorLeft = new Alphabet(0, 0, '>', true);
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true);
 		add(selectorRight);
 
-		changeSelection();
+		reloadOptions();
+		
 		ClientPrefs.saveSettings();
 
 		/*
