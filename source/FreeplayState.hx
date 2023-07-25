@@ -420,6 +420,7 @@ class FreeplayState extends MusicBeatState
 
 			try {
 				PlayState.SONG = Song.loadFromJson(songJson, songLowercase);
+				CharMenu.songToLoad = Song.loadFromJson(songJson, songLowercase);
 				PlayState.isStoryMode = false;
 				PlayState.storyDifficulty = curDifficulty;
 				selectedSomethin = true;
@@ -463,6 +464,7 @@ class FreeplayState extends MusicBeatState
 				var errorText:FlxText = new FlxText(-70, FlxG.height - 50, 0, "Oops! We can't seem to find your chart file. You sure it's named '"+ songJson +"'?");
 				errorText.alpha = 0;
 				add(errorText);
+				SoundEffects.playSFX('cancel', false);
 				FlxTween.tween(errorText, {x: 50, alpha: 1}, 0.4, {ease: FlxEase.quadOut});
 				new FlxTimer().start(3, function (tmr:FlxTimer) {
 					FlxTween.tween(errorText, {x: -50, alpha: 0}, 2, {ease: FlxEase.quadOut});
