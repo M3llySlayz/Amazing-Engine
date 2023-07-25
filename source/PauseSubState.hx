@@ -320,7 +320,7 @@ class PauseSubState extends MusicBeatSubstate
 		if (back || (FlxG.mouse.justPressed && !selectedSomethin)){
 			if (menuItems == menuItemsRetry){
 				restartSong();
-			} else if (menuItems == (menuItemsQuitting || difficultyChoices)){
+			} else if (menuItems == menuItemsQuitting || menuItems == difficultyChoices){
 				menuItems = menuItemsOG;
 				regenMenu();
 			} else {
