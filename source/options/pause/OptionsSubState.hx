@@ -65,7 +65,7 @@ class OptionsSubState extends MusicBeatSubstate
 			case 'Settings':
 				openSubState(new options.gameplay.GameplaySettingsSubState());
 			case 'Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.gameplay.NoteOffsetState());
+				LoadingState.loadAndSwitchState(new options.pause.NoteOffsetState());
 			case 'Dev Stuff':
 				openSubState(new options.dev.DevSettingsSubState());
 			case 'Music':
