@@ -70,10 +70,14 @@ class PauseSubState extends MusicBeatSubstate
 			{
 				num = 1;
 				menuItemsOG.insert(3, 'Skip Time');
+				menuItemsRetry.insert(3, 'Skip Time');
 			}
 			menuItemsOG.insert(3 + num, 'End Song');
 			menuItemsOG.insert(4 + num, 'Toggle Practice Mode');
 			menuItemsOG.insert(5 + num, 'Toggle Botplay');
+			menuItemsRetry.insert(3 + num, 'End Song');
+			menuItemsRetry.insert(4 + num, 'Toggle Practice Mode');
+			menuItemsRetry.insert(5 + num, 'Toggle Botplay');
 		}
 		menuItems = menuItemsOG;
 
@@ -201,6 +205,7 @@ class PauseSubState extends MusicBeatSubstate
 		var upP = controls.UI_UP_P && !selectedSomethin;
 		var downP = controls.UI_DOWN_P && !selectedSomethin;
 		var accepted = controls.ACCEPT && !selectedSomethin;
+		var back = controls.BACK && !selectedSomethin;
 
 		if (upP)
 		{
@@ -309,6 +314,17 @@ class PauseSubState extends MusicBeatSubstate
 					authorText.text = 'By ' + composer;
 				default:
 					closeState();
+			}
+		}
+
+		if (back || (FlxG.mouse.justPressed && !selectedSomethin)){
+			if (menuItems == menuItemsRetry){
+				restartSong();
+			} else if (menuItems == (menuItemsQuitting || difficultyChoices)){
+				menuItems = menuItemsOG;
+				regenMenu();
+			} else {
+				close();
 			}
 		}
 	}
