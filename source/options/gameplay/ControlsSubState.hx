@@ -58,8 +58,6 @@ class ControlsSubState extends MusicBeatSubstate {
 		add(grpOptions);
 
 		optionShit = EKData.Keybinds.optionShit();
-
-		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 

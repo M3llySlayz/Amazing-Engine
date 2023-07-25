@@ -32,7 +32,7 @@ class OptionsSubState extends MusicBeatSubstate
 	var options:Array<String> = [];
 	var initialOptions:Array<String> = ['Gameplay', 'Visuals', 'Notes', 'Music', 'Other'];
 	var visualOptions:Array<String> = ['Graphics', 'UI', 'Visual Settings'];
-	var gameplayOptions:Array<String> = ['Settings', 'Controls', 'Delay and Combo'];
+	var gameplayOptions:Array<String> = ['Settings', /*'Controls', shit is broken rn*/ 'Delay and Combo'];
 	var notesOptions:Array<String> = ['Colors', 'Options'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
