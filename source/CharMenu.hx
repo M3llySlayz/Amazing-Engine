@@ -97,7 +97,7 @@ class CharMenu extends MusicBeatState
 	var tweenTime:Float = 0.35;
 	var destinationTweens:Array<FlxTween> = [null];
 	
-	public var songToLoad:Song;
+	public static var songToLoad:SwagSong;
 
 	// Use for offseting
 	#if debug
