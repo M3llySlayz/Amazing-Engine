@@ -65,7 +65,7 @@ class MusicSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeMenuMusic;
 
 		var option = new Option('Persistent Music',
-			'Do you want music played through the engine to be consistent?\nThis means, for exmaple, playing an Inst from Freeplay will keep it playing in menus.',
+			'Do you want music played through the engine to be consistent?\nThis means, for example, playing an Inst from Freeplay will keep it playing in menus.',
 			'persistentBeats',
 			'bool',
 			false);

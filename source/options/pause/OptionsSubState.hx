@@ -152,6 +152,7 @@ class OptionsSubState extends MusicBeatSubstate
 				changeSelection(1);
 			}
 		}
+		/* trust me, it's chaos.
 		if (controls.DEV_BIND_P) {
 			if (ClientPrefs.devMode){
 				options.remove('Dev Stuff');
@@ -161,7 +162,7 @@ class OptionsSubState extends MusicBeatSubstate
 			}
 			openSubState(new options.pause.OptionsSubState());
 			close();
-		}
+		}*/
 
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
 			if (options == initialOptions){
