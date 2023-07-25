@@ -99,14 +99,13 @@ class OptionsState extends MusicBeatState
 
 		options = initialOptions;
 
-		reloadOptions();
-
 		selectorLeft = new Alphabet(0, 0, '>', true);
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true);
 		add(selectorRight);
 
-		changeSelection();
+		reloadOptions();
+		
 		ClientPrefs.saveSettings();
 
 		super.create();
