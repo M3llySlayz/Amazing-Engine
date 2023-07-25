@@ -69,9 +69,6 @@ import sys.io.File;
 
 class ChartingState extends MusicBeatState
 {	
-	#if (flixel < "5.3.0")
-	//do nothing here
-	#else
 	private var songStarted:Bool = false;
 	public static var noteTypeList:Array<String> = [ //Used for backwards compatibility with 0.1 - 0.3.2 charts, though, you should add your hardcoded custom note types here too.
 		'',
@@ -3475,7 +3472,6 @@ class ChartingState extends MusicBeatState
 		if(_song.notes[section] != null) val = _song.notes[section].sectionBeats;
 		return val != null ? val : 4;
 	}
-	#end
 }
 
 class AttachedFlxText extends FlxText
