@@ -31,7 +31,7 @@ class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [];
 	var initialOptions:Array<String> = ['Gameplay', 'Visuals', 'Notes', 'Music', 'Other'];
-	var visualOptions:Array<String> = ['Graphics', 'UI', 'Visuals'];
+	var visualOptions:Array<String> = ['Graphics', 'UI', 'Visual Settings'];
 	var gameplayOptions:Array<String> = ['Settings', 'Controls', 'Delay and Combo'];
 	var notesOptions:Array<String> = ['Colors', 'Options'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -53,12 +53,10 @@ class OptionsState extends MusicBeatState
 			case 'Graphics':
 				openSubState(new options.visuals.GraphicsSettingsSubState());
 			case 'Visuals':
-				if (options == visualOptions){
-					openSubState(new options.visuals.VisualsSubState());
-				} else {
-					options == visualOptions;
-					reloadOptions();
-				}
+				options == visualOptions;
+				reloadOptions();
+			case 'Visual Settings':
+				openSubState(new options.visuals.VisualsSubState());
 			case 'UI':
 				openSubState(new options.visuals.UISubState());
 			case 'Gameplay':
@@ -100,9 +98,6 @@ class OptionsState extends MusicBeatState
 		if (ClientPrefs.devMode) initialOptions.insert(0, 'Dev Stuff');
 
 		options = initialOptions;
-
-		grpOptions = new FlxTypedGroup<Alphabet>();
-		add(grpOptions);
 
 		reloadOptions();
 
@@ -198,7 +193,11 @@ class OptionsState extends MusicBeatState
 	}
 
 	function reloadOptions() {
-		grpOptions = null;
+		if (grpOptions != null){
+			remove(grpOptions);
+		}
+		grpOptions = new FlxTypedGroup<Alphabet>();
+		add(grpOptions);
 		for (i in 0...options.length)
 		{
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
@@ -206,5 +205,6 @@ class OptionsState extends MusicBeatState
 			optionText.y += 75 * (i - (options.length / 2)) + 32;
 			grpOptions.add(optionText);
 		}
+		changeSelection();
 	}
 }

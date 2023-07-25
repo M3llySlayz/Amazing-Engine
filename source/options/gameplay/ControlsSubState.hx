@@ -58,33 +58,8 @@ class ControlsSubState extends MusicBeatSubstate {
 		add(grpOptions);
 
 		optionShit = EKData.Keybinds.optionShit();
-
-		var currentPage:String = "";
-		var generatedPage:Dynamic = [];
-		for (option in optionShit) {
-			if (option[0] != "" && option.length < 2 && currentPage == "") { //It's the first page title
-				generatedPage.push(option);
-				currentPage = option[0];
-			} else if (option[0] != "" && option.length < 2 && currentPage != "") { // It's a new page title.
-				generatedPage.push(['']);
-				generatedPage.push([defaultKey]);
-				pages.push(generatedPage);
-
-				generatedPage = [];
-
-				generatedPage.push(option);
-				currentPage = option[0];
-			} else if (option.length > 1) { // It's an input
-				generatedPage.push(option);
-			} else if (option[0] == "" && option.length < 2) { // It's blank!
-				generatedPage.push(option);
-			}
-		}
-
-		optionShit = pages[curPage];
-		reloadTexts();
-		changeSelection();
 	}
+
 
 	function reloadTexts() {
 		for (i in 0...grpOptions.members.length) {

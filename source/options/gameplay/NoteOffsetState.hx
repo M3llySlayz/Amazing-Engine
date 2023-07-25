@@ -13,12 +13,15 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.ui.FlxBar;
 import flixel.math.FlxPoint;
+import Character;
 
 using StringTools;
 
 class NoteOffsetState extends MusicBeatState
 {
-	// This comment is here cuz I screwed something up upon commit -Irshaad
+	var boyfriend:Character;
+	var gf:Character;
+
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
@@ -60,6 +63,17 @@ class NoteOffsetState extends MusicBeatState
 
 		var bgSprite:FlxSprite = new FlxSprite().loadGraphic(Paths.image('offsetBG'));
 		add(bgSprite);
+
+		// Characters
+		gf = new Character(400, 130, 'gf');
+		gf.x += gf.positionArray[0];
+		gf.y += gf.positionArray[1];
+		gf.scrollFactor.set(0.95, 0.95);
+		boyfriend = new Character(770, 100, 'bf', true);
+		boyfriend.x += boyfriend.positionArray[0];
+		boyfriend.y += boyfriend.positionArray[1];
+		add(gf);
+		add(boyfriend);
 
 		// Combo stuff
 
@@ -319,6 +333,12 @@ class NoteOffsetState extends MusicBeatState
 		if(lastBeatHit == curBeat)
 		{
 			return;
+		}
+
+		if(curBeat % 2 == 0)
+		{
+			boyfriend.dance();
+			gf.dance();
 		}
 		
 		if(curBeat % 4 == 2)
