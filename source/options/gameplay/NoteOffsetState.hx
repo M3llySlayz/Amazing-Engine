@@ -13,7 +13,6 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.ui.FlxBar;
 import flixel.math.FlxPoint;
-import Character;
 
 using StringTools;
 
@@ -27,8 +26,8 @@ class NoteOffsetState extends MusicBeatState
 	public var camOther:FlxCamera;
 
 	var coolText:FlxText;
-	var ratingSpr:FlxSprite;
-	var comboTxt:FlxText;
+	var rating:FlxSprite;
+	var comboNums:FlxSpriteGroup;
 	var dumbTexts:FlxTypedGroup<FlxText>;
 
 	var barPercent:Float = 0;
@@ -57,12 +56,35 @@ class NoteOffsetState extends MusicBeatState
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camOther;
+		FlxG.camera.scroll.set(120, 130);
 
 		persistentUpdate = true;
 		FlxG.sound.pause();
+		// Stage
+		var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
+		add(bg);
 
-		var bgSprite:FlxSprite = new FlxSprite().loadGraphic(Paths.image('offsetBG'));
-		add(bgSprite);
+		var stageFront:BGSprite = new BGSprite('stagefront', -650, 600, 0.9, 0.9);
+		stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+		stageFront.updateHitbox();
+		add(stageFront);
+
+		if(!ClientPrefs.lowQuality) {
+			var stageLight:BGSprite = new BGSprite('stage_light', -125, -100, 0.9, 0.9);
+			stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+			stageLight.updateHitbox();
+			add(stageLight);
+			var stageLight:BGSprite = new BGSprite('stage_light', 1225, -100, 0.9, 0.9);
+			stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
+			stageLight.updateHitbox();
+			stageLight.flipX = true;
+			add(stageLight);
+
+			var stageCurtains:BGSprite = new BGSprite('stagecurtains', -500, -300, 1.3, 1.3);
+			stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+			stageCurtains.updateHitbox();
+			add(stageCurtains);
+		}
 
 		// Characters
 		gf = new Character(400, 130, 'gf');
@@ -81,19 +103,35 @@ class NoteOffsetState extends MusicBeatState
 		coolText.screenCenter();
 		coolText.x = FlxG.width * 0.35;
 
-		ratingSpr = new FlxSprite().loadGraphic(Paths.image('sick'));
-		ratingSpr.cameras = [camHUD];
-		ratingSpr.scale.set(0.7, 0.7);
-		ratingSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		rating = new FlxSprite().loadGraphic(Paths.image('sick'));
+		rating.cameras = [camHUD];
+		rating.setGraphicSize(Std.int(rating.width * 0.7));
+		rating.updateHitbox();
+		rating.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		add(rating);
 
-		add(ratingSpr);
+		comboNums = new FlxSpriteGroup();
+		comboNums.cameras = [camHUD];
+		add(comboNums);
 
-		comboTxt = new FlxText(0, ratingSpr.y + (ratingSpr.height / 1.35), 0, '373 COMBO', 72);
-		comboTxt.setFormat(Paths.font('lunchtype21.ttf'), 72, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		comboTxt.antialiasing = ClientPrefs.globalAntialiasing;
-		comboTxt.cameras = [camHUD];
-		comboTxt.borderSize = 3;
-		add(comboTxt);
+		var seperatedScore:Array<Int> = [];
+		for (i in 0...3)
+		{
+			seperatedScore.push(FlxG.random.int(0, 9));
+		}
+
+		var daLoop:Int = 0;
+		for (i in seperatedScore)
+		{
+			var numScore:FlxSprite = new FlxSprite(43 * daLoop).loadGraphic(Paths.image('num' + i));
+			numScore.cameras = [camHUD];
+			numScore.setGraphicSize(Std.int(numScore.width * 0.5));
+			numScore.updateHitbox();
+			numScore.antialiasing = ClientPrefs.globalAntialiasing;
+			comboNums.add(numScore);
+			daLoop++;
+		}
 
 		dumbTexts = new FlxTypedGroup<FlxText>();
 		dumbTexts.cameras = [camHUD];
@@ -224,23 +262,26 @@ class NoteOffsetState extends MusicBeatState
 			{
 				holdingObjectType = null;
 				FlxG.mouse.getScreenPosition(camHUD, startMousePos);
-				if (startMousePos.x - comboTxt.x >= 0 && startMousePos.x - comboTxt.x <= comboTxt.width &&
-					startMousePos.y - comboTxt.y >= 0 && startMousePos.y - comboTxt.y <= comboTxt.height)
+				if (startMousePos.x - comboNums.x >= 0 && startMousePos.x - comboNums.x <= comboNums.width &&
+					startMousePos.y - comboNums.y >= 0 && startMousePos.y - comboNums.y <= comboNums.height)
 				{
 					holdingObjectType = true;
 					startComboOffset.x = ClientPrefs.comboOffset[2];
 					startComboOffset.y = ClientPrefs.comboOffset[3];
+					//trace('yo bro');
 				}
-				else if (startMousePos.x - ratingSpr.x >= 0 && startMousePos.x - ratingSpr.x <= ratingSpr.width &&
-					startMousePos.y - ratingSpr.y >= 0 && startMousePos.y - ratingSpr.y <= ratingSpr.height)
+				else if (startMousePos.x - rating.x >= 0 && startMousePos.x - rating.x <= rating.width &&
+						 startMousePos.y - rating.y >= 0 && startMousePos.y - rating.y <= rating.height)
 				{
 					holdingObjectType = false;
 					startComboOffset.x = ClientPrefs.comboOffset[0];
 					startComboOffset.y = ClientPrefs.comboOffset[1];
+					//trace('heya');
 				}
 			}
 			if(FlxG.mouse.justReleased) {
 				holdingObjectType = null;
+				//trace('dead');
 			}
 
 			if(holdingObjectType != null)
@@ -314,7 +355,7 @@ class NoteOffsetState extends MusicBeatState
 
 			persistentUpdate = false;
 			CustomFadeTransition.nextCamera = camOther;
-			MusicBeatState.switchState(new options.OptionsState());
+			MusicBeatState.switchState(new OptionsState());
 			//FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true);
 			if (!ClientPrefs.persistentBeats) FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong), 1, true);
 			FlxG.mouse.visible = false;
@@ -346,13 +387,18 @@ class NoteOffsetState extends MusicBeatState
 			FlxG.camera.zoom = 1.15;
 
 			if(zoomTween != null) zoomTween.cancel();
-			zoomTween = FlxTween.tween(FlxG.camera, {zoom: 1}, 1, {ease: FlxEase.circOut});
+			zoomTween = FlxTween.tween(FlxG.camera, {zoom: 1}, 1, {ease: FlxEase.circOut, onComplete: function(twn:FlxTween)
+				{
+					zoomTween = null;
+				}
+			});
 
 			beatText.alpha = 1;
 			beatText.y = 320;
 			beatText.velocity.y = -150;
 			if(beatTween != null) beatTween.cancel();
-			beatTween = FlxTween.tween(beatText, {alpha: 0}, 1, {ease: FlxEase.sineIn, onComplete: function(twn:FlxTween) {
+			beatTween = FlxTween.tween(beatText, {alpha: 0}, 1, {ease: FlxEase.sineIn, onComplete: function(twn:FlxTween)
+				{
 					beatTween = null;
 				}
 			});
@@ -363,19 +409,13 @@ class NoteOffsetState extends MusicBeatState
 
 	function repositionCombo()
 	{
-		ratingSpr.screenCenter();
-		ratingSpr.x += FlxG.width * 0.15;
-		ratingSpr.y -= 60;
-		ratingSpr.x += ClientPrefs.comboOffset[0];
-		ratingSpr.y -= ClientPrefs.comboOffset[1];
+		rating.screenCenter();
+		rating.x = coolText.x - 40 + ClientPrefs.comboOffset[0];
+		rating.y -= 60 + ClientPrefs.comboOffset[1];
 
-		comboTxt.screenCenter();
-		comboTxt.x = ratingSpr.x + (ratingSpr.width / 2);
-		comboTxt.y = ratingSpr.y + (ratingSpr.height / 1.3);
-		comboTxt.text = '373';
-		comboTxt.x -= comboTxt.width / 2;
-		comboTxt.x += ClientPrefs.comboOffset[2];
-		comboTxt.y -= ClientPrefs.comboOffset[3];
+		comboNums.screenCenter();
+		comboNums.x = coolText.x - 90 + ClientPrefs.comboOffset[2];
+		comboNums.y += 80 - ClientPrefs.comboOffset[3];
 		reloadTexts();
 	}
 
@@ -419,8 +459,8 @@ class NoteOffsetState extends MusicBeatState
 
 	function updateMode()
 	{
-		ratingSpr.visible = onComboMenu;
-		comboTxt.visible = onComboMenu;
+		rating.visible = onComboMenu;
+		comboNums.visible = onComboMenu;
 		dumbTexts.visible = onComboMenu;
 		
 		timeBarBG.visible = !onComboMenu;

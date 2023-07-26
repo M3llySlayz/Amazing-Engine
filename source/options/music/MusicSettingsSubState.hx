@@ -98,7 +98,7 @@ class MusicSettingsSubState extends BaseOptionsMenu
 
 	override function destroy() {
 		if(changedMusic) {
-			if (!ClientPrefs.persistentBeats) FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
+			if (!ClientPrefs.persistentBeats) FlxG.sound.playMusic(Paths.music(ClientPrefs.pauseMusic));
 			super.destroy();
 		}
 	}
