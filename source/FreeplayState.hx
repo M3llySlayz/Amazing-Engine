@@ -420,7 +420,6 @@ class FreeplayState extends MusicBeatState
 
 			try {
 				PlayState.SONG = Song.loadFromJson(songJson, songLowercase);
-				CharMenu.songToLoad = Song.loadFromJson(songJson, songLowercase);
 				PlayState.isStoryMode = false;
 				PlayState.storyDifficulty = curDifficulty;
 				selectedSomethin = true;

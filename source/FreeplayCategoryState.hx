@@ -200,7 +200,7 @@ class FreeplayCategoryState extends MusicBeatState {
 				new FlxTimer().start(1.5, function(tmr:FlxTimer) {
 					FreeplayState.curCategory = categoriesList[curSelected];
 					if (FreeplayState.curCategory == 'base game') FreeplayState.curCategory = '';
-					LoadingState.loadAndSwitchState(new FreeplayState());
+					MusicBeatState.switchState(new FreeplayState());
 				});
 			} else SoundEffects.playSFX('cancel', false);
 		} catch (e:Any) {}

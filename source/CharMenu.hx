@@ -96,8 +96,6 @@ class CharMenu extends MusicBeatState
 	var charXoffset:Int = 500;
 	var tweenTime:Float = 0.35;
 	var destinationTweens:Array<FlxTween> = [null];
-	
-	public static var songToLoad:SwagSong;
 
 	// Use for offseting
 	#if debug
@@ -286,9 +284,8 @@ class CharMenu extends MusicBeatState
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					PlayState.SONG = songToLoad;
 					if (unlockedCharacters[curSelected] != PlayState.SONG.player1) PlayState.SONG.player1 = daSelected;
-					LoadingState.loadAndSwitchState(new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState(), false, true);
 				});
 			}
 			if (goBack)
