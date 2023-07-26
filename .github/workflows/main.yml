@@ -6,9 +6,9 @@ name: Build
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ extra-keys ]
+    branches: [ nightly ]
   pull_request:
-    branches: [ extra-keys ]
+    branches: [ nightly ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
           sudo apt-get install libvlc-bin
           sudo apt-get install vlc-bin
           haxelib setup ~/haxelib
-          haxelib install hxcpp > /dev/null
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
           haxelib install lime
           haxelib install openfl
           haxelib --never install flixel
@@ -79,7 +79,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib install hxcpp > nul
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
           haxelib install lime
           haxelib install openfl
           haxelib --never install flixel
@@ -121,7 +121,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp > /dev/null
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
           haxelib install lime
           haxelib install openfl
           haxelib --never install flixel
