@@ -75,6 +75,8 @@ class ControlsSubState extends MusicBeatSubstate {
 		optionShit = pages[curPage];
 		reloadTexts();
 		changeSelection();
+
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	function reloadTexts() {

@@ -13,6 +13,8 @@ import flixel.addons.ui.FlxUIState;
 import lime.app.Application as LimeApp;
 import sys.FileSystem;
 import Discord.DiscordClient;
+import haxe.CallStack;
+import haxe.io.Path;
 
 import openfl.Lib;
 
@@ -142,8 +144,12 @@ class FuckState extends FlxUIState
 			try {Main.forceStateSwitch(new FuckState(exception,info,saved));
 			} catch(e) {
 				var errMsg:String = "";
+				trace('switching states failed, making an error popup');
 
 				errMsg += err + "\nPlease report this error to the GitHub page: https://github.com/M3llySlayz/Amazing-Engine\n\n> Crash Handler written by: sqirra-rng" + "\n\nYou're seeing this message because something went wrong with the in-game crash handler.\nMention this when you report the issue.";
+
+				Sys.println(errMsg);
+				Sys.println('Crash dump saved in crash/AE-Crash-Log-${dateNow}.log');
 
 				Application.current.window.alert(errMsg, "Error!");
 				DiscordClient.shutdown();
