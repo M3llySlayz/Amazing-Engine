@@ -35,6 +35,7 @@ import haxe.zip.Reader;
 import haxe.zip.Entry;
 import haxe.zip.Uncompress;
 import haxe.zip.Writer;
+import Achievements;
 
 using StringTools;
 
@@ -142,6 +143,8 @@ class ModsMenuState extends MusicBeatState
 				if(!Paths.ignoreModFolders.contains(folder))
 				{
 					addToModsList([folder, true]); //i like it false by default. -bb //Well, i like it True! -Shadow
+					if (!Achievements.isAchievementUnlocked('modinstalled') && Achievements.exists('modinstalled'))
+						startAchievement('modinstalled');
 				}
 			}
 		}
@@ -780,6 +783,21 @@ class ModsMenuState extends MusicBeatState
 		canExit = true;
 		trace("Problem loading file");
 	}*/
+
+	#if ACHIEVEMENTS_ALLOWED
+	var achievementObj:AchievementObject = null;
+	function startAchievement(achieve:String) {
+		achievementObj = new AchievementObject(achieve);
+		achievementObj.onFinish = achievementEnd;
+		add(achievementObj);
+		trace('Giving achievement ' + achieve);
+		Achievements.unlockAchievement(achieve);
+	}
+	function achievementEnd():Void
+	{
+		achievementObj = null;
+	}
+	#end
 }
 
 class ModMetadata

@@ -116,16 +116,16 @@
 		"gameOver",
 		"gameOverEnd"
 	],
-	"image": "characters/JBBF",
+	"image": "characters/AEBF",
 	"position": [
 		0,
 		350
 	],
-	"healthicon": "JBBF",
+	"healthicon": "AEBF",
 	"flip_x": true,
 	"healthbar_colors": [
-		204,
-		100,
+		0,
+		120,
 		0
 	],
 	"camera_position": [
