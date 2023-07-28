@@ -172,7 +172,7 @@ class CreditsEditor extends MusicBeatState
 	{
 		var yDist:Float = 20;
 		titleInput = new FlxUIInputText(60, 20, 180, '', 8);
-		titleJump = new FlxUICheckBox(20, titleInput.y + yDist, null, null, 'Space betwen titles', 110);
+		titleJump = new FlxUICheckBox(20, titleInput.y + yDist, null, null, 'Space between titles', 110);
 		titleJump.textX += 3;
 		titleJump.textY += 4;
 		if (FlxG.save.data.jumpTitle == null) FlxG.save.data.jumpTitle = true;
