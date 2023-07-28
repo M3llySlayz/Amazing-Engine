@@ -82,14 +82,14 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Amazing Engine'],
-			['M3llySlayz',			'melly',			'Lead Programmer, Musician, and Artist',						'https://youtube.com/@M3llySlayz',		'BE0101'],
-			['Irshaad Ali',			'Irshaad',			'Programmer, Made Splitscroll and Alt Splitscroll',				'https://www.youtube.com/channel/UCwJQYZunvqdDTVbgi9mA7fg',			'0079C7'],
-			['SomeGuyWhoUhhhh', 	'sgwu',				'Programmer, Spearheaded Freeplay Changes, Errorchecked Story Mode,\nFreeplay, Chart Editor, In-game, and its Pause Screen,\nand Made the Chart Editor Substate menu.',						'https://gamejolt.com/@SomeGuyWhoLikesFNF',							'9900FF'],
-			['JB444m',				'jb',				'Artist, Convinced Melly to add Extra Keys (it was painful)', 	'https://youtube.com/@JB444m',			'FFAA00'],
-			['Discord',				'discord',			"The Discord server for AE lol",		'https://discord.gg/KjeeBQ3fh3',			'7289DA'],
+			['M3llySlayz',			'melly',			'Lead Programmer, Musician, and Artist',						'https://youtube.com/@M3llySlayz',		'BE0101'], //The man behind the slau- I mean Engine.. Engine, yeah. //also kelly lmao
+			['Irshaad Ali',			'Irshaad',			'Programmer, Made Splitscroll and Swapscroll\nIrshaad\'s Note:\n I\'m the person who gives Melly hell here lmao.\n(Also apparently my icon is the only icon with a capital letter in it. Huh.)',				'https://www.youtube.com/channel/UCwJQYZunvqdDTVbgi9mA7fg',			'0079C7'], //so cool.
+			['SomeGuyWhoUhhhh', 	'sgwu',				'Programmer, Spearheaded Freeplay Changes, Errorchecked Story Mode,\nFreeplay, Chart Editor, In-game, and its Pause Screen,\nand Made the Chart Editor Substate menu.',						'https://gamejolt.com/@SomeGuyWhoLikesFNF',							'9900FF'],//Not Just Some Guy. He good guy :D
+			['JB444m',				'jb',				'Artist, Convinced Melly to add Extra Keys (it was painful)', 	'https://youtube.com/@JB444m',			'FFAA00'],// The guy who's failing to convince melly about multichar and also making potato bans
+			['Discord',				'discord',			"The Discord server for AE lol",		'https://discord.gg/KjeeBQ3fh3',			'7289DA'], //join now or else nothing happens
 			[''],
 			['Amazing Engine Contributors'],
-			['NexIsDumb',			'nothing',			'Made Custom Options Code',										'https://github.com/ShadowMario/FNF-PsychEngine/pull/12307',		'AAAAAA'],
+			['NexIsDumb',			'nothing',			'Made Custom Options Code',										'https://github.com/ShadowMario/FNF-PsychEngine/pull/12307',		'AAAAAA'], //not dum
 			['TheWorldMachinima',	'nothing',			'Made Custom Achievements Code',								'https://github.com/ShadowMario/FNF-PsychEngine/pull/11651',		'AAAAAA'],
 			['RodneyAnImaginativePerson', 	'nothing',	'Made Opponent Play Code',											'https://github.com/ShadowMario/FNF-PsychEngine/pull/11805',		'AAAAAA'],
 			[''],
