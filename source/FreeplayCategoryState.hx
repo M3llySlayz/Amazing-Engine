@@ -17,7 +17,6 @@ import lime.utils.Assets;
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
-
 using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState {
