@@ -138,7 +138,8 @@ class EKData {
     0.26, //17k
     0.22 //18k
     ];
-var lessX:Array<Int> = [
+    
+    public static var lessX:Array<Int> = [
 		0, //1k
 		0, //2k
 		0, //3k
