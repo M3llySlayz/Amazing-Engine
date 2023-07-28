@@ -80,7 +80,7 @@ import sys.io.File;
 #if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as VideoHandler;
 #elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as VideoHandler;
 #elseif (hxCodec == "2.6.0") import VideoHandler as VideoHandler;
-#else import vlc.VideoHandler; #end
+#else import vlc.MP4Handler; #end
 #end
 
 #if LUA_ALLOWED
