@@ -235,6 +235,7 @@ class OptionsSubState extends MusicBeatSubstate
 			optionText.y += 75 * (i - (options.length / 2)) + 32;
 			grpOptions.add(optionText);
 		}
+		curSelected = 0;
 		changeSelection();
 	}
 }
