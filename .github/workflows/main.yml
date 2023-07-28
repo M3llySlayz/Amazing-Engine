@@ -148,7 +148,7 @@ jobs:
           uses: actions/upload-artifact@v2.2.4
           with:
             name: AE-Windows-32bit
-            path: export/release/windows/bin
+            path: export/32bit/windows/bin
   Build_Mac:
     runs-on: macos-latest
 
