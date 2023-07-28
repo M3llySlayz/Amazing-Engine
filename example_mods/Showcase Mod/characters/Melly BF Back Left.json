@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Bf Idle Dance"
+		},
+		{
+			"offsets": [
+				185,
+				-6
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "boyfriend left"
+		},
+		{
+			"offsets": [
+				-8,
+				43
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "boyfriend right"
+		},
+		{
+			"offsets": [
+				84,
+				147
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "boyfriend up"
+		},
+		{
+			"offsets": [
+				-20,
+				-51
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "boyfriend down"
+		},
+		{
+			"offsets": [
+				45,
+				111
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "boyfriend dow miss"
+		},
+		{
+			"offsets": [
+				417,
+				169
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "boyfriend lef miss"
+		},
+		{
+			"offsets": [
+				234,
+				357
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "boyfriend u miss"
+		},
+		{
+			"offsets": [
+				56,
+				192
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "boyfriend righ miss"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Melly Back BF Left",
+	"position": [
+		0,
+		270
+	],
+	"healthicon": "melly",
+	"flip_x": true,
+	"healthbar_colors": [
+		155,
+		0,
+		0
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

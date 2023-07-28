@@ -9,11 +9,19 @@ import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
+import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+import flixel.util.FlxColor;
 
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
+
+#if DISCORD_ALLOWED
+import Discord.DiscordClient;
+#end
 
 import haxe.io.Path;
 
@@ -40,26 +48,25 @@ class LoadingState extends MusicBeatState
 		this.stopMusic = stopMusic;
 		this.directory = directory;
 	}
+
 	var loadingScreen:String = 'images/LoadingScreen.png';
 	var checkerboard:FlxBackdrop;
 	var funkay:FlxSprite;
 	var loadBar:FlxSprite;
 	override function create()
 	{
+		#if DISCORD_ALLOWED
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Loading...", "If you're even seeing this, their pc sucks", null, false, null, 'paused');
+		#end
+
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);
 		add(bg);
+
 		funkay = new FlxSprite(600, 600).loadGraphic(Paths.getPath(loadingScreen, IMAGE));
-		//funkay.setGraphicSize(FlxG.width, FlxG.height);
-		//funkay.updateHitbox();
 		funkay.antialiasing = ClientPrefs.globalAntialiasing;
 		add(funkay);
-		//funkay.scrollFactor.set();
 		funkay.screenCenter();
-
-		loadBar = new FlxSprite(0, FlxG.height - 20).makeGraphic(FlxG.width, 10, 0xd8008409);
-		loadBar.screenCenter(X);
-		loadBar.antialiasing = ClientPrefs.globalAntialiasing;
-		add(loadBar);
 
 		var swagShader:ColorSwap = null;
 		swagShader = new ColorSwap();
@@ -71,6 +78,31 @@ class LoadingState extends MusicBeatState
 		checkerboard.screenCenter(X);
 		add(checkerboard);
 		checkerboard.shader = swagShader.shader;
+
+		var loadingText = new Alphabet(0, FlxG.height - 85, "Loading...", true);
+		loadingText.isMenuItem = false;
+		loadingText.visible = true;
+		add(loadingText);
+
+		var note:FlxSprite = new FlxSprite().loadGraphic(Paths.image('loadingNote'));
+		note.x = FlxG.width - note.width - 25;
+		note.y = FlxG.height - note.height - 25;
+		//note.useFramePixels = true;
+		add(note);
+		FlxTween.tween(note, {angle: 720}, 30, {ease: FlxEase.linear, 
+			onComplete: function(twn:FlxTween){
+				var uhOh:FlxText = new FlxText(0, 0, 0, "It shouldn't be taking this long. Is your computer trash?", 32);
+				uhOh.borderStyle = OUTLINE;
+				uhOh.borderSize = 1;
+				uhOh.borderColor = FlxColor.BLACK;
+				add(uhOh);
+			}
+		});
+
+		loadBar = new FlxSprite(0, FlxG.height - 20).makeGraphic(FlxG.width, 10, 0xd8008409);
+		loadBar.screenCenter(X);
+		loadBar.antialiasing = ClientPrefs.globalAntialiasing;
+		add(loadBar);
 		
 		initSongsManifest().onComplete
 		(
@@ -93,6 +125,8 @@ class LoadingState extends MusicBeatState
 				new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete());
 			}
 		);
+
+		persistentUpdate = true;
 	}
 	
 	function checkLoadSong(path:String)
@@ -101,10 +135,6 @@ class LoadingState extends MusicBeatState
 		{
 			var library = Assets.getLibrary("songs");
 			final symbolPath = path.split(":").pop();
-			// @:privateAccess
-			// library.types.set(symbolPath, SOUND);
-			// @:privateAccess
-			// library.pathGroups.set(symbolPath, [library.__cacheBreak(symbolPath)]);
 			var callback = callbacks.add("song:" + path);
 			Assets.loadSound(path).onComplete(function (_) { callback(); });
 		}
@@ -126,14 +156,6 @@ class LoadingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		//funkay.setGraphicSize(Std.int(0.88 * FlxG.width + 0.9 * (funkay.width - 0.88 * FlxG.width)));
-		//funkay.updateHitbox();
-		if(controls.ACCEPT)
-		{
-			//funkay.setGraphicSize(Std.int(funkay.width + 60));
-			//funkay.updateHitbox();
-		}
-
 		if(callbacks != null) {
 			targetShit = FlxMath.remapToRange(callbacks.numRemaining / callbacks.length, 1, 0, 0, 1);
 			loadBar.scale.x += 0.5 * (targetShit - loadBar.scale.x);
@@ -158,16 +180,15 @@ class LoadingState extends MusicBeatState
 		return Paths.voices(PlayState.SONG.song);
 	}
 	
-	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)
+	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false, nullOut = false)
 	{
-		MusicBeatState.switchState(getNextState(target, stopMusic));
+		MusicBeatState.switchState(getNextState(target, stopMusic, nullOut));
 	}
 	
-	static function getNextState(target:FlxState, stopMusic = false):FlxState
+	static function getNextState(target:FlxState, stopMusic = false, nullOut = false):FlxState
 	{
 		var directory:String = 'shared';
 		var weekDir:String = StageData.forceNextDirectory;
-		StageData.forceNextDirectory = null;
 
 		if(weekDir != null && weekDir.length > 0 && weekDir != '') directory = weekDir;
 
@@ -177,33 +198,33 @@ class LoadingState extends MusicBeatState
 		var loaded:Bool = false;
 		if (PlayState.SONG != null) {
 			loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded("shared") && isLibraryLoaded(directory);
+			if (nullOut) StageData.forceNextDirectory = null;
 		}
-		
+
 		if (!loaded)
 			return new LoadingState(target, stopMusic, directory);
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
-		
+
 		return target;
 	}
-	
+
 	static function isSoundLoaded(path:String):Bool
 	{
 		return Assets.cache.hasSound(path);
 	}
-	
+
 	static function isLibraryLoaded(library:String):Bool
 	{
 		return Assets.getLibrary(library) != null;
 	}
-	
+
 	override function destroy()
 	{
 		super.destroy();
-		
 		callbacks = null;
 	}
-	
+
 	static function initSongsManifest()
 	{
 		var id = "songs";
@@ -281,7 +302,7 @@ class MultiCallback
 	var unfired = new Map<String, Void->Void>();
 	var fired = new Array<String>();
 	
-	public function new (callback:Void->Void, logId:String = null)
+	public function new(callback:Void->Void, logId:String = null)
 	{
 		this.callback = callback;
 		this.logId = logId;

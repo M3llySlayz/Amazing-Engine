@@ -1,29 +1,27 @@
 package options;
 
-#if desktop
-import Discord.DiscordClient;
+#if MODS_ALLOWED
+import flixel.util.FlxStringUtil;
+import sys.FileSystem;
+import sys.io.File;
+import haxe.Json;
 #end
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
+
+import CheckboxThingie;
+import AttachedText;
+import Character;
+import options.Option;
+
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
+import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
-import flixel.FlxSubState;
-import flash.text.TextField;
 import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.util.FlxSave;
-import haxe.Json;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxTimer;
-import flixel.input.keyboard.FlxKey;
-import flixel.graphics.FlxGraphic;
-import Controls;
+import flixel.math.FlxMath;
+
+#if DISCORD_ALLOWED
+import Discord.DiscordClient;
+#end
 
 using StringTools;
 
@@ -40,6 +38,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	private var boyfriend:Character = null;
 	private var descBox:FlxSprite;
 	private var descText:FlxText;
+	#if MODS_ALLOWED
+	private var modDisp:FlxText;
+	#end
 
 	public var title:String;
 	public var rpcTitle:String;
@@ -51,8 +52,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		if(title == null) title = 'Options';
 		if(rpcTitle == null) rpcTitle = 'Options Menu';
 		
-		#if desktop
-		DiscordClient.changePresence(rpcTitle, null);
+		#if DISCORD_ALLOWED
+		DiscordClient.changePresence('In the ' + rpcTitle, 'Changing settings', 'icon', false, null, 'gear');
 		#end
 		
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -86,6 +87,36 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		descText.scrollFactor.set();
 		descText.borderSize = 2.4;
 		add(descText);
+
+		#if MODS_ALLOWED
+		modDisp = new FlxText(descBox.getGraphicMidpoint().x, descBox.y, descText.fieldWidth, "", 20);
+		modDisp.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		modDisp.scrollFactor.set();
+		modDisp.borderSize = 1.4;
+		add(modDisp);
+
+		for (folder in Paths.getActiveModsDir(true)) {
+			var path:String = haxe.io.Path.join([Paths.mods(), folder, 'options', FlxStringUtil.getClassName(this, true)]);
+			if(FileSystem.exists(path)) for(file in FileSystem.readDirectory(path)) if(file.endsWith('.json')) {
+				var rawJson = File.getContent(path + '/' + file);
+				if (rawJson != null && rawJson.length > 0) {
+					var json = Json.parse(rawJson);
+					var modName:String = Json.parse(File.getContent(Paths.mods(folder + '/pack.json'))).name;
+					var option:Option = new Option(
+						file.replace('.json', ''), folder != '' ? 'An option for ' + modName :
+						'An option inside the Main Global Folder.', getMainField(json),
+						getMainField(json), getMainField(json), getMainField(json),
+						[folder, folder != '' ? modName : '']
+					);
+					
+					for (field in Reflect.fields(json)) {
+						Reflect.setField(option, field, Reflect.field(json, field));
+					}
+					addOption(option);
+				}
+			}
+		}
+		#end
 
 		for (i in 0...optionsArray.length)
 		{
@@ -123,7 +154,21 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		changeSelection();
 		reloadCheckboxes();
+
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
+
+	#if MODS_ALLOWED
+	var loops:Int = 0;
+	var mainFields:Array<String> = ['variable', 'type', 'defaultValue', 'options'];
+	function getMainField(json:Dynamic):Dynamic {  // Just to simplify the work up there  - Nex_isDumb
+		if (loops == mainFields.length) loops = 0;
+		var daVal:Dynamic = Reflect.field(json, mainFields[loops]);
+		Reflect.deleteField(json, mainFields[loops]);
+		loops++;
+		return daVal;
+	}
+	#end
 
 	public function addOption(option:Option) {
 		if(optionsArray == null || optionsArray.length < 1) optionsArray = [];
@@ -144,9 +189,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		if (controls.BACK) {
+		if (FlxG.mouse.wheel != 0) changeSelection(-FlxG.mouse.wheel);
+
+		if (controls.BACK || FlxG.mouse.justPressedRight) {
 			close();
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', true);
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
 
 		if(nextAccept <= 0)
@@ -159,9 +207,10 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 			if(usesCheckbox)
 			{
-				if(controls.ACCEPT)
+				if(controls.ACCEPT || FlxG.mouse.justPressed)
 				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					//FlxG.sound.play(Paths.sound('scrollMenu'));
+					SoundEffects.playSFX('confirm', true);
 					curOption.setValue((curOption.getValue() == true) ? false : true);
 					curOption.change();
 					reloadCheckboxes();
@@ -211,7 +260,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 							}
 							updateTextFrom(curOption);
 							curOption.change();
-							FlxG.sound.play(Paths.sound('scrollMenu'));
+							//FlxG.sound.play(Paths.sound('scrollMenu'));
+							SoundEffects.playSFX('scroll', false);
 						} else if(curOption.type != 'string') {
 							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1);
 							if(holdValue < curOption.minValue) holdValue = curOption.minValue;
@@ -238,7 +288,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET)
+			if(controls.RESET || FlxG.mouse.justPressedMiddle)
 			{
 				for (i in 0...optionsArray.length)
 				{
@@ -254,7 +304,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					}
 					leOption.change();
 				}
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('cancel', false);
 				reloadCheckboxes();
 			}
 		}
@@ -280,7 +331,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	function clearHold()
 	{
 		if(holdTime > 0.5) {
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			//FlxG.sound.play(Paths.sound('scrollMenu'));
+			SoundEffects.playSFX('scroll', false);
 		}
 		holdTime = 0;
 	}
@@ -319,12 +371,22 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
 
+		#if MODS_ALLOWED
+		if (optionsArray[curSelected].fromJson != null) {
+			modDisp.text = optionsArray[curSelected].fromJson[1];
+			if (modDisp.text == '') modDisp.text = 'Main Global Folder';
+			modDisp.setPosition(descBox.getGraphicMidpoint().x, descBox.y - 15);
+		}
+		else modDisp.text = '';
+		#end
+
 		if(boyfriend != null)
 		{
 			boyfriend.visible = optionsArray[curSelected].showBoyfriend;
 		}
 		curOption = optionsArray[curSelected]; //shorter lol
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		//FlxG.sound.play(Paths.sound('scrollMenu'));
+		SoundEffects.playSFX('scroll', false);
 	}
 
 	public function reloadBoyfriend()

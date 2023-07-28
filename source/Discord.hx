@@ -1,3 +1,4 @@
+#if DISCORD_ALLOWED
 package;
 
 import Sys.sleep;
@@ -28,7 +29,6 @@ class DiscordClient
 		{
 			DiscordRpc.process();
 			sleep(2);
-			//trace("Discord Client Update");
 		}
 
 		DiscordRpc.shutdown();
@@ -103,3 +103,4 @@ class DiscordClient
 	}
 	#end
 }
+#end

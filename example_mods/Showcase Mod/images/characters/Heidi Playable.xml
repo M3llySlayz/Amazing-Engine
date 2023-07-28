@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Heidi Playable.png">
+	<!-- Created with Adobe Animate version 23.0.1.70 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="GF_Cheer0000" x="0" y="0" width="288" height="448" frameX="0" frameY="0" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0001" x="0" y="0" width="288" height="448" frameX="0" frameY="0" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0002" x="288" y="0" width="291" height="443" frameX="0" frameY="-4" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0003" x="288" y="0" width="291" height="443" frameX="0" frameY="-4" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0004" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0005" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0006" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0007" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0008" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0009" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0010" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0011" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0012" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Cheer0013" x="579" y="0" width="291" height="445" frameX="0" frameY="-2" frameWidth="291" frameHeight="448"/>
+	<SubTexture name="GF_Dead0000" x="870" y="0" width="304" height="458" frameX="-4" frameY="-6" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0001" x="1174" y="0" width="307" height="458" frameX="-1" frameY="-6" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0002" x="1481" y="0" width="307" height="462" frameX="-1" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0003" x="1788" y="0" width="322" height="462" frameX="-2" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0004" x="2110" y="0" width="322" height="462" frameX="-2" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0005" x="2432" y="0" width="324" height="462" frameX="0" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0006" x="2756" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0007" x="2756" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0008" x="2756" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0009" x="2756" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0010" x="2756" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0011" x="2756" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0012" x="2756" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0013" x="2756" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0014" x="2756" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0015" x="3061" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0016" x="3061" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0017" x="3061" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0018" x="3366" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0019" x="3366" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0020" x="3671" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0021" x="3671" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0022" x="3976" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0023" x="3976" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0024" x="4281" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0025" x="4586" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0026" x="4586" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0027" x="4891" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0028" x="4891" y="0" width="305" height="462" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0029" x="5196" y="0" width="305" height="465" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0030" x="5196" y="0" width="305" height="465" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0031" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0032" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0033" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0034" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0035" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0036" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0037" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0038" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0039" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0040" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0041" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0042" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0043" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0044" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0045" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0046" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0047" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0048" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0049" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0050" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0051" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0052" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0053" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0054" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0055" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0056" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_Dead0057" x="5501" y="0" width="305" height="464" frameX="-3" frameY="0" frameWidth="324" frameHeight="465"/>
+	<SubTexture name="GF_DeadConfirm0000" x="5806" y="0" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0001" x="6111" y="0" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0002" x="6416" y="0" width="305" height="485" frameX="0" frameY="0" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0003" x="6721" y="0" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0004" x="7026" y="0" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0005" x="7331" y="0" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0006" x="7636" y="0" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0007" x="0" y="485" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0008" x="305" y="485" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0009" x="610" y="485" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0010" x="915" y="485" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0011" x="1220" y="485" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0012" x="1525" y="485" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0013" x="1830" y="485" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0014" x="2135" y="485" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0015" x="2440" y="485" width="305" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0016" x="2745" y="485" width="308" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0017" x="3053" y="485" width="309" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0018" x="3362" y="485" width="311" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0019" x="3673" y="485" width="313" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0020" x="3986" y="485" width="314" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0021" x="4300" y="485" width="315" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0022" x="4615" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0023" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0024" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0025" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0026" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0027" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0028" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0029" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0030" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0031" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0032" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadConfirm0033" x="4931" y="485" width="316" height="464" frameX="0" frameY="-21" frameWidth="317" frameHeight="485"/>
+	<SubTexture name="GF_DeadLoop0000" x="5247" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0001" x="5552" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0002" x="5552" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0003" x="5857" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0004" x="5857" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0005" x="6162" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0006" x="6162" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0007" x="6467" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0008" x="6772" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0009" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0010" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0011" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0012" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0013" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0014" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0015" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0016" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0017" x="7382" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0018" x="7687" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0019" x="7687" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0020" x="0" y="949" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0021" x="0" y="949" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0022" x="305" y="949" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0023" x="305" y="949" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0024" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0025" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0026" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0027" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0028" x="610" y="949" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0029" x="610" y="949" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0030" x="6467" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0031" x="6772" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0032" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_DeadLoop0033" x="7077" y="485" width="305" height="464"/>
+	<SubTexture name="GF_Down0000" x="915" y="949" width="494" height="391" frameX="0" frameY="-8" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0001" x="915" y="949" width="494" height="391" frameX="0" frameY="-8" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0002" x="1409" y="949" width="469" height="399" frameX="-28" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0003" x="1878" y="949" width="470" height="399" frameX="-27" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0004" x="2348" y="949" width="471" height="399" frameX="-26" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0005" x="2819" y="949" width="472" height="399" frameX="-25" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0006" x="3291" y="949" width="477" height="399" frameX="-20" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0007" x="3768" y="949" width="482" height="399" frameX="-15" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0008" x="4250" y="949" width="486" height="399" frameX="-11" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0009" x="4250" y="949" width="486" height="399" frameX="-11" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0010" x="4250" y="949" width="486" height="399" frameX="-11" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0011" x="4250" y="949" width="486" height="399" frameX="-11" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0012" x="4250" y="949" width="486" height="399" frameX="-11" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down0013" x="4250" y="949" width="486" height="399" frameX="-11" frameY="0" frameWidth="497" frameHeight="399"/>
+	<SubTexture name="GF_Down_MISS0000" x="4736" y="949" width="494" height="391" frameX="-4" frameY="0" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0001" x="5230" y="949" width="324" height="381" frameX="0" frameY="-9" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0002" x="5230" y="949" width="324" height="381" frameX="0" frameY="-9" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0003" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0004" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0005" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0006" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0007" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0008" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0009" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0010" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0011" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0012" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Down_MISS0013" x="5554" y="949" width="322" height="388" frameX="-3" frameY="-2" frameWidth="498" frameHeight="391"/>
+	<SubTexture name="GF_Fear0000" x="5876" y="949" width="289" height="445" frameX="-1" frameY="-1" frameWidth="291" frameHeight="446"/>
+	<SubTexture name="GF_Fear0001" x="6165" y="949" width="289" height="443" frameX="-2" frameY="-3" frameWidth="291" frameHeight="446"/>
+	<SubTexture name="GF_Fear0002" x="6454" y="949" width="289" height="446" frameX="-2" frameY="0" frameWidth="291" frameHeight="446"/>
+	<SubTexture name="GF_Fear0003" x="6743" y="949" width="289" height="445" frameX="0" frameY="-1" frameWidth="291" frameHeight="446"/>
+	<SubTexture name="GF_IdleLeft0000" x="7032" y="949" width="287" height="436" frameX="-21" frameY="-13" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0001" x="7319" y="949" width="302" height="439" frameX="-3" frameY="-10" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0002" x="7621" y="949" width="305" height="442" frameX="0" frameY="-7" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0003" x="7621" y="949" width="305" height="442" frameX="0" frameY="-7" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0004" x="0" y="1413" width="316" height="449" frameX="-16" frameY="0" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0005" x="0" y="1413" width="316" height="449" frameX="-16" frameY="0" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0006" x="316" y="1413" width="300" height="449" frameX="-38" frameY="0" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0007" x="316" y="1413" width="300" height="449" frameX="-38" frameY="0" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0008" x="616" y="1413" width="289" height="448" frameX="-55" frameY="-1" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0009" x="616" y="1413" width="289" height="448" frameX="-55" frameY="-1" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0010" x="616" y="1413" width="289" height="448" frameX="-55" frameY="-1" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0011" x="616" y="1413" width="289" height="448" frameX="-55" frameY="-1" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0012" x="905" y="1413" width="293" height="449" frameX="-52" frameY="0" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleLeft0013" x="905" y="1413" width="293" height="449" frameX="-52" frameY="0" frameWidth="345" frameHeight="449"/>
+	<SubTexture name="GF_IdleRight0000" x="1198" y="1413" width="309" height="439" frameX="0" frameY="-9" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0001" x="1507" y="1413" width="288" height="440" frameX="-22" frameY="-8" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0002" x="1795" y="1413" width="290" height="442" frameX="-26" frameY="-6" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0003" x="1795" y="1413" width="290" height="442" frameX="-26" frameY="-6" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0004" x="2085" y="1413" width="289" height="446" frameX="-20" frameY="-2" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0005" x="2085" y="1413" width="289" height="446" frameX="-20" frameY="-2" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0006" x="2374" y="1413" width="287" height="448" frameX="-10" frameY="0" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0007" x="2374" y="1413" width="287" height="448" frameX="-10" frameY="0" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0008" x="2661" y="1413" width="289" height="448" frameX="-7" frameY="0" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0009" x="2661" y="1413" width="289" height="448" frameX="-7" frameY="0" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0010" x="2661" y="1413" width="289" height="448" frameX="-7" frameY="0" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0011" x="2661" y="1413" width="289" height="448" frameX="-7" frameY="0" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0012" x="2950" y="1413" width="290" height="446" frameX="-1" frameY="-2" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_IdleRight0013" x="2950" y="1413" width="290" height="446" frameX="-1" frameY="-2" frameWidth="316" frameHeight="448"/>
+	<SubTexture name="GF_Left0000" x="3240" y="1413" width="320" height="463" frameX="0" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0001" x="3240" y="1413" width="320" height="463" frameX="0" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0002" x="3560" y="1413" width="320" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0003" x="3560" y="1413" width="320" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0004" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0005" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0006" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0007" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0008" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0009" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0010" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0011" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0012" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left0013" x="3880" y="1413" width="318" height="463" frameX="-8" frameY="0" frameWidth="328" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0000" x="4198" y="1413" width="320" height="463" frameX="-6" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0001" x="4518" y="1413" width="314" height="462" frameX="0" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0002" x="4518" y="1413" width="314" height="462" frameX="0" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0003" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0004" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0005" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0006" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0007" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0008" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0009" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0010" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0011" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0012" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Left_MISS0013" x="4832" y="1413" width="316" height="462" frameX="-5" frameY="0" frameWidth="326" frameHeight="463"/>
+	<SubTexture name="GF_Right0000" x="5148" y="1413" width="294" height="447" frameX="-13" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0001" x="5148" y="1413" width="294" height="447" frameX="-13" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0002" x="5442" y="1413" width="298" height="447" frameX="0" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0003" x="5442" y="1413" width="298" height="447" frameX="0" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0004" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0005" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0006" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0007" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0008" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0009" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0010" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0011" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0012" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right0013" x="5740" y="1413" width="297" height="447" frameX="-2" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0000" x="5148" y="1413" width="294" height="447" frameX="-1" frameY="0" frameWidth="307" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0001" x="6037" y="1413" width="298" height="444" frameX="-5" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0002" x="6037" y="1413" width="298" height="444" frameX="-5" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0003" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0004" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0005" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0006" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0007" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0008" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0009" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0010" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0011" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0012" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Right_MISS0013" x="6335" y="1413" width="295" height="444" frameX="0" frameY="-2" frameWidth="303" frameHeight="447"/>
+	<SubTexture name="GF_Up0000" x="6630" y="1413" width="303" height="469" frameX="-1" frameY="0" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0001" x="6630" y="1413" width="303" height="469" frameX="-1" frameY="0" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0002" x="6933" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0003" x="6933" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0004" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0005" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0006" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0007" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0008" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0009" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0010" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0011" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0012" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up0013" x="7235" y="1413" width="302" height="467" frameX="0" frameY="-2" frameWidth="304" frameHeight="469"/>
+	<SubTexture name="GF_Up_MISS0000" x="7537" y="1413" width="303" height="469" frameX="0" frameY="-22" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0001" x="7840" y="1413" width="301" height="492" frameX="-2" frameY="0" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0002" x="7840" y="1413" width="301" height="492" frameX="-2" frameY="0" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0003" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0004" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0005" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0006" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0007" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0008" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0009" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0010" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0011" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0012" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+	<SubTexture name="GF_Up_MISS0013" x="0" y="1905" width="301" height="483" frameX="-2" frameY="-9" frameWidth="303" frameHeight="492"/>
+</TextureAtlas>

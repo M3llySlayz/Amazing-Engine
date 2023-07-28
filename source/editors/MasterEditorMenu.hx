@@ -1,6 +1,6 @@
 package editors;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flixel.FlxG;
@@ -30,7 +30,8 @@ class MasterEditorMenu extends MusicBeatState
 		'Dialogue Editor',
 		'Dialogue Portrait Editor',
 		'Character Editor',
-		'Chart Editor'
+		'Chart Editor',
+		'Credits Editor'
 	];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
 	private var directories:Array<String> = [null];
@@ -42,9 +43,9 @@ class MasterEditorMenu extends MusicBeatState
 	override function create()
 	{
 		FlxG.camera.bgColor = FlxColor.BLACK;
-		#if desktop
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Editors Main Menu", null);
+		DiscordClient.changePresence("In the Editing Menu", "Deciding what to work on", null, false, null, 'chart');
 		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -99,6 +100,9 @@ class MasterEditorMenu extends MusicBeatState
 		{
 			changeSelection(1);
 		}
+
+		if (FlxG.mouse.wheel != 0) changeSelection(-FlxG.mouse.wheel);
+
 		#if MODS_ALLOWED
 		if(controls.UI_LEFT_P)
 		{
@@ -110,12 +114,17 @@ class MasterEditorMenu extends MusicBeatState
 		}
 		#end
 
-		if (controls.BACK)
+		if (controls.BACK || FlxG.mouse.justPressedRight)
 		{
-			MusicBeatState.switchState(new MainMenuState());
+			if (ClientPrefs.luaMenu){
+				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+				LoadingState.loadAndSwitchState(new PlayState());
+			} else {
+				MusicBeatState.switchState(new MainMenuState());
+			}
 		}
 
-		if (controls.ACCEPT)
+		if (controls.ACCEPT || FlxG.mouse.justPressed)
 		{
 			switch(options[curSelected]) {
 				case 'Character Editor':
@@ -130,6 +139,8 @@ class MasterEditorMenu extends MusicBeatState
 					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
+				case 'Credits Editor':
+					MusicBeatState.switchState(new CreditsEditor());
 			}
 			FlxG.sound.music.volume = 0;
 			#if PRELOAD_ALL
@@ -157,7 +168,7 @@ class MasterEditorMenu extends MusicBeatState
 
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 
 		curSelected += change;
 
@@ -170,7 +181,7 @@ class MasterEditorMenu extends MusicBeatState
 	#if MODS_ALLOWED
 	function changeDirectory(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 
 		curDirectory += change;
 

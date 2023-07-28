@@ -18,6 +18,9 @@ If you want video support on your mod, simply do `haxelib install hxCodec 2.5.1`
 
 Otherwise, you can delete the "VIDEOS_ALLOWED" Line on Project.xml
 
+If you're looking for support on a problem and can't find your answer in the wiki, join our [Discord](https://discord.gg/KjeeBQ3fh3)!
+=======
+
 ## Credits:
 * M3llySlayz - Programmer, Artist, Composer
 * Irshaad - Programmer
@@ -49,7 +52,10 @@ _____________________________________
 
 ## Mod Support
 * Probably one of the main points of this engine, you can code in .lua files outside of the source code, making your own weeks without even messing with the source!
-* Comes with a Mod Organizing/Disabling Menu.
+* Comes with a Mod Organizing/Disabling Menu, and a Mod Save Reset menu.
+* Custom Options - Easily creatable with JSON files, Amazing Engine supports making your own options in your mod's folder. (May get an editor soon, not sure.)
+* Speaking of editors, there's a Credits Editor now. Not sure why you'd need this, it was pretty easy to do before, but here you go.
 
 ## Multi Key
 * Goes up to 18k as of now, credits to tposejank (top left of the site shows his repository)
+

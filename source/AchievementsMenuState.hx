@@ -1,6 +1,6 @@
 package;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
@@ -28,8 +28,8 @@ class AchievementsMenuState extends MusicBeatState
 	private var descText:FlxText;
 
 	override function create() {
-		#if desktop
-		DiscordClient.changePresence("Achievements Menu", null);
+		#if DISCORD_ALLOWED
+		DiscordClient.changePresence("In the Achievements Menu", "Looking at their accomplishments", null, false, null, 'icon');
 		#end
 
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
@@ -66,6 +66,7 @@ class AchievementsMenuState extends MusicBeatState
 
 		descText = new FlxText(150, 600, 980, "", 32);
 		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.screenCenter(X);
 		descText.scrollFactor.set();
 		descText.borderSize = 2.4;
 		add(descText);
@@ -76,6 +77,7 @@ class AchievementsMenuState extends MusicBeatState
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
+		descText.screenCenter(X);
 
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
@@ -85,9 +87,20 @@ class AchievementsMenuState extends MusicBeatState
 		}
 
 		if (controls.BACK) {
-			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', false);
+			if (ClientPrefs.luaMenu){
+				PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+				LoadingState.loadAndSwitchState(new PlayState());
+			} else {
+				MusicBeatState.switchState(new MainMenuState());
+			}
 		}
+
+		if (FlxG.mouse.wheel != 0) {
+		    SoundEffects.playSFX('scroll', false);
+		    changeSelection(-FlxG.mouse.wheel);
+        	}
 	}
 
 	function changeSelection(change:Int = 0) {
@@ -116,7 +129,8 @@ class AchievementsMenuState extends MusicBeatState
 			}
 		}
 		descText.text = Achievements.achievementsStuff[achievementIndex[curSelected]][1];
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 	}
 	#end
 }

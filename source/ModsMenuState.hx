@@ -1,6 +1,6 @@
 package;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
@@ -30,10 +30,16 @@ import flash.geom.Rectangle;
 import flixel.ui.FlxButton;
 import flixel.FlxBasic;
 import sys.io.File;
-/*import haxe.zip.Reader;
+import openfl.net.FileReference;
+import openfl.events.Event;
+import openfl.events.IOErrorEvent;
+import flash.net.FileFilter;
+import haxe.io.Bytes;
+import haxe.zip.Reader;
 import haxe.zip.Entry;
 import haxe.zip.Uncompress;
-import haxe.zip.Writer;*/
+import haxe.zip.Writer;
+import Achievements;
 
 using StringTools;
 
@@ -44,6 +50,7 @@ class ModsMenuState extends MusicBeatState
 	var bg:FlxSprite;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
+	var manual:FlxSprite;
 
 	var noModsTxt:FlxText;
 	var selector:AttachedSprite;
@@ -64,6 +71,7 @@ class ModsMenuState extends MusicBeatState
 	var removeButton:FlxButton;
 
 	var modsList:Array<Dynamic> = [];
+	public var enabledMods:Array<Dynamic> = []; 
 
 	var visibleWhenNoMods:Array<FlxBasic> = [];
 	var visibleWhenHasMods:Array<FlxBasic> = [];
@@ -74,9 +82,9 @@ class ModsMenuState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		WeekData.setDirectoryFromWeek();
 
-		#if desktop
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In the Mods Menu", "Modifying the game", 'gear', false, null, 'icon');
 		#end
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -93,6 +101,18 @@ class ModsMenuState extends MusicBeatState
 		noModsTxt.screenCenter();
 		visibleWhenNoMods.push(noModsTxt);
 
+		/*
+		manual = new FlxSprite(0, 0);
+		manual.frames = Paths.getSparrowAtlas('extra-keys/manual_book');
+		manual.animation.addByPrefix('normal', 'manual icon', 30, true);
+		manual.animation.addByPrefix('hover', 'manual icon hover', 30, true);
+		add(manual);
+		manual.x = FlxG.width - manual.width;
+		manual.y = FlxG.height - manual.height;
+		manual.animation.play('normal', true);
+		manual.updateHitbox();
+		*/
+
 		var path:String = 'modsList.txt';
 		if(FileSystem.exists(path))
 		{
@@ -101,11 +121,20 @@ class ModsMenuState extends MusicBeatState
 			{
 				if(leMods.length > 1 && leMods[0].length > 0) {
 					var modSplit:Array<String> = leMods[i].split('|');
-					if(!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase()))
-					{
-						addToModsList([modSplit[0], (modSplit[1] == '1')]);
-						//trace(modSplit[1]);
-					}
+					if(!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase())) addToModsList([modSplit[0], (modSplit[1] == '1')]);
+				}
+			}
+		}
+
+		if(FileSystem.exists(path))
+		{
+			var leMods:Array<String> = CoolUtil.coolTextFile(path); //sets the leMod var as a string and sets
+			//it to the list of mods in the text file.
+			for (i in 0...leMods.length) //for 0 to the length of the mods list.
+			{
+				var modSplit:Array<String> = leMods[i].split('|'); //splits up the mods into two variables. name and enabled[t/f]
+				if (modSplit[1] == '1') { //if mod is enabled.
+					addToEnabledList([modSplit[0]]); //enabledlist.txt is the name of the mods only that are enabled.
 				}
 			}
 		}
@@ -118,6 +147,8 @@ class ModsMenuState extends MusicBeatState
 				if(!Paths.ignoreModFolders.contains(folder))
 				{
 					addToModsList([folder, true]); //i like it false by default. -bb //Well, i like it True! -Shadow
+					if (!Achievements.isAchievementUnlocked('modinstalled') && Achievements.exists('modinstalled'))
+						startAchievement('modinstalled');
 				}
 			}
 		}
@@ -142,7 +173,8 @@ class ModsMenuState extends MusicBeatState
 			}
 			modsList[curSelected][1] = !modsList[curSelected][1];
 			updateButtonToggle();
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			//FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			SoundEffects.playSFX('scroll', false);
 		});
 		buttonToggle.setGraphicSize(50, 50);
 		buttonToggle.updateHitbox();
@@ -157,7 +189,7 @@ class ModsMenuState extends MusicBeatState
 		buttonUp = new FlxButton(startX, 0, "/\\", function()
 		{
 			moveMod(-1);
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			//FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 		});
 		buttonUp.setGraphicSize(50, 50);
 		buttonUp.updateHitbox();
@@ -170,7 +202,7 @@ class ModsMenuState extends MusicBeatState
 
 		buttonDown = new FlxButton(startX, 0, "\\/", function() {
 			moveMod(1);
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			//FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 		});
 		buttonDown.setGraphicSize(50, 50);
 		buttonDown.updateHitbox();
@@ -192,7 +224,7 @@ class ModsMenuState extends MusicBeatState
 			{
 				needaReset = true;
 			}
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			SoundEffects.playSFX('scroll', false);
 		});
 		buttonTop.setGraphicSize(80, 50);
 		buttonTop.updateHitbox();
@@ -218,7 +250,7 @@ class ModsMenuState extends MusicBeatState
 				}
 			}
 			updateButtonToggle();
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			SoundEffects.playSFX('cancel', true);
 		});
 		buttonDisableAll.setGraphicSize(170, 50);
 		buttonDisableAll.updateHitbox();
@@ -244,7 +276,7 @@ class ModsMenuState extends MusicBeatState
 				}
 			}
 			updateButtonToggle();
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+			SoundEffects.playSFX('confirm', true);
 		});
 		buttonEnableAll.setGraphicSize(170, 50);
 		buttonEnableAll.updateHitbox();
@@ -377,31 +409,35 @@ class ModsMenuState extends MusicBeatState
 		intendedColor = bg.color;
 		changeSelection();
 		updatePosition();
-		FlxG.sound.play(Paths.sound('scrollMenu'));
 
 		FlxG.mouse.visible = true;
 
 		super.create();
 	}
 
-	/*function getIntArray(max:Int):Array<Int>{
-		var arr:Array<Int> = [];
-		for (i in 0...max) {
-			arr.push(i);
-		}
-		return arr;
-	}*/
 	function addToModsList(values:Array<Dynamic>)
 	{
 		for (i in 0...modsList.length)
 		{
 			if(modsList[i][0] == values[0])
 			{
-				//trace(modsList[i][0], values[0]);
 				return;
 			}
 		}
 		modsList.push(values);
+	}
+
+	function addToEnabledList(values:Array<String>)
+	{
+		for (i in 0...enabledMods.length)
+		{
+			if(enabledMods[i][0] == values[0])
+			{
+				//trace(modsList[i][0], values[0]);
+				return;
+			}
+		}
+		enabledMods.push(values);
 	}
 
 	function updateButtonToggle()
@@ -466,6 +502,22 @@ class ModsMenuState extends MusicBeatState
 		Paths.pushGlobalMods();
 	}
 
+	function saveEnabledTxt()
+		{
+			var fileStr:String = '';
+			for (values in enabledMods)
+			{
+				if (values[1] == 1)
+				{
+					if(fileStr.length > 0) fileStr += '\n';
+					fileStr += values[0];
+				}
+			}
+		var path:String = 'enabledList.txt';
+		File.saveContent(path, fileStr);
+		Paths.pushGlobalMods();
+		}
+
 	var noModsSine:Float = 0;
 	var canExit:Bool = true;
 	override function update(elapsed:Float)
@@ -476,14 +528,33 @@ class ModsMenuState extends MusicBeatState
 			noModsTxt.alpha = 1 - Math.sin((Math.PI * noModsSine) / 180);
 		}
 
+		if (controls.RESET || FlxG.mouse.justPressedMiddle){
+			openSubState(new options.DeleteSavesSubState());
+		}
+
+	/*	if (FlxG.mouse.overlaps(manual)) {
+			if (manual.animation.curAnim.name != 'hover') {
+				manual.animation.play('hover', true);
+				if (FlxG.mouse.justPressed){
+					openSubState(new options.DeleteSavesSubState());
+				}
+			}
+		} else {
+			if (manual.animation.curAnim != null && manual.animation.curAnim.name != 'normal') {
+				manual.animation.play('normal', true);
+			}
+		}*/
+
 		if(canExit && controls.BACK)
 		{
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', false);
 			FlxG.mouse.visible = false;
 			saveTxt();
+			saveEnabledTxt();
 			if(needaReset)
 			{
 				//MusicBeatState.switchState(new TitleState());
@@ -503,16 +574,21 @@ class ModsMenuState extends MusicBeatState
 			}
 		}
 
-		if(controls.UI_UP_P)
+		if(controls.UI_UP_P && !noModsTxt.visible)
 		{
 			changeSelection(-1);
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			//FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
-		if(controls.UI_DOWN_P)
+		if(controls.UI_DOWN_P && !noModsTxt.visible)
 		{
 			changeSelection(1);
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			//FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
+
+		if (FlxG.mouse.wheel != 0){
+			changeSelection(-FlxG.mouse.wheel);
+		}
+
 		updatePosition(elapsed);
 		super.update(elapsed);
 	}
@@ -566,7 +642,7 @@ class ModsMenuState extends MusicBeatState
 				mod.alphabet.alpha = 1;
 				selector.sprTracker = mod.alphabet;
 				descriptionTxt.text = mod.description;
-				if (mod.restart){//finna make it to where if nothing changed then it won't reset
+				if (mod.restart) { //finna make it to where if nothing changed then it won't reset
 					descriptionTxt.text += " (This Mod will restart the game!)";
 				}
 
@@ -586,6 +662,7 @@ class ModsMenuState extends MusicBeatState
 			i++;
 		}
 		updateButtonToggle();
+		SoundEffects.playSFX('scroll', false);
 	}
 
 	function updatePosition(elapsed:Float = -1)
@@ -710,6 +787,21 @@ class ModsMenuState extends MusicBeatState
 		canExit = true;
 		trace("Problem loading file");
 	}*/
+
+	#if ACHIEVEMENTS_ALLOWED
+	var achievementObj:AchievementObject = null;
+	function startAchievement(achieve:String) {
+		achievementObj = new AchievementObject(achieve);
+		achievementObj.onFinish = achievementEnd;
+		add(achievementObj);
+		trace('Giving achievement ' + achieve);
+		Achievements.unlockAchievement(achieve);
+	}
+	function achievementEnd():Void
+	{
+		achievementObj = null;
+	}
+	#end
 }
 
 class ModMetadata

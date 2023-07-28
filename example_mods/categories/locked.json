@@ -1,0 +1,13 @@
+{
+	"category": "locked",
+	"name": "Locked",
+	"songs": [
+		["Very super hard song", "bf", "Normal, Hard, Expert"]
+	],
+	"songColors": [
+		[41, 19, 66]
+	],
+	"color": [41, 19, 66],
+	"startLocked": true,
+	"hiddenWhenLocked": false
+}

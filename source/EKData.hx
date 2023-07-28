@@ -48,7 +48,7 @@ class EKData {
             ],
 		7 => [
                 "letters" => ["A", "B", "C", "D", "F", "G", "H", "I"], 
-                "anims" => ["LEFT", "UP", "DOWN", "RIGHT", "LEFT", "DOWN", "UP", "RIGHT"],
+                "anims" => ["LEFT", "DOWN", "UP", "RIGHT", "LEFT", "DOWN", "UP", "RIGHT"],
 			    "strumAnims" => ["LEFT", "DOWN", "UP", "RIGHT", "LEFT", "DOWN", "UP", "RIGHT"], 
                 "pixelAnimIndex" => [0, 1, 2, 3, 5, 6, 7, 8]
             ],
@@ -134,11 +134,11 @@ class EKData {
 		0.31, //13k
 		0.31, //14k
 		0.3, //15k
-        0.29, //16k
-        0.27, //17k
-        0.25 //18k
-    ]; 
-	public static var lessX:Array<Int> = [
+    0.26, //16k
+    0.26, //17k
+    0.22 //18k
+    ];
+var lessX:Array<Int> = [
 		0, //1k
 		0, //2k
 		0, //3k
@@ -158,6 +158,72 @@ class EKData {
         6, //17k
         6 //18k
     ];
+
+    // MULTISTRUM STUFF
+    ////////////////////////////////////////////////////////////////
+    public static var lesserX:Array<Int> = [
+        0, // 0
+        0, // 1
+        0, // 2
+        154, // 3
+        370, // 4
+        586, // 5
+        795 // 6
+    ];
+
+    public static var moreY:Array<Int> = [
+        0, // 0
+        0, // 1
+        0, // 2
+        46, // 3
+        118, // 4
+        204, // 5
+        296 // 6
+    ];
+
+    public static var lessScale:Array<Float> = [
+        1, // 0
+        1, // 1
+        1, // 2
+        0.84, // 3
+        0.66, // 4
+        0.54, // 5
+        0.46 // 6
+    ];
+
+    // THIS TOOK FOREVER.
+    public static var lesserScale:Array<Array<Float>> = [
+        //one strum, two strums, three strums, and so on
+        [1, 1, 1, 1, 1, 1, 1], //1k
+        [1, 1, 1, 1, 1, 1, 1], //2k
+        [1, 1, 1, 1, 1, 1, 1], //3k
+        [1, 1, 1, 1, 1, 1, 1], //4k
+        [1, 1, 1, 0.9, 0.88, 0.87, 0.86], //5k
+        [1, 1, 1, 0.88, 0.86, 0.85, 0.84], //6k
+        [1, 1, 1, 0.86, 0.84, 0.83, 0.82], //7k
+        [1, 1, 1, 0.84, 0.82, 0.81, 0.8], //8k
+        [1, 1, 1, 0.82, 0.8, 0.79, 0.78], //9k
+        [1, 1, 1, 0.8, 0.78, 0.77, 0.76], //10k
+        [1, 1, 1, 0.78, 0.76, 0.75, 0.74], //11k
+        [1, 1, 1, 0.76, 0.74, 0.73, 0.72], //12k
+        [1, 1, 1, 0.8, 0.79, 0.79, 0.77], //13k
+        [1, 1, 1, 0.72, 0.7, 0.69, 0.68], //14k
+        [1, 1, 1, 0.7, 0.68, 0.67, 0.66], //15k
+        [1, 1, 1, 0.68, 0.66, 0.65, 0.64], //16k
+        [1, 1, 1, 0.66, 0.64, 0.63, 0.62], //17k
+        [1, 1, 1, 0.64, 0.62, 0.61, 0.6] //18k
+    ];
+
+    public static var lessSpacing:Array<Float> = [
+        2, // 0
+        2, // 1
+        2, // 2
+        2.7, // 3
+        2.75, // 4
+        2.8, // 5
+        2.85 // 6
+    ];
+    ////////////////////////////////////////////////////////////////
 
     public static var noteSep:Array<Int> = [
         0, //1k
@@ -246,22 +312,22 @@ class EKData {
     public static var gridSizes:Array<Int> = [
         60, //1k
         50, //2k
-        45, //3k
+        40, //3k
         40, //4k
-        40, //5k
-        40, //6k
-        40, //7k
-        38, //8k
-        36, //9k
-        34, //10k
+        39, //5k
+        39, //6k
+        39, //7k
+        39, //8k
+        38, //9k
+        36, //10k
         32, //11k
-        30, //12k
-        29, //13k
-        28, //14k
-        27, //15k
-        26, //16k
-        25, //17k
-        24 //18k
+        28, //12k
+        26, //13k
+        24, //14k
+        23, //15k
+        22, //16k
+        21, //17k
+        20 //18k
     ];
 
     public static var splashScales:Array<Float> = [
@@ -307,10 +373,247 @@ class EKData {
     ];
 }
 
-class Keybinds
-{
+class Keybinds {
+    // This was used in ControlsSubState (line 186) to fix keybind resetting. Feel free to customize this.
+    public static function defaultKeybinds():Map<String, Array<flixel.input.keyboard.FlxKey>> {
+        return [
+            'note_one1'		=> [SPACE, NONE],
+
+            'note_two1'		=> [D, NONE],
+            'note_two2'		=> [K, NONE],
+
+            'note_three1'	=> [D, NONE],
+            'note_three2'	=> [SPACE, NONE],
+            'note_three3'	=> [K, NONE],
+
+            'note_left'		=> [A, LEFT],
+            'note_down'		=> [S, DOWN],
+            'note_up'		=> [W, UP],
+            'note_right'	=> [D, RIGHT],
+
+            'note_five1'	=> [D, NONE],
+            'note_five2'	=> [F, NONE],
+            'note_five3'	=> [SPACE, NONE],
+            'note_five4'	=> [J, NONE],
+            'note_five5'	=> [K, NONE],
+
+            'note_six1'		=> [S, NONE],
+            'note_six2'		=> [D, NONE],
+            'note_six3'		=> [F, NONE],
+            'note_six4'		=> [J, NONE],
+            'note_six5'		=> [K, NONE],
+            'note_six6'		=> [L, NONE],
+
+            'note_seven1'	=> [S, NONE],
+            'note_seven2'	=> [D, NONE],
+            'note_seven3'	=> [F, NONE],
+            'note_seven4'	=> [SPACE, NONE],
+            'note_seven5'	=> [J, NONE],
+            'note_seven6'	=> [K, NONE],
+            'note_seven7'	=> [L, NONE],
+
+            'note_eight1'	=> [A, NONE],
+            'note_eight2'	=> [S, NONE],
+            'note_eight3'	=> [D, NONE],
+            'note_eight4'	=> [F, NONE],
+            'note_eight5'	=> [H, NONE],
+            'note_eight6'	=> [J, NONE],
+            'note_eight7'	=> [K, NONE],
+            'note_eight8'	=> [L, NONE],
+
+            'note_nine1'	=> [A, NONE],
+            'note_nine2'	=> [S, NONE],
+            'note_nine3'	=> [D, NONE],
+            'note_nine4'	=> [F, NONE],
+            'note_nine5'	=> [SPACE, NONE],
+            'note_nine6'	=> [H, NONE],
+            'note_nine7'	=> [J, NONE],
+            'note_nine8'	=> [K, NONE],
+            'note_nine9'	=> [L, NONE],
+
+            'note_ten1'		=> [A, NONE],
+            'note_ten2'		=> [S, NONE],
+            'note_ten3'		=> [D, NONE],
+            'note_ten4'		=> [F, NONE],
+            'note_ten5'		=> [G, NONE],
+            'note_ten6'		=> [SPACE, NONE],
+            'note_ten7'		=> [H, NONE],
+            'note_ten8'     => [J, NONE],
+            'note_ten9'		=> [K, NONE],
+            'note_ten10'	=> [L, NONE],
+
+            'note_elev1'	=> [A, NONE],
+            'note_elev2'	=> [S, NONE],
+            'note_elev3'	=> [D, NONE],
+            'note_elev4'	=> [F, NONE],
+            'note_elev5'	=> [G, NONE],
+            'note_elev6'	=> [SPACE, NONE],
+            'note_elev7'	=> [H, NONE],
+            'note_elev8'    => [J, NONE],
+            'note_elev9'	=> [K, NONE],
+            'note_elev10'	=> [L, NONE],
+            'note_elev11'	=> [PERIOD, NONE],
+
+            // submitted by btoad#2337
+            'note_twel1'	=> [A, NONE],
+            'note_twel2'	=> [S, NONE],
+            'note_twel3'	=> [D, NONE],
+            'note_twel4'	=> [F, NONE],
+            'note_twel5'	=> [C, NONE],
+            'note_twel6'	=> [V, NONE],
+            'note_twel7'	=> [N, NONE],
+            'note_twel8'    => [M, NONE],
+            'note_twel9'	=> [H, NONE],
+            'note_twel10'	=> [J, NONE],
+            'note_twel11'	=> [K, NONE],
+            'note_twel12'	=> [L, NONE],
+
+            'note_thir1'	=> [A, NONE],
+            'note_thir2'	=> [S, NONE],
+            'note_thir3'	=> [D, NONE],
+            'note_thir4'	=> [F, NONE],
+            'note_thir5'	=> [C, NONE],
+            'note_thir6'	=> [V, NONE],
+            'note_thir7'	=> [SPACE, NONE],
+            'note_thir8'	=> [N, NONE],
+            'note_thir9'    => [M, NONE],
+            'note_thir10'	=> [H, NONE],
+            'note_thir11'	=> [J, NONE],
+            'note_thir12'	=> [K, NONE],
+            'note_thir13'	=> [L, NONE],
+
+            'note_fourt1'	=> [A, NONE],
+            'note_fourt2'	=> [S, NONE],
+            'note_fourt3'	=> [D, NONE],
+            'note_fourt4'	=> [F, NONE],
+            'note_fourt5'	=> [C, NONE],
+            'note_fourt6'	=> [V, NONE],
+            'note_fourt7'	=> [T, NONE],
+            'note_fourt8'   => [Y, NONE],
+            'note_fourt9'	=> [N, NONE],
+            'note_fourt10'	=> [M, NONE],
+            'note_fourt11'	=> [H, NONE],
+            'note_fourt12'	=> [J, NONE],
+            'note_fourt13'	=> [K, NONE],
+            'note_fourt14'	=> [L, NONE],
+
+            'note_151'	=> [A, NONE],
+            'note_152'	=> [S, NONE],
+            'note_153'	=> [D, NONE],
+            'note_154'	=> [F, NONE],
+            'note_155'	=> [C, NONE],
+            'note_156'	=> [V, NONE],
+            'note_157'	=> [T, NONE],
+            'note_158'  => [Y, NONE],
+            'note_159'  => [U, NONE],
+            'note_1510'	=> [N, NONE],
+            'note_1511'	=> [M, NONE],
+            'note_1512'	=> [H, NONE],
+            'note_1513'	=> [J, NONE],
+            'note_1514'	=> [K, NONE],
+            'note_1515'	=> [L, NONE],
+
+            'note_161'	=> [A, NONE],
+            'note_162'	=> [S, NONE],
+            'note_163'	=> [D, NONE],
+            'note_164'	=> [F, NONE],
+            'note_165'	=> [Q, NONE],
+            'note_166'	=> [W, NONE],
+            'note_167'	=> [E, NONE],
+            'note_168'  => [R, NONE],
+            'note_169'  => [Y, NONE],
+            'note_1610'	=> [U, NONE],
+            'note_1611'	=> [I, NONE],
+            'note_1612'	=> [O, NONE],
+            'note_1613'	=> [H, NONE],
+            'note_1614'	=> [J, NONE],
+            'note_1615'	=> [K, NONE],
+            'note_1616'	=> [L, NONE],
+        
+            'note_171'	=> [A, NONE],
+            'note_172'	=> [S, NONE],
+            'note_173'	=> [D, NONE],
+            'note_174'	=> [F, NONE],
+            'note_175'	=> [Q, NONE],
+            'note_176'	=> [W, NONE],
+            'note_177'	=> [E, NONE],
+            'note_178'  => [R, NONE],
+            'note_179'	=> [SPACE, NONE],
+            'note_1710' => [Y, NONE],
+            'note_1711'	=> [U, NONE],
+            'note_1712'	=> [I, NONE],
+            'note_1713'	=> [O, NONE],
+            'note_1714'	=> [H, NONE],
+            'note_1715'	=> [J, NONE],
+            'note_1716'	=> [K, NONE],
+            'note_1717'	=> [L, NONE],
+
+            'note_181'	=> [A, NONE],
+            'note_182'	=> [S, NONE],
+            'note_183'	=> [D, NONE],
+            'note_184'	=> [F, NONE],
+            'note_185'	=> [SPACE, NONE],
+            'note_186'	=> [H, NONE],
+            'note_187'	=> [J, NONE],
+            'note_188'	=> [K, NONE],
+            'note_189'  => [L, NONE],
+
+            'note_1810' => [Q, NONE],
+            'note_1811'	=> [W, NONE],
+            'note_1812'	=> [E, NONE],
+            'note_1813'	=> [R, NONE],
+            'note_1814'	=> [T, NONE],
+            'note_1815'	=> [Y, NONE],
+            'note_1816'	=> [U, NONE],
+            'note_1817'	=> [I, NONE],
+            'note_1818'	=> [O, NONE],
+
+            'ui_left'		=> [A, LEFT],
+            'ui_down'		=> [S, DOWN],
+            'ui_up'			=> [W, UP],
+            'ui_right'		=> [D, RIGHT],
+            
+            'accept'		=> [SPACE, ENTER],
+            'back'			=> [BACKSPACE, ESCAPE],
+            'pause'			=> [ENTER, ESCAPE],
+            'reset'			=> [DELETE, NONE],
+            
+            'volume_mute'	=> [ZERO, NONE],
+            'volume_up'		=> [NUMPADPLUS, PLUS],
+            'volume_down'	=> [NUMPADMINUS, MINUS],
+
+            'debug_1'		=> [SEVEN, NONE],
+            'debug_2'		=> [EIGHT, NONE],
+
+            'dev_bind'		=> [NUMPADFIVE, F5],
+            'stats_bind'    => [NUMPADNINE, F9]
+        ];
+    }
+
     public static function optionShit():Array<Dynamic> {
         return [
+            ['UI'],
+            ['Left', 'ui_left'],
+            ['Down', 'ui_down'],
+            ['Up', 'ui_up'],
+            ['Right', 'ui_right'],
+            [''],
+            ['Accept', 'accept'],
+            ['Back', 'back'],
+            ['Pause', 'pause'],
+            ['Reset', 'reset'],
+            [''],
+            ['VOLUME'],
+            ['Mute', 'volume_mute'],
+            ['Up', 'volume_up'],
+            ['Down', 'volume_down'],
+            [''],
+            ['DEBUG'],
+            ['Dev', 'dev_bind'],
+            ['Stats', 'stats_bind'],
+            ['Key 1', 'debug_1'],
+            ['Key 2', 'debug_2'],
+            [''],
             ['1 KEY'],
             ['Center', 'note_one1'],
             [''],
@@ -494,7 +797,7 @@ class Keybinds
             ['Right 3', 'note_1713'],
             ['Left 4', 'note_1714'],
             ['Down 4', 'note_1715'],
-            ['Up 4', 'note_1717'],
+            ['Up 4', 'note_1716'], // Thank you JB for noticing it, tposejank was rushing while making these keybinds
             ['Right 4', 'note_1717'],
             [''],
             ['18 KEYS FINAL'],
@@ -516,27 +819,7 @@ class Keybinds
             ['Down 4', 'note_1816'],
             ['Up 4', 'note_1817'],
             ['Right 4', 'note_1818'],
-            [''],
-            ['UI'],
-            ['Left', 'ui_left'],
-            ['Down', 'ui_down'],
-            ['Up', 'ui_up'],
-            ['Right', 'ui_right'],
-            [''],
-            ['Reset', 'reset'],
-            ['Accept', 'accept'],
-            ['Back', 'back'],
-            ['Pause', 'pause'],
-            [''],
-            ['VOLUME'],
-            ['Mute', 'volume_mute'],
-            ['Up', 'volume_up'],
-            ['Down', 'volume_down'],
-            [''],
-            ['DEBUG'],
-            ['Key 1', 'debug_1'],
-            ['Key 2', 'debug_2'],
-            ['Dev Bind', 'dev_bind']
+            [''] // Don't remove it //But I wannaaaaa -Irshaad
         ];
     }
 

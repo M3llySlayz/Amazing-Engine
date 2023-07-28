@@ -30,7 +30,7 @@ class NoteSplash extends FlxSprite
 		setPosition(x - Note.swagWidth * 0.95, y - Note.swagWidth);
 		setGraphicSize(Std.int(width * sc[PlayState.mania]));
 
-		alpha = 0.6;
+		alpha = ClientPrefs.splashOpacity;
 
 		if(texture == null) {
 			texture = 'noteSplashes';
@@ -61,6 +61,8 @@ class NoteSplash extends FlxSprite
 	}
 
 	function loadAnims(skin:String) {
+		Paths.image(skin);
+		
 		frames = Paths.getSparrowAtlas(skin);
 		for (i in 1...3) {
 			for (j in 0...Note.gfxLetter.length) {

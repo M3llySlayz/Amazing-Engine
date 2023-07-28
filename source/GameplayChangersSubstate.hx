@@ -1,6 +1,6 @@
 package;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
@@ -94,6 +94,9 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 		var option:GameplayOption = new GameplayOption('Botplay', 'botplay', 'bool', false);
 		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('Play as Opponent', 'playAsOpponent', 'bool', false);
+		optionsArray.push(option);
 	}
 
 	public function getOptionByName(name:String)
@@ -160,6 +163,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 		changeSelection();
 		reloadCheckboxes();
+
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	var nextAccept:Int = 5;
@@ -176,10 +181,15 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		if (controls.BACK) {
+		if (FlxG.mouse.wheel != 0){
+			changeSelection(-FlxG.mouse.wheel);
+		}
+
+		if (controls.BACK || FlxG.mouse.justPressedRight) {
 			close();
 			ClientPrefs.saveSettings();
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			SoundEffects.playSFX('cancel', true);
 		}
 
 		if(nextAccept <= 0)
@@ -192,16 +202,19 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 
 			if(usesCheckbox)
 			{
-				if(controls.ACCEPT)
+				if(controls.ACCEPT || FlxG.mouse.justPressed)
 				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					//FlxG.sound.play(Paths.sound('scrollMenu'));
+					SoundEffects.playSFX('confirm', true);
 					curOption.setValue((curOption.getValue() == true) ? false : true);
 					curOption.change();
 					reloadCheckboxes();
+					PlayState.validScore = false;
 				}
 			} else {
 				if(controls.UI_LEFT || controls.UI_RIGHT) {
 					var pressed = (controls.UI_LEFT_P || controls.UI_RIGHT_P);
+					PlayState.validScore = false;
 					if(holdTime > 0.5 || pressed) {
 						if(pressed) {
 							var add:Dynamic = null;
@@ -264,7 +277,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 							}
 							updateTextFrom(curOption);
 							curOption.change();
-							FlxG.sound.play(Paths.sound('scrollMenu'));
+							//FlxG.sound.play(Paths.sound('scrollMenu'));
+							SoundEffects.playSFX('scroll', false);
 						} else if(curOption.type != 'string') {
 							holdValue = Math.max(curOption.minValue, Math.min(curOption.maxValue, holdValue + curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1)));
 
@@ -290,7 +304,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET)
+			if(controls.RESET || FlxG.mouse.justPressedMiddle)
 			{
 				for (i in 0...optionsArray.length)
 				{
@@ -317,7 +331,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 					}
 					leOption.change();
 				}
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('confirm', false);
 				reloadCheckboxes();
 			}
 		}
@@ -339,7 +354,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 	function clearHold()
 	{
 		if(holdTime > 0.5) {
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			SoundEffects.playSFX('scroll', false);
 		}
 		holdTime = 0;
 	}
@@ -370,7 +385,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			}
 		}
 		curOption = optionsArray[curSelected]; //shorter lol
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		//FlxG.sound.play(Paths.sound('scrollMenu'));
+		SoundEffects.playSFX('scroll', false);
 	}
 
 	function reloadCheckboxes() {

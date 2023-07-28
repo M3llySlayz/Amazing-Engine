@@ -1,0 +1,137 @@
+{
+	"animations": [
+		{
+			"image": "characters/JBBF",
+			"offsets": [
+				-5,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "BF idle dance"
+		},
+		{
+			"image": "characters/JBBF",
+			"offsets": [
+				18,
+				-8
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "BF NOTE LEFT0"
+		},
+		{
+			"image": "characters/JBBF",
+			"offsets": [
+				-20,
+				-51
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "BF NOTE DOWN0"
+		},
+		{
+			"image": "characters/JBBF",
+			"offsets": [
+				-46,
+				27
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "BF NOTE UP0"
+		},
+		{
+			"image": "characters/JBBF",
+			"offsets": [
+				-48,
+				-7
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "BF NOTE RIGHT0"
+		},
+		{
+			"image": "characters/JBBF",
+			"offsets": [
+				-15,
+				-19
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"loop": false,
+			"name": "BF NOTE DOWN MISS"
+		},
+		{
+			"image": "characters/JBBF",
+			"offsets": [
+				-46,
+				27
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUPmiss",
+			"loop": false,
+			"name": "BF NOTE UP MISS"
+		},
+		{
+			"image": "characters/JBBF",
+			"offsets": [
+				-44,
+				22
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"loop": false,
+			"name": "BF NOTE RIGHT MISS"
+		},
+		{
+			"image": "characters/JBBF",
+			"offsets": [
+				7,
+				19
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"loop": false,
+			"name": "BF NOTE LEFT MISS"
+		}
+	],
+	"no_antialiasing": false,
+	"gameover_properties": [
+		"bf-dead",
+		"fnf_loss_sfx",
+		"gameOver",
+		"gameOverEnd"
+	],
+	"image": "characters/JBBF",
+	"position": [
+		0,
+		350
+	],
+	"healthicon": "JBBF",
+	"flip_x": true,
+	"healthbar_colors": [
+		204,
+		100,
+		0
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

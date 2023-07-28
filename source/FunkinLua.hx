@@ -57,7 +57,7 @@ import hscript.Interp;
 import hscript.Expr;
 #end
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord;
 #end
 
@@ -79,8 +79,9 @@ class FunkinLua {
 	#if hscript
 	public static var hscript:HScript = null;
 	#end
-	
-	public function new(script:String) {
+	public var scriptCode:String;
+
+	public function new(script:String, ?scriptCode:String) {
 		#if LUA_ALLOWED
 		lua = LuaL.newstate();
 		LuaL.openlibs(lua);
@@ -91,7 +92,11 @@ class FunkinLua {
 
 		//LuaL.dostring(lua, CLENSE);
 		try{
-			var result:Dynamic = LuaL.dofile(lua, script);
+			var result;
+			if(scriptCode != null) 
+				result = LuaL.dostring(lua, scriptCode);
+			else
+				result = LuaL.dofile(lua, script);
 			var resultStr:String = Lua.tostring(lua, result);
 			if(resultStr != null && result != 0) {
 				trace('Error on lua script! ' + resultStr);
@@ -107,6 +112,9 @@ class FunkinLua {
 			trace(e);
 			return;
 		}
+		if (scriptCode != null) 
+			this.scriptCode = scriptCode;
+
 		scriptName = script;
 		initHaxeModule();
 
@@ -131,6 +139,7 @@ class FunkinLua {
 		set('songPath', Paths.formatToSongPath(PlayState.SONG.song));
 		set('startedCountdown', false);
 		set('mania', PlayState.mania);
+		set('strumlines', PlayState.strumlines);
 		set('curStage', PlayState.SONG.stage);
 
 		set('isStoryMode', PlayState.isStoryMode);
@@ -793,7 +802,7 @@ class FunkinLua {
 			return false;
 		});
 
-
+		
 		Lua_helper.add_callback(lua, "addLuaScript", function(luaFile:String, ?ignoreAlreadyRunning:Bool = false) { //would be dope asf.
 			var cervix = luaFile + ".lua";
 			if(luaFile.endsWith(".lua"))cervix=luaFile;
@@ -1408,6 +1417,36 @@ class FunkinLua {
 			return PlayState.instance.health;
 		});
 
+		Lua_helper.add_callback(lua, "unlockCategory", function(name:String) {
+			if (FreeplayCategory.categoriesLoaded.exists(name)) {
+				if (FreeplayCategoryState.catUnlocks.get(name) == false) {
+					FreeplayCategoryState.catUnlocks.set(name, true);
+					FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
+					FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks;
+					trace('Category "$name" successfully unlocked!');
+				} else {
+					trace('Category "$name" is already unlocked!');
+				}
+			} else {
+				trace('Category "$name" doesn\'t exist!');
+			}
+		});
+
+		Lua_helper.add_callback(lua, "lockCategory", function(name:String) { // If you want to lock a specific category
+			if (FreeplayCategory.categoriesLoaded.exists(name)) {
+				if (FreeplayCategoryState.catUnlocks.get(name) == true) {
+					FreeplayCategoryState.catUnlocks.set(name, false);
+					FlxG.save.data.catUnlocks = FreeplayCategoryState.catUnlocks;
+					FreeplayCategoryState.catUnlocks = FlxG.save.data.catUnlocks;
+					trace('Category "$name" successfully locked!');
+				} else {
+					trace('Category "$name" is already locked!');
+				}
+			} else {
+				trace('Category "$name" doesn\'t exist!');
+			}
+		});
+
 		Lua_helper.add_callback(lua, "getColorFromHex", function(color:String) {
 			if(!color.startsWith('0x')) color = '0xff' + color;
 			return Std.parseInt(color);
@@ -1558,7 +1597,7 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "restartSong", function(?skipTransition:Bool = false) {
 			PlayState.instance.persistentUpdate = false;
-			PauseSubState.restartSong(skipTransition);
+			PauseSubState.restartSongFromInstance(skipTransition);
 			return true;
 		});
 		Lua_helper.add_callback(lua, "exitSong", function(?skipTransition:Bool = false) {
@@ -1763,8 +1802,9 @@ class FunkinLua {
 		});
 
 		Lua_helper.add_callback(lua, "makeGraphic", function(obj:String, width:Int, height:Int, color:String) {
-			var colorNum:Int = Std.parseInt(color);
+			var colorNum:Dynamic = Std.parseInt(color);
 			if(!color.startsWith('0x')) colorNum = Std.parseInt('0xff' + color);
+			if(color.startsWith('FlxColor.'))colorNum = color;
 
 			var spr:FlxSprite = PlayState.instance.getLuaObject(obj,false);
 			if(spr!=null) {
@@ -1777,6 +1817,7 @@ class FunkinLua {
 				object.makeGraphic(width, height, colorNum);
 			}
 		});
+		
 		Lua_helper.add_callback(lua, "addAnimationByPrefix", function(obj:String, name:String, prefix:String, framerate:Int = 24, loop:Bool = true) {
 			if(PlayState.instance.getLuaObject(obj,false)!=null) {
 				var cock:FlxSprite = PlayState.instance.getLuaObject(obj,false);
@@ -2015,10 +2056,15 @@ class FunkinLua {
 		});
 
 		Lua_helper.add_callback(lua, "setHealthBarColors", function(leftHex:String, rightHex:String) {
-			var left:FlxColor = Std.parseInt(leftHex);
-			if(!leftHex.startsWith('0x')) left = Std.parseInt('0xff' + leftHex);
-			var right:FlxColor = Std.parseInt(rightHex);
-			if(!rightHex.startsWith('0x')) right = Std.parseInt('0xff' + rightHex);
+			var left = Std.parseInt('0xFF' + leftHex);
+			var right = Std.parseInt('0xFF' + rightHex);
+
+			if (leftHex == null || leftHex == '') {
+				left = FlxColor.fromRGB(PlayState.instance.dad.healthColorArray[0], PlayState.instance.dad.healthColorArray[1], PlayState.instance.dad.healthColorArray[2]);
+			}		
+			if (rightHex == null || rightHex == '') {
+				right = FlxColor.fromRGB(PlayState.instance.boyfriend.healthColorArray[0], PlayState.instance.boyfriend.healthColorArray[1], PlayState.instance.boyfriend.healthColorArray[2]);
+			}
 
 			PlayState.instance.healthBar.createFilledBar(left, right);
 			PlayState.instance.healthBar.updateBar();

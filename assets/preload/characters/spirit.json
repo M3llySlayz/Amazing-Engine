@@ -1,62 +1,73 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				-218,
 				-280
 			],
-			"loop": false,
-			"anim": "idle",
 			"fps": 24,
-			"name": "idle spirit_",
-			"indices": []
+			"anim": "idle",
+			"image": "characters/spirit",
+			"indices": [],
+			"name": "idle spirit_"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-200,
 				-280
 			],
-			"loop": false,
-			"anim": "singLEFT",
 			"fps": 24,
-			"name": "left_",
-			"indices": []
+			"anim": "singLEFT",
+			"image": "characters/spirit",
+			"indices": [],
+			"name": "left_"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				170,
 				110
 			],
-			"loop": false,
-			"anim": "singDOWN",
 			"fps": 24,
-			"name": "spirit down_",
-			"indices": []
+			"anim": "singDOWN",
+			"image": "characters/spirit",
+			"indices": [],
+			"name": "spirit down_"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-220,
 				-280
 			],
-			"loop": false,
-			"anim": "singRIGHT",
 			"fps": 24,
-			"name": "right_",
-			"indices": []
+			"anim": "singRIGHT",
+			"image": "characters/spirit",
+			"indices": [],
+			"name": "right_"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-220,
 				-240
 			],
-			"loop": false,
-			"anim": "singUP",
 			"fps": 24,
-			"name": "up_",
-			"indices": []
+			"anim": "singUP",
+			"image": "characters/spirit",
+			"indices": [],
+			"name": "up_"
 		}
 	],
 	"no_antialiasing": true,
+	"gameover_properties": [
+		"bf-dead",
+		"fnf_loss_sfx",
+		"gameOver",
+		"gameOverEnd"
+	],
 	"image": "characters/spirit",
 	"position": [
 		-150,
@@ -70,8 +81,8 @@
 		110
 	],
 	"camera_position": [
-		0,
-		0
+		220,
+		360
 	],
 	"sing_duration": 4,
 	"scale": 6

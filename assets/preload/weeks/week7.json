@@ -42,6 +42,7 @@
 		113,
 		253
 	],
+	"difficulties": "Easy, Normal, Hard, Expert",
 	"hideStoryMode": false,
 	"weekBefore": "week6",
 	"startUnlocked": true

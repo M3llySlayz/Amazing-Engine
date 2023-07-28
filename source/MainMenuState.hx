@@ -1,7 +1,7 @@
 package;
 
 import flixel.util.FlxTimer;
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flixel.FlxG;
@@ -16,6 +16,7 @@ import flixel.text.FlxText;
 import flixel.math.FlxMath;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import gamejolt.GJClient;
 import flixel.util.FlxColor;
 import lime.app.Application;
 import Achievements;
@@ -26,10 +27,11 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var amazingEngineVersion:String = '0.3'; //This is also used for Discord RPC
+	public static var amazingEngineVersion:String = '0.4'; //This is also used for Discord RPC
+	public static var compileType:String = '';
 	public static var curSelected:Int = 0;
 	public static var launchChance:Dynamic = null;
-	public static var wasPaused:Bool = false;
+	//public static var wasPaused:Bool = false;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -57,9 +59,21 @@ class MainMenuState extends MusicBeatState
 		#end
 		WeekData.loadTheFirstEnabledMod();
 
-		#if desktop
+		#if windows
+		compileType = 'Windows';
+		#end
+
+		#if mac
+		compileType = 'Mac';
+		#end
+
+		#if linux
+		compileType = 'Linux';
+		#end
+
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In the Main Menu", "Being a little indecisive", null, false, null, 'icon');
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
@@ -113,7 +127,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(100, (i * 140)  + offset);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -121,7 +135,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			if (ClientPrefs.mainMenuPos == 'Center') menuItem.screenCenter(X);	
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -161,6 +175,11 @@ class MainMenuState extends MusicBeatState
 			if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's a friday night. WEEEEEEEEEEEEEEEEEE
 				Achievements.achievementsMap.set(Achievements.achievementsStuff[achieveID][2], true);
 				giveAchievement();
+				/* I'll leave this here so you can add a trophie with the "friday_night_play" condition, only if you want ofc */
+
+			#if GAMEJOLT_ALLOWED
+			// GJClient.trophieAdd("Your Trophie ID here");
+			#end
 				ClientPrefs.saveSettings();
 			}
 		}
@@ -207,7 +226,7 @@ class MainMenuState extends MusicBeatState
 	// Unlocks "Freaky on a Friday Night" achievement
 	function giveAchievement() {
 		add(new AchievementObject('friday_night_play', camAchievement));
-		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+		SoundEffects.playSFX('scroll', false);
 		trace('Giving achievement "friday_night_play"');
 	}
 	#end
@@ -227,26 +246,31 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+			if (FlxG.mouse.wheel != 0)
+				changeItem(-FlxG.mouse.wheel);
+
 			if (controls.UI_UP_P)
 			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				SoundEffects.playSFX('scroll', false);
 				changeItem(-1);
 			}
 
 			if (controls.UI_DOWN_P)
 			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				//FlxG.sound.play(Paths.sound('scrollMenu'));
+				SoundEffects.playSFX('scroll', false);
 				changeItem(1);
 			}
 
-			if (controls.BACK)
+			if (controls.BACK || FlxG.mouse.justPressedRight)
 			{
 				selectedSomethin = true;
-				FlxG.sound.play(Paths.sound('cancelMenu'));
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('cancel', false);
 				MusicBeatState.switchState(new TitleState());
 			}
 
-			if (controls.ACCEPT)
+			if (controls.ACCEPT || FlxG.mouse.justPressed)
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
@@ -255,11 +279,8 @@ class MainMenuState extends MusicBeatState
 				else
 				{
 					selectedSomethin = true;
-					FlxG.sound.play(Paths.sound('confirmMenu'));
-					FlxG.mouse.visible = false;
-
+					SoundEffects.playSFX('confirm', false);
 					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
-
 					menuItems.forEach(function(spr:FlxSprite)
 					{
 						if (curSelected != spr.ID)
@@ -274,16 +295,24 @@ class MainMenuState extends MusicBeatState
 						}
 						else
 						{
-							FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+							if (optionShit[curSelected] == 'story_mode') {
+								FlxG.sound.music.fadeIn(1, 0.75, 0);
+								if(FreeplayState.vocals != null) FreeplayState.vocals.fadeIn(1.25, 0.75, 0);
+							}
+							FlxFlicker.flicker(spr, 1, 0.05, false, false, function(flick:FlxFlicker)
 							{
 								var daChoice:String = optionShit[curSelected];
 
 								switch (daChoice)
 								{
 									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
+										if (ClientPrefs.newStoryMenu)
+											MusicBeatState.switchState(new AmazingStoryMenuState());
+										else
+											MusicBeatState.switchState(new StoryMenuState());
+										
 									case 'freeplay':
-										MusicBeatState.switchState(new FreeplayState());
+										MusicBeatState.switchState(new FreeplayCategoryState());
 									#if MODS_ALLOWED
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
@@ -313,13 +342,14 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.screenCenter(X);
+			if (ClientPrefs.mainMenuPos == 'Center') spr.screenCenter(X);
 		});
 	}
 
 	function changeItem(huh:Int = 0)
 	{
 		curSelected += huh;
+		if (huh != 0) SoundEffects.playSFX('scroll', false);
 
 		if (curSelected >= menuItems.length)
 			curSelected = 0;
@@ -330,7 +360,6 @@ class MainMenuState extends MusicBeatState
 		{
 			spr.animation.play('idle');
 			spr.updateHitbox();
-
 			if (spr.ID == curSelected)
 			{
 				spr.animation.play('selected');

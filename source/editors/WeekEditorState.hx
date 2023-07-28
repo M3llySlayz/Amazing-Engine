@@ -1,6 +1,6 @@
 package editors;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flixel.FlxG;
@@ -153,7 +153,7 @@ class WeekEditorState extends MusicBeatState
 		});
 		freeplayButton.screenCenter(X);
 		add(freeplayButton);
-	
+
 		var saveWeekButton:FlxButton = new FlxButton(0, 650, "Save Week", function() {
 			saveWeek(weekFile);
 		});
@@ -369,9 +369,9 @@ class WeekEditorState extends MusicBeatState
 		}
 		recalculateStuffPosition();
 
-		#if desktop
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Week Editor", "Editting: " + weekFileName);
+		DiscordClient.changePresence("In the Week Editor", "Editting: " + weekFileName, null, false, null, 'storyeditor');
 		#end
 	}
 	
@@ -451,7 +451,7 @@ class WeekEditorState extends MusicBeatState
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 			}
 		}
 
@@ -649,25 +649,25 @@ class WeekEditorFreeplayState extends MusicBeatState
 		addFreeplayUI();
 		add(UI_box);
 
-		var blackBlack:FlxSprite = new FlxSprite(0, 670).makeGraphic(FlxG.width, 50, FlxColor.BLACK);
+		var blackBlack:FlxSprite = new FlxSprite(0, 630).makeGraphic(FlxG.width, 50, FlxColor.BLACK);
 		blackBlack.alpha = 0.6;
 		add(blackBlack);
 
-		var loadWeekButton:FlxButton = new FlxButton(0, 685, "Load Week", function() {
+		var loadWeekButton:FlxButton = new FlxButton(0, 650, "Load Week", function() {
 			WeekEditorState.loadWeek();
 		});
 		loadWeekButton.screenCenter(X);
 		loadWeekButton.x -= 120;
 		add(loadWeekButton);
 		
-		var storyModeButton:FlxButton = new FlxButton(0, 685, "Story Mode", function() {
+		var storyModeButton:FlxButton = new FlxButton(0, 650, "Story Mode", function() {
 			MusicBeatState.switchState(new WeekEditorState(weekFile));
 			
 		});
 		storyModeButton.screenCenter(X);
 		add(storyModeButton);
 	
-		var saveWeekButton:FlxButton = new FlxButton(0, 685, "Save Week", function() {
+		var saveWeekButton:FlxButton = new FlxButton(0, 650, "Save Week", function() {
 			WeekEditorState.saveWeek(weekFile);
 		});
 		saveWeekButton.screenCenter(X);
@@ -752,7 +752,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 	}
 
 	function changeSelection(change:Int = 0) {
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 
 		curSelected += change;
 
@@ -814,7 +814,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				FlxG.sound.playMusic(Paths.music(ClientPrefs.mainSong));
 			}
 
 			if(controls.UI_UP_P) changeSelection(-1);

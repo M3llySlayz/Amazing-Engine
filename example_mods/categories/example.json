@@ -1,0 +1,13 @@
+{
+	"category": "example",
+	"name": "Example Category",
+	"songs": [
+		["Song name", "character", "Easy, Normal, Hard"]
+	],
+	"songColors": [
+		[0, 255, 255]
+	],
+	"color": [0, 255, 255],
+	"startLocked": false,
+	"hiddenWhenLocked": false
+}

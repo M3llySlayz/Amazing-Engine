@@ -1,0 +1,13 @@
+{
+	"category": "maroon",
+	"name": "maroon",
+	"songs": [
+		["maroon", "shaggy", "Hard"]
+	],
+	"songColors": [
+		[155, 0, 0]
+	],
+	"color": [155, 0, 0],
+	"startLocked": false,
+	"hiddenWhenLocked": false
+}

@@ -1,6 +1,6 @@
 package;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
@@ -39,9 +39,9 @@ class CreditsState extends MusicBeatState
 
 	override function create()
 	{
-		#if desktop
+		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In the Credits", "Checking out the cool devs", null, false, null, 'icon');
 		#end
 
 		persistentUpdate = true;
@@ -82,8 +82,16 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Amazing Engine'],
-			['M3llySlayz',			'melly',			'Lead Programmer, Musician, and Artist',						'https://youtube.com/@M3llySlayz',		'BE0101'],
-			['Irshaad Ali',			'irshaad',			'Programmer, Made Alt Splitscroll',								'',										'0079C7'],
+			['M3llySlayz',			'melly',			'Lead Programmer, Musician, and Artist',						'https://youtube.com/@M3llySlayz',		'BE0101'], //The man behind the slau- I mean Engine.. Engine, yeah. //also kelly lmao
+			['Irshaad Ali',			'Irshaad',			'Programmer, Made Splitscroll and Swapscroll\nIrshaad\'s Note:\n I\'m the person who gives Melly hell here lmao.\n(Also apparently my icon is the only icon with a capital letter in it. Huh.)',				'https://www.youtube.com/channel/UCwJQYZunvqdDTVbgi9mA7fg',			'0079C7'], //so cool.
+			['SomeGuyWhoUhhhh', 	'sgwu',				'Programmer, Spearheaded Freeplay Changes, Errorchecked Story Mode,\nFreeplay, Chart Editor, In-game, and its Pause Screen,\nand Made the Chart Editor Substate menu.',						'https://gamejolt.com/@SomeGuyWhoLikesFNF',							'9900FF'],//Not Just Some Guy. He good guy :D
+			['JB444m',				'jb',				'Artist, Convinced Melly to add Extra Keys (it was painful)', 	'https://youtube.com/@JB444m',			'FFAA00'],// The guy who's failing to convince melly about multichar and also making potato bans
+			['Discord',				'discord',			"The Discord server for AE lol",		'https://discord.gg/KjeeBQ3fh3',			'7289DA'], //join now or else nothing happens
+			[''],
+			['Amazing Engine Contributors'],
+			['NexIsDumb',			'nothing',			'Made Custom Options Code',										'https://github.com/ShadowMario/FNF-PsychEngine/pull/12307',		'AAAAAA'], //not dum
+			['TheWorldMachinima',	'nothing',			'Made Custom Achievements Code',								'https://github.com/ShadowMario/FNF-PsychEngine/pull/11651',		'AAAAAA'],
+			['RodneyAnImaginativePerson', 	'nothing',	'Made Opponent Play Code',											'https://github.com/ShadowMario/FNF-PsychEngine/pull/11805',		'AAAAAA'],
 			[''],
 			['Extra Keys'],
 			['tposejank', 			'tposejank',		'Actitud Positiva',			 									'https://www.youtube.com/channel/UCNdhmFe3BXu-Ff2DZ4loYvQ', 		'B9AF27'],	//mensajes subliminales
@@ -94,10 +102,10 @@ class CreditsState extends MusicBeatState
 			['RiverOaken',			'river',			'Main Artist/Animator of Psych Engine',							'https://twitter.com/RiverOaken',		'B42F71'],
 			['shubs',				'shubs',			'Additional Programmer of Psych Engine',						'https://twitter.com/yoshubs',			'5E99DF'],
 			[''],
-			['Former Engine Members'],
+			['Former Psych Engine Members'],
 			['bb-panzu',			'bb',				'Ex-Programmer of Psych Engine',								'https://twitter.com/bbsub3',			'3E813A'],
 			[''],
-			['Engine Contributors'],
+			['Psych Engine Contributors'],
 			['iFlicky',				'flicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',		'https://twitter.com/flicky_i',			'9E29CF'],
 			['SqirraRNG',			'sqirra',			'Crash Handler and Base code for\nChart Editor\'s Waveform',	'https://twitter.com/gedehari',			'E1843A'],
 			['EliteMasterEric',		'mastereric',		'Runtime Shaders support',										'https://twitter.com/EliteMasterEric',	'FFBD40'],
@@ -159,7 +167,7 @@ class CreditsState extends MusicBeatState
 		descText = new FlxText(50, FlxG.height + offsetThing - 25, 1180, "", 32);
 		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER/*, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK*/);
 		descText.scrollFactor.set();
-		//descText.borderSize = 2.4;
+		descText.borderSize = 1;
 		descBox.sprTracker = descText;
 		add(descText);
 
@@ -173,8 +181,9 @@ class CreditsState extends MusicBeatState
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music.volume < 0.7)
-		{
+		descText.screenCenter(X);
+		descBox.screenCenter(X);
+		if (FlxG.sound.music.volume < 0.7) {
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 
@@ -199,6 +208,11 @@ class CreditsState extends MusicBeatState
 					holdTime = 0;
 				}
 
+				if (FlxG.mouse.wheel != 0)
+				{
+					changeSelection(-FlxG.mouse.wheel);
+				}
+
 				if(controls.UI_DOWN || controls.UI_UP)
 				{
 					var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
@@ -212,16 +226,22 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
+			if(controls.ACCEPT || FlxG.mouse.justPressed && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
 				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
 			}
-			if (controls.BACK)
+			if (controls.BACK || FlxG.mouse.justPressedRight)
 			{
 				if(colorTween != null) {
 					colorTween.cancel();
 				}
-				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.switchState(new MainMenuState());
+				//FlxG.sound.play(Paths.sound('cancelMenu'));
+				SoundEffects.playSFX('cancel', false);
+				if (ClientPrefs.luaMenu){
+					PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+					LoadingState.loadAndSwitchState(new PlayState());
+				} else {
+					MusicBeatState.switchState(new MainMenuState());
+				}
 				quitting = true;
 			}
 		}
@@ -249,7 +269,8 @@ class CreditsState extends MusicBeatState
 	var moveTween:FlxTween = null;
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		//FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		SoundEffects.playSFX('scroll', false);
 		do {
 			curSelected += change;
 			if (curSelected < 0)

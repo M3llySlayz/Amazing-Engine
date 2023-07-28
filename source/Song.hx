@@ -26,12 +26,18 @@ typedef SwagSong =
 	var gfVersion:String;
 	var stage:String;
 
-	var mania:Null<Int>;
-
-
 	var arrowSkin:String;
 	var splashSkin:String;
 	var validScore:Bool;
+	var songInstVolume:Float;
+
+	var strumlines:Null<Int>;
+	var mania:Null<Int>;
+
+	var healthdrain:Float;
+	var healthdrainKill:Bool;
+
+	var charSelectSkip:Bool;
 }
 
 class Song
@@ -44,10 +50,18 @@ class Song
 	public var arrowSkin:String;
 	public var splashSkin:String;
 	public var speed:Float = 1;
+	public var healthdrain:Float = 0;
 	public var stage:String;
+	public var healthdrainKill:Bool = false;
+	public var characterTrails:Bool = false;
+	public var bfTrails:Bool = false;
+
 	public var player1:String = 'bf';
 	public var player2:String = 'dad';
 	public var gfVersion:String = 'gf';
+	public var songInstVolume:Float = 1;
+
+	public var charSelectSkip:Bool = false;
 
 	private static function onLoadJson(songJson:Dynamic) // Convert old charts to newest format
 	{
@@ -81,21 +95,17 @@ class Song
 			}
 		}
 
-		if (songJson.mania == null && ClientPrefs.convertEK) //yall better not replace this
+		if (songJson.mania == null)
         {
-			/*var highestMania:Int = -1;
-			for (i in 0...songJson.notes.length)
-			{
-				var notes:Array<Dynamic> = songJson.notes[i].sectionNotes;
-				if (notes[1] > -1 && notes[1] > highestMania)
-				{
-					highestMania = notes[1];
-				}
-			}*/
-
-            songJson.mania = Note.defaultMania;
+			songJson.mania = Note.defaultMania;
 			trace("Song mania value is NULL, set to " + Note.defaultMania);
         }
+
+		if (songJson.strumlines == null || (songJson.strumlines < 2 && songJson.strumlines > 6))
+		{
+			songJson.strumlines = 2;
+			trace("Song strumlines value is NULL, set to 2");
+		}
 	}
 
 	public function new(song, notes, bpm)

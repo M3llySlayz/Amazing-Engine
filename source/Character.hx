@@ -8,6 +8,8 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxSort;
+import flixel.graphics.frames.FlxFramesCollection;
+import flixel.animation.FlxAnimationController;
 import Section.SwagSection;
 #if MODS_ALLOWED
 import sys.io.File;
@@ -33,8 +35,11 @@ typedef CharacterFile = {
 	var flip_x:Bool;
 	var no_antialiasing:Bool;
 	var healthbar_colors:Array<Int>;
-}
 
+	var gameover_properties:Array<String>;
+
+	//var noteSkin:String; //MWAHAHAHAHA
+}
 typedef AnimArray = {
 	var anim:String;
 	var name:String;
@@ -42,12 +47,22 @@ typedef AnimArray = {
 	var loop:Bool;
 	var indices:Array<Int>;
 	var offsets:Array<Int>;
+	var image:String;
 }
 
 class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
+
+	// For swapping out huge sheets
+	public var framesList:Map<String, FlxFramesCollection>; // Image, Frames
+	public var imageNames:Map<String, String>; // Anim Name, Image
+	public var animStates:Map<String, FlxAnimationController>; // Image, Anim Controller
+	public var curFrames:String; // Current image name
+	public static var tempAnimState:FlxAnimationController; // Just so that the real one won't be cleared (It crashes if it's null)
+
+	public var spriteType:String;
 
 	public var isPlayer:Bool = false;
 	public var curCharacter:String = DEFAULT_CHARACTER;
@@ -71,6 +86,12 @@ class Character extends FlxSprite
 
 	public var hasMissAnimations:Bool = false;
 
+	//Used for Game Over Properties
+	public var deathChar:String = 'bf-dead';
+	public var deathSound:String = 'fnf_loss_sfx';
+	public var deathConfirm:String = 'gameOverEnd';
+	public var deathMusic:String = 'gameOver';
+
 	//Used on Character Editor
 	public var imageFile:String = '';
 	public var jsonScale:Float = 1;
@@ -78,16 +99,28 @@ class Character extends FlxSprite
 	public var originalFlipX:Bool = false;
 	public var healthColorArray:Array<Int> = [255, 0, 0];
 
+	//public var noteSkin:String = ''; //soon
+
 	public static var DEFAULT_CHARACTER:String = 'bf'; //In case a character is missing, it will use BF on its place
-	public function new(x:Float, y:Float, ?character:String = 'bf', ?isPlayer:Bool = false)
+	public function new(x:Float, y:Float, ?character:String = 'bf', ?isPlayer:Bool = false, ?library:String)
 	{
 		super(x, y);
 
 		#if (haxe >= "4.0.0")
 		animOffsets = new Map();
+		framesList = new Map();
+		imageNames = new Map();
+		animStates = new Map();
 		#else
 		animOffsets = new Map<String, Array<Dynamic>>();
+		framesList = new Map<String, FlxFramesCollection>();
+		imageNames = new Map<String, String>();
+		animStates = new Map<String, FlxAnimationController>();
 		#end
+		if (tempAnimState != null) {
+			tempAnimState.destroy();
+		}
+		tempAnimState = new FlxAnimationController(this);
 		curCharacter = character;
 		this.isPlayer = isPlayer;
 		antialiasing = ClientPrefs.globalAntialiasing;
@@ -127,14 +160,14 @@ class Character extends FlxSprite
 				//texture
 				#if MODS_ALLOWED
 				var modTxtToFind:String = Paths.modsTxt(json.image);
-				var txtToFind:String = Paths.getPath('images/' + json.image + '.txt', TEXT);
+				var txtToFind:String = Paths.getPath('images/' + json.image + '.txt', TEXT, library);
 				
 				//var modTextureToFind:String = Paths.modFolders("images/"+json.image);
 				//var textureToFind:String = Paths.getPath('images/' + json.image, new AssetType();
 				
 				if (FileSystem.exists(modTxtToFind) || FileSystem.exists(txtToFind) || Assets.exists(txtToFind))
 				#else
-				if (Assets.exists(Paths.getPath('images/' + json.image + '.txt', TEXT)))
+				if (Assets.exists(Paths.getPath('images/' + json.image + '.txt', TEXT, library)))
 				#end
 				{
 					spriteType = "packer";
@@ -149,22 +182,58 @@ class Character extends FlxSprite
 				
 				if (FileSystem.exists(modAnimToFind) || FileSystem.exists(animToFind) || Assets.exists(animToFind))
 				#else
-				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json', TEXT)))
+				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json', TEXT, library)))
 				#end
 				{
 					spriteType = "texture";
 				}
 
-				switch (spriteType){
-					
+				switch (spriteType) {
 					case "packer":
-						frames = Paths.getPackerAtlas(json.image);
+						frames = Paths.getPackerAtlas(json.image, library);
 					
+						curFrames = json.image;
+						framesList.set(json.image, frames);
+						animStates.set(json.image, animation);
+						for (anim in json.animations) {
+							if (anim.image != null && anim.image.length > 0 && !framesList.exists(anim.image)) {
+								framesList.set(anim.image, Paths.getPackerAtlas(anim.image));
+								animStates.set(anim.image, new FlxAnimationController(this));
+							}
+							else if (anim.image == null || anim.image.length == 0)
+								anim.image = json.image;
+							imageNames.set(anim.anim, anim.image);
+						}
 					case "sparrow":
-						frames = Paths.getSparrowAtlas(json.image);
+						frames = Paths.getSparrowAtlas(json.image, library);
 					
+						curFrames = json.image;
+						framesList.set(json.image, frames);
+						animStates.set(json.image, animation);
+						for (anim in json.animations) {
+							if (anim.image != null && anim.image.length > 0 && !framesList.exists(anim.image)) {
+								framesList.set(anim.image, Paths.getSparrowAtlas(anim.image));
+								animStates.set(anim.image, new FlxAnimationController(this));
+							}
+							else if (anim.image == null || anim.image.length == 0)
+								anim.image = json.image;
+							imageNames.set(anim.anim, anim.image);
+						}
 					case "texture":
-						frames = AtlasFrameMaker.construct(json.image);
+						AtlasFrameMaker.construct(json.image); //too busy to bring AtlasFrameMaker changes to patch-3.
+
+						curFrames = json.image;
+						framesList.set(json.image, frames);
+						animStates.set(json.image, animation);
+						for (anim in json.animations) {
+							if (anim.image != null && anim.image.length > 0 && !framesList.exists(anim.image)) {
+								framesList.set(anim.image, AtlasFrameMaker.construct(anim.image));
+								animStates.set(anim.image, new FlxAnimationController(this));
+							}
+							else if (anim.image == null || anim.image.length == 0)
+								anim.image = json.image;
+							imageNames.set(anim.anim, anim.image);
+						}
 				}
 				imageFile = json.image;
 
@@ -185,6 +254,14 @@ class Character extends FlxSprite
 					noAntialiasing = true;
 				}
 
+				if (json.gameover_properties != null)
+				{
+					deathChar = json.gameover_properties[0];
+					deathSound = json.gameover_properties[1];
+					deathMusic = json.gameover_properties[2];
+					deathConfirm = json.gameover_properties[3];
+				}
+
 				if(json.healthbar_colors != null && json.healthbar_colors.length > 2)
 					healthColorArray = json.healthbar_colors;
 
@@ -199,6 +276,14 @@ class Character extends FlxSprite
 						var animFps:Int = anim.fps;
 						var animLoop:Bool = !!anim.loop; //Bruh
 						var animIndices:Array<Int> = anim.indices;
+
+						if (anim.image != curFrames) {
+							animation = tempAnimState;
+							frames = framesList.get(anim.image);
+							animation = animStates.get(anim.image);
+							curFrames = anim.image;
+						}
+
 						if(animIndices != null && animIndices.length > 0) {
 							animation.addByIndices(animAnim, animName, animIndices, "", animFps, animLoop);
 						} else {
@@ -212,6 +297,10 @@ class Character extends FlxSprite
 				} else {
 					quickAnimAdd('idle', 'BF idle dance');
 				}
+				animation = tempAnimState;
+				frames = framesList.get(json.image);
+				animation = animStates.get(json.image);
+				curFrames = json.image;
 				//trace('Loaded file to character ' + curCharacter);
 		}
 		originalFlipX = flipX;
@@ -256,60 +345,78 @@ class Character extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		if(!debugMode && animation.curAnim != null)
-		{
-			if(heyTimer > 0)
+		try {
+			if(!debugMode && animation.curAnim != null)
 			{
-				heyTimer -= elapsed * PlayState.instance.playbackRate;
-				if(heyTimer <= 0)
+				if(heyTimer > 0)
 				{
-					if(specialAnim && animation.curAnim.name == 'hey' || animation.curAnim.name == 'cheer')
+					heyTimer -= elapsed;
+					if(heyTimer <= 0)
 					{
-						specialAnim = false;
+						if(specialAnim && animation.curAnim.name == 'hey' || animation.curAnim.name == 'cheer')
+						{
+							specialAnim = false;
+							dance();
+						}
+						heyTimer = 0;
+					}
+				} else if(specialAnim && animation.curAnim.finished)
+				{
+					specialAnim = false;
+					dance();
+				}
+				
+				switch(curCharacter)
+				{
+					case 'pico-speaker':
+						if(animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
+						{
+							var noteData:Int = 1;
+							if(animationNotes[0][1] > 2) noteData = 3;
+
+							noteData += FlxG.random.int(0, 1);
+							playAnim('shoot' + noteData, true);
+							animationNotes.shift();
+						}
+						if(animation.curAnim.finished) playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
+				}
+
+				if (!isPlayer)
+				{
+					if (!specialAnim) {
+						if (!PlayState.instance.playingAsOpponent || curCharacter.startsWith('gf')) {
+							if (animation.curAnim.name.startsWith('sing'))
+							{
+								holdTimer += elapsed;
+							}
+	
+							if (holdTimer >= Conductor.stepCrochet * (0.001 / PlayState.instance.playbackRate) * singDuration)
+							{
+								dance();
+								holdTimer = 0;
+							}
+						} else {
+							if (animation.curAnim.name.startsWith('sing'))
+							{
+								holdTimer += elapsed;
+							}
+							else
+								holdTimer = 0;
+	
+							if (animation.curAnim.name.endsWith('miss') && animation.curAnim.finished && !debugMode)
+								dance();
+						}
+					} else if (animation.curAnim.finished) { // For special anim
 						dance();
 					}
-					heyTimer = 0;
 				}
-			} else if(specialAnim && animation.curAnim.finished)
-			{
-				specialAnim = false;
-				dance();
-			}
-			
-			switch(curCharacter)
-			{
-				case 'pico-speaker':
-					if(animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
-					{
-						var noteData:Int = 1;
-						if(animationNotes[0][1] > 2) noteData = 3;
 
-						noteData += FlxG.random.int(0, 1);
-						playAnim('shoot' + noteData, true);
-						animationNotes.shift();
-					}
-					if(animation.curAnim.finished) playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
-			}
-
-			if (!isPlayer)
-			{
-				if (animation.curAnim.name.startsWith('sing'))
+				if(animation.curAnim.finished && animation.getByName(animation.curAnim.name + '-loop') != null)
 				{
-					holdTimer += elapsed;
-				}
-
-				if (holdTimer >= Conductor.stepCrochet * (0.0011 / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1)) * singDuration)
-				{
-					dance();
-					holdTimer = 0;
+					playAnim(animation.curAnim.name + '-loop');
 				}
 			}
-
-			if(animation.curAnim.finished && animation.getByName(animation.curAnim.name + '-loop') != null)
-			{
-				playAnim(animation.curAnim.name + '-loop');
-			}
-		}
+		} catch (e:Any) {}
 		super.update(elapsed);
 	}
 
@@ -320,7 +427,7 @@ class Character extends FlxSprite
 	 */
 	public function dance()
 	{
-		if (!debugMode && !skipDance && !specialAnim)
+		if (!debugMode && !skipDance)
 		{
 			if(danceIdle)
 			{
@@ -332,13 +439,21 @@ class Character extends FlxSprite
 					playAnim('danceLeft' + idleSuffix);
 			}
 			else if(animation.getByName('idle' + idleSuffix) != null) {
-					playAnim('idle' + idleSuffix);
+				playAnim('idle' + idleSuffix);
 			}
 		}
 	}
 
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{
+		var prevFrames = imageNames.get(AnimName);
+		if (prevFrames != curFrames) {
+			animation = tempAnimState;
+			frames = framesList.get(prevFrames);
+			animation = animStates.get(prevFrames);
+			curFrames = prevFrames;
+		}
+
 		specialAnim = false;
 		animation.play(AnimName, Force, Reversed, Frame);
 

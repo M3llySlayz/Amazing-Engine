@@ -1,6 +1,6 @@
 package options;
 
-#if desktop
+#if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
@@ -29,29 +29,51 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Gameplay', 'Controls', 'Graphics', 'Visuals and UI', 'Adjust Delay and Combo', 'Note Colors', 'Music'];
+	var options:Array<String> = [];
+	var initialOptions:Array<String> = ['Gameplay', 'Visuals', 'Notes', 'Music', 'Other'];
+	var visualOptions:Array<String> = ['Graphics', 'UI', 'Visual Settings'];
+	var gameplayOptions:Array<String> = ['Settings', 'Controls', 'Delay and Combo'];
+	var notesOptions:Array<String> = ['Colors', 'Options'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
+	var manual:FlxSprite;
+	var theCircle:FlxSprite;
+	var changeLogSheet:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
-			case 'Note Colors':
-				openSubState(new options.NotesSubState());
+			case 'Colors':
+				openSubState(new options.notes.NotesSubState());
+			case 'Notes':
+				options = notesOptions;
+				reloadOptions();
 			case 'Controls':
-				openSubState(new options.ControlsSubState());
+				openSubState(new options.gameplay.ControlsSubState());
 			case 'Graphics':
-				openSubState(new options.GraphicsSettingsSubState());
-			case 'Visuals and UI':
-				openSubState(new options.VisualsUISubState());
+				openSubState(new options.visuals.GraphicsSettingsSubState());
+			case 'Visuals':
+				options = visualOptions;
+				reloadOptions();
+			case 'Visual Settings':
+				openSubState(new options.visuals.VisualsSubState());
+			case 'UI':
+				openSubState(new options.visuals.UISubState());
 			case 'Gameplay':
-				openSubState(new options.GameplaySettingsSubState());
-			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+				options = gameplayOptions;
+				reloadOptions();
+			case 'Settings':
+				openSubState(new options.gameplay.GameplaySettingsSubState());
+			case 'Delay and Combo':
+				LoadingState.loadAndSwitchState(new options.gameplay.NoteOffsetState());
 			case 'Dev Stuff':
-				openSubState(new options.DevSettingsSubState());
+				openSubState(new options.dev.DevSettingsSubState());
 			case 'Music':
-				openSubState(new options.MusicSettingsSubState());
+				openSubState(new options.music.MusicSettingsSubState());
+			case 'Options': //note options
+				openSubState(new options.notes.NoteOptionsSubState());
+			case 'Other':
+				openSubState(new options.other.OtherSettingsSubState());
 		}
 	}
 
@@ -59,9 +81,11 @@ class OptionsState extends MusicBeatState
 	var selectorRight:Alphabet;
 
 	override function create() {
-		#if desktop
-		DiscordClient.changePresence("Options Menu", null);
+		#if DISCORD_ALLOWED
+		DiscordClient.changePresence("In the Options Menu", "Changing settings", 'icon', false, null, 'gear');
 		#end
+
+		FlxG.mouse.visible = true;
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
@@ -71,24 +95,17 @@ class OptionsState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		if (ClientPrefs.devMode) options.insert(0, 'Dev Stuff');
-		grpOptions = new FlxTypedGroup<Alphabet>();
-		add(grpOptions);
+		if (ClientPrefs.devMode) initialOptions.insert(0, 'Dev Stuff');
 
-		for (i in 0...options.length)
-		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
-			optionText.screenCenter();
-			optionText.y += (100 * (i - (options.length / 2))) + 50;
-			grpOptions.add(optionText);
-		}
+		options = initialOptions;
 
 		selectorLeft = new Alphabet(0, 0, '>', true);
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true);
 		add(selectorRight);
 
-		changeSelection();
+		reloadOptions();
+		
 		ClientPrefs.saveSettings();
 
 		super.create();
@@ -105,12 +122,21 @@ class OptionsState extends MusicBeatState
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
 		}
+
 		if (controls.UI_DOWN_P) {
 			changeSelection(1);
 		}
 
+		if (FlxG.mouse.wheel != 0) {
+			if (FlxG.mouse.wheel > 0) {
+				changeSelection(-1);
+			} else {
+				changeSelection(1);
+			}
+		}
+
 		if (controls.DEV_BIND_P) {
-			if (ClientPrefs.devMode){
+			if (ClientPrefs.devMode) {
 				options.remove('Dev Stuff');
 				ClientPrefs.devMode = false;
 			} else {
@@ -119,17 +145,23 @@ class OptionsState extends MusicBeatState
 			LoadingState.loadAndSwitchState(new options.OptionsState());
 		}
 
-		if (controls.BACK) {
-			FlxG.sound.play(Paths.sound('cancelMenu'));
-			if (!MainMenuState.wasPaused){
-			MusicBeatState.switchState(new MainMenuState());
+		if (controls.BACK || FlxG.mouse.justPressedRight) {
+			if (options == initialOptions){
+				FlxG.mouse.visible = false;
+				SoundEffects.playSFX('cancel', false);
+				if (ClientPrefs.luaMenu) {
+					PlayState.SONG = Song.loadFromJson('ae-menu', 'ae-menu');
+					LoadingState.loadAndSwitchState(new PlayState());
+				} else {
+					MusicBeatState.switchState(new MainMenuState());
+				}
 			} else {
-			LoadingState.loadAndSwitchState(new PlayState());
-			MainMenuState.wasPaused = false;
+				options = initialOptions;
+				reloadOptions();
 			}
 		}
 
-		if (controls.ACCEPT) {
+		if (controls.ACCEPT || FlxG.mouse.justPressed) {
 			openSelectedSubstate(options[curSelected]);
 		}
 	}
@@ -156,6 +188,22 @@ class OptionsState extends MusicBeatState
 				selectorRight.y = item.y;
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		SoundEffects.playSFX('scroll', false);
+	}
+
+	function reloadOptions() {
+		if (grpOptions != null){
+			remove(grpOptions);
+		}
+		grpOptions = new FlxTypedGroup<Alphabet>();
+		add(grpOptions);
+		for (i in 0...options.length)
+		{
+			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
+			optionText.screenCenter();
+			optionText.y += 75 * (i - (options.length / 2)) + 32;
+			grpOptions.add(optionText);
+		}
+		changeSelection();
 	}
 }

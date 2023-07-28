@@ -15,6 +15,9 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.util.FlxGradient;
 import flixel.FlxState;
+#if GAMEJOLT_ALLOWED
+import gamejolt.GJClient;
+#end
 import flixel.FlxCamera;
 import flixel.FlxBasic;
 
@@ -23,12 +26,14 @@ class MusicBeatState extends FlxUIState
 	private var curSection:Int = 0;
 	private var stepsToDo:Int = 0;
 
+	private var pinged:Bool = false;
+
 	private var curStep:Int = 0;
 	private var curBeat:Int = 0;
 
 	private var curDecStep:Float = 0;
 	private var curDecBeat:Float = 0;
-	private var controls(get, never):Controls;
+	public var controls(get, never):Controls;
 
 	public static var camBeat:FlxCamera;
 
@@ -37,23 +42,31 @@ class MusicBeatState extends FlxUIState
 
 	override function create() {
 		camBeat = FlxG.camera;
+		CoolUtil.daCam = FlxG.camera;
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
 		super.create();
 
 		if(!skip) {
-			openSubState(new CustomFadeTransition(0.7, true));
+			openSubState(new CustomFadeTransition(ClientPrefs.loadSpeed, true));
 		}
 		FlxTransitionableState.skipNextTransOut = false;
 	}
 
 	override function update(elapsed:Float)
 	{
-		//everyStep();
 		var oldStep:Int = curStep;
 
 		updateCurStep();
 		updateBeat();
 
+		#if GAMEJOLT_ALLOWED
+		if (curStep % 16 == 0 && !pinged) {
+			GJClient.pingSession();
+			pinged = true;
+		}
+		else if (curStep % 16 == 7) pinged = false;
+		#end
+		
 		if (oldStep != curStep)
 		{
 			if(curStep > 0)
@@ -123,20 +136,21 @@ class MusicBeatState extends FlxUIState
 
 	public static function switchState(nextState:FlxState) {
 		// Custom made Trans in
+		LoadingScreen.loadingText = "Loading libraries";
 		var curState:Dynamic = FlxG.state;
 		var leState:MusicBeatState = curState;
 		if(!FlxTransitionableState.skipNextTransIn) {
-			leState.openSubState(new CustomFadeTransition(0.6, false));
+			leState.openSubState(new CustomFadeTransition(ClientPrefs.loadSpeed, false));
 			if(nextState == FlxG.state) {
 				CustomFadeTransition.finishCallback = function() {
+					//LoadingScreen.show();
 					FlxG.resetState();
 				};
-				//trace('resetted');
 			} else {
 				CustomFadeTransition.finishCallback = function() {
+					//LoadingScreen.show();
 					FlxG.switchState(nextState);
 				};
-				//trace('changed state');
 			}
 			return;
 		}

@@ -5,6 +5,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
+import flixel.math.FlxRect;
 import flixel.util.FlxColor;
 import flash.display.BitmapData;
 import editors.ChartingState;
@@ -25,13 +26,18 @@ class Note extends FlxSprite
 
 	//Important stuff
 	public static var gfxLetter:Array<String> = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
-												'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
+	'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
 	public static var ammo:Array<Int> = EKData.gun;
 	public static var minMania:Int = 0;
 	public static var maxMania:Int = 17; // key value is this + 1
 
 	public static var scales:Array<Float> = EKData.scales;
 	public static var lessX:Array<Int> = EKData.lessX;
+	public static var lesserX:Array<Int> = EKData.lesserX;
+	public static var moreY:Array<Int> = EKData.moreY;
+	public static var lessScale:Array<Float> = EKData.lessScale;
+	public static var lesserScale:Array<Array<Float>> = EKData.lesserScale;
+	public static var lessSpacing:Array<Float> = EKData.lessSpacing;
 	public static var separator:Array<Int> = EKData.noteSep;
 	public static var xtra:Array<Float> = EKData.offsetX;
 	public static var posRest:Array<Float> = EKData.restPosition;
@@ -120,8 +126,8 @@ class Note extends FlxSprite
 	public var copyAngle:Bool = true;
 	public var copyAlpha:Bool = true;
 
-	public var hitHealth:Float = 0.023;
-	public var missHealth:Float = 0.0475;
+	public var hitHealth:Float = 0.05;
+	public var missHealth:Float = 0.05;
 	public var rating:String = 'unknown';
 	public var ratingMod:Float = 0; //9 = unknown, 0.25 = shit, 0.5 = bad, 0.75 = good, 1 = sick
 	public var ratingDisabled:Bool = false;
@@ -136,15 +142,15 @@ class Note extends FlxSprite
 	public var hitsoundDisabled:Bool = false;
 	public var changeAnim:Bool = true;
 	public var changeColSwap:Bool = true;
-	
+
 	public function resizeByRatio(ratio:Float) //haha funny twitter shit
+	{
+		if(isSustainNote && !animation.curAnim.name.endsWith('tail'))
 		{
-			if(isSustainNote && !animation.curAnim.name.endsWith('tail'))
-			{
-				scale.y *= ratio;
-				updateHitbox();
-			}
+			scale.y *= ratio;
+			updateHitbox();
 		}
+	}
 
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
@@ -195,6 +201,12 @@ class Note extends FlxSprite
 						missHealth = 0.3;
 					}
 					hitCausesMiss = true;
+				case 'Caution Note':
+					reloadNote('CAUTION');
+					colorSwap.hue = 0;
+					colorSwap.saturation = 0;
+					colorSwap.brightness = 0;
+					missHealth = 1;
 				case 'Alt Animation':
 					animSuffix = '-alt';
 				case 'No Animation':
@@ -245,8 +257,6 @@ class Note extends FlxSprite
 			}
 		}
 
-		// trace(prevNote);
-
 		if (isSustainNote && prevNote != null)
 		{
 			alpha = 0.6;
@@ -278,7 +288,7 @@ class Note extends FlxSprite
 
 				if(PlayState.isPixelStage) { ///Y E  A H
 					prevNote.scale.y *= 1.19;
-					prevNote.scale.y *= (6 / height); //Auto adjust note size
+					prevNote.scale.y *= 6 / height; //Auto adjust note size
 				}
 				prevNote.updateHitbox();
 				// prevNote.setGraphicSize();
@@ -304,9 +314,10 @@ class Note extends FlxSprite
 		
 		var skin:String = texture;
 		if(texture.length < 1) {
-			skin = PlayState.SONG.arrowSkin;
 			if(skin == null || skin.length < 1) {
 				skin = 'NOTE_assets';
+			} else {
+				skin = PlayState.SONG.arrowSkin;
 			}
 		}
 
@@ -337,7 +348,7 @@ class Note extends FlxSprite
 				loadGraphic(Paths.image('pixelUI/' + blahblah), true, Math.floor(width), Math.floor(height));
 			}
 			defaultWidth = width;
-			setGraphicSize(Std.int(width * PlayState.daPixelZoom * Note.pixelScales[mania]));
+			setGraphicSize(Std.int(width * PlayState.daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[mania][PlayState.strumlines])));
 			loadPixelNoteAnims();
 			antialiasing = false;
 
@@ -345,13 +356,6 @@ class Note extends FlxSprite
 				offsetX += lastNoteOffsetXForPixelAutoAdjusting;
 				lastNoteOffsetXForPixelAutoAdjusting = (width - 7) * (PlayState.daPixelZoom / 2);
 				offsetX -= lastNoteOffsetXForPixelAutoAdjusting;
-				
-				/*if(animName != null && !animName.endsWith('tail'))
-				{
-					lastScaleY /= lastNoteScaleToo;
-					lastNoteScaleToo = (6 / height);
-					lastScaleY *= lastNoteScaleToo; 
-				}*/
 			}
 		} else {
 			frames = Paths.getSparrowAtlas(blahblah);
@@ -387,9 +391,9 @@ class Note extends FlxSprite
 			ogW = width;
 			ogH = height;
 			if (!isSustainNote)
-				setGraphicSize(Std.int(defaultWidth * scales[mania]));
+				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[mania][PlayState.strumlines])));
 			else
-				setGraphicSize(Std.int(defaultWidth * scales[mania]), Std.int(defaultHeight * scales[0]));
+				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[mania][PlayState.strumlines])), Std.int(defaultHeight * scales[0]));
 			updateHitbox();
 	}
 
@@ -406,50 +410,11 @@ class Note extends FlxSprite
 		}
 	}
 
-	/*public function applyManiaChange()
-	{
-		if (isSustainNote) 
-			scale.y = 1;
-		reloadNote(texture);
-		if (isSustainNote)
-			offsetX = width / 2;
-		if (!isSustainNote)
-		{
-			var animToPlay:String = '';
-			animToPlay = Note.keysShit.get(mania).get('letters')[noteData % Note.ammo[mania]];
-			animation.play(animToPlay);
-		}
-
-		/*if (isSustainNote && prevNote != null) someone please tell me why this wont work
-		{
-			animation.play(Note.keysShit.get(mania).get('letters')[noteData % Note.ammo[mania]] + ' tail');
-			if (prevNote != null && prevNote.isSustainNote)
-			{
-				prevNote.animation.play(Note.keysShit.get(mania).get('letters')[prevNote.noteData % Note.ammo[mania]] + ' hold');
-				prevNote.updateHitbox();
-			}
-		}
-
-		updateHitbox();
-	}*/
-
-
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
 		mania = PlayState.mania;
-
-		/* im so stupid for that
-		if (noteData == 9)
-		{
-			if (animation.curAnim != null)
-				trace(animation.curAnim.name);
-			else trace("te anim is null waaaaaa");
-
-			trace(Note.keysShit.get(mania).get('letters')[noteData]);
-		}
-		*/
 
 		if (mustPress)
 		{
@@ -479,5 +444,15 @@ class Note extends FlxSprite
 			if (alpha > 0.3)
 				alpha = 0.3;
 		}
+	}
+	@:noCompletion
+	override function set_clipRect(rect:FlxRect):FlxRect
+	{
+		clipRect = rect;
+
+		if (frames != null)
+			frame = frames.frames[animation.frameIndex];
+
+		return rect;
 	}
 }
