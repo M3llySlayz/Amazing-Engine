@@ -57,16 +57,16 @@ class NoteOptionsSubState extends BaseOptionsMenu
 			['None', 'Normal', 'Up n\' Down', 'Double Down', 'Alt', 'Double Down Alt']);
 		addOption(option);
 
-		var option:Option = new Option('SwapScroll',
-			'Note Swap?\nOnly Works For 2 Strums!\nMelly\'s gonna die lmao',
+		var option:Option = new Option('SwapScroll:',
+			'Note Swap?\nOnly Works For 2 Strums!',
 			'swapScroll',
 			'string',
 			'None',
 			['None', 'Quarter', 'Half', 'Three Quarter', 'Full', 'Quarter Alt', 'Half Alt', 'Three Quarter Alt']);
 		addOption(option);
 
-		var option:Option = new Option('UnderSwap',
-			"SwapScroll but Reverse\nheheh underswap reference", //ok irshaad -melly
+		var option:Option = new Option('ScrollSwap',
+			"SwapScroll but reverse.",
 			'swapReverse',
 			'bool',
 			false);

@@ -147,19 +147,19 @@ class PauseSubState extends MusicBeatSubstate
 		add(chartingText);
 
 		nowPlaying = new FlxText(20, 640 + 12, 0, 'Now Playing: ???', 32);
-		nowPlaying.x = FlxG.width - nowPlaying.width - 20;
 		nowPlaying.scrollFactor.set();
 		nowPlaying.setFormat(Paths.font("vcr.ttf"), 32);
 		nowPlaying.drawFrame();
 		nowPlaying.updateHitbox();
+		nowPlaying.x = FlxG.width - nowPlaying.width - 140;
 		add(nowPlaying);
 
 		authorText = new FlxText(20, 640 + 32, 0, "By ???", 32);
-		authorText.x = FlxG.width - authorText.width - 20;
 		authorText.scrollFactor.set();
 		authorText.setFormat(Paths.font("vcr.ttf"), 32);
 		authorText.drawFrame();
 		authorText.updateHitbox();
+		authorText.x = FlxG.width - authorText.width - 140;
 		add(authorText);
 
 		quittingTxt = new FlxText(0, 100, 0, "Are you sure?", 32);
