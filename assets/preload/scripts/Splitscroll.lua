@@ -37,7 +37,7 @@ function onCreatePost()
     if swapType == 'None' then
         --do nothing again lol
     else
-        if swapType == 'Quater' then
+        if swapType == 'Quarter' then
             if (swapSwap) then
                 i = mania
                 while i ~= 0 do
@@ -79,7 +79,7 @@ function onCreatePost()
                 end
             end
         end
-        if swapType == 'Three-Quater' then
+        if swapType == 'Three Quarter' then
             if (swapSwap) then
                 i = mania
                 while i ~= 0 do
@@ -107,7 +107,7 @@ function onCreatePost()
                 setPropertyFromGroup('playerStrums', i, 'x', (getPropertyFromGroup('playerStrums', i, 'x') - xDisplacement))
             end
         end
-        if scrollType == 'Quater Alt' then
+        if scrollType == 'Quarter Alt' then
             if (swapSwap) then
                 counter = 0
                 i = mania
@@ -167,7 +167,7 @@ function onCreatePost()
                         end
                     end
                 end
-                if scrollType == 'Three-Quater Alt' then
+                if scrollType == 'Three Quarter Alt' then
                     if (swapSwap) then
                         counter = 0
                         i = mania
