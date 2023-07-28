@@ -4,7 +4,7 @@
 Engine originally used on [VS Astoria](https://gamebanana.com/mods/435389), intended to make Psych Engine easier to modify without source code.
 
 ## Installation:
-You must have [the most up-to-date version of Haxe](https://haxe.org/download/), seriously, stop using 4.1.5, it misses some stuff.
+You must have [Haxe 4.2.5](https://haxe.org/download/), seriously, stop using 4.1.5, it misses some stuff.
 
 Follow a Friday Night Funkin' source code compilation tutorial, after this run `haxelib install hmm` and `haxelib run hmm install` and you should be good.
 
@@ -14,7 +14,7 @@ If you don't want your mod to be able to run .lua scripts, delete the "LUA_ALLOW
 
 If you get an error about StatePointer when using Lua, run `haxelib remove linc_luajit` into Command Prompt/PowerShell, then re-install linc_luajit.
 
-If you want video support on your mod, simply do `haxelib install hxCodec 2.5.1` and `haxelib set hxCodec 2.5.1` on a Command prompt/PowerShell
+If you want video support on your mod, simply do `haxelib install hxCodec` on a Command prompt/PowerShell
 
 Otherwise, you can delete the "VIDEOS_ALLOWED" Line on Project.xml
 
