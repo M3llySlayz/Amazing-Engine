@@ -12,6 +12,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import FreeplayCategory;
+import lime.utils.Assets;
 
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
@@ -148,7 +149,11 @@ class FreeplayCategoryState extends MusicBeatState {
 		if (curSelected > categoriesList.length-1) curSelected = 0;
 
 		if (!selectedSomethin) {
-			categorySpr.loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
+			if (Paths.image('categories/' + categoriesList[curSelected]) != null)
+				categorySpr.loadGraphic(Paths.image('categories/' + categoriesList[curSelected]));
+			else
+				categorySpr.loadGraphic(Paths.image('categories/placeholder'));
+
 			alphabetText.text = categoryNamesList[curSelected];
 			alphabetText.x = FlxG.width / 6;
 			bg.color = categoryColors[curSelected];

@@ -1,6 +1,6 @@
 {
-	"category": "custom",
-	"name": "Custom",
+	"category": "example",
+	"name": "Example Category",
 	"songs": [
 		["Song name", "character", "Easy, Normal, Hard"]
 	],

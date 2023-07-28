@@ -146,7 +146,8 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
 
-		nowPlaying = new FlxText(20, 640 + 16, 0, 'Now Playing: ???', 32);
+		nowPlaying = new FlxText(20, 640 + 12, 0, 'Now Playing: ???', 32);
+		nowPlaying.x = FlxG.width - nowPlaying.width - 20;
 		nowPlaying.scrollFactor.set();
 		nowPlaying.setFormat(Paths.font("vcr.ttf"), 32);
 		nowPlaying.drawFrame();
@@ -154,6 +155,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(nowPlaying);
 
 		authorText = new FlxText(20, 640 + 32, 0, "By ???", 32);
+		authorText.x = FlxG.width - authorText.width - 20;
 		authorText.scrollFactor.set();
 		authorText.setFormat(Paths.font("vcr.ttf"), 32);
 		authorText.drawFrame();
@@ -426,6 +428,7 @@ class PauseSubState extends MusicBeatSubstate
 			FlxTween.tween(levelDifficulty, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			FlxTween.tween(blueballedTxt, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			FlxTween.tween(quittingTxt, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
+			FlxTween.tween(nowPlaying, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			FlxTween.tween(authorText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			if (practiceText.visible) FlxTween.tween(practiceText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
 			if (chartingText.visible) FlxTween.tween(chartingText, {alpha: 0}, daTime, {ease: FlxEase.sineOut});
