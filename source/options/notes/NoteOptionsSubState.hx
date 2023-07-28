@@ -50,13 +50,28 @@ class NoteOptionsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Splitscroll:',
-			'Selects your own personal hell.\nSplits your notes into something fearful.\nEach type is different, and Downscroll affects them as well.', // Enjoy The Hell =] -Irshaad
+			'Only Works For 2 Strums!\nSelects your own personal hell.\nSplits your notes into something fearful.\nEach type is different, and Downscroll affects them as well.', // Enjoy The Hell =] -Irshaad
 			'splitScroll',
 			'string',
 			'None',
 			['None', 'Normal', 'Up n\' Down', 'Double Down', 'Alt', 'Double Down Alt']);
 		addOption(option);
-		
+
+		var option:Option = new Option('SwapScroll',
+			'NoteSwap?\nOnly Works For 2 Strums!\nMelly\'s gonna die lmao',
+			'swapScroll',
+			'string',
+			'None',
+			['None', 'Quater', 'Half', 'Three-Quater', 'Full', 'Quater Alt', 'Half Alt', 'Three-Quater Alt']);
+		addOption(option);
+
+		var option:Option = new Option('UnderSwap',
+			"SwapScroll but Reverse\nheheh underswap reference",
+			'swapReverse',
+			'bool',
+			false);
+		addOption(option);
+
 		var option:Option = new Option('Note Glow',
 			"If checked, when it's almost time to press a note, it'll glow.\nWorks like FPS Plus, but more efficient.",
 			'noteGlow',

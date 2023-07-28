@@ -46,6 +46,8 @@ class ClientPrefs {
 	public static var checkForUpdates:Bool = true;
 	public static var antimash:Bool = true;
 	public static var splitScroll:String = 'None';
+	public static var swapScroll:String = 'None';
+	public static var swapReverse:Bool = false;
 	public static var bigCache:Bool = false;
 	public static var devMode:Bool = false;
 	public static var mainMenuPos:String = 'Center';
@@ -159,6 +161,8 @@ class ClientPrefs {
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.antimash = antimash;
 		FlxG.save.data.splitScroll = splitScroll;
+		FlxG.save.data.swapScroll = swapScroll;
+		FlxG.save.data.swapReverse = swapReverse;
 		FlxG.save.data.bigCache = bigCache;
 		FlxG.save.data.devMode = devMode;
 		FlxG.save.data.mainMenuPos = mainMenuPos;
@@ -338,6 +342,14 @@ class ClientPrefs {
 		if (FlxG.save.data.splitScroll != null)
 		{
 			splitScroll = FlxG.save.data.splitScroll;
+		}
+		if (FlxG.save.data.swapScroll != null)
+		{
+			swapScroll = FlxG.save.data.swapScroll;
+		}
+		if (FlxG.save.data.swapReverse != null)
+		{
+			swapReverse = FlxG.save.data.swapReverse;
 		}
 		if (FlxG.save.data.bigCache != null)
 		{
