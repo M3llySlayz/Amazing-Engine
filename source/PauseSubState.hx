@@ -36,7 +36,8 @@ class PauseSubState extends MusicBeatSubstate
 	var composer:String = '';
 
 	var pauseMusic:FlxSound;
-	var authorText:FlxText = new FlxText(20, 640 + 32, 0, "", 32);
+	var nowPlaying:FlxText;
+	var authorText:FlxText;
 	var practiceText:FlxText;
 	var skipTimeText:FlxText;
 	var skipTimeTracker:Alphabet;
@@ -56,7 +57,10 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		super();
 		SoundEffects.playSFX('scroll', false);
-		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); menuItemsRetry.remove('Change Difficulty'); //No need to change difficulty if there is only one!
+		if(CoolUtil.difficulties.length < 2) {
+			menuItemsOG.remove('Change Difficulty'); 
+			menuItemsRetry.remove('Change Difficulty'); //No need to change difficulty if there is only one!
+		}
 
 		if (ClientPrefs.pauseExit == 'Countdown')
 			cacheCountdown();
@@ -142,6 +146,20 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
 
+		nowPlaying = new FlxText(20, 640 + 16, 0, 'Now Playing: ???', 32);
+		nowPlaying.scrollFactor.set();
+		nowPlaying.setFormat(Paths.font("vcr.ttf"), 32);
+		nowPlaying.drawFrame();
+		nowPlaying.updateHitbox();
+		add(nowPlaying);
+
+		authorText = new FlxText(20, 640 + 32, 0, "By ???", 32);
+		authorText.scrollFactor.set();
+		authorText.setFormat(Paths.font("vcr.ttf"), 32);
+		authorText.drawFrame();
+		authorText.updateHitbox();
+		add(authorText);
+
 		quittingTxt = new FlxText(0, 100, 0, "Are you sure?", 32);
 		quittingTxt.scrollFactor.set();
 		quittingTxt.setFormat(Paths.font('vcr.ttf'), 32);
@@ -165,9 +183,14 @@ class PauseSubState extends MusicBeatSubstate
 				composer = '???';
 		}
 
+		nowPlaying.text = 'Now Playing: ' + ClientPrefs.pauseMusic;
+		authorText.text = 'By ' + composer;
+
 		blueballedTxt.alpha = 0;
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
+		nowPlaying.alpha = 0;
+		authorText.alpha = 0;
 
 		levelInfo.x = FlxG.width - (levelInfo.width + 20);
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
@@ -177,16 +200,11 @@ class PauseSubState extends MusicBeatSubstate
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
 		FlxTween.tween(blueballedTxt, {alpha: 1, y: blueballedTxt.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.7});
+		FlxTween.tween(nowPlaying, {alpha: 1, y: nowPlaying.y}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.9});
+		FlxTween.tween(authorText, {alpha: 1, y: authorText.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 1.1});
 
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
-
-		authorText.text += 'By ' + composer;
-		authorText.scrollFactor.set();
-		authorText.setFormat(Paths.font("vcr.ttf"), 32);
-		authorText.drawFrame();
-		authorText.updateHitbox();
-		add(authorText);
 
 		regenMenu();
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
