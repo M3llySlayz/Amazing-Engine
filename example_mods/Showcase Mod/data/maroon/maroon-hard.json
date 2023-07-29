@@ -2,6 +2,958 @@
 	"song": {
 		"player1": "Melly BF Back Right",
 		"player2": "Shaggy Small",
+		"events": [
+			[
+				0,
+				[
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.1"
+					]
+				]
+			],
+			[
+				6857.14285714286,
+				[
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"opp",
+						""
+					]
+				]
+			],
+			[
+				8571.42857142857,
+				[
+					[
+						"Maroon Cam",
+						"bf",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.1",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				10285.7142857143,
+				[
+					[
+						"Maroon Cam",
+						"opp",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				12000,
+				[
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"1.1",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					]
+				]
+			],
+			[
+				12857.1428571429,
+				[
+					[
+						"Maroon Cam",
+						"opp",
+						""
+					]
+				]
+			],
+			[
+				13714.2857142857,
+				[
+					[
+						"Maroon Cam",
+						"shag",
+						""
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				15428.5714285714,
+				[
+					[
+						"Cinema Bars",
+						"150",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"1.5",
+						"0.2"
+					]
+				]
+			],
+			[
+				16285.7142857143,
+				[
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					]
+				]
+			],
+			[
+				17142.8571428571,
+				[
+					[
+						"Set Cam Zoom",
+						"0.7",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					],
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				20571.4285714286,
+				[
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					],
+					[
+						"Maroon Cam",
+						"opp",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					]
+				]
+			],
+			[
+				22285.7142857143,
+				[
+					[
+						"Set Cam Zoom",
+						"1.5",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"150",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				24000,
+				[
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"0.7",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					]
+				]
+			],
+			[
+				27428.5714285714,
+				[
+					[
+						"Flash Camera",
+						"0.4",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1",
+						"0.2"
+					]
+				]
+			],
+			[
+				27857.1428571429,
+				[
+					[
+						"Maroon Cam",
+						"opp",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				29142.8571428571,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				30857.1428571428,
+				[
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"0.7",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					]
+				]
+			],
+			[
+				34285.7142857143,
+				[
+					[
+						"Set Cam Zoom",
+						"1",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				34714.2857142857,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"opp",
+						""
+					],
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				36000,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.5",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"150",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				37285.7142857143,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Add Camera Zoom",
+						"0.05",
+						""
+					]
+				]
+			],
+			[
+				37714.2857142857,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Add Camera Zoom",
+						"0.05",
+						""
+					]
+				]
+			],
+			[
+				38142.8571428571,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						"000000"
+					],
+					[
+						"Set Cam Zoom",
+						"0.7",
+						"0.01"
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					],
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.01"
+					]
+				]
+			],
+			[
+				39428.5714285714,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				40285.7142857143,
+				[
+					[
+						"Cinema Bars",
+						"150",
+						"linear, 1"
+					],
+					[
+						"Set Cam Zoom",
+						"1.5",
+						"1"
+					]
+				]
+			],
+			[
+				40714.2857142857,
+				[
+					[
+						"Flash Camera",
+						"0.4",
+						""
+					]
+				]
+			],
+			[
+				41142.8571428571,
+				[
+					[
+						"Maroon Swap",
+						"",
+						""
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"0.7",
+						"0.01"
+					],
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.01"
+					]
+				]
+			],
+			[
+				48000,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Maroon Cam",
+						"right",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				51428.5714285714,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Maroon Cam",
+						"bfswap",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.1",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				54428.5714285714,
+				[
+					[
+						"Flash Camera",
+						"0.3",
+						""
+					]
+				]
+			],
+			[
+				54857.1428571428,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"0.7",
+						""
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					],
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				55285.7142857143,
+				[
+					[
+						"Maroon Swap",
+						"",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"opp",
+						""
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				58285.7142857143,
+				[
+					[
+						"Set Cam Zoom",
+						"1",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				58714.2857142857,
+				[
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.2"
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"0.7",
+						"0.2"
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				60000,
+				[
+					[
+						"Set Cam Zoom",
+						"1",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				60857.1428571428,
+				[
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				61714.2857142857,
+				[
+					[
+						"Maroon Cam",
+						"normal",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				62142.8571428571,
+				[
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"opp",
+						""
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				63428.5714285714,
+				[
+					[
+						"Set Cam Zoom",
+						"1.5",
+						""
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Cinema Bars",
+						"150",
+						"linear, 0.2"
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				65142.8571428571,
+				[
+					[
+						"Set Cam Zoom",
+						"1",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				65571.4285714285,
+				[
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"0.7",
+						"0.2"
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					]
+				]
+			],
+			[
+				66857.1428571428,
+				[
+					[
+						"Set Cam Zoom",
+						"1",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"110",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				67714.2857142857,
+				[
+					[
+						"Cinema Bars",
+						"150",
+						"linear, 1"
+					],
+					[
+						"Set Cam Zoom",
+						"1.5",
+						"1"
+					]
+				]
+			],
+			[
+				68571.4285714286,
+				[
+					[
+						"Maroon Swap",
+						"",
+						""
+					],
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.01"
+					],
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Maroon Cam",
+						"rightup",
+						""
+					]
+				]
+			],
+			[
+				72000,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Maroon Cam",
+						"bfswap",
+						""
+					]
+				]
+			],
+			[
+				75000,
+				[
+					[
+						"Flash Camera",
+						"0.3",
+						""
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"0.7",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"100",
+						"linear, 0.2"
+					]
+				]
+			],
+			[
+				75428.5714285714,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				78857.1428571428,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"1.3",
+						"0.2"
+					],
+					[
+						"Cinema Bars",
+						"130",
+						"linear, 0.2"
+					],
+					[
+						"Maroon Cam",
+						"rightup",
+						""
+					]
+				]
+			],
+			[
+				80571.4285714286,
+				[
+					[
+						"Maroon Cam",
+						"bfswap",
+						""
+					]
+				]
+			],
+			[
+				82285.7142857143,
+				[
+					[
+						"Flash Camera",
+						"0.5",
+						""
+					],
+					[
+						"Maroon Cam",
+						"off",
+						""
+					],
+					[
+						"Cinema Bars",
+						"60",
+						"linear, 0.2"
+					],
+					[
+						"Set Cam Zoom",
+						"0.7",
+						"0.2"
+					]
+				]
+			]
+		],
 		"notes": [
 			{
 				"typeOfSection": 0,
@@ -5658,12 +6610,12 @@
 				"mustHitSection": true
 			}
 		],
-		"gfVersion": "gf",
+		"gfVersion": "Noire",
 		"mania": 3,
 		"splashSkin": "noteSplashes",
 		"song": "Maroon",
 		"validScore": true,
-		"stage": "maroon",
+		"stage": "Maroon",
 		"arrowSkin": "",
 		"needsVoices": true,
 		"speed": 2.9,
