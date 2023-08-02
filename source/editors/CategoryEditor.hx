@@ -164,6 +164,8 @@ class CategoryEditor extends MusicBeatState
 
 	var categoryInput:FlxUIInputText;
 	var nameInput:FlxUIInputText;
+	var colorInput:FlxUIInputText;
+	var colorSquare:FlxSprite;
 	var lockedCheck:FlxUICheckBox;
 	var hiddenCheck:FlxUICheckBox;
 
@@ -171,7 +173,7 @@ class CategoryEditor extends MusicBeatState
 	{
 		var yDist:Float = 20;
 		categoryInput = new FlxUIInputText(60, 20, 180, '', 8);
-		lockedCheck = new FlxUICheckBox(20, titleInput.y + yDist, null, null, 'Start Locked?', 110);
+		lockedCheck = new FlxUICheckBox(20, categoryInput.y + yDist, null, null, 'Start Locked?', 110);
 		lockedCheck.textX += 3;
 		lockedCheck.textY += 4;
 		if (FlxG.save.data.lockedCheck == null) FlxG.save.data.lockedCheck = true;
@@ -181,8 +183,8 @@ class CategoryEditor extends MusicBeatState
 			FlxG.save.data.lockedCheck = lockedCheck.checked;
 		};
 
-		nameInput = new FlxUIInputText(60, titleInput.y + 100, 180, '', 8);
-		colorInput = new FlxUIInputText(60, linkInput.y + yDist, 70, '', 8);
+		nameInput = new FlxUIInputText(60, categoryInput.y + 100, 180, '', 8);
+		colorInput = new FlxUIInputText(60, nameInput.y + yDist, 70, '', 8);
 		colorSquare = new FlxSprite(colorInput.x + 80, colorInput.y).makeGraphic(15, 15, 0xFFFFFFFF);
 		
 		blockPressWhileTypingOn.push(categoryInput);
@@ -193,6 +195,7 @@ class CategoryEditor extends MusicBeatState
 		{
 			loadCategory();
 		});
+
 		var saveFile:FlxButton = new FlxButton(loadFile.x + 90, loadFile.y, "Save Credits", function()
 		{
 			saveCategory(category);
