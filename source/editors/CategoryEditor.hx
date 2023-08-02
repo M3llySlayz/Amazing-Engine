@@ -65,7 +65,7 @@ class CategoryEditor extends MusicBeatState
 		super();
 		this.category = FreeplayCategory.createCategoryFile();
 		if(category != null) this.category = category;
-		else name = 'example';
+		else this.category.category = 'example';
 	}
 
 	override function create()
@@ -79,7 +79,7 @@ class CategoryEditor extends MusicBeatState
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		bg.color = categoryColors[curSelected];
+		bg.color = FlxColor.fromRGB(category.color[0], category.color[1], category.color[2], 255);
 		add(bg);
 
 		categorySpr = new FlxSprite().loadGraphic(Paths.image('categories/placeholder'));
@@ -106,9 +106,7 @@ class CategoryEditor extends MusicBeatState
 
 		//FlxTween.tween(blackBG, {alpha: 0}, 0.5, {ease: FlxEase.smootherStepOut});
 		FlxTween.tween(categorySpr, {alpha: 1, x: categorySpr.x - 60}, 0.75, {ease: FlxEase.quintOut, startDelay: 0.15});
-		FlxTween.tween(alphabetText, {alpha: 1, x: FlxG.width / 6}, 0.75, {ease: FlxEase.quintOut, startDelay: 0.25, onComplete: function(twm:FlxTween) {
-			selectedSomethin = false;
-		}});
+		FlxTween.tween(alphabetText, {alpha: 1, x: FlxG.width / 6}, 0.75, {ease: FlxEase.quintOut, startDelay: 0.25});
 		lockedTxt.screenCenter(X);
 		
 		camGame = new FlxCamera();
@@ -160,14 +158,12 @@ class CategoryEditor extends MusicBeatState
 		addCategoryUI();
 
 		bg.color = getCurrentBGColor();
-		intendedColor = bg.color;
-		changeSelection();
 		
 		super.create();
 	}
 
 	var categoryInput:FlxUIInputText;
-	var nameInput:FkxUIInputText;
+	var nameInput:FlxUIInputText;
 	var lockedCheck:FlxUICheckBox;
 	var hiddenCheck:FlxUICheckBox;
 
