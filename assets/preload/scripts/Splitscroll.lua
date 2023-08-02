@@ -13,7 +13,7 @@ end
 
 local scrollType --28/06/2023. I'm surprised that 2 days of sleep deprivation, I am still able to do this
 local swapType --25/07/2023. It's been almost a month, It's time splitscroll got an update. I've got tons of assignments to do yet so little time though, won't you agree? --26/07/2023 5 Assignments done, 1 to go.
-local swapReverse
+local swapSwap
 local xDisplacement
 local BarConfig = {0, -20}
 
@@ -35,7 +35,7 @@ end
 function onCreatePost()
 
     if swapType == 'None' then
-        --do nothing again lol
+        close(true)
     else
         if swapType == 'Quarter' then
             if (swapSwap) then
