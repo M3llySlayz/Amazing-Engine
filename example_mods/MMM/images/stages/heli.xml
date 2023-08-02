@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="heli.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="heli0000" x="0" y="0" width="851" height="467"/>
+	<SubTexture name="heli0001" x="0" y="467" width="848" height="466" frameX="-3" frameY="-1" frameWidth="851" frameHeight="467"/>
+</TextureAtlas>

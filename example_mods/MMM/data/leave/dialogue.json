@@ -1,0 +1,53 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "Yeah nice cheating my guy you're literally on practice mode",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "excited",
+			"text": "thats cap",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "confused",
+			"text": "The real Lynn would not beat this without practice mode unless she actually got good before we did this.",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "pissed",
+			"text": "Is that a statement of animous dissension",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "confused",
+			"text": "what",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "pissed",
+			"text": "You wanna fight, loser",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "demon",
+			"text": "Leave.",
+			"boxState": "angry",
+			"speed": 0.05,
+			"portrait": "gf"
+		}
+	]
+}

@@ -1,0 +1,32 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "ok you know what",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "demon",
+			"text": "FRICK this crap!",
+			"boxState": "angry",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "talk",
+			"text": "Sing with my fricking dad",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "talk",
+			"text": "wait wha OH-",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		}
+	]
+}

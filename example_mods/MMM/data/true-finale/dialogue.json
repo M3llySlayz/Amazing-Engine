@@ -1,0 +1,46 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "Know what",
+			"boxState": "normal",
+			"portrait": "gf",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "after doing this for 3 consecutive weeks",
+			"boxState": "normal",
+			"portrait": "gf",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "I kinda like rapping.",
+			"boxState": "normal",
+			"portrait": "gf",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "after this song i gotta go, but come back next week and we can do four more",
+			"boxState": "normal",
+			"portrait": "gf",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "paggers",
+			"boxState": "normal",
+			"portrait": "bf",
+			"speed": 0.05
+		},
+		{
+			"expression": "demon",
+			"text": "ok now d i e .",
+			"boxState": "angry",
+			"portrait": "gf",
+			"speed": 0.05
+		}
+	]
+}

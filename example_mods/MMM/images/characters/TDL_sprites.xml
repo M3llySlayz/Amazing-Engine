@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="TDL sprites.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="TDL_attack0000" x="0" y="0" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0001" x="956" y="0" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0002" x="1912" y="0" width="956" height="688"/>
+	<SubTexture name="TDL_attack0003" x="2868" y="0" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0004" x="3824" y="0" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0005" x="4780" y="0" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0006" x="5736" y="0" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0007" x="6692" y="0" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0008" x="0" y="688" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0009" x="956" y="688" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0010" x="1912" y="688" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0011" x="2868" y="688" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0012" x="3824" y="688" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0013" x="4780" y="688" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0014" x="5736" y="688" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0015" x="6692" y="688" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0016" x="0" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0017" x="956" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0018" x="1912" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0019" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0020" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0021" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0022" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0023" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0024" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0025" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0026" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0027" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0028" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0029" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0030" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0031" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0032" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0033" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0034" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0035" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0036" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0037" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0038" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0039" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0040" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0041" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0042" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0043" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0044" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0045" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0046" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0047" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0048" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0049" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0050" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0051" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0052" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0053" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0054" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0055" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0056" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0057" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_attack0058" x="2868" y="1374" width="956" height="686" frameX="0" frameY="-2" frameWidth="956" frameHeight="688"/>
+	<SubTexture name="TDL_down0000" x="3824" y="1374" width="592" height="425"/>
+	<SubTexture name="TDL_down0001" x="4416" y="1374" width="592" height="425"/>
+	<SubTexture name="TDL_down0002" x="5008" y="1374" width="592" height="425"/>
+	<SubTexture name="TDL_down0003" x="5600" y="1374" width="592" height="425"/>
+	<SubTexture name="TDL_down0004" x="6192" y="1374" width="592" height="425"/>
+	<SubTexture name="TDL_down0005" x="6784" y="1374" width="592" height="425"/>
+	<SubTexture name="TDL_down0006" x="7376" y="1374" width="592" height="425"/>
+	<SubTexture name="TDL_down0007" x="0" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0008" x="592" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0009" x="1184" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0010" x="1776" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0011" x="2368" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0012" x="2960" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0013" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0014" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0015" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0016" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0017" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0018" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0019" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0020" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0021" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0022" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0023" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0024" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0025" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0026" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0027" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0028" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0029" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0030" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0031" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0032" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0033" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0034" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0035" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0036" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0037" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0038" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0039" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0040" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0041" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0042" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0043" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0044" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0045" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0046" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0047" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0048" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0049" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0050" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0051" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_down0052" x="3552" y="2060" width="592" height="425"/>
+	<SubTexture name="TDL_idle0000" x="4144" y="2060" width="339" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0001" x="4483" y="2060" width="339" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0002" x="4822" y="2060" width="340" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0003" x="5162" y="2060" width="340" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0004" x="5502" y="2060" width="342" height="572"/>
+	<SubTexture name="TDL_idle0005" x="5844" y="2060" width="342" height="572"/>
+	<SubTexture name="TDL_idle0006" x="6186" y="2060" width="340" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0007" x="6526" y="2060" width="340" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0008" x="6866" y="2060" width="339" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0009" x="7205" y="2060" width="339" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0010" x="7544" y="2060" width="339" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0011" x="0" y="2632" width="339" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0012" x="339" y="2632" width="339" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0013" x="678" y="2632" width="339" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_idle0014" x="1017" y="2632" width="339" height="572" frameX="0" frameY="0" frameWidth="342" frameHeight="572"/>
+	<SubTexture name="TDL_left0000" x="1356" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0001" x="1881" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0002" x="2406" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0003" x="2931" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0004" x="3456" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0005" x="3981" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0006" x="4506" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0007" x="5031" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0008" x="5556" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0009" x="6081" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0010" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0011" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0012" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0013" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0014" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0015" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0016" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0017" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0018" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0019" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0020" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0021" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0022" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0023" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0024" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0025" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0026" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0027" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_left0028" x="6606" y="2632" width="525" height="573"/>
+	<SubTexture name="TDL_up0000" x="7131" y="2632" width="466" height="811"/>
+	<SubTexture name="TDL_up0001" x="7597" y="2632" width="466" height="811"/>
+	<SubTexture name="TDL_up0002" x="0" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0003" x="466" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0004" x="932" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0005" x="1398" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0006" x="1864" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0007" x="2330" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0008" x="2796" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0009" x="3262" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0010" x="3728" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0011" x="4194" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0012" x="4660" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0013" x="5126" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0014" x="5592" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0015" x="6058" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0016" x="6524" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0017" x="1864" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0018" x="2330" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0019" x="2796" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0020" x="3262" y="3443" width="466" height="811"/>
+	<SubTexture name="TDL_up0021" x="3728" y="3443" width="466" height="811"/>
+	<SubTexture name="TLD_right0000" x="6990" y="3443" width="465" height="549"/>
+	<SubTexture name="TLD_right0001" x="7455" y="3443" width="465" height="549"/>
+	<SubTexture name="TLD_right0002" x="0" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0003" x="465" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0004" x="930" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0005" x="1395" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0006" x="1860" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0007" x="2325" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0008" x="2790" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0009" x="3255" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0010" x="3720" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0011" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0012" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0013" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0014" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0015" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0016" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0017" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0018" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0019" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0020" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0021" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0022" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0023" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0024" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0025" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0026" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0027" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0028" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0029" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0030" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0031" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0032" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0033" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0034" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0035" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0036" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0037" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0038" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0039" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0040" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0041" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0042" x="4185" y="4254" width="465" height="549"/>
+	<SubTexture name="TLD_right0043" x="4185" y="4254" width="465" height="549"/>
+</TextureAtlas>

@@ -1,0 +1,11 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "This one is just True Finale with re done vocals. Not as hard as it was cause this is a bonus week lmbo"
+		}
+	]
+}

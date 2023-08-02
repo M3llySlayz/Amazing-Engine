@@ -1,0 +1,7 @@
+Flashes Camera
+
+Value 1: speed
+
+Value 2: Color in form of hex code
+WITHOUT THE HASHTAG
+if left blank, the flash will be white

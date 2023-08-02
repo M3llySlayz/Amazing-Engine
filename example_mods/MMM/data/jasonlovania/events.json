@@ -1,0 +1,2573 @@
+{
+	"song": {
+		"speed": 3,
+		"stage": "city",
+		"player1": "bf",
+		"player2": "stickly",
+		"player3": null,
+		"events": [
+			[
+				0,
+				[
+					[
+						"Set Cam Zoom",
+						"1.2",
+						"12"
+					]
+				]
+			],
+			[
+				12800,
+				[
+					[
+						"Set Cam Zoom",
+						"0.6",
+						""
+					]
+				]
+			],
+			[
+				28800,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"500",
+						"800"
+					]
+				]
+			],
+			[
+				28900,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				29000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				29100,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				29200,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				29300,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				29400,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				29500,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				29600,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				29700,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				29800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				29900,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				29925,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				30100,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				30200,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				30300,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				32000,
+				[
+					[
+						"Camera Follow Pos",
+						"",
+						""
+					],
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				32200,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				32300,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				32500,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				32700,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				32900,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				33100,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				33600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				33800,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				33900,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				34100,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				34300,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				34500,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				34700,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				34900,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				35000,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				35200,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"500",
+						"800"
+					]
+				],
+				null,
+				"bfdark"
+			],
+			[
+				35400,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				35600,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				35800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				36000,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				36200,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				36400,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				36600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				36800,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				37000,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				37100,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				37300,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				37500,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				38000,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				38400,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				39200,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				39600,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				40000,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				40400,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				40800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				41200,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				41600,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"500",
+						"800"
+					]
+				]
+			],
+			[
+				42300,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				42800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				43200,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				44000,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				44200,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				44400,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				44600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				44800,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				45600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				46000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				46400,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				46800,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				47200,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				47600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				48000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"500",
+						"800"
+					]
+				]
+			],
+			[
+				48800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				48850,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				48900,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				48950,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				49000,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				49050,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				49100,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				49150,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				49200,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				49250,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				49300,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				49350,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				49400,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				49450,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				49500,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				49550,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				49600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				50400,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				51200,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"",
+						""
+					]
+				]
+			],
+			[
+				52000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				52800,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				53600,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				54400,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"500",
+						"800"
+					]
+				]
+			],
+			[
+				55200,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				56000,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				56800,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				57600,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"",
+						""
+					]
+				]
+			],
+			[
+				58400,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				59200,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				60000,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				60800,
+				[
+					[
+						"Play Animation",
+						"idle",
+						"BF"
+					]
+				]
+			],
+			[
+				61000,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"500",
+						"800"
+					]
+				]
+			],
+			[
+				61200,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				61400,
+				[
+					[
+						"Play Animation",
+						"idle",
+						"BF"
+					]
+				]
+			],
+			[
+				61500,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				61700,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				61900,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				62100,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				62200,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				62300,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				62400,
+				[
+					[
+						"Play Animation",
+						"idle",
+						"BF"
+					]
+				]
+			],
+			[
+				62600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				62800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				63000,
+				[
+					[
+						"Play Animation",
+						"idle",
+						"BF"
+					]
+				]
+			],
+			[
+				63100,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				63300,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				63500,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				63700,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				63800,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				63900,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				64000,
+				[
+					[
+						"Camera Follow Pos",
+						"",
+						""
+					],
+					[
+						"Set Cam Zoom",
+						"0.6",
+						""
+					]
+				]
+			],
+			[
+				76800,
+				[
+					[
+						"Camera Follow Pos",
+						"500",
+						"800"
+					],
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				],
+				null,
+				"bfdark"
+			],
+			[
+				76900,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				77000,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				77100,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				77200,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				77300,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				77400,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				77500,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				77600,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				77700,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				77800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				77900,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				78000,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				78100,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				78200,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				78300,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				78400,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				78500,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				78600,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				78700,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				78800,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				78900,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				79000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				79100,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				79200,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				79300,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				79400,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				79500,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				79600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				79700,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				79800,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				79900,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				80000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				80100,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				80200,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				80300,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				80400,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				80500,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				80600,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				80700,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				80800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				80900,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				81000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				81100,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				81200,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				81300,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				81400,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				81500,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				81600,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				81700,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				81800,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				81900,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				82000,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				82100,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				82200,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				82300,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				82400,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				82500,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				82600,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				82700,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				82800,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				82900,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				83000,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				83100,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				83200,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				83300,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				83400,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				83500,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				83600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				83700,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				83800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				83900,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				84000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				84100,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				84200,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				84300,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				84400,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				84500,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				84600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				84700,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				84800,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				84900,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				85000,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				85100,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				85200,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				85300,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				85400,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				85500,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				85600,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				85700,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				85800,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				85900,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				86000,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				86100,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				86200,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				86300,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				86400,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				86500,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				86600,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				86700,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				86800,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				86900,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				87000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				87100,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				87200,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				87300,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				87400,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				87500,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"BF"
+					]
+				]
+			],
+			[
+				87600,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				87700,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				87800,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				87900,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				88000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				88100,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				88200,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				88300,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"BF"
+					]
+				]
+			],
+			[
+				88400,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				88500,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				88700,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				88800,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				89000,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				89200,
+				[
+					[
+						"Play Animation",
+						"singUP",
+						"BF"
+					]
+				]
+			],
+			[
+				89300,
+				[
+					[
+						"Play Animation",
+						"singDOWN",
+						"BF"
+					]
+				]
+			],
+			[
+				89600,
+				[
+					[
+						"Play Animation",
+						"idle",
+						"BF"
+					],
+					[
+						"Camera Follow Pos",
+						"",
+						""
+					]
+				]
+			],
+			[
+				102400,
+				[
+					[
+						"Camera Follow Pos",
+						"500",
+						"800"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "gf",
+		"bpm": 150,
+		"arrowSkin": "",
+		"needsVoices": true,
+		"song": "Jasonlovania"
+	}
+}

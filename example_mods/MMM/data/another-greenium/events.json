@@ -1,0 +1,30 @@
+{
+	"song": {
+		"speed": 3.4,
+		"stage": null,
+		"player1": "bf-dark",
+		"player2": "carol-green",
+		"player3": null,
+		"events": [
+			[
+				0,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						"9"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "gf-dark",
+		"bpm": 130,
+		"mania": 3,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "Another Greenium"
+	}
+}

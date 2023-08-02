@@ -1,0 +1,19 @@
+{
+	"category": "LynnB",
+	"name": "Bonus Songs",
+	"songs": [
+		["Lynnlovania", "carol", "Hard, Insane"],
+		["Another Greenium", "carol", "Hard, Insane"],
+		["True Finale Remix", "carol", "Hard, Insane"],
+		["Accelerant", "carol", "Hard, Insane"]
+	],
+	"songColors": [
+		[0, 255, 255],
+		[0, 255, 255],
+		[0, 255, 255],
+		[255, 255, 255]
+	],
+	"color": [0, 255, 255],
+	"startLocked": false,
+	"hiddenWhenLocked": false
+}

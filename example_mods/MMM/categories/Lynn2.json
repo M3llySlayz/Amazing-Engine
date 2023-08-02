@@ -1,0 +1,17 @@
+{
+	"category": "Lynn2",
+	"name": "Lynn Week 2",
+	"songs": [
+		["greenie", "carol", "Hard, Insane"],
+		["mad", "carol", "Hard, Insane"],
+		["ace", "bfmelly", "Hard"]
+	],
+	"songColors": [
+		[140, 255, 160],
+		[120, 255, 0],
+		[155, 0, 0]
+	],
+	"color": [0, 255, 0],
+	"startLocked": true,
+	"hiddenWhenLocked": false
+}

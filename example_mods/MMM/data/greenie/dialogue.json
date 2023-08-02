@@ -1,0 +1,46 @@
+{
+	"dialogue": [
+		{
+			"expression": "confused",
+			"text": "You're back.",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "demon",
+			"text": "In my HOUSE.",
+			"boxState": "angry",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "pissed",
+			"text": "Whatcha gonna do ",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "confused",
+			"text": "Whatever man, I'm assuming you want another rap battle?",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"expression": "excited",
+			"text": "ye",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf"
+		},
+		{
+			"expression": "talk",
+			"text": "k",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		}
+	]
+}

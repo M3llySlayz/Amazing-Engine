@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="City Path Good.png"><SubTexture name="CP Idle0000" x="0" y="0" width="640" height="360" frameX="0" frameY="0" frameWidth="640" frameHeight="360" />
+<SubTexture name="CP Idle0001" x="640" y="0" width="640" height="360" frameX="0" frameY="0" frameWidth="640" frameHeight="360" />
+</TextureAtlas>

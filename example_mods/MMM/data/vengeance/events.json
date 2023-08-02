@@ -1,0 +1,49 @@
+{
+	"song": {
+		"speed": 3.2,
+		"stage": "TDL",
+		"player1": "PlayableGFV2",
+		"player2": "TDL-mad",
+		"player3": null,
+		"events": [
+			[
+				37800,
+				[
+					[
+						"Add Camera Zoom",
+						"0.4",
+						"0.05"
+					]
+				]
+			],
+			[
+				38100,
+				[
+					[
+						"Add Camera Zoom",
+						"0.4",
+						"0.05"
+					]
+				]
+			],
+			[
+				43800,
+				[
+					[
+						"Add Camera Zoom",
+						"0.4",
+						"0.05"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "gf-gone",
+		"bpm": 200,
+		"arrowSkin": "",
+		"needsVoices": true,
+		"song": "Vengeance-gf"
+	}
+}

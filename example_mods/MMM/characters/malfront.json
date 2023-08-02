@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "maelIDLE"
+		},
+		{
+			"offsets": [
+				-161,
+				-20
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "maelLEFT"
+		},
+		{
+			"offsets": [
+				40,
+				-90
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "maelDOWN"
+		},
+		{
+			"offsets": [
+				-50,
+				460
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "maelUP"
+		},
+		{
+			"offsets": [
+				-50,
+				-70
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "maelRIGHT"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/maelstrom2",
+	"position": [
+		220,
+		-570
+	],
+	"healthicon": "mal",
+	"flip_x": false,
+	"healthbar_colors": [
+		42,
+		40,
+		100
+	],
+	"camera_position": [
+		-130,
+		170
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

@@ -1,0 +1,5 @@
+Place the event for arrows to spin like in Endless.
+
+----------
+
+Coloca el evento para que las flechas giren como en Endless.

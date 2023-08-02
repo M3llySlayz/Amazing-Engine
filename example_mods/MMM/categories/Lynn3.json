@@ -1,0 +1,17 @@
+{
+	"category": "Lynn3",
+	"name": "Lynn Week 3",
+	"songs": [
+		["Final Boss", "carol", "Hard, Insane"],
+		["Leave", "carol", "Hard, Insane"],
+		["True Finale", "carol", "Hard, Insane"]
+	],
+	"songColors": [
+		[0, 255, 0],
+		[0, 155, 0],
+		[0, 55, 0]
+	],
+	"color": [0, 155, 0],
+	"startLocked": true,
+	"hiddenWhenLocked": false
+}

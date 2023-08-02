@@ -1,0 +1,49 @@
+{
+	"storyName": "Lynn... again",
+	"difficulties": "Hard, Insane",
+	"hideFreeplay": false,
+	"weekBackground": "halloween",
+	"weekBefore": "weekL",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": false,
+	"songs": [
+		[
+			"greenie",
+			"carol",
+			[
+				140,
+				255,
+				160
+			]
+		],
+		[
+			"mad",
+			"carol",
+			[
+				140,
+				255,
+				160
+			]
+		],
+		[
+			"ace",
+			"stickly",
+			[
+				60,
+				115,
+				0
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"weekName": "ur still here lol"
+}

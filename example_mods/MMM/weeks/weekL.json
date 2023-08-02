@@ -1,0 +1,49 @@
+{
+	"storyName": "Lynn",
+	"difficulties": "Hard, Insane",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"Talk It Out",
+			"bf-pixel",
+			[
+				100,
+				255,
+				255
+			]
+		],
+		[
+			"Intense",
+			"bf-pixel",
+			[
+				100,
+				255,
+				255
+			]
+		],
+		[
+			"Gaming",
+			"carol",
+			[
+				100,
+				255,
+				75
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"weekName": "why are you here"
+}

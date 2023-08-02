@@ -1,0 +1,9 @@
+{
+	"directory": "city path",
+	"defaultZoom": 0.7,
+	"isPixelStage": false,
+
+	"boyfriend": [900, 550],
+	"girlfriend": [300, 450],
+	"opponent": [-400, 400]
+}

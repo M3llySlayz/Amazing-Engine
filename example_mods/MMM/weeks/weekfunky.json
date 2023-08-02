@@ -1,0 +1,32 @@
+{
+	"songs": [
+		[
+			"Funky Saturday",
+			"chara",
+			[
+				0,
+				133,
+				33
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "Normal",
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"storyName": "among us chara",
+	"weekName": "Chara",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": true,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

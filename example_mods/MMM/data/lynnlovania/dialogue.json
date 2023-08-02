@@ -1,0 +1,11 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "K this one is a meme song so have fun ig"
+		}
+	]
+}

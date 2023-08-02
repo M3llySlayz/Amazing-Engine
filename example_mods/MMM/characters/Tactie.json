@@ -1,0 +1,166 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-20,
+				-10
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Idle"
+		},
+		{
+			"offsets": [
+				-32,
+				-95
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Down Pose"
+		},
+		{
+			"offsets": [
+				2,
+				76
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Up Pose"
+		},
+		{
+			"offsets": [
+				-18,
+				-13
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Left Pose"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				12,
+				14
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Right Pose",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-8,
+				30
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "shootUPalt",
+			"indices": [],
+			"name": "Shoot"
+		},
+		{
+			"offsets": [
+				-8,
+				30
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "shootDOWNalt",
+			"indices": [],
+			"name": "Shoot"
+		},
+		{
+			"offsets": [
+				-8,
+				30
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "shootLEFTalt",
+			"indices": [],
+			"name": "Shoot"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-8,
+				30
+			],
+			"anim": "shootRIGHTalt",
+			"fps": 24,
+			"name": "Shoot",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				54,
+				48
+			],
+			"anim": "shootUP",
+			"fps": 24,
+			"name": "Pistol",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				54,
+				48
+			],
+			"anim": "shootRIGHT",
+			"fps": 24,
+			"name": "Pistol",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				54,
+				48
+			],
+			"anim": "shootDOWN",
+			"fps": 24,
+			"name": "Pistol",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				54,
+				48
+			],
+			"anim": "shootLEFT",
+			"fps": 24,
+			"name": "Pistol",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Tactie",
+	"position": [
+		-60,
+		160
+	],
+	"healthicon": "tactie",
+	"flip_x": true,
+	"healthbar_colors": [
+		0,
+		0,
+		0
+	],
+	"camera_position": [
+		180,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

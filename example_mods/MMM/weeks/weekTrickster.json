@@ -1,0 +1,41 @@
+{
+	"songs": [
+		[
+			"UpSide!Improbable Outset",
+			"tricky",
+			[
+				0,
+				93,
+				95
+			]
+		],
+		[
+			"UpSide!Madness",
+			"trickyunmasked",
+			[
+				0,
+				93,
+				95
+			]
+		]
+	],
+	"hiddenUntilUnlocked": true,
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "Normal, Hard",
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"storyName": "go away stop looking at my files",
+	"weekName": "Custom Week",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": true,
+	"weekBefore": "weekL3",
+	"startUnlocked": true
+}

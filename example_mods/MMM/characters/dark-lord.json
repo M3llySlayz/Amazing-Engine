@@ -1,0 +1,89 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				109,
+				-106
+			],
+			"anim": "attack",
+			"fps": 24,
+			"name": "TDL_attack",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				120,
+				-368
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "TDL_down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				-220
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "TDL_idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				20,
+				-217
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "TDL_left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				27,
+				21
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "TDL_up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				27,
+				-241
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "TLD_right",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/animation/TDL_sprites",
+	"position": [
+		0,
+		-120
+	],
+	"healthicon": "tdl",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		28,
+		28
+	],
+	"camera_position": [
+		-360,
+		200
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

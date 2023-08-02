@@ -1,0 +1,243 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-6,
+				-1
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "GF Idle dance"
+		},
+		{
+			"offsets": [
+				45,
+				-36
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "GF Left"
+		},
+		{
+			"offsets": [
+				-6,
+				-75
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "GF Down"
+		},
+		{
+			"offsets": [
+				-60,
+				17
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "GF Up"
+		},
+		{
+			"offsets": [
+				-49,
+				-7
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "GF Right"
+		},
+		{
+			"offsets": [
+				35,
+				-18
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "GF Miss Left"
+		},
+		{
+			"offsets": [
+				-42,
+				-44
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "GF Miss Down"
+		},
+		{
+			"offsets": [
+				-60,
+				55
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "GF Miss Up"
+		},
+		{
+			"offsets": [
+				-80,
+				22
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "GF Miss Right"
+		},
+		{
+			"offsets": [
+				-36,
+				1
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hey",
+			"indices": [],
+			"name": "GF Hey"
+		},
+		{
+			"offsets": [
+				-35,
+				-2
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "scared",
+			"indices": [],
+			"name": "GF Scared"
+		},
+		{
+			"offsets": [
+				-27,
+				11
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "GF First Death"
+		},
+		{
+			"offsets": [
+				-39,
+				-3
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "deathLoop",
+			"indices": [],
+			"name": "GF Death Loop"
+		},
+		{
+			"offsets": [
+				-33,
+				-2
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "deathConfirm",
+			"indices": [],
+			"name": "GF Death Continue"
+		},
+		{
+			"offsets": [
+				-92,
+				-23
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodgeUP",
+			"indices": [],
+			"name": "GF Dodge"
+		},
+		{
+			"offsets": [
+				-92,
+				-24
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodgeLEFT",
+			"indices": [],
+			"name": "GF Dodge"
+		},
+		{
+			"offsets": [
+				-93,
+				-24
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodgeDOWN",
+			"indices": [],
+			"name": "GF Dodge"
+		},
+		{
+			"offsets": [
+				-92,
+				-23
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodgeRIGHT",
+			"indices": [],
+			"name": "GF Dodge"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-92,
+				-23
+			],
+			"anim": "dodge",
+			"fps": 24,
+			"name": "GF Dodge",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "hurt",
+			"fps": 24,
+			"name": "GF Scared",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Playable GF V2",
+	"position": [
+		0,
+		290
+	],
+	"healthicon": "gf",
+	"flip_x": true,
+	"healthbar_colors": [
+		165,
+		0,
+		77
+	],
+	"camera_position": [
+		1000,
+		-200
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

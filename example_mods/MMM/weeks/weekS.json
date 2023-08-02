@@ -1,0 +1,103 @@
+{
+	"storyName": "Secret",
+	"difficulties": "Hard, Insane",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"weekBefore": "weekLB",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"songs": [
+		[
+			"Last Hope",
+			"taeyai",
+			[
+				0,
+				220,
+				255
+			]
+		],
+		[
+			"Epiphany",
+			"gf-dark",
+			[
+				175,
+				0,
+				255
+			]
+		],
+		[
+			"Vibe",
+			"bf-pixel",
+			[
+				0,
+				220,
+				255
+			]
+		],
+		[
+			"Retro",
+			"da",
+			[
+				166,
+				173,
+				215
+			]
+		],
+		[
+			"Snake Eyes",
+			"cuphead",
+			[
+				255,
+				0,
+				0
+			]
+		],
+		[
+			"Alan",
+			"alan",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"End Process",
+			"TDL",
+			[
+				255,
+				0,
+				0
+			]
+		],
+		[
+			"Pixel",
+			"missingno",
+			[
+				155,
+				0,
+				255
+			]
+		],
+		[
+			"Jason Training",
+			"stickly",
+			[
+				0,
+				75,
+				0
+			]
+		]
+	],
+	"hideStoryMode": true,
+	"weekName": "Secret"
+}

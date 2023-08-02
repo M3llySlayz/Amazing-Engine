@@ -1,0 +1,105 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				140,
+				-100
+			],
+			"loop": false,
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Left",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-50,
+				-120
+			],
+			"loop": false,
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Down",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-50,
+				25
+			],
+			"loop": false,
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Up",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-70,
+				-100
+			],
+			"loop": false,
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Right",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				-9
+			],
+			"loop": false,
+			"anim": "danceLeft",
+			"fps": 24,
+			"name": "Idle",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5
+			]
+		},
+		{
+			"offsets": [
+				0,
+				-9
+			],
+			"loop": false,
+			"anim": "danceRight",
+			"fps": 24,
+			"name": "Idle",
+			"indices": [
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Cursor",
+	"position": [
+		100,
+		250
+	],
+	"healthicon": "alan",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

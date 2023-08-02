@@ -1,0 +1,49 @@
+{
+	"storyName": "Thrid Time's the hardest",
+	"difficulties": "Hard, Insane",
+	"hideFreeplay": false,
+	"weekBackground": "christmas",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "weekL2",
+	"startUnlocked": false,
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"songs": [
+		[
+			"Final Boss",
+			"carol",
+			[
+				186,
+				255,
+				253
+			]
+		],
+		[
+			"Leave",
+			"carol",
+			[
+				186,
+				255,
+				253
+			]
+		],
+		[
+			"True Finale",
+			"carol",
+			[
+				186,
+				255,
+				253
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "bruh"
+}

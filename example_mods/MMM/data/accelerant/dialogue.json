@@ -1,0 +1,32 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "This last one is just a jammer Matt came up with lmbo",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "gf"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Wait Matt is canon in this universe"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "Bro nothing is canon this is a bonus week"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "pissed",
+			"text": "damn"
+		}
+	]
+}

@@ -1,0 +1,246 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-20,
+				-10
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Idle"
+		},
+		{
+			"offsets": [
+				-4,
+				-92
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Down Pose"
+		},
+		{
+			"offsets": [
+				-88,
+				76
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Up Pose"
+		},
+		{
+			"offsets": [
+				-38,
+				14
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Right Pose"
+		},
+		{
+			"offsets": [
+				87,
+				-13
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Left Pose"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-10,
+				-92
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "Down Miss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-88,
+				66
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "Up Miss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-38,
+				-6
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "Right Miss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				42,
+				-91
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "Left Miss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				37,
+				-94
+			],
+			"anim": "firstDeath",
+			"fps": 24,
+			"name": "Tactie Downed",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-69,
+				-237
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "Tactie Loop",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				66,
+				-11
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "Tactie Revived",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				30,
+				-60
+			],
+			"anim": "hey",
+			"fps": 24,
+			"name": "Hey!",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-43,
+				-53
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodgeLEFT",
+			"indices": [],
+			"name": "Dodge Left"
+		},
+		{
+			"offsets": [
+				-126,
+				17
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodgeRIGHT",
+			"indices": [],
+			"name": "Dodge Right"
+		},
+		{
+			"offsets": [
+				-74,
+				-66
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodgeDOWN",
+			"indices": [],
+			"name": "Dodge Down"
+		},
+		{
+			"offsets": [
+				-40,
+				27
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dodgeUP",
+			"indices": [],
+			"name": "Dodge Up"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-126,
+				17
+			],
+			"anim": "dodge",
+			"fps": 24,
+			"name": "Dodge Right",
+			"indices": []
+		},
+		{
+			"offsets": [
+				86,
+				-11
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "singLEFT-loop",
+			"indices": [
+				13,
+				14
+			],
+			"name": "Left Pose"
+		},
+		{
+			"offsets": [
+				1419,
+				30
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Shoot",
+			"indices": [],
+			"name": "Shoot"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Tactie",
+	"position": [
+		-10,
+		190
+	],
+	"healthicon": "tactie",
+	"flip_x": true,
+	"healthbar_colors": [
+		0,
+		0,
+		0
+	],
+	"camera_position": [
+		150,
+		80
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

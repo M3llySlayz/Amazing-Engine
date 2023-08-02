@@ -1,0 +1,53 @@
+{
+	"dialogue": [
+		{
+			"expression": "shocked",
+			"text": "Oh god its a woman",
+			"boxState": "normal",
+			"portrait": "bf",
+			"speed": 0.05
+		},
+		{
+			"expression": "demon",
+			"text": "Get off of my stage.",
+			"boxState": "angry",
+			"portrait": "gf",
+			"speed": 0.05
+		},
+		{
+			"expression": "pissed",
+			"text": "Rap and i will",
+			"boxState": "normal",
+			"portrait": "bf",
+			"speed": 0.05
+		},
+		{
+			"expression": "demon",
+			"text": "bet",
+			"boxState": "normal",
+			"portrait": "gf",
+			"speed": 0.05
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Wait GF why are you talking"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "gf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Lynn can't talk by herself so I'm using demon telepathy to show you what she's saying."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Quite the explanation"
+		}
+	]
+}

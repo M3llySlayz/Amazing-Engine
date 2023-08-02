@@ -1,0 +1,17 @@
+{
+	"category": "Lynn1",
+	"name": "Lynn Week 1",
+	"songs": [
+		["talk it out", "bf-pixel", "Hard, Insane"],
+		["intense", "bf-pixel", "Hard, Insane"],
+		["gaming", "carol", "Hard"]
+	],
+	"songColors": [
+		[0, 255, 255],
+		[0, 255, 255],
+		[0, 255, 0]
+	],
+	"color": [0, 255, 255],
+	"startLocked": false,
+	"hiddenWhenLocked": false
+}

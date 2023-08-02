@@ -1,0 +1,4 @@
+Moves the game camera to wherever set (does not tween)
+
+Value 1: X value
+Vaule 2: Y value

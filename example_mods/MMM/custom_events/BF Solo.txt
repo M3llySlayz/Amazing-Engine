@@ -1,0 +1,4 @@
+Tweens ALL of the HUD EXCEPT for the notes.
+
+Value 1: Duration
+Value 2: Opacity

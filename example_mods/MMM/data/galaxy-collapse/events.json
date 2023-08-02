@@ -1,0 +1,40 @@
+{
+	"song": {
+		"speed": 3,
+		"stage": "stage",
+		"player1": "bf-dark",
+		"player2": "carol-camerab3gf",
+		"player3": null,
+		"events": [
+			[
+				28444.4444444445,
+				[
+					[
+						"Blammed Lights",
+						"4",
+						""
+					]
+				]
+			],
+			[
+				31777.7777777778,
+				[
+					[
+						"Blammed Lights",
+						"0",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "b3GF",
+		"bpm": 270,
+		"mania": 3,
+		"arrowSkin": "",
+		"needsVoices": false,
+		"song": "Galaxy Collapse"
+	}
+}

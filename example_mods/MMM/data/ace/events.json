@@ -1,0 +1,729 @@
+{
+	"song": {
+		"speed": 3.4,
+		"stage": "void",
+		"player1": "bf-dark",
+		"player2": "Melly BF OP",
+		"player3": null,
+		"events": [
+			[
+				61440,
+				[
+					[
+						"MoveArrow",
+						"4",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"5",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"6",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"7",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"0",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"1",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"2",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"3",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"Change Character",
+						"BF",
+						"Melly BF"
+					],
+					[
+						"Change Character",
+						"1",
+						"bf-dark"
+					]
+				]
+			],
+			[
+				76800,
+				[
+					[
+						"MoveArrow",
+						"4",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"5",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"6",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"7",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"0",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"1",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"2",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"3",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"Change Character",
+						"1",
+						"Melly BF OP"
+					],
+					[
+						"Change Character",
+						"BF",
+						"bf-dark"
+					]
+				]
+			],
+			[
+				107520,
+				[
+					[
+						"MoveArrow",
+						"0",
+						"0, 0, 0, 0, 0.01"
+					],
+					[
+						"MoveArrow",
+						"1",
+						"0, 0, 0, 0, 0.01"
+					],
+					[
+						"MoveArrow",
+						"2",
+						"0, 0, 0, 0, 0.01"
+					],
+					[
+						"MoveArrow",
+						"3",
+						"0, 0, 0, 0, 0.01"
+					]
+				]
+			],
+			[
+				115200,
+				[
+					[
+						"Set Cam Zoom",
+						"1.2",
+						""
+					]
+				]
+			],
+			[
+				122880,
+				[
+					[
+						"MoveArrow",
+						"4",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"5",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"6",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"7",
+						"-631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"0",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"1",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"2",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"MoveArrow",
+						"3",
+						"631, 0, 0, 1, 1"
+					],
+					[
+						"Set Cam Zoom",
+						"0.8",
+						""
+					],
+					[
+						"Change Character",
+						"1",
+						"bf-dark"
+					],
+					[
+						"Change Character",
+						"BF",
+						"Melly BF"
+					]
+				]
+			],
+			[
+				130560,
+				[
+					[
+						"Change Character",
+						"BF",
+						"bf-dark"
+					],
+					[
+						"Change Character",
+						"1",
+						"Melly BF OP"
+					],
+					[
+						"Set Cam Zoom",
+						"1.2",
+						""
+					],
+					[
+						"Camera Follow Pos",
+						"",
+						""
+					]
+				]
+			],
+			[
+				142800,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				144000,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				146400,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				148800,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				151200,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				153600,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				154800,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				156000,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				157200,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				158400,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				159600,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				160800,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				162000,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				163200,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				163500,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				164400,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				164700,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				165600,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				166050,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				166500,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				166800,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				167100,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				167400,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				167700,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				168000,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				168300,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				168600,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				168900,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				169200,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				169500,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				169800,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				170100,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				170400,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				170850,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				171150,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				171600,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				172050,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				172500,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				172800,
+				[
+					[
+						"Hey!",
+						"2",
+						"8"
+					]
+				]
+			],
+			[
+				174000,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				175200,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				176400,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				177600,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				178800,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				180000,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				181200,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				182400,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				183600,
+				[
+					[
+						"Add Camera Zoom",
+						"1",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "Melly GF",
+		"bpm": 250,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "Ace"
+	}
+}

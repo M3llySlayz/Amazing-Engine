@@ -1,0 +1,58 @@
+{
+	"storyName": "Undertale",
+	"difficulties": "Hard, Insane",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "weekL3",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"songs": [
+		[
+			"Lynnlovania",
+			"carol",
+			[
+				255,
+				0,
+				0
+			]
+		],
+		[
+			"Another greenium",
+			"carol",
+			[
+				255,
+				0,
+				0
+			]
+		],
+		[
+			"True finale remix",
+			"carol",
+			[
+				255,
+				0,
+				0
+			]
+		],
+		[
+			"accelerant",
+			"carol",
+			[
+				255,
+				0,
+				0
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "bonus"
+}

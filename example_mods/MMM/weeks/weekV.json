@@ -1,0 +1,41 @@
+{
+	"storyName": "Vengeance",
+	"difficulties": "Normal, Hard, Insane",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"weekBefore": "weekLB",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": true,
+	"songs": [
+		[
+			"Vengeance",
+			"tdl",
+			[
+				255,
+				0,
+				0
+			]
+		],
+		[
+			"Vengeance gf",
+			"tdl",
+			[
+				255,
+				0,
+				0
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "Vengeance"
+}

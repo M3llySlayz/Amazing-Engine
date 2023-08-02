@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="TheDarkLord.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="tdldown0000" x="0" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0001" x="449" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0002" x="898" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0003" x="1347" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0004" x="1796" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0005" x="2245" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0006" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0007" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0008" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0009" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0010" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0011" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0012" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0013" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0014" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0015" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0016" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0017" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0018" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdldown0019" x="2694" y="0" width="449" height="556"/>
+	<SubTexture name="tdlidle0000" x="3143" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0001" x="3386" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0002" x="3629" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0003" x="3872" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0004" x="4115" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0005" x="4358" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0006" x="4601" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0007" x="4844" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0008" x="5087" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0009" x="5330" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0010" x="5573" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0011" x="5816" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0012" x="6059" y="0" width="243" height="609"/>
+	<SubTexture name="tdlidle0013" x="6302" y="0" width="243" height="609"/>
+	<SubTexture name="tdlleft0000" x="6545" y="0" width="485" height="672"/>
+	<SubTexture name="tdlleft0001" x="7030" y="0" width="485" height="672"/>
+	<SubTexture name="tdlleft0002" x="7030" y="0" width="485" height="672"/>
+	<SubTexture name="tdlleft0003" x="7515" y="0" width="485" height="672"/>
+	<SubTexture name="tdlleft0004" x="7515" y="0" width="485" height="672"/>
+	<SubTexture name="tdlleft0005" x="0" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0006" x="485" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0007" x="970" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0008" x="970" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0009" x="1455" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0010" x="1455" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0011" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0012" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0013" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0014" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0015" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0016" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0017" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0018" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0019" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0020" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlleft0021" x="1940" y="672" width="485" height="672"/>
+	<SubTexture name="tdlright0000" x="2425" y="672" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0001" x="2967" y="672" width="542" height="600"/>
+	<SubTexture name="tdlright0002" x="3509" y="672" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0003" x="4051" y="672" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0004" x="4593" y="672" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0005" x="5135" y="672" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0006" x="5677" y="672" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0007" x="6219" y="672" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0008" x="6761" y="672" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0009" x="7303" y="672" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0010" x="0" y="1344" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0011" x="0" y="1344" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0012" x="0" y="1344" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0013" x="0" y="1344" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0014" x="0" y="1344" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0015" x="0" y="1344" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0016" x="0" y="1344" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0017" x="0" y="1344" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlright0018" x="0" y="1344" width="542" height="590" frameX="0" frameY="-10" frameWidth="542" frameHeight="600"/>
+	<SubTexture name="tdlup0000" x="542" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0001" x="1200" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0002" x="1858" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0003" x="2516" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0004" x="3174" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0005" x="3832" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0006" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0007" x="5148" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0008" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0009" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0010" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0011" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0012" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0013" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0014" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0015" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0016" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0017" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0018" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0019" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0020" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0021" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0022" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0023" x="4490" y="1344" width="658" height="697"/>
+	<SubTexture name="tdlup0024" x="4490" y="1344" width="658" height="697"/>
+</TextureAtlas>

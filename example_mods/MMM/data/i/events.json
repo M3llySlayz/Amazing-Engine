@@ -1,0 +1,29 @@
+{
+	"song": {
+		"speed": 2.8,
+		"stage": "voltex",
+		"player1": "bf-rasis",
+		"player2": "rasis",
+		"player3": null,
+		"events": [
+			[
+				61199.9999999999,
+				[
+					[
+						"Add Camera Zoom",
+						"0.2",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "gf-gone",
+		"bpm": 225,
+		"arrowSkin": "VoltexNotes",
+		"needsVoices": true,
+		"song": "I"
+	}
+}

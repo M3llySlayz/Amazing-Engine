@@ -1,0 +1,49 @@
+{
+	"storyName": "Your New Week",
+	"difficulties": "Hard, Insane",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "weekL3",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"songs": [
+		[
+			"Chillin",
+			"stickly",
+			[
+				0,
+				135,
+				73
+			]
+		],
+		[
+			"Jasonlovania",
+			"stickly",
+			[
+				0,
+				135,
+				73
+			]
+		],
+		[
+			"Autophobia",
+			"stickly",
+			[
+				0,
+				135,
+				73
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Custom Week"
+}

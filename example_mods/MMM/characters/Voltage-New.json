@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Voltage Idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				52,
+				-7
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Voltage Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-50,
+				10
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Voltage Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				11,
+				-7
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Voltage Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				2,
+				6
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Voltage Right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "Voltage West",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "Voltage East",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "Voltage North",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-50,
+				20
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "Voltage South",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Voltage New",
+	"position": [
+		0,
+		110
+	],
+	"healthicon": "Voltage",
+	"flip_x": false,
+	"healthbar_colors": [
+		41,
+		201,
+		181
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 0.999999999999999
+}

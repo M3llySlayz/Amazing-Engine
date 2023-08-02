@@ -1,0 +1,32 @@
+{
+	"songs": [
+		[
+			"Maelstrom",
+			"mal",
+			[
+				26,
+				20,
+				100
+			]
+		]
+	],
+	"hiddenUntilUnlocked": true,
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "hard",
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"storyName": "desperate for lore bro",
+	"weekName": "Maelstrom",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": true,
+	"weekBefore": "weekL3",
+	"startUnlocked": true
+}

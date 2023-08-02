@@ -1,0 +1,59 @@
+{
+	"storyName": "Camellia",
+	"difficulties": "Insane",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"weekBefore": "weekLB",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"Quaoar",
+			"bf-dark",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Nacreous Snowmelt",
+			"bf-dark",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Ghoul",
+			"bf-dark",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"GHOST VIP",
+			"bf-dark",
+			[
+				146,
+				113,
+				253
+			]
+		]
+	],
+	"weekName": "hard week lmao",
+	"hiddenUntilUnlocked": true
+}

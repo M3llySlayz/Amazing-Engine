@@ -1,0 +1,4 @@
+Tweens both the cameras (Game and HUD) up or down.
+
+Value 1: How many pixels by which to move
+Value 2: Duration

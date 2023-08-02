@@ -1,0 +1,220 @@
+{
+	"song": {
+		"speed": 2.7,
+		"stage": "stage",
+		"player1": "bfdoki",
+		"player2": "sayori",
+		"player3": null,
+		"events": [
+			[
+				0,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						"9"
+					]
+				]
+			],
+			[
+				9081.08108108108,
+				[
+					[
+						"Blammed Lights",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				10378.3783783784,
+				[
+					[
+						"Add Camera Zoom",
+						"0.2",
+						""
+					]
+				]
+			],
+			[
+				19459.4594594595,
+				[
+					[
+						"Blammed Lights",
+						"0",
+						""
+					]
+				]
+			],
+			[
+				41513.5135135135,
+				[
+					[
+						"Blammed Lights",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				46702.7027027027,
+				[
+					[
+						"Blammed Lights",
+						"3",
+						""
+					]
+				]
+			],
+			[
+				51567.5675675676,
+				[
+					[
+						"Blammed Lights",
+						"0",
+						""
+					]
+				]
+			],
+			[
+				74594.5945945946,
+				[
+					[
+						"Blammed Lights",
+						"4",
+						""
+					]
+				]
+			],
+			[
+				74918.9189189189,
+				[
+					[
+						"Play Animation",
+						"Death",
+						"Dad"
+					],
+					[
+						"Add Camera Zoom",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				75000,
+				[
+					[
+						"Add Camera Zoom",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				75081.0810810811,
+				[
+					[
+						"Add Camera Zoom",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				75162.1621621622,
+				[
+					[
+						"Add Camera Zoom",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				75243.2432432433,
+				[
+					[
+						"Blammed Lights",
+						"0",
+						""
+					],
+					[
+						"Play Animation",
+						"idle",
+						"Dad"
+					]
+				]
+			],
+			[
+				83027.027027027,
+				[
+					[
+						"Blammed Lights",
+						"1",
+						""
+					],
+					[
+						"Set GF Speed",
+						"2",
+						""
+					],
+					[
+						"Change Scroll Speed",
+						"0.85",
+						"0.5"
+					]
+				]
+			],
+			[
+				103783.783783784,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"1"
+					],
+					[
+						"Blammed Lights",
+						"0",
+						""
+					],
+					[
+						"Set GF Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				134918.918918919,
+				[
+					[
+						"Blammed Lights",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				146594.594594595,
+				[
+					[
+						"Blammed Lights",
+						"0",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "gfdoki",
+		"bpm": 185,
+		"mania": 3,
+		"arrowSkin": "",
+		"needsVoices": true,
+		"song": "Complutau"
+	}
+}

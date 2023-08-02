@@ -1,0 +1,32 @@
+{
+	"storyName": "Sayori from DDLC???????",
+	"difficulties": "Beepbox, Normal, Utau",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "weekL3",
+	"startUnlocked": false,
+	"songs": [
+		[
+			"Complicated",
+			"sayori",
+			[
+				0,
+				255,
+				255
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"hideStoryMode": false,
+	"hiddenUntilUnlocked": true,
+	"weekName": "Complicated"
+}
