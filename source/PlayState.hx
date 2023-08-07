@@ -3271,19 +3271,11 @@ class PlayState extends MusicBeatState
 	}
 
 	// This is about to be done for
-	function updateNotes()
+	function updateNotes(note:Note)
 	{
-		for (note in notes) {
-			note.scale.x = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
-			if (!note.isSustainNote) note.scale.y = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
-			note.mania = mania;
-		}
-
-		for (note in unspawnNotes) {
-			note.scale.x = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
-			if (!note.isSustainNote) note.scale.y = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
-			note.mania = mania;
-		}
+		note.scale.x = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
+		if (!note.isSustainNote) note.scale.y = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
+		note.mania = mania;
 	}
 
 	public function changeMania(newValue:Int, skipStrumFadeOut:Bool = false)
@@ -3324,7 +3316,8 @@ class PlayState extends MusicBeatState
 			strumLineNotes.clear();
 			setOnLuas('mania', mania);
 
-			updateNotes();
+			for (note in unspawnNotes) updateNote(unspawnNotes);
+			for (note in notes) updateNote(notes);
 
 			callOnLuas('onChangeMania', [mania, daOldMania]);
 
