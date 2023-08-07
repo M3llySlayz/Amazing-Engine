@@ -3274,12 +3274,14 @@ class PlayState extends MusicBeatState
 	function updateNotes()
 	{
 		for (note in notes) {
-			if (!note.isSustainNote) note.scale.set((1 * Note.scales[mania]) * Note.lessScale[strumlines]);
+			note.scale.x = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
+			if (!note.isSustainNote) note.scale.y = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
 			note.mania = mania;
 		}
 
 		for (note in unspawnNotes) {
-			if (!note.isSustainNote) note.scale.set((1 * Note.scales[mania]) * Note.lessScale[strumlines]);
+			note.scale.x = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
+			if (!note.isSustainNote) note.scale.y = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
 			note.mania = mania;
 		}
 	}
