@@ -3316,8 +3316,8 @@ class PlayState extends MusicBeatState
 			strumLineNotes.clear();
 			setOnLuas('mania', mania);
 
-			for (note in unspawnNotes) updateNote(unspawnNotes);
-			for (note in notes) updateNote(notes);
+			for (note in unspawnNotes) updateNote(note);
+			for (note in notes) updateNote(note);
 
 			callOnLuas('onChangeMania', [mania, daOldMania]);
 
