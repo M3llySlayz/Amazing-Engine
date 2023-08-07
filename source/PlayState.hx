@@ -4904,7 +4904,7 @@ class PlayState extends MusicBeatState
 
 		ratingSpr.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
 		ratingSpr.screenCenter();
-		ratingSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		ratingSpr.antialiasing = ClientPrefs.globalAntialiasing && !isPixelStage;
 		ratingSpr.visible = (!ClientPrefs.hideHud && showRating);
 		ratingSpr.alpha = 1;
 		if (!playingAsOpponent) ratingSpr.x += FlxG.width * 0.15;
@@ -4914,8 +4914,8 @@ class PlayState extends MusicBeatState
 		ratingSpr.y -= ClientPrefs.comboOffset[1];
 		if (!isPixelStage) ratingSpr.scale.set(0.9, 0.9);
 		else ratingSpr.scale.set(daPixelZoom * 0.85, daPixelZoom * 0.85);
-		FlxTween.tween(ratingSpr, {'scale.x': 0.8, 'scale.y': 0.8}, 0.25, {ease: FlxEase.expoOut, onComplete: (t) -> {
-			FlxTween.tween(ratingSpr, {'scale.x': 0.7, 'scale.y': 0.7, alpha: 0}, 0.15, {ease: FlxEase.quintIn, startDelay: (note.sustainLength / 1000) - 0.15});
+		FlxTween.tween(ratingSpr, {'scale.x': 0.8 * (isPixelStage ? 6 : 1), 'scale.y': 0.8 * (isPixelStage ? 6 : 1)}, 0.25, {ease: FlxEase.expoOut, onComplete: (t) -> {
+			FlxTween.tween(ratingSpr, {'scale.x': 0.7 * (isPixelStage ? 6 : 1), 'scale.y': 0.7 * (isPixelStage ? 6 : 1), alpha: 0}, 0.15, {ease: FlxEase.quintIn, startDelay: (note.sustainLength / 1000) - 0.15});
 			coolText.destroy();
 		}});
 
