@@ -3276,21 +3276,20 @@ class PlayState extends MusicBeatState
 		var tMania:Int = mania + 1;
 		var noteData:Int = note.noteData;
 
-		note.scale.set(1, 1);
+		if (!note.isSustainNote) note.scale.set(1, 1);
 		note.updateHitbox();
 
 		// Like reloadNote()
 		var lastScaleY:Float = note.scale.y;
 		if (isPixelStage) {
 			if (note.isSustainNote) note.originalHeightForCalcs = note.height;
-			note.setGraphicSize(Std.int(note.width * daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[mania][strumlines])));
+			if (!note.isSustainNote) note.setGraphicSize(Std.int(note.width * daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[mania][strumlines])));
 		} else {
 			// Like loadNoteAnims()
 			if (!note.isSustainNote) note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[mania][strumlines])));
-			else note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[mania][strumlines])), Std.int(note.height * 1.05));
 			note.updateHitbox();
 		}
-		note.offsetX += note.width / (Note.scales[mania] * 2);
+		note.offsetX += note.width;
 
 		// Like new()
 		var prevNote:Note = note.prevNote;
@@ -3314,7 +3313,7 @@ class PlayState extends MusicBeatState
 		} else if (!note.isSustainNote && noteData > -1 && noteData < tMania) {
 			note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania]);
 		}
-		note.offsetX -= note.width / (Note.scales[mania] * 2);
+		note.offsetX -= note.width;
 
 		// Like set_noteType()
 		if (note.changeColSwap) {
