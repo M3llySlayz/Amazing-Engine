@@ -379,23 +379,23 @@ class Note extends FlxSprite
 
 	function loadNoteAnims() {
 		for (i in 0...gfxLetter.length)
+		{
+			animation.addByPrefix(gfxLetter[i], gfxLetter[i] + '0');
+
+			if (isSustainNote)
 			{
-				animation.addByPrefix(gfxLetter[i], gfxLetter[i] + '0');
-	
-				if (isSustainNote)
-				{
-					animation.addByPrefix(gfxLetter[i] + ' hold', gfxLetter[i] + ' hold');
-					animation.addByPrefix(gfxLetter[i] + ' tail', gfxLetter[i] + ' tail');
-				}
+				animation.addByPrefix(gfxLetter[i] + ' hold', gfxLetter[i] + ' hold');
+				animation.addByPrefix(gfxLetter[i] + ' tail', gfxLetter[i] + ' tail');
 			}
-				
-			ogW = width;
-			ogH = height;
-			if (!isSustainNote)
-				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[mania][PlayState.strumlines])));
-			else
-				setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[mania][PlayState.strumlines])), Std.int(defaultHeight * scales[0]));
-			updateHitbox();
+		}
+
+		ogW = width;
+		ogH = height;
+		if (!isSustainNote)
+			setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[mania][PlayState.strumlines])));
+		else
+			setGraphicSize(Std.int(defaultWidth * (scales[mania] * Note.lesserScale[mania][PlayState.strumlines])), Std.int(defaultHeight * scales[0]));
+		updateHitbox();
 	}
 
 	function loadPixelNoteAnims() {
@@ -420,31 +420,18 @@ class Note extends FlxSprite
 		if (mustPress)
 		{
 			// ok river
-			if (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult)
-				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
-				canBeHit = true;
-			else
-				canBeHit = false;
-
-			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
-				tooLate = true;
+			canBeHit = strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) && strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult);
+			tooLate = strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit;
 		}
 		else
 		{
-			canBeHit = false;
-
 			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
 			{
-				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
-					wasGoodHit = true;
+				wasGoodHit = (isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition;
 			}
 		}
 
-		if (tooLate && !inEditor)
-		{
-			if (alpha > 0.3)
-				alpha = 0.3;
-		}
+		if (tooLate && !inEditor) alpha -= 0.09;
 	}
 	@:noCompletion
 	override function set_clipRect(rect:FlxRect):FlxRect

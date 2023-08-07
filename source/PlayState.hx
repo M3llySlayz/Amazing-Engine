@@ -3916,11 +3916,11 @@ class PlayState extends MusicBeatState
 						daNote.alpha = strumAlpha;
 
 					if(daNote.copyX)
-						daNote.x = (strumX + Math.cos(angleDir) * daNote.distance) + FlxG.random.float(0, elapsed * 2);
+						daNote.x = (strumX + Math.cos(angleDir) * daNote.distance) + FlxG.random.float(-elapsed, 0);
 
 					if(daNote.copyY)
 					{
-						daNote.y = (strumY + Math.sin(angleDir) * daNote.distance) + FlxG.random.float(elapsed * 2, -elapsed);
+						daNote.y = (strumY + Math.sin(angleDir) * daNote.distance) + FlxG.random.float(-elapsed, 0);
 
 						//Jesus fuck this took me so much mother fucking time AAAAAAAAAA
 						if(strumScroll && daNote.isSustainNote)
