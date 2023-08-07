@@ -3276,7 +3276,8 @@ class PlayState extends MusicBeatState
 		var tMania:Int = mania + 1;
 		var noteData:Int = note.noteData;
 
-		if (!note.isSustainNote) note.scale.set(1, 1);
+		note.scale.x = 1;
+		if (!note.isSustainNote) note.scale.y = 1;
 		note.updateHitbox();
 
 		// Like reloadNote()
@@ -3289,7 +3290,7 @@ class PlayState extends MusicBeatState
 			if (!note.isSustainNote) note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[mania][strumlines])));
 			note.updateHitbox();
 		}
-		note.offsetX += note.width;
+		note.offsetX += note.width / 2;
 
 		// Like new()
 		var prevNote:Note = note.prevNote;
@@ -3313,7 +3314,7 @@ class PlayState extends MusicBeatState
 		} else if (!note.isSustainNote && noteData > -1 && noteData < tMania) {
 			note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania]);
 		}
-		note.offsetX -= note.width;
+		note.offsetX -= note.width / 2;
 
 		// Like set_noteType()
 		if (note.changeColSwap) {
