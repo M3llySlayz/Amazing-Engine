@@ -3275,6 +3275,10 @@ class PlayState extends MusicBeatState
 	{
 		note.scale.x = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
 		if (!note.isSustainNote) note.scale.y = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
+		note.mania = mania;
+		@:privateAccess {
+			note.reloadNote();
+		}
 	}
 
 	public function changeMania(newValue:Int, skipStrumFadeOut:Bool = false)
@@ -3316,7 +3320,7 @@ class PlayState extends MusicBeatState
 			setOnLuas('mania', mania);
 
 			for (note in unspawnNotes) updateNote(note);
-			for (note in notes) updateNote(note);
+			notes.forEachAlive(function(note:Note) updateNote(note));
 
 			callOnLuas('onChangeMania', [mania, daOldMania]);
 
