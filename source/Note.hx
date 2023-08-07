@@ -431,7 +431,7 @@ class Note extends FlxSprite
 			}
 		}
 
-		if (tooLate && !inEditor) alpha -= 0.09;
+		if (tooLate && !inEditor) alpha -= 0.29;
 	}
 	@:noCompletion
 	override function set_clipRect(rect:FlxRect):FlxRect
