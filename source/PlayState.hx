@@ -3271,57 +3271,16 @@ class PlayState extends MusicBeatState
 	}
 
 	// This is about to be done for
-	function updateNote(note:Note)
+	function updateNotes()
 	{
-		var tMania:Int = mania + 1;
-		var noteData:Int = note.noteData;
-
-		note.scale.x = 1;
-		if (!note.isSustainNote) note.scale.y = 1;
-		note.updateHitbox();
-
-		// Like reloadNote()
-		var lastScaleY:Float = note.scale.y;
-		if (isPixelStage) {
-			if (note.isSustainNote) note.originalHeightForCalcs = note.height;
-			note.setGraphicSize(Std.int(note.width * daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[mania][strumlines])));
-		} else {
-			// Like loadNoteAnims()
-			note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[mania][strumlines])));
-			note.updateHitbox();
+		for (note in notes) {
+			if (!note.isSustainNote) note.scale.set((1 * Note.scales[mania]) * Note.lessScale[strumlines]);
+			note.mania = mania;
 		}
-		note.offsetX += note.width / 2;
 
-		// Like new()
-		var prevNote:Note = note.prevNote;
-		if (note.isSustainNote && prevNote != null) {
-			if (note.animation.curAnim.name.endsWith('tail')) note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' tail');
-			else note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania] + ' hold');
-
-			if (note != null && prevNote != null && prevNote.isSustainNote && prevNote.animation != null) { // haxe flixel
-				prevNote.scale.y *= Conductor.stepCrochet / 100 / 1.05;
-				prevNote.scale.y *= songSpeed;
-
-				if(isPixelStage) {
-					prevNote.scale.y *= 1.19;
-					prevNote.scale.y *= 6 / note.height;
-				}
-			}
-
-			if (isPixelStage) {
-				prevNote.scale.y *= daPixelZoom * (Note.pixelScales[mania]); //Fuck urself
-			}
-		} else if (!note.isSustainNote && noteData > -1 && noteData < tMania) {
-			note.animation.play(Note.keysShit.get(mania).get('letters')[noteData % tMania]);
-		}
-		note.offsetX -= note.width / 2;
-
-		// Like set_noteType()
-		if (note.changeColSwap) {
-			var hsvNumThing = Std.int(Note.keysShit.get(mania).get('pixelAnimIndex')[noteData % tMania]);
-			note.colorSwap.hue = ClientPrefs.arrowHSV[hsvNumThing][0] / 360;
-			note.colorSwap.saturation = ClientPrefs.arrowHSV[hsvNumThing][1] / 100;
-			note.colorSwap.brightness = ClientPrefs.arrowHSV[hsvNumThing][2] / 100;
+		for (note in unspawnNotes) {
+			if (!note.isSustainNote) note.scale.set((1 * Note.scales[mania]) * Note.lessScale[strumlines]);
+			note.mania = mania;
 		}
 	}
 
@@ -3363,13 +3322,7 @@ class PlayState extends MusicBeatState
 			strumLineNotes.clear();
 			setOnLuas('mania', mania);
 
-			for (note in unspawnNotes) {
-				updateNote(note);
-			}
-			
-			notes.forEachAlive(function(note:Note) {
-				updateNote(note);
-			});
+			updateNotes();
 
 			callOnLuas('onChangeMania', [mania, daOldMania]);
 
