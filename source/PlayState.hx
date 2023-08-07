@@ -3271,7 +3271,7 @@ class PlayState extends MusicBeatState
 	}
 
 	// This is about to be done for
-	function updateNotes(note:Note)
+	function updateNote(note:Note)
 	{
 		note.scale.x = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
 		if (!note.isSustainNote) note.scale.y = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
