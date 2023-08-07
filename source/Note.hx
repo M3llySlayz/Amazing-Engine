@@ -358,6 +358,7 @@ class Note extends FlxSprite
 				offsetX -= lastNoteOffsetXForPixelAutoAdjusting;
 			}
 		} else {
+			loadGraphic(Paths.image(blahblah), true, Math.floor(width), Math.floor(height));
 			frames = Paths.getSparrowAtlas(blahblah);
 			loadNoteAnims();
 			antialiasing = ClientPrefs.globalAntialiasing;

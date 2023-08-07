@@ -3273,12 +3273,22 @@ class PlayState extends MusicBeatState
 	// This is about to be done for
 	function updateNote(note:Note)
 	{
+		note.prevNote = note;
+
+		note.mania = mania;
 		note.scale.x = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
 		if (!note.isSustainNote) note.scale.y = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
-		note.mania = mania;
-		@:privateAccess {
-			note.reloadNote();
+
+		// From Note.new()
+		if(!note.isSustainNote && note.noteData > -1 && note.noteData < Note.maxManiaUI_integer) { //Doing this 'if' check to fix the warnings on Senpai songs
+			note.animation.play(Note.keysShit.get(note.mania).get('letters')[note.noteData]);
+		} else if (note.isSustainNote) {
+			note.offset.x = note.width / (Note.scales[mania] * Note.lessScale[strumlines]) * 1.4;
+			if (note.prevNote.isSustainNote) note.animation.play(Note.keysShit.get(note.mania).get('letters')[note.noteData] + ' hold');
+			else note.animation.play(Note.keysShit.get(note.mania).get('letters')[note.noteData] + ' tail');
+			if (ClientPrefs.downScroll) note.flipY = true;
 		}
+		note.updateHitbox();
 	}
 
 	public function changeMania(newValue:Int, skipStrumFadeOut:Bool = false)
