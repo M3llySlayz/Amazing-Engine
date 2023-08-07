@@ -3275,7 +3275,6 @@ class PlayState extends MusicBeatState
 	{
 		note.scale.x = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
 		if (!note.isSustainNote) note.scale.y = (1 * Note.scales[mania]) * Note.lessScale[strumlines];
-		note.mania = mania;
 	}
 
 	public function changeMania(newValue:Int, skipStrumFadeOut:Bool = false)
