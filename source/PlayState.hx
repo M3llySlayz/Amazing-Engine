@@ -3284,10 +3284,10 @@ class PlayState extends MusicBeatState
 		var lastScaleY:Float = note.scale.y;
 		if (isPixelStage) {
 			if (note.isSustainNote) note.originalHeightForCalcs = note.height;
-			if (!note.isSustainNote) note.setGraphicSize(Std.int(note.width * daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[mania][strumlines])));
+			note.setGraphicSize(Std.int(note.width * daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[mania][strumlines])));
 		} else {
 			// Like loadNoteAnims()
-			if (!note.isSustainNote) note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[mania][strumlines])));
+			note.setGraphicSize(Std.int(note.width * (Note.scales[mania] * Note.lesserScale[mania][strumlines])));
 			note.updateHitbox();
 		}
 		note.offsetX += note.width / 2;
