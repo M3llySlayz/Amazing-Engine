@@ -1,4 +1,4 @@
-package pause;
+package options.pause;
 
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
