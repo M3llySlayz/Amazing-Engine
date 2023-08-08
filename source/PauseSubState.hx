@@ -285,9 +285,7 @@ class PauseSubState extends MusicBeatSubstate
 					}
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
-					if (!PlayState.SONG.charSelectSkip)
-						authorText.text = 'Hold ALT to skip character selection.';
-
+					if (!PlayState.SONG.charSelectSkip) authorText.text = 'Hold ALT to skip character selection.';
 					deleteSkipTimeText();
 					regenMenu();
 				case 'Toggle Practice Mode':
@@ -304,9 +302,8 @@ class PauseSubState extends MusicBeatSubstate
 					openSubState(new GameplayChangersSubstate());
 					persistentUpdate = false;
 				case 'Options':
-					regenMenu();
-					persistentUpdate = false;
 					openSubState(new options.pause.OptionsSubState());
+					persistentUpdate = false;
 				case "Quit":
 					SoundEffects.playSFX('scroll', true);
 					menuItems = menuItemsQuitting;
