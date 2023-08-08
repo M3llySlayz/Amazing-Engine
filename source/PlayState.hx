@@ -208,6 +208,7 @@ class PlayState extends MusicBeatState
 
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
+	public var actualHealth:Float = 1;
 	public var combo:Int = 0;
 
 	private var healthBarBG:AttachedSprite;
@@ -1298,7 +1299,7 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, (playingAsOpponent ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
+			'actualHealth', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
@@ -3543,6 +3544,14 @@ class PlayState extends MusicBeatState
 	{
 		callOnLuas('onUpdate', [elapsed]);
 
+		actualHealth = FlxMath.lerp(actualHealth, health, 0.2);
+
+		if (actualHealth > 2) actualHealth = 2;
+		if (actualHealth < 0) actualHealth = 0;
+
+		if (health > 2) health = 2;
+		if (health < 0) health = 0;
+
 		if(ClientPrefs.camMovement && !PlayState.isPixelStage) {
 			if(camlock) {
 				camFollow.x = camlockx;
@@ -3735,13 +3744,11 @@ class PlayState extends MusicBeatState
 		iconP2.updateHitbox();
 
 		var iconOffset:Int = 26;
-		var percent:Float = 1 - ((playingAsOpponent ? -health : health) / 2);
+		var percent:Float = 1 - ((playingAsOpponent ? -actualHealth : actualHealth) / 2);
 		iconP1.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = (playingAsOpponent ? -584 : 0) + healthBar.x + (healthBar.width * percent) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 		iconP1.y = healthBar.y - (75 / iconP1.scale.y);
 		iconP2.y = healthBar.y - (75 / iconP2.scale.y);
-
-		if (health > 2) health = 2;
 
 		if (healthBar.percent < 20) {
 			(playingAsOpponent?iconP2:iconP1).animation.curAnim.curFrame = 1;
@@ -3916,17 +3923,17 @@ class PlayState extends MusicBeatState
 						daNote.alpha = strumAlpha;
 
 					if(daNote.copyX)
-						daNote.x = (strumX + Math.cos(angleDir) * daNote.distance) - (elapsed * 2);
+						daNote.x = (strumX + Math.cos(angleDir) * daNote.distance) - 0.5;
 
 					if(daNote.copyY)
 					{
-						daNote.y = (strumY + Math.sin(angleDir) * daNote.distance) - (elapsed * 2);
+						daNote.y = (strumY + Math.sin(angleDir) * daNote.distance) - 0.5;
 
 						//Jesus fuck this took me so much mother fucking time AAAAAAAAAA
 						if(strumScroll && daNote.isSustainNote)
 						{
 							if (daNote.animation.curAnim.name.endsWith('tail')) {
-								daNote.y += 11 * (fakeCrochet / 400) * 1.5 * songSpeed + (46 * (songSpeed - 1));
+								daNote.y += 10 * (fakeCrochet / 400) * 1.5 * songSpeed + (46 * (songSpeed - 1));
 								daNote.y -= 46 * (1 - (fakeCrochet / 600)) * songSpeed;
 								if(PlayState.isPixelStage) {
 									daNote.y += 8 + (6 - daNote.originalHeightForCalcs) * PlayState.daPixelZoom;
@@ -3984,11 +3991,7 @@ class PlayState extends MusicBeatState
 						if (daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit)) {
 							noteMiss(daNote);
 						}
-						daNote.active = false;
-						daNote.visible = false;
-						daNote.kill();
-						daNote.destroy();
-						remove(daNote);
+						//daNote.kill();
 					}
 				});
 			}
@@ -4645,7 +4648,9 @@ class PlayState extends MusicBeatState
 		#if ACHIEVEMENTS_ALLOWED
 		if(achievementObj != null) {
 			return;
-		} else {
+		}
+		else
+		{
 			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
 				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
 				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
@@ -4665,8 +4670,8 @@ class PlayState extends MusicBeatState
 				#if !switch
 				var percent:Float = ratingPercent;
 				if(Math.isNaN(percent)) percent = 0;
-					if (!cpuControlled && !practiceMode && !chartingMode && songSpeedType != 'constant')
-						Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
+				if (!cpuControlled && !practiceMode && !chartingMode)
+					Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
 				#end
 			}
 			playbackRate = 1;
@@ -5093,7 +5098,6 @@ class PlayState extends MusicBeatState
 						if(daNote.noteData == key)
 						{
 							sortedNotesList.push(daNote);
-							//notesDatas.push(daNote.noteData);
 							canMiss = ClientPrefs.antimash;
 						}
 					}
@@ -5289,7 +5293,7 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.ghostTapping) return; //fuck it
 		if (!boyfriend.stunned)
 		{
-			for (daNote in notes) health -= daNote.missHealth * healthLoss;
+			health -= 0.05 * healthLoss;
 			if(instakillOnMiss)
 			{
 				vocals.volume = 0;
@@ -5459,7 +5463,7 @@ class PlayState extends MusicBeatState
 				if(combo > 9999) combo = 9999;
 				popUpScore(note);
 			}
-			if (health < 2) health += note.hitHealth * healthGain;
+			if (health < 2) health += (!note.isSustainNote ? note.hitHealth : note.hitHealth / 4) * healthGain;
 
 			if(!note.noAnimation) {
 				var animToPlay:String = 'sing' + Note.keysShit.get(mania).get('anims')[note.noteData];

@@ -350,7 +350,6 @@ class Note extends FlxSprite
 			defaultWidth = width;
 			setGraphicSize(Std.int(width * PlayState.daPixelZoom * (Note.pixelScales[mania] * Note.lesserScale[mania][PlayState.strumlines])));
 			loadPixelNoteAnims();
-			antialiasing = false;
 
 			if(isSustainNote) {
 				offsetX += lastNoteOffsetXForPixelAutoAdjusting;
@@ -358,11 +357,11 @@ class Note extends FlxSprite
 				offsetX -= lastNoteOffsetXForPixelAutoAdjusting;
 			}
 		} else {
-			loadGraphic(Paths.image(blahblah), true, Math.floor(width), Math.floor(height));
+			loadGraphic(Paths.image(blahblah, 'shared'), true, Math.floor(width), Math.floor(height));
 			frames = Paths.getSparrowAtlas(blahblah);
 			loadNoteAnims();
-			antialiasing = ClientPrefs.globalAntialiasing;
 		}
+		antialiasing = ClientPrefs.globalAntialiasing && !PlayState.isPixelStage;
 		if(isSustainNote) {
 			scale.y = lastScaleY;
 		}
@@ -417,30 +416,18 @@ class Note extends FlxSprite
 
 		mania = PlayState.mania;
 
-		if (mustPress)
-		{
-			// ok river
-			canBeHit = strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) && strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult);
-			tooLate = strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit;
-		}
-		else
-		{
-			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
-			{
-				wasGoodHit = (isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition;
-			}
-		}
+		canBeHit = mustPress && strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) && strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult);
+		tooLate = mustPress && strumTime < Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) - 100;
+		//if (prevNote.wasGoodHit && strumTime <= Conductor.songPosition) wasGoodHit = strumTime < Conductor.songPosition - (Conductor.safeZoneOffset * earlyHitMult); // This is unused
 
-		if (tooLate && !inEditor) alpha -= 0.29;
+		if (tooLate && !inEditor) alpha = 0.3;
 	}
+
 	@:noCompletion
 	override function set_clipRect(rect:FlxRect):FlxRect
 	{
 		clipRect = rect;
-
-		if (frames != null)
-			frame = frames.frames[animation.frameIndex];
-
+		if (frames != null) frame = frames.frames[animation.frameIndex];
 		return rect;
 	}
 }
