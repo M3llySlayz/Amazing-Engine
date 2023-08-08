@@ -2552,7 +2552,7 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
-		scoreTxt.text = 'Score: $songScore / Accuracy: ${ratingName != '?' ? '${Highscore.floorDecimal(ratingPercent * 100, 2)}% [$ratingName]' : '?'} / Misses: $songMisses [$ratingFC] / $combo Combo';
+		scoreTxt.text = 'Score: $songScore / Accuracy: ${ratingName != '?' ? '${Highscore.floorDecimal(ratingPercent * 100, 2)}% [$ratingName]' : '?'} / Misses: $songMisses${ratingFC != '' ? '[$ratingFC]' : '?'} / $combo Combo';
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -3846,7 +3846,7 @@ class PlayState extends MusicBeatState
 			if(startedCountdown)
 			{
 				var fakeCrochet:Float = (60 / SONG.bpm) * 1000;
-				notes.forEachAlive(function(daNote:Note)
+				notes.forEach(function(daNote:Note)
 				{
 					var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
 					if(!daNote.mustPress) {
@@ -4875,40 +4875,43 @@ class PlayState extends MusicBeatState
 		}
 
 		/// RATING POPUP
-		FlxTween.cancelTweensOf(ratingSpr, []);
-		if (comboType == 'text') FlxTween.cancelTweensOf(comboTxt, []);
+		
+		if (!ClientPrefs.hideHud && showRating) {
+			FlxTween.cancelTweensOf(ratingSpr, []);
+			if (comboType == 'text') FlxTween.cancelTweensOf(comboTxt, []);
 
-		ratingSpr.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
-		ratingSpr.screenCenter();
-		ratingSpr.antialiasing = ClientPrefs.globalAntialiasing && !isPixelStage;
-		ratingSpr.visible = (!ClientPrefs.hideHud && showRating);
-		ratingSpr.alpha = 1;
-		if (!playingAsOpponent) ratingSpr.x += FlxG.width * 0.15;
-		else ratingSpr.x -= FlxG.width * 0.15;
-		ratingSpr.y -= 60;
-		ratingSpr.x += ClientPrefs.comboOffset[0];
-		ratingSpr.y -= ClientPrefs.comboOffset[1];
-		if (!isPixelStage) ratingSpr.scale.set(0.9, 0.9);
-		else ratingSpr.scale.set(daPixelZoom * 0.85, daPixelZoom * 0.85);
-		FlxTween.tween(ratingSpr, {'scale.x': 0.8 * (isPixelStage ? 6 : 1), 'scale.y': 0.8 * (isPixelStage ? 6 : 1)}, 0.25, {ease: FlxEase.expoOut, onComplete: (t) -> {
-			FlxTween.tween(ratingSpr, {'scale.x': 0.7 * (isPixelStage ? 6 : 1), 'scale.y': 0.7 * (isPixelStage ? 6 : 1), alpha: 0}, 0.15, {ease: FlxEase.quintIn, startDelay: (note.sustainLength / 1000) - 0.15});
-			coolText.destroy();
-		}});
-
-		/// COMBO POPUP
-		if (comboType == 'text') {
-			comboTxt.screenCenter();
-			comboTxt.x = ratingSpr.x + (ratingSpr.width / 2);
-			comboTxt.y = ratingSpr.y + (ratingSpr.height / 1.3);
-			comboTxt.text = '$combo';
-			comboTxt.x -= comboTxt.width / 2;
-			comboTxt.x += ClientPrefs.comboOffset[2];
-			comboTxt.y -= ClientPrefs.comboOffset[3];
-			comboTxt.scale.set(1.15, 1.15);
-			comboTxt.alpha = 1;
-			FlxTween.tween(comboTxt, {'scale.x': 1, 'scale.y': 1, y: ratingSpr.y + (ratingSpr.height / 1.35)}, 0.25, {ease: FlxEase.expoOut, onComplete: (t) -> {
-				FlxTween.tween(comboTxt, {'scale.x': 0.9, 'scale.y': 0.9, alpha: 0}, 0.15, {ease: FlxEase.quintIn, startDelay: (note.sustainLength / 1000) - 0.15});
+			ratingSpr.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
+			ratingSpr.screenCenter();
+			ratingSpr.antialiasing = ClientPrefs.globalAntialiasing && !isPixelStage;
+			ratingSpr.visible = (!ClientPrefs.hideHud && showRating);
+			ratingSpr.alpha = 1;
+			if (!playingAsOpponent) ratingSpr.x += FlxG.width * 0.15;
+			else ratingSpr.x -= FlxG.width * 0.15;
+			ratingSpr.y -= 60;
+			ratingSpr.x += ClientPrefs.comboOffset[0];
+			ratingSpr.y -= ClientPrefs.comboOffset[1];
+			if (!isPixelStage) ratingSpr.scale.set(0.9, 0.9);
+			else ratingSpr.scale.set(daPixelZoom * 0.85, daPixelZoom * 0.85);
+			FlxTween.tween(ratingSpr, {'scale.x': 0.8 * (isPixelStage ? 6 : 1), 'scale.y': 0.8 * (isPixelStage ? 6 : 1)}, 0.25, {ease: FlxEase.expoOut, onComplete: (t) -> {
+				FlxTween.tween(ratingSpr, {'scale.x': 0.7 * (isPixelStage ? 6 : 1), 'scale.y': 0.7 * (isPixelStage ? 6 : 1), alpha: 0}, 0.15, {ease: FlxEase.quintIn, startDelay: (note.sustainLength / 1000) - 0.15});
+				coolText.destroy();
 			}});
+
+			/// COMBO POPUP
+			if (comboType == 'text') {
+				comboTxt.screenCenter();
+				comboTxt.x = ratingSpr.x + (ratingSpr.width / 2);
+				comboTxt.y = ratingSpr.y + (ratingSpr.height / 1.3);
+				comboTxt.text = '$combo';
+				comboTxt.x -= comboTxt.width / 2;
+				comboTxt.x += ClientPrefs.comboOffset[2];
+				comboTxt.y -= ClientPrefs.comboOffset[3];
+				comboTxt.scale.set(1.15, 1.15);
+				comboTxt.alpha = 1;
+				FlxTween.tween(comboTxt, {'scale.x': 1, 'scale.y': 1, y: ratingSpr.y + (ratingSpr.height / 1.35)}, 0.25, {ease: FlxEase.expoOut, onComplete: (t) -> {
+					FlxTween.tween(comboTxt, {'scale.x': 0.9, 'scale.y': 0.9, alpha: 0}, 0.15, {ease: FlxEase.quintIn, startDelay: (note.sustainLength / 1000) - 0.15});
+				}});
+			}
 		}
 
 		///
