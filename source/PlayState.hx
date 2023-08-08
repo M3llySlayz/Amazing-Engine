@@ -3846,7 +3846,7 @@ class PlayState extends MusicBeatState
 			if(startedCountdown)
 			{
 				var fakeCrochet:Float = (60 / SONG.bpm) * 1000;
-				notes.forEach(function(daNote:Note)
+				notes.forEachAlive(function(daNote:Note)
 				{
 					var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
 					if(!daNote.mustPress) {
@@ -3974,6 +3974,8 @@ class PlayState extends MusicBeatState
 						if (daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit)) {
 							noteMiss(daNote);
 						}
+						daNote.active = false;
+						daNote.kill();
 					}
 				});
 			}
@@ -5226,10 +5228,7 @@ class PlayState extends MusicBeatState
 		//Dupe note remove
 		notes.forEachAlive(function(note:Note) {
 			if (daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 0) {
-				note.active = false;
-				note.visible = false;
 				note.kill();
-				remove(note);
 			}
 		});
 		songMisses++;
