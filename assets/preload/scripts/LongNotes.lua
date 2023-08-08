@@ -12,38 +12,39 @@ function onCreatePost()
 end
 
 function goodNoteHit(id, direction, noteType, isSustainNote)
-    if isSustainNote then
-        -- Fix for play as opponent
-        if cpuPlay then
-          if getProperty('dad.animation.curAnim.curFrame')>4 then setProperty('dad.animation.curAnim.curFrame', 2) end
-          setProperty('dad.holdTimer', 0);
-        end
-        if getPropertyFromGroup('notes', id, 'gfNote') or noteType == 'GF Sing' then
-            if getProperty('gf.animation.curAnim.curFrame')>4 then setProperty('gf.animation.curAnim.curFrame', 2) end
-            setProperty('gf.holdTimer', 0);
-        else
-            if getProperty('boyfriend.animation.curAnim.curFrame')>4 then setProperty('boyfriend.animation.curAnim.curFrame', 2) end
-            setProperty('boyfriend.holdTimer', 0);
-        end
-    end
-  end
+	if getPropertyFromClass('ClientPrefs', 'fixedLongNotes') then
+		if isSustainNote then
+			-- Fix for play as opponent
+			if cpuPlay then
+				if getProperty('dad.animation.curAnim.curFrame')>4 then setProperty('dad.animation.curAnim.curFrame', 2) end
+				setProperty('dad.holdTimer', 0);
+			end
+			if getPropertyFromGroup('notes', id, 'gfNote') or noteType == 'GF Sing' then
+					if getProperty('gf.animation.curAnim.curFrame')>4 then setProperty('gf.animation.curAnim.curFrame', 2) end
+					setProperty('gf.holdTimer', 0);
+			else
+					if getProperty('boyfriend.animation.curAnim.curFrame')>4 then setProperty('boyfriend.animation.curAnim.curFrame', 2) end
+					setProperty('boyfriend.holdTimer', 0);
+			end
+		end
+	end
 end
 
 function opponentNoteHit(id, direction, noteType, isSustainNote)
-  if getPropertyFromClass('ClientPrefs', 'fixedLongNotes') then
-    if isSustainNote then
-        -- Fix for play as opponent
-        if cpuPlay then
-          if getProperty('boyfriend.animation.curAnim.curFrame')>4 then setProperty('boyfriend.animation.curAnim.curFrame', 2) end
-          setProperty('boyfriend.holdTimer', 0);
-        end
-        if getPropertyFromGroup('notes', id, 'gfNote') or noteType == 'GF Sing' then
-            if getProperty('gf.animation.curAnim.curFrame')>4 then setProperty('gf.animation.curAnim.curFrame', 2) end
-            setProperty('gf.holdTimer', 0);
-        else
-            if getProperty('dad.animation.curAnim.curFrame')>4 then setProperty('dad.animation.curAnim.curFrame', 2) end
-            setProperty('dad.holdTimer', 0);
-        end
-    end
-  end
+	if getPropertyFromClass('ClientPrefs', 'fixedLongNotes') then
+		if isSustainNote then
+			-- Fix for play as opponent
+			if cpuPlay then
+				if getProperty('boyfriend.animation.curAnim.curFrame')>4 then setProperty('boyfriend.animation.curAnim.curFrame', 2) end
+				setProperty('boyfriend.holdTimer', 0);
+			end
+			if getPropertyFromGroup('notes', id, 'gfNote') or noteType == 'GF Sing' then
+					if getProperty('gf.animation.curAnim.curFrame')>4 then setProperty('gf.animation.curAnim.curFrame', 2) end
+					setProperty('gf.holdTimer', 0);
+			else
+					if getProperty('dad.animation.curAnim.curFrame')>4 then setProperty('dad.animation.curAnim.curFrame', 2) end
+					setProperty('dad.holdTimer', 0);
+			end
+		end
+	end
 end
