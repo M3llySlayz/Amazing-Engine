@@ -2,8 +2,8 @@ function onCreate()
     setPropertyFromClass('GameOverSubstate', 'characterName', 'bf-pixel-dead');
 
     --low quality things
-    makeLuaSprite('LQbg', 'city path/City Path', -625, 275);
-    makeAnimatedLuaSprite('LQrain', 'city path/Rain', -625, 275);
+    makeLuaSprite('LQbg', 'City Path', -625, 275);
+    makeAnimatedLuaSprite('LQrain', 'Rain', -625, 275);
     makeLuaSprite('dark', '', -625, 275);
 
     --darkness because who needs pngs
@@ -25,8 +25,8 @@ function onCreate()
     setProperty('LQbg.antialiasing', false);
 
     --high quality things
-    makeAnimatedLuaSprite('bg', 'city path/City Path Good', -625, 50);
-    makeAnimatedLuaSprite('rain', 'city path/Rain Good', -625, 50);
+    makeAnimatedLuaSprite('bg', 'City Path Good', -625, 50);
+    makeAnimatedLuaSprite('rain', 'Rain Good', -625, 50);
 
     addAnimationByPrefix('bg', 'idle', 'CP Idle', 8, true);
     addAnimationByPrefix('rain', 'idle', 'CP Idle', 15, true);
