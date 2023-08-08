@@ -2552,7 +2552,7 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
-		scoreTxt.text = 'Score: $songScore / Accuracy: ${ratingName != '?' ? '${Highscore.floorDecimal(ratingPercent * 100, 2)}% [$ratingName]' : ''} / Misses: $songMisses [$ratingFC] / $combo Combo';
+		scoreTxt.text = 'Score: $songScore / Accuracy: ${ratingName != '?' ? '${Highscore.floorDecimal(ratingPercent * 100, 2)}% [$ratingName]' : '?'} / Misses: $songMisses [$ratingFC] / $combo Combo';
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -3533,7 +3533,8 @@ class PlayState extends MusicBeatState
 	{
 		callOnLuas('onUpdate', [elapsed]);
 
-
+		camNotes.x = 0;
+		camNotes.y = 0;
 
 		actualHealth = FlxMath.lerp(actualHealth, health, 0.2);
 
@@ -3916,7 +3917,7 @@ class PlayState extends MusicBeatState
 						{
 							if (daNote.animation.curAnim.name.endsWith('tail')) {
 								daNote.y += 10.5 * (fakeCrochet / 400) * 1.5 * songSpeed + (46 * (songSpeed - 1));
-								daNote.y -= 47 * (1 - (fakeCrochet / 600)) * songSpeed;
+								daNote.y -= 46 * (1 - (fakeCrochet / 600)) * songSpeed;
 								if(PlayState.isPixelStage) {
 									daNote.y += 8 + (6 - daNote.originalHeightForCalcs) * PlayState.daPixelZoom;
 								} else {
@@ -5347,13 +5348,35 @@ class PlayState extends MusicBeatState
 
 			if(playingAsOpponent && boyfriend != null)
 			{
-				boyfriend.playAnim(animToPlay, true);
-				boyfriend.holdTimer = 0;
+				if (ClientPrefs.fixedLongNotes) {
+					if (!note.isSustainNote) {
+						boyfriend.playAnim(animToPlay + note.animSuffix, true);
+					} else if (boyfriend.animation.curAnim.curFrame > 6 && !boyfriend.animation.curAnim.name.endsWith('miss')) {
+						boyfriend.animation.curAnim.curFrame = 4;
+					} else if (note.isSustainNote && boyfriend.animation.curAnim.name.endsWith('miss')) {
+						boyfriend.playAnim(animToPlay + note.animSuffix, true);
+					}
+					boyfriend.holdTimer = 0;
+				} else {
+					boyfriend.playAnim(animToPlay, true);
+					boyfriend.holdTimer = 0;
+				}
 			}
 			else if(char != null)
 			{
-				char.playAnim(animToPlay, true);
-				char.holdTimer = 0;
+				if (ClientPrefs.fixedLongNotes) {
+					if (!note.isSustainNote) {
+						char.playAnim(animToPlay, true);
+					} else if (char.animation.curAnim.curFrame > 6 && !char.animation.curAnim.name.endsWith('miss')) {
+						char.animation.curAnim.curFrame = 4;
+					} else if (note.isSustainNote && char.animation.curAnim.name.endsWith('miss')) {
+						char.playAnim(animToPlay + note.animSuffix, true);
+					}
+					char.holdTimer = 0;
+				} else {
+					char.playAnim(animToPlay, true);
+					char.holdTimer = 0;
+				}
 			}
 		}
 
@@ -5434,14 +5457,36 @@ class PlayState extends MusicBeatState
 				{
 					if(gf != null)
 					{
-						gf.playAnim(animToPlay + note.animSuffix, true);
-						gf.holdTimer = 0;
+						if (ClientPrefs.fixedLongNotes) {
+							if (!note.isSustainNote) {
+								gf.playAnim(animToPlay + note.animSuffix, true);
+							} else if (gf.animation.curAnim.curFrame > 6 && !gf.animation.curAnim.name.endsWith('miss')) {
+								gf.animation.curAnim.curFrame = 4;
+							} else if (note.isSustainNote && gf.animation.curAnim.name.endsWith('miss')) {
+								gf.playAnim(animToPlay + note.animSuffix, true);
+							}
+							gf.holdTimer = 0;
+						} else {
+							gf.playAnim(animToPlay + note.animSuffix, true);
+							gf.holdTimer = 0;
+						}
 					}
 				}
 				else
 				{
-					char.playAnim(animToPlay + note.animSuffix, true);
-					char.holdTimer = 0;
+					if (ClientPrefs.fixedLongNotes) {
+						if (!note.isSustainNote) {
+							char.playAnim(animToPlay, true);
+						} else if (char.animation.curAnim.curFrame > 6 && !char.animation.curAnim.name.endsWith('miss')) {
+							char.animation.curAnim.curFrame = 4;
+						} else if (note.isSustainNote && char.animation.curAnim.name.endsWith('miss')) {
+							char.playAnim(animToPlay + note.animSuffix, true);
+						}
+						char.holdTimer = 0;
+					} else {
+						char.playAnim(animToPlay + note.animSuffix, true);
+						char.holdTimer = 0;
+					}
 				}
 
 				if(note.noteType == 'Hey!') {
