@@ -1294,7 +1294,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.yAdd = -4;
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
-		healthBar = new FlxBar(healthBarBG.x healthBarBG.y, (playingAsOpponent ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), Std.int(healthBarBG.width), Std.int(healthBarBG.height), this,
+		healthBar = new FlxBar(healthBarBG.x, healthBarBG.y, (playingAsOpponent ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), Std.int(healthBarBG.width), Std.int(healthBarBG.height), this,
 			'actualHealth', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
@@ -2552,7 +2552,7 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
-		scoreTxt.text = 'Score: $songScore / Accuracy: ${ratingName != '?' ? '${Highscore.floorDecimal(ratingPercent * 100, 2)}% [$ratingName]' : '?'} / Misses: $songMisses${ratingFC != '' ? '[$ratingFC]' : '?'} / $combo Combo';
+		scoreTxt.text = 'Score: $songScore / Accuracy: ${ratingName != '?' ? '${Highscore.floorDecimal(ratingPercent * 100, 2)}% [$ratingName]' : '?'} / Misses: $songMisses ${ratingFC != '' ? '[$ratingFC]' : '?'} / $combo Combo';
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
