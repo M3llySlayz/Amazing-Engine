@@ -187,6 +187,7 @@ class FunkinLua {
 		set('instakillOnMiss', PlayState.instance.instakillOnMiss);
 		set('botPlay', PlayState.instance.cpuControlled);
 		set('practice', PlayState.instance.practiceMode);
+		set('cpuPlay', PlayState.instance.playingAsOpponent);
 
 		for (i in 0...PlayState.mania) {
 			set('defaultPlayerStrumX' + i, 0);
