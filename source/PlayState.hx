@@ -3991,6 +3991,7 @@ class PlayState extends MusicBeatState
 						if (daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit)) {
 							noteMiss(daNote);
 						}
+						daNote.active = false;
 						daNote.kill();
 					}
 				});
