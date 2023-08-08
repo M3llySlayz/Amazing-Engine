@@ -80,6 +80,9 @@ class OptionsSubState extends MusicBeatSubstate
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
+	// Booleans
+	var pressedAccept:Bool = false;
+
 	public function new() {
 		super();
 		#if DISCORD_ALLOWED
@@ -129,6 +132,8 @@ class OptionsSubState extends MusicBeatSubstate
 		changeLogSheet.updateHitbox();
 		*/
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+
+		pressedAccept = controls.ACCEPT || FlxG.mouse.justPressed;
 	}
 
 	override function closeSubState() {
@@ -176,7 +181,7 @@ class OptionsSubState extends MusicBeatSubstate
 			}
 		}
 
-		if (controls.ACCEPT || FlxG.mouse.justPressed) {
+		if (pressedAccept) {
 			openSelectedSubstate(options[curSelected]);
 		}
 
