@@ -98,9 +98,6 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 	public static var grabbablePlayBackRate:Float;
 
-	public static var cameramovingoffset = 20;
-	public static var cameramovingoffsetbf = 20; // idk why i made literally same variable
-
 	public static var ratingStuff:Array<Dynamic> = [
 		['You Suck!', 0.2], //From 0% to 19%
 		['Shit', 0.4], //From 20% to 39%
@@ -2294,15 +2291,6 @@ class PlayState extends MusicBeatState
 	public var countdownGo:FlxSprite;
 	public static var startOnTime:Float = 0;
 
-	public var camMovement:Float = 40;
-	public var velocity:Float = 1;
-	public var campointx:Float = 0;
-	public var campointy:Float = 0;
-	public var camlockx:Float = 0;
-	public var camlocky:Float = 0;
-	public var camlock:Bool = false;
-	public var bfturn:Bool = false;
-
 	function cacheCountdown()
 	{
 		var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
@@ -3537,6 +3525,10 @@ class PlayState extends MusicBeatState
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
 
+	var camFollowX = 0;
+	var camFollowY = 0;
+	var camFollowOffset = 40; // Edit this variable!
+
 	override public function update(elapsed:Float)
 	{
 		callOnLuas('onUpdate', [elapsed]);
@@ -3548,13 +3540,6 @@ class PlayState extends MusicBeatState
 
 		if (health > 2) health = 2;
 		if (health < 0) health = 0;
-
-		if(ClientPrefs.camMovement && !PlayState.isPixelStage) {
-			if(camlock) {
-				camFollow.x = camlockx;
-				camFollow.y = camlocky;
-			}
-		}
 
 		switch (curStage)
 		{
@@ -3688,7 +3673,7 @@ class PlayState extends MusicBeatState
 
 		if(!inCutscene) {
 			var lerpVal:Float = CoolUtil.boundTo(elapsed * 2.4 * cameraSpeed * playbackRate, 0, 1);
-			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x + camFollowX, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y + camFollowY, lerpVal));
 			if(!startingSong && !endingSong && boyfriend.animation.curAnim.name.startsWith('idle')) {
 				boyfriendIdleTime += elapsed;
 				if(boyfriendIdleTime >= 0.15) { // Kind of a mercy thing for making the achievement easier to get as it's apparently frustrating to some playerss
@@ -3703,8 +3688,6 @@ class PlayState extends MusicBeatState
 
 		setOnLuas('curDecStep', curDecStep);
 		setOnLuas('curDecBeat', curDecBeat);
-		setOnLuas('camNoteOffsetP1', cameramovingoffsetbf);
-		setOnLuas('camNoteOffsetP2', cameramovingoffset);
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -3920,17 +3903,17 @@ class PlayState extends MusicBeatState
 						daNote.alpha = strumAlpha;
 
 					if(daNote.copyX)
-						daNote.x = (strumX + Math.cos(angleDir) * daNote.distance) - 0.4;
+						daNote.x = (strumX + Math.cos(angleDir) * daNote.distance) - 0.5;
 
 					if(daNote.copyY)
 					{
-						daNote.y = (strumY + Math.sin(angleDir) * daNote.distance) - 0.4;
+						daNote.y = (strumY + Math.sin(angleDir) * daNote.distance) - 0.5;
 
 						//Jesus fuck this took me so much mother fucking time AAAAAAAAAA
 						if(strumScroll && daNote.isSustainNote)
 						{
 							if (daNote.animation.curAnim.name.endsWith('tail')) {
-								daNote.y += 10 * (fakeCrochet / 400) * 1.5 * songSpeed + (46 * (songSpeed - 1));
+								daNote.y += 11 * (fakeCrochet / 400) * 1.5 * songSpeed + (46 * (songSpeed - 1));
 								daNote.y -= 46 * (1 - (fakeCrochet / 600)) * songSpeed;
 								if(PlayState.isPixelStage) {
 									daNote.y += 8 + (6 - daNote.originalHeightForCalcs) * PlayState.daPixelZoom;
@@ -4548,25 +4531,11 @@ class PlayState extends MusicBeatState
 		if (!SONG.notes[curSection].mustHitSection)
 		{
 			moveCamera(true);
-			if(ClientPrefs.camMovement && !PlayState.isPixelStage){
-				campointx = camFollow.x;
-				campointy = camFollow.y;
-				bfturn = false;
-				camlock = false;
-				cameraSpeed = 1;
-			}
 			callOnLuas('onMoveCamera', ['dad']);
 		}
 		else
 		{
 			moveCamera(false);
-			if(ClientPrefs.camMovement && !PlayState.isPixelStage){
-				campointx = camFollow.x;
-				campointy = camFollow.y;	
-				bfturn = true;
-				camlock = false;
-				cameraSpeed = 1;
-			}
 			callOnLuas('onMoveCamera', ['boyfriend']);
 		}
 	}
@@ -4613,6 +4582,7 @@ class PlayState extends MusicBeatState
 		camFollow.set(x, y);
 		camFollowPos.setPosition(x, y);
 	}
+
 	public function finishSong(?ignoreNoteOffset:Bool = false):Void
 	{
 		var finishCallback:Void->Void = endSong; //In case you want to change it in a specific song.
@@ -5265,9 +5235,14 @@ class PlayState extends MusicBeatState
 			doDeathCheck(true);
 		}
 
+		if (ClientPrefs.camMovement) {
+			camFollowX = 0;
+			camFollowY = 0;
+		}
+
 		vocals.volume = 0;
 		if(!practiceMode) songScore -= 10;
-		
+
 		totalPlayed++;
 		RecalculateRating(true);
 
@@ -5312,16 +5287,11 @@ class PlayState extends MusicBeatState
 			RecalculateRating(true);
 
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
-			// FlxG.log.add('played imss note');
-
-			/*boyfriend.stunned = true;
-
-			// get stunned for 1/60 of a second, makes you able to
-			new FlxTimer().start(1 / 60, function(tmr:FlxTimer)
-			{
-				boyfriend.stunned = false;
-			});*/
+			
+			if (ClientPrefs.camMovement && !note.isSustainNote) {
+				camFollowX = 0;
+				camFollowY = 0;
+			}
 
 			if(boyfriend.hasMissAnimations) {
 				boyfriend.playAnim('sing' + Note.keysShit.get(mania).get('anims')[direction] + 'miss', true);
@@ -5357,23 +5327,13 @@ class PlayState extends MusicBeatState
 				char = gf;
 			}
 
-			if (ClientPrefs.cameraMoveOnNotes) {
-				try {
-					if(!SONG.notes[curSection].mustHitSection && !note.isSustainNote) {
-						if (!char.stunned) {
-							switch (char.animation.curAnim.name) {
-								case 'singLEFT' | 'singLEFT-alt':
-									if (!playingAsOpponent) cameraMove('dadLEFT'); else cameraMove('bfLEFT');
-								case 'singDOWN' | 'singDOWN-alt':
-									if (!playingAsOpponent) cameraMove('dadDOWN'); else cameraMove('bfLEFT');
-								case 'singUP' | 'singUP-alt':
-									if (!playingAsOpponent) cameraMove('dadUP'); else cameraMove('bfLEFT');
-								case 'singRIGHT' | 'singRIGHT-alt':
-									if (!playingAsOpponent) cameraMove('dadRIGHT'); else cameraMove('bfLEFT');
-							}
-						}
-					}
-				} catch (e:Any) {}
+			if (ClientPrefs.camMovement && !note.isSustainNote) {
+				switch (note.noteData) {
+					case 0: camFollowX = -camFollowOffset;
+					case 1: camFollowY = camFollowOffset;
+					case 2: camFollowY = -camFollowOffset;
+					case 3: camFollowX = camFollowOffset;
+				}
 			}
 
 			health -= healthdrain;
@@ -5482,25 +5442,6 @@ class PlayState extends MusicBeatState
 					char.holdTimer = 0;
 				}
 
-				if(ClientPrefs.cameraMoveOnNotes) {
-					try {
-						if(SONG.notes[Math.floor(curStep / 16)].mustHitSection && !note.isSustainNote) {
-							if (!char.stunned) {
-								switch (char.animation.curAnim.name) {
-									case 'singLEFT' | 'singLEFT-alt':
-										if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadLEFT');
-									case 'singDOWN' | 'singDOWN-alt':
-										if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadDOWN');
-									case 'singUP' | 'singUP-alt':
-										if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadUP');
-									case 'singRIGHT' | 'singRIGHT-alt':
-										if (!playingAsOpponent) cameraMove('bfLEFT'); else cameraMove('dadRIGHT');
-								}
-							}
-						}
-					} catch (e:Any) {}
-				}
-
 				if(note.noteType == 'Hey!') {
 					if(boyfriend.animOffsets.exists('hey')) {
 						char.playAnim('hey', true);
@@ -5514,6 +5455,15 @@ class PlayState extends MusicBeatState
 						gf.heyTimer = 0.6;
 					}
 				} 
+			}
+
+			if (ClientPrefs.camMovement && !note.isSustainNote) {
+				switch (note.noteData) {
+					case 0: camFollowX = -camFollowOffset;
+					case 1: camFollowY = camFollowOffset;
+					case 2: camFollowY = -camFollowOffset;
+					case 3: camFollowX = camFollowOffset;
+				}
 			}
 
 			if(cpuControlled) {
@@ -5538,36 +5488,6 @@ class PlayState extends MusicBeatState
 
 			callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
 			if (!note.isSustainNote) note.kill();
-		}
-	}
-
-	//wouldn't need this if not for fucking ek :sob:
-	function cameraMove(what:String) {
-		switch(what) {
-			case 'bfLEFT':
-				camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
-				camFollow.x += boyfriend.cameraPosition[0] - cameramovingoffsetbf; camFollow.y += boyfriend.cameraPosition[1];
-			case 'bfDOWN':
-				camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
-				camFollow.x += boyfriend.cameraPosition[0]; camFollow.y += boyfriend.cameraPosition[1] + cameramovingoffsetbf;
-			case 'bfUP':
-				camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
-				camFollow.x += boyfriend.cameraPosition[0]; camFollow.y += boyfriend.cameraPosition[1] - cameramovingoffsetbf;
-			case 'bfRIGHT':
-				camFollow.set(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y - 100);
-				camFollow.x += boyfriend.cameraPosition[0] + cameramovingoffsetbf; camFollow.y += boyfriend.cameraPosition[1];
-			case 'dadLEFT':
-				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-				camFollow.x += dad.cameraPosition[0] - cameramovingoffset; camFollow.y += dad.cameraPosition[1];
-			case 'dadDOWN':
-				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-				camFollow.x += dad.cameraPosition[0]; camFollow.y += dad.cameraPosition[1] + cameramovingoffset;
-			case 'dadUP':
-				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-				camFollow.x += dad.cameraPosition[0]; camFollow.y += dad.cameraPosition[1] - cameramovingoffset;
-			case 'dadRIGHT':
-				camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-				camFollow.x += dad.cameraPosition[0] + cameramovingoffset; camFollow.y += dad.cameraPosition[1];
 		}
 	}
 
