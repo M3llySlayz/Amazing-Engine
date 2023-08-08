@@ -299,7 +299,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
 				case 'Modifiers':
-					openSubState(new GameplayChangersSubstate());
+					openSubState(new options.pause.GameplayChangersSubstate());
 					persistentUpdate = false;
 				case 'Options':
 					openSubState(new options.pause.OptionsSubState());

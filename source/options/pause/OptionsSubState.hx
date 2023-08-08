@@ -168,11 +168,13 @@ class OptionsSubState extends MusicBeatSubstate
 		}*/
 
 		if (controls.BACK || FlxG.mouse.justPressedRight) {
-			if (options == initialOptions){
+			if (options == initialOptions) {
 				FlxG.mouse.visible = false;
 				SoundEffects.playSFX('cancel', false);
 				openSubState(new PauseSubState(PlayState.instance.boyfriend.getScreenPosition().x, PlayState.instance.boyfriend.getScreenPosition().y));
 				close();
+				MusicBeatState.resetState();
+				CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
 			} else {
 				options = initialOptions;
 				reloadOptions();

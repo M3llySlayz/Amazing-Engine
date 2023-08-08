@@ -1,4 +1,4 @@
-package;
+package pause;
 
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
@@ -189,7 +189,9 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			close();
 			ClientPrefs.saveSettings();
 			SoundEffects.playSFX('cancel', true);
-		}
+			MusicBeatState.resetState();
+			CustomFadeTransition.nextCamera = FlxG.cameras.list[FlxG.cameras.list.length - 1];
+		} 
 
 		if(nextAccept <= 0)
 		{
