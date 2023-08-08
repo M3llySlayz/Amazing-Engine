@@ -1292,7 +1292,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.visible = !ClientPrefs.hideHud;
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
-		healthBar = new FlxBar(healthBarBG.x + 1, healthBarBG.y + 4, (playingAsOpponent ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), Std.int(healthBarBG.width - 6), Std.int(healthBarBG.height - 4), this,
+		healthBar = new FlxBar(healthBarBG.x + 1, healthBarBG.y + 6, (playingAsOpponent ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), Std.int(healthBarBG.width - 6), Std.int(healthBarBG.height - 2), this,
 			'actualHealth', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
@@ -5332,6 +5332,8 @@ class PlayState extends MusicBeatState
 			}
 
 			if (ClientPrefs.camMovement && !note.isSustainNote) {
+				camFollowX = 0;
+				camFollowY = 0;
 				switch (note.noteData) {
 					case 0: camFollowX = -camFollowOffset;
 					case 1: camFollowY = camFollowOffset;
@@ -5506,6 +5508,8 @@ class PlayState extends MusicBeatState
 			}
 
 			if (ClientPrefs.camMovement && !note.isSustainNote) {
+				camFollowX = 0;
+				camFollowY = 0;
 				switch (note.noteData) {
 					case 0: camFollowX = -camFollowOffset;
 					case 1: camFollowY = camFollowOffset;
