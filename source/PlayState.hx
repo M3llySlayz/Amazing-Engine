@@ -3975,7 +3975,9 @@ class PlayState extends MusicBeatState
 							noteMiss(daNote);
 						}
 						daNote.active = false;
+						daNote.visible = false;
 						daNote.kill();
+						remove(daNote);
 					}
 				});
 			}
