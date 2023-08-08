@@ -179,9 +179,11 @@ class OptionsSubState extends MusicBeatSubstate
 			}
 		}
 
-		if (controls.ACCEPT || FlxG.mouse.justPressed && time > 1) {
-			openSelectedSubstate(options[curSelected]);
-			time = 0;
+		if (time > 1) {
+			if (controls.ACCEPT || FlxG.mouse.justPressed) {
+				openSelectedSubstate(options[curSelected]);
+				time = 0;
+			}
 		}
 
 		/*
