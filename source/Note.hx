@@ -416,7 +416,7 @@ class Note extends FlxSprite
 
 		mania = PlayState.mania;
 
-		canBeHit = strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) && strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult);
+		canBeHit = mustPress && strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) && strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult);
 		tooLate = mustPress && strumTime < Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) - 100;
 		//if (prevNote.wasGoodHit && strumTime <= Conductor.songPosition) wasGoodHit = strumTime < Conductor.songPosition - (Conductor.safeZoneOffset * earlyHitMult); // This is unused
 

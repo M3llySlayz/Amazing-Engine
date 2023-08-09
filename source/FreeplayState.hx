@@ -446,7 +446,7 @@ class FreeplayState extends MusicBeatState
 						colorTween.cancel();
 					}
 					if (shiftPressed) {
-						MusicBeatState.switchState(new ChartingState());
+						LoadingState.loadAndSwitchState(new ChartingState());
 					} else if (altPressed) {
 						LoadingState.loadAndSwitchState(new PlayState());
 					} else {
