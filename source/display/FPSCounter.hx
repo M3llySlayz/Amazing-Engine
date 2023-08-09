@@ -58,7 +58,7 @@ class FPSCounter extends TextField
 	public function enterFrame(deltaTime:Float) {
 		updateFPS(deltaTime);
 		updateMemory();
-		text = (ClientPrefs.showFPS ? FPSText : '') + (ClientPrefs.showMEM ? MemoryText : '');
+		text = (ClientPrefs.showFPS ? FPSText : '') + (ClientPrefs.showMEM ? MemoryText : '') + '\nState: ' + Type.getClass(FlxG.state);
 	}
 
 	// Frames Counter
@@ -153,4 +153,6 @@ class FPSCounter extends TextField
 		return HelperFunctions.truncateFloat(baseFloat / whatToConvert, 2) + ' $units';
 	}
 	*/
+
+	var CurrentStateText:String;
 }
