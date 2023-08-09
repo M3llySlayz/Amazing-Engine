@@ -1339,9 +1339,7 @@ class PlayState extends MusicBeatState
 		ratingSpr.antialiasing = ClientPrefs.globalAntialiasing;
 		ratingSpr.visible = (!ClientPrefs.hideHud && showRating);
 		ratingSpr.alpha = 0;
-		if (!playingAsOpponent) ratingSpr.x += FlxG.width * 0.15;
-		else ratingSpr.x -= FlxG.width * 0.15;
-		ratingSpr.y -= 60;
+		ratingSpr.x += FlxG.width * 0.1;
 		ratingSpr.x += ClientPrefs.comboOffset[0];
 		ratingSpr.y -= ClientPrefs.comboOffset[1];
 		if (!isPixelStage) ratingSpr.scale.set(0.9, 0.9);
@@ -4885,9 +4883,6 @@ class PlayState extends MusicBeatState
 			ratingSpr.antialiasing = ClientPrefs.globalAntialiasing && !isPixelStage;
 			ratingSpr.visible = (!ClientPrefs.hideHud && showRating);
 			ratingSpr.alpha = 1;
-			if (!playingAsOpponent) ratingSpr.x += FlxG.width * 0.15;
-			else ratingSpr.x -= FlxG.width * 0.15;
-			ratingSpr.y -= 60;
 			ratingSpr.x += ClientPrefs.comboOffset[0];
 			ratingSpr.y -= ClientPrefs.comboOffset[1];
 			if (!isPixelStage) ratingSpr.scale.set(0.9, 0.9);
