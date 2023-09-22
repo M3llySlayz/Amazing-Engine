@@ -252,7 +252,7 @@ class Note extends FlxSprite
 			x += swagWidth * (noteData % Note.ammo[mania]);
 			if(!isSustainNote && noteData > -1 && noteData < Note.maxManiaUI_integer) { //Doing this 'if' check to fix the warnings on Senpai songs
 				var animToPlay:String = '';
-				animToPlay = Note.keysShit.get(mania).get('letters')[noteData];
+				animToPlay = Note.keysShit.get(mania).get('letters')[noteData]; //Detects the group of key group in mania, then gets the letter variables, then takes a letter from the index of NoteData
 				animation.play(animToPlay);
 			}
 		}

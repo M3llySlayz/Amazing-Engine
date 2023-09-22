@@ -460,6 +460,9 @@ healthLossMult = 0
 --- If the player must FC to win
 ---@type boolean
 instakillOnMiss = false
+--- If the player must get below misses
+---@type integer
+instaKillPastExpect = 0
 --- If a CPU plays instead of the player
 ---@type boolean
 botPlay = false

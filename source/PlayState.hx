@@ -235,6 +235,7 @@ class PlayState extends MusicBeatState
 	public var healthGain:Float = 1;
 	public var healthLoss:Float = 1;
 	public var instakillOnMiss:Bool = false;
+	public var instaKillPastExpect:Int = 0; //MEET YOUR NEW BEST FRIEND :D
 	public var cpuControlled:Bool = false;
 	public var playingAsOpponent:Bool = false;
 	public var practiceMode:Bool = false;
@@ -2943,6 +2944,52 @@ class PlayState extends MusicBeatState
 	}
 
 	public var skipArrowStartTween:Bool = false; //for lua
+	
+	"""public static function listSplit(thing:Array<String>, split:Array<String>) { // This was coded by Irshaad in Python, Which was converted to Haxe by Irshaad. TOLD YA THIS WOULD BE USEFUL MELLY
+		var result = [];
+		for (text in thing) {
+			for (detector in split) {
+				if (detector == text) {
+					break;
+				} else {
+					if (detector == split[split.length - 1]) {
+						result.push(text);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	public static function changeDetector(before:Array<String>, after:Array<String>) {
+		var added = listSplit(after, before);
+		var removed = listSplit(before, after);
+		var returned = [[], []];
+		if (added.length < 1) {
+			returned[0] = [];
+		} else {
+			returned[0] = added;
+		}
+		if (removed.length < 1) {
+			returned[1] = [];
+		} else {
+			returned[1] = removed;
+		}
+		return returned;
+	}
+
+	public function normalFinder(before:Array<String>, after:Array<String>) {
+		var stuff = changeDetector(before, after);
+		var stuffer = [];
+		for (i in 0...(stuff.length)) {
+			for (item in stuff[i]) {
+				stuffer.push(item);
+			}
+		}
+		var result:Array<String> = changeDetector(stuffer, after)[0];
+		return result;
+	}
+	"""
 	private function generateStaticArrows(player:Int):Void // Yay, try catch works!!
 	{
 		try {
@@ -3048,9 +3095,13 @@ class PlayState extends MusicBeatState
 	}
 
 	// Regenereate static arrows
-	private function regenerateStaticArrows(player:Int):Void // Yay, try catch works!!
+	private function regenerateStaticArrows(player:Int, oldMania:Int):Void // Yay, try catch works!!
 	{
 		try {
+			"""var before = Note.keysShit.get(oldMania).get('letters');
+			var after = Note.keysShit.get(mania).get('letters');
+			var normals = normalFinder(before, after);
+			"""
 			for (i in 0...Note.ammo[mania])
 			{
 				var targetAlpha:Float = 1;
@@ -3061,12 +3112,36 @@ class PlayState extends MusicBeatState
 				}
 
 				var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
+				"""var babyArrow_newX:Float = babyArrow.x;
+				babyArrow_newX += Note.swagWidth * (i % Note.ammo[mania]);
+				babyArrow_newX += (FlxG.width / Note.lessSpacing[PlayState.strumlines]) * player;
+				var letterOfI = Note.keysShit.get(mania).get('letters')[i];
+				"""
+				var isSameLetter:Bool = false;
+				"""
+				for (k in normals) {
+					if (letterOfI == k) {
+						isSameLetter = true;
+						break;
+					}
+				}
+				if (isSameLetter) {
+					babyArrow.x = strumLineNotes.members[before.indexOf(letterOfI)].x;
+				}"""
 				babyArrow.downScroll = ClientPrefs.downScroll;
 				if (!skipArrowStartTween && mania > 1) {
-					babyArrow.y += 10;
 					babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
-					babyArrow.alpha = 0;
-					if (player < strumlines) FlxTween.tween(babyArrow, {y: babyArrow.y - 10, alpha: targetAlpha}, 0.3, {ease: FlxEase.quadOut});
+					if (player < strumlines) {
+						if (isSameLetter) {
+							babyArrow.alpha = 1;
+							FlxTween.tween(babyArrow, {x: babyArrow_newX, alpha: 1}, 5, {ease: FlxEase.quadOut});
+						} else {
+							babyArrow.y += 10;
+							babyArrow.alpha = 0;
+							FlxTween.tween(babyArrow, {y: babyArrow.y - 10, alpha: targetAlpha}, 0.3, {ease: FlxEase.quadOut});
+						}
+							
+					}
 				} else {
 					babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
 					if (player < strumlines) babyArrow.alpha = targetAlpha;
@@ -3278,6 +3353,7 @@ class PlayState extends MusicBeatState
 		//funny dissapear transitions
 		//while new strums appear
 		var daOldMania = mania;
+		var oldStrum:FlxTypedGroup<StrumNote> = strumLineNotes;
 		mania = newValue;
 
 		try {
@@ -3289,16 +3365,15 @@ class PlayState extends MusicBeatState
 					oldStrum.alpha = strumLineNotes.members[i].alpha;
 					oldStrum.scrollFactor.set();
 					oldStrum.cameras = [camNotes];
-					oldStrum.setGraphicSize(Std.int(oldStrum.width * Note.scales[daOldMania]));
+					oldStrum.setGraphicSize(Std.int(oldStrum.width * Note.scales[daOldStrums]));
 					oldStrum.updateHitbox();
 					add(oldStrum);
-		
+
 					FlxTween.tween(oldStrum, {y: oldStrum.y + 10, alpha: 0}, 0.3, {ease: FlxEase.quadOut, onComplete: function(_) {
 						remove(oldStrum);
 					}});
 				}
 			}
-
 			playerStrums.clear();
 			opponentStrums.clear();
 
@@ -3308,7 +3383,11 @@ class PlayState extends MusicBeatState
 			fifthStrums.clear();
 			sixthStrums.clear();
 
-			strumLineNotes.clear();
+			var strumLineMember:Int = strumLineNotes.members.length;
+			if (daOldMania > mania) {
+				strumLineMember = Note.ammo[mania];
+			}
+			
 			setOnLuas('mania', mania);
 
 			for (note in unspawnNotes) updateNote(note);
@@ -3318,10 +3397,13 @@ class PlayState extends MusicBeatState
 
 			for (strum in 0...6) {
 				if (!skipStrumFadeOut) {
-					regenerateStaticArrows(strum);
+					regenerateStaticArrows(strum, daOldMania);
 				} else {
 					regenerateStaticArrowsQuick(strum);
 				}
+			}
+			for (i in 0...strumLineMember) {
+				strumLineNotes.remove(strumLineNotes.members[i]);
 			}
 		} catch (e:Any) {}
 	}
@@ -3361,18 +3443,20 @@ class PlayState extends MusicBeatState
 			fifthStrums.clear();
 			sixthStrums.clear();
 
-			strumLineNotes.clear();
+			
+
 			setOnLuas('strumlines', strumlines);
 
 			callOnLuas('onChangeStrumlines', [strumlines, daOldStrums]);
 
 			for (strum in 0...6) {
 				if (!skipStrumFadeOut) {
-					regenerateStaticArrows(strum);
+					regenerateStaticArrows(strum, mania);
 				} else {
 					regenerateStaticArrowsQuick(strum);
 				}
 			}
+
 		} catch (e:Any) {}
 	}
 
@@ -4845,8 +4929,9 @@ class PlayState extends MusicBeatState
 		note.ratingMod = daRating.ratingMod;
 		if(!note.ratingDisabled) daRating.increase();
 		note.rating = daRating.name;
-		var instakillMultiplier:Int = 1;
+		var instakillMultiplier:Float = 1;
 		if (instakillOnMiss) instakillMultiplier = 2;
+		if (instaKillPastExpect > 0) instakillMultiplier *= (1 / instaKillPastExpect);
 		score = daRating.score * playbackRate * songSpeed * instakillMultiplier;
 
 		if(daRating.noteSplash && !note.noteSplashDisabled) {
@@ -5233,7 +5318,9 @@ class PlayState extends MusicBeatState
 		if(instakillOnMiss)
 		{
 			vocals.volume = 0;
-			doDeathCheck(true);
+			if (instaKillPastExpect < songMisses){
+				doDeathCheck(true);
+			}
 		}
 
 		if (ClientPrefs.camMovement) {
@@ -5271,7 +5358,9 @@ class PlayState extends MusicBeatState
 			if(instakillOnMiss)
 			{
 				vocals.volume = 0;
-				doDeathCheck(true);
+				if (instaKillPastExpect < songMisses){
+					doDeathCheck(true);
+				}
 			}
 
 			if (combo > 5 && gf != null && gf.animOffsets.exists('sad'))
@@ -6149,6 +6238,7 @@ class PlayState extends MusicBeatState
 	function refreshModifiers() {
 		playbackRate = ClientPrefs.getGameplaySetting('songspeed', 1);
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
+		instaKillPastExpect = ClientPrefs.getGameplaySetting('missInstaKill', 0);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		healthGain = ClientPrefs.getGameplaySetting('healthgain', 1);
