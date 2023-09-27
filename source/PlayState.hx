@@ -2945,7 +2945,8 @@ class PlayState extends MusicBeatState
 
 	public var skipArrowStartTween:Bool = false; //for lua
 	
-	"""public static function listSplit(thing:Array<String>, split:Array<String>) { // This was coded by Irshaad in Python, Which was converted to Haxe by Irshaad. TOLD YA THIS WOULD BE USEFUL MELLY
+	/*
+	public static function listSplit(thing:Array<String>, split:Array<String>) { // This was coded by Irshaad in Python, Which was converted to Haxe by Irshaad. TOLD YA THIS WOULD BE USEFUL MELLY
 		var result = [];
 		for (text in thing) {
 			for (detector in split) {
@@ -2988,8 +2989,7 @@ class PlayState extends MusicBeatState
 		}
 		var result:Array<String> = changeDetector(stuffer, after)[0];
 		return result;
-	}
-	"""
+	}*/
 	private function generateStaticArrows(player:Int):Void // Yay, try catch works!!
 	{
 		try {
@@ -3098,10 +3098,11 @@ class PlayState extends MusicBeatState
 	private function regenerateStaticArrows(player:Int, oldMania:Int):Void // Yay, try catch works!!
 	{
 		try {
-			"""var before = Note.keysShit.get(oldMania).get('letters');
+			/*
+			var before = Note.keysShit.get(oldMania).get('letters');
 			var after = Note.keysShit.get(mania).get('letters');
 			var normals = normalFinder(before, after);
-			"""
+			*/
 			for (i in 0...Note.ammo[mania])
 			{
 				var targetAlpha:Float = 1;
@@ -3112,13 +3113,13 @@ class PlayState extends MusicBeatState
 				}
 
 				var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
-				"""var babyArrow_newX:Float = babyArrow.x;
+				/*var babyArrow_newX:Float = babyArrow.x;
 				babyArrow_newX += Note.swagWidth * (i % Note.ammo[mania]);
 				babyArrow_newX += (FlxG.width / Note.lessSpacing[PlayState.strumlines]) * player;
 				var letterOfI = Note.keysShit.get(mania).get('letters')[i];
-				"""
+				
 				var isSameLetter:Bool = false;
-				"""
+				
 				for (k in normals) {
 					if (letterOfI == k) {
 						isSameLetter = true;
@@ -3127,19 +3128,21 @@ class PlayState extends MusicBeatState
 				}
 				if (isSameLetter) {
 					babyArrow.x = strumLineNotes.members[before.indexOf(letterOfI)].x;
-				}"""
+				}*/
 				babyArrow.downScroll = ClientPrefs.downScroll;
 				if (!skipArrowStartTween && mania > 1) {
 					babyArrow.y += ClientPrefs.downScroll ? Note.moreY[strumlines] : -Note.moreY[strumlines];
 					if (player < strumlines) {
-						if (isSameLetter) {
+						
+						/*if (isSameLetter) {
 							babyArrow.alpha = 1;
 							FlxTween.tween(babyArrow, {x: babyArrow_newX, alpha: 1}, 5, {ease: FlxEase.quadOut});
 						} else {
 							babyArrow.y += 10;
 							babyArrow.alpha = 0;
 							FlxTween.tween(babyArrow, {y: babyArrow.y - 10, alpha: targetAlpha}, 0.3, {ease: FlxEase.quadOut});
-						}
+						}*/
+						FlxTween.tween(babyArrow, {y: babyArrow.y - 10, alpha: targetAlpha}, 0.3, {ease: FlxEase.quadOut});
 							
 					}
 				} else {
@@ -3353,7 +3356,7 @@ class PlayState extends MusicBeatState
 		//funny dissapear transitions
 		//while new strums appear
 		var daOldMania = mania;
-		var oldStrum:FlxTypedGroup<StrumNote> = strumLineNotes;
+		/*var oldStrum:FlxTypedGroup<StrumNote> = strumLineNotes;*/
 		mania = newValue;
 
 		try {
@@ -3365,7 +3368,7 @@ class PlayState extends MusicBeatState
 					oldStrum.alpha = strumLineNotes.members[i].alpha;
 					oldStrum.scrollFactor.set();
 					oldStrum.cameras = [camNotes];
-					oldStrum.setGraphicSize(Std.int(oldStrum.width * Note.scales[daOldStrums]));
+					oldStrum.setGraphicSize(Std.int(oldStrum.width * Note.scales[daOldMania]));
 					oldStrum.updateHitbox();
 					add(oldStrum);
 
