@@ -22,5 +22,5 @@
             - Add a scroll for the list of anims
             - Add the index name anims
             - Refreshen the thing up a bit wouldja'?
-            - Figure out a way to import chart editor files using text input and dragging the chart file into the application will automatically import it for you
+            - Figure out a way to import chart editor files using text input and dragging the chart file into the application window, it'll automatically import it for you
 */
