@@ -12,6 +12,12 @@ import editors.ChartingState;
 
 using StringTools;
 
+typedef AEEventNote = {
+	strumTime:Float,
+	event:Map<String, Int>,
+	value:Array<String>
+}
+
 typedef EventNote = {
 	strumTime:Float,
 	event:String,

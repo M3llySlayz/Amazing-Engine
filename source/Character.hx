@@ -1,5 +1,6 @@
 package;
 
+import Achievements.AchievementMeta;
 import animateatlas.AtlasFrameMaker;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -22,6 +23,30 @@ import haxe.format.JsonParser;
 
 using StringTools;
 
+typedef AECharacterFile = {
+	var animations:Array<AEAnimArray>; // help this list in list in list thing is making my brain hurt
+	var defaultAnimIndex:Int;
+	var image:String;
+	var scale:Float;
+	var sing_duration:Float;
+
+	var position:Array<Float>;
+	var camera_position:Array<Float>;
+
+	var flip_x:Bool;
+	var no_antialiasing:Bool;
+
+	var gameover_properties:Array<String>;
+}
+typedef AEAnimArray = {
+	var nameOfIndex:String; // Name of The Anim Index
+	var healthiconIndex:String; // Health Icon of Anim Index
+	var imageIndex:String; // c'mon, we're having soft tacos later :D
+	var healthbar_colorsIndex:Array<Int>;
+	var animationOfIndex:Array<AnimArray>; // Uses old Anim Array lmao
+	// If someone can rename these variables so that they're not spammed with Index at the end
+	// That'd be nice, thanks! - Irshaad
+}
 typedef CharacterFile = {
 	var animations:Array<AnimArray>;
 	var image:String;
@@ -152,7 +177,6 @@ class Character extends FlxSprite
 				#else
 				var rawJson = Assets.getText(path);
 				#end
-
 				var json:CharacterFile = cast Json.parse(rawJson);
 				var spriteType = "sparrow";
 				//sparrow

@@ -8,11 +8,11 @@
 		Just do it already.
 
         - Events:
-            - Make the ability to put zero, one, two and more inputs in an event
+            - Make the ability to put zero, one, two and more inputs in an event [In Progress]
         - Characters:
             - Rewrite how Character JSONS are read
-            - Add Character Indexes (Helps for more than one alt animation)
-            - Add Character Index Names (Just an alternative method)
+            - Add Character Indexes (Helps for more than one alt animation) [In Progress]
+            - Add Character Index Names (Just an alternative method) [In Progress]
             - Make Event specific for this
             - Keep AE's script of reading Psych (and probably Leather)'s Char Json files
             - Still have AE have the ability to read an AE Json File
