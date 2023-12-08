@@ -142,7 +142,8 @@ class CharacterEditorState extends MusicBeatState
 		camFollow.screenCenter();
 		add(camFollow);
 
-		var tipTextArray:Array<String> = "E/Q - Camera Zoom In/Out
+		var tipTextArray:Array<String> = "
+		E/Q - Camera Zoom In/Out
 		\nR - Reset Camera Zoom
 		\nJKLI - Move Camera
 		\nW/S - Previous/Next Animation
@@ -517,6 +518,12 @@ class CharacterEditorState extends MusicBeatState
 	var healthColorStepperG:FlxUINumericStepper;
 	var healthColorStepperB:FlxUINumericStepper;
 
+	var STR:Int;
+	var STG:Int;
+	var STB:Int;
+	var rgbTextStuff:FlxText;
+	var confusion:FlxColor;
+
 	function addCharacterUI() {
 		var tab_group = new FlxUI(null, UI_box);
 		tab_group.name = "Character";
@@ -583,6 +590,13 @@ class CharacterEditorState extends MusicBeatState
 		healthColorStepperR = new FlxUINumericStepper(singDurationStepper.x, saveCharacterButton.y, 20, char.healthColorArray[0], 0, 255, 0);
 		healthColorStepperG = new FlxUINumericStepper(singDurationStepper.x + 65, saveCharacterButton.y, 20, char.healthColorArray[1], 0, 255, 0);
 		healthColorStepperB = new FlxUINumericStepper(singDurationStepper.x + 130, saveCharacterButton.y, 20, char.healthColorArray[2], 0, 255, 0);
+		
+		STR = Std.int(healthColorStepperR.value);
+		STG = Std.int(healthColorStepperG.value);
+		STB = Std.int(healthColorStepperB.value);
+		rgbTextStuff = new FlxText(healthColorStepperR.x, healthColorStepperR.y - 18, 0, 'Health bar R/G/B:');
+		confusion = FlxColor.fromRGB(STR, STG, STB); // How the hell did this work - Irshaad
+		rgbTextStuff.color = confusion;
 
 		tab_group.add(new FlxText(15, imageInputText.y - 18, 0, 'Image file name:'));
 		tab_group.add(new FlxText(15, healthIconInputText.y - 18, 0, 'Health icon name:'));
@@ -590,7 +604,7 @@ class CharacterEditorState extends MusicBeatState
 		tab_group.add(new FlxText(15, scaleStepper.y - 18, 0, 'Scale:'));
 		tab_group.add(new FlxText(positionXStepper.x, positionXStepper.y - 18, 0, 'Character X/Y:'));
 		tab_group.add(new FlxText(positionCameraXStepper.x, positionCameraXStepper.y - 18, 0, 'Camera X/Y:'));
-		tab_group.add(new FlxText(healthColorStepperR.x, healthColorStepperR.y - 18, 0, 'Health bar R/G/B:'));
+		tab_group.add(rgbTextStuff);
 		tab_group.add(imageInputText);
 		tab_group.add(reloadImage);
 		tab_group.add(decideIconColor);
@@ -919,7 +933,7 @@ class CharacterEditorState extends MusicBeatState
 
 
 
-
+		// Can someone tell me what's this gap for - Irshaad
 
 
 
@@ -1064,6 +1078,11 @@ class CharacterEditorState extends MusicBeatState
 			flipXCheckBox.checked = char.originalFlipX;
 			noAntialiasingCheckBox.checked = char.noAntialiasing;
 			resetHealthBarColor();
+			STR = Std.int(healthColorStepperR.value);
+			STG = Std.int(healthColorStepperG.value);
+			STB = Std.int(healthColorStepperB.value);
+			confusion = FlxColor.fromRGB(STR, STG, STB); // How the hell did this work - Irshaad
+			rgbTextStuff.color = confusion;
 			leHealthIcon.changeIcon(healthIconInputText.text);
 			positionXStepper.value = char.positionArray[0];
 			positionYStepper.value = char.positionArray[1];
@@ -1300,6 +1319,11 @@ class CharacterEditorState extends MusicBeatState
 		}
 		//camMenu.zoom = FlxG.camera.zoom;
 		ghostChar.setPosition(char.x, char.y);
+		STR = Std.int(healthColorStepperR.value);
+		STG = Std.int(healthColorStepperG.value);
+		STB = Std.int(healthColorStepperB.value);
+		confusion = FlxColor.fromRGB(STR, STG, STB); // copypaste rules
+		rgbTextStuff.color = confusion;
 		super.update(elapsed);
 	}
 
@@ -1369,6 +1393,21 @@ class CharacterEditorState extends MusicBeatState
 			"healthbar_colors": char.healthColorArray,
 			"gameover_properties": [char.deathChar, char.deathSound, char.deathMusic, char.deathConfirm],
 		};
+		/*
+		var AEJson = {
+			"animations": char.aeAnimationsArray,
+			"image": char.imageFile,
+			"scale": char.jsonScale,
+			"sing_duration": char.singDuration,
+
+			"position":	char.positionArray,
+			"camera_position": char.cameraPosition,
+
+			"flip_x": char.originalFlipX,
+			"no_antialiasing": char.noAntialiasing,
+			"gameover_properties": [char.deathChar, char.deathSound, char.deathMusic, char.deathConfirm],
+		}
+		*/
 
 		var data:String = Json.stringify(json, "\t");
 
