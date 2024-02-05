@@ -7,6 +7,8 @@ Engine originally used on [VS Astoria](https://gamebanana.com/mods/435389), inte
 You must have [Haxe 4.2.5](https://haxe.org/download/), seriously, stop using 4.1.5, it misses some stuff.
 
 Follow a Friday Night Funkin' source code compilation tutorial, after this run `haxelib install hmm` and `haxelib run hmm install` and you should be good.
+A suggestion for a Friday Night Funkin' source code compilation is https://gamebanana.com/tuts/16701
+(or just use the installer I put in the files - Irshaad)
 
 
 If you don't want your mod to be able to run .lua scripts, delete the "LUA_ALLOWED" line on Project.xml

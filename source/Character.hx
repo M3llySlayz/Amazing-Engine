@@ -40,10 +40,11 @@ typedef AECharacterFile = {
 }
 typedef AEAnimArray = {
 	var nameOfIndex:String; // Name of The Anim Index
+	var animationOfIndex:Array<AnimArray>; // Uses old Anim Array lmao
 	var healthiconIndex:String; // Health Icon of Anim Index
 	var imageIndex:String; // c'mon, we're having soft tacos later :D
 	var healthbar_colorsIndex:Array<Int>;
-	var animationOfIndex:Array<AnimArray>; // Uses old Anim Array lmao
+	
 	// If someone can rename these variables so that they're not spammed with Index at the end
 	// That'd be nice, thanks! - Irshaad
 }
