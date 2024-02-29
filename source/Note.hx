@@ -14,7 +14,7 @@ using StringTools;
 
 typedef AEEventNote = {
 	strumTime:Float,
-	event:Map<String, Int>,
+	event:String,
 	value:Array<String>
 }
 
