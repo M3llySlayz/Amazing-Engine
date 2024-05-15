@@ -5182,6 +5182,10 @@ class PlayState extends MusicBeatState
 					}
 				} else {
 					callOnLuas('onGhostTap', [key]);
+					if (ClientPrefs.animOnGhostTap)
+					{
+						animGhostTap(key);
+					}
 					if (canMiss) {
 						noteMissPress(key);
 					}
@@ -5352,9 +5356,24 @@ class PlayState extends MusicBeatState
 		callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
 	}
 
+	function animGhostTap(direction:Int = 1):Void //Literally just Ghost Tap but you play your Anim
+	{
+		var animToPlay = 'sing' + Note.keysShit.get(mania).get('anims')[direction];
+		boyfriend.playAnim(animToPlay, true);
+		var char = boyfriend;
+		if (curBeat % char.danceEveryNumBeats == 0 && char.animation.curAnim != null && !char.animation.curAnim.name.startsWith('sing') && !char.stunned)
+			{
+				char.dance();
+			}
+		boyfriend.holdTimer = 0;
+	}
+
 	function noteMissPress(direction:Int = 1):Void //You pressed a key when there was no notes to press for this key
 	{
-		if(ClientPrefs.ghostTapping) return; //fuck it
+		if(ClientPrefs.ghostTapping)
+		{
+			return; //fuck it
+		}
 		if (!boyfriend.stunned)
 		{
 			health -= 0.05 * healthLoss;

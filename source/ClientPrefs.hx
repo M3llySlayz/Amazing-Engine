@@ -36,6 +36,7 @@ class ClientPrefs {
 	];
 	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
+	public static var animOnGhostTap:Bool = false;
 	public static var timeBarType:String = 'Time Left';
 	public static var timeBarStyle:String = 'Gradient';
 	public static var scoreZoom:Bool = true;
@@ -141,6 +142,7 @@ class ClientPrefs {
 		FlxG.save.data.arrowHSV = arrowHSV;
 		FlxG.save.data.imagesPersist = imagesPersist;
 		FlxG.save.data.ghostTapping = ghostTapping;
+		FlxG.save.data.animOnGhostTap = animOnGhostTap;
 		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.timeBarStyle = timeBarStyle;
 		FlxG.save.data.scoreZoom = scoreZoom;
@@ -270,6 +272,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.ghostTapping != null) {
 			ghostTapping = FlxG.save.data.ghostTapping;
+		}
+		if(FlxG.save.data.animOnGhostTap != null) {
+			animOnGhostTap = FlxG.save.data.animOnGhostTap;
 		}
 		if(FlxG.save.data.timeBarType != null) {
 			timeBarType = FlxG.save.data.timeBarType;
