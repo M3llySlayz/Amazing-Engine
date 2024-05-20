@@ -33,51 +33,33 @@ class NoteOptionsSubState extends BaseOptionsMenu
 	{
 		title = 'Note Options';
 		rpcTitle = 'Note Options Menu'; //for Discord Rich Presence
+		
+		addOptions([
 
-		//I'd suggest using "Downscroll" as an example for making your own option since it is the simplest here
-		var option:Option = new Option('Downscroll', //Name
-			'If checked, notes go Down instead of Up, simple enough.', //Description
-			'downScroll', //Save data variable name
-			'bool', //Variable type
-			false); //Default value
-		addOption(option);
-
-		var option:Option = new Option('Middlescroll',
-			'If checked, your notes get centered.',
-			'middleScroll',
-			'bool',
-			false);
-		addOption(option);
-
-		var option:Option = new Option('Splitscroll:',
-			'Only Works For 2 Strums!\nSelects your own personal hell.\nSplits your notes into something fearful.\nEach type is different, and Downscroll affects them as well.', // Enjoy The Hell =] -Irshaad
-			'splitScroll',
-			'string',
-			'None',
-			['None', 'Normal', 'Up n\' Down', 'Double Down', 'Alt', 'Double Down Alt']);
-		addOption(option);
-
-		var option:Option = new Option('SwapScroll:',
-			'Note Swap?\nOnly Works For 2 Strums!',
-			'swapScroll',
-			'string',
-			'None',
-			['None', 'Quarter', 'Half', 'Three Quarter', 'Full', 'Quarter Alt', 'Half Alt', 'Three Quarter Alt']);
-		addOption(option);
-
-		var option:Option = new Option('ScrollSwap',
-			"SwapScroll but reverse.",
-			'swapReverse',
-			'bool',
-			false);
-		addOption(option);
-
-		var option:Option = new Option('Note Glow',
-			"If checked, when it's almost time to press a note, it'll glow.\nWorks like FPS Plus, but more efficient.",
-			'noteGlow',
-			'bool',
-			false);
-		addOption(option);
+			new Option(
+				'Downscroll', //Name
+				'If checked, notes go Down instead of Up, simple enough.', //Description
+				'downScroll', //Save data variable name
+				'bool', //Variable type
+				false // Default Value
+			),
+			
+			new Option(
+				'Middlescroll',
+				'If checked, your notes get centered.',
+				'middleScroll',
+				'bool',
+				false
+			),
+			
+			new Option(
+				'Note Glow',
+				"If checked, when it's almost time to press a note, it'll glow.\nWorks like FPS Plus, but more efficient.",
+				'noteGlow',
+				'bool',
+				false
+			)
+		]);
 		
 		var option:Option = new Option('Note Splash Opacity:',
 			"Set the alpha for the Note Splashes, shown when hitting \"Sick!\" notes.",

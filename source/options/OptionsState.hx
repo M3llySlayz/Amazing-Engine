@@ -1,5 +1,6 @@
 package options;
 
+import options.wackyoptions.WackyOptionsSubState;
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
@@ -30,7 +31,7 @@ using StringTools;
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [];
-	var initialOptions:Array<String> = ['Gameplay', 'Visuals', 'Notes', 'Music', 'Other'];
+	var initialOptions:Array<String> = ['Irshaad\'s Wacky Options', 'Gameplay', 'Visuals', 'Notes', 'Music', 'Other'];
 	var visualOptions:Array<String> = ['Graphics', 'UI', 'Visual Settings'];
 	var gameplayOptions:Array<String> = ['Settings', 'Controls', 'Delay and Combo'];
 	var notesOptions:Array<String> = ['Colors', 'Options'];
@@ -43,6 +44,8 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
+			case 'Irshaad\'s Wacky Options':
+				openSubState(new options.wackyoptions.WackyOptionsSubState());
 			case 'Colors':
 				openSubState(new options.notes.NotesSubState());
 			case 'Notes':

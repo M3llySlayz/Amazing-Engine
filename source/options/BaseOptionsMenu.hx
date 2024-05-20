@@ -174,6 +174,14 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		if(optionsArray == null || optionsArray.length < 1) optionsArray = [];
 		optionsArray.push(option);
 	}
+	
+	public function addOptions(options:Array<Option>)
+	{
+		for (option in options)
+		{
+			addOption(option);
+		}
+	}
 
 	var nextAccept:Int = 5;
 	var holdTime:Float = 0;
